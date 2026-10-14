@@ -1,0 +1,133 @@
+{
+  "episodeId": "listen-rain",
+  "model": "cosyvoice-v3-flash",
+  "voice": "longsanshu_v3",
+  "rate": 1.04,
+  "pitch": 0.96,
+  "gapSeconds": 0.08,
+  "targetSeconds": 33.48,
+  "assembledSeconds": 37.042,
+  "fitFactor": 1.106381,
+  "finalSeconds": 33.515,
+  "captions": [
+    {
+      "text": "如果最近很累，先别急着撑",
+      "startMs": 0,
+      "endMs": 2526,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "城市终于慢下来",
+      "startMs": 2599,
+      "endMs": 4251,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "雨声替你挡住喧哗",
+      "startMs": 4324,
+      "endMs": 6449,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "窗上水痕没有方向",
+      "startMs": 6521,
+      "endMs": 8245,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "却都在往前",
+      "startMs": 8317,
+      "endMs": 9970,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "人生也一样",
+      "startMs": 10042,
+      "endMs": 11364,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "有些日子看似反复",
+      "startMs": 11436,
+      "endMs": 13349,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "其实在悄悄改变",
+      "startMs": 13421,
+      "endMs": 15334,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "别急着给低谷下结论",
+      "startMs": 15406,
+      "endMs": 17531,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "很多答案，等雨停才看见",
+      "startMs": 17603,
+      "endMs": 20673,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "能熬过沉默的人",
+      "startMs": 20745,
+      "endMs": 22657,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "才懂平静的重量",
+      "startMs": 22730,
+      "endMs": 24524,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "你此刻的不顺",
+      "startMs": 24596,
+      "endMs": 26037,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "也许正替未来让路",
+      "startMs": 26109,
+      "endMs": 27903,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "先把今天过完",
+      "startMs": 27976,
+      "endMs": 29416,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "先把心安顿好",
+      "startMs": 29488,
+      "endMs": 31283,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "雨会停，路还在",
+      "startMs": 31355,
+      "endMs": 33480,
+      "timestampMs": null,
+      "confidence": null
+    }
+  ]
+}

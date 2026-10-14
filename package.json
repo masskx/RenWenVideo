@@ -1,0 +1,47 @@
+{
+  "name": "zen-video",
+  "version": "1.0.0",
+  "description": "My Remotion video",
+  "repository": {},
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@remotion/cli": "4.0.524",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.524",
+    "@remotion/captions": "4.0.524",
+    "@remotion/media": "4.0.524",
+    "@remotion/bundler": "4.0.524",
+    "@remotion/renderer": "4.0.524"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.524",
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "eslint": "9.19.0",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "dev": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run.ps1 -Mode preview",
+    "lint": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run.ps1 -Mode lint",
+    "render": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run.ps1 -Mode render",
+    "batch": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run.ps1 -Mode batch",
+    "check": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run.ps1 -Mode check",
+    "workbench": "node workbench/server.js",
+    "generate:images2": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generate.ps1 -Provider images2",
+    "generate:doubao": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generate.ps1 -Provider doubao",
+    "series:prepare": "node scripts/create-series.mjs",
+    "series:images": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generate-series-images.ps1",
+    "series:tts": "node scripts/generate-series-voice.mjs",
+    "music:plan": "node scripts/generate-music.mjs",
+    "music:generate": "node scripts/generate-music.mjs --generate",
+    "video:prepare": "node scripts/prepare-gemini-video.mjs",
+    "tts:plan": "node scripts/generate-voice.mjs",
+    "tts:generate": "node scripts/generate-voice.mjs --generate"
+  },
+  "sideEffects": [
+    "*.css"
+  ]
+}

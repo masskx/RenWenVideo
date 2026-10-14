@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "name": "江南慢生活参考视频复刻规范",
+  "profile": "jiangnan-quiet-life-vertical",
+  "canvas": { "width": 1080, "height": 1920, "fps": 25 },
+  "duration": { "frames": 837, "seconds": 33.48, "toleranceFrames": 0 },
+  "shotCount": 14,
+  "transitionFrames": 12,
+  "title": { "endFrame": 92, "topRatio": 0.2, "fontSize": 144, "writingMode": "vertical" },
+  "subtitle": { "y": 0.7, "fontSize": 68, "leftRatio": 0.07, "rightRatio": 0.93 },
+  "shots": [
+    { "id": "bridge", "start": 0, "duration": 92, "subject": "柳树、石拱桥、暗绿水面" },
+    { "id": "pour-tea", "start": 92, "duration": 81, "subject": "紫砂壶向白杯倒茶" },
+    { "id": "stone-tea", "start": 173, "duration": 53, "subject": "石台茶壶、绿叶、流水" },
+    { "id": "lotus-vase", "start": 226, "duration": 54, "subject": "青瓷瓶、粉荷花" },
+    { "id": "stove", "start": 280, "duration": 51, "subject": "炭炉、提梁壶、茶杯" },
+    { "id": "koi", "start": 331, "duration": 65, "subject": "暗色池塘、锦鲤、水纹" },
+    { "id": "tea-leaves", "start": 396, "duration": 53, "subject": "竹茶则、茶叶、茶罐" },
+    { "id": "water", "start": 449, "duration": 56, "subject": "石水槽、细水、苔石" },
+    { "id": "blossom", "start": 505, "duration": 59, "subject": "带水滴的花枝、青瓷杯" },
+    { "id": "maple", "start": 564, "duration": 60, "subject": "明亮绿叶、深色背景" },
+    { "id": "lotus-leaf", "start": 624, "duration": 75, "subject": "单片荷叶、暗池塘" },
+    { "id": "bamboo", "start": 699, "duration": 47, "subject": "雨雾竹林" },
+    { "id": "garden-tea", "start": 746, "duration": 30, "subject": "户外茶席、野花、青瓷壶" },
+    { "id": "warm-room", "start": 776, "duration": 61, "subject": "暖灯茶室、茶杯、花枝" }
+  ],
+  "visualRules": [
+    "9:16 满幅，不加入卡片框、进度条或复杂 UI",
+    "深森林绿、灰绿、深棕为主，局部使用紫花、粉荷、暖火",
+    "景物自然运动优先；静态图只使用克制的慢推、慢拉、横移，流水、倒茶、火焰、鱼等主体优先使用图生视频",
+    "所有生成素材不带文字、字母、Logo、水印或边框",
+    "标题由 Remotion 排版，字幕由 Remotion 排版，禁止把文字交给生图模型",
+    "动态视频片段默认静音，由百炼旁白与 MiniMax 纯音乐统一混音；雨、水、火等自然声可按镜头低音量开启"
+  ],
+  "media": {
+    "mode": "hybrid",
+    "videoProvider": "bailian-i2v / gemini-omni-web",
+    "defaultVideoAudio": "mute",
+    "ambienceVolume": 0.08
+  }
+}

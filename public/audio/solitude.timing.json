@@ -1,0 +1,10 @@
+{
+  "episodeId": "solitude",
+  "provider": "dashscope-tts",
+  "model": "cosyvoice-v3-flash",
+  "voice": "longxiu_v3",
+  "rawSeconds": 34.142,
+  "targetSeconds": 33.48,
+  "atempoFactor": 1.019774,
+  "generatedAt": "2026-09-18T15:52:08.228Z"
+}

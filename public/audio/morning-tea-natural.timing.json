@@ -1,0 +1,10 @@
+{
+  "episodeId": "morning-tea",
+  "provider": "dashscope-tts",
+  "model": "cosyvoice-v3-flash",
+  "voice": "longsanshu_v3",
+  "rawSeconds": 39.602,
+  "targetSeconds": 33.48,
+  "atempoFactor": 1.182844,
+  "generatedAt": "2026-09-19T10:52:44.460Z"
+}

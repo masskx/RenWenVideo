@@ -1,0 +1,10 @@
+{
+  "episodeId": "slow-life",
+  "provider": "dashscope-tts",
+  "model": "cosyvoice-v3-flash",
+  "voice": "longsanshu_v3",
+  "rawSeconds": 41.038,
+  "targetSeconds": 33.48,
+  "atempoFactor": 1.225757,
+  "generatedAt": "2026-09-19T10:52:34.140Z"
+}

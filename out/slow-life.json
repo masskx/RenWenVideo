@@ -1,0 +1,331 @@
+{
+  "episode": {
+    "id": "slow-life",
+    "title": "慢下来",
+    "fps": 25,
+    "width": 1080,
+    "height": 1920,
+    "titleEnd": 92,
+    "transitionFrames": 12,
+    "subtitleY": 0.7,
+    "subtitleSize": 68,
+    "audioSrc": "audio/slow-life-segmented.mp3",
+    "musicSrc": "audio/music/philosophy-jiangnan-01.mp3",
+    "musicId": "philosophy-jiangnan-01",
+    "musicVolume": 0.09,
+    "musicFadeFrames": 45,
+    "shots": [
+      {
+        "id": "bridge",
+        "start": 0,
+        "duration": 92,
+        "zoomFrom": 1.025,
+        "zoomTo": 1.065,
+        "panX": 8,
+        "src": "video/gemini-omni/slow-life/bridge.mp4",
+        "kind": "video",
+        "trimBefore": 0,
+        "videoProvider": "gemini-omni-web",
+        "videoAudioMode": "mute",
+        "videoAudioVolume": 0.08
+      },
+      {
+        "id": "pour-tea",
+        "start": 92,
+        "duration": 81,
+        "zoomFrom": 1.065,
+        "zoomTo": 1.025,
+        "panX": -8,
+        "src": "video/bailian-i2v/slow-life/pour-tea-wan3-0-video-prime.mp4",
+        "kind": "video",
+        "trimBefore": 0,
+        "videoProvider": "bailian-wan3.0-video-prime",
+        "videoAudioMode": "mute",
+        "videoAudioVolume": 0
+      },
+      {
+        "id": "stone-tea",
+        "start": 173,
+        "duration": 53,
+        "zoomFrom": 1.025,
+        "zoomTo": 1.065,
+        "panX": 8,
+        "src": "video/bailian-i2v/slow-life/stone-tea-wan3-0-video-prime.mp4",
+        "kind": "video",
+        "trimBefore": 0,
+        "videoProvider": "bailian-wan3.0-video-prime",
+        "videoAudioMode": "mute",
+        "videoAudioVolume": 0
+      },
+      {
+        "id": "lotus-vase",
+        "start": 226,
+        "duration": 54,
+        "zoomFrom": 1.065,
+        "zoomTo": 1.025,
+        "panX": -8,
+        "src": "video/bailian-i2v/slow-life/lotus-vase-wan3-0-video-prime.mp4",
+        "kind": "video",
+        "trimBefore": 0,
+        "videoProvider": "bailian-wan3.0-video-prime",
+        "videoAudioMode": "mute",
+        "videoAudioVolume": 0
+      },
+      {
+        "id": "stove",
+        "start": 280,
+        "duration": 51,
+        "zoomFrom": 1.025,
+        "zoomTo": 1.065,
+        "panX": 8,
+        "src": "video/bailian-i2v/slow-life/stove-wan3-0-video-prime.mp4",
+        "kind": "video",
+        "trimBefore": 0,
+        "videoProvider": "bailian-wan3.0-video-prime",
+        "videoAudioMode": "mute",
+        "videoAudioVolume": 0
+      },
+      {
+        "id": "koi",
+        "start": 331,
+        "duration": 65,
+        "zoomFrom": 1.065,
+        "zoomTo": 1.025,
+        "panX": -8,
+        "src": "video/bailian-i2v/slow-life/koi-wan3-0-video-prime.mp4",
+        "kind": "video",
+        "trimBefore": 0,
+        "videoProvider": "bailian-wan3.0-video-prime",
+        "videoAudioMode": "mute",
+        "videoAudioVolume": 0
+      },
+      {
+        "id": "tea-leaves",
+        "start": 396,
+        "duration": 53,
+        "zoomFrom": 1.025,
+        "zoomTo": 1.065,
+        "panX": 8,
+        "src": "video/bailian-i2v/slow-life/tea-leaves-wan3-0-video-prime.mp4",
+        "kind": "video",
+        "trimBefore": 0,
+        "videoProvider": "bailian-wan3.0-video-prime",
+        "videoAudioMode": "mute",
+        "videoAudioVolume": 0
+      },
+      {
+        "id": "water",
+        "start": 449,
+        "duration": 56,
+        "zoomFrom": 1.065,
+        "zoomTo": 1.025,
+        "panX": -8,
+        "src": "video/bailian-i2v/slow-life/water-wan3-0-video-prime.mp4",
+        "kind": "video",
+        "trimBefore": 0,
+        "videoProvider": "bailian-wan3.0-video-prime",
+        "videoAudioMode": "mute",
+        "videoAudioVolume": 0
+      },
+      {
+        "id": "blossom",
+        "start": 505,
+        "duration": 59,
+        "zoomFrom": 1.025,
+        "zoomTo": 1.065,
+        "panX": 8,
+        "src": "video/bailian-i2v/slow-life/blossom-wan3-0-video-prime.mp4",
+        "kind": "video",
+        "trimBefore": 0,
+        "videoProvider": "bailian-wan3.0-video-prime",
+        "videoAudioMode": "mute",
+        "videoAudioVolume": 0
+      },
+      {
+        "id": "maple",
+        "start": 564,
+        "duration": 60,
+        "zoomFrom": 1.065,
+        "zoomTo": 1.025,
+        "panX": -8,
+        "src": "video/bailian-i2v/slow-life/maple-wan3-0-video-prime.mp4",
+        "kind": "video",
+        "trimBefore": 0,
+        "videoProvider": "bailian-wan3.0-video-prime",
+        "videoAudioMode": "mute",
+        "videoAudioVolume": 0
+      },
+      {
+        "id": "lotus-leaf",
+        "start": 624,
+        "duration": 75,
+        "zoomFrom": 1.025,
+        "zoomTo": 1.065,
+        "panX": 8,
+        "src": "images/11-lotus-leaf.png",
+        "kind": "image"
+      },
+      {
+        "id": "bamboo",
+        "start": 699,
+        "duration": 47,
+        "zoomFrom": 1.065,
+        "zoomTo": 1.025,
+        "panX": -8,
+        "src": "images/12-bamboo.png",
+        "kind": "image"
+      },
+      {
+        "id": "garden-tea",
+        "start": 746,
+        "duration": 30,
+        "zoomFrom": 1.025,
+        "zoomTo": 1.065,
+        "panX": 8,
+        "src": "images/13-garden-tea.png",
+        "kind": "image"
+      },
+      {
+        "id": "warm-room",
+        "start": 776,
+        "duration": 61,
+        "zoomFrom": 1.065,
+        "zoomTo": 1.025,
+        "panX": -8,
+        "src": "images/14-warm-room.png",
+        "kind": "image"
+      }
+    ],
+    "captions": [
+      {
+        "text": "你越急着赶路，越容易错过自己",
+        "startMs": 0,
+        "endMs": 2877,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "走太快的人",
+        "startMs": 2950,
+        "endMs": 4400,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "常错过自己的心",
+        "startMs": 4473,
+        "endMs": 6280,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "一杯茶，不必喝完",
+        "startMs": 6353,
+        "endMs": 8351,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "一段路，不必赶完",
+        "startMs": 8423,
+        "endMs": 10564,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "你真正拥有的",
+        "startMs": 10636,
+        "endMs": 12515,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "往往是被忽略的时刻",
+        "startMs": 12588,
+        "endMs": 14466,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "人到一定年纪才明白",
+        "startMs": 14539,
+        "endMs": 16750,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "安静不是浪费时间",
+        "startMs": 16823,
+        "endMs": 18630,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "是把自己捡回来",
+        "startMs": 18703,
+        "endMs": 20154,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "少一点向外证明",
+        "startMs": 20226,
+        "endMs": 22034,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "多一点向内安放",
+        "startMs": 22106,
+        "endMs": 23913,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "日子有自己的节奏",
+        "startMs": 23986,
+        "endMs": 25865,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "花不会因催促盛开",
+        "startMs": 25938,
+        "endMs": 28006,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "先把今天过好",
+        "startMs": 28079,
+        "endMs": 29482,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "余下交给时间",
+        "startMs": 29555,
+        "endMs": 31077,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "慢一点，才听见生活",
+        "startMs": 31149,
+        "endMs": 33480,
+        "timestampMs": null,
+        "confidence": null
+      }
+    ],
+    "videoProvider": "gemini-omni-web",
+    "videoAudioMode": "mute",
+    "videoAudioVolume": 0.08
+  },
+  "output": {
+    "width": 1080,
+    "height": 1920,
+    "frames": 837,
+    "fps": 25
+  },
+  "createdAt": "2026-09-19T13:47:45.302Z"
+}

@@ -1,0 +1,10 @@
+{
+  "episodeId": "listen-rain",
+  "provider": "dashscope-tts",
+  "model": "cosyvoice-v3-flash",
+  "voice": "longsanshu_v3",
+  "rawSeconds": 37.198,
+  "targetSeconds": 33.48,
+  "atempoFactor": 1.111062,
+  "generatedAt": "2026-09-19T10:52:23.460Z"
+}

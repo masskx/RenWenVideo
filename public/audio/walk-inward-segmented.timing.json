@@ -1,0 +1,133 @@
+{
+  "episodeId": "walk-inward",
+  "model": "cosyvoice-v3-flash",
+  "voice": "longsanshu_v3",
+  "rate": 1.04,
+  "pitch": 0.96,
+  "gapSeconds": 0.08,
+  "targetSeconds": 33.48,
+  "assembledSeconds": 36.389,
+  "fitFactor": 1.086875,
+  "finalSeconds": 33.515,
+  "captions": [
+    {
+      "text": "别向别人借答案了",
+      "startMs": 0,
+      "endMs": 1947,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "越容易把自己弄丢",
+      "startMs": 2020,
+      "endMs": 3703,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "外界声音很多",
+      "startMs": 3776,
+      "endMs": 5315,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "真正重要的往往很轻",
+      "startMs": 5388,
+      "endMs": 8441,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "藏在你反复想起的事里",
+      "startMs": 8514,
+      "endMs": 10749,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "藏在你不愿承认的疲惫里",
+      "startMs": 10823,
+      "endMs": 12986,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "生活不是讨所有人喜欢",
+      "startMs": 13060,
+      "endMs": 15151,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "而是越来越像自己",
+      "startMs": 15224,
+      "endMs": 17459,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "该拒绝就拒绝",
+      "startMs": 17533,
+      "endMs": 19215,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "该转身就转身",
+      "startMs": 19289,
+      "endMs": 20707,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "不把委屈当懂事",
+      "startMs": 20781,
+      "endMs": 22679,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "不把沉默当宽容",
+      "startMs": 22753,
+      "endMs": 24507,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "当你听见内心",
+      "startMs": 24581,
+      "endMs": 26263,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "世界反而没那么吵",
+      "startMs": 26337,
+      "endMs": 28019,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "所谓成熟",
+      "startMs": 28093,
+      "endMs": 29631,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "不是看透所有人",
+      "startMs": 29705,
+      "endMs": 31387,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "是终于不再为难自己",
+      "startMs": 31461,
+      "endMs": 33480,
+      "timestampMs": null,
+      "confidence": null
+    }
+  ]
+}

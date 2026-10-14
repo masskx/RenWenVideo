@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "source": "minimax-audio-web",
+  "description": "MiniMax 在线音乐素材库：按抖音人生哲理视频的情绪固定选曲，渲染时自动裁切到片长并以低音量混入。",
+  "defaults": {
+    "volume": 0.09,
+    "fadeInSeconds": 1.8,
+    "fadeOutSeconds": 3.2
+  },
+  "episodeMap": {
+    "slow-life": ["philosophy-jiangnan-01", "philosophy-jiangnan-02"],
+    "solitude": ["solitude-city-01", "solitude-city-02"],
+    "listen-rain": ["memory-rain-01", "memory-rain-02"],
+    "morning-tea": ["healing-morning-01", "healing-morning-02"],
+    "walk-inward": ["solitude-city-02", "philosophy-jiangnan-02"],
+    "leave-space": ["philosophy-jiangnan-02", "healing-morning-02"],
+    "self-kindness": ["healing-morning-02", "restart-light-01"]
+  },
+  "tracks": [
+    {
+      "id": "philosophy-jiangnan-01",
+      "file": "philosophy-jiangnan-01.mp3",
+      "label": "沉静哲理 · 江南留白 01",
+      "moods": ["哲理", "沉静", "江南", "留白"],
+      "durationSeconds": 123.43
+    },
+    {
+      "id": "philosophy-jiangnan-02",
+      "file": "philosophy-jiangnan-02.mp3",
+      "label": "沉静哲理 · 江南留白 02",
+      "moods": ["哲理", "沉静", "温暖", "慢生活"],
+      "durationSeconds": 159.95
+    },
+    {
+      "id": "regret-rain-01",
+      "file": "regret-rain-01.mp3",
+      "label": "伤感后悔 · 雨夜回望 01",
+      "moods": ["伤感", "后悔", "回望", "雨夜"],
+      "durationSeconds": 170.45
+    },
+    {
+      "id": "regret-rain-02",
+      "file": "regret-rain-02.mp3",
+      "label": "伤感后悔 · 雨夜回望 02",
+      "moods": ["伤感", "遗憾", "克制", "独白"],
+      "durationSeconds": 144.90
+    },
+    {
+      "id": "solitude-city-01",
+      "file": "solitude-city-01.mp3",
+      "label": "孤独夜行 · 城市灯影 01",
+      "moods": ["孤独", "夜行", "清冷", "成长"],
+      "durationSeconds": 291.66
+    },
+    {
+      "id": "solitude-city-02",
+      "file": "solitude-city-02.mp3",
+      "label": "孤独夜行 · 城市灯影 02",
+      "moods": ["孤独", "深夜", "安静", "自省"],
+      "durationSeconds": 171.78
+    },
+    {
+      "id": "memory-rain-01",
+      "file": "memory-rain-01.mp3",
+      "label": "雨后回忆 · 旧时光 01",
+      "moods": ["回忆", "雨后", "怀旧", "温柔遗憾"],
+      "durationSeconds": 133.59
+    },
+    {
+      "id": "memory-rain-02",
+      "file": "memory-rain-02.mp3",
+      "label": "雨后回忆 · 旧时光 02",
+      "moods": ["旧时光", "窗边", "时间感", "回望"],
+      "durationSeconds": 371.33
+    },
+    {
+      "id": "healing-morning-01",
+      "file": "healing-morning-01.mp3",
+      "label": "温柔治愈 · 晨光 01",
+      "moods": ["治愈", "晨光", "放下", "善待自己"],
+      "durationSeconds": 159.56
+    },
+    {
+      "id": "healing-morning-02",
+      "file": "healing-morning-02.mp3",
+      "label": "温柔治愈 · 晨光 02",
+      "moods": ["温柔", "自渡", "清晨", "安定"],
+      "durationSeconds": 111.67
+    },
+    {
+      "id": "restart-light-01",
+      "file": "restart-light-01.mp3",
+      "label": "重新出发 · 微光 01",
+      "moods": ["重新开始", "微光", "坚定", "希望"],
+      "durationSeconds": 157.10
+    },
+    {
+      "id": "restart-light-02",
+      "file": "restart-light-02.mp3",
+      "label": "重新出发 · 微光 02",
+      "moods": ["向前", "清澈", "恢复", "新阶段"],
+      "durationSeconds": 129.59
+    }
+  ]
+}

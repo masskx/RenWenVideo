@@ -1,0 +1,10 @@
+{
+  "episodeId": "leave-space",
+  "provider": "dashscope-tts",
+  "model": "cosyvoice-v3-flash",
+  "voice": "longxiu_v3",
+  "rawSeconds": 30.72,
+  "targetSeconds": 33.48,
+  "atempoFactor": 0.917563,
+  "generatedAt": "2026-09-18T15:53:38.803Z"
+}

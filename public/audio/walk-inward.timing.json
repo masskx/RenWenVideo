@@ -1,0 +1,10 @@
+{
+  "episodeId": "walk-inward",
+  "provider": "dashscope-tts",
+  "model": "cosyvoice-v3-flash",
+  "voice": "longxiu_v3",
+  "rawSeconds": 33.28,
+  "targetSeconds": 33.48,
+  "atempoFactor": 0.994026,
+  "generatedAt": "2026-09-18T15:53:32.180Z"
+}

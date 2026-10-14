@@ -1,0 +1,302 @@
+{
+  "id": "morning-tea",
+  "title": "晨光",
+  "fps": 25,
+  "width": 1080,
+  "height": 1920,
+  "titleEnd": 92,
+  "transitionFrames": 12,
+  "subtitleY": 0.7,
+  "subtitleSize": 68,
+  "audioSrc": "audio/morning-tea-segmented.mp3",
+  "musicSrc": "audio/music/healing-morning-01.mp3",
+  "musicId": "healing-morning-01",
+  "musicVolume": 0.09,
+  "musicFadeFrames": 45,
+  "shots": [
+    {
+      "id": "bridge",
+      "start": 0,
+      "duration": 92,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "video/bailian-i2v/morning-tea/bridge-wan3-0-video.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "bailian-wan3.0-video",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0
+    },
+    {
+      "id": "pour-tea",
+      "start": 92,
+      "duration": 81,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "video/gemini-omni/morning-tea/pour-tea.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "gemini-omni-web",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0.08
+    },
+    {
+      "id": "stone-tea",
+      "start": 173,
+      "duration": 53,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "video/bailian-i2v/morning-tea/stone-tea-wan3-0-video.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "bailian-wan3.0-video",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0
+    },
+    {
+      "id": "lotus-vase",
+      "start": 226,
+      "duration": 54,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "video/bailian-i2v/morning-tea/lotus-vase-wan3-0-video.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "bailian-wan3.0-video",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0
+    },
+    {
+      "id": "stove",
+      "start": 280,
+      "duration": 51,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "images/series/morning-tea/05-stove.png",
+      "kind": "image"
+    },
+    {
+      "id": "koi",
+      "start": 331,
+      "duration": 65,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "video/bailian-i2v/morning-tea/koi-wan3-0-video.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "bailian-wan3.0-video",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0
+    },
+    {
+      "id": "tea-leaves",
+      "start": 396,
+      "duration": 53,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "images/series/morning-tea/07-tea-leaves.png",
+      "kind": "image"
+    },
+    {
+      "id": "water",
+      "start": 449,
+      "duration": 56,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "images/series/morning-tea/08-water.png",
+      "kind": "image"
+    },
+    {
+      "id": "blossom",
+      "start": 505,
+      "duration": 59,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "images/series/morning-tea/09-blossom.png",
+      "kind": "image"
+    },
+    {
+      "id": "maple",
+      "start": 564,
+      "duration": 60,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "images/series/morning-tea/10-maple.png",
+      "kind": "image"
+    },
+    {
+      "id": "lotus-leaf",
+      "start": 624,
+      "duration": 75,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "images/series/morning-tea/11-lotus-leaf.png",
+      "kind": "image"
+    },
+    {
+      "id": "bamboo",
+      "start": 699,
+      "duration": 47,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "images/series/morning-tea/12-bamboo.png",
+      "kind": "image"
+    },
+    {
+      "id": "garden-tea",
+      "start": 746,
+      "duration": 30,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "images/series/morning-tea/13-garden-tea.png",
+      "kind": "image"
+    },
+    {
+      "id": "warm-room",
+      "start": 776,
+      "duration": 61,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "images/series/morning-tea/14-warm-room.png",
+      "kind": "image"
+    }
+  ],
+  "captions": [
+    {
+      "text": "真正改变你的，往往不是大事",
+      "startMs": 0,
+      "endMs": 2656,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "只是落在桌面上",
+      "startMs": 2727,
+      "endMs": 4330,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "提醒新的一天开始",
+      "startMs": 4400,
+      "endMs": 6598,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "人这一生",
+      "startMs": 6668,
+      "endMs": 7951,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "真正改变命运的",
+      "startMs": 8021,
+      "endMs": 9692,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "很少是惊天动地的决定",
+      "startMs": 9763,
+      "endMs": 11572,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "更多是每个普通早晨",
+      "startMs": 11642,
+      "endMs": 13840,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "你愿不愿重新整理自己",
+      "startMs": 13910,
+      "endMs": 16155,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "把该做的做好",
+      "startMs": 16225,
+      "endMs": 17622,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "把不该背的放下",
+      "startMs": 17692,
+      "endMs": 19547,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "不羡慕别人的季节",
+      "startMs": 19617,
+      "endMs": 21678,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "也不否认自己的迟到",
+      "startMs": 21748,
+      "endMs": 23488,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "只要还在往前走",
+      "startMs": 23558,
+      "endMs": 25299,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "就没有真正的晚",
+      "startMs": 25369,
+      "endMs": 27361,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "按自己的速度成长",
+      "startMs": 27431,
+      "endMs": 29492,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "日子会把答案放在坚持里",
+      "startMs": 29562,
+      "endMs": 31555,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "慢慢来，也是一种力量",
+      "startMs": 31625,
+      "endMs": 33480,
+      "timestampMs": null,
+      "confidence": null
+    }
+  ],
+  "videoProvider": "gemini-omni-web",
+  "videoAudioMode": "mute",
+  "videoAudioVolume": 0.08
+}

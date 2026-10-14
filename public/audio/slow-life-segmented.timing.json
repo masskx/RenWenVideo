@@ -1,0 +1,133 @@
+{
+  "episodeId": "slow-life",
+  "model": "cosyvoice-v3-flash",
+  "voice": "longsanshu_v3",
+  "rate": 1.04,
+  "pitch": 0.96,
+  "gapSeconds": 0.08,
+  "targetSeconds": 33.48,
+  "assembledSeconds": 36.78,
+  "fitFactor": 1.098578,
+  "finalSeconds": 33.515,
+  "captions": [
+    {
+      "text": "你越急着赶路，越容易错过自己",
+      "startMs": 0,
+      "endMs": 2877,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "走太快的人",
+      "startMs": 2950,
+      "endMs": 4400,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "常错过自己的心",
+      "startMs": 4473,
+      "endMs": 6280,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "一杯茶，不必喝完",
+      "startMs": 6353,
+      "endMs": 8351,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "一段路，不必赶完",
+      "startMs": 8423,
+      "endMs": 10564,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "你真正拥有的",
+      "startMs": 10636,
+      "endMs": 12515,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "往往是被忽略的时刻",
+      "startMs": 12588,
+      "endMs": 14466,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "人到一定年纪才明白",
+      "startMs": 14539,
+      "endMs": 16750,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "安静不是浪费时间",
+      "startMs": 16823,
+      "endMs": 18630,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "是把自己捡回来",
+      "startMs": 18703,
+      "endMs": 20154,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "少一点向外证明",
+      "startMs": 20226,
+      "endMs": 22034,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "多一点向内安放",
+      "startMs": 22106,
+      "endMs": 23913,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "日子有自己的节奏",
+      "startMs": 23986,
+      "endMs": 25865,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "花不会因催促盛开",
+      "startMs": 25938,
+      "endMs": 28006,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "先把今天过好",
+      "startMs": 28079,
+      "endMs": 29482,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "余下交给时间",
+      "startMs": 29555,
+      "endMs": 31077,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "慢一点，才听见生活",
+      "startMs": 31149,
+      "endMs": 33480,
+      "timestampMs": null,
+      "confidence": null
+    }
+  ]
+}

@@ -1,0 +1,315 @@
+{
+  "id": "solitude",
+  "title": "独处",
+  "fps": 25,
+  "width": 1080,
+  "height": 1920,
+  "titleEnd": 92,
+  "transitionFrames": 12,
+  "subtitleY": 0.7,
+  "subtitleSize": 68,
+  "audioSrc": "audio/solitude-segmented.mp3",
+  "musicSrc": "audio/music/solitude-city-01.mp3",
+  "musicId": "solitude-city-01",
+  "musicVolume": 0.09,
+  "musicFadeFrames": 45,
+  "shots": [
+    {
+      "id": "bridge",
+      "start": 0,
+      "duration": 92,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "video/bailian-i2v/solitude/bridge-happyhorse-1-1-i2v.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "bailian-happyhorse-1.1-i2v",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0
+    },
+    {
+      "id": "pour-tea",
+      "start": 92,
+      "duration": 81,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "video/bailian-i2v/solitude/pour-tea-wan3-0-video-prime.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "bailian-wan3.0-video-prime",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0
+    },
+    {
+      "id": "stone-tea",
+      "start": 173,
+      "duration": 53,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "video/bailian-i2v/solitude/stone-tea-wan3-0-video-prime.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "bailian-wan3.0-video-prime",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0
+    },
+    {
+      "id": "lotus-vase",
+      "start": 226,
+      "duration": 54,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "images/04-lotus-vase.png",
+      "kind": "image"
+    },
+    {
+      "id": "stove",
+      "start": 280,
+      "duration": 51,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "video/bailian-i2v/solitude/stove-wan3-0-video-prime.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "bailian-wan3.0-video-prime",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0
+    },
+    {
+      "id": "koi",
+      "start": 331,
+      "duration": 65,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "video/bailian-i2v/solitude/koi-wan3-0-video-prime.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "bailian-wan3.0-video-prime",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0
+    },
+    {
+      "id": "tea-leaves",
+      "start": 396,
+      "duration": 53,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "video/bailian-i2v/solitude/tea-leaves-wan3-0-video-prime.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "bailian-wan3.0-video-prime",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0
+    },
+    {
+      "id": "water",
+      "start": 449,
+      "duration": 56,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "video/bailian-i2v/solitude/water-wan3-0-video-prime.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "bailian-wan3.0-video-prime",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0
+    },
+    {
+      "id": "blossom",
+      "start": 505,
+      "duration": 59,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "video/bailian-i2v/solitude/blossom-wan3-0-video-prime.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "bailian-wan3.0-video-prime",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0
+    },
+    {
+      "id": "maple",
+      "start": 564,
+      "duration": 60,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "video/bailian-i2v/solitude/maple-wan3-0-video-prime.mp4",
+      "kind": "video",
+      "trimBefore": 0,
+      "videoProvider": "bailian-wan3.0-video-prime",
+      "videoAudioMode": "mute",
+      "videoAudioVolume": 0
+    },
+    {
+      "id": "lotus-leaf",
+      "start": 624,
+      "duration": 75,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "images/11-lotus-leaf.png",
+      "kind": "image"
+    },
+    {
+      "id": "bamboo",
+      "start": 699,
+      "duration": 47,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "images/12-bamboo.png",
+      "kind": "image"
+    },
+    {
+      "id": "garden-tea",
+      "start": 746,
+      "duration": 30,
+      "zoomFrom": 1.025,
+      "zoomTo": 1.065,
+      "panX": 8,
+      "src": "images/13-garden-tea.png",
+      "kind": "image"
+    },
+    {
+      "id": "warm-room",
+      "start": 776,
+      "duration": 61,
+      "zoomFrom": 1.065,
+      "zoomTo": 1.025,
+      "panX": -8,
+      "src": "images/14-warm-room.png",
+      "kind": "image"
+    }
+  ],
+  "captions": [
+    {
+      "text": "真正的成熟，是敢一个人安静",
+      "startMs": 0,
+      "endMs": 3189,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "不解释，也不迎合",
+      "startMs": 3259,
+      "endMs": 5015,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "这不是冷漠",
+      "startMs": 5086,
+      "endMs": 6449,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "是把心从喧闹里带回来",
+      "startMs": 6520,
+      "endMs": 9062,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "不必在每个群体证明自己",
+      "startMs": 9132,
+      "endMs": 11466,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "有些关系走远了",
+      "startMs": 11537,
+      "endMs": 13154,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "不代表你做错了什么",
+      "startMs": 13225,
+      "endMs": 14519,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "只是同行到了分岔口",
+      "startMs": 14590,
+      "endMs": 16923,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "独处让人看见",
+      "startMs": 16994,
+      "endMs": 18473,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "哪些热闹属于自己",
+      "startMs": 18544,
+      "endMs": 20300,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "哪些期待只是别人的声音",
+      "startMs": 20370,
+      "endMs": 22588,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "安静下来",
+      "startMs": 22659,
+      "endMs": 24138,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "才知道自己想要什么",
+      "startMs": 24209,
+      "endMs": 26427,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "能与自己相处的人",
+      "startMs": 26498,
+      "endMs": 28369,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "更懂得珍惜相逢",
+      "startMs": 28440,
+      "endMs": 30311,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "不怕一个人走",
+      "startMs": 30382,
+      "endMs": 31399,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "就不会随便跟谁走",
+      "startMs": 31470,
+      "endMs": 33480,
+      "timestampMs": null,
+      "confidence": null
+    }
+  ]
+}

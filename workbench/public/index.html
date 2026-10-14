@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>哲理视频工作台</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <h1 class="logo">🍵 哲理视频工作台</h1>
+      <span class="tagline">中式慢生活 · 配置驱动 · 批量生产</span>
+    </div>
+    <nav class="nav" id="nav">
+      <button class="nav-btn active" data-view="dashboard">视频列表</button>
+      <button class="nav-btn" data-view="production">生产中心</button>
+      <button class="nav-btn" data-view="assets">素材库</button>
+      <button class="nav-btn" data-view="publish">发布追踪</button>
+      <button class="nav-btn" data-view="guide">使用指南</button>
+    </nav>
+    <div class="header-right">
+      <button class="btn btn-primary" id="btn-new">＋ 新建视频</button>
+    </div>
+  </header>
+
+  <!-- 渲染状态条 -->
+  <div class="render-bar hidden" id="render-bar">
+    <span class="render-spinner"></span>
+    <span id="render-text">正在渲染...</span>
+  </div>
+
+  <main class="main" id="app">
+    <!-- 由 app.js 动态渲染 -->
+  </main>
+
+  <!-- 新建视频弹窗 -->
+  <div class="modal-overlay hidden" id="modal-new">
+    <div class="modal">
+      <h2>新建视频</h2>
+      <div class="form-group">
+        <label>视频标题</label>
+        <input type="text" id="new-title" placeholder="例如：静心" maxlength="4">
+      </div>
+      <div class="form-group">
+        <label>基于模板</label>
+        <select id="new-template">
+          <option value="slow-life">慢下来（14镜头完整模板）</option>
+          <option value="solitude">独处（14镜头完整模板）</option>
+          <option value="blank">空白（手动配置）</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn" onclick="closeModal('modal-new')">取消</button>
+        <button class="btn btn-primary" id="btn-create">创建</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 编辑器弹窗 -->
+  <div class="modal-overlay modal-editor hidden" id="modal-editor">
+    <div class="modal modal-lg">
+      <div class="editor-header">
+        <h2 id="editor-title">编辑视频</h2>
+        <button class="btn btn-danger btn-sm" id="btn-close-editor">✕ 关闭</button>
+      </div>
+      <div class="editor-body" id="editor-body">
+        <!-- 编辑器内容 -->
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

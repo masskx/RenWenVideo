@@ -1,0 +1,10 @@
+{
+  "episodeId": "self-kindness",
+  "provider": "dashscope-tts",
+  "model": "cosyvoice-v3-flash",
+  "voice": "longxiu_v3",
+  "rawSeconds": 32.261,
+  "targetSeconds": 33.48,
+  "atempoFactor": 0.963597,
+  "generatedAt": "2026-09-18T15:53:50.668Z"
+}
