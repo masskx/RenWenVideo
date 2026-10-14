@@ -1,0 +1,12 @@
+{
+  "tutorial": "rea-quickstart",
+  "source": "https://x.com/0xlangeai/status/2109544824135467312",
+  "voice": "zh-CN-YunxiNeural",
+  "output": {
+    "width": 1080,
+    "height": 1920,
+    "frames": 6165,
+    "fps": 30
+  },
+  "createdAt": "2026-10-14T14:15:48.823Z"
+}

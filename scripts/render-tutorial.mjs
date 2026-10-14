@@ -3,7 +3,8 @@
 // Run scripts/generate-tutorial-voice.py and scripts/generate-tutorial-music.py first.
 import {bundle} from '@remotion/bundler';
 import {renderMedia, renderStill, selectComposition} from '@remotion/renderer';
-import {access, mkdir, readFile, rename, writeFile} from 'node:fs/promises';
+import {access, mkdir, readFile, unlink, writeFile} from 'node:fs/promises';
+import {execFileSync} from 'node:child_process';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
@@ -52,7 +53,10 @@ let last = -1;
 await renderMedia({serveUrl, composition, inputProps, browserExecutable, outputLocation: pending, codec: 'h264', crf: 18,
   audioBitrate: '192k', scale: draft ? 2 / 3 : 1, concurrency: Number(process.env.RENDER_CONCURRENCY ?? 4),
   onProgress: ({progress}) => { const n = Math.floor(progress * 20); if (n !== last) { last = n; console.log(`${tutorial.id}: ${n * 5}%`); } }});
-await rename(pending, outputLocation);
+// Short-video platforms play back around -14…-16 LUFS; normalize the mix without touching the video stream.
+execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', pending, '-c:v', 'copy', '-af', 'loudnorm=I=-15:TP=-1.5:LRA=11',
+  '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-movflags', '+faststart', outputLocation]);
+await unlink(pending);
 console.log(`Saved ${outputLocation}`);
 
 const stamp = (ms) => {
