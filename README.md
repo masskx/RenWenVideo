@@ -118,6 +118,23 @@ curl -X POST http://localhost:3210/api/render \
 
 完整 API 文档见 `workbench/API.md`。
 
+## 科普教程视频（Tutorial 管线）
+
+与哲理短片的复刻规范分开，`tutorials/` 下的配置用于把图文教程改编成抖音竖屏讲解视频（1080×1920 · 30fps）。旁白逐句驱动画面：`{a}` 标记的位置会被换算成画面动画的触发时间，字幕按词级时间轴自动切分。
+
+```powershell
+pip install edge-tts numpy
+python scripts/generate-tutorial-voice.py tutorials/rea-quickstart.json   # 分场景配音 + 字幕/动画时间轴
+python scripts/generate-tutorial-music.py tutorials/rea-quickstart.json   # 合成无版权底乐
+node scripts/render-tutorial.mjs tutorials/rea-quickstart.json --overwrite # 渲染成片 + 封面 + SRT
+node scripts/render-tutorial.mjs tutorials/rea-quickstart.json --stills=300,1200  # 抽帧检查
+```
+
+- 场景画面在 `src/tutorial/scenes.tsx`，通过 `visual` 字段与配置对应；Remotion Studio 中的 composition 为 `Tutorial` 与 `TutorialCover`。
+- 旁白写法：`[显示文本|朗读文本]` 可让字幕与读音不同（如 `[9222|九二二二]`）。修改旁白后重新运行配音脚本，只会重配变化的场景。
+- 在使用 TLS 代理的环境中，设置 `TTS_CA_BUNDLE` 指向代理 CA 证书。
+- 发布标题、描述、置顶评论命令与来源核对见 `tutorials/rea-quickstart.publish.md`。
+
 ## Episode 配置说明
 
 - `shots[].start` / `duration`：帧为单位，镜头必须连续排列

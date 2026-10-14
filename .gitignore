@@ -10,6 +10,7 @@ out/*
 !out/*.mp4
 !out/*.srt
 !out/*.json
+!out/*-cover.jpg
 out/*-draft.mp4
 out/*-silent.mp4
 out/*-draft.json
