@@ -1,7 +1,7 @@
 """Generate per-scene narration + caption/cue timing for a tutorial video.
 
 Usage:
-  python scripts/generate-tutorial-voice.py tutorials/rea-quickstart.json [--force]
+  python scripts/generate-tutorial-voice.py <id> [--force]     (reads tutorials/<id>/tutorial.json)
 
 Narration markup:
   {a}            cue marker; its time (ms from scene start) is written to timing.cues.a
@@ -9,7 +9,7 @@ Narration markup:
 
 Outputs:
   public/audio/tutorials/<id>/<nn>-<scene>.mp3
-  tutorials/<id>.timing.json
+  tutorials/<id>/timing.json
 """
 import asyncio
 import json
@@ -29,6 +29,16 @@ ROOT = Path(__file__).resolve().parent.parent
 _ca = os.environ.get("TTS_CA_BUNDLE") or os.environ.get("SSL_CERT_FILE")
 if _ca and Path(_ca).exists():
     edge_tts.communicate._SSL_CTX = ssl.create_default_context(cafile=_ca)
+
+def resolve_tutorial(arg):
+    """Accept an id ("rea-quickstart"), a folder ("tutorials/rea-quickstart") or a tutorial.json path."""
+    target = Path(arg or "rea-quickstart")
+    if target.suffix == ".json":
+        return ROOT / target
+    if len(target.parts) == 1:
+        target = Path("tutorials") / target
+    return ROOT / target / "tutorial.json"
+
 
 TOKEN = re.compile(r"\{([a-z0-9]+)\}|\[([^\]|]+)\|([^\]]+)\]")
 BREAK = set("，。？！；：、,?!;:")
@@ -140,7 +150,7 @@ def time_at(words, display_index, fallback):
 async def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     force = "--force" in sys.argv
-    spec_path = ROOT / (args[0] if args else "tutorials/rea-quickstart.json")
+    spec_path = resolve_tutorial(args[0] if args else None)
     spec = json.loads(spec_path.read_text(encoding="utf-8"))
     audio_dir = ROOT / "public" / "audio" / "tutorials" / spec["id"]
     audio_dir.mkdir(parents=True, exist_ok=True)
@@ -175,7 +185,7 @@ async def main():
         start_frame += duration_frames
     timing = {"id": spec["id"], "voice": spec["voice"], "rate": spec.get("rate"), "fps": fps, "leadMs": lead,
               "totalFrames": start_frame, "scenes": scenes}
-    out = spec_path.with_name(f"{spec['id']}.timing.json")
+    out = spec_path.with_name("timing.json")
     out.write_text(json.dumps(timing, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"{len(scenes)} scenes, {start_frame} frames ({start_frame / fps:.1f}s) -> {out.relative_to(ROOT)}")
 

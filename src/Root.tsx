@@ -6,8 +6,9 @@ import solitude from '../episodes/solitude.json';
 import slowLife from '../episodes/slow-life.json';
 import {TutorialCover, TutorialVideo} from './tutorial/TutorialVideo';
 import {Tutorial, TutorialTiming} from './tutorial/types';
-import reaQuickstart from '../tutorials/rea-quickstart.json';
-import reaQuickstartTiming from '../tutorials/rea-quickstart.timing.json';
+// Studio preview defaults; render-tutorial.mjs passes any tutorials/<id>/ as inputProps.
+import reaQuickstart from '../tutorials/rea-quickstart/tutorial.json';
+import reaQuickstartTiming from '../tutorials/rea-quickstart/timing.json';
 
 const reaTutorial = {tutorial: reaQuickstart as Tutorial, timing: reaQuickstartTiming as TutorialTiming};
 

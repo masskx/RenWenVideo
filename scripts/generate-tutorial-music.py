@@ -1,9 +1,9 @@
 """Synthesize a light, royalty-free tech-tutorial music bed (pad + soft arpeggio + sub).
 
 Usage:
-  python scripts/generate-tutorial-music.py tutorials/rea-quickstart.json
+  python scripts/generate-tutorial-music.py <id>
 
-Reads tutorials/<id>.timing.json for the length and writes the file named by musicSrc.
+Reads tutorials/<id>/timing.json for the length and writes the file named by musicSrc.
 """
 import json
 import subprocess
@@ -25,6 +25,16 @@ CHORDS = [
 ]
 
 
+def resolve_tutorial(arg):
+    """Accept an id ("rea-quickstart"), a folder ("tutorials/rea-quickstart") or a tutorial.json path."""
+    target = Path(arg or "rea-quickstart")
+    if target.suffix == ".json":
+        return ROOT / target
+    if len(target.parts) == 1:
+        target = Path("tutorials") / target
+    return ROOT / target / "tutorial.json"
+
+
 def hz(midi):
     return 440.0 * 2 ** ((midi - 69) / 12)
 
@@ -38,9 +48,9 @@ def envelope(n, attack, release):
 
 
 def main():
-    spec_path = ROOT / (sys.argv[1] if len(sys.argv) > 1 else "tutorials/rea-quickstart.json")
+    spec_path = resolve_tutorial(sys.argv[1] if len(sys.argv) > 1 else None)
     spec = json.loads(spec_path.read_text(encoding="utf-8"))
-    timing = json.loads(spec_path.with_name(f"{spec['id']}.timing.json").read_text(encoding="utf-8"))
+    timing = json.loads(spec_path.with_name("timing.json").read_text(encoding="utf-8"))
     seconds = timing["totalFrames"] / timing["fps"] + 1.0
     total = int(seconds * SR)
     out = np.zeros(total)

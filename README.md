@@ -6,7 +6,7 @@
 
 ### 普通用户：单页预览
 
-双击 `启动工作台.cmd`，或直接打开 `workbench.html`。页面不启动 Node 服务；点击“选择 out 文件夹”，选择当前项目的 `zen-video\out`，即可预览已有 MP4。也可以直接选择多个视频文件。
+双击 `启动工作台.cmd`，或直接打开 `workbench.html`。页面不启动 Node 服务；点击“选择 out 文件夹”，选择当前项目的 `zen-video\out`，即可预览已有 MP4（会自动扫描 `out/<系列>/<id>/` 子目录）。也可以直接选择多个视频文件。
 
 ### 自动化/高级模式：服务版工作台
 
@@ -33,9 +33,31 @@ npm run workbench
 npm run dev
 ```
 
-F 盘是 FAT32 可移动磁盘，本项目启动脚本会把运行文件同步到 `%LOCALAPPDATA%/zen-video-runtime-20260912` 并在那里安装依赖、执行渲染，最后把成片复制回项目的 `out/`。
+F 盘是 FAT32 可移动磁盘，本项目启动脚本会把运行文件同步到 `%LOCALAPPDATA%/zen-video-runtime-20260912` 并在那里安装依赖、执行渲染，最后把成片按 `out/<系列>/<id>/` 结构复制回项目，并刷新 `out/INDEX.md`。
 
 正式成片会保留在 `out/` 并纳入版本库；本机密钥、依赖目录、QA 截图、草稿/静音中间文件和字体文件不会上传。
+
+## 目录结构
+
+每条视频的**源配置**和**成片**各有一个固定位置，以 `<id>` 一一对应：
+
+```text
+episodes/<id>.json                 哲理短片配置（zen 系列）
+tutorials/<id>/                    科普教程（tutorials 系列）
+  tutorial.json                    旁白脚本 + 场景
+  timing.json                      配音脚本生成的字幕/动画时间轴
+  publish.md                       抖音标题、描述、置顶评论与来源核对
+public/                            素材（按类型 → 视频 id 分目录，如 audio/tutorials/<id>/）
+out/
+  INDEX.md                         全部成片目录：时长、大小、渲染时间、发布状态、文件链接
+  <系列>/<id>/                     一条视频一个文件夹 = 上传抖音所需的全部文件
+    <id>.mp4  <id>-cover.jpg  <id>.srt  <id>.json(渲染记录)
+    drafts/                        草稿、静音版、抽帧截图（不进版本库）
+```
+
+- 系列在 `scripts/output-layout.cjs` 中登记（目前 `zen`、`tutorials`）；渲染脚本、工作台和目录生成都从这里取路径，新增系列只需加一行。
+- `<id>` 只能用小写字母、数字和连字符，且在同一系列内唯一。
+- 每次渲染结束会自动刷新 `out/INDEX.md`；手动刷新用 `npm run catalog`。发布状态取自工作台的“发布追踪”。
 
 ## 命令一览
 
@@ -46,6 +68,7 @@ npm run check        # 验证所有配置
 npm run render       # 渲染默认视频
 npm run batch        # 批量渲染所有视频
 npm run lint         # ESLint + TypeScript 检查
+npm run catalog      # 重新生成 out/INDEX.md 成片目录
 npm run generate:images2  # 用现有 Images2 链路批量生成图片
 npm run generate:doubao   # 用豆包 Seedream 批量生成图片（当前仅作静帧备选）
 npm run series:prepare    # 准备七主题 episode JSON 与 Images2 prompts
@@ -120,20 +143,21 @@ curl -X POST http://localhost:3210/api/render \
 
 ## 科普教程视频（Tutorial 管线）
 
-与哲理短片的复刻规范分开，`tutorials/` 下的配置用于把图文教程改编成抖音竖屏讲解视频（1080×1920 · 30fps）。旁白逐句驱动画面：`{a}` 标记的位置会被换算成画面动画的触发时间，字幕按词级时间轴自动切分。
+与哲理短片的复刻规范分开，`tutorials/<id>/` 下的配置用于把图文教程改编成抖音竖屏讲解视频（1080×1920 · 30fps）。旁白逐句驱动画面：`{a}` 标记的位置会被换算成画面动画的触发时间，字幕按词级时间轴自动切分。
 
 ```powershell
 pip install edge-tts numpy
-python scripts/generate-tutorial-voice.py tutorials/rea-quickstart.json   # 分场景配音 + 字幕/动画时间轴
-python scripts/generate-tutorial-music.py tutorials/rea-quickstart.json   # 合成无版权底乐
-node scripts/render-tutorial.mjs tutorials/rea-quickstart.json --overwrite # 渲染成片 + 封面 + SRT
-node scripts/render-tutorial.mjs tutorials/rea-quickstart.json --stills=300,1200  # 抽帧检查
+npm run tutorial:voice -- rea-quickstart                 # 分场景配音 + 字幕/动画时间轴 → tutorials/<id>/timing.json
+npm run tutorial:music -- rea-quickstart                 # 合成无版权底乐
+npm run tutorial:render -- rea-quickstart --overwrite    # 成片 + 封面 + SRT → out/tutorials/<id>/
+npm run tutorial:render -- rea-quickstart --stills=300,1200  # 抽帧检查 → out/tutorials/<id>/drafts/
 ```
 
 - 场景画面在 `src/tutorial/scenes.tsx`，通过 `visual` 字段与配置对应；Remotion Studio 中的 composition 为 `Tutorial` 与 `TutorialCover`。
 - 旁白写法：`[显示文本|朗读文本]` 可让字幕与读音不同（如 `[9222|九二二二]`）。修改旁白后重新运行配音脚本，只会重配变化的场景。
 - 在使用 TLS 代理的环境中，设置 `TTS_CA_BUNDLE` 指向代理 CA 证书。
-- 发布标题、描述、置顶评论命令与来源核对见 `tutorials/rea-quickstart.publish.md`。
+- 发布标题、描述、置顶评论命令与来源核对见 `tutorials/<id>/publish.md`。
+- 新建一期教程：复制 `tutorials/rea-quickstart/` 为 `tutorials/<新id>/`，改 `tutorial.json` 的 `id` 和旁白，在 `src/tutorial/scenes.tsx` 登记新画面，然后依次运行上面三条命令。
 
 ## Episode 配置说明
 

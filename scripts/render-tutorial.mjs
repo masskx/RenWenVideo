@@ -1,5 +1,6 @@
-// Render a tutorial video (tutorials/<id>.json + generated <id>.timing.json).
-//   node scripts/render-tutorial.mjs tutorials/rea-quickstart.json [--draft] [--stills=120,900] [--overwrite]
+// Render a tutorial video from tutorials/<id>/ (tutorial.json + generated timing.json)
+// into out/tutorials/<id>/ (see scripts/output-layout.cjs).
+//   node scripts/render-tutorial.mjs <id> [--draft] [--stills=120,900] [--overwrite]
 // Run scripts/generate-tutorial-voice.py and scripts/generate-tutorial-music.py first.
 import {bundle} from '@remotion/bundler';
 import {renderMedia, renderStill, selectComposition} from '@remotion/renderer';
@@ -7,17 +8,23 @@ import {access, mkdir, readFile, unlink, writeFile} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {createRequire} from 'node:module';
+
+const layout = createRequire(import.meta.url)('./output-layout.cjs');
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 process.chdir(root);
 const args = process.argv.slice(2);
 const draft = args.includes('--draft');
 const stillsArg = args.find((a) => a.startsWith('--stills='));
-const specFile = args.find((a) => !a.startsWith('--')) ?? 'tutorials/rea-quickstart.json';
+// Accept an id ("rea-quickstart"), a folder ("tutorials/rea-quickstart") or the tutorial.json path.
+const target = (args.find((a) => !a.startsWith('--')) ?? 'rea-quickstart').replace(/[\\/]+$/, '');
+const tutorialDir = target.endsWith('.json') ? path.dirname(target) : target.includes('/') || target.includes('\\') ? target : path.join('tutorials', target);
+const specFile = path.join(tutorialDir, 'tutorial.json');
 const readJson = async (file) => JSON.parse((await readFile(file, 'utf8')).replace(/^﻿/, ''));
 
 const tutorial = await readJson(specFile);
-const timing = await readJson(specFile.replace(/\.json$/, '.timing.json'));
+const timing = await readJson(path.join(tutorialDir, 'timing.json'));
 if (timing.id !== tutorial.id) throw Error(`Timing file belongs to ${timing.id}, not ${tutorial.id}`);
 const missing = tutorial.scenes.filter((s) => !timing.scenes.some((t) => t.id === s.id)).map((s) => s.id);
 if (missing.length) throw Error(`Scenes without voice timing: ${missing.join(', ')} — run generate-tutorial-voice.py`);
@@ -26,12 +33,14 @@ for (const src of [...timing.scenes.map((s) => s.audioSrc), tutorial.musicSrc].f
 const inputProps = {tutorial, timing};
 const serveUrl = await bundle({entryPoint: path.join(root, 'src/index.ts')});
 const browserExecutable = process.env.REMOTION_BROWSER_EXECUTABLE;
-await mkdir('out', {recursive: true});
+const outDir = layout.videoDir('tutorials', tutorial.id, root);
+const draftsDir = layout.draftsDir('tutorials', tutorial.id, root);
+await mkdir(draftsDir, {recursive: true});
 
 if (stillsArg) {
   const composition = await selectComposition({serveUrl, id: 'Tutorial', inputProps, browserExecutable});
   for (const frame of stillsArg.slice(9).split(',').map(Number)) {
-    const output = path.join(root, 'out', `${tutorial.id}-${frame}.png`);
+    const output = path.join(draftsDir, `${tutorial.id}-${frame}.png`);
     await renderStill({serveUrl, composition, inputProps, browserExecutable, frame, output});
     console.log(`Saved ${output}`);
   }
@@ -39,12 +48,12 @@ if (stillsArg) {
 }
 
 const cover = await selectComposition({serveUrl, id: 'TutorialCover', inputProps, browserExecutable});
-const coverOutput = path.join(root, 'out', `${tutorial.id}-cover.jpg`);
+const coverOutput = path.join(draft ? draftsDir : outDir, `${tutorial.id}-cover.jpg`);
 await renderStill({serveUrl, composition: cover, inputProps, browserExecutable, output: coverOutput, imageFormat: 'jpeg', jpegQuality: 92});
 console.log(`Saved ${coverOutput}`);
 
 const composition = await selectComposition({serveUrl, id: 'Tutorial', inputProps, browserExecutable});
-const outputLocation = path.join(root, 'out', `${tutorial.id}${draft ? '-draft' : ''}.mp4`);
+const outputLocation = layout.videoFile('tutorials', tutorial.id, {draft}, root);
 let exists = false;
 try { await access(outputLocation); exists = true; } catch {}
 if (exists && !args.includes('--overwrite')) { console.log(`Skipped existing ${outputLocation}`); process.exit(0); }
@@ -65,6 +74,8 @@ const stamp = (ms) => {
 };
 const captions = timing.scenes.flatMap((s) => s.captions.map((c) => ({...c, startMs: c.startMs + s.startFrame / timing.fps * 1000, endMs: c.endMs + s.startFrame / timing.fps * 1000})));
 await writeFile(outputLocation.replace(/\.mp4$/, '.srt'), captions.map((c, i) => `${i + 1}\n${stamp(c.startMs)} --> ${stamp(c.endMs)}\n${c.text}\n`).join('\n'), 'utf8');
-await writeFile(outputLocation.replace(/\.mp4$/, '.json'), JSON.stringify({tutorial: tutorial.id, source: tutorial.source, voice: timing.voice,
+await writeFile(outputLocation.replace(/\.mp4$/, '.json'), JSON.stringify({series: 'tutorials', id: tutorial.id, title: tutorial.title, source: tutorial.source, voice: timing.voice,
   output: {width: Math.round(composition.width * (draft ? 2 / 3 : 1)), height: Math.round(composition.height * (draft ? 2 / 3 : 1)),
     frames: composition.durationInFrames, fps: composition.fps}, createdAt: new Date().toISOString()}, null, 2), 'utf8');
+const {count} = layout.writeIndex(root);
+console.log(`Updated out/INDEX.md (${count} videos)`);

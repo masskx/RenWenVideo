@@ -7,6 +7,7 @@ import {createRequire} from 'node:module';
 
 const require = createRequire(import.meta.url);
 const {assessEpisode} = require('./replication-check.cjs');
+const layout = require('./output-layout.cjs');
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 process.chdir(root);
@@ -60,7 +61,6 @@ for (const file of files) {
   if (episode.musicSrc) await access(withinPublic(episode.musicSrc));
   jobs.push(episode);
 }
-await mkdir('out',{recursive:true});
 if (args.includes('--check')) {console.log(`Validated ${jobs.length} episode(s), timelines and asset paths.`); process.exit(0);}
 const serveUrl=await bundle({entryPoint:path.join(root,'src/index.ts')});
 let browserExecutable=process.env.REMOTION_BROWSER_EXECUTABLE;
@@ -70,14 +70,16 @@ if (!browserExecutable && process.platform==='win32') {
   }
 }
 for (const episode of jobs) {
-  const outputLocation=path.join(root,'out',`${episode.id}${draft?'-draft':''}${episode.audioSrc?'':'-silent'}.mp4`);
+  const outputLocation=layout.videoFile('zen',episode.id,{draft,silent:!episode.audioSrc},root);
+  await mkdir(path.dirname(outputLocation),{recursive:true});
   let exists=false;try {await access(outputLocation);exists=true;} catch {}
   if (exists&&!args.includes('--overwrite')&&!args.includes('--stills')) {console.log(`Skipped existing ${outputLocation}`);continue;}
   const inputProps={episode};
   const composition=await selectComposition({serveUrl,id:'Solitude',inputProps,browserExecutable});
   if (args.includes('--stills')) {
+    await mkdir(layout.draftsDir('zen',episode.id,root),{recursive:true});
     for (const frame of [25,Math.floor(composition.durationInFrames/2),composition.durationInFrames-15]) {
-      await renderStill({serveUrl,composition,inputProps,browserExecutable,frame,output:path.join(root,'out',`${episode.id}-${frame}.png`)});
+      await renderStill({serveUrl,composition,inputProps,browserExecutable,frame,output:path.join(layout.draftsDir('zen',episode.id,root),`${episode.id}-${frame}.png`)});
     }
     console.log(`Saved stills for ${episode.id}`);
     continue;
@@ -93,5 +95,7 @@ for (const episode of jobs) {
     return `${String(Math.floor(t/3600000)).padStart(2,'0')}:${String(Math.floor(t/60000)%60).padStart(2,'0')}:${String(Math.floor(t/1000)%60).padStart(2,'0')},${String(t%1000).padStart(3,'0')}`;
   };
   await writeFile(outputLocation.replace(/\.mp4$/,'.srt'),episode.captions.map((c,i)=>`${i+1}\n${stamp(c.startMs)} --> ${stamp(c.endMs)}\n${c.text}\n`).join('\n'),'utf8');
-  await writeFile(outputLocation.replace(/\.mp4$/,'.json'),JSON.stringify({episode,output:{width:Math.round(composition.width*(draft?2/3:1)),height:Math.round(composition.height*(draft?2/3:1)),frames:composition.durationInFrames,fps:composition.fps},createdAt:new Date().toISOString()},null,2),'utf8');
+  await writeFile(outputLocation.replace(/\.mp4$/,'.json'),JSON.stringify({series:'zen',id:episode.id,title:episode.title,episode,output:{width:Math.round(composition.width*(draft?2/3:1)),height:Math.round(composition.height*(draft?2/3:1)),frames:composition.durationInFrames,fps:composition.fps},createdAt:new Date().toISOString()},null,2),'utf8');
 }
+const {count}=layout.writeIndex(root);
+console.log(`Updated out/INDEX.md (${count} videos)`);

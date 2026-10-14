@@ -1,5 +1,7 @@
 {
-  "tutorial": "rea-quickstart",
+  "series": "tutorials",
+  "id": "rea-quickstart",
+  "title": "REA 保姆级上手",
   "source": "https://x.com/0xlangeai/status/2109544824135467312",
   "voice": "zh-CN-YunxiNeural",
   "output": {

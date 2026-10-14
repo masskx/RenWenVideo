@@ -1,8 +1,8 @@
 # 抖音发布物料 · REA 保姆级上手
 
-- 成片：`out/rea-quickstart.mp4`（1080×1920 · 30fps · 约 3 分 26 秒）
-- 封面：`out/rea-quickstart-cover.jpg`
-- 字幕：`out/rea-quickstart.srt`（画面已烧录字幕，SRT 仅备用）
+- 成片：`out/tutorials/rea-quickstart/rea-quickstart.mp4`（1080×1920 · 30fps · 约 3 分 26 秒）
+- 封面：`out/tutorials/rea-quickstart/rea-quickstart-cover.jpg`
+- 字幕：`out/tutorials/rea-quickstart/rea-quickstart.srt`（画面已烧录字幕，SRT 仅备用）
 
 ## 标题（任选其一，≤ 30 字）
 

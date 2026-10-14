@@ -39,7 +39,11 @@
     "music:generate": "node scripts/generate-music.mjs --generate",
     "video:prepare": "node scripts/prepare-gemini-video.mjs",
     "tts:plan": "node scripts/generate-voice.mjs",
-    "tts:generate": "node scripts/generate-voice.mjs --generate"
+    "tts:generate": "node scripts/generate-voice.mjs --generate",
+    "catalog": "node scripts/catalog.mjs",
+    "tutorial:voice": "python scripts/generate-tutorial-voice.py",
+    "tutorial:music": "python scripts/generate-tutorial-music.py",
+    "tutorial:render": "node scripts/render-tutorial.mjs"
   },
   "sideEffects": [
     "*.css"
