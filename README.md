@@ -59,6 +59,17 @@ npm run tts:generate      # 生成百炼 CosyVoice 配音并适配成片时长
 node scripts/generate-segmented-voice.mjs --episodes=slow-life --generate --apply  # 分句生成并回写字幕时间轴
 ```
 
+## 长文讲解视频（Explainer）
+
+除了慢生活哲理系列，项目还支持把一篇文章做成带章节的竖屏知识讲解视频。配置写在 `explainers/<id>.json`，内容包括分场景旁白、标题、原话卡片和配图提示词，Remotion 合成组件是 `src/ArticleExplainer.tsx`。
+
+```bash
+node scripts/build-explainer.mjs --id=ai-era-11-rules --images --voice   # Images2 配图 + CosyVoice 分句配音 + 时间轴 + 底乐
+node scripts/render-explainer.mjs --composition=AiEra11Rules --out=douyin/ai-era-11-rules/video.mp4
+```
+
+成片和发布文案统一放在 `douyin/<id>/`，第一条是 `douyin/ai-era-11-rules/`（孙宇晨×邵艾伦对谈的 11 条反常识）。
+
 ## 提供商与密钥
 
 项目将 Images2、豆包 Seedream、百炼 CosyVoice TTS 统一登记在 `config/providers.json`。本机凭据放在 `zen-video/.env`（已被 `.gitignore` 忽略），可以从 `.env.example` 复制模板。工作台的“生产中心”只显示提供商是否已配置，不显示密钥值。
