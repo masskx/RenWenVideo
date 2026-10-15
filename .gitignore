@@ -8,7 +8,7 @@ out/
 *.raw.mp4
 
 # Local QA screenshots are reproducible and not production artifacts.
-qa/
+/qa/
 
 .env
 .env.*

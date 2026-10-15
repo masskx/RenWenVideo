@@ -1,19 +1,20 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {AbsoluteFill, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Audio} from '@remotion/media';
 import {captionY, color, font, stage} from './theme';
 import {sceneRegistry} from './scenes';
 import {Dino} from './ui';
 import {SceneTiming, TimedCaption, TutorialProps} from './types';
+import {CutStage, Particles, beatTour, clamp, ease, planCuts, prog, sway} from '../fx';
 
 const Background: React.FC = () => {
   const frame = useCurrentFrame();
   const t = frame / 30;
   return <AbsoluteFill style={{background: color.bg}}>
-    <AbsoluteFill style={{background: `radial-gradient(900px 700px at ${20 + Math.sin(t / 6) * 8}% ${12 + Math.cos(t / 7) * 4}%, rgba(34,211,238,0.16), transparent 70%),
-      radial-gradient(900px 800px at ${82 + Math.cos(t / 5) * 6}% ${78 + Math.sin(t / 8) * 5}%, rgba(167,139,250,0.18), transparent 70%)`}} />
+    <AbsoluteFill style={{background: `radial-gradient(900px 700px at ${20 + Math.sin(t / 3) * 16}% ${14 + Math.cos(t / 4) * 9}%, rgba(34,211,238,0.16), transparent 70%),
+      radial-gradient(900px 800px at ${80 + Math.cos(t / 2.6) * 14}% ${76 + Math.sin(t / 3.4) * 10}%, rgba(167,139,250,0.18), transparent 70%)`}} />
     <AbsoluteFill style={{backgroundImage: 'radial-gradient(rgba(148,163,255,0.13) 2px, transparent 2px)', backgroundSize: '44px 44px',
-      backgroundPosition: `0 ${(-frame * 0.4) % 44}px`, maskImage: 'linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent)'}} />
+      backgroundPosition: `0 ${(-frame * 1.1) % 44}px`, maskImage: 'linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent)'}} />
   </AbsoluteFill>;
 };
 
@@ -53,33 +54,56 @@ const Caption: React.FC<{captions: TimedCaption[]}> = ({captions}) => {
   </div>;
 };
 
-const SceneFrame: React.FC<{timing: SceneTiming; visual: string; credit: string}> = ({timing, visual, credit}) => {
+// Scene visual with the shared motion layer: entrance, a new framing on every caption line (beatTour) and a
+// slow breath while held (docs/video-craft/动效与画面变化.md §1, §4).
+const SceneVisual: React.FC<{timing: SceneTiming; visual: string; credit: string}> = ({timing, visual, credit}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const Visual = sceneRegistry[visual];
+  const t = frame / fps;
   const cue = (name: string, fallback = 0) => (name in timing.cues ? Math.round(timing.cues[name] / 1000 * fps) : fallback);
-  const enter = interpolate(frame, [0, 10], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const beats = useMemo(() => timing.captions.map((c) => c.startMs / 1000), [timing]);
+  const enterP = ease.outBack(prog(t, 0, 0.4), 1.2);
   const exit = interpolate(frame, [timing.durationFrames - 8, timing.durationFrames], [1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  return <AbsoluteFill>
-    <div style={{position: 'absolute', left: stage.left, top: stage.top, width: stage.width, height: stage.height,
-      opacity: Math.min(enter, exit), transform: `translateY(${(1 - enter) * 30}px)`}}>
-      {Visual && <Visual f={frame} dur={timing.durationFrames} cue={cue} credit={credit} />}
-    </div>
-    <Caption captions={timing.captions} />
-  </AbsoluteFill>;
+  const bz = beatTour(t, beats, {amp: 0.075, drift: 30});
+  const sw = sway(t, 0.9, {dy: 3, deg: 0, breath: 0.006});
+  return <div style={{position: 'absolute', left: stage.left, top: stage.top, width: stage.width, height: stage.height,
+    opacity: Math.min(clamp(enterP * 1.5), exit), transformOrigin: '50% 40%',
+    transform: `translate(${bz.dx}px, ${(1 - enterP) * 40 + bz.dy + sw.dy}px) scale(${bz.s * sw.s})`}}>
+    {Visual && <Visual f={frame} dur={timing.durationFrames} cue={cue} credit={credit} />}
+  </div>;
 };
 
 export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
-  const {durationInFrames} = useVideoConfig();
+  const frame = useCurrentFrame();
+  const {durationInFrames, fps, width, height} = useVideoConfig();
+  const t = frame / fps;
   const leadFrames = Math.round((timing.leadMs ?? 0) / 1000 * tutorial.fps);
+  const stepOf = (id: string) => tutorial.scenes.find((s) => s.id === id)?.step ?? 0;
+  // A new step gets a big transition; scenes inside the same step get small ones.
+  const cuts = useMemo(() => {
+    const list = timing.scenes.slice(1).map((s, i) => ({at: s.startFrame / fps, big: stepOf(s.id) !== stepOf(timing.scenes[i].id)}));
+    // The opening is the densest part (a change every 1–1.5 s): reveal the first frame with an iris.
+    return [{at: 0, kind: 'iris' as const}, ...planCuts(list.map((c) => c.at), (i) => list[i].big)];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timing, tutorial, fps]);
   return <AbsoluteFill style={{background: color.bg, overflow: 'hidden'}}>
-    <Background />
-    {timing.scenes.map((t) => {
-      const scene = tutorial.scenes.find((s) => s.id === t.id);
-      return <Sequence key={t.id} name={t.id} from={t.startFrame} durationInFrames={t.durationFrames}>
+    <CutStage t={t} cuts={cuts} width={width} height={height} colors={[color.cyan, color.violet, color.bg]} fill={color.bg} paper="#e8ecff">
+      <Background />
+      <Particles t={t} width={width} height={height} kind="glow" n={28} colors={[color.cyan, color.violet, '#ffffff']} area={[0, 260, width, captionY - 110]} alpha={0.4} />
+      {timing.scenes.map((s) => {
+        const scene = tutorial.scenes.find((x) => x.id === s.id);
+        return <Sequence key={s.id} name={s.id} from={s.startFrame} durationInFrames={s.durationFrames}>
+          <SceneVisual timing={s} visual={scene?.visual ?? ''} credit={tutorial.credit} />
+        </Sequence>;
+      })}
+    </CutStage>
+    {timing.scenes.map((s) => {
+      const scene = tutorial.scenes.find((x) => x.id === s.id);
+      return <Sequence key={`${s.id}-chrome`} name={`${s.id}-chrome`} from={s.startFrame} durationInFrames={s.durationFrames}>
         <Header title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />
-        <SceneFrame timing={t} visual={scene?.visual ?? ''} credit={tutorial.credit} />
-        <Sequence from={leadFrames} name={`${t.id}-voice`}><Audio src={staticFile(t.audioSrc)} /></Sequence>
+        <Caption captions={s.captions} />
+        <Sequence from={leadFrames} name={`${s.id}-voice`}><Audio src={staticFile(s.audioSrc)} /></Sequence>
       </Sequence>;
     })}
     {tutorial.musicSrc && <Audio src={staticFile(tutorial.musicSrc)} volume={(f) => {

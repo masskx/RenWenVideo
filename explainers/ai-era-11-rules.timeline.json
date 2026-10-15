@@ -17,6 +17,44 @@
     "src": "audio/explainers/ai-era-11-rules/music-bed.mp3",
     "volume": 0.18
   },
+  "highlights": [
+    {
+      "text": "AI",
+      "role": "A"
+    },
+    {
+      "text": "数据",
+      "role": "B"
+    }
+  ],
+  "emphasis": [
+    "反常识",
+    "3分钟",
+    "1000块",
+    "AI化",
+    "Markdown",
+    "2到4个月",
+    "外接大脑",
+    "100套",
+    "十年",
+    "十天",
+    "价值断点",
+    "全球性",
+    "八十亿",
+    "伴生品",
+    "寿命",
+    "银行账户",
+    "碳基服务器",
+    "Small Ego",
+    "支付系统",
+    "不存在",
+    "知识库",
+    "体验大于结论",
+    "多创造，少消费",
+    "旧地图",
+    "新大陆",
+    "评论区"
+  ],
   "scenes": [
     {
       "id": "hook",
@@ -26,6 +64,10 @@
         "11条反常识"
       ],
       "kicker": "孙宇晨 × 邵艾伦",
+      "stamp": {
+        "text": "3 分钟看完",
+        "at": 6.024
+      },
       "from": 0,
       "durationInFrames": 237,
       "images": [
@@ -42,6 +84,10 @@
       ],
       "quote": "孙学升级大脑，薄肌升级身体，黄毛升级心态。",
       "split": 3,
+      "stamp": {
+        "text": "AI 掌舵",
+        "at": 23.628
+      },
       "from": 237,
       "durationInFrames": 506,
       "images": [
@@ -60,6 +106,10 @@
       ],
       "quote": "可视化、数据化、可总结化，然后全部搞成Markdown文档。",
       "split": 2,
+      "stamp": {
+        "text": "存成 .md",
+        "at": 35.614
+      },
       "from": 743,
       "durationInFrames": 465,
       "images": [
@@ -78,6 +128,10 @@
       ],
       "quote": "先积累个2到4个月，把所有的数据都收集齐。",
       "split": 2,
+      "stamp": {
+        "text": "外接大脑",
+        "at": 50.59
+      },
       "from": 1208,
       "durationInFrames": 426,
       "images": [
@@ -96,6 +150,10 @@
       ],
       "quote": "你就先用它把整个地图探一遍，再做决定。",
       "split": 2,
+      "stamp": {
+        "text": "只看不买",
+        "at": 58.287
+      },
       "from": 1634,
       "durationInFrames": 424,
       "images": [
@@ -114,6 +172,10 @@
       ],
       "quote": "商业首先最基本的，就是看你有没有创造价值。",
       "split": 2,
+      "stamp": {
+        "text": "价值断点",
+        "at": 72.244
+      },
       "from": 2058,
       "durationInFrames": 427,
       "images": [
@@ -132,6 +194,10 @@
       ],
       "quote": "把全世界的人当做你的客户。",
       "split": 2,
+      "stamp": {
+        "text": "80 亿需求",
+        "at": 89.471
+      },
       "from": 2485,
       "durationInFrames": 316,
       "images": [
@@ -150,6 +216,10 @@
       ],
       "quote": "哪里有水，哪里有草，我们就去哪住。",
       "split": 2,
+      "stamp": {
+        "text": "伴生品",
+        "at": 98.015
+      },
       "from": 2801,
       "durationInFrames": 376,
       "images": [
@@ -168,6 +238,10 @@
       ],
       "quote": "肌肉相当于是身体里最重要的银行账户。",
       "split": 2,
+      "stamp": {
+        "text": "肌肉=存款",
+        "at": 115.584
+      },
       "from": 3177,
       "durationInFrames": 471,
       "images": [
@@ -186,6 +260,10 @@
       ],
       "quote": "有新的就得学，有新的就得干。",
       "split": 2,
+      "stamp": {
+        "text": "错了就改",
+        "at": 133.58
+      },
       "from": 3648,
       "durationInFrames": 383,
       "images": [
@@ -205,6 +283,10 @@
       "quote": "把人类几千年的货币，翻译成AI和机器听得懂的语言。",
       "disclaimer": "嘉宾个人观点，不构成任何投资建议",
       "split": 2,
+      "stamp": {
+        "text": "机器支付",
+        "at": 144.97
+      },
       "from": 4031,
       "durationInFrames": 344,
       "images": [
@@ -223,6 +305,10 @@
       ],
       "quote": "没有成为AI语料的东西，就像从来没有发生过。",
       "split": 2,
+      "stamp": {
+        "text": "≈ 不存在",
+        "at": 150.164
+      },
       "from": 4375,
       "durationInFrames": 323,
       "images": [
@@ -241,6 +327,10 @@
       ],
       "quote": "多创造，少消费，然后你做什么基本上都是对的。",
       "split": 2,
+      "stamp": {
+        "text": "多创造",
+        "at": 163.256
+      },
       "from": 4698,
       "durationInFrames": 334,
       "images": [
@@ -256,6 +346,10 @@
         "别用旧地图",
         "找新大陆"
       ],
+      "stamp": {
+        "text": "换新地图",
+        "at": 174.211
+      },
       "from": 5032,
       "durationInFrames": 387,
       "images": [

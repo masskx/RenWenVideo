@@ -1,0 +1,24 @@
+# 视频手艺（video-craft）
+
+这里收着本项目做竖屏讲解视频的通用规则、动效知识，以及对应的代码和检查工具。两条流水线（长文讲解、操作教程）共用这一套。
+
+| 文档 | 管什么 |
+| --- | --- |
+| [讲解动画规则.md](讲解动画规则.md) | 看得清、卡得准：字号、对比度、抖音安全区、A/B 固定色、一镜一事、动效时长 |
+| [动效与画面变化.md](动效与画面变化.md) | 画面一直有新东西：每镜头四件事、变化频率、转场轮换、分层和节拍推拉、丰富度自查表、`src/fx` 速查 |
+| [概念画法.md](概念画法.md) | 抽象概念怎么变成会动的画面 |
+
+## 对应的代码和工具
+
+| 位置 | 内容 |
+| --- | --- |
+| `src/fx/` | 共用动效库：转场（`CutStage`、`planCuts`）、节拍推拉（`beatZoom`、`beatTour`）、震屏、印章、粒子、光带、关键词上色、缓动、带种子的随机 |
+| `scripts/qa/richness.mjs` | 丰富度检查：每 2.5 秒一格，相邻格平均差 ≥ 10 且没有“几乎没变”才算过 |
+| `scripts/qa/scan.mjs` | 扫片（每秒 3 帧拼图）、手机宽度可读性检查（`--phone`）、切点前后细看（`--around`） |
+| `.claude/skills/video-craft/SKILL.md` | 给 Claude 的工作流：做新视频或改视频时按这套规则走，出片前必须过检查 |
+
+## 来源与许可
+
+规则、动效参数和检查方法改编自 [chuspeeism/dashi-animationstyle](https://github.com/chuspeeism/dashi-animationstyle)（commit `aa620f3`，《大师的AI小灶》出品，MIT 许可，许可全文见 [LICENSE-dashi-animationstyle.txt](LICENSE-dashi-animationstyle.txt)）。原项目用 HTML/Canvas + 无头 Chrome 出 16:9 横屏；本项目改写成了 Remotion 组件，按 9:16 抖音竖屏重新换算了字号和安全区，并按本项目的实测补充了 `beatTour`、嵌套转场等做法。
+
+原项目里的风格模板、示例页、示例口播音频（作者本人声音，仅供试用该 skill）**没有**复制进本仓库。

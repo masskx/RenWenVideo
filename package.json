@@ -30,7 +30,9 @@
     "explainer:render": "node scripts/render-explainer.mjs",
     "tutorial:voice": "python scripts/generate-tutorial-voice.py",
     "tutorial:music": "python scripts/generate-tutorial-music.py",
-    "tutorial:render": "node scripts/render-tutorial.mjs"
+    "tutorial:render": "node scripts/render-tutorial.mjs",
+    "qa:richness": "node scripts/qa/richness.mjs",
+    "qa:scan": "node scripts/qa/scan.mjs"
   },
   "sideEffects": [
     "*.css"

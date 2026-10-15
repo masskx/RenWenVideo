@@ -1,6 +1,6 @@
 // Render a tutorial video from tutorials/<id>.json (+ generated tutorials/<id>.timeline.json)
 // into the Douyin package douyin/<id>/ (video.mp4, cover.jpg, subtitles.srt; README.md is the publish copy).
-//   node scripts/render-tutorial.mjs <id> [--overwrite]
+//   node scripts/render-tutorial.mjs <id> [--overwrite] [--crf=22]
 //   node scripts/render-tutorial.mjs <id> --draft            -> qa/<id>/video-draft.mp4 (2/3 scale)
 //   node scripts/render-tutorial.mjs <id> --stills=120,900   -> qa/<id>/frame-<n>.png
 // Run scripts/generate-tutorial-voice.py and scripts/generate-tutorial-music.py first.
@@ -15,6 +15,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 process.chdir(root);
 const args = process.argv.slice(2);
 const draft = args.includes('--draft');
+// x264 CRF: constant on-screen motion (particles, beat zoom) costs bits; 22 keeps a ~3.5 min video well under GitHub's 100 MB.
+const crf = Number(args.find((a) => a.startsWith('--crf='))?.slice(6) ?? 22);
 const stillsArg = args.find((a) => a.startsWith('--stills='));
 // Accept an id ("rea-quickstart") or the config path ("tutorials/rea-quickstart.json").
 const target = args.find((a) => !a.startsWith('--')) ?? 'rea-quickstart';
@@ -59,7 +61,7 @@ try { await access(outputLocation); exists = true; } catch {}
 if (exists && !args.includes('--overwrite')) { console.log(`Skipped existing ${path.relative(root, outputLocation)}`); process.exit(0); }
 const pending = outputLocation.replace(/\.mp4$/, '.raw.mp4');
 let last = -1;
-await renderMedia({serveUrl, composition, inputProps, browserExecutable, outputLocation: pending, codec: 'h264', crf: 18,
+await renderMedia({serveUrl, composition, inputProps, browserExecutable, outputLocation: pending, codec: 'h264', crf,
   audioBitrate: '192k', scale: draft ? 2 / 3 : 1, concurrency: Number(process.env.RENDER_CONCURRENCY ?? 4), overwrite: true,
   onProgress: ({progress}) => { const n = Math.floor(progress * 20); if (n !== last) { last = n; console.log(`${id}: ${n * 5}%`); } }});
 // Short-video platforms play back around -14…-16 LUFS; normalize the mix without touching the video stream.

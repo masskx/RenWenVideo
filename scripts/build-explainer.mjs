@@ -136,9 +136,15 @@ for (const scene of config.scenes) {
   const sceneStart = cursor;
   cursor += sceneLead;
   const lineTimes = [];
+  let stamp = null;
   for (const segment of segments.filter((s) => s.scene === scene.id)) {
     const seconds = probe(segment.file);
     const start = cursor;
+    // Stamp beat: estimate when the phrase is spoken by its character position within the line.
+    if (scene.stamp?.line === segment.index) {
+      const at = start + seconds * Math.max(0, segment.text.indexOf(scene.stamp.phrase)) / segment.text.length;
+      stamp = {text: scene.stamp.text, at: Number(at.toFixed(3))};
+    }
     concatInputs.push({file: segment.file, at: start});
     captions.push({text: segment.text, startMs: Math.round(start * 1000), endMs: Math.round((start + seconds) * 1000), timestampMs: null, confidence: null});
     lineTimes.push(start);
@@ -151,7 +157,7 @@ for (const scene of config.scenes) {
   const imageSwitch = scene.images.length > 1 && split > 0 ? Math.round(lineTimes[split] * fps) - from : null;
   const {images, ...rest} = scene;
   delete rest.lines;
-  scenes.push({...rest, from, durationInFrames: to - from, images: images.map((image) => `images/explainers/${id}/${image.id}.jpg`), imageSwitch});
+  scenes.push({...rest, stamp, from, durationInFrames: to - from, images: images.map((image) => `images/explainers/${id}/${image.id}.jpg`), imageSwitch});
 }
 const totalSeconds = cursor;
 
@@ -183,6 +189,8 @@ const timeline = {
   chapterCount: config.scenes.filter((scene) => scene.kind === 'chapter').length,
   audioSrc: `audio/explainers/${id}/narration.mp3`,
   music: musicSrc ? {src: musicSrc, volume: config.music.volume ?? 0.08} : null,
+  highlights: config.highlights ?? [],
+  emphasis: config.emphasis ?? [],
   scenes, captions
 };
 writeFileSync(path.join(root, 'explainers', `${id}.timeline.json`), `${JSON.stringify(timeline, null, 2)}\n`);
