@@ -1,898 +1,1227 @@
 import React from 'react';
-import {color, font, mono} from '../theme';
-import {Appear, Check, Chip, CueGlow, Panel, SceneProps, Window, ramp, usePop} from '../ui';
-import {Stamp, ease, prog, shake, sway, typed} from '../../fx';
+import {font, paper} from '../theme';
+import {CamKey, SceneProps, SfxEvent} from '../ui';
+import {ContactShadow, Smear, clamp, drop, hash, impulse, matte, mix, ripple, springStep, springTrack, squash, toss, twoEdge} from '../../fx';
 
-// 一个人带 AI 团队 (Rahul's article on running a team of AI agents in one group chat, Teamily AI).
-// Storyboard: tutorials/ai-agent-team.storyboard.md. The chat UI is drawn from the article's description,
-// not from screenshots. A = 交接 (pink: every agent-to-agent handoff), B = 拍板 (green: the human).
-// Role colours avoid pink and green; ticks are cyan.
+// 一个人带 AI 团队 — second cut, rebuilt on the director layer (docs/video-craft/导演层.md).
+// Storyboard + brief: tutorials/ai-agent-team.storyboard.md. One subject runs through the film: a terracotta task
+// card (A = 交接) tossed between clay agents along gravity arcs; it ends on the human, the only green thing
+// (B = 拍板). Every main event has a force origin, a contact frame on the keyword, squash, a contact shadow and a
+// sound computed from the same physics (static `sfx` on each scene). No glow, no gradients on chrome, no
+// whole-stage push/pull, ink + paper + two accents only.
 
-const A = color.keyA;
-const B = color.keyB;
-const ROLE = {
-  res: {zh: '趋势调研员', short: '调研', en: 'Trend Researcher', c: color.cyan},
-  wri: {zh: '文案', short: '文案', en: 'Content Creator', c: color.violet},
-  dev: {zh: '网页开发', short: '开发', en: 'Webpage Developer', c: color.amber},
-  rev: {zh: '审核编辑', short: '审核', en: 'Verification Editor', c: color.red},
-};
-type RoleKey = keyof typeof ROLE;
-const ORDER: RoleKey[] = ['res', 'wri', 'dev', 'rev'];
+const INK = paper.ink, DIM = paper.dim, A = paper.keyA, B = paper.keyB, CARD = paper.card, LINE = paper.line;
+const CLAY = '#d6ccbc';
+const num = '"Inter Display", "Inter", "Noto Sans CJK SC", sans-serif';
+const S = (f: number) => f / 30;
 
-const H: React.FC<{size?: number; c?: string; style?: React.CSSProperties; children: React.ReactNode}> = ({size = 60, c = color.text, style, children}) => (
-  <div style={{fontFamily: font, fontWeight: 900, fontSize: size, color: c, lineHeight: 1.25, ...style}}>{children}</div>
+type Cue = SceneProps['cue'];
+type Scene = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: Cue, dur: number) => SfxEvent[]; camera?: (cue: Cue, dur: number) => CamKey[]};
+/** Camera key: look at stage point (x, y) at zoom z from frame `at` (the camera itself lags a few frames). */
+const cam = (at: number, x: number, y: number, z: number): CamKey => ({at, x, y, z});
+type Who = 'res' | 'wri' | 'dev' | 'rev' | 'me';
+type P2 = [number, number];
+const NAME: Record<Who, string> = {res: '调研员', wri: '文案', dev: '开发', rev: '审核', me: '你'};
+const AGENTS: Who[] = ['res', 'wri', 'dev', 'rev'];
+const SLOT = [96, 268, 440, 612, 784];
+
+/* ---------- drawing pieces ---------- */
+
+const Glyph: React.FC<{who: Who; size: number; c: string; wob?: number}> = ({who, size, c, wob = 0}) => (
+  <svg width={size} height={size} viewBox="0 0 48 48" style={{transform: `rotate(${wob}deg)`, flex: 'none'}}>
+    <g fill="none" stroke={c} strokeWidth={3.6} strokeLinecap="round" strokeLinejoin="round">
+      {who === 'res' && <><circle cx={21} cy={21} r={11} /><path d="M29 29 L39 39" /></>}
+      {who === 'wri' && <><path d="M24 6 L35 22 L24 41 L13 22 Z" /><path d="M24 22 L24 41" /><circle cx={24} cy={22} r={2.6} /></>}
+      {who === 'dev' && <><path d="M18 13 L8 24 L18 35" /><path d="M30 13 L40 24 L30 35" /></>}
+      {who === 'rev' && <><rect x={9} y={9} width={30} height={30} rx={7} /><path d="M16 24 L22 30 L33 18" /></>}
+      {who === 'me' && <><circle cx={24} cy={17} r={7} /><path d="M11 41 Q11 28 24 28 Q37 28 37 41" /></>}
+    </g>
+  </svg>
 );
-const P: React.FC<{size?: number; c?: string; style?: React.CSSProperties; children: React.ReactNode}> = ({size = 36, c = color.dim, style, children}) => (
-  <div style={{fontFamily: font, fontSize: size, color: c, lineHeight: 1.45, ...style}}>{children}</div>
-);
-/** Scene root: cue-following glow behind, optional shake (frames) on stamp hits. */
-const Root: React.FC<{f: number; beats: number[]; glow?: string; hits?: number[]; children: React.ReactNode}> = ({f, beats, glow = color.violet, hits = [], children}) => {
-  const k = shake(f / 30, hits.map((h) => h / 30), {amp: 10});
-  return <div style={{position: 'relative', isolation: 'isolate', height: 960, transform: `translate(${k.dx}px, ${k.dy}px)`}}>
-    <CueGlow f={f} beats={beats} c={glow} />{children}
-  </div>;
+
+/** A clay agent (or the green human) standing on the ground line. hit > 0 squashes it from the top. */
+const Pebble: React.FC<{who: Who; x: number; ground: number; size?: number; lift?: number; hit?: number; wob?: number;
+  label?: string | null; labelOp?: number; op?: number; shift?: number}> = ({who, x, ground, size = 128, lift = 0, hit = 0, wob = 0, label, labelOp = 1, op = 1, shift = 0}) => {
+  const me = who === 'me';
+  const h = clamp(hit, -0.6, 1);
+  return <>
+    <ContactShadow x={x} y={ground} w={size * 0.95} lift={lift} opacity={0.3 * op} />
+    <div style={{position: 'absolute', left: x - size / 2, top: ground - size - lift, width: size, height: size, opacity: op,
+      transform: `scale(${1 + 0.16 * h}, ${1 - 0.2 * h})`, transformOrigin: '50% 100%', borderRadius: '44%', background: matte(me ? B : CLAY, {shift}),
+      display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+      <Glyph who={who} size={size * 0.52} c={me ? CARD : INK} wob={wob} />
+    </div>
+    {label && <div style={{position: 'absolute', left: x - 120, width: 240, top: ground + 14, textAlign: 'center', fontFamily: font, fontWeight: 900,
+      fontSize: 40, color: me ? B : INK, opacity: labelOp * op}}>{label}</div>}
+  </>;
 };
+
+/** The task card (A). (x, y) = bottom centre. Stretches along its velocity and smears when fast. */
+const Packet: React.FC<{x: number; y: number; vx?: number; vy?: number; ground?: number; scale?: number; op?: number}> = ({x, y, vx = 0, vy = 0, ground, scale = 1, op = 1}) => {
+  const q = squash(vx, vy, {k: 0.0001, max: 0.25});
+  const w = 92 * scale, h = 68 * scale;
+  return <>
+    {ground !== undefined && <ContactShadow x={x} y={ground} w={w} lift={ground - y} opacity={0.22 * op} />}
+    <div style={{position: 'absolute', left: x - w / 2, top: y - h, width: w, height: h, opacity: op}}>
+      <Smear vx={vx} vy={vy}>
+        <div style={{width: w, height: h, transform: q.css, position: 'relative', borderRadius: 8 * scale, background: matte(A, {gloss: 0.18}), overflow: 'hidden'}}>
+          <div style={{position: 'absolute', right: 0, top: 0, width: 0, height: 0, borderStyle: 'solid', borderWidth: `0 ${22 * scale}px ${22 * scale}px 0`,
+            borderColor: `transparent ${paper.bg} ${mix(A, '#000000', 0.25)} transparent`}} />
+          {[0, 1, 2].map((k) => <div key={k} style={{position: 'absolute', left: 14 * scale, top: (18 + k * 14) * scale, height: 5 * scale,
+            width: `${[58, 66, 40][k]}%`, borderRadius: 3, background: 'rgba(250,247,241,0.78)'}} />)}
+        </div>
+      </Smear>
+    </div>
+  </>;
+};
+
+const AtToken: React.FC<{x: number; y: number; vx?: number; vy?: number}> = ({x, y, vx = 0, vy = 0}) => {
+  const q = squash(vx, vy, {k: 0.0001});
+  return <div style={{position: 'absolute', left: x - 34, top: y - 68, width: 68, height: 68, borderRadius: 34, background: matte(A),
+    transform: q.css, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: num, fontWeight: 900, fontSize: 44, color: CARD}}>@</div>;
+};
+
+const Big: React.FC<{size?: number; c?: string; w?: number; style?: React.CSSProperties; children: React.ReactNode}> = ({size = 88, c = INK, w = 900, style, children}) => (
+  <div style={{fontFamily: font, fontWeight: w, fontSize: size, lineHeight: 1.14, color: c, letterSpacing: 1, ...style}}>{children}</div>
+);
+const Kicker: React.FC<{size?: number; c?: string; style?: React.CSSProperties; children: React.ReactNode}> = ({size = 32, c = DIM, style, children}) => (
+  <div style={{fontFamily: font, fontWeight: 700, fontSize: size, color: c, letterSpacing: 3, ...style}}>{children}</div>
+);
 const Abs: React.FC<{x: number; y: number; w?: number; style?: React.CSSProperties; children: React.ReactNode}> = ({x, y, w, style, children}) => (
   <div style={{position: 'absolute', left: x, top: y, width: w, ...style}}>{children}</div>
 );
+const Ground: React.FC<{y: number; op?: number; x0?: number; x1?: number}> = ({y, op = 1, x0 = -20, x1 = 900}) => (
+  <div style={{position: 'absolute', left: x0, width: x1 - x0, top: y, height: 2, background: INK, opacity: 0.7 * op}} />
+);
 
-/** Line-art robot: an agent. */
-const Bot: React.FC<{size?: number; c?: string; on?: number}> = ({size = 64, c = color.cyan, on = 1}) => (
-  <svg width={size} height={size} viewBox="0 0 64 64" style={{opacity: 0.35 + 0.65 * on, flex: 'none'}}>
-    <line x1={32} y1={6} x2={32} y2={14} stroke={c} strokeWidth={3} strokeLinecap="round" />
-    <circle cx={32} cy={6} r={3.5} fill={c} />
-    <rect x={10} y={14} width={44} height={36} rx={10} fill={`${c}22`} stroke={c} strokeWidth={3} />
-    <circle cx={24} cy={31} r={4.5} fill={c} /><circle cx={40} cy={31} r={4.5} fill={c} />
-    <path d="M24 42 Q32 46 40 42" stroke={c} strokeWidth={3} fill="none" strokeLinecap="round" />
-  </svg>
-);
-/** Line-art person: the human (always B green). */
-const Person: React.FC<{size?: number; c?: string; on?: number}> = ({size = 64, c = B, on = 1}) => (
-  <svg width={size} height={size} viewBox="0 0 64 64" style={{opacity: 0.35 + 0.65 * on, flex: 'none'}}>
-    <circle cx={32} cy={21} r={11} fill={`${c}22`} stroke={c} strokeWidth={3} />
-    <path d="M12 56 Q12 36 32 36 Q52 36 52 56 Z" fill={`${c}22`} stroke={c} strokeWidth={3} strokeLinejoin="round" />
-  </svg>
-);
-/** Round avatar for a role or the human. */
-const Av: React.FC<{who: RoleKey | 'me'; size?: number; on?: number; ring?: number}> = ({who, size = 96, on = 1, ring = 0}) => {
-  const c = who === 'me' ? B : ROLE[who].c;
-  return <div style={{width: size, height: size, borderRadius: size / 2, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center',
-    background: `${c}${on > 0.5 ? '22' : '08'}`, border: `3px solid ${on > 0.5 ? c : '#2a3352'}`, boxShadow: ring ? `0 0 ${30 * ring}px ${c}` : undefined}}>
-    {who === 'me' ? <Person size={size * 0.68} on={on} /> : <Bot size={size * 0.68} c={ROLE[who].c} on={on} />}
+/** Labels rise after the event they belong to (导演层 §3: labels +6–10 frames), each on its own spring. */
+const Rise: React.FC<{f: number; at: number; dy?: number; style?: React.CSSProperties; children: React.ReactNode}> = ({f, at, dy = 28, style, children}) => {
+  const s = springStep(S(f), S(at), {f: 2.4, z: 0.82});
+  return <div style={style}>
+    <div style={{opacity: clamp(s * 1.5), transform: `translateY(${(1 - s) * dy}px)`, filter: s > 0 && s < 0.97 ? `blur(${(1 - clamp(s)) * 6}px)` : undefined}}>{children}</div>
   </div>;
 };
-/** Chat message: avatar, name, text (typed from `at` when `cps` is set). */
-const Msg: React.FC<{f: number; at: number; who: RoleKey | 'me'; text: React.ReactNode | string; cps?: number; size?: number; style?: React.CSSProperties}> = ({f, at, who, text, cps, size = 36, style}) => {
-  const pop = usePop();
-  const c = who === 'me' ? B : ROLE[who].c;
-  const name = who === 'me' ? 'Rahul（人）' : ROLE[who].zh;
-  const body = typeof text === 'string' && cps ? typed(text, f / 30, at / 30, cps) : text;
-  const typing = typeof text === 'string' && cps ? (body as string).length < text.length : false;
-  return <Appear p={pop(f, at)} dy={24} style={{display: 'flex', gap: 16, alignItems: 'flex-start', ...style}}>
-    <Av who={who} size={76} />
-    <div style={{flex: 1}}>
-      <div style={{fontFamily: font, fontSize: 26, fontWeight: 800, color: c}}>{name}</div>
-      <div style={{marginTop: 4, display: 'inline-block', background: '#18213a', border: `2px solid ${c}66`, borderRadius: '6px 24px 24px 24px',
-        padding: '14px 22px', fontFamily: font, fontSize: size, color: color.text, lineHeight: 1.4}}>
-        {body}{typing && <span style={{opacity: Math.floor(f / 8) % 2 ? 1 : 0.2}}>▍</span>}
-      </div>
-    </div>
-  </Appear>;
+/** Visible between two frames: in on one spring, out on another, with a short blur (content swap, not a new card). */
+const phaseOp = (f: number, from: number, to = 1e9): React.CSSProperties => {
+  const i = springStep(S(f), S(from), {f: 2.4, z: 0.85}), o = springStep(S(f), S(to), {f: 2.8, z: 0.9});
+  const v = clamp(i * 1.5) * (1 - clamp(o * 1.5));
+  return {opacity: v, filter: v > 0.02 && v < 0.97 ? `blur(${(1 - v) * 7}px)` : undefined, transform: `translateY(${(1 - clamp(i)) * 24 - clamp(o) * 18}px)`};
 };
-const At: React.FC<{who: RoleKey}> = ({who}) => <span style={{color: ROLE[who].c, fontWeight: 800}}>@{ROLE[who].zh}</span>;
 
-/** Pink handoff arrow (A), drawn left→right with progress p. */
-const Hand: React.FC<{p: number; w?: number; c?: string}> = ({p, w = 70, c = A}) => (
-  <svg width={w} height={40} viewBox={`0 0 ${w} 40`} style={{flex: 'none', opacity: Math.min(1, p * 3)}}>
-    <path d={`M4 20 L${w - 8} 20`} stroke={c} strokeWidth={6} strokeLinecap="round" strokeDasharray={w} strokeDashoffset={w * (1 - p)} />
-    <path d={`M${w - 22} 8 L${w - 6} 20 L${w - 22} 32`} stroke={c} strokeWidth={6} fill="none" strokeLinecap="round" strokeLinejoin="round" opacity={p > 0.8 ? 1 : 0} />
-  </svg>
-);
-const Strike: React.FC<{p: number; c?: string; children: React.ReactNode; style?: React.CSSProperties}> = ({p, c = color.red, children, style}) => (
-  <span style={{position: 'relative', display: 'inline-block', ...style}}>
+const Strike: React.FC<{p: number; c?: string; w?: number; children: React.ReactNode}> = ({p, c = INK, w = 5, children}) => (
+  <span style={{position: 'relative', display: 'inline-block'}}>
     {children}
-    <span style={{position: 'absolute', left: -4, right: -4, top: '52%', height: 5, borderRadius: 3, background: c, transform: `scaleX(${p})`, transformOrigin: 'left'}} />
+    <span style={{position: 'absolute', left: -6, right: -6, top: '54%', height: w, borderRadius: w, background: c, transform: `scaleX(${clamp(p)})`, transformOrigin: 'left'}} />
   </span>
 );
-const Big: React.FC<{at: number; f: number; text: string; c: string; size?: number; deg?: number; h?: number; style?: React.CSSProperties}> = ({at, f, text, c, size = 56, deg = -5, h = 140, style}) => (
-  <div style={{position: 'relative', height: h, display: 'flex', justifyContent: 'center', alignItems: 'center', ...style}}>
-    <Stamp t={f / 30} at={at / 30} text={text} color={c} size={size} deg={deg} font={font} style={{position: 'relative'}} />
-  </div>
+const Tick: React.FC<{p: number; size?: number; c?: string}> = ({p, size = 44, c = INK}) => (
+  <svg width={size} height={size} viewBox="0 0 44 44" style={{flex: 'none'}}>
+    <circle cx={22} cy={22} r={19} fill="none" stroke={c} strokeWidth={3} opacity={clamp(p * 2)} />
+    <path d="M12 23 L19 30 L32 15" fill="none" stroke={c} strokeWidth={4.5} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={40} strokeDashoffset={40 * (1 - clamp(p))} />
+  </svg>
 );
+const draw = (f: number, at: number, dur = 14) => clamp((f - at) / dur);
 
-/* hook — you are the glue between AI windows → one group that hands work on; you only make the call */
-const Hook: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
+/* ---------- motion helpers ---------- */
+
+type Hop = {at: number; dur: number; from: P2; to: P2; lift?: number};
+/** Where the card is on a list of hops (frames). Before the first hop it waits at the first origin. */
+const hopAt = (f: number, hops: Hop[]) => {
+  let h = hops[0];
+  for (const k of hops) if (f >= k.at) h = k;
+  return toss(S(f), {at: S(h.at), dur: S(h.dur), from: h.from, to: h.to, lift: h.lift ?? 140});
+};
+const landsOf = (hops: Hop[]) => hops.map((h) => h.at + h.dur);
+/** Squash of a receiver from the contacts that hit it (sum of impulses). */
+const hitOf = (f: number, contacts: number[], amp = 1) => contacts.reduce((s, c) => s + impulse(S(f), S(c), {f: 3.2, z: 0.42, amp}), 0);
+/** Frame to release a drop from `height` px so that it first touches the ground on `contact`. */
+const dropFrom = (contact: number, height: number, g = 4200) => contact - Math.sqrt((2 * height) / g) * 30;
+const dropY = (f: number, contact: number, ground: number, height = 620) => drop(S(f), {at: S(dropFrom(contact, height)), from: ground - height, ground});
+/** Lift above ground for something that drops in (0 when resting, height before it falls). */
+const dropLift = (f: number, contact: number, ground: number, height = 620) => ground - dropY(f, contact, ground, height).y;
+const top = (x: number, ground: number, size: number): P2 => [x, ground - size + 4];
+
+const Root: React.FC<{children: React.ReactNode}> = ({children}) => <div style={{position: 'relative', width: 880, height: 960}}>{children}</div>;
+
+/* ---------- hook ---------- */
+
+const hookPlan = (cue: Cue) => {
   const [a, b, c, d, e, g] = [cue('a', 75), cue('b', 115), cue('c', 155), cue('d', 242), cue('e', 334), cue('f', 359)];
-  const merge = ease.inOutCubic(prog(f, d, 22));
-  const wins = [{t: '查资料', at: a, x: 0, y: 40}, {t: '写稿', at: b, x: 560, y: 40}, {t: '检查', at: c, x: 290, y: 470}];
-  const me = {x: 440, y: 300};
-  // a document card shuttles between windows through "you" once window 2 is up
-  const trip = f >= b ? ((f - b) % 50) / 50 : -1;
-  const legs: [number, number][][] = f >= c ? [[[150, 120], [440, 300], [710, 120]], [[710, 120], [440, 300], [440, 550]], [[440, 550], [440, 300], [150, 120]]] : [[[150, 120], [440, 300], [710, 120]]];
-  const leg = trip >= 0 ? legs[Math.floor((f - b) / 50) % legs.length] : null;
-  const bz = (u: number, p: [number, number][]) => [(1 - u) ** 2 * p[0][0] + 2 * u * (1 - u) * p[1][0] + u * u * p[2][0], (1 - u) ** 2 * p[0][1] + 2 * u * (1 - u) * p[1][1] + u * u * p[2][1]];
-  const doc = leg ? bz(ease.inOutCubic(trip), leg) : [0, 0];
-  const copies = f < c ? 0 : Math.min(99, 3 + Math.floor((f - c) / 9));
-  return <Root f={f} beats={[0, a, b, c, d, e]} glow={B} hits={[g]}>
-    <Appear p={pop(f, 0)} style={{textAlign: 'center'}}><H size={68}>{f < d ? '你，是 AI 之间的胶水？' : '换个做法：组一个 AI 团队'}</H></Appear>
-    <div style={{position: 'relative', height: 640, marginTop: 20}}>
-      <div style={{opacity: 1 - merge, transform: `scale(${1 - 0.3 * merge})`, transformOrigin: '50% 45%', position: 'absolute', inset: 0}}>
-        <svg width={880} height={640} style={{position: 'absolute', inset: 0}}>
-          {wins.map((w) => <line key={w.t} x1={w.x + 150} y1={w.y + 80} x2={me.x} y2={me.y} stroke="#3a4466" strokeWidth={4} strokeDasharray="10 10"
-            opacity={ramp(f, w.at, w.at + 8)} />)}
-        </svg>
-        {wins.map((w, i) => (
-          <Abs key={w.t} x={w.x} y={w.y} w={300}>
-            <Appear p={pop(f, w.at)} scale>
-              <Window title={`AI 窗口 ${i + 1}`} bodyStyle={{padding: '18px 22px'}} style={{width: 300}}>
-                <div style={{fontFamily: font, fontSize: 40, fontWeight: 900, color: color.text, textAlign: 'center'}}>{w.t}</div>
-              </Window>
-            </Appear>
-          </Abs>
-        ))}
-        <Abs x={me.x - 70} y={me.y - 70}>
-          <Appear p={pop(f, 4)} scale style={{textAlign: 'center'}}>
-            <Av who="me" size={140} ring={0.4 + 0.3 * Math.sin(f / 6)} />
-          </Appear>
-        </Abs>
-        <Abs x={me.x - 130} y={me.y + 80} w={260}><Appear p={pop(f, 8)}><P size={36} c={B} style={{textAlign: 'center', fontWeight: 900}}>你 = 胶水</P></Appear></Abs>
-        {leg && <Abs x={doc[0] - 40} y={doc[1] - 30}>
-          <div style={{width: 80, height: 60, borderRadius: 10, background: '#e8ecff', boxShadow: '0 8px 20px rgba(0,0,0,0.5)', padding: '10px 12px'}}>
-            {[0, 1, 2].map((k) => <div key={k} style={{height: 6, borderRadius: 3, background: '#7c86a8', marginBottom: 7, width: `${90 - k * 22}%`}} />)}
-          </div>
-        </Abs>}
-        <Abs x={600} y={400} w={280}>
-          <Appear p={pop(f, c)} scale><Chip c={color.amber} style={{fontSize: 36}}>复制粘贴 ×{copies}</Chip></Appear>
-        </Abs>
-      </div>
-      {f >= d && <div style={{position: 'absolute', left: 0, right: 0, top: 120, opacity: merge, transform: `scale(${0.8 + 0.2 * merge})`}}>
-        <Panel style={{padding: '30px 26px'}}>
-          <div style={{fontFamily: font, fontSize: 34, color: color.dim, marginBottom: 20, textAlign: 'center'}}>一个群：4 个 agent + 你</div>
-          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-            {ORDER.map((r, i) => <React.Fragment key={r}>
-              {i > 0 && <Hand p={ease.outCubic(prog(f, e + (i - 1) * 6, 10))} w={60} />}
-              <Av who={r} size={110} on={1} ring={f >= e + (i - 1) * 6 && f < e + i * 6 + 6 ? 0.8 : 0} />
-            </React.Fragment>)}
-          </div>
-          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 20, marginTop: 26}}>
-            <Av who="me" size={110} on={f >= g ? 1 : 0.4} ring={f >= g ? 0.6 : 0} />
-            <div style={{fontFamily: font, fontSize: 40, fontWeight: 900, color: f >= g ? B : color.dim}}>你</div>
-          </div>
-        </Panel>
-      </div>}
-    </div>
-    <Big f={f} at={g} text="你只管拍板" c={B} size={64} h={160} style={{marginTop: -30}} />
-  </Root>;
+  const G = 800, SHELF = 470, ME = 140, AG = 128;
+  const win = [{x: 150, at: a}, {x: 730, at: b}, {x: 440, at: c}];
+  const winTop = (i: number): P2 => [win[i].x, SHELF - 150 + 4];
+  const meTop1: P2 = top(440, G, ME), meTop2: P2 = top(SLOT[4], G, ME);
+  // Phase 1: the human is the glue — the card shuttles window → you → window until the switch.
+  const hops: Hop[] = [];
+  let at = b + 10, pos = winTop(0), k = 0;
+  const order = ['me', 'w1', 'me', 'w2', 'me', 'w0'];
+  while (at + 13 < d - 6) {
+    let dest = order[k % order.length];
+    if (dest === 'w2' && at < c + 14) dest = 'w0';
+    const to: P2 = dest === 'me' ? meTop1 : winTop(Number(dest[1]));
+    hops.push({at, dur: 13, from: pos, to, lift: dest === 'me' ? 70 : 110});
+    pos = to; at += 16; k += 1;
+  }
+  const meCatches = hops.filter((h) => h.to === meTop1).map((h) => h.at + h.dur);
+  // Phase 2: the card goes to the first agent, then hands itself down the row and lands on you on 「拍板」.
+  const agentLand = AGENTS.map((_, i) => d + 18 + i * 5);
+  hops.push({at: d + 40, dur: 14, from: pos, to: top(SLOT[0], G, AG), lift: 160});
+  const span = (g - (e - 3)) / 4;
+  for (let i = 0; i < 4; i += 1) {
+    const from = top(SLOT[i], G, AG), to = i < 3 ? top(SLOT[i + 1], G, AG) : meTop2;
+    hops.push({at: Math.round(e - 3 + i * span), dur: Math.round(span), from, to, lift: i < 3 ? 70 : 120});
+  }
+  return {a, b, c, d, e, g, G, SHELF, ME, AG, win, hops, meCatches, agentLand};
 };
 
-/* idea — Teamily AI: a group chat where some members are agents; @ to assign, the next one picks up */
-const Idea: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
+const Hook: Scene = ({f, cue}) => {
+  const p = hookPlan(cue);
+  const t = S(f);
+  const card = hopAt(f, p.hops);
+  const lands = landsOf(p.hops);
+  const meX = springTrack(t, 440, [{at: S(p.d + 8), to: SLOT[4]}], {f: 1.6, z: 0.85});
+  const meHits = hitOf(f, p.meCatches, 0.6) + hitOf(f, [p.g], 1.1);
+  const copies = p.meCatches.filter((c) => f >= c).length;
+  const phase2 = f >= p.d;
+  const away = (i: number) => toss(t, {at: S(p.d + i * 4), dur: S(18), from: [p.win[i].x, p.SHELF], to: [i === 1 ? 1180 : -300, -260], lift: 60});
+  const chainLands = lands.slice(-4);
+  return <Root>
+    <div style={{position: 'absolute', left: 0, top: 0, width: 880, height: 220}}>
+      <div style={{position: 'absolute', inset: 0, ...phaseOp(f, 2, p.d + 2)}}><Big size={84}>你，还在当胶水？</Big></div>
+      <div style={{position: 'absolute', inset: 0, ...phaseOp(f, p.d + 6, p.g + 4)}}><Big size={70}>换个做法：<br />组一个 AI 团队</Big></div>
+      <div style={{position: 'absolute', inset: 0, ...phaseOp(f, p.g + 8)}}><Big size={104}>你只管<span style={{color: B}}>拍板</span></Big></div>
+    </div>
+    <Ground y={p.SHELF} op={1 - clamp((f - p.d) / 12)} x0={20} x1={860} />
+    {p.win.map((w, i) => {
+      const lift = dropLift(f, w.at, p.SHELF, 520);
+      const fly = phase2 ? away(i) : null;
+      const x = fly ? fly.x : w.x, y = fly ? fly.y : p.SHELF - lift;
+      const hit = hitOf(f, [w.at], 0.5) + hitOf(f, p.hops.filter((h) => h.to[0] === w.x && h.to[1] < p.SHELF).map((h) => h.at + h.dur), 0.25);
+      if (f < w.at - 25 || (fly && fly.landed)) return null;
+      return <React.Fragment key={i}>
+        {!fly && <ContactShadow x={w.x} y={p.SHELF} w={230} lift={lift} />}
+        <div style={{position: 'absolute', left: x - 120, top: y - 150, width: 240, height: 150, borderRadius: 18, background: CARD, border: `3px solid ${INK}`,
+          transform: `scale(${1 + 0.06 * hit}, ${1 - 0.08 * hit}) rotate(${fly ? (f - p.d) * (i === 1 ? 6 : -6) : 0}deg)`, transformOrigin: '50% 100%'}}>
+          <div style={{height: 34, borderBottom: `2px solid ${INK}`, display: 'flex', alignItems: 'center', gap: 7, padding: '0 14px'}}>
+            {[0, 1, 2].map((k) => <div key={k} style={{width: 11, height: 11, borderRadius: 6, border: `2px solid ${INK}`}} />)}
+            <span style={{fontFamily: font, fontSize: 22, color: DIM, marginLeft: 8}}>AI 窗口 {i + 1}</span>
+          </div>
+          <div style={{fontFamily: font, fontWeight: 900, fontSize: 44, color: INK, textAlign: 'center', marginTop: 18}}>{['查资料', '写稿', '检查'][i]}</div>
+        </div>
+      </React.Fragment>;
+    })}
+    <Ground y={p.G} />
+    <Pebble who="me" x={meX} ground={p.G} size={p.ME} hit={meHits} label={phase2 ? '你' : null} labelOp={clamp((f - p.d - 20) / 10)} />
+    {!phase2 && f >= p.b + 10 && <Abs x={500} y={p.G - 200} w={380} style={phaseOp(f, p.b + 30, p.d)}>
+      <Big size={44} w={700}>复制 · 粘贴 <span style={{fontFamily: num}}>×{copies}</span></Big>
+    </Abs>}
+    {phase2 && AGENTS.map((who, i) => {
+      const lift = dropLift(f, p.agentLand[i], p.G, 700);
+      const hit = hitOf(f, [p.agentLand[i]], 0.5) + hitOf(f, i > 0 ? [chainLands[i - 1]] : [], 0.7);
+      return <Pebble key={who} who={who} x={SLOT[i]} ground={p.G} size={p.AG} lift={lift} hit={hit} label={NAME[who]} labelOp={clamp((f - p.agentLand[i] - 8) / 10)} />;
+    })}
+    {/* handoff arcs left behind by the card (A = 交接) */}
+    {f >= p.e - 3 && <svg width={880} height={960} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
+      {p.hops.slice(-4).map((h, i) => {
+        const pr = draw(f, h.at, h.dur);
+        const mid: P2 = [(h.from[0] + h.to[0]) / 2, Math.min(h.from[1], h.to[1]) - 2 * (h.lift ?? 140)];
+        return <path key={i} d={`M${h.from[0]} ${h.from[1] - 70} Q${mid[0]} ${mid[1] - 10} ${h.to[0]} ${h.to[1] - 70}`} fill="none" stroke={A} strokeWidth={4}
+          strokeDasharray="10 12" opacity={0.75 * pr} strokeLinecap="round" />;
+      })}
+    </svg>}
+    {f >= p.a + 14 && <Packet x={card.x} y={card.y} vx={card.vx} vy={card.vy} />}
+  </Root>;
+};
+Hook.camera = (cue) => {
+  const p = hookPlan(cue);
+  return [cam(0, 440, 420, 1.06), cam(p.a, 150, 420, 1.14), cam(p.b, 730, 420, 1.14), cam(p.c, 440, 560, 1.06), cam(p.d, 440, 520, 1),
+    cam(p.d + 40, 300, 720, 1.1), cam(p.e - 3, 520, 720, 1.06), cam(p.g, 784, 680, 1.16), cam(p.g + 24, 440, 420, 1.02)];
+};
+Hook.sfx = (cue) => {
+  const p = hookPlan(cue);
+  const ev: SfxEvent[] = p.win.map((w) => ({at: Math.round(w.at), kind: 'tap', gain: 0.26}));
+  for (const c of p.meCatches) ev.push({at: Math.round(c), kind: 'tap', gain: 0.12});
+  ev.push({at: p.d, kind: 'whoosh', gain: 0.2});
+  ev.push({at: Math.round(p.agentLand[0]), kind: 'tap', gain: 0.16}, {at: Math.round(p.agentLand[3]), kind: 'tap', gain: 0.16});
+  ev.push({at: p.e - 4, kind: 'whoosh-short', gain: 0.14});
+  ev.push({at: p.g, kind: 'thud', gain: 0.34});
+  return ev;
+};
+
+/* ---------- idea ---------- */
+
+const ideaPlan = (cue: Cue) => {
   const [a, b, c, d, e] = [cue('a', 79), cue('b', 129), cue('c', 176), cue('d', 230), cue('e', 314)];
-  const glowWri = f >= c && f < d + 20 ? 1 : 0;
-  return <Root f={f} beats={[0, a, b, c, d, e]} glow={color.cyan}>
-    <Appear p={pop(f, 0)}><H size={60}>Teamily AI</H></Appear>
-    <Appear p={pop(f, 8)}><P size={36} c={color.text}>说白了：一个有 agent 的群聊</P></Appear>
-    <Appear p={pop(f, a)} dy={40} style={{marginTop: 22}}>
-      <Window title="群聊 · 提示词库项目" bodyStyle={{padding: '20px 24px', minHeight: 600}}>
-        <div style={{display: 'flex', alignItems: 'center', gap: 14, paddingBottom: 16, borderBottom: '2px solid #1f2842'}}>
-          <span style={{fontFamily: font, fontSize: 28, color: color.dim}}>成员</span>
-          <Appear p={pop(f, a + 6)} scale><Av who="me" size={74} /></Appear>
-          {ORDER.map((r, i) => <Appear key={r} p={pop(f, b + i * 7)} scale><Av who={r} size={74} ring={r === 'wri' ? glowWri : 0} /></Appear>)}
-          <Appear p={pop(f, b + 30)} style={{marginLeft: 'auto'}}><Chip c={color.cyan} style={{fontSize: 28}}>4 个 agent</Chip></Appear>
-        </div>
-        <div style={{marginTop: 20, display: 'flex', flexDirection: 'column', gap: 16}}>
-          {f >= c - 4 && <Msg f={f} at={c} who="me" text={<><At who="wri" /> 把页面文案写出来</>} />}
-          {f >= d - 4 && <Msg f={f} at={d} who="wri" text={<>写好了 → <At who="dev" /> 接着建站</>} />}
-          {f >= d + 24 && <Msg f={f} at={d + 28} who="dev" text="收到，读到上面的文案了" />}
-        </div>
-      </Window>
-    </Appear>
-    <div style={{display: 'flex', alignItems: 'center', gap: 20, marginTop: 24, justifyContent: 'center'}}>
-      <Appear p={pop(f, d)} scale><Chip c={A} style={{fontSize: 36}}>做完就交接</Chip></Appear>
-      <Appear p={pop(f, e)} scale><span style={{fontFamily: font, fontSize: 40, fontWeight: 900, color: color.text}}>
-        <Strike p={ramp(f, e + 8, e + 18)}>复制粘贴</Strike></span></Appear>
-    </div>
+  const G = 780, AG = 124;
+  const at: Hop = {at: c - 14, dur: 14, from: top(SLOT[4], G, 140), to: top(SLOT[1], G, AG), lift: 150};
+  const card: Hop = {at: d, dur: 16, from: top(SLOT[1], G, AG), to: top(SLOT[2], G, AG), lift: 120};
+  return {a, b, c, d, e, G, AG, at, card};
+};
+const Idea: Scene = ({f, cue}) => {
+  const p = ideaPlan(cue);
+  const t = S(f);
+  const tok = hopAt(f, [p.at]);
+  const card = hopAt(f, [p.card]);
+  const frame = draw(f, p.a, 26);
+  const L = 2 * (900 + 440);
+  return <Root>
+    <Rise f={f} at={2}><div style={{fontFamily: num, fontWeight: 900, fontSize: 96, color: INK, lineHeight: 1}}>Teamily AI</div></Rise>
+    <Rise f={f} at={p.a + 8} style={{marginTop: 18}}><Big size={52} w={700}>说白了，就是一个群聊</Big></Rise>
+    <svg width={900} height={960} style={{position: 'absolute', left: -10, top: 0, overflow: 'visible'}}>
+      <rect x={0} y={400} width={900} height={440} rx={30} fill="none" stroke={INK} strokeWidth={3} strokeDasharray={L} strokeDashoffset={L * (1 - frame)} />
+    </svg>
+    <Abs x={20} y={376} style={{opacity: clamp((f - p.a - 12) / 10), background: paper.bg, padding: '0 12px'}}><Kicker size={30} c={INK}>群聊 · 提示词库项目</Kicker></Abs>
+    <Ground y={p.G} x0={20} x1={860} op={frame} />
+    {AGENTS.map((who, i) => {
+      const lift = Math.max(-4, 40 * ripple(t, S(p.b), i, {delay: 0.1, decay: 0.95, f: 2, z: 0.45}));
+      const hit = who === 'wri' ? hitOf(f, [p.c], 0.9) : who === 'dev' ? hitOf(f, [p.d + 16], 0.7) : 0;
+      const wob = who === 'wri' && f >= p.c ? 14 * impulse(t, S(p.c + 2), {f: 4, z: 0.15}) : 0;
+      return <Pebble key={who} who={who} x={SLOT[i]} ground={p.G} size={p.AG} lift={lift} hit={hit} wob={wob} label={NAME[who]}
+        labelOp={clamp((f - p.b - 8 - i * 3) / 10)} op={clamp((f - p.a) / 12)} />;
+    })}
+    <Pebble who="me" x={SLOT[4]} ground={p.G} size={140} label="你" op={clamp((f - p.a) / 12)} />
+    {f >= p.at.at && f < p.c + 4 && <AtToken x={tok.x} y={tok.y} vx={tok.vx} vy={tok.vy} />}
+    {f >= p.c + 18 && <Packet x={card.x} y={card.y} vx={card.vx} vy={card.vy} scale={clamp(springStep(t, S(p.c + 18), {f: 2.4, z: 0.6}), 0, 1.1)} />}
+    {f >= p.d && <svg width={880} height={960} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
+      <path d={`M${SLOT[1]} ${p.card.from[1] - 70} Q${SLOT[1] + 86} ${p.card.from[1] - 330} ${SLOT[2]} ${p.card.to[1] - 70}`} fill="none" stroke={A} strokeWidth={4}
+        strokeDasharray="10 12" strokeLinecap="round" opacity={0.75 * draw(f, p.d, 16)} />
+    </svg>}
+    <Rise f={f} at={p.e} style={{position: 'absolute', left: 0, top: 250}}>
+      <Big size={60}>不用再<Strike p={springStep(t, S(p.e + 8), {f: 2.6, z: 1})} w={7}>复制粘贴</Strike></Big>
+    </Rise>
   </Root>;
 };
+Idea.camera = (cue) => {
+  const p = ideaPlan(cue);
+  return [cam(0, 300, 160, 1.16), cam(p.a, 440, 600, 1.02), cam(p.b, 440, 700, 1.1), cam(p.c, 268, 700, 1.18), cam(p.d, 440, 680, 1.1), cam(p.e, 380, 320, 1.08)];
+};
+Idea.sfx = (cue) => {
+  const p = ideaPlan(cue);
+  return [{at: p.a, kind: 'paper', gain: 0.18}, {at: p.b, kind: 'pop', gain: 0.1}, {at: p.c - 14, kind: 'whoosh-short', gain: 0.12},
+    {at: p.c, kind: 'tap', gain: 0.22}, {at: p.d - 2, kind: 'whoosh', gain: 0.14}, {at: p.d + 16, kind: 'tap', gain: 0.2}, {at: p.e + 8, kind: 'tick', gain: 0.18}];
+};
 
-/* task — scattered prompts → one copyable page; four jobs; normally four chat tabs and a human carrying */
-const Task: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
+/* ---------- task ---------- */
+
+const RUN = [110, 770, 330, 550, 110, 770, 440];
+const taskPlan = (cue: Cue) => {
   const [a, b, c, d, e, g, h, k] = [cue('a', 54), cue('b', 120), cue('c', 191), cue('d', 228), cue('e', 249), cue('f', 269), cue('g', 289), cue('h', 314)];
-  const gather = ease.inOutCubic(prog(f, b, 26));
-  const jobs: {t: string; r: RoleKey; at: number}[] = [{t: '调研', r: 'res', at: d}, {t: '写稿', r: 'wri', at: e}, {t: '建站', r: 'dev', at: g}, {t: '审核', r: 'rev', at: h}];
-  const run = f >= k ? Math.sin((f - k) / 9) : 0;
-  return <Root f={f} beats={[0, a, b, c, d, h, k]} glow={color.amber}>
-    <Appear p={pop(f, 0)}><H size={60}>真活：一页提示词库</H></Appear>
-    <div style={{position: 'relative', height: 420, marginTop: 14}}>
-      <Abs x={170} y={20} w={540}>
-        <Appear p={pop(f, b)} scale>
-          <Window url="prompts · 一页搞定" bodyStyle={{padding: '16px 22px', height: 280}}>
-            {[0, 1, 2, 3].map((i) => <div key={i} style={{display: 'flex', alignItems: 'center', gap: 14, height: 62, opacity: ramp(f, b + 18 + i * 5, b + 26 + i * 5)}}>
-              <span style={{fontFamily: mono, fontSize: 28, color: color.dim}}>#{i + 1}</span>
-              <div style={{flex: 1, height: 12, borderRadius: 6, background: '#2a3352'}} />
-              <span style={{fontFamily: font, fontSize: 26, fontWeight: 800, color: '#0a0e1a', background: color.amber, borderRadius: 10, padding: '2px 12px'}}>复制</span>
-            </div>)}
-          </Window>
-        </Appear>
-      </Abs>
-      {Array.from({length: 8}, (_, i) => {
-        const hx = [20, 640, 110, 560, 330, 720, 10, 450][i], hy = [10, 30, 230, 250, 0, 150, 330, 330][i];
-        const tx = 300 + (i % 2) * 120, ty = 120 + Math.floor(i / 2) * 50;
-        const fl = sway(f / 30, i * 1.1, {dy: 8, deg: 3});
-        const x = hx + (tx - hx) * gather, y = hy + fl.dy + (ty - hy) * gather;
-        return <Abs key={i} x={x} y={y}>
-          <Appear p={pop(f, i * 3)} scale>
-            <div style={{width: 150, padding: '10px 14px', borderRadius: 14, background: '#18213a', border: `2px solid ${color.panelBorder}`, opacity: 1 - gather,
-              transform: `rotate(${fl.deg * (1 - gather)}deg) scale(${1 - 0.6 * gather})`}}>
-              <div style={{fontFamily: font, fontSize: 24, color: color.dim}}>{['3 月', '5 月', '6 月', '7 月', '8 月', '9 月', '4 月', '10 月'][i]}的帖子</div>
-              <div style={{height: 8, borderRadius: 4, background: '#3a4466', marginTop: 8}} /><div style={{height: 8, borderRadius: 4, background: '#3a4466', marginTop: 6, width: '70%'}} />
-            </div>
-          </Appear>
-        </Abs>;
-      })}
-      <Abs x={0} y={0} w={880}>
-        <div style={{opacity: 1 - ramp(f, b, b + 8)}}><Appear p={pop(f, a)}><Chip c={color.dim} style={{fontSize: 32}}>散在几个月的帖子里</Chip></Appear></div>
-      </Abs>
+  const scraps = Array.from({length: 12}, (_, i) => ({x: 90 + hash(i * 3.3 + 1) * 700, g: 470 + hash(i * 7.1 + 2) * 300, rot: (hash(i * 2.9) - 0.5) * 26, land: a + 8 + i * 3}));
+  const tiles = [{who: 'res' as Who, t: '调研', at: d}, {who: 'wri' as Who, t: '写稿', at: e}, {who: 'dev' as Who, t: '建站', at: g}, {who: 'rev' as Who, t: '审核', at: h}];
+  return {a, b, c, d, e, g, h, k, scraps, tiles, HG: 930};
+};
+const Task: Scene = ({f, cue}) => {
+  const p = taskPlan(cue);
+  const t = S(f);
+  const page = springStep(t, S(p.b), {f: 2.2, z: 0.75});
+  const split = springStep(t, S(p.c), {f: 1.8, z: 0.72});
+  const runKeys = RUN.map((x, i) => ({at: S(p.k + 18 + i * 20), to: x}));
+  const runX = springTrack(t, 440, runKeys, {f: 1.6, z: 0.7});
+  const runV = (springTrack(t + 0.02, 440, runKeys, {f: 1.6, z: 0.7}) - runX) / 0.02;
+  const meLift = dropLift(f, p.k + 6, p.HG, 700);
+  return <Root>
+    <Rise f={f} at={2}><Big size={76}>真活：一页提示词库</Big></Rise>
+    <Rise f={f} at={p.a + 10} style={{marginTop: 14}}><Kicker size={40} c={DIM}>提示词散在几个月的帖子里</Kicker></Rise>
+    {/* the page the scraps fly into */}
+    <div style={{position: 'absolute', left: 250, top: 230, width: 380, height: 380, borderRadius: 10, background: CARD, border: `3px solid ${INK}`,
+      opacity: clamp(page * 1.4) * (1 - clamp(split * 2)), transform: `scale(${0.85 + 0.15 * page})`}}>
+      <div style={{fontFamily: font, fontWeight: 900, fontSize: 40, color: INK, padding: '16px 20px'}}>一页 · 能直接复制</div>
+      {Array.from({length: 8}, (_, j) => <div key={j} style={{display: 'flex', alignItems: 'center', gap: 12, margin: '10px 20px', opacity: clamp((f - p.b - 18 - j * 3) / 6)}}>
+        <div style={{flex: 1, height: 9, borderRadius: 5, background: LINE}} /><div style={{width: 44, height: 22, borderRadius: 6, border: `2px solid ${INK}`}} />
+      </div>)}
     </div>
-    <Appear p={pop(f, c)}><H size={48}>拆开是 4 件事</H></Appear>
-    <div style={{display: 'flex', gap: 16, marginTop: 14}}>
-      {jobs.map((j) => <Appear key={j.t} p={pop(f, j.at)} scale style={{flex: 1}}>
-        <div style={{textAlign: 'center', padding: '16px 0', borderRadius: 20, border: `3px solid ${ROLE[j.r].c}`, background: `${ROLE[j.r].c}1c`}}>
-          <Bot size={56} c={ROLE[j.r].c} />
-          <div style={{fontFamily: font, fontSize: 42, fontWeight: 900, color: color.text}}>{j.t}</div>
+    {p.scraps.map((s, i) => {
+      if (f >= p.b + 20 + i * 3) return null;
+      const fall = dropY(f, s.land, s.g, 640);
+      const fly = toss(t, {at: S(p.b + 6 + i * 3), dur: S(14), from: [s.x, s.g], to: [440, 330 + (i % 8) * 34], lift: 80});
+      const flying = f >= p.b + 6 + i * 3;
+      const x = flying ? fly.x : s.x, y = flying ? fly.y : fall.y;
+      const hit = hitOf(f, [s.land], 0.6);
+      const k = flying ? 1 - 0.5 * fly.u : 1;
+      return <React.Fragment key={i}>
+        {!flying && <ContactShadow x={s.x} y={s.g} w={120} lift={s.g - fall.y} opacity={0.2} />}
+        <div style={{position: 'absolute', left: x - 64, top: y - 76, width: 128, height: 76, borderRadius: 8, background: CARD, border: `2px solid ${INK}`,
+          transform: `rotate(${s.rot * (flying ? 1 - fly.u : 1)}deg) scale(${(1 + 0.08 * hit) * k}, ${(1 - 0.1 * hit) * k})`, opacity: f >= s.land - 20 ? 1 : 0}}>
+          <div style={{margin: '14px 14px 0', height: 7, borderRadius: 4, background: INK, opacity: 0.6}} />
+          <div style={{margin: '10px 14px 0', width: '60%', height: 7, borderRadius: 4, background: INK, opacity: 0.3}} />
         </div>
-      </Appear>)}
-    </div>
-    <Appear p={pop(f, k)} dy={20} style={{marginTop: 24}}>
-      <div style={{position: 'relative', height: 190, borderRadius: 20, border: '2px dashed #3a4466', padding: '18px 26px'}}>
-        <span style={{fontFamily: font, fontSize: 36, color: color.text}}>平常：4 个聊天窗口，人在中间来回搬</span>
-        <div style={{display: 'flex', gap: 120, marginTop: 14, paddingLeft: 30}}>{ORDER.map((r) => <Window key={r} title="" style={{width: 80}} bodyStyle={{padding: 8, height: 20}}><span /></Window>)}</div>
-        <div style={{position: 'absolute', left: 390 + run * 330, top: 92}}><Person size={70} /></div>
+      </React.Fragment>;
+    })}
+    {/* the page splits into four jobs */}
+    <Ground y={760} op={clamp(split * 1.5)} x0={20} x1={860} />
+    {split > 0 && p.tiles.map((tile, i) => {
+      const k = springStep(t, S(p.c + i * 3), {f: 1.9, z: 0.7});
+      const x0 = 250 + (i % 2) * 190 + 95, y0 = 230 + Math.floor(i / 2) * 190 + 190;
+      const x = x0 + ([110, 330, 550, 770][i] - x0) * k, y = y0 + (760 - y0) * k;
+      const hop = Math.max(0, 50 * impulse(t, S(tile.at), {f: 2.4, z: 0.5}));
+      const hit = hitOf(f, [tile.at + 7], 0.5);
+      return <React.Fragment key={tile.t}>
+        <ContactShadow x={x} y={760} w={180} lift={760 - y + hop} opacity={0.25 * clamp(k * 2)} />
+        <div style={{position: 'absolute', left: x - 95, top: y - 170 - hop, width: 190, height: 170, borderRadius: 18, background: matte(CLAY),
+          transform: `scale(${1 + 0.06 * hit}, ${1 - 0.08 * hit})`, transformOrigin: '50% 100%', opacity: clamp(split * 2),
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6}}>
+          <Glyph who={tile.who} size={64} c={INK} />
+          <div style={{fontFamily: font, fontWeight: 900, fontSize: 44, color: INK, opacity: clamp((f - tile.at - 4) / 8)}}>{tile.t}</div>
+        </div>
+      </React.Fragment>;
+    })}
+    <div style={{position: 'absolute', left: 0, top: 190, width: 880, ...phaseOp(f, p.c + 8, p.k + 10)}}><Big size={52} w={700}>拆开是 4 件事</Big></div>
+    <div style={{position: 'absolute', left: 0, top: 190, width: 880, ...phaseOp(f, p.k + 14)}}><Big size={52} w={700}>平常：4 个窗口，人在中间来回搬</Big></div>
+    {f >= p.k - 20 && <>
+      <Ground y={p.HG} x0={20} x1={860} op={clamp((f - p.k + 10) / 10)} />
+      <Pebble who="me" x={runX} ground={p.HG} size={100} lift={meLift} hit={hitOf(f, [p.k + 6], 0.7)} />
+      <Packet x={runX} y={p.HG - 100 - meLift + 2} vx={runV} scale={0.75} />
+    </>}
+  </Root>;
+};
+Task.camera = (cue) => {
+  const p = taskPlan(cue);
+  return [cam(0, 400, 160, 1.12), cam(p.a, 440, 600, 1.0), cam(p.b, 440, 420, 1.14), cam(p.c, 440, 640, 1.04), cam(p.d, 220, 690, 1.14),
+    cam(p.g, 660, 690, 1.14), cam(p.k, 440, 860, 1.1), cam(p.k + 50, 440, 560, 1.02)];
+};
+Task.sfx = (cue) => {
+  const p = taskPlan(cue);
+  return [{at: p.a + 8, kind: 'paper', gain: 0.2}, {at: p.b + 6, kind: 'paper', gain: 0.16}, {at: p.b + 56, kind: 'tick', gain: 0.14},
+    ...p.tiles.map((x) => ({at: x.at + 7, kind: 'tap', gain: 0.15})), {at: p.k + 6, kind: 'thud', gain: 0.26}];
+};
+
+/* ---------- roles ---------- */
+
+const ROLE_INFO: Record<string, {zh: string; en: string; duty: string}> = {
+  res: {zh: '趋势调研员', en: 'Trend Researcher', duty: '找粉丝真正收藏的内容'},
+  wri: {zh: '文案', en: 'Content Creator', duty: '页面上的每个字都归它'},
+  dev: {zh: '网页开发', en: 'Webpage Developer', duty: '用 Website Builder 建站'},
+  rev: {zh: '审核编辑', en: 'Verification Editor', duty: '检查一切，专门挑刺'},
+};
+const rolesPlan = (cue: Cue) => ({at: [cue('a', 72), cue('b', 162), cue('c', 241), cue('d', 312)], G: 860, xs: [110, 330, 550, 770]});
+const Roles: Scene = ({f, cue}) => {
+  const p = rolesPlan(cue);
+  const t = S(f);
+  const cur = p.at.filter((x) => f >= x - 2).length - 1;
+  return <Root>
+    <div style={{position: 'absolute', left: 0, top: 0, ...phaseOp(f, 2, p.at[0] - 4)}}><Big size={80}>先建群，<br />拉进 4 个 agent</Big></div>
+    {AGENTS.map((who, i) => (
+      <div key={who} style={{position: 'absolute', left: 0, top: 30, width: 880, ...phaseOp(f, p.at[i] + 8, i < 3 ? p.at[i + 1] + 2 : undefined)}}>
+        <div style={{display: 'flex', alignItems: 'baseline', gap: 22}}>
+          <span style={{fontFamily: num, fontWeight: 900, fontSize: 64, color: DIM}}>0{i + 1}</span>
+          <Big size={112}>{ROLE_INFO[who].zh}</Big>
+        </div>
+        <div style={{fontFamily: num, fontSize: 34, color: DIM, marginTop: 6}}>{ROLE_INFO[who].en}</div>
+        <Big size={52} w={700} style={{marginTop: 34}}>{ROLE_INFO[who].duty}</Big>
       </div>
-    </Appear>
-  </Root>;
-};
-
-/* roles — four agents, each owns one job */
-const DUTY: Record<RoleKey, string> = {res: '找粉丝真正收藏的内容', wri: '页面上每个字都归它', dev: '用 Website Builder 建站', rev: '检查一切，专门挑刺'};
-const Roles: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
-  const at = {res: cue('a', 72), wri: cue('b', 162), dev: cue('c', 241), rev: cue('d', 312)};
-  return <Root f={f} beats={[0, at.res, at.wri, at.dev, at.rev]} glow={color.violet}>
-    <div style={{display: 'flex', alignItems: 'center', gap: 18}}>
-      <Appear p={pop(f, 0)}><H size={60}>建群，拉进 4 个 agent</H></Appear>
-    </div>
-    <Appear p={pop(f, 8)} style={{marginTop: 14, display: 'flex', alignItems: 'center', gap: 14}}>
-      <Av who="me" size={70} /><P size={34} c={color.text}>群主：作者本人</P>
-      <Chip c={color.dim} style={{fontSize: 26, marginLeft: 'auto'}}>Discover → Agents</Chip>
-    </Appear>
-    <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginTop: 26}}>
-      {ORDER.map((r, i) => {
-        const p = pop(f, at[r]);
-        const sw = sway(f / 30, i * 1.4, {dy: 3, deg: 0.6});
-        return <div key={r} style={{height: 320, borderRadius: 24, border: `3px ${p > 0.1 ? 'solid' : 'dashed'} ${p > 0.1 ? ROLE[r].c : '#2a3352'}`,
-          background: p > 0.1 ? `${ROLE[r].c}14` : 'transparent'}}>
-          <Appear p={p} scale style={{padding: '22px 24px', transform: `translateY(${sw.dy}px) rotate(${sw.deg}deg) scale(${0.85 + 0.15 * p})`}}>
-            <div style={{display: 'flex', alignItems: 'center', gap: 14}}>
-              <Bot size={84} c={ROLE[r].c} />
-              <div style={{fontFamily: mono, fontSize: 40, fontWeight: 900, color: ROLE[r].c}}>{i + 1}</div>
-            </div>
-            <div style={{fontFamily: font, fontSize: 48, fontWeight: 900, color: color.text, marginTop: 8}}>{ROLE[r].zh}</div>
-            <div style={{fontFamily: mono, fontSize: 22, color: color.dim}}>{ROLE[r].en}</div>
-            <div style={{fontFamily: font, fontSize: 30, color: color.text, marginTop: 10, lineHeight: 1.3, whiteSpace: 'nowrap'}}>{DUTY[r]}</div>
-          </Appear>
-        </div>;
-      })}
-    </div>
-  </Root>;
-};
-
-/* rules — every agent: what it owns, where its input comes from, who's next; nothing ships until "ship it" */
-const RULES: {r: RoleKey; own: string; input: string; next: string}[] = [
-  {r: 'res', own: '调研', input: '我贴的数据', next: '文案'},
-  {r: 'wri', own: '每个字', input: '调研报告', next: '开发'},
-  {r: 'dev', own: '网站', input: '最新文案', next: '审核'},
-  {r: 'rev', own: '质量', input: '整个页面', next: '作者'},
-];
-const Rules: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
-  const [a, b, c, d, e, g] = [cue('a', 52), cue('b', 102), cue('c', 119), cue('d', 152), cue('e', 196), cue('f', 334)];
-  const cols = [{k: 'own', t: '管什么', at: b, c: color.cyan}, {k: 'input', t: '输入从哪来', at: c, c: color.violet}, {k: 'next', t: '交接给谁', at: d, c: A}] as const;
-  const w = [210, 190, 260, 200];
-  return <Root f={f} beats={[0, a, b, d, e, g]} glow={color.cyan} hits={[g]}>
-    <Appear p={pop(f, 0)}><H size={60}>第一条消息：群规</H></Appear>
-    <Appear p={pop(f, a - 10)} dy={30} style={{marginTop: 20}}>
-      <Panel style={{padding: '18px 0 10px'}}>
-        <div style={{display: 'flex', padding: '0 0 10px', borderBottom: '2px solid #1f2842'}}>
-          <div style={{width: w[0], fontFamily: font, fontSize: 30, color: color.dim, paddingLeft: 24}}>谁</div>
-          {cols.map((col, i) => {
-            const on = ramp(f, col.at, col.at + 8);
-            return <div key={col.k} style={{width: w[i + 1], textAlign: 'center'}}>
-              <span style={{fontFamily: font, fontSize: 32, fontWeight: 900, color: on > 0.5 ? '#0a0e1a' : color.dim, background: on > 0.5 ? col.c : 'transparent',
-                borderRadius: 12, padding: '4px 12px', display: 'inline-block', transform: `scale(${1 + 0.12 * Math.sin(Math.PI * on)})`}}>{col.t}</span>
-            </div>;
-          })}
-        </div>
-        {RULES.map((row, i) => {
-          const shown = ramp(f, a + i * 8, a + i * 8 + 10);
-          return <div key={row.r} style={{display: 'flex', alignItems: 'center', height: 86, borderBottom: i < 3 ? '1px solid #1f2842' : undefined, opacity: shown,
-            transform: `translateX(${(1 - shown) * 30}px)`}}>
-            <div style={{width: w[0], display: 'flex', alignItems: 'center', gap: 10, paddingLeft: 20}}>
-              <Bot size={50} c={ROLE[row.r].c} /><span style={{fontFamily: font, fontSize: 34, fontWeight: 800, color: ROLE[row.r].c, whiteSpace: 'nowrap'}}>{ROLE[row.r].short}</span>
-            </div>
-            {cols.map((col, k) => {
-              const on = f >= col.at;
-              const v = row[col.k];
-              return <div key={col.k} style={{width: w[k + 1], textAlign: 'center', fontFamily: font, fontSize: 34, fontWeight: on ? 800 : 500,
-                color: on ? (col.k === 'next' ? A : color.text) : color.dim}}>{col.k === 'next' ? `→ ${v}` : v}</div>;
-            })}
-          </div>;
-        })}
-      </Panel>
-    </Appear>
-    <Appear p={pop(f, e)} dy={30} style={{marginTop: 24}}>
-      <div style={{padding: '20px 26px', borderRadius: 22, border: `3px solid ${B}`, background: `${B}14`}}>
-        <div style={{fontFamily: font, fontSize: 28, color: B, fontWeight: 800}}>最后一句，留给自己</div>
-        <div style={{fontFamily: font, fontSize: 42, fontWeight: 900, color: color.text, marginTop: 4}}>{typed('我说 “ship it” 之前，什么都不许上线', f / 30, (e + 8) / 30, 16)}</div>
-        <div style={{fontFamily: mono, fontSize: 22, color: color.dim, marginTop: 6}}>Nothing goes public until I say “ship it”.</div>
-      </div>
-    </Appear>
-    <Big f={f} at={g} text="4 个机器人 → 1 个团队" c={color.amber} size={54} h={150} style={{marginTop: 10}} />
-  </Root>;
-};
-
-/* kickoff — real data, not a made-up task: 20 most-saved posts, one message, then stop typing */
-const Kickoff: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
-  const [a, b, c, d] = [cue('a', 63), cue('b', 107), cue('c', 215), cue('d', 246)];
-  const fold = ease.inOutCubic(prog(f, c, 20));
-  const rows = [3120, 2740, 2610, 2290, 2105, 1980, 1760, 1540, 1310, 980];
-  const sorted = ease.inOutCubic(prog(f, b, 20));
-  return <Root f={f} beats={[0, a, b, c, d]} glow={color.cyan}>
-    <div style={{display: 'flex', alignItems: 'center', gap: 22}}>
-      <Appear p={pop(f, 0)}><H size={60}>喂真数据</H></Appear>
-      <Appear p={pop(f, 10)} scale><span style={{fontFamily: font, fontSize: 40, fontWeight: 800, color: color.dim}}><Strike p={ramp(f, 30, 44)}>编一个任务</Strike></span></Appear>
-    </div>
-    <div style={{position: 'relative', height: 640, marginTop: 20}}>
-      <div style={{position: 'absolute', inset: 0, opacity: 1 - fold, transform: `scale(${1 - 0.5 * fold}) translateY(${fold * 300}px)`, transformOrigin: '80% 100%'}}>
-        <Appear p={pop(f, a)} dy={40}>
-          <Window title="X 后台 · 最近 60 天（示意）" bodyStyle={{padding: '10px 24px', height: 540, overflow: 'hidden'}}>
-            <div style={{display: 'flex', fontFamily: font, fontSize: 26, color: color.dim, padding: '6px 0'}}>
-              <span style={{flex: 1}}>帖子</span><span style={{width: 160, textAlign: 'right'}}>收藏 ↓</span>
-            </div>
-            <div style={{position: 'relative', height: 480}}>{rows.map((v, i) => {
-              const rank = Math.round(i * sorted + ((i * 7) % 10) * (1 - sorted));
-              const top = f >= b + 16;
-              return <div key={i} style={{position: 'absolute', left: 0, right: 0, top: rank * 48, display: 'flex', alignItems: 'center', height: 44,
-                borderRadius: 10, background: top ? `${color.cyan}18` : 'transparent'}}>
-                <span style={{fontFamily: mono, fontSize: 24, color: color.dim, width: 54}}>{top ? rank + 1 : '·'}</span>
-                <div style={{flex: 1, marginRight: 20}}><div style={{height: 10, borderRadius: 5, background: '#2a3352', width: 340 + ((i * 53) % 120)}} /></div>
-                <span style={{fontFamily: mono, fontSize: 28, fontWeight: 800, color: top ? color.cyan : color.text, width: 120, textAlign: 'right'}}>{v.toLocaleString('en-US')}</span>
-              </div>;
-            })}</div>
-          </Window>
-        </Appear>
-        <Abs x={520} y={-6}><Appear p={pop(f, b + 18)} scale><Chip c={color.cyan} style={{fontSize: 34}}>收藏前 20 条</Chip></Appear></Abs>
-      </div>
-      {f >= c && <div style={{position: 'absolute', left: 0, right: 0, top: 40, opacity: fold}}>
-        <Msg f={f} at={c} who="me" size={34} text={<><At who="res" /> 这是我近 60 天收藏最多的 20 条帖子，附收藏、回复、浏览数。找出收藏最多的 3 个话题，写成报告，交接给 <At who="wri" />。</>} />
-        <Appear p={pop(f, c + 14)} style={{marginTop: 16, display: 'flex', justifyContent: 'flex-end'}}><Chip c={color.cyan} style={{fontSize: 30}}>✓ 已发送 · 一条消息</Chip></Appear>
-      </div>}
-      {f >= d && <Abs x={0} y={420} w={880}>
-        <Appear p={pop(f, d)} dy={20} style={{display: 'flex', alignItems: 'center', gap: 22, justifyContent: 'center'}}>
-          <svg width={150} height={90} viewBox="0 0 150 90">
-            <rect x={4} y={4} width={142} height={82} rx={12} fill="none" stroke="#3a4466" strokeWidth={4} />
-            {Array.from({length: 12}, (_, i) => <rect key={i} x={16 + (i % 6) * 21} y={18 + Math.floor(i / 6) * 22} width={15} height={15} rx={3} fill="#3a4466" />)}
-            <rect x={36} y={64} width={78} height={12} rx={4} fill="#3a4466" />
-          </svg>
-          <H size={48} c={color.dim}>然后，不打字了</H>
-        </Appear>
-      </Abs>}
-    </div>
-  </Root>;
-};
-
-/* pushback — the writer refuses to write without research, and asks the researcher by name */
-const Pushback: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
-  const [a, b, c] = [cue('a', 43), cue('b', 158), cue('c', 224)];
-  return <Root f={f} beats={[0, a, b, c]} glow={color.violet}>
-    <Appear p={pop(f, 0)}><H size={60}>第一个惊喜：agent 会顶回来</H></Appear>
-    <Appear p={pop(f, 6)} dy={30} style={{marginTop: 22}}>
-      <Window title="群聊 · 提示词库项目" bodyStyle={{padding: '22px 24px', minHeight: 560, display: 'flex', flexDirection: 'column', gap: 22}}>
-        <Msg f={f} at={8} who="me" size={32} text="（群规已发）" />
-        {f >= a - 4 && <Msg f={f} at={a} who="wri" cps={9} size={40} text="没有调研，这需求写不了。" />}
-        {f >= b - 4 && <Msg f={f} at={b} who="wri" size={40} text={<><At who="res" /> 先给我一份调研报告</>} />}
-        {f >= b + 30 && <Msg f={f} at={b + 34} who="res" size={36} text="收到，这就去。" />}
-      </Window>
-    </Appear>
-    <div style={{display: 'flex', alignItems: 'center', gap: 16, marginTop: 20, justifyContent: 'center'}}>
-      <Appear p={pop(f, b)} scale><Chip c={A} style={{fontSize: 34}}>点名要资料</Chip></Appear>
-      <Appear p={pop(f, c)} scale><Chip c={color.violet} style={{fontSize: 40}}>这才像个同事</Chip></Appear>
-    </div>
-  </Root>;
-};
-
-/* chain — research note (top 3 topics by saves) → 15 prompts → plan + 3 flags sent back */
-const TOPICS = [{t: '未来的工作和 AI 赚钱', v: 43060}, {t: 'AI agent 和自动化搭建', v: 34551}, {t: '微调定制模型', v: 32852}];
-const Chain: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
-  const [a, b, c, d, e, g, h] = [cue('a', 49), cue('b', 127), cue('c', 149), cue('d', 172), cue('e', 215), cue('f', 314), cue('g', 372)];
-  const lit: Record<RoleKey, number> = {res: a, wri: e, dev: g, rev: 99999};
-  const phase = f < e ? 0 : f < g ? 1 : 2;
-  const swap = (at: number) => ease.outCubic(prog(f, at, 14));
-  const back = ease.inOutCubic(prog(f, h, 24));
-  return <Root f={f} beats={[0, a, b, d, e, g, h]} glow={phase === 0 ? color.cyan : phase === 1 ? color.violet : color.amber}>
-    <Appear p={pop(f, 0)}><H size={56}>接力开始</H></Appear>
-    <div style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 16}}>
-      {ORDER.map((r, i) => <React.Fragment key={r}>
-        {i > 0 && <Hand p={ease.outCubic(prog(f, lit[r] - 8, 10))} w={70} />}
-        <div style={{textAlign: 'center'}}>
-          <Av who={r} size={120} on={f >= lit[r] ? 1 : 0.3} ring={f >= lit[r] && f < lit[r] + 30 ? 0.8 : 0} />
-          <div style={{fontFamily: font, fontSize: 32, fontWeight: 800, color: f >= lit[r] ? ROLE[r].c : color.dim, marginTop: 6}}>{ROLE[r].short}</div>
-        </div>
-      </React.Fragment>)}
-      {back > 0 && <svg width={880} height={140} viewBox="0 0 880 140" style={{position: 'absolute', left: 0, top: -120, overflow: 'visible'}}>
-        <path d="M535 120 Q440 -20 345 120" stroke={color.red} strokeWidth={5} fill="none" strokeDasharray="12 10" opacity={0.8 * Math.min(1, back * 3)} />
-        {[0, 1, 2].map((k) => {
-          const u = ease.inOutCubic(prog(f, h + k * 6, 22));
-          const x = (1 - u) ** 2 * 535 + 2 * u * (1 - u) * 440 + u * u * 345, y = (1 - u) ** 2 * 120 + 2 * u * (1 - u) * -20 + u * u * 120 - 50;
-          return <g key={k} transform={`translate(${x + k * 30 - 30} ${y})`} opacity={u > 0 ? 1 : 0}>
-            <line x1={0} y1={0} x2={0} y2={36} stroke={color.text} strokeWidth={4} /><path d="M0 0 L26 8 L0 16 Z" fill={color.red} />
-          </g>;
-        })}
-      </svg>}
-    </div>
-    <div style={{position: 'relative', height: 560, marginTop: 40}}>
-      {phase === 0 && <Appear p={pop(f, a)} dy={30}>
-        <Panel glow={color.cyan} style={{padding: '22px 26px'}}>
-          <div style={{fontFamily: font, fontSize: 34, fontWeight: 900, color: color.cyan}}>调研报告 · 收藏最多的 3 个话题</div>
-          {TOPICS.map((tp, i) => {
-            const at = [b, c, d][i];
-            const g2 = ease.outCubic(prog(f, at, 20));
-            return <div key={tp.t} style={{marginTop: 22, opacity: Math.min(1, g2 * 2)}}>
-              <div style={{display: 'flex', alignItems: 'baseline'}}>
-                <span style={{fontFamily: font, fontSize: 36, color: color.text}}>{tp.t}</span>
-                <span style={{marginLeft: 'auto', fontFamily: mono, fontSize: 40, fontWeight: 900, color: color.amber}}>{Math.round(tp.v * g2).toLocaleString('en-US')}</span>
-              </div>
-              <div style={{height: 26, borderRadius: 13, background: '#1b2238', marginTop: 8}}>
-                <div style={{height: '100%', borderRadius: 13, width: `${tp.v / 43060 * 100 * g2}%`, background: color.cyan}} />
-              </div>
-            </div>;
-          })}
-          <Appear p={pop(f, d + 20)}><P size={30} style={{marginTop: 18}}>拿不准的 3 条帖子，标成 UNCONFIRMED 留给审核</P></Appear>
-        </Panel>
-      </Appear>}
-      {phase === 1 && <div style={{opacity: swap(e), transform: `translateY(${(1 - swap(e)) * 40}px)`}}>
-        <Panel glow={color.violet} style={{padding: '22px 26px'}}>
-          <div style={{fontFamily: font, fontSize: 34, fontWeight: 900, color: color.violet}}>页面文案 · 照着报告写</div>
-          <div style={{display: 'flex', alignItems: 'baseline', gap: 14, marginTop: 10}}>
-            <span style={{fontFamily: mono, fontSize: 110, fontWeight: 900, color: color.text, lineHeight: 1}}>{Math.min(15, Math.max(0, Math.floor((f - e - 30) / 3)))}</span>
-            <H size={44}>条提示词，按收藏排序</H>
-          </div>
-          <div style={{display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 10, marginTop: 20}}>
-            {Array.from({length: 15}, (_, i) => <div key={i} style={{height: 54, borderRadius: 12, background: f >= e + 30 + i * 3 ? `${color.violet}44` : '#1b2238',
-              border: `2px solid ${f >= e + 30 + i * 3 ? color.violet : '#2a3352'}`}} />)}
-          </div>
-          <P size={30} style={{marginTop: 16}}>核实不了的，标出来，不瞎编</P>
-        </Panel>
-      </div>}
-      {phase === 2 && <div style={{opacity: swap(g), transform: `translateY(${(1 - swap(g)) * 40}px)`}}>
-        <Panel glow={color.amber} style={{padding: '22px 26px'}}>
-          <div style={{fontFamily: font, fontSize: 34, fontWeight: 900, color: color.amber}}>开发：先发方案，再动手</div>
-          {['版块和样式', '表单写进真数据库', '管理页看请求'].map((t, i) => (
-            <Appear key={t} p={pop(f, g + 10 + i * 8)} dy={14} style={{display: 'flex', alignItems: 'center', gap: 14, marginTop: 16}}>
-              <Check p={ramp(f, g + 10 + i * 8, g + 22 + i * 8)} size={44} c={color.cyan} /><span style={{fontFamily: font, fontSize: 38, color: color.text}}>{t}</span>
-            </Appear>
-          ))}
-          <Appear p={pop(f, h)} dy={20} style={{marginTop: 22}}>
-            <div style={{display: 'flex', alignItems: 'center', gap: 14, padding: '14px 20px', borderRadius: 16, border: `2px solid ${color.red}`, background: `${color.red}14`}}>
-              <span style={{fontFamily: mono, fontSize: 44, fontWeight: 900, color: color.red}}>3</span>
-              <span style={{fontFamily: font, fontSize: 36, color: color.text}}>个问题，当众退回文案</span>
-            </div>
-          </Appear>
-        </Panel>
-      </div>}
-    </div>
-  </Root>;
-};
-
-/* insight — hype gets reach, guides get saves: 1.89% vs 0.17% */
-const Insight: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
-  const [a, b, c, d, e] = [cue('a', 51), cue('b', 85), cue('c', 129), cue('d', 231), cue('e', 346)];
-  const Col: React.FC<{t: string; sub: string; col: string; at: number; reach: number; save: number}> = ({t, sub, col, at, reach, save}) => {
-    const g = ease.outCubic(prog(f, at, 20));
-    return <Appear p={pop(f, at)} scale style={{flex: 1}}>
-      <div style={{padding: '20px 22px', borderRadius: 22, border: `3px solid ${col}`, background: `${col}12`}}>
-        <div style={{fontFamily: font, fontSize: 44, fontWeight: 900, color: col}}>{t}</div>
-        <div style={{fontFamily: font, fontSize: 32, color: color.text, marginTop: 4}}>{sub}</div>
-        {[['流量', reach], ['收藏', save]].map(([k, v]) => <div key={k as string} style={{display: 'flex', alignItems: 'center', gap: 12, marginTop: 14}}>
-          <span style={{fontFamily: font, fontSize: 30, color: color.dim, width: 64}}>{k}</span>
-          <div style={{flex: 1, height: 22, borderRadius: 11, background: '#1b2238'}}><div style={{height: '100%', borderRadius: 11, width: `${(v as number) * g}%`, background: col}} /></div>
-        </div>)}
-      </div>
-    </Appear>;
-  };
-  const bar = (v: number, at: number) => v / 1.89 * 300 * ease.outCubic(prog(f, at, 22));
-  return <Root f={f} beats={[0, a, b, c, d, e]} glow={color.cyan} hits={[e]}>
-    <Appear p={pop(f, 0)}><H size={56}>报告里最值钱的一句</H></Appear>
-    <div style={{display: 'flex', gap: 18, marginTop: 22}}>
-      <Col t="炒作帖" sub="拿流量" col={color.amber} at={a} reach={95} save={12} />
-      <Col t="教程帖" sub="拿收藏" col={color.cyan} at={b} reach={40} save={90} />
-    </div>
-    <Appear p={pop(f, c)} style={{marginTop: 26}}><P size={34} c={color.text}>收藏率（收藏 ÷ 浏览）</P></Appear>
-    <div style={{display: 'flex', alignItems: 'flex-end', gap: 60, height: 360, padding: '0 90px', borderBottom: '3px solid #2a3352'}}>
-      {[{v: 1.89, at: c, col: color.cyan, t: '免费学习资源'}, {v: 0.17, at: d, col: color.amber, t: '最火的炒作帖'}].map((x) => (
-        <div key={x.t} style={{flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%'}}>
-          <div style={{fontFamily: mono, fontSize: 52, fontWeight: 900, color: x.col, opacity: f >= x.at ? 1 : 0}}>{(x.v * ease.outCubic(prog(f, x.at, 22))).toFixed(2)}%</div>
-          <div style={{width: '100%', height: bar(x.v, x.at), borderRadius: '14px 14px 0 0', background: x.col}} />
-        </div>
-      ))}
-    </div>
-    <div style={{display: 'flex', gap: 60, padding: '10px 90px 0'}}>
-      {['免费学习资源', '最火的炒作帖'].map((t) => <div key={t} style={{flex: 1, textAlign: 'center', fontFamily: font, fontSize: 32, color: color.text}}>{t}</div>)}
-    </div>
-    <div style={{position: 'absolute', right: 30, top: 470}}>
-      <Stamp t={f / 30} at={e / 30} text="差 11 倍" color={color.cyan} size={56} deg={-8} font={font} style={{position: 'relative'}} />
-    </div>
-  </Root>;
-};
-
-/* block — the reviewer blocks v1: "Claude" quoted as "the model"; 16 vs 15 */
-const Block: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
-  const [a, b, c, d, e] = [cue('a', 67), cue('b', 145), cue('c', 228), cue('d', 303), cue('e', 409)];
-  const ring = ramp(f, d, d + 14);
-  return <Root f={f} beats={[0, a, b, c, d, e]} glow={color.red} hits={[a]}>
-    <div style={{display: 'flex', alignItems: 'center', gap: 18}}>
-      <Appear p={pop(f, 0)} scale>
-        <div style={{padding: '14px 22px', borderRadius: 18, border: `2px solid ${color.amber}`, background: `${color.amber}14`, fontFamily: font, fontSize: 36, fontWeight: 900, color: color.text}}>第一版网页 v1</div>
-      </Appear>
-      <Hand p={ease.outCubic(prog(f, 10, 14))} w={90} />
-      <Appear p={pop(f, 18)} scale><Av who="rev" size={96} /></Appear>
-      <Appear p={pop(f, 22)}><H size={44} c={color.red}>审核编辑</H></Appear>
-    </div>
-    <div style={{position: 'relative', height: 190, marginTop: 14}}>
-      {f >= a && <div style={{position: 'absolute', left: 0, right: 0, top: 10, display: 'flex', justifyContent: 'center'}}>
-        <Stamp t={f / 30} at={a / 30} text="NOT READY TO SHIP" color={color.red} size={64} deg={-4} font={mono} style={{position: 'relative'}} />
-      </div>}
-      <Abs x={0} y={120} w={880}><Appear p={pop(f, a + 18)} style={{textAlign: 'center'}}><P size={38} c={color.text}>不能上线：2 个阻断问题</P></Appear></Abs>
-    </div>
-    <Appear p={pop(f, b)} dy={30} style={{marginTop: 16}}>
-      <Panel style={{padding: '22px 28px'}}>
-        <div style={{fontFamily: font, fontSize: 30, color: color.dim}}>页面引用：Anthropic 提示词指南</div>
-        <div style={{position: 'relative', fontFamily: mono, fontSize: 46, fontWeight: 800, color: color.text, marginTop: 50, lineHeight: 1.3}}>
-          <span style={{color: ring > 0.5 ? color.amber : color.text, fontSize: ring > 0.5 ? 54 : 46}}>“</span>
-          …<span style={{position: 'relative', display: 'inline-block'}}>
-            <Strike p={ramp(f, c, c + 10)}><span style={{color: f >= c ? color.red : color.text}}>the model</span></Strike>
-            <span style={{position: 'absolute', left: 10, top: -50, fontSize: 44, color: color.cyan, opacity: ramp(f, c + 10, c + 18),
-              transform: `translateY(${(1 - ramp(f, c + 10, c + 18)) * 16}px)`}}>Claude</span>
-          </span> will be too.<span style={{color: ring > 0.5 ? color.amber : color.text, fontSize: ring > 0.5 ? 54 : 46}}>”</span>
-        </div>
-        <div style={{display: 'flex', alignItems: 'center', gap: 14, marginTop: 16}}>
-          <span style={{fontFamily: mono, fontSize: 34, color: color.text, padding: '2px 12px', borderRadius: 12, border: `3px solid ${ring > 0.5 ? color.amber : 'transparent'}`}}>— Anthropic</span>
-          <Appear p={pop(f, d + 6)} scale style={{marginLeft: 'auto'}}><Chip c={color.amber} style={{fontSize: 32}}>一个词 · 在引号里 · 署了名</Chip></Appear>
-        </div>
-      </Panel>
-    </Appear>
-    <Appear p={pop(f, e)} dy={24} style={{marginTop: 22}}>
-      <Panel style={{padding: '20px 28px', display: 'flex', alignItems: 'center', gap: 22}}>
-        <span style={{fontFamily: font, fontSize: 32, color: color.dim}}>页面写</span>
-        <span style={{fontFamily: mono, fontSize: 44, fontWeight: 800, color: color.text}}><Strike p={ramp(f, e + 30, e + 40)}>“Sixteen prompts”</Strike></span>
-        <span style={{marginLeft: 'auto', fontFamily: font, fontSize: 32, color: color.dim}}>实际</span>
-        <span style={{fontFamily: mono, fontSize: 64, fontWeight: 900, color: color.cyan, opacity: ramp(f, e + 40, e + 48)}}>15</span>
-      </Panel>
-    </Appear>
-  </Root>;
-};
-
-/* fix — before → after against the live guides; the developer fixes and debugs the form; checker ≠ author */
-const Fix: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
-  const [a, b, c, d, e, g] = [cue('a', 102), cue('b', 146), cue('c', 200), cue('d', 272), cue('e', 340), cue('f', 429)];
-  const pairs = [['the model will be too', 'Claude will be too'], ['Sixteen prompts', '15 prompts'], ['模型没有实时数据', '删掉：新模型已过时']];
-  const rows = f < d + 40 ? 0 : 1;
-  return <Root f={f} beats={[0, a, b, c, d, e, g]} glow={color.cyan}>
-    <Appear p={pop(f, 0)}><H size={52}>对照线上指南，逐条给改法</H></Appear>
-    <div style={{display: 'flex', gap: 12, marginTop: 12}}>
-      <Appear p={pop(f, 10)} scale><Chip c={color.dim} style={{fontSize: 28}}>OpenAI 指南</Chip></Appear>
-      <Appear p={pop(f, 16)} scale><Chip c={color.dim} style={{fontSize: 28}}>Anthropic 指南</Chip></Appear>
-    </div>
-    <Panel style={{marginTop: 16, padding: '14px 24px'}}>
-      {pairs.map(([x, y], i) => <Appear key={x} p={pop(f, a + i * 12)} dy={14} style={{display: 'flex', alignItems: 'center', gap: 12, height: 66}}>
-        <span style={{fontFamily: x.match(/[a-z]/) ? mono : font, fontSize: 28, color: color.dim, width: 400, whiteSpace: 'nowrap'}}><Strike p={ramp(f, a + i * 12 + 6, a + i * 12 + 14)} c={color.red}>{x}</Strike></span>
-        <span style={{fontFamily: font, fontSize: 34, color: color.dim}}>→</span>
-        <span style={{fontFamily: y.match(/[a-z]/) ? mono : font, fontSize: 32, fontWeight: 800, color: color.cyan}}>{y}</span>
-      </Appear>)}
-    </Panel>
-    <div style={{display: 'flex', alignItems: 'center', gap: 18, marginTop: 20}}>
-      <Appear p={pop(f, b)} scale><Av who="dev" size={86} /></Appear>
-      <Appear p={pop(f, b + 4)}><H size={40}>开发：自己改、自己复查</H></Appear>
-    </div>
-    <Appear p={pop(f, c)} dy={20} style={{marginTop: 14}}>
-      <div style={{display: 'flex', alignItems: 'center', gap: 20, padding: '16px 22px', borderRadius: 20, background: '#121a2e', border: `2px solid ${rows ? color.cyan : color.red}`}}>
-        <span style={{fontFamily: font, fontSize: 34, color: color.text}}>测试表单 → 数据库</span>
-        {f >= d && f < d + 40 && <svg width={56} height={56} viewBox="0 0 56 56" style={{transform: `rotate(${(f - d) * 14}deg)`}}>
-          <circle cx={28} cy={28} r={20} stroke={color.amber} strokeWidth={6} fill="none" strokeDasharray="90 40" strokeLinecap="round" /></svg>}
-        <span style={{marginLeft: 'auto', fontFamily: mono, fontSize: 40, fontWeight: 900, color: rows ? color.cyan : color.red}}>{rows} 行 {rows ? '✓' : '✗'}</span>
-      </div>
-    </Appear>
-    <div style={{display: 'flex', gap: 18, marginTop: 24}}>
-      <Appear p={pop(f, e)} scale style={{flex: 1}}>
-        <div style={{height: 230, padding: '16px 18px', borderRadius: 20, border: '2px solid #3a4466', textAlign: 'center'}}>
-          <div style={{fontFamily: font, fontSize: 32, color: color.dim}}>单个聊天机器人</div>
-          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 6, marginTop: 10}}><Bot size={90} c={color.dim} /><Check p={ramp(f, e + 10, e + 22)} size={56} c={color.dim} /></div>
-          <div style={{fontFamily: font, fontSize: 34, fontWeight: 800, color: color.text, marginTop: 6}}>自己批自己</div>
-        </div>
-      </Appear>
-      <Appear p={pop(f, g)} scale style={{flex: 1}}>
-        <div style={{height: 230, padding: '16px 18px', borderRadius: 20, border: `3px solid ${color.cyan}`, background: `${color.cyan}10`, textAlign: 'center'}}>
-          <div style={{fontFamily: font, fontSize: 32, color: color.cyan}}>这个团队</div>
-          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 4, marginTop: 10}}>
-            <Bot size={80} c={color.amber} /><Hand p={ease.outCubic(prog(f, g + 8, 12))} w={60} /><Bot size={80} c={color.red} /></div>
-          <div style={{fontFamily: font, fontSize: 34, fontWeight: 800, color: color.text, marginTop: 6}}>写的 ≠ 查的</div>
-        </div>
-      </Appear>
-    </div>
-  </Root>;
-};
-
-/* human — 8 rounds of polishing; a first-time visitor's view; one message from the human */
-const Human: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
-  const [a, b, c, d, e, g, h, k] = [cue('a', 82), cue('b', 148), cue('c', 209), cue('d', 247), cue('e', 361), cue('f', 399), cue('g', 437), cue('h', 483)];
-  const round = Math.min(8, 1 + Math.floor(f / 9));
-  const wob = Math.sin(f / 5) * 6;
-  return <Root f={f} beats={[0, a, b, c, d, e, h]} glow={B}>
-    <div style={{display: 'flex', alignItems: 'center', gap: 20}}>
-      <Panel style={{padding: '12px 24px', textAlign: 'center'}}>
-        <div style={{fontFamily: font, fontSize: 26, color: color.dim}}>打磨</div>
-        <div style={{fontFamily: mono, fontSize: 64, fontWeight: 900, color: color.amber, lineHeight: 1}}>第 {round} 轮</div>
-      </Panel>
-      <div style={{display: 'flex', gap: 6}}>{ORDER.map((r, i) => <div key={r} style={{transform: `rotate(${f < a ? Math.sin(f / 4 + i) * 12 : 0}deg)`}}><Bot size={60} c={ROLE[r].c} /></div>)}</div>
-      <Appear p={pop(f, a)} scale style={{marginLeft: 'auto'}}>
-        <div style={{display: 'flex', alignItems: 'center', gap: 10, padding: '8px 18px 8px 8px', borderRadius: 50, border: `3px solid ${B}`, background: `${B}18`}}>
-          <Av who="me" size={76} ring={0.5} /><span style={{fontFamily: font, fontSize: 40, fontWeight: 900, color: B}}>人来拍板</span>
-        </div>
-      </Appear>
-    </div>
-    <div style={{position: 'relative', marginTop: 22}}>
-      <Appear p={pop(f, b)} dy={30}>
-        <Window url="新访客视角 · 提示词库" bodyStyle={{padding: '20px 26px', height: 270}}>
-          <div style={{fontFamily: font, fontSize: 38, fontWeight: 900, color: color.text}}>
-            built from the 20 posts{' '}
-            {f < d ? <span>you saved</span> : <><Strike p={ramp(f, d, d + 10)}><span style={{color: color.red}}>you saved</span></Strike>{' '}
-              <span style={{color: color.cyan, opacity: ramp(f, d + 12, d + 20)}}>his followers saved</span></>} most
-          </div>
-          <div style={{fontFamily: font, fontSize: 30, color: color.dim, marginTop: 6}}>{f < d ? '“你收藏的帖子”' : '其实是：粉丝收藏的帖子'}</div>
-          <div style={{display: 'flex', gap: 12, marginTop: 20}}>{[0, 1, 2].map((i) => <div key={i} style={{flex: 1, height: 70, borderRadius: 12, background: '#1b2238'}} />)}</div>
-        </Window>
-      </Appear>
-      {f >= c && <div style={{position: 'absolute', right: 40, top: 180, transform: `rotate(${wob}deg) scale(${ease.outBack(prog(f, c, 12), 1.6)})`}}>
-        <div style={{width: 120, height: 120, borderRadius: 60, background: color.amber, display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontFamily: font, fontSize: 84, fontWeight: 900, color: '#0a0e1a'}}>?</div>
-        <div style={{fontFamily: font, fontSize: 30, color: color.amber, textAlign: 'center', marginTop: 4, whiteSpace: 'nowrap', marginLeft: -60, width: 240}}>从哪看起？</div>
-      </div>}
-    </div>
-    {f >= e - 4 && <Appear p={pop(f, e)} dy={30} style={{marginTop: 24}}>
-      <div style={{display: 'flex', gap: 16}}>
-        <Av who="me" size={80} />
-        <div style={{flex: 1, padding: '18px 24px', borderRadius: '6px 26px 26px 26px', background: `${B}14`, border: `3px solid ${B}`}}>
-          <div style={{fontFamily: font, fontSize: 28, color: B, fontWeight: 800}}>只发一条消息</div>
-          {['照审核意见改', '顶上加个“从这里开始”', '然后发布'].map((t, i) => {
-            const at = [g, h, k][i];
-            return <div key={t} style={{display: 'flex', alignItems: 'center', gap: 14, marginTop: 12, opacity: f >= at - 4 ? 1 : 0.35}}>
-              <Check p={ramp(f, at, at + 12)} size={44} c={color.cyan} />
-              <span style={{fontFamily: font, fontSize: 38, fontWeight: 800, color: color.text}}>{t}</span>
-            </div>;
-          })}
-        </div>
-      </div>
-    </Appear>}
-  </Root>;
-};
-
-/* ship — the developer stops and hands the publish button to the human; reviewer's live-page PASS */
-const Ship: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
-  const [a, b, c, d, e] = [cue('a', 54), cue('b', 124), cue('c', 184), cue('d', 256), cue('e', 339)];
-  const u = ease.inOutCubic(prog(f, a, 26));
-  const bx = 140 + u * 250, by = 30 - Math.sin(Math.PI * u) * 40;
-  const press = f >= b && f < b + 8 ? 0.9 : 1;
-  const checks = ['PASS', 'Hero', 'Start here', 'Copy 按钮', '表单'];
-  return <Root f={f} beats={[0, a, b, c, d, e]} glow={B} hits={[d + 50]}>
-    <div style={{position: 'relative', height: 250}}>
-      <Abs x={0} y={0} w={130}><Appear p={pop(f, 0)} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}><Av who="dev" size={110} /><P size={30} c={color.amber}>开发</P></Appear></Abs>
-      <Abs x={740} y={0} w={130}><Appear p={pop(f, 6)} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}><Av who="me" size={110} ring={f >= a + 26 ? 0.6 : 0} /><P size={30} c={B}>作者</P></Appear></Abs>
-      <Abs x={bx} y={by}>
-        <Appear p={pop(f, 4)} scale>
-          <div style={{padding: '18px 36px', borderRadius: 40, background: f >= b ? B : color.text, color: '#0a0e1a', fontFamily: font, fontSize: 40, fontWeight: 900,
-            transform: `scale(${press})`, boxShadow: `0 0 ${f >= b ? 40 : 0}px ${B}`, whiteSpace: 'nowrap'}}>发布 Publish</div>
-        </Appear>
-      </Abs>
-      <Abs x={0} y={170} w={880}><Appear p={pop(f, b)} style={{textAlign: 'center'}}><Chip c={B} style={{fontSize: 38}}>发不发，是人的事</Chip></Appear></Abs>
-    </div>
-    <Appear p={pop(f, b + 10)} dy={20}>
-      <div style={{textAlign: 'center', padding: '14px 0', borderRadius: 18, border: `2px solid ${B}88`, fontFamily: mono, fontSize: 40, fontWeight: 800, color: B}}>● Version 1 is live</div>
-    </Appear>
-    <Appear p={pop(f, c)} dy={30} style={{marginTop: 22}}>
-      <div style={{display: 'flex', gap: 16}}>
-        <Av who="rev" size={86} />
-        <div style={{flex: 1}}>
-          <div style={{fontFamily: font, fontSize: 30, color: color.red, fontWeight: 800}}>审核编辑 · 打开线上页面终审</div>
-          <div style={{marginTop: 8, padding: '16px 24px', borderRadius: '6px 24px 24px 24px', background: '#18213a', border: `2px solid ${color.red}66`}}>
-            {checks.map((t, i) => <div key={t} style={{display: 'flex', alignItems: 'center', gap: 14, height: 54, opacity: f >= d + i * 8 ? 1 : 0.15}}>
-              <Check p={ramp(f, d + i * 8, d + i * 8 + 10)} size={40} c={color.cyan} />
-              <span style={{fontFamily: i ? font : mono, fontSize: i ? 34 : 40, fontWeight: i ? 600 : 900, color: i ? color.text : color.cyan}}>{t}</span>
-            </div>)}
-          </div>
-        </div>
-      </div>
-    </Appear>
-    <div style={{position: 'absolute', right: 20, top: 560}}>
-      <Stamp t={f / 30} at={(d + 50) / 30} text="PASS" color={color.cyan} size={72} deg={-10} font={mono} style={{position: 'relative'}} />
-    </div>
-    <Appear p={pop(f, e)} dy={20} style={{marginTop: 20}}>
-      <div style={{display: 'flex', alignItems: 'center', gap: 16, padding: '14px 22px', borderRadius: 18, background: '#121a2e', border: `2px solid ${color.cyan}66`}}>
-        <span style={{fontFamily: font, fontSize: 34, color: color.text}}>真提交一次表单 → 数据库</span>
-        <span style={{marginLeft: 'auto', fontFamily: mono, fontSize: 36, fontWeight: 900, color: color.cyan,
-          transform: `scale(${1 + 0.3 * Math.sin(Math.PI * ramp(f, e + 20, e + 32))})`}}>{f >= e + 20 ? '+1 行 ✓' : '…'}</span>
-      </div>
-    </Appear>
-  </Root>;
-};
-
-/* loop — save the chain as a weekly Loop; the human card only receives */
-const LOOP: {who: RoleKey | 'me'; t: string}[] = [
-  {who: 'res', t: '每周一：找收藏最多的 3 条'},
-  {who: 'wri', t: '写成一张提示词卡'},
-  {who: 'dev', t: '加到页面顶部，不发布'},
-  {who: 'me', t: '作者批准，才上线'},
-];
-const Loop: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
-  const [a, b, c, d, e, g, h] = [cue('a', 86), cue('b', 151), cue('c', 172), cue('d', 188), cue('e', 208), cue('f', 254), cue('g', 319)];
-  const ats = [b, c, d, e];
-  return <Root f={f} beats={[0, a, b, e, g, h]} glow={A} hits={[h]}>
-    <div style={{display: 'flex', alignItems: 'center', gap: 18}}>
-      <svg width={84} height={84} viewBox="0 0 84 84" style={{transform: `rotate(${f * 3}deg)`}}>
-        <circle cx={42} cy={42} r={30} stroke={A} strokeWidth={7} fill="none" strokeDasharray="150 40" strokeLinecap="round" />
-        <path d="M64 14 L72 26 L58 30" stroke={A} strokeWidth={7} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      <Appear p={pop(f, 0)}><H size={58}>存成 Loop，每周照跑</H></Appear>
-    </div>
-    <div style={{position: 'relative', marginTop: 20, height: 780, borderRadius: 24, border: '2px solid #1f2842',
-      backgroundImage: 'radial-gradient(rgba(148,163,255,0.22) 2px, transparent 2px)', backgroundSize: '32px 32px', padding: '20px 26px'}}>
-      <Appear p={pop(f, a)} scale style={{position: 'absolute', right: 20, top: 16}}>
-        <Chip c={color.cyan} style={{fontSize: 30, transform: `scale(${f >= a && f < b ? 1 + 0.06 * Math.sin(f / 3) : 1})`}}>＋ 添加节点</Chip>
-      </Appear>
-      {LOOP.map((n, i) => {
-        const p = ease.outBack(prog(f, ats[i] - 2, 12), 1.4);
-        const c = n.who === 'me' ? B : ROLE[n.who].c;
-        const y = 76 + i * 160;
-        const line = ease.inOutCubic(prog(f, ats[i] - 10, 12));
-        return <React.Fragment key={i}>
-          {i > 0 && <svg width={60} height={44} viewBox="0 0 60 44" style={{position: 'absolute', left: 68, top: y - 43}}>
-            <path d="M30 2 L30 36" stroke={A} strokeWidth={6} strokeDasharray={40} strokeDashoffset={40 * (1 - line)} strokeLinecap="round" />
-            <path d="M18 28 L30 41 L42 28" stroke={A} strokeWidth={6} fill="none" strokeLinecap="round" strokeLinejoin="round" opacity={line > 0.9 ? 1 : 0} />
-            <circle cx={30} cy={2 + ((f * 1.5 + i * 13) % 30)} r={5} fill="#fff" opacity={line > 0.9 ? 0.8 : 0} />
-          </svg>}
-          <div style={{position: 'absolute', left: 26, top: y - (1 - p) * 60, opacity: Math.min(1, p * 2), width: 700, display: 'flex', alignItems: 'center', gap: 18,
-            padding: '14px 20px', borderRadius: 20, background: '#121a2e', border: `3px solid ${c}`, boxShadow: `0 10px 24px rgba(0,0,0,0.4)`}}>
-            <Av who={n.who} size={84} />
-            <div>
-              <div style={{fontFamily: font, fontSize: 30, fontWeight: 800, color: c}}>{i + 1} · {n.who === 'me' ? '作者（人）' : ROLE[n.who].zh}</div>
-              <div style={{fontFamily: font, fontSize: 34, color: color.text}}>{n.t}</div>
-            </div>
-          </div>
-        </React.Fragment>;
-      })}
-      {f >= g && <div style={{position: 'absolute', left: 40, top: 76 + 3 * 160 + 140, display: 'flex', alignItems: 'center', gap: 12, opacity: ramp(f, g, g + 8)}}>
-        <svg width={56} height={56} viewBox="0 0 56 56"><path d="M10 10 L46 46 M46 10 L10 46" stroke={color.red} strokeWidth={8} strokeLinecap="round" /></svg>
-        <span style={{fontFamily: font, fontSize: 38, fontWeight: 900, color: color.text}}>人的卡片：只收，不往下传</span>
-      </div>}
-      <div style={{position: 'absolute', right: 30, top: 680}}>
-        <Stamp t={f / 30} at={h / 30} text="人拍板" color={B} size={64} deg={-8} font={font} style={{position: 'relative'}} />
-      </div>
-    </div>
-  </Root>;
-};
-
-/* lessons — three things to do differently */
-const Lessons: React.FC<SceneProps> = ({f, cue}) => {
-  const pop = usePop();
-  const [a, b, c, d, e] = [cue('a', 83), cue('b', 132), cue('c', 281), cue('d', 321), cue('e', 352)];
-  const off = ramp(f, b + 30, b + 40);
-  const fold = ease.inOutCubic(prog(f, d, 14));
-  // the reviewer's verdict lands after the five lines (holds the scene's tail)
-  const verdict = e + 54;
-  const tint = ramp(f, verdict, verdict + 10);
-  const items = [
-    {at: a, t: '第一条消息就给真数据', s: '第一次调研用了网上的数据，只能重做', col: color.cyan},
-    {at: b, t: '一开工就关掉自动插话', s: '开着时中途纠正一句，又起了一条链', col: color.violet},
-    {at: c, t: '给审核员一个终点', s: '线上终审，5 行内给 PASS 或 FAIL', col: color.red},
-  ];
-  return <Root f={f} beats={[0, a, b, b + 60, c, d, e, verdict]} glow={tint > 0.5 ? color.cyan : color.violet} hits={[verdict]}>
-    <Appear p={pop(f, 0)}><H size={60}>3 件事，作者会改着来</H></Appear>
-    {items.map((it, i) => {
-      const sw = sway(f / 30, i * 1.7, {dy: 2, deg: 0.3});
-      const dim = i < 2 ? 1 - 0.45 * fold : 1;
-      return <Appear key={it.t} p={pop(f, it.at)} dy={30} style={{marginTop: 24}}>
-        <div style={{opacity: dim, transform: `translateY(${sw.dy}px)`, position: 'relative', display: 'flex', alignItems: 'center', gap: 20, padding: '22px 24px', borderRadius: 22,
-          background: i === 2 && tint > 0 ? `rgba(34,211,238,${0.22 * tint})` : '#121a2e', border: `3px solid ${i === 2 && tint > 0.5 ? color.cyan : it.col}`}}>
-          {i === 2 && <div style={{position: 'absolute', right: 30, bottom: 40}}>
-            <Stamp t={f / 30} at={verdict / 30} text="PASS" color={color.cyan} size={80} deg={-10} font={mono} style={{position: 'relative'}} />
-          </div>}
-          <div style={{width: 84, height: 84, borderRadius: 22, background: `${it.col}26`, border: `2px solid ${it.col}`, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontFamily: mono, fontSize: 50, fontWeight: 900, color: it.col, flex: 'none'}}>{i + 1}</div>
-          <div style={{flex: 1}}>
-            <div style={{fontFamily: font, fontSize: 42, fontWeight: 900, color: color.text}}>{it.t}</div>
-            <div style={{maxHeight: i < 2 ? 140 * (1 - fold) : undefined, overflow: 'hidden'}}>
-            <div style={{fontFamily: font, fontSize: 32, color: color.text, opacity: 0.85, marginTop: 6}}>{it.s}</div>
-            {i === 1 && <div style={{display: 'flex', alignItems: 'center', gap: 14, marginTop: 14}}>
-              <div style={{width: 96, height: 52, borderRadius: 26, background: off > 0.5 ? '#3a4466' : color.violet, position: 'relative'}}>
-                <div style={{position: 'absolute', top: 6, left: 6 + (1 - off) * 44, width: 40, height: 40, borderRadius: 20, background: '#fff'}} />
-              </div>
-              <span style={{fontFamily: mono, fontSize: 28, color: color.dim}}>Agent Proactivity · {off > 0.5 ? 'OFF' : 'ON'}</span>
-            </div>}
-            </div>
-            {i === 2 && <div style={{display: 'flex', alignItems: 'center', gap: 12, marginTop: 14}}>
-              {['PASS', 'FAIL'].map((t, k) => <Appear key={t} p={pop(f, c + 20 + k * 8)} scale><Chip c={k ? color.red : color.cyan} style={{fontSize: 32, fontFamily: mono}}>{t}</Chip></Appear>)}
-              <Appear p={pop(f, d)} scale style={{marginLeft: 'auto'}}>
-                <svg width={90} height={90} viewBox="0 0 90 90" style={{transform: `rotate(${sway(f / 30, 2).deg * 4}deg)`}}>
-                  <line x1={18} y1={8} x2={18} y2={86} stroke={color.text} strokeWidth={5} strokeLinecap="round" />
-                  {[0, 1, 2, 3].map((k) => <rect key={k} x={20 + (k % 2) * 16} y={10 + Math.floor(k / 2) * 16} width={16} height={16} fill={k === 1 || k === 2 ? color.text : '#0a0e1a'} stroke={color.text} strokeWidth={2} />)}
-                  <rect x={20} y={10} width={64} height={32} fill="none" stroke={color.text} strokeWidth={3} />
-                </svg>
-              </Appear>
-            </div>}
-            {i === 2 && f >= e - 2 && <div style={{marginTop: 14, padding: '12px 18px', borderRadius: 16, background: '#0d1220', border: `2px solid ${color.red}66`}}>
-              <div style={{fontFamily: font, fontSize: 28, color: color.red, fontWeight: 800}}>线上终审 · 5 行</div>
-              {Array.from({length: 5}, (_, k) => <div key={k} style={{display: 'flex', alignItems: 'center', gap: 10, marginTop: 6, opacity: ramp(f, e + k * 8, e + k * 8 + 8)}}>
-                <Check p={ramp(f, e + k * 8, e + k * 8 + 10)} size={28} c={color.cyan} />
-                <div style={{height: 12, borderRadius: 6, background: '#3a4466', width: [180, 260, 220, 300, 150][k]}} />
-              </div>)}
-            </div>}
-          </div>
-        </div>
-      </Appear>;
+    ))}
+    <Ground y={p.G} />
+    {AGENTS.map((who, i) => {
+      if (f < p.at[i] - 30) return null;
+      const lift = dropLift(f, p.at[i], p.G, 700);
+      const raise = i === cur ? 22 * springStep(t, S(p.at[i] + 10), {f: 1.6, z: 0.7}) : 0;
+      // The ones already standing answer each new landing a few frames later, weaker further away.
+      const hit = hitOf(f, [p.at[i]], 1) + (i < cur ? hitOf(f, [p.at[cur] + 3 + (cur - 1 - i) * 2], 0.22) : 0);
+      return <Pebble key={who} who={who} x={p.xs[i]} ground={p.G} size={150} lift={lift + raise} hit={hit} label={NAME[who]} labelOp={clamp((f - p.at[i] - 8) / 8)}
+        op={i === cur ? 1 : 0.55} />;
     })}
   </Root>;
 };
+Roles.camera = (cue) => {
+  const p = rolesPlan(cue);
+  return [cam(0, 300, 160, 1.12), ...p.at.flatMap((x, i) => [cam(x - 4, p.xs[i], 760, 1.14), cam(x + 34, 420, 300, 1.04)])];
+};
+Roles.sfx = (cue) => rolesPlan(cue).at.map((x) => ({at: x, kind: 'thud', gain: 0.22}));
 
-/* outro — agents work, hand off and check each other; the human makes the call; disclosure */
-const Outro: React.FC<SceneProps & {credit: string}> = ({f, cue}) => {
-  const pop = usePop();
-  const [a, b, c, d] = [cue('a', 96), cue('b', 159), cue('c', 231), cue('d', 263)];
-  return <Root f={f} beats={[0, a, b, c, d]} glow={B} hits={[a + 37]}>
-    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 10}}>
-      {ORDER.map((r, i) => <React.Fragment key={r}>
-        {i > 0 && <Hand p={ease.outCubic(prog(f, 20 + i * 12, 10))} w={50} />}
-        <Appear p={pop(f, i * 8)} scale><Av who={r} size={110} /></Appear>
-      </React.Fragment>)}
-      <Hand p={ease.outCubic(prog(f, a, 12))} w={50} c={B} />
-      <Appear p={pop(f, a + 6)} scale><Av who="me" size={120} ring={f >= a ? 0.7 : 0} /></Appear>
+/* ---------- rules ---------- */
+
+const RULE_ROWS: {who: Who; own: string; input: string; next: string}[] = [
+  {who: 'res', own: '调研', input: '我贴的数据', next: '文案'},
+  {who: 'wri', own: '每个字', input: '调研报告', next: '开发'},
+  {who: 'dev', own: '网站', input: '最新文案', next: '审核'},
+  {who: 'rev', own: '质量', input: '整个页面', next: '作者'},
+];
+const rulesPlan = (cue: Cue) => {
+  const [a, b, c, d, e, g] = [cue('a', 52), cue('b', 102), cue('c', 119), cue('d', 152), cue('e', 196), cue('f', 334)];
+  return {a, b, c, d, e, g, seal: e + 40};
+};
+const Rules: Scene = ({f, cue}) => {
+  const p = rulesPlan(cue);
+  const t = S(f);
+  const sx = springTrack(t, 980, [{at: S(4), to: 0}], {f: 1.5, z: 0.8});
+  const rot = springTrack(t, -4, [{at: S(4), to: -0.6}], {f: 1.5, z: 0.7});
+  const dip = 4 * hitOf(f, [p.seal + 3], 0.6);
+  const cols = [{k: 'own', t: '管什么', at: p.b, x: 230, w: 170}, {k: 'input', t: '输入从哪来', at: p.c, x: 400, w: 230}, {k: 'next', t: '交接给谁', at: p.d, x: 630, w: 200}] as const;
+  const rowY = (i: number) => 200 + i * 94;
+  const sealLift = dropLift(f, p.seal, 830, 760);
+  const sealHit = hitOf(f, [p.seal], 1);
+  return <Root>
+    <div style={{position: 'absolute', left: sx, top: 30 + dip, width: 880, height: 620, borderRadius: 6, background: CARD, border: `2px solid ${INK}`,
+      transform: `rotate(${rot}deg)`, boxShadow: '0 18px 30px rgba(60,45,25,0.12)'}}>
+      <div style={{display: 'flex', alignItems: 'baseline', gap: 18, padding: '24px 28px 0'}}>
+        <Big size={56}>群规</Big><Kicker size={30}>第一条消息</Kicker>
+      </div>
+      {cols.map((c) => {
+        const on = springStep(t, S(c.at), {f: 3, z: 1});
+        return <React.Fragment key={c.k}>
+          <div style={{position: 'absolute', left: c.x, top: 120, width: c.w, textAlign: 'center', fontFamily: font, fontWeight: 700, fontSize: 32, color: on > 0.5 ? (c.k === 'next' ? A : INK) : DIM}}>{c.t}</div>
+          <div style={{position: 'absolute', left: c.x + 10, top: 166, width: c.w - 20, height: 4, borderRadius: 2, background: c.k === 'next' ? A : INK, transform: `scaleX(${clamp(on)})`, transformOrigin: 'left'}} />
+        </React.Fragment>;
+      })}
+      {RULE_ROWS.map((r, i) => (
+        <Rise key={r.who} f={f} at={p.a + i * 6} dy={14} style={{position: 'absolute', left: 0, top: rowY(i), width: 880}}>
+          <div style={{display: 'flex', alignItems: 'center', height: 80}}>
+            <div style={{width: 230, display: 'flex', alignItems: 'center', gap: 12, paddingLeft: 28}}>
+              <Glyph who={r.who} size={50} c={INK} wob={8 * ripple(t, S(p.g), i, {delay: 0.08, f: 3, z: 0.3, decay: 1})} />
+              <span style={{fontFamily: font, fontWeight: 900, fontSize: 40, color: INK}}>{NAME[r.who]}</span>
+            </div>
+            {cols.map((c) => <div key={c.k} style={{position: 'absolute', left: c.x, width: c.w, textAlign: 'center', fontFamily: font, fontSize: 38,
+              fontWeight: f >= c.at ? 900 : 500, color: f >= c.at ? (c.k === 'next' ? A : INK) : DIM}}>{c.k === 'next' ? `→ ${r[c.k]}` : r[c.k]}</div>)}
+          </div>
+        </Rise>
+      ))}
     </div>
-    <div style={{display: 'flex', justifyContent: 'center', gap: 14, marginTop: 24}}>
-      {[['干活', color.cyan], ['交接', A], ['挑错', color.red]].map(([t, col], i) => <Appear key={t} p={pop(f, 14 + i * 12)} scale><Chip c={col} style={{fontSize: 38}}>{t}</Chip></Appear>)}
-    </div>
-    <Big f={f} at={a + 37} text="你只管拍板" c={B} size={72} h={190} style={{marginTop: 10}} />
-    <Appear p={pop(f, b)} style={{textAlign: 'center', marginTop: 10}}><H size={52} c={color.amber}>你最想把哪份活交给 AI 团队？</H></Appear>
-    <Appear p={pop(f, c)} style={{display: 'flex', justifyContent: 'center', gap: 16, marginTop: 24}}>
-      <Chip c={color.cyan} style={{fontSize: 32}}>评论区聊聊</Chip><Chip c={color.violet} style={{fontSize: 32}}>点赞</Chip><Chip c={color.amber} style={{fontSize: 32}}>收藏</Chip>
-    </Appear>
-    <Appear p={pop(f, d)} style={{marginTop: 30, textAlign: 'center'}}>
-      <P size={40} c={color.text}>内容参考：Rahul（X @sairahul1）</P>
-      <P size={40} c={color.amber}>原文是 Teamily AI 的合作推广</P>
-    </Appear>
+    {/* the handoff chain drawn down the right edge */}
+    <svg width={880} height={960} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
+      {[0, 1, 2].map((i) => {
+        const y0 = 30 + rowY(i) + 56, y1 = 30 + rowY(i + 1) + 26, pr = draw(f, p.d + 6 + i * 5, 10);
+        return <path key={i} d={`M845 ${y0} Q885 ${(y0 + y1) / 2} 845 ${y1}`} fill="none" stroke={A} strokeWidth={4} strokeLinecap="round" strokeDasharray={90} strokeDashoffset={90 * (1 - pr)} />;
+      })}
+    </svg>
+    <Rise f={f} at={p.e + 8} style={{position: 'absolute', left: 0, top: 690, width: 640}}>
+      <Big size={46}>我说 “ship it” 之前，<br />什么都不许上线</Big>
+    </Rise>
+    <Ground y={830} x0={680} x1={880} op={clamp((f - p.e) / 10)} />
+    {f >= p.seal - 22 && <ContactShadow x={775} y={830} w={140} lift={sealLift} />}
+    {f >= p.seal - 22 && <div style={{position: 'absolute', left: 700, top: 830 - 150 - sealLift, width: 150, height: 150, borderRadius: 75, background: matte(B),
+      transform: `rotate(-10deg) scale(${1 + 0.1 * sealHit}, ${1 - 0.12 * sealHit})`, transformOrigin: '50% 100%',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: num, fontWeight: 900, fontSize: 38, color: CARD, textAlign: 'center', lineHeight: 1}}>ship<br />it</div>}
+    <Rise f={f} at={p.g + 8} style={{position: 'absolute', left: 0, top: 856}}><Big size={58}>4 个机器人 → 1 个团队</Big></Rise>
   </Root>;
 };
+Rules.camera = (cue) => {
+  const p = rulesPlan(cue);
+  return [cam(0, 440, 340, 1.0), cam(p.a, 300, 330, 1.1), cam(p.b, 315, 400, 1.16), cam(p.c, 515, 400, 1.16), cam(p.d, 740, 400, 1.16),
+    cam(p.e, 330, 720, 1.12), cam(p.seal, 775, 760, 1.16), cam(p.g, 440, 520, 1.0), cam(p.g + 40, 300, 880, 1.1)];
+};
+Rules.sfx = (cue) => {
+  const p = rulesPlan(cue);
+  return [{at: 4, kind: 'paper', gain: 0.22}, {at: p.b, kind: 'tick', gain: 0.12}, {at: p.c, kind: 'tick', gain: 0.12}, {at: p.d, kind: 'tick', gain: 0.14},
+    {at: p.seal, kind: 'stamp', gain: 0.3}, {at: p.g, kind: 'pop', gain: 0.1}];
+};
 
-export const aiAgentTeamScenes: Record<string, React.FC<SceneProps & {credit: string}>> = {
+/* ---------- kickoff ---------- */
+
+const BARS = Array.from({length: 24}, (_, i) => 140 + hash(i * 2.71 + 5) * 460);
+const RANK = BARS.map((v) => BARS.filter((w) => w > v).length);
+const kickPlan = (cue: Cue) => {
+  const [a, b, c, d] = [cue('a', 63), cue('b', 107), cue('c', 215), cue('d', 246)];
+  const RG = 900, RX = 770;
+  const hop: Hop = {at: c + 16, dur: 16, from: [300, 520], to: top(RX, RG, 120), lift: 200};
+  return {a, b, c, d, RG, RX, hop};
+};
+const Kickoff: Scene = ({f, cue}) => {
+  const p = kickPlan(cue);
+  const t = S(f);
+  const card = hopAt(f, [p.hop]);
+  return <Root>
+    <div style={{display: 'flex', alignItems: 'baseline', gap: 26}}>
+      <Rise f={f} at={2}><Big size={84}>喂真数据</Big></Rise>
+      <Rise f={f} at={12}><Big size={48} c={DIM} w={700}>别<Strike p={springStep(t, S(30), {f: 2.6, z: 1})} c={DIM}>编任务</Strike></Big></Rise>
+    </div>
+    <Rise f={f} at={p.a + 6} style={{position: 'absolute', left: 0, top: 150}}><Kicker size={30}>X 后台 · 最近 60 天（示意）</Kicker></Rise>
+    {BARS.map((len, i) => {
+      const y0 = 210 + i * 22, y1 = 210 + RANK[i] * 22;
+      const fall = springStep(t, S(p.a + i * 1.5), {f: 2.4, z: 0.7});
+      const sort = springStep(t, S(p.b + RANK[i] * 0.7), {f: 1.7, z: 0.75});
+      const gone = springStep(t, S(p.c + RANK[i] * 0.5), {f: 2.2, z: 1});
+      const keep = RANK[i] < 20;
+      const y = y0 + (y1 - y0) * sort - (1 - fall) * 60;
+      const c = keep || f < p.b + 20 ? INK : LINE;
+      const toX = 300, toY = 480;
+      return <div key={i} style={{position: 'absolute', left: keep ? toX * gone : 0, top: y + (keep ? (toY - y) * gone : 0), height: 12, borderRadius: 6,
+        width: len * (keep ? 1 - gone : 1), background: c, opacity: clamp(fall * 1.5) * (keep ? 1 - clamp(gone * 1.2 - 0.2) : 1 - clamp((f - p.c) / 12))}} />;
+    })}
+    <Rise f={f} at={p.b + 14} style={{position: 'absolute', left: 640, top: 220}}><Big size={44} w={700}>收藏前<br /><span style={{fontFamily: num, fontSize: 96}}>20</span> 条</Big></Rise>
+    <Ground y={p.RG} x0={560} x1={880} />
+    <Pebble who="res" x={p.RX} ground={p.RG} size={120} hit={hitOf(f, [p.c + 32], 0.8)} />
+    {f >= p.c + 8 && f < p.d + 40 && <Packet x={card.x} y={card.y} vx={card.vx} vy={card.vy} scale={clamp(springStep(t, S(p.c + 8), {f: 2.6, z: 0.6}), 0, 1.1)} />}
+    <Rise f={f} at={p.c + 22} style={{position: 'absolute', left: 300, top: 580}}><Big size={44} w={700} c={A}>一条消息</Big></Rise>
+    <Rise f={f} at={p.d + 6} style={{position: 'absolute', left: 0, top: 690}}>
+      <Big size={64}>然后，不打字了<span style={{display: 'inline-block', width: 8, height: 62, marginLeft: 10, verticalAlign: -8,
+        background: f > p.d + 34 ? LINE : INK, opacity: f > p.d + 34 ? 1 : Math.floor(f / 8) % 2}} /></Big>
+    </Rise>
+  </Root>;
+};
+Kickoff.camera = (cue) => {
+  const p = kickPlan(cue);
+  return [cam(0, 300, 120, 1.14), cam(p.a, 300, 440, 1.08), cam(p.b, 440, 420, 1.0), cam(p.b + 40, 700, 300, 1.14), cam(p.c, 440, 560, 1.04),
+    cam(p.c + 30, 760, 800, 1.14), cam(p.d, 330, 720, 1.12)];
+};
+Kickoff.sfx = (cue) => {
+  const p = kickPlan(cue);
+  return [{at: p.a, kind: 'paper', gain: 0.18}, {at: p.b + 4, kind: 'tick', gain: 0.14}, {at: p.c + 14, kind: 'whoosh', gain: 0.14}, {at: p.c + 32, kind: 'tap', gain: 0.22}];
+};
+
+/* ---------- pushback ---------- */
+
+const pushPlan = (cue: Cue) => {
+  const [a, b, c] = [cue('a', 43), cue('b', 158), cue('c', 224)];
+  const G = 880, X = {me: 120, wri: 440, res: 770};
+  const hops: Hop[] = [
+    {at: a - 14, dur: 14, from: top(X.me, G, 130), to: top(X.wri, G, 130), lift: 140},
+    {at: a + 2, dur: 18, from: top(X.wri, G, 130), to: top(X.me, G, 130), lift: 70},
+  ];
+  const at: Hop = {at: b, dur: 14, from: top(X.wri, G, 130), to: top(X.res, G, 130), lift: 130};
+  return {a, b, c, G, X, hops, at};
+};
+const Pushback: Scene = ({f, cue}) => {
+  const p = pushPlan(cue);
+  const t = S(f);
+  const card = hopAt(f, p.hops);
+  const tok = hopAt(f, [p.at]);
+  const resLift = 26 * springStep(t, S(p.b + 18), {f: 2, z: 0.6});
+  return <Root>
+    <Rise f={f} at={2}><Kicker size={32}>第一个惊喜</Kicker></Rise>
+    <div style={{position: 'absolute', left: 0, top: 70, width: 880, height: 300}}>
+      <div style={{position: 'absolute', inset: 0, ...phaseOp(f, 8, p.a + 6)}}><Big size={72}>agent 读完了群规……</Big></div>
+      <div style={{position: 'absolute', inset: 0, ...phaseOp(f, p.a + 8, p.c + 4)}}><Kicker size={34} c={INK}>文案：</Kicker><Big size={76}>“没有调研，<br />这需求写不了。”</Big></div>
+      <div style={{position: 'absolute', inset: 0, ...phaseOp(f, p.c + 8)}}><Big size={80}>会顶回来，<br />才像个同事</Big></div>
+    </div>
+    <Rise f={f} at={p.b + 10} style={{position: 'absolute', left: 430, top: 540}}><Big size={42} w={700} c={A} style={{whiteSpace: 'nowrap'}}>@调研员 先给份调研</Big></Rise>
+    <Ground y={p.G} />
+    <Pebble who="me" x={p.X.me} ground={p.G} size={130} hit={hitOf(f, [p.a + 20], 0.6)} label="你" />
+    <Pebble who="wri" x={p.X.wri} ground={p.G} size={130} hit={hitOf(f, [p.a], 1)} wob={-10 * impulse(t, S(p.a + 3), {f: 3, z: 0.3})} label="文案" />
+    <Pebble who="res" x={p.X.res} ground={p.G} size={130} lift={resLift} hit={hitOf(f, [p.b + 14], 0.8)} label="调研员" />
+    <Packet x={card.x} y={card.y} vx={card.vx} vy={card.vy} />
+    {f >= p.b - 2 && f < p.b + 16 && <AtToken x={tok.x} y={tok.y} vx={tok.vx} vy={tok.vy} />}
+  </Root>;
+};
+Pushback.camera = (cue) => {
+  const p = pushPlan(cue);
+  return [cam(0, 400, 220, 1.12), cam(p.a - 14, 440, 760, 1.14), cam(p.a + 30, 400, 240, 1.1), cam(p.b, 700, 700, 1.14), cam(p.c, 400, 260, 1.08)];
+};
+Pushback.sfx = (cue) => {
+  const p = pushPlan(cue);
+  return [{at: p.a - 16, kind: 'whoosh-short', gain: 0.12}, {at: p.a, kind: 'thud', gain: 0.28}, {at: p.a + 3, kind: 'whoosh-short', gain: 0.1},
+    {at: p.a + 20, kind: 'tap', gain: 0.16}, {at: p.b + 14, kind: 'tap', gain: 0.2}];
+};
+
+/* ---------- chain ---------- */
+
+const TOPICS = [{t: '未来的工作和 AI 赚钱', v: 43060}, {t: 'AI agent 和自动化搭建', v: 34551}, {t: '微调定制模型', v: 32852}];
+const chainPlan = (cue: Cue) => {
+  const [a, b, c, d, e, g, h] = [cue('a', 49), cue('b', 127), cue('c', 149), cue('d', 172), cue('e', 215), cue('f', 314), cue('g', 372)];
+  const G = 860, xs = [110, 330, 550, 770], AG = 120;
+  const hops: Hop[] = [
+    {at: e - 14, dur: 14, from: top(xs[0], G, AG), to: top(xs[1], G, AG), lift: 110},
+    {at: g - 14, dur: 14, from: top(xs[1], G, AG), to: top(xs[2], G, AG), lift: 110},
+  ];
+  const flags = [0, 1, 2].map((k) => ({at: h + k * 4, dur: 16, from: top(xs[2], G, AG), to: [xs[1] - 30 + k * 30, G - AG + 4] as P2, lift: 120}));
+  return {a, b, c, d, e, g, h, G, xs, AG, hops, flags};
+};
+const Chain: Scene = ({f, cue}) => {
+  const p = chainPlan(cue);
+  const t = S(f);
+  const card = hopAt(f, p.hops);
+  const holder = f < p.e ? 0 : f < p.g ? 1 : 2;
+  const holdAt = holder === 0 ? p.a : holder === 1 ? p.e + 4 : p.g + 4;
+  const holdLift = 16 * springStep(t, S(holdAt), {f: 2, z: 0.7});
+  const lands = landsOf(p.hops);
+  const resting = !p.hops.some((hp) => f >= hp.at && f < hp.at + hp.dur);
+  return <Root>
+    <div style={{position: 'absolute', left: 0, top: 0, width: 880, ...phaseOp(f, 0, p.a - 2)}}><Big size={84}>接力开始</Big></div>
+    <div style={{position: 'absolute', left: 0, top: 0, width: 880, ...phaseOp(f, p.a + 6, p.e + 2)}}>
+      <Kicker size={32}>调研报告 · 收藏最多的 3 个话题</Kicker>
+      {TOPICS.map((tp, i) => {
+        const at = [p.b, p.c, p.d][i];
+        const g = springStep(t, S(at), {f: 2, z: 0.62});
+        return <div key={tp.t} style={{marginTop: 34, opacity: clamp((f - at + 4) / 6)}}>
+          <div style={{display: 'flex', alignItems: 'baseline'}}>
+            <Big size={42} w={700}>{tp.t}</Big>
+            <span style={{marginLeft: 'auto', fontFamily: num, fontWeight: 900, fontSize: 56, color: INK}}>{Math.round(tp.v * clamp(g)).toLocaleString('en-US')}</span>
+          </div>
+          <div style={{height: 30, borderRadius: 4, marginTop: 10, width: `${(tp.v / 43060) * 100 * g}%`, background: matte('#3b3631', {gloss: 0.12})}} />
+        </div>;
+      })}
+    </div>
+    <div style={{position: 'absolute', left: 0, top: 0, width: 880, ...phaseOp(f, p.e + 6, p.g + 2)}}>
+      <Kicker size={32}>文案 · 照着报告写</Kicker>
+      <div style={{display: 'flex', alignItems: 'baseline', gap: 18, marginTop: 10}}>
+        <span style={{fontFamily: num, fontWeight: 900, fontSize: 220, color: INK, lineHeight: 1}}>{Math.min(15, Math.max(0, Math.floor((f - p.e - 10) / 2)))}</span>
+        <Big size={60}>条提示词</Big>
+      </div>
+      <div style={{display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginTop: 24, width: 640}}>
+        {Array.from({length: 15}, (_, i) => {
+          const s = springStep(t, S(p.e + 10 + i * 2), {f: 2.6, z: 0.6});
+          return <div key={i} style={{height: 46, borderRadius: 6, background: CARD, border: `2px solid ${INK}`, opacity: clamp(s * 2), transform: `scale(${0.7 + 0.3 * s})`}} />;
+        })}
+      </div>
+    </div>
+    <div style={{position: 'absolute', left: 0, top: 0, width: 880, ...phaseOp(f, p.g + 6)}}>
+      <Kicker size={32}>开发 · 没急着动手</Kicker>
+      <Big size={72} style={{marginTop: 6}}>先发方案</Big>
+      {['版块和样式', '表单写进真数据库', '管理页看请求'].map((x, i) => (
+        <div key={x} style={{display: 'flex', alignItems: 'center', gap: 16, marginTop: 22, opacity: clamp((f - p.g - 12 - i * 8) / 6)}}>
+          <Tick p={clamp((f - p.g - 12 - i * 8) / 10)} /><Big size={44} w={700}>{x}</Big>
+        </div>
+      ))}
+      <Rise f={f} at={p.h + 8} style={{marginTop: 34}}><Big size={46}>3 个问题，<span style={{color: A}}>当众退回</span>文案</Big></Rise>
+    </div>
+    <Ground y={p.G} />
+    {AGENTS.map((who, i) => {
+      const hold = i === holder ? holdLift : 0;
+      const hit = hitOf(f, i === 1 ? [lands[0], ...p.flags.map((x) => x.at + x.dur)] : i === 2 ? [lands[1]] : [], i === 1 && f > p.h ? 0.4 : 0.8);
+      return <Pebble key={who} who={who} x={p.xs[i]} ground={p.G} size={p.AG} lift={hold} hit={hit} label={NAME[who]} op={i === holder || f < p.a ? 1 : 0.6} />;
+    })}
+    {f >= p.a && <Packet x={card.x} y={card.y - (resting ? holdLift : 0)} vx={card.vx} vy={card.vy} scale={clamp(springStep(t, S(p.a), {f: 2.6, z: 0.6}), 0, 1.1)} />}
+    {p.flags.map((fl, k) => {
+      if (f < fl.at) return null;
+      const q = hopAt(f, [fl]);
+      return <svg key={k} width={40} height={60} viewBox="0 0 40 60" style={{position: 'absolute', left: q.x - 6, top: q.y - 58}}>
+        <line x1={6} y1={4} x2={6} y2={58} stroke={INK} strokeWidth={4} strokeLinecap="round" /><path d="M6 6 L34 15 L6 25 Z" fill={INK} />
+      </svg>;
+    })}
+  </Root>;
+};
+Chain.camera = (cue) => {
+  const p = chainPlan(cue);
+  return [cam(0, 300, 120, 1.14), cam(p.a, 300, 400, 1.04), cam(p.b, 440, 180, 1.14), cam(p.c, 440, 300, 1.14), cam(p.d, 440, 420, 1.14),
+    cam(p.e - 10, 330, 780, 1.12), cam(p.e + 30, 360, 300, 1.08), cam(p.g - 10, 550, 780, 1.12), cam(p.g + 30, 400, 300, 1.08), cam(p.h, 330, 760, 1.16)];
+};
+Chain.sfx = (cue) => {
+  const p = chainPlan(cue);
+  return [{at: p.b, kind: 'tick', gain: 0.14}, {at: p.c, kind: 'tick', gain: 0.12}, {at: p.d, kind: 'tick', gain: 0.12},
+    {at: p.e - 16, kind: 'whoosh-short', gain: 0.12}, {at: p.e, kind: 'tap', gain: 0.2}, {at: p.g - 16, kind: 'whoosh-short', gain: 0.12}, {at: p.g, kind: 'tap', gain: 0.2},
+    {at: p.h + 16, kind: 'tap', gain: 0.14}, {at: p.h + 24, kind: 'tap', gain: 0.12}];
+};
+
+/* ---------- insight ---------- */
+
+const insightPlan = (cue: Cue) => {
+  const [a, b, c, d, e, only] = [cue('a', 51), cue('b', 85), cue('c', 129), cue('d', 231), cue('e', 346), cue('f', 270)];
+  return {a, b, c, d, e, only, G: 800};
+};
+const Insight: Scene = ({f, cue}) => {
+  const p = insightPlan(cue);
+  const t = S(f);
+  const guide = springTrack(t, 0, [{at: S(p.c), to: 400}], {f: 1.5, z: 0.55});
+  const hype = springTrack(t, 0, [{at: S(p.d), to: 36}], {f: 2.2, z: 0.6});
+  const textLift = dropLift(f, p.e, p.G - 36, 700);
+  const hits = [hitOf(f, [p.e + 5], 0.35), hitOf(f, [p.e], 1)];
+  const textHit = hitOf(f, [p.e], 1);
+  return <Root>
+    <Rise f={f} at={2}><Kicker size={32}>报告里最值钱的一句</Kicker></Rise>
+    <Rise f={f} at={p.a} style={{marginTop: 18}}><Big size={74}>炒作帖，拿流量</Big></Rise>
+    <Rise f={f} at={p.b} style={{marginTop: 4}}><Big size={74}>教程帖，拿<span style={{textDecoration: `underline ${INK} 6px`, textUnderlineOffset: 12}}>收藏</span></Big></Rise>
+    <Ground y={p.G} />
+    {/* 「只有」: a dashed level from the tall column's top shows how little the short one reaches */}
+    <svg width={880} height={960} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
+      <path d={`M345 ${p.G - 400} L740 ${p.G - 400}`} stroke={INK} strokeWidth={3} strokeDasharray="10 10" opacity={0.6 * draw(f, p.only, 14)} />
+      <path d={`M640 ${p.G - 392} L640 ${p.G - 46}`} stroke={INK} strokeWidth={3} strokeDasharray="6 8" opacity={0.6 * draw(f, p.only + 8, 12)} />
+    </svg>
+    {[{x: 260, h: guide, at: p.c, v: '1.89%', l: '免费学习资源'}, {x: 640, h: hype, at: p.only - 6, v: '0.17%', l: '最火的炒作帖'}].map((c, i) => (
+      <React.Fragment key={c.l}>
+        <div style={{position: 'absolute', left: c.x - 85, top: p.G - Math.max(0, c.h), width: 170, height: Math.max(0, c.h), borderRadius: '10px 10px 0 0',
+          background: matte('#3b3631', {gloss: 0.14}), transform: `scaleY(${1 - 0.06 * hits[i]})`, transformOrigin: '50% 100%'}} />
+        <div style={{position: 'absolute', left: c.x - 160, width: 320, top: p.G + 14, textAlign: 'center', opacity: clamp((f - c.at - 6) / 8)}}>
+          <div style={{fontFamily: num, fontWeight: 900, fontSize: 56, color: INK, lineHeight: 1.1}}>{c.v}</div>
+          <Big size={36} w={700} c={DIM}>{c.l}</Big>
+        </div>
+      </React.Fragment>
+    ))}
+    <Rise f={f} at={p.c + 6} style={{position: 'absolute', left: 0, top: 360}}><Kicker size={32}>收藏率 = 收藏 ÷ 浏览</Kicker></Rise>
+    {f >= p.e - 25 && <div style={{position: 'absolute', left: 400, top: p.G - 36 - 120 - textLift, width: 480, textAlign: 'center', whiteSpace: 'nowrap',
+      transform: `scale(${1 + 0.08 * textHit}, ${1 - 0.1 * textHit})`, transformOrigin: '50% 100%'}}>
+      <Big size={104}>差 <span style={{fontFamily: num}}>11</span> 倍</Big>
+    </div>}
+  </Root>;
+};
+Insight.camera = (cue) => {
+  const p = insightPlan(cue);
+  return [cam(0, 300, 100, 1.12), cam(p.a, 360, 140, 1.14), cam(p.b, 360, 240, 1.14), cam(p.c, 260, 620, 1.12), cam(p.d, 640, 720, 1.16),
+    cam(p.only + 4, 500, 560, 1.0), cam(p.e - 4, 600, 700, 1.1), cam(p.e + 30, 440, 480, 1.0)];
+};
+Insight.sfx = (cue) => {
+  const p = insightPlan(cue);
+  return [{at: p.c, kind: 'tick', gain: 0.16}, {at: p.d, kind: 'tick', gain: 0.12}, {at: p.only, kind: 'tick', gain: 0.12}, {at: p.e, kind: 'thud', gain: 0.32}];
+};
+
+/* ---------- block ---------- */
+
+const blockPlan = (cue: Cue) => {
+  const [a, b, c, d, e] = [cue('a', 67), cue('b', 145), cue('c', 228), cue('d', 303), cue('e', 409)];
+  const G = 420, DX = 120, RX = 770, GATE = 620;
+  const hops: Hop[] = [
+    {at: a - 14, dur: 14, from: top(DX, G, 130), to: [GATE - 14, G - 120], lift: 120},
+    {at: a, dur: 20, from: [GATE - 14, G - 120], to: top(DX, G, 130), lift: 60},
+  ];
+  return {a, b, c, d, e, only: cue('f', 479), G, DX, RX, GATE, hops, gateLand: a - 6};
+};
+const Block: Scene = ({f, cue}) => {
+  const p = blockPlan(cue);
+  const t = S(f);
+  const card = hopAt(f, p.hops);
+  const gateLift = dropLift(f, p.gateLand, p.G, 600);
+  const gateWob = 3 * impulse(t, S(p.a), {f: 3.5, z: 0.25});
+  const fix = springStep(t, S(p.c + 8), {f: 2.4, z: 0.8});
+  const ring = draw(f, p.d + 4, 16);
+  return <Root>
+    <div style={{position: 'absolute', left: 0, top: 0, width: 880, ...phaseOp(f, 2, p.a + 4)}}><Big size={68}>建好第一版，<br />交给审核员</Big></div>
+    <div style={{position: 'absolute', left: 0, top: 0, width: 880, ...phaseOp(f, p.a + 8)}}>
+      <div style={{fontFamily: num, fontWeight: 900, fontSize: 76, color: INK, lineHeight: 1}}>NOT READY TO SHIP</div>
+      <Big size={44} w={700} c={DIM} style={{marginTop: 12}}>不能上线 · 2 个阻断问题</Big>
+    </div>
+    <Ground y={p.G} />
+    <Pebble who="dev" x={p.DX} ground={p.G} size={130} hit={hitOf(f, [p.a + 20], 0.6)} label="开发" />
+    <Pebble who="rev" x={p.RX} ground={p.G} size={130} hit={hitOf(f, [p.gateLand], 0.3)} label="审核" />
+    {f >= p.gateLand - 20 && <>
+      <ContactShadow x={p.GATE + 12} y={p.G} w={70} lift={gateLift} />
+      <div style={{position: 'absolute', left: p.GATE, top: p.G - 230 - gateLift, width: 26, height: 230, borderRadius: 6, background: matte('#2b2824'),
+        transform: `rotate(${gateWob}deg)`, transformOrigin: '50% 100%'}} />
+    </>}
+    <Packet x={card.x} y={card.y} vx={card.vx} vy={card.vy} />
+    <Rise f={f} at={p.b} style={{position: 'absolute', left: 0, top: 540, width: 880}}>
+      <div style={{background: CARD, border: `2px solid ${INK}`, borderRadius: 8, padding: '22px 28px 26px', boxShadow: '0 14px 24px rgba(60,45,25,0.10)'}}>
+        <Kicker size={30}>页面引用 · Anthropic 提示词指南</Kicker>
+        <div style={{position: 'relative', fontFamily: num, fontWeight: 800, fontSize: 54, color: INK, marginTop: 64, whiteSpace: 'nowrap'}}>
+          <span style={{position: 'relative'}}>“{ring > 0 && <svg width={70} height={90} style={{position: 'absolute', left: -22, top: -12, overflow: 'visible'}}>
+            <ellipse cx={30} cy={40} rx={30} ry={40} fill="none" stroke={INK} strokeWidth={4} strokeDasharray={230} strokeDashoffset={230 * (1 - ring)} /></svg>}</span>
+          …<span style={{position: 'relative', display: 'inline-block'}}>
+            <Strike p={springStep(t, S(p.c), {f: 3, z: 1})} w={6}><span style={{color: f >= p.c ? DIM : INK}}>the model</span></Strike>
+            <span style={{position: 'absolute', left: 4, top: -62, color: INK, fontWeight: 900, opacity: clamp(fix * 1.4), transform: `translateY(${(1 - fix) * 16}px)`}}>Claude</span>
+          </span> will be too.”
+        </div>
+        <div style={{display: 'flex', alignItems: 'center', gap: 18, marginTop: 14}}>
+          <span style={{position: 'relative', fontFamily: num, fontSize: 36, color: INK}}>— Anthropic
+            {ring > 0 && <svg width={260} height={70} style={{position: 'absolute', left: -20, top: -12, overflow: 'visible'}}>
+              <ellipse cx={120} cy={26} rx={128} ry={34} fill="none" stroke={INK} strokeWidth={4} strokeDasharray={600} strokeDashoffset={600 * (1 - draw(f, p.d + 10, 16))} /></svg>}
+          </span>
+          <Rise f={f} at={p.d + 14} style={{marginLeft: 'auto'}}><Big size={40} w={700}>一个词 · 在引号里 · 署了名</Big></Rise>
+        </div>
+      </div>
+    </Rise>
+    <Rise f={f} at={p.e} style={{position: 'absolute', left: 0, top: 860, width: 880}}>
+      <div style={{display: 'flex', alignItems: 'baseline', gap: 18}}>
+        <Big size={40} w={700} c={DIM}>页面写</Big>
+        <span style={{fontFamily: num, fontWeight: 800, fontSize: 48, color: INK}}><Strike p={springStep(t, S(p.e + 30), {f: 3, z: 1})} w={6}>“Sixteen prompts”</Strike></span>
+        <Big size={40} w={700} c={DIM} style={{marginLeft: 'auto'}}>实际</Big>
+        <span style={{fontFamily: num, fontWeight: 900, fontSize: 76, color: INK, lineHeight: 1, display: 'inline-block', opacity: clamp((f - p.only + 2) / 4),
+          transform: `translateY(${-dropLift(f, p.only, 0, 220)}px) scale(${1 + 0.1 * hitOf(f, [p.only], 1)}, ${1 - 0.12 * hitOf(f, [p.only], 1)})`, transformOrigin: '50% 100%'}}>15</span>
+      </div>
+    </Rise>
+  </Root>;
+};
+Block.camera = (cue) => {
+  const p = blockPlan(cue);
+  return [cam(0, 330, 200, 1.1), cam(p.a - 16, 400, 340, 1.12), cam(p.a + 10, 440, 120, 1.06), cam(p.b, 440, 650, 1.06), cam(p.c, 420, 700, 1.16),
+    cam(p.d, 300, 760, 1.14), cam(p.e, 380, 880, 1.12), cam(p.only, 790, 880, 1.2), cam(p.only + 36, 440, 560, 1.0)];
+};
+Block.sfx = (cue) => {
+  const p = blockPlan(cue);
+  return [{at: p.a - 16, kind: 'whoosh-short', gain: 0.12}, {at: p.gateLand, kind: 'thud', gain: 0.28}, {at: p.a, kind: 'block', gain: 0.26},
+    {at: p.c, kind: 'tick', gain: 0.14}, {at: p.d + 4, kind: 'paper', gain: 0.14}, {at: p.e + 30, kind: 'tick', gain: 0.14}, {at: p.only, kind: 'tap', gain: 0.2}];
+};
+
+/* ---------- fix ---------- */
+
+const fixPlan = (cue: Cue) => {
+  const [a, b, c, d, e, g] = [cue('a', 102), cue('b', 146), cue('c', 200), cue('d', 272), cue('e', 340), cue('f', 429)];
+  const G = 600, DX = 110;
+  const miss: Hop[] = [{at: c, dur: 16, from: top(DX, G, 120), to: [600, 470], lift: 120}, {at: c + 16, dur: 12, from: [600, 470], to: [520, G], lift: 40}];
+  const make: Hop = {at: d + 20, dur: 16, from: top(DX, G, 120), to: [720, 580], lift: 170};
+  return {a, b, c, d, e, g, G, DX, miss, make};
+};
+const Fix: Scene = ({f, cue}) => {
+  const p = fixPlan(cue);
+  const first = hopAt(f, p.miss);
+  const second = hopAt(f, [p.make]);
+  const rows = f >= p.make.at + p.make.dur ? 1 : 0;
+  const boxHit = hitOf(f, [p.c + 16], 0.4) + hitOf(f, [p.make.at + p.make.dur], 0.8);
+  const pairs = [['the model will be too', 'Claude will be too'], ['Sixteen prompts', '15 prompts'], ['模型没有实时数据', '删掉：已过时']];
+  return <Root>
+    <Rise f={f} at={2}><Kicker size={32}>对照 OpenAI / Anthropic 线上指南</Kicker></Rise>
+    <Rise f={f} at={8} style={{marginTop: 8}}><Big size={60}>逐条给改法</Big></Rise>
+    {pairs.map(([x, y], i) => (
+      <Rise key={x} f={f} at={p.a + i * 8} dy={16} style={{position: 'absolute', left: 0, top: 170 + i * 70, width: 880}}>
+        <div style={{display: 'flex', alignItems: 'baseline', gap: 14}}>
+          <span style={{width: 400, fontFamily: /[a-z]/.test(x) ? num : font, fontSize: 30, color: DIM, whiteSpace: 'nowrap'}}><Strike p={clamp((f - p.a - i * 8 - 6) / 8)} c={DIM} w={3}>{x}</Strike></span>
+          <span style={{fontFamily: font, fontSize: 32, color: DIM}}>→</span>
+          <span style={{fontFamily: /[a-z]/.test(y) ? num : font, fontWeight: 900, fontSize: 40, color: INK, whiteSpace: 'nowrap'}}>{y}</span>
+        </div>
+      </Rise>
+    ))}
+    <Ground y={p.G} x0={20} x1={860} />
+    <Pebble who="dev" x={p.DX} ground={p.G} size={120} wob={f >= p.b && f < p.b + 40 ? 10 * Math.sin((f - p.b) / 2.2) * (1 - (f - p.b) / 40) : 0} label="开发" />
+    <Rise f={f} at={p.b + 8} style={{position: 'absolute', left: 200, top: 400}}><Big size={40} w={700}>自己改、自己复查</Big></Rise>
+    {/* the database: an open box on the ground */}
+    <div style={{position: 'absolute', left: 600, top: 470, width: 240, height: 130, transform: `scaleY(${1 - 0.08 * boxHit})`, transformOrigin: '50% 100%'}}>
+      <svg width={240} height={130} style={{position: 'absolute', inset: 0}}><path d="M3 0 L3 127 L237 127 L237 0" fill={CARD} stroke={INK} strokeWidth={4} /></svg>
+      <div style={{position: 'absolute', left: 0, right: 0, top: 30, textAlign: 'center', fontFamily: num, fontWeight: 900, fontSize: 50, color: INK, opacity: f >= p.c + 16 ? 1 : 0}}>{rows} 行</div>
+    </div>
+    <Kicker size={30} style={{position: 'absolute', left: 600, top: 424}}>数据库</Kicker>
+    {f >= p.d && f < p.make.at + p.make.dur && <svg width={70} height={70} viewBox="0 0 70 70" style={{position: 'absolute', left: 770, top: 380, transform: `rotate(${(f - p.d) * 12}deg)`}}>
+      <circle cx={35} cy={35} r={24} fill="none" stroke={INK} strokeWidth={5} strokeDasharray="110 50" strokeLinecap="round" /></svg>}
+    {f >= p.c && f < p.d + 20 && <Packet x={first.x} y={first.y} vx={first.vx} vy={first.vy} ground={p.G} op={1 - clamp((f - p.c - 40) / 10)} />}
+    {f >= p.d + 20 && <Packet x={second.x} y={second.y} vx={second.vx} vy={second.vy} />}
+    {/* checking your own homework vs. a different agent checking */}
+    <Rise f={f} at={p.e} style={{position: 'absolute', left: 0, top: 690, width: 420}}><Big size={40} w={700}>单个聊天机器人：<br />自己批自己</Big></Rise>
+    {f >= p.e && <>
+      <Pebble who="wri" x={110} ground={930} size={90} hit={hitOf(f, [p.e + 22], 0.4)} />
+      <svg width={200} height={200} style={{position: 'absolute', left: 120, top: 740, overflow: 'visible'}}>
+        <path d="M30 100 C 120 60, 150 170, 50 180" fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" strokeDasharray={260} strokeDashoffset={260 * (1 - draw(f, p.e + 6, 16))} />
+      </svg>
+    </>}
+    <Rise f={f} at={p.g} style={{position: 'absolute', left: 470, top: 690, width: 420}}><Big size={40} w={700}>这里：写的 ≠ 查的</Big></Rise>
+    {f >= p.g && <>
+      <Pebble who="dev" x={540} ground={930} size={90} />
+      <Pebble who="rev" x={800} ground={930} size={90} hit={hitOf(f, [p.g + 18], 0.6)} />
+      <svg width={880} height={960} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
+        <path d="M560 830 Q670 760 790 830" fill="none" stroke={A} strokeWidth={5} strokeLinecap="round" strokeDasharray="10 12" opacity={draw(f, p.g + 4, 14)} />
+      </svg>
+      {(() => {
+        const q = hopAt(f, [{at: p.g + 4, dur: 14, from: top(540, 930, 90), to: top(800, 930, 90), lift: 110}]);
+        return <Packet x={q.x} y={q.y} vx={q.vx} vy={q.vy} scale={0.7} />;
+      })()}
+    </>}
+  </Root>;
+};
+Fix.camera = (cue) => {
+  const p = fixPlan(cue);
+  return [cam(0, 300, 100, 1.12), cam(p.a, 440, 260, 1.1), cam(p.b, 200, 480, 1.12), cam(p.c, 650, 520, 1.14), cam(p.d, 720, 520, 1.16),
+    cam(p.e, 220, 760, 1.06), cam(p.g, 660, 880, 1.2)];
+};
+Fix.sfx = (cue) => {
+  const p = fixPlan(cue);
+  return [{at: p.a, kind: 'tick', gain: 0.12}, {at: p.c - 2, kind: 'whoosh-short', gain: 0.12}, {at: p.c + 16, kind: 'thud', gain: 0.2},
+    {at: p.make.at - 2, kind: 'whoosh-short', gain: 0.12}, {at: p.make.at + p.make.dur, kind: 'tap', gain: 0.22}, {at: p.make.at + p.make.dur + 6, kind: 'tick', gain: 0.14},
+    {at: p.e + 6, kind: 'paper', gain: 0.12}, {at: p.g + 2, kind: 'whoosh-short', gain: 0.12}, {at: p.g + 18, kind: 'tap', gain: 0.18}];
+};
+
+/* ---------- human ---------- */
+
+const humanPlan = (cue: Cue) => {
+  const [a, b, c, d, e, g, h, k] = [cue('a', 82), cue('b', 148), cue('c', 209), cue('d', 247), cue('e', 361), cue('f', 399), cue('g', 437), cue('h', 483)];
+  return {a, b, c, d, e, g, h, k, i: cue('i', 318), G: 270, HX: 770, qLand: c + 10, sheet: {at: e, dur: 18}};
+};
+const Human: Scene = ({f, cue}) => {
+  const p = humanPlan(cue);
+  const t = S(f);
+  const round = Math.min(8, 1 + Math.floor(f / 5));
+  const meLift = dropLift(f, p.a, p.G, 760);
+  const qLift = dropLift(f, p.qLand, 630, 700);
+  const qHit = hitOf(f, [p.qLand], 1);
+  const knock = toss(t, {at: S(p.i), dur: S(24), from: [795, 630], to: [1060, 1100], lift: 120});
+  const sheet = toss(t, {at: S(p.sheet.at), dur: S(p.sheet.dur), from: [p.HX, 120], to: [440, 940], lift: 60});
+  const sheetDone = f >= p.sheet.at + p.sheet.dur;
+  return <Root>
+    <div style={{display: 'flex', alignItems: 'baseline', gap: 10}}>
+      <Big size={44} w={700}>第</Big><span style={{fontFamily: num, fontWeight: 900, fontSize: 120, color: INK, lineHeight: 1}}>{round}</span><Big size={44} w={700}>轮，还在打磨</Big>
+    </div>
+    <Ground y={p.G} />
+    {AGENTS.map((who, i) => (
+      <Pebble key={who} who={who} x={70 + i * 120} ground={p.G} size={90}
+        lift={f < p.a + 10 ? Math.max(0, 22 * Math.sin((f - i * 4) / 4)) * (f < p.a ? 1 : 1 - (f - p.a) / 10) : 0} hit={hitOf(f, [p.a + 3 + i * 2], 0.35)} />
+    ))}
+    {f >= p.a - 30 && <Pebble who="me" x={p.HX} ground={p.G} size={170} lift={meLift} hit={hitOf(f, [p.a], 1)} />}
+    <Rise f={f} at={p.a + 8} style={{position: 'absolute', left: 560, top: 300}}><Big size={52}>人来<span style={{color: B}}>拍板</span></Big></Rise>
+    <Rise f={f} at={p.b} style={{position: 'absolute', left: 0, top: 390, width: 880}}>
+      <div style={{background: CARD, border: `2px solid ${INK}`, borderRadius: 8, padding: '22px 26px', height: 240, boxShadow: '0 14px 24px rgba(60,45,25,0.10)'}}>
+        <Kicker size={28}>新访客视角 · 提示词库首页</Kicker>
+        <div style={{fontFamily: num, fontWeight: 800, fontSize: 36, color: INK, marginTop: 14, lineHeight: 1.25, width: 640}}>
+          built from the 20 posts{' '}
+          {f < p.d ? 'you saved' : <><Strike p={springStep(t, S(p.d), {f: 3, z: 1})} c={DIM} w={5}><span style={{color: DIM}}>you saved</span></Strike>{' '}
+            <span style={{fontWeight: 900, opacity: clamp((f - p.d - 10) / 8)}}>his followers saved</span></>} most
+        </div>
+        <Rise f={f} at={p.i}><Big size={34} w={700} c={DIM} style={{marginTop: 10}}>其实是：粉丝收藏的帖子</Big></Rise>
+      </div>
+    </Rise>
+    {/* once the answer is in, the question mark is knocked off the page */}
+    {f >= p.qLand - 22 && f < p.i + 26 && <div style={{position: 'absolute', left: 730 + (f >= p.i ? knock.x - 795 : 0), top: 630 - 150 - qLift + (f >= p.i ? knock.y - 630 : 0), width: 130, height: 150, textAlign: 'center',
+      transform: `rotate(${f >= p.i ? (f - p.i) * 9 : f >= p.qLand ? 8 * impulse(t, S(p.qLand), {f: 1.6, z: 0.2}) : 0}deg) scale(${1 + 0.1 * qHit}, ${1 - 0.12 * qHit})`,
+      transformOrigin: '50% 100%', fontFamily: num, fontWeight: 900, fontSize: 150, color: INK, lineHeight: 1}}>?</div>}
+    {f >= p.sheet.at && <div style={{position: 'absolute', left: (sheetDone ? 440 : sheet.x) - 440, top: (sheetDone ? 940 : sheet.y) - 270,
+      width: 880, height: 270, transform: `scale(${sheetDone ? 1 : 0.3 + 0.7 * sheet.u})`, transformOrigin: '50% 100%',
+      background: CARD, border: `2px solid ${INK}`, borderLeft: `10px solid ${B}`, borderRadius: 8, padding: '18px 26px'}}>
+      <Kicker size={28} c={B}>作者只发了一条消息</Kicker>
+      {['照审核意见改', '顶上加个“从这里开始”', '然后发布'].map((x, i) => {
+        const at = [p.g, p.h, p.k][i];
+        return <div key={x} style={{display: 'flex', alignItems: 'center', gap: 16, marginTop: 14, opacity: f >= at - 6 ? 1 : 0.3}}>
+          <Tick p={clamp((f - at) / 10)} size={40} /><Big size={42} w={700}>{x}</Big>
+        </div>;
+      })}
+    </div>}
+  </Root>;
+};
+Human.camera = (cue) => {
+  const p = humanPlan(cue);
+  return [cam(0, 260, 130, 1.14), cam(p.a, 770, 220, 1.16), cam(p.b, 440, 500, 1.06), cam(p.qLand, 760, 560, 1.16), cam(p.d, 420, 480, 1.14), cam(p.i, 300, 580, 1.16),
+    cam(p.e, 440, 800, 1.06), cam(p.g, 360, 760, 1.12), cam(p.h, 440, 820, 1.14), cam(p.k, 300, 870, 1.12)];
+};
+Human.sfx = (cue) => {
+  const p = humanPlan(cue);
+  return [{at: p.a, kind: 'thud', gain: 0.34}, {at: p.qLand, kind: 'tap', gain: 0.2}, {at: p.d, kind: 'tick', gain: 0.12}, {at: p.i - 2, kind: 'whoosh-short', gain: 0.14},
+    {at: p.e - 2, kind: 'whoosh', gain: 0.14}, {at: p.e + 18, kind: 'paper', gain: 0.18}, {at: p.g, kind: 'tick', gain: 0.16}, {at: p.h, kind: 'tick', gain: 0.16}, {at: p.k, kind: 'tick', gain: 0.16}];
+};
+
+/* ---------- ship ---------- */
+
+const shipPlan = (cue: Cue) => {
+  const [a, b, c, d, e] = [cue('a', 54), cue('b', 124), cue('c', 184), cue('d', 256), cue('e', 339)];
+  return {a, b, c, d, e, G: 280, passLand: d + 50, drop: {at: e, dur: 18, from: top(110, 640, 110), to: [430, 930] as P2, lift: 120}};
+};
+const Ship: Scene = ({f, cue}) => {
+  const p = shipPlan(cue);
+  const t = S(f);
+  // The button travels with its leading (right) edge on a stiffer spring than the trailing edge: it stretches on the way.
+  const right = springTrack(t, 500, [{at: S(p.a), to: 680}, {at: S(p.b + 10), to: 760}], {f: 3, z: 0.75});
+  const left = springTrack(t, 200, [{at: S(p.a), to: 380}, {at: S(p.b + 10), to: 160}], {f: 1.8, z: 0.8});
+  const press = hitOf(f, [p.b], 1);
+  const live = springStep(t, S(p.b + 10), {f: 2.4, z: 0.9});
+  const passLift = dropLift(f, p.passLand, 770, 600);
+  const passHit = hitOf(f, [p.passLand], 1);
+  const pk = hopAt(f, [{at: p.drop.at, dur: p.drop.dur, from: p.drop.from, to: p.drop.to, lift: p.drop.lift}]);
+  return <Root>
+    <Ground y={p.G} />
+    <Pebble who="dev" x={90} ground={p.G} size={120} label="开发" />
+    <Pebble who="me" x={810} ground={p.G} size={130} hit={press * 0.8} label="作者" />
+    <div style={{position: 'absolute', left, top: p.G - 86, width: right - left, height: 86, borderRadius: 43,
+      background: live > 0.5 ? matte(B) : matte('#2b2824'), transform: `scale(${1 + 0.06 * press}, ${1 - 0.14 * press})`, transformOrigin: '50% 100%',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', whiteSpace: 'nowrap'}}>
+      <span style={{position: 'absolute', fontFamily: font, fontWeight: 900, fontSize: 40, color: CARD, opacity: 1 - clamp(live * 1.6), filter: `blur(${clamp(live) * 6}px)`}}>发布 Publish</span>
+      <span style={{position: 'absolute', fontFamily: num, fontWeight: 800, fontSize: 40, color: CARD, opacity: clamp(live * 1.4), filter: `blur(${(1 - clamp(live)) * 6}px)`}}>● Version 1 is live</span>
+    </div>
+    <Rise f={f} at={p.a + 20} style={{position: 'absolute', left: 0, top: 0}}><Big size={60}>开发停下，<br />把按钮交给作者</Big></Rise>
+    <Rise f={f} at={p.b + 14} style={{position: 'absolute', left: 230, top: 340}}><Big size={52}>发不发，是<span style={{color: B}}>人</span>的事</Big></Rise>
+    <Ground y={640} x0={20} x1={200} op={clamp((f - p.c + 20) / 10)} />
+    {f >= p.c - 25 && <Pebble who="rev" x={110} ground={640} size={110} lift={dropLift(f, p.c, 640, 600)} hit={hitOf(f, [p.c], 0.8)} label="审核" />}
+    <div style={{position: 'absolute', left: springTrack(t, 1200, [{at: S(p.c + 4), to: 250}], {f: 1.5, z: 0.82}), top: 440, width: 630, height: 340,
+      background: CARD, border: `2px solid ${INK}`, borderRadius: 8, padding: '18px 26px', boxShadow: '0 14px 24px rgba(60,45,25,0.10)'}}>
+      <Kicker size={28}>线上页面 · 终审</Kicker>
+      {['PASS', 'Hero', 'Start here', 'Copy 按钮', '表单'].map((x, i) => (
+        <div key={x} style={{display: 'flex', alignItems: 'center', gap: 14, marginTop: 3, opacity: f >= p.d + i * 7 - 4 ? 1 : 0.25}}>
+          <Tick p={clamp((f - p.d - i * 7) / 9)} size={38} /><span style={{fontFamily: i ? font : num, fontWeight: i ? 700 : 900, fontSize: i ? 36 : 40, color: INK}}>{x}</span>
+        </div>
+      ))}
+    </div>
+    {f >= p.passLand - 20 && <div style={{position: 'absolute', left: 590, top: 770 - 100 - passLift, transform: `rotate(-6deg) scale(${1 + 0.08 * passHit}, ${1 - 0.1 * passHit})`,
+      transformOrigin: '50% 100%', fontFamily: num, fontWeight: 900, fontSize: 96, color: INK, lineHeight: 1}}>PASS</div>}
+    {f >= p.e - 10 && <>
+      <svg width={300} height={110} style={{position: 'absolute', left: 280, top: 830}}><path d="M3 0 L3 107 L297 107 L297 0" fill={CARD} stroke={INK} strokeWidth={4} /></svg>
+      <Kicker size={30} style={{position: 'absolute', left: 280, top: 790}}>数据库</Kicker>
+      <Packet x={pk.x} y={pk.y} vx={pk.vx} vy={pk.vy} scale={0.8} />
+      <Rise f={f} at={p.e + p.drop.dur + 4} style={{position: 'absolute', left: 610, top: 860}}><span style={{fontFamily: num, fontWeight: 900, fontSize: 56, color: INK}}>+1 行</span></Rise>
+    </>}
+  </Root>;
+};
+Ship.camera = (cue) => {
+  const p = shipPlan(cue);
+  return [cam(0, 440, 220, 1.08), cam(p.a, 560, 240, 1.14), cam(p.b, 790, 240, 1.16), cam(p.c, 440, 600, 1.04), cam(p.d, 440, 560, 1.12),
+    cam(p.passLand, 700, 700, 1.16), cam(p.e, 430, 860, 1.12)];
+};
+Ship.sfx = (cue) => {
+  const p = shipPlan(cue);
+  return [{at: p.a, kind: 'whoosh', gain: 0.14}, {at: p.b, kind: 'tick', gain: 0.22}, {at: p.b + 10, kind: 'pop', gain: 0.14}, {at: p.c, kind: 'tap', gain: 0.18},
+    {at: p.d, kind: 'tick', gain: 0.1}, {at: p.d + 14, kind: 'tick', gain: 0.1}, {at: p.d + 28, kind: 'tick', gain: 0.1}, {at: p.passLand, kind: 'chime', gain: 0.24},
+    {at: p.e - 2, kind: 'whoosh-short', gain: 0.1}, {at: p.e + p.drop.dur, kind: 'tap', gain: 0.18}];
+};
+
+/* ---------- loop ---------- */
+
+const LOOP_NODES: {who: Who; name: string; t: string}[] = [
+  {who: 'res', name: '调研员', t: '每周一：找收藏最多的 3 条'},
+  {who: 'wri', name: '文案', t: '写成一张提示词卡'},
+  {who: 'dev', name: '开发', t: '加到页面顶部，不发布'},
+  {who: 'me', name: '作者', t: '批准了，才上线'},
+];
+const loopPlan = (cue: Cue) => {
+  const [a, b, c, d, e, g, h] = [cue('a', 86), cue('b', 151), cue('c', 172), cue('d', 188), cue('e', 208), cue('f', 254), cue('g', 319)];
+  return {a, b, c, d, e, g, h, lands: [b, c, d, e]};
+};
+const Loop: Scene = ({f, cue}) => {
+  const p = loopPlan(cue);
+  const t = S(f);
+  const slotY = (i: number) => 230 + i * 165;
+  const ringC: P2 = [440, 520], R = 220;
+  return <Root>
+    <div style={{display: 'flex', alignItems: 'center', gap: 18}}>
+      <svg width={74} height={74} viewBox="0 0 84 84" style={{transform: `rotate(${f * 2.4}deg)`}}>
+        <circle cx={42} cy={42} r={30} stroke={INK} strokeWidth={7} fill="none" strokeDasharray="150 40" strokeLinecap="round" />
+        <path d="M64 14 L72 26 L58 30" stroke={INK} strokeWidth={7} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <Rise f={f} at={2}><Big size={66}>存成 Loop，每周照跑</Big></Rise>
+    </div>
+    <div style={{position: 'absolute', left: 0, top: 120, width: 880, height: 820, backgroundImage: `radial-gradient(${INK}33 2px, transparent 2px)`, backgroundSize: '34px 34px', opacity: 0.8}} />
+    <Rise f={f} at={p.a} style={{position: 'absolute', right: 0, top: 136}}>
+      <div style={{fontFamily: font, fontWeight: 700, fontSize: 34, color: INK, padding: '8px 22px', borderRadius: 30, border: `3px solid ${INK}`, background: paper.bg,
+        transform: `scale(${1 - 0.08 * hitOf(f, [p.a + 4], 1)})`}}>＋ 添加节点</div>
+    </Rise>
+    {/* connectors: a column first, then the ring */}
+    <svg width={880} height={960} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
+      {[1, 2, 3].map((i) => {
+        const pr = draw(f, p.lands[i] + 4, 8) * (1 - clamp((f - p.h) / 8));
+        return <path key={i} d={`M110 ${slotY(i - 1) + 120} L110 ${slotY(i) - 6}`} stroke={A} strokeWidth={5} strokeLinecap="round" strokeDasharray={50} strokeDashoffset={50 * (1 - pr)} opacity={pr > 0 ? 1 : 0} />;
+      })}
+      <circle cx={ringC[0]} cy={ringC[1]} r={R} fill="none" stroke={A} strokeWidth={5} strokeDasharray={2 * Math.PI * R} strokeDashoffset={2 * Math.PI * R * (1 - draw(f, p.h + 14, 20))} transform={`rotate(-90 ${ringC[0]} ${ringC[1]})`} />
+    </svg>
+    {LOOP_NODES.map((n, i) => {
+      if (f < p.lands[i] - 10) return null;
+      const ring = springStep(t, S(p.h + i * 3), {f: 1.6, z: 0.78});
+      const ang = (-90 + i * 90) * Math.PI / 180;
+      const colX = 50 + 340, colY = slotY(i) + 60;
+      const rx = ringC[0] + R * Math.cos(ang), ry = ringC[1] + R * Math.sin(ang);
+      const cx = colX + (rx - colX) * ring, cy = colY + (ry - colY) * ring;
+      const w = 680 + (130 - 680) * clamp(ring), hgt = 120 + (130 - 120) * clamp(ring);
+      // 「在画布上加卡片」: each card is dragged in from the left and lands in its slot on the cue (a slide never
+      // crosses the title or the card above it). The spring arrives on the keyword; the small overshoot is the landing.
+      const slide = (1 - springStep(t, S(p.lands[i] - 8), {f: 2.2, z: 0.72})) * -760 * (1 - clamp(ring));
+      const fall = 0;
+      const hit = hitOf(f, [p.lands[i]], 0.6);
+      const me = n.who === 'me';
+      return <div key={n.who} style={{position: 'absolute', left: cx - w / 2 + slide, top: cy - hgt / 2 - fall, width: w, height: hgt, borderRadius: 26 + 39 * clamp(ring),
+        background: me && ring > 0.5 ? matte(B) : ring > 0.5 ? matte(CLAY) : CARD, border: ring > 0.5 ? 'none' : `2px solid ${me ? B : INK}`,
+        transform: `scale(${1 + 0.05 * hit}, ${1 - 0.07 * hit})`, display: 'flex', alignItems: 'center', gap: 18, padding: ring > 0.5 ? 0 : '0 22px',
+        justifyContent: ring > 0.5 ? 'center' : 'flex-start', boxShadow: '0 12px 22px rgba(60,45,25,0.10)', overflow: 'hidden'}}>
+        <div style={{width: 84, height: 84, borderRadius: '44%', background: matte(me ? B : CLAY), display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 'none'}}>
+          <Glyph who={n.who} size={46} c={me ? CARD : INK} />
+        </div>
+        <div style={{opacity: 1 - clamp(ring * 2.5), whiteSpace: 'nowrap'}}>
+          <Big size={40} c={me ? B : INK}>{n.name}</Big>
+          <Big size={32} w={500} c={DIM}>{n.t}</Big>
+        </div>
+      </div>;
+    })}
+    <div style={{position: 'absolute', left: 60, top: slotY(3) + 140, display: 'flex', alignItems: 'center', gap: 14, ...phaseOp(f, p.g, p.h)}}>
+      <svg width={50} height={50} viewBox="0 0 56 56"><path d="M10 10 L46 46 M46 10 L10 46" stroke={INK} strokeWidth={8} strokeLinecap="round" /></svg>
+      <Big size={42}>人的卡片：只收，不往下传</Big>
+    </div>
+    {f >= p.h + 30 && (() => {
+      const ang = (-90 + (f - p.h - 30) * 3.2) * Math.PI / 180;
+      return <Packet x={ringC[0] + R * Math.cos(ang)} y={ringC[1] + R * Math.sin(ang) + 34} vx={-Math.sin(ang) * 400} vy={Math.cos(ang) * 400} scale={0.8} />;
+    })()}
+    <Rise f={f} at={p.h + 30} style={{position: 'absolute', left: 0, top: 856, width: 880, textAlign: 'center'}}><Big size={52}>最后<span style={{color: B}}>拍板</span>的，永远是人</Big></Rise>
+  </Root>;
+};
+Loop.camera = (cue) => {
+  const p = loopPlan(cue);
+  return [cam(0, 330, 100, 1.12), cam(p.a, 740, 160, 1.12), ...p.lands.map((x, i) => cam(x - 6, 380, 290 + i * 165, 1.12)),
+    cam(p.g, 300, 860, 1.14), cam(p.h, 440, 520, 1.0), cam(p.h + 40, 440, 600, 1.08)];
+};
+Loop.sfx = (cue) => {
+  const p = loopPlan(cue);
+  return [{at: p.a + 4, kind: 'tick', gain: 0.16}, ...p.lands.map((x) => ({at: x, kind: 'tap', gain: 0.16})), {at: p.g, kind: 'thud', gain: 0.2}, {at: p.h, kind: 'whoosh', gain: 0.16}];
+};
+
+/* ---------- lessons ---------- */
+
+const lessonsPlan = (cue: Cue) => {
+  const [a, b, c, d, e] = [cue('a', 83), cue('b', 132), cue('c', 281), cue('d', 321), cue('e', 352)];
+  return {a, b, c, d, e, chain2: cue('f', 241), verdict: e + 54, flag: d + 4};
+};
+const Lessons: Scene = ({f, cue}) => {
+  const p = lessonsPlan(cue);
+  const t = S(f);
+  const items = [
+    {at: p.a, t: '第一条消息就给真数据', s: '第一次调研用了网上的数据，只能重做'},
+    {at: p.b, t: '一开工就关掉自动插话', s: '不然中途纠正一句，又起一条链'},
+    {at: p.c, t: '给审核员一个终点', s: '线上终审，5 行内给 PASS 或 FAIL'},
+  ];
+  // The knob's two edges ride different springs, so it stretches while it slides from ON to OFF.
+  const knob = twoEdge(t, 0, [{at: S(p.b + 30), to: -56}]);
+  const off = f >= p.b + 34;
+  const flagLift = dropLift(f, p.flag, 690, 500);
+  const passLift = dropLift(f, p.verdict, 930, 600);
+  const passHit = hitOf(f, [p.verdict], 1);
+  return <Root>
+    <Rise f={f} at={2}><Kicker size={32}>作者说：3 件事会改着来</Kicker></Rise>
+    {items.map((it, i) => {
+      const next = items[i + 1]?.at;
+      const dim = next ? 1 - 0.5 * springStep(t, S(next + 4), {f: 2, z: 1}) : 1;
+      return <Rise key={it.t} f={f} at={it.at} style={{position: 'absolute', left: 0, top: 80 + i * 250, width: 880}}>
+        <div style={{display: 'flex', gap: 26, opacity: dim}}>
+          <span style={{fontFamily: num, fontWeight: 900, fontSize: 150, lineHeight: 0.9, color: INK, width: 110}}>{i + 1}</span>
+          <div style={{flex: 1}}>
+            <Big size={54}>{it.t}</Big>
+            <Big size={34} w={500} c={DIM} style={{marginTop: 8}}>{it.s}</Big>
+            {i === 1 && <div style={{display: 'flex', alignItems: 'center', gap: 16, marginTop: 16}}>
+              <div style={{position: 'relative', width: 116, height: 60, borderRadius: 30, background: off ? LINE : INK}}>
+                <div style={{position: 'absolute', top: 6, left: 62 + Math.min(knob.lead, knob.trail), width: 48 + Math.abs(knob.trail - knob.lead), height: 48, borderRadius: 24, background: CARD}} />
+              </div>
+              <span style={{fontFamily: num, fontSize: 30, color: DIM}}>Agent Proactivity · {off ? 'OFF' : 'ON'}</span>
+            </div>}
+            {i === 1 && <svg width={300} height={120} style={{position: 'absolute', left: 470, top: 120, overflow: 'visible'}}>
+              {[0, 1].map((k) => {
+                const pr = k === 0 ? draw(f, p.b + 40, 14) : draw(f, p.chain2, 14);
+                return <path key={k} d={`M0 ${30 + k * 50} Q60 ${-10 + k * 50} 120 ${30 + k * 50} Q180 ${70 + k * 50} 240 ${30 + k * 50}`} fill="none" stroke={A} strokeWidth={4}
+                  strokeDasharray="10 10" strokeLinecap="round" opacity={pr} strokeDashoffset={0} style={{clipPath: `inset(0 ${(1 - pr) * 100}% 0 0)`}} />;
+              })}
+            </svg>}
+          </div>
+        </div>
+      </Rise>;
+    })}
+    {f >= p.flag - 20 && <svg width={80} height={110} viewBox="0 0 80 110" style={{position: 'absolute', left: 760, top: 690 - 110 - flagLift}}>
+      <line x1={10} y1={4} x2={10} y2={108} stroke={INK} strokeWidth={5} strokeLinecap="round" />
+      {[0, 1, 2, 3, 4, 5].map((k) => <rect key={k} x={12 + (k % 3) * 20} y={6 + Math.floor(k / 3) * 20} width={20} height={20} fill={(k + Math.floor(k / 3)) % 2 ? INK : CARD} stroke={INK} strokeWidth={2} />)}
+    </svg>}
+    {f >= p.e - 4 && <div style={{position: 'absolute', left: 136, top: 750}}>
+      {Array.from({length: 5}, (_, k) => <div key={k} style={{display: 'flex', alignItems: 'center', gap: 12, height: 36, opacity: clamp((f - p.e - k * 8) / 6)}}>
+        <Tick p={clamp((f - p.e - k * 8) / 10)} size={30} /><div style={{height: 10, borderRadius: 5, background: INK, opacity: 0.55, width: [180, 260, 220, 300, 150][k]}} />
+      </div>)}
+    </div>}
+    {f >= p.verdict - 20 && <div style={{position: 'absolute', left: 560, top: 930 - 120 - passLift, transform: `rotate(-6deg) scale(${1 + 0.08 * passHit}, ${1 - 0.1 * passHit})`,
+      transformOrigin: '50% 100%', fontFamily: num, fontWeight: 900, fontSize: 120, color: INK, lineHeight: 1}}>PASS</div>}
+  </Root>;
+};
+Lessons.camera = (cue) => {
+  const p = lessonsPlan(cue);
+  return [cam(0, 300, 60, 1.1), cam(p.a, 440, 160, 1.12), cam(p.b, 440, 410, 1.12), cam(p.b + 26, 250, 500, 1.18), cam(p.chain2, 640, 470, 1.16), cam(p.c, 440, 660, 1.1),
+    cam(p.flag, 790, 640, 1.16), cam(p.e, 380, 830, 1.12), cam(p.verdict, 700, 860, 1.16)];
+};
+Lessons.sfx = (cue) => {
+  const p = lessonsPlan(cue);
+  return [{at: p.a, kind: 'paper', gain: 0.14}, {at: p.b, kind: 'paper', gain: 0.12}, {at: p.b + 30, kind: 'tick', gain: 0.2}, {at: p.c, kind: 'paper', gain: 0.12},
+    {at: p.chain2, kind: 'pop', gain: 0.12}, {at: p.flag, kind: 'tap', gain: 0.18}, {at: p.e, kind: 'tick', gain: 0.1}, {at: p.e + 16, kind: 'tick', gain: 0.1}, {at: p.e + 32, kind: 'tick', gain: 0.1}, {at: p.verdict, kind: 'thud', gain: 0.28}];
+};
+
+/* ---------- outro ---------- */
+
+const outroPlan = (cue: Cue) => {
+  const [a, b, c, d] = [cue('a', 96), cue('b', 159), cue('c', 231), cue('d', 263)];
+  const G = 560, AG = 124;
+  const hops: Hop[] = [0, 1, 2].map((i) => ({at: 12 + i * 22, dur: 14, from: top(SLOT[i], G, AG), to: top(SLOT[i + 1], G, AG), lift: 80}));
+  hops.push({at: a - 16, dur: 16, from: top(SLOT[3], G, AG), to: top(SLOT[4], G, 140), lift: 130});
+  return {a, b, c, d, G, AG, hops};
+};
+const Outro: Scene = ({f, cue}) => {
+  const p = outroPlan(cue);
+  const card = hopAt(f, p.hops);
+  const lands = landsOf(p.hops);
+  return <Root>
+    <div style={{position: 'absolute', left: 0, top: 30, ...phaseOp(f, 2, p.a + 4)}}><Big size={60}>agent 干活、交接、挑错</Big></div>
+    <div style={{position: 'absolute', left: 0, top: 10, ...phaseOp(f, p.a + 8)}}><Big size={110}>你只管<span style={{color: B}}>拍板</span></Big></div>
+    <Ground y={p.G} />
+    {AGENTS.map((who, i) => <Pebble key={who} who={who} x={SLOT[i]} ground={p.G} size={p.AG} hit={hitOf(f, i > 0 ? [lands[i - 1]] : [], 0.7)} label={NAME[who]} />)}
+    <Pebble who="me" x={SLOT[4]} ground={p.G} size={140} hit={hitOf(f, [p.a], 1)} label="你" />
+    <svg width={880} height={960} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
+      {p.hops.map((h, i) => <path key={i} d={`M${h.from[0]} ${h.from[1] - 70} Q${(h.from[0] + h.to[0]) / 2} ${h.from[1] - 70 - 2 * (h.lift ?? 100)} ${h.to[0]} ${h.to[1] - 70}`}
+        fill="none" stroke={A} strokeWidth={4} strokeDasharray="10 12" strokeLinecap="round" opacity={0.7 * draw(f, h.at, h.dur)} />)}
+    </svg>
+    <Packet x={card.x} y={card.y} vx={card.vx} vy={card.vy} />
+    <Rise f={f} at={p.b} style={{position: 'absolute', left: 0, top: 690, width: 880}}><Big size={54}>你最想把哪份活交给 AI 团队？</Big></Rise>
+    <Rise f={f} at={p.c} style={{position: 'absolute', left: 0, top: 772}}><Big size={40} w={700} c={DIM}>评论区聊聊</Big></Rise>
+    <Rise f={f} at={p.d} style={{position: 'absolute', left: 0, top: 846, width: 880}}>
+      <Big size={32} w={500} c={DIM}>内容参考：Rahul（X @sairahul1）</Big>
+      <Big size={40} w={900} style={{marginTop: 4}}>原文是 Teamily AI 的合作推广</Big>
+    </Rise>
+  </Root>;
+};
+Outro.camera = (cue) => {
+  const p = outroPlan(cue);
+  return [cam(0, 300, 120, 1.1), ...p.hops.slice(0, 3).map((h) => cam(h.at, h.to[0], 460, 1.12)), cam(p.a - 8, 784, 480, 1.16),
+    cam(p.a + 16, 440, 220, 1.06), cam(p.b, 440, 720, 1.1), cam(p.d, 440, 880, 1.1)];
+};
+Outro.sfx = (cue) => {
+  const p = outroPlan(cue);
+  return [...landsOf(p.hops).slice(0, 3).map((x) => ({at: x, kind: 'tap', gain: 0.13})), {at: p.a, kind: 'thud', gain: 0.32}];
+};
+
+export const aiAgentTeamScenes: Record<string, Scene> = {
   'at.hook': Hook,
   'at.idea': Idea,
   'at.task': Task,

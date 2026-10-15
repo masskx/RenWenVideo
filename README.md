@@ -19,7 +19,7 @@
 | [`douyin/marketing-engineer/`](douyin/marketing-engineer/) | 长文讲解：Greg Isenberg《Marketing Engineers》，用 AI Agent 做营销的 8 步 | 3:10 |
 | [`douyin/workbuddy-15-skills/`](douyin/workbuddy-15-skills/) | 教程：WorkBuddy 最值得装的 15 个技能（10 月版） | 3:50 |
 | [`douyin/magpie-lessons/`](douyin/magpie-lessons/) | 教程：magpie 的错题本，AI 怎么自己维护项目 | 3:10 |
-| [`douyin/ai-agent-team/`](douyin/ai-agent-team/) | 教程：一个人带 AI 团队，4 个 agent 自己交接、互相挑错（Rahul，原文为 Teamily AI 合作推广） | 3:48 |
+| [`douyin/ai-agent-team/`](douyin/ai-agent-team/) | 教程：一个人带 AI 团队，4 个 agent 自己交接、互相挑错（Rahul，原文为 Teamily AI 合作推广）。第一部按导演层做的片子：纸面风格、物理、音效 | 3:48 |
 
 ## 目录结构
 
@@ -44,9 +44,10 @@ scripts/generate-tutorial-voice.py / generate-tutorial-music.py / render-tutoria
 src/tutorial/                    TutorialVideo 合成、通用 UI、每期画面 scenes/<id>.tsx
 
 # 公共
-src/fx/                          共用动效库：转场、节拍推拉、震屏、印章、粒子、关键词上色（见 docs/video-craft/）
-scripts/qa/                      出片检查：richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、palette.mjs（取色）
-docs/video-craft/                讲解动画规则、动效与画面变化、分镜模板、风格词典、风格卡模板、概念画法、踩坑清单
+src/fx/                          共用动效库：闭式弹簧、抛出/下落/弹跳、挤压拉伸、错相、相机跟随、主光/接触影/运动残影、转场、印章、关键词上色（见 docs/video-craft/）
+public/audio/sfx/                合成的免版权音效（scripts/generate-sfx.py），画面组件用 sfx() 放到接触帧上
+scripts/qa/                      出片检查：brief.mjs（导演层）、richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、frames.mjs（逐帧查看页）、palette.mjs（取色）
+docs/video-craft/                导演层（先读）、讲解动画规则、动效与画面变化、分镜模板、风格词典、风格卡模板、概念画法、踩坑清单
 .claude/skills/video-craft/      给 Claude 的做片工作流和出片检查门槛
 src/Root.tsx                     注册合成：AiEra11Rules、MarketingEngineer、Tutorial、TutorialCover
 scripts/run.ps1                  Windows 辅助脚本（项目放在 FAT32/移动盘时使用）
@@ -117,11 +118,28 @@ npm ci
 
 `TutorialVideo` 外层统一加了转场（步骤号变化时用大转场）、开场圆形遮罩、每句字幕换一次构图（`beatTour`）、光点粒子和背景流动，每期的画面文件只管自己的内容和卡点动画。
 
+## 导演层：先定观感，再写代码
+
+2026-10-15 起，每条视频都先过 [`docs/video-craft/导演层.md`](docs/video-craft/导演层.md)（整理自观默 @guanmo_ai《用 Codex 自动生成顶尖动效视频》和 twoclipping 公开的动效提示词模板）。以前的片子检查都过了，但“AI 味”很重：元素一起弹出、每句整幅推拉、到处发光、卡片堆字、没有物理、没有音效。现在的要求：
+
+- 分镜前先写**导演 Brief 八项**（目标、分镜与主次、轨迹与相机、运动与物理、材质与光、节拍与声音、禁止项、验收标准），先在[参考画廊](https://guanmo-ai.github.io/awesome-ai-motion/)里找 1–2 个参考拆关系。
+- 每个主动作写清**受力起点 → 接触帧 → 恢复**，各层按错相晚几帧；至少一个主体贯穿多镜、变形成下一个状态。
+- 一盏主光（左上）、哑光材质、接触影；一屏强调色 ≤ 2；不发光、不渐变、不整幅推拉。
+- 音效从运动里长出来，落在接触帧上，比人声低 12–18 dB。
+- 教程配置里用 `look` 切换：`{"theme": "paper", "tour": false, "particles": false}`（旧片不写 `look`，保持原样）。
+
+```bash
+python scripts/generate-sfx.py                                   # 生成音效库 → public/audio/sfx/
+node scripts/qa/brief.mjs <id>                                   # 导演层检查：Brief 八项、逐镜主体/受力/错相/音效、禁止项
+node scripts/qa/frames.mjs douyin/<id>/video.mp4 --at=秒          # 逐帧查看页（← → 翻帧），看预备、接触、压扁、回稳、错相
+```
+
 ## 出片检查（每条视频提交前都要过）
 
 动效知识和规则在 [`docs/video-craft/`](docs/video-craft/)。改编自 [dashi-animationstyle](https://github.com/chuspeeism/dashi-animationstyle)（MIT），按竖屏抖音重新换算过。
 
 ```bash
+node scripts/qa/brief.mjs <id>                                 # 导演层：Brief 八项、禁止项（发光、渐变、整幅推拉……）
 node scripts/qa/richness.mjs douyin/<id>/video.mp4             # 丰富度：要显示“判定：过”（相邻 2.5 秒平均变化 ≥ 10，没有几乎不变的段）
 node scripts/qa/scan.mjs douyin/<id>/video.mp4                 # 扫片：每秒 3 帧拼图，查截断、叠字、空白，转场至少 3 种
 node scripts/qa/scan.mjs douyin/<id>/video.mp4 --phone=5,60,120  # 缩到 360 宽（手机屏宽），要读的字必须读得清
@@ -138,7 +156,7 @@ node scripts/qa/marks.mjs douyin/<id>/video.mp4                # 卡点：每个
 | marketing-engineer | 10.2 不过（25 段几乎不变）→ 16.4 过 |
 | workbuddy-15-skills | 新片，15.9 过 |
 | magpie-lessons | 新片，12.5 过（卡点 50 个全部对上） |
-| ai-agent-team | 新片，13.2 过（卡点 88 个全部对上） |
+| ai-agent-team | 第一版 13.2 过但“AI 味”重；第二版按导演层重做 11.3 过（卡点 92 个对上，导演层检查过） |
 
 ## 命令一览
 

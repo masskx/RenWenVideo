@@ -5,6 +5,20 @@ import {ease as fxEase, prog as fxProg} from '../fx';
 
 export type SceneProps = {f: number; dur: number; cue: (name: string, fallback?: number) => number};
 
+/**
+ * A sound effect placed on a scene frame (导演层 §7). Scenes list them through a static `sfx(cue, dur)` on the
+ * component; compute `at` from the same physics that drives the motion, not from hand-typed seconds.
+ * kind = a file in public/audio/sfx/ (scripts/generate-sfx.py); gain is relative to the voice (default 0.3).
+ */
+export type SfxEvent = {at: number; kind: string; gain?: number};
+
+/**
+ * Where the camera looks (导演层 §8): at frame `at`, frame the stage point (x, y) at zoom z. The camera follows
+ * these keys late (PHASE.camera) and critically damped, so it never leads or overshoots the action. Scenes list
+ * them through a static `camera(cue, dur)`; every key must point at the subject of that moment.
+ */
+export type CamKey = {at: number; x: number; y: number; z: number};
+
 /** 0→1 spring that starts at frame `at`. */
 export const usePop = () => {
   const {fps} = useVideoConfig();

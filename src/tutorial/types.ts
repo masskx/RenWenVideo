@@ -24,6 +24,12 @@ export type Tutorial = {
   steps?: string[];
   /** Per-line framing tour (fx beatTour); wide layouts need a smaller drift to stay inside the safe area. */
   motion?: {amp?: number; drift?: number};
+  /**
+   * Look switches for the director layer (docs/video-craft/导演层.md). Defaults keep the original dark look:
+   * theme "dark", tour (per-caption whole-stage reframing) on, particles on, default cut kinds.
+   */
+  look?: {theme?: 'dark' | 'paper'; tour?: boolean; particles?: boolean; mascot?: boolean;
+    cuts?: {big?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch')[]; small?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch')[]}};
   /** The video's two core nouns (A/B): fixed colours in captions and visuals. */
   highlights?: {text: string; role: 'A' | 'B'}[];
   /** Scene id to freeze for the cover image; defaults to the first scene. */

@@ -4,12 +4,14 @@
 
 | 文件 | 说明 |
 | --- | --- |
-| `video.mp4` | 成片：1080×1920，30fps，H.264 + AAC，228 秒（3:48），约 80 MB，响度约 -15 LUFS |
+| `video.mp4` | 成片（第二版，按导演层重做）：1080×1920，30fps，H.264 + AAC，228 秒（3:48），约 36 MB，响度约 -15 LUFS |
 | `cover.jpg` | 封面（1080×1920，取自开场画面） |
 | `subtitles.srt` | 逐句字幕，画面里已经烧录了一份；如果用平台自动字幕，上传这份可以免识别 |
 
 源配置：`tutorials/ai-agent-team.json` · 分镜：`tutorials/ai-agent-team.storyboard.md` · 重新渲染：`npm run tutorial:render -- ai-agent-team --overwrite --crf=23`
-配音：阿里云百炼 CosyVoice（`cosyvoice-v3-flash` / `longsanshu_v3`，语速 1.22）
+配音：阿里云百炼 CosyVoice（`cosyvoice-v3-flash` / `longsanshu_v3`，语速 1.22）；音效：`scripts/generate-sfx.py` 合成，落在接触帧上
+
+第二版（2026-10-15）：第一版检查都过了，但“AI 味”很重（元素一起弹出、每句整幅推拉、发光、卡片堆字、没有物理和音效）。按 `docs/video-craft/导演层.md` 重做画面：纸面 + 墨色 + 两个强调色（赤陶 = 交接，墨绿 = 人），一张任务卡贯穿全片、沿抛物线在 agent 之间交接，接触帧压扁、接触影、音效；相机只看向这一刻的主体。旁白和时间轴沿用第一版。
 
 ## 标题（任选其一，≤ 30 字）
 
