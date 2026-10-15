@@ -37,20 +37,39 @@ const Header: React.FC<{title: string; step: number; steps: string[]}> = ({title
   </div>
 );
 
-// Highlight latin words and numbers (commands, tool names, values) in captions.
+// Highlight latin words and numbers (commands, tool names, values) in captions; the A/B core nouns
+// (tutorial.highlights) take their fixed colours first, exact match, longest first.
 const TOKEN = /([A-Za-z0-9][A-Za-z0-9.%:\-_/]*)/g;
-const Caption: React.FC<{captions: TimedCaption[]}> = ({captions}) => {
+const latin = (text: string, key: string) => text.split(TOKEN).map((p, i) => (i % 2
+  ? <span key={`${key}-${i}`} style={{color: color.amber}}>{p}</span>
+  : <React.Fragment key={`${key}-${i}`}>{p}</React.Fragment>));
+const Caption: React.FC<{captions: TimedCaption[]; highlights?: {text: string; role: 'A' | 'B'}[]}> = ({captions, highlights = []}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const ms = frame / fps * 1000;
   const active = captions.find((c) => ms >= c.startMs && ms < c.endMs);
   if (!active) return null;
   const pop = interpolate(ms, [active.startMs, active.startMs + 90], [0.94, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const parts = active.text.split(TOKEN);
+  const keys = [...highlights].sort((a, b) => b.text.length - a.text.length);
+  const parts: React.ReactNode[] = [];
+  let buf = '';
+  for (let i = 0; i < active.text.length;) {
+    const hit = keys.find((k) => active.text.startsWith(k.text, i));
+    if (hit) {
+      if (buf) parts.push(...latin(buf, `t${i}`));
+      buf = '';
+      parts.push(<span key={`k${i}`} style={{color: hit.role === 'A' ? color.keyA : color.keyB}}>{hit.text}</span>);
+      i += hit.text.length;
+    } else {
+      buf += active.text[i];
+      i += 1;
+    }
+  }
+  if (buf) parts.push(...latin(buf, 'end'));
   return <div style={{position: 'absolute', top: captionY, left: stage.left - 20, width: stage.width + 40, transform: `translateY(-50%) scale(${pop})`,
     textAlign: 'center', fontFamily: font, fontWeight: 900, fontSize: 60, whiteSpace: 'nowrap', lineHeight: 1.3, color: '#ffffff', letterSpacing: 1,
     WebkitTextStroke: '10px #0a0e1a', paintOrder: 'stroke fill', textShadow: '0 6px 20px rgba(0,0,0,0.7)'}}>
-    {parts.map((p, i) => (i % 2 ? <span key={i} style={{color: color.amber}}>{p}</span> : <React.Fragment key={i}>{p}</React.Fragment>))}
+    {parts}
   </div>;
 };
 
@@ -102,7 +121,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
       const scene = tutorial.scenes.find((x) => x.id === s.id);
       return <Sequence key={`${s.id}-chrome`} name={`${s.id}-chrome`} from={s.startFrame} durationInFrames={s.durationFrames}>
         <Header title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />
-        <Caption captions={s.captions} />
+        <Caption captions={s.captions} highlights={tutorial.highlights} />
         <Sequence from={leadFrames} name={`${s.id}-voice`}><Audio src={staticFile(s.audioSrc)} /></Sequence>
       </Sequence>;
     })}

@@ -1,0 +1,789 @@
+{
+  "id": "magpie-lessons",
+  "voice": "longsanshu_v3",
+  "rate": 1.22,
+  "fps": 30,
+  "leadMs": 200,
+  "totalFrames": 5688,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/magpie-lessons/01-hook.mp3",
+      "audioMs": 14289,
+      "startFrame": 0,
+      "durationFrames": 446,
+      "cues": {
+        "a": 3052,
+        "b": 4636,
+        "c": 9178,
+        "d": 13076
+      },
+      "captions": [
+        {
+          "text": "19 天，发了 1204 个版本",
+          "startMs": 200,
+          "endMs": 3052
+        },
+        {
+          "text": "一天 60 多个",
+          "startMs": 3052,
+          "endMs": 4636
+        },
+        {
+          "text": "代码由 agent 编写",
+          "startMs": 4636,
+          "endMs": 5937
+        },
+        {
+          "text": "审查、合并和发布",
+          "startMs": 5937,
+          "endMs": 8091
+        },
+        {
+          "text": "人几乎不碰",
+          "startMs": 8091,
+          "endMs": 9178
+        },
+        {
+          "text": "这就是 yetone",
+          "startMs": 9178,
+          "endMs": 10177
+        },
+        {
+          "text": "的开源项目 magpie",
+          "startMs": 10177,
+          "endMs": 11769
+        },
+        {
+          "text": "它凭什么不翻车？",
+          "startMs": 11769,
+          "endMs": 13076
+        },
+        {
+          "text": "答案是一本错题本",
+          "startMs": 13076,
+          "endMs": 14438
+        }
+      ]
+    },
+    {
+      "id": "compare",
+      "audioSrc": "audio/tutorials/magpie-lessons/02-compare.mp3",
+      "audioMs": 9221,
+      "startFrame": 446,
+      "durationFrames": 294,
+      "cues": {
+        "a": 4813,
+        "b": 6769,
+        "c": 7874
+      },
+      "captions": [
+        {
+          "text": "作者 WquGuru 把",
+          "startMs": 200,
+          "endMs": 1864
+        },
+        {
+          "text": "2862 个 commit 全翻了一遍",
+          "startMs": 1864,
+          "endMs": 4813
+        },
+        {
+          "text": "拿 OpenClaw 头 19 天对照",
+          "startMs": 4813,
+          "endMs": 6769
+        },
+        {
+          "text": "commit 多了一倍",
+          "startMs": 6769,
+          "endMs": 7874
+        },
+        {
+          "text": "版本多了一百多倍",
+          "startMs": 7874,
+          "endMs": 9369
+        }
+      ]
+    },
+    {
+      "id": "files",
+      "audioSrc": "audio/tutorials/magpie-lessons/03-files.mp3",
+      "audioMs": 11729,
+      "startFrame": 740,
+      "durationFrames": 369,
+      "cues": {
+        "a": 1042,
+        "b": 3203,
+        "c": 8497
+      },
+      "captions": [
+        {
+          "text": "先看入口",
+          "startMs": 200,
+          "endMs": 1042
+        },
+        {
+          "text": "magpie 的 CLAUDE.md 只有两行",
+          "startMs": 1042,
+          "endMs": 3203
+        },
+        {
+          "text": "一个 AGENTS.md",
+          "startMs": 3203,
+          "endMs": 4798
+        },
+        {
+          "text": "是路由表",
+          "startMs": 4798,
+          "endMs": 5538
+        },
+        {
+          "text": "告诉 agent",
+          "startMs": 5538,
+          "endMs": 6533
+        },
+        {
+          "text": "干什么活之前翻哪份文档",
+          "startMs": 6533,
+          "endMs": 8497
+        },
+        {
+          "text": "一个 LESSONS.md",
+          "startMs": 8497,
+          "endMs": 10067
+        },
+        {
+          "text": "就是错题本",
+          "startMs": 10067,
+          "endMs": 11870
+        }
+      ]
+    },
+    {
+      "id": "nightly",
+      "audioSrc": "audio/tutorials/magpie-lessons/04-nightly.mp3",
+      "audioMs": 7419,
+      "startFrame": 1109,
+      "durationFrames": 240,
+      "cues": {
+        "a": 3606,
+        "b": 4794,
+        "c": 6118
+      },
+      "captions": [
+        {
+          "text": "每天夜里",
+          "startMs": 200,
+          "endMs": 941
+        },
+        {
+          "text": "agent 把当天的",
+          "startMs": 941,
+          "endMs": 1735
+        },
+        {
+          "text": "commit 全过一遍",
+          "startMs": 1735,
+          "endMs": 2826
+        },
+        {
+          "text": "只找三种：修完又返工的",
+          "startMs": 2826,
+          "endMs": 4794
+        },
+        {
+          "text": "压根不该合的",
+          "startMs": 4794,
+          "endMs": 6118
+        },
+        {
+          "text": "验证做得太糙的",
+          "startMs": 6118,
+          "endMs": 7571
+        }
+      ]
+    },
+    {
+      "id": "entry",
+      "audioSrc": "audio/tutorials/magpie-lessons/05-entry.mp3",
+      "audioMs": 10919,
+      "startFrame": 1349,
+      "durationFrames": 345,
+      "cues": {
+        "a": 2018,
+        "b": 2820,
+        "c": 3524,
+        "d": 8870
+      },
+      "captions": [
+        {
+          "text": "每找到一个",
+          "startMs": 200,
+          "endMs": 1154
+        },
+        {
+          "text": "就记一条：一句规则",
+          "startMs": 1154,
+          "endMs": 2820
+        },
+        {
+          "text": "一段原因",
+          "startMs": 2820,
+          "endMs": 3524
+        },
+        {
+          "text": "再挂上 commit",
+          "startMs": 3524,
+          "endMs": 4543
+        },
+        {
+          "text": "和 issue 号当证据",
+          "startMs": 4543,
+          "endMs": 6047
+        },
+        {
+          "text": "比如 834 号问题返工了 4 次",
+          "startMs": 6047,
+          "endMs": 8870
+        },
+        {
+          "text": "每次只修了截图里那一个",
+          "startMs": 8870,
+          "endMs": 10132
+        },
+        {
+          "text": "agent",
+          "startMs": 10132,
+          "endMs": 11071
+        }
+      ]
+    },
+    {
+      "id": "seen",
+      "audioSrc": "audio/tutorials/magpie-lessons/06-seen.mp3",
+      "audioMs": 13662,
+      "startFrame": 1694,
+      "durationFrames": 427,
+      "cues": {
+        "a": 1857,
+        "b": 4901,
+        "c": 8326,
+        "d": 11058
+      },
+      "captions": [
+        {
+          "text": "关键是最后那行 Seen",
+          "startMs": 200,
+          "endMs": 1857
+        },
+        {
+          "text": "同一条教训",
+          "startMs": 1857,
+          "endMs": 2798
+        },
+        {
+          "text": "在 3 个不同的日子都被抓到",
+          "startMs": 2798,
+          "endMs": 4901
+        },
+        {
+          "text": "就从错题本搬进代码规范",
+          "startMs": 4901,
+          "endMs": 7418
+        },
+        {
+          "text": "变成硬规则",
+          "startMs": 7418,
+          "endMs": 8326
+        },
+        {
+          "text": "之后每个 PR 都要逐条对",
+          "startMs": 8326,
+          "endMs": 11058
+        },
+        {
+          "text": "做对的事也会记下来",
+          "startMs": 11058,
+          "endMs": 12611
+        },
+        {
+          "text": "标成 Done right",
+          "startMs": 12611,
+          "endMs": 13805
+        }
+      ]
+    },
+    {
+      "id": "promoted",
+      "audioSrc": "audio/tutorials/magpie-lessons/07-promoted.mp3",
+      "audioMs": 17528,
+      "startFrame": 2121,
+      "durationFrames": 543,
+      "cues": {
+        "a": 3207,
+        "b": 10798,
+        "c": 12545,
+        "d": 15316
+      },
+      "captions": [
+        {
+          "text": "文章发出时",
+          "startMs": 200,
+          "endMs": 1298
+        },
+        {
+          "text": "已经有 8 条转正",
+          "startMs": 1298,
+          "endMs": 3207
+        },
+        {
+          "text": "我 10 月 15 日再看",
+          "startMs": 3207,
+          "endMs": 8945
+        },
+        {
+          "text": "已经 15 条了",
+          "startMs": 8945,
+          "endMs": 10256
+        },
+        {
+          "text": "比如：同类的 bug 要一起修掉",
+          "startMs": 10256,
+          "endMs": 12545
+        },
+        {
+          "text": "main 上挂掉的测试",
+          "startMs": 12545,
+          "endMs": 13710
+        },
+        {
+          "text": "就是马上要修的 bug",
+          "startMs": 13710,
+          "endMs": 15316
+        },
+        {
+          "text": "打 tag 之前",
+          "startMs": 15316,
+          "endMs": 16475
+        },
+        {
+          "text": "CI 必须全绿",
+          "startMs": 16475,
+          "endMs": 17674
+        }
+      ]
+    },
+    {
+      "id": "crash",
+      "audioSrc": "audio/tutorials/magpie-lessons/08-crash.mp3",
+      "audioMs": 13296,
+      "startFrame": 2664,
+      "durationFrames": 416,
+      "cues": {
+        "a": 5043,
+        "b": 7759,
+        "c": 10182
+      },
+      "captions": [
+        {
+          "text": "这本错题本",
+          "startMs": 200,
+          "endMs": 1203
+        },
+        {
+          "text": "是 10 月",
+          "startMs": 1203,
+          "endMs": 2158
+        },
+        {
+          "text": "6 日凌晨 3 点才加上的",
+          "startMs": 2158,
+          "endMs": 5043
+        },
+        {
+          "text": "前一天",
+          "startMs": 5043,
+          "endMs": 5725
+        },
+        {
+          "text": "magpie 一天发了 168 个版本",
+          "startMs": 5725,
+          "endMs": 7759
+        },
+        {
+          "text": "40 来个在修刚发出去的版本",
+          "startMs": 7759,
+          "endMs": 10182
+        },
+        {
+          "text": "CI 几乎每一轮都被下一次",
+          "startMs": 10182,
+          "endMs": 12094
+        },
+        {
+          "text": "push 取消",
+          "startMs": 12094,
+          "endMs": 13459
+        }
+      ]
+    },
+    {
+      "id": "brake",
+      "audioSrc": "audio/tutorials/magpie-lessons/09-brake.mp3",
+      "audioMs": 15438,
+      "startFrame": 3080,
+      "durationFrames": 480,
+      "cues": {
+        "a": 1905,
+        "b": 4677,
+        "c": 6455,
+        "e": 10019,
+        "d": 11853
+      },
+      "captions": [
+        {
+          "text": "第一版错题本就加了一条",
+          "startMs": 200,
+          "endMs": 1905
+        },
+        {
+          "text": "打 tag 前，CI 必须跑完",
+          "startMs": 1905,
+          "endMs": 3893
+        },
+        {
+          "text": "全绿",
+          "startMs": 3893,
+          "endMs": 4677
+        },
+        {
+          "text": "第二天发版降到 42",
+          "startMs": 4677,
+          "endMs": 6455
+        },
+        {
+          "text": "再往后一直在 15 到 26 之间",
+          "startMs": 6455,
+          "endMs": 10019
+        },
+        {
+          "text": "没人开会，也没人发通知",
+          "startMs": 10019,
+          "endMs": 11853
+        },
+        {
+          "text": "错题本加了一条",
+          "startMs": 11853,
+          "endMs": 13201
+        },
+        {
+          "text": "agent 读到",
+          "startMs": 13201,
+          "endMs": 14240
+        },
+        {
+          "text": "发版就慢下来了",
+          "startMs": 14240,
+          "endMs": 15581
+        }
+      ]
+    },
+    {
+      "id": "accept",
+      "audioSrc": "audio/tutorials/magpie-lessons/10-accept.mp3",
+      "audioMs": 14655,
+      "startFrame": 3560,
+      "durationFrames": 457,
+      "cues": {
+        "a": 4562,
+        "b": 8138,
+        "c": 11801
+      },
+      "captions": [
+        {
+          "text": "再看验收",
+          "startMs": 200,
+          "endMs": 1163
+        },
+        {
+          "text": "6 条标准全过才能合并",
+          "startMs": 1163,
+          "endMs": 3437
+        },
+        {
+          "text": "有三条很少见",
+          "startMs": 3437,
+          "endMs": 4562
+        },
+        {
+          "text": "回退测试，把旧代码放回去",
+          "startMs": 4562,
+          "endMs": 6470
+        },
+        {
+          "text": "新测试必须真挂",
+          "startMs": 6470,
+          "endMs": 8138
+        },
+        {
+          "text": "真实使用，改了哪家厂商",
+          "startMs": 8138,
+          "endMs": 10216
+        },
+        {
+          "text": "就拿真账号去验",
+          "startMs": 10216,
+          "endMs": 11801
+        },
+        {
+          "text": "没跑的检查",
+          "startMs": 11801,
+          "endMs": 12736
+        },
+        {
+          "text": "要写明没跑",
+          "startMs": 12736,
+          "endMs": 13831
+        },
+        {
+          "text": "不能省略",
+          "startMs": 13831,
+          "endMs": 14798
+        }
+      ]
+    },
+    {
+      "id": "pr",
+      "audioSrc": "audio/tutorials/magpie-lessons/11-pr.mp3",
+      "audioMs": 13949,
+      "startFrame": 4017,
+      "durationFrames": 436,
+      "cues": {
+        "a": 2266,
+        "b": 3961,
+        "c": 7237,
+        "d": 9298
+      },
+      "captions": [
+        {
+          "text": "原文挑了一个真实 PR",
+          "startMs": 200,
+          "endMs": 2266
+        },
+        {
+          "text": "Red check 是回退测试",
+          "startMs": 2266,
+          "endMs": 3961
+        },
+        {
+          "text": "Break check 是故意改坏",
+          "startMs": 3961,
+          "endMs": 5812
+        },
+        {
+          "text": "看测试能不能抓到",
+          "startMs": 5812,
+          "endMs": 7237
+        },
+        {
+          "text": "最后一行写着 Not run",
+          "startMs": 7237,
+          "endMs": 9298
+        },
+        {
+          "text": "合并命令还带着审过的",
+          "startMs": 9298,
+          "endMs": 10520
+        },
+        {
+          "text": "commit 号",
+          "startMs": 10520,
+          "endMs": 11617
+        },
+        {
+          "text": "有人中途 push",
+          "startMs": 11617,
+          "endMs": 12856
+        },
+        {
+          "text": "合并直接失败",
+          "startMs": 12856,
+          "endMs": 14112
+        }
+      ]
+    },
+    {
+      "id": "human",
+      "audioSrc": "audio/tutorials/magpie-lessons/12-human.mp3",
+      "audioMs": 12565,
+      "startFrame": 4453,
+      "durationFrames": 394,
+      "cues": {
+        "a": 1213,
+        "b": 3580,
+        "c": 6321,
+        "d": 9600
+      },
+      "captions": [
+        {
+          "text": "那人做什么？",
+          "startMs": 200,
+          "endMs": 1213
+        },
+        {
+          "text": "拍过板的产品决定",
+          "startMs": 1213,
+          "endMs": 2418
+        },
+        {
+          "text": "PR 不能推翻",
+          "startMs": 2418,
+          "endMs": 3580
+        },
+        {
+          "text": "风险检查命中",
+          "startMs": 3580,
+          "endMs": 4866
+        },
+        {
+          "text": "要等维护者放行",
+          "startMs": 4866,
+          "endMs": 6321
+        },
+        {
+          "text": "yetone 自己常常只说一句",
+          "startMs": 6321,
+          "endMs": 8629
+        },
+        {
+          "text": "这个太丑了",
+          "startMs": 8629,
+          "endMs": 9600
+        },
+        {
+          "text": "剩下的 agent 补齐",
+          "startMs": 9600,
+          "endMs": 10858
+        },
+        {
+          "text": "写成能验证的改动",
+          "startMs": 10858,
+          "endMs": 12717
+        }
+      ]
+    },
+    {
+      "id": "diy",
+      "audioSrc": "audio/tutorials/magpie-lessons/13-diy.mp3",
+      "audioMs": 14106,
+      "startFrame": 4847,
+      "durationFrames": 440,
+      "cues": {
+        "a": 2774,
+        "b": 6495,
+        "c": 11126
+      },
+      "captions": [
+        {
+          "text": "想自己搭一套",
+          "startMs": 200,
+          "endMs": 1389
+        },
+        {
+          "text": "就抄这本错题本",
+          "startMs": 1389,
+          "endMs": 2774
+        },
+        {
+          "text": "每条写清规则",
+          "startMs": 2774,
+          "endMs": 3773
+        },
+        {
+          "text": "出事的 commit",
+          "startMs": 3773,
+          "endMs": 4721
+        },
+        {
+          "text": "修复，和做对的例子",
+          "startMs": 4721,
+          "endMs": 6495
+        },
+        {
+          "text": "每天让 agent 复盘一次",
+          "startMs": 6495,
+          "endMs": 7952
+        },
+        {
+          "text": "只找返工的",
+          "startMs": 7952,
+          "endMs": 9073
+        },
+        {
+          "text": "不该合的、验证太弱的",
+          "startMs": 9073,
+          "endMs": 11126
+        },
+        {
+          "text": "同一条出现满 3 天",
+          "startMs": 11126,
+          "endMs": 12996
+        },
+        {
+          "text": "就升进代码规范",
+          "startMs": 12996,
+          "endMs": 14260
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "audioSrc": "audio/tutorials/magpie-lessons/14-outro.mp3",
+      "audioMs": 12800,
+      "startFrame": 5287,
+      "durationFrames": 401,
+      "cues": {
+        "a": 3672,
+        "b": 7456,
+        "c": 9570
+      },
+      "captions": [
+        {
+          "text": "犯过的错写下来",
+          "startMs": 200,
+          "endMs": 1613
+        },
+        {
+          "text": "agent 下次启动一定会读到",
+          "startMs": 1613,
+          "endMs": 3672
+        },
+        {
+          "text": "犯满三天就成硬规则",
+          "startMs": 3672,
+          "endMs": 5363
+        },
+        {
+          "text": "正好是事不过三",
+          "startMs": 5363,
+          "endMs": 7456
+        },
+        {
+          "text": "你会让 AI 维护自己的项目吗？",
+          "startMs": 7456,
+          "endMs": 9570
+        },
+        {
+          "text": "评论区聊聊",
+          "startMs": 9570,
+          "endMs": 10479
+        },
+        {
+          "text": "内容参考 WquGuru 的原文",
+          "startMs": 10479,
+          "endMs": 12951
+        }
+      ]
+    }
+  ]
+}

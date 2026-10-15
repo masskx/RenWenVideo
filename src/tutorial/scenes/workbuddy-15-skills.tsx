@@ -1,6 +1,6 @@
 import React from 'react';
 import {color, font, mono} from '../theme';
-import {Appear, Arrow, ChatPrompt, Check, Chip, Panel, SceneProps, Window, ramp, usePop} from '../ui';
+import {Appear, Arrow, ChatPrompt, Check, Chip, CueGlow, Panel, SceneProps, Window, ramp, usePop} from '../ui';
 import {Stamp, ease, prog, sway} from '../../fx';
 
 // WorkBuddy 15 skills (程序员小灰, Oct edition). Prompts, numbers and test results come from the article.
@@ -99,22 +99,6 @@ const Reply: React.FC<{p: number; c?: string; children: React.ReactNode}> = ({p,
       fontFamily: font, fontSize: 30, color: color.text, lineHeight: 1.45}}>{children}</div>
   </Appear>
 );
-
-/**
- * Background layer: a soft glow in the category colour that glides to a new spot on every cue, like a
- * spotlight following the narration. Large-area change with no effect on layout (stage-relative offsets
- * cover the whole 1080×1920 frame).
- */
-const SPOTS: [number, number][] = [[30, 22], [72, 38], [26, 55], [70, 62], [40, 30], [62, 48]];
-const CueGlow: React.FC<{f: number; beats: number[]; c: string}> = ({f, beats, c}) => {
-  let idx = 0;
-  while (idx + 1 < beats.length && f >= beats[idx + 1]) idx += 1;
-  const from = SPOTS[Math.max(0, idx - 1) % SPOTS.length], to = SPOTS[idx % SPOTS.length];
-  const k = idx === 0 ? 1 : ease.inOutCubic(prog(f, beats[idx], 18));
-  const x = from[0] + (to[0] - from[0]) * k, y = from[1] + (to[1] - from[1]) * k;
-  return <div style={{position: 'absolute', left: -80, top: -300, width: 1080, height: 1920, pointerEvents: 'none', zIndex: -1,
-    background: `radial-gradient(680px 620px at ${x}% ${y}%, ${c}52, transparent 72%)`}} />;
-};
 
 const ResultView: React.FC<{f: number; r: Result; at: number[]; c: string}> = ({f, r, at, c}) => {
   const pop = usePop();

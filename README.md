@@ -18,6 +18,7 @@
 | [`douyin/ochiai-claude-code/`](douyin/ochiai-claude-code/) | 教程：落合阳一 × Claude Code，6 个 AI 习惯 | 3:31 |
 | [`douyin/marketing-engineer/`](douyin/marketing-engineer/) | 长文讲解：Greg Isenberg《Marketing Engineers》，用 AI Agent 做营销的 8 步 | 3:10 |
 | [`douyin/workbuddy-15-skills/`](douyin/workbuddy-15-skills/) | 教程：WorkBuddy 最值得装的 15 个技能（10 月版） | 3:50 |
+| [`douyin/magpie-lessons/`](douyin/magpie-lessons/) | 教程：magpie 的错题本，AI 怎么自己维护项目 | 3:10 |
 
 ## 目录结构
 
@@ -135,6 +136,7 @@ node scripts/qa/marks.mjs douyin/<id>/video.mp4                # 卡点：每个
 | ochiai-claude-code | 3.4 不过 → 10.6 过 |
 | marketing-engineer | 10.2 不过（25 段几乎不变）→ 16.4 过 |
 | workbuddy-15-skills | 新片，15.9 过 |
+| magpie-lessons | 新片，12.5 过（卡点 50 个全部对上） |
 
 ## 命令一览
 

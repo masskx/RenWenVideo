@@ -13,6 +13,9 @@ export const color = {
   green: '#4ade80',
   red: '#f87171',
   pink: '#f472b6',
+  /** A/B core-noun colours (tutorial.highlights); keep other accents out of these hues. */
+  keyA: '#f472b6',
+  keyB: '#4ade80',
 };
 
 // Douyin overlays its UI on the top bar, right-hand action column and bottom description,

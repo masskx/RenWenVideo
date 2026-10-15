@@ -1,6 +1,7 @@
 import React from 'react';
 import {Easing, interpolate, spring, useVideoConfig} from 'remotion';
 import {color, font, mono} from './theme';
+import {ease as fxEase, prog as fxProg} from '../fx';
 
 export type SceneProps = {f: number; dur: number; cue: (name: string, fallback?: number) => number};
 
@@ -64,6 +65,22 @@ export const Window: React.FC<{title?: string; url?: string; style?: React.CSSPr
     <div style={{padding: 28, ...bodyStyle}}>{children}</div>
   </div>
 );
+
+/**
+ * Background layer: a soft glow in the category colour that glides to a new spot on every cue, like a
+ * spotlight following the narration. Large-area change with no effect on layout (stage-relative offsets
+ * cover the whole 1080×1920 frame). Wrap the scene root in `position: relative; isolation: isolate`.
+ */
+const SPOTS: [number, number][] = [[30, 22], [72, 38], [26, 55], [70, 62], [40, 30], [62, 48]];
+export const CueGlow: React.FC<{f: number; beats: number[]; c: string}> = ({f, beats, c}) => {
+  let idx = 0;
+  while (idx + 1 < beats.length && f >= beats[idx + 1]) idx += 1;
+  const from = SPOTS[Math.max(0, idx - 1) % SPOTS.length], to = SPOTS[idx % SPOTS.length];
+  const k = idx === 0 ? 1 : fxEase.inOutCubic(fxProg(f, beats[idx], 18));
+  const x = from[0] + (to[0] - from[0]) * k, y = from[1] + (to[1] - from[1]) * k;
+  return <div style={{position: 'absolute', left: -80, top: -300, width: 1080, height: 1920, pointerEvents: 'none', zIndex: -1,
+    background: `radial-gradient(680px 620px at ${x}% ${y}%, ${c}52, transparent 72%)`}} />;
+};
 
 export type TermLine = {at: number; kind: 'cmd' | 'out' | 'ok' | 'note'; text: string; speed?: number; highlight?: string};
 

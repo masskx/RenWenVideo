@@ -24,6 +24,8 @@ export type Tutorial = {
   steps?: string[];
   /** Per-line framing tour (fx beatTour); wide layouts need a smaller drift to stay inside the safe area. */
   motion?: {amp?: number; drift?: number};
+  /** The video's two core nouns (A/B): fixed colours in captions and visuals. */
+  highlights?: {text: string; role: 'A' | 'B'}[];
   /** Scene id to freeze for the cover image; defaults to the first scene. */
   cover?: string;
   scenes: TutorialScene[];
