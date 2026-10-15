@@ -1,7 +1,7 @@
 // Renders an explainer composition built by scripts/build-explainer.mjs.
 //   node scripts/render-explainer.mjs --composition=AiEra11Rules --out=douyin/ai-era-11-rules/video.mp4
 //   node scripts/render-explainer.mjs --composition=AiEra11Rules --still=120 --out=qa/frame.png
-// Set REMOTION_BROWSER to a Chrome/headless-shell binary if Remotion cannot download its own.
+// Set REMOTION_BROWSER_EXECUTABLE to a Chrome/headless-shell binary if Remotion cannot download its own.
 import {bundle} from '@remotion/bundler';
 import {selectComposition, renderMedia, renderStill} from '@remotion/renderer';
 import {existsSync, mkdirSync, renameSync, rmSync} from 'node:fs';
@@ -15,7 +15,7 @@ const value = (name, fallback = '') => args.find((arg) => arg.startsWith(`--${na
 const compositionId = value('composition', 'AiEra11Rules');
 const outputLocation = path.resolve(root, value('out', `out/${compositionId}.mp4`));
 const still = value('still');
-const browserExecutable = process.env.REMOTION_BROWSER
+const browserExecutable = process.env.REMOTION_BROWSER_EXECUTABLE || process.env.REMOTION_BROWSER
   || ['/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell'].find((candidate) => existsSync(candidate))
   || null;
 

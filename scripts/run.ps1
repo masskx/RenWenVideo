@@ -1,14 +1,14 @@
 # Windows helper for projects on FAT32/removable drives: syncs the project into a local runtime
 # folder, installs dependencies there, runs Remotion, and copies finished videos back to douyin/.
 param(
-  [ValidateSet('preview','lint','render')][string]$Mode='render',
+  [ValidateSet('preview','lint','render','tutorial')][string]$Mode='render',
   [Parameter(ValueFromRemainingArguments=$true)][string[]]$ScriptArgs
 )
 $ErrorActionPreference='Stop'
 $projectDir=Split-Path $PSScriptRoot -Parent
 $runtimeDir=Join-Path $env:LOCALAPPDATA 'renwen-video-runtime'
 New-Item -ItemType Directory -Force -Path $runtimeDir | Out-Null
-foreach ($name in @('src','explainers','public','scripts','package.json','package-lock.json','tsconfig.json','eslint.config.mjs','remotion.config.ts')) {
+foreach ($name in @('src','explainers','tutorials','public','scripts','package.json','package-lock.json','tsconfig.json','eslint.config.mjs','remotion.config.ts')) {
   $sourceItem=Get-Item -LiteralPath (Join-Path $projectDir $name)
   $files=if ($sourceItem.PSIsContainer) {Get-ChildItem -LiteralPath $sourceItem.FullName -Recurse -File} else {@($sourceItem)}
   foreach ($file in $files) {
@@ -35,9 +35,10 @@ try {
       node node_modules/typescript/bin/tsc --noEmit
     }
     'render' { node scripts/render-explainer.mjs @ScriptArgs }
+    'tutorial' { node scripts/render-tutorial.mjs @ScriptArgs }
   }
   if ($LASTEXITCODE -ne 0) { throw "$Mode failed." }
-  if ($Mode -eq 'render' -and (Test-Path -LiteralPath 'douyin')) {
+  if ($Mode -in @('render','tutorial') -and (Test-Path -LiteralPath 'douyin')) {
     Copy-Item -Path 'douyin' -Destination $projectDir -Recurse -Force
     Write-Output "Outputs copied to $(Join-Path $projectDir 'douyin')"
   }

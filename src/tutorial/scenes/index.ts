@@ -1,0 +1,12 @@
+import React from 'react';
+import {SceneProps} from '../ui';
+import {ochiaiClaudeCodeScenes} from './ochiai-claude-code';
+import {reaQuickstartScenes} from './rea-quickstart';
+
+export type SceneComponent = React.FC<SceneProps & {credit: string}>;
+
+// One file per tutorial; visual keys must be unique across files.
+export const sceneRegistry: Record<string, SceneComponent> = {
+  ...reaQuickstartScenes,
+  ...ochiaiClaudeCodeScenes,
+};
