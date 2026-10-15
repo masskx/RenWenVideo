@@ -43,9 +43,14 @@ def resolve_tutorial(arg):
 TOKEN = re.compile(r"\{([a-z0-9]+)\}|\[([^\]|]+)\|([^\]]+)\]")
 BREAK = set("，。？！；：、,?!;:")
 KEEP_TAIL = set("？！?!")
+# Limits are in visual width: a CJK character is 1, latin letters/digits/spaces about 0.55.
 MAX_CAPTION = 15
 MERGE_BELOW = 6
 MERGE_MAX = 14
+
+
+def width(text):
+    return sum(0.55 if ch.isascii() else 1 for ch in text)
 
 
 def parse(narration):
@@ -74,6 +79,32 @@ def parse(narration):
     return display, spoken, to_display, cues
 
 
+SENTENCE_END = set("。？！；?!;")
+CLOSERS = set("”」』）)")
+MIN_CAPTION_MS = 700
+
+
+def is_latin(ch):
+    return ch.isascii() and (ch.isalnum() or ch in ".%-_/²")
+
+
+def cut_points(display, s, e):
+    """Indices where a long run may be broken: spaces and closing quotes, but never inside
+    "Claude Code"-style latin phrases or between a number and its measure word ("6 个")."""
+    points = []
+    for k in range(s + 4, e - 3):
+        before, after = display[k - 1], display[k + 1] if k + 1 < e else ""
+        if display[k] == " ":
+            if is_latin(before) and is_latin(after):
+                continue
+            if before.isdigit() and not is_latin(after):
+                continue
+            points.append(k + 1)
+        elif display[k - 1] in CLOSERS and display[k] not in BREAK:
+            points.append(k)
+    return points
+
+
 def caption_chunks(display):
     """Split display text into caption-sized chunks: list of (start_index, end_index)."""
     chunks, start = [], 0
@@ -85,22 +116,45 @@ def caption_chunks(display):
         chunks.append((start, len(display)))
     merged = []
     for s, e in chunks:
-        # fold very short fragments ("第一步，") into the following phrase
-        if merged and merged[-1][1] - merged[-1][0] < MERGE_BELOW and e - merged[-1][0] <= MERGE_MAX:
-            merged[-1] = (merged[-1][0], e)
+        # fold very short fragments ("第一步，") into the following phrase, but not across a sentence end
+        prev = merged[-1] if merged else None
+        if prev and width(display[prev[0]:prev[1]]) < MERGE_BELOW and width(display[prev[0]:e]) <= MERGE_MAX and display[prev[1] - 1] not in SENTENCE_END:
+            merged[-1] = (prev[0], e)
         else:
             merged.append((s, e))
     out = []
     for s, e in merged:
-        while e - s > MAX_CAPTION:
-            # split long runs at a space if possible, else in the middle
+        while width(display[s:e]) > MAX_CAPTION:
+            points = cut_points(display, s, e)
+            if not points and width(display[s:e]) <= MAX_CAPTION + 3:
+                break
             mid = s + (e - s) // 2
-            spaces = [k for k in range(s + 4, e - 4) if display[k] == " "]
-            cut = min(spaces, key=lambda k: abs(k - mid)) + 1 if spaces else mid
+            if points:
+                cut = min(points, key=lambda k: abs(k - mid))
+            else:
+                # no natural break: cut near the middle, outside latin words
+                cut = min((k for k in range(s + 4, e - 3) if not (is_latin(display[k - 1]) and is_latin(display[k]))),
+                          key=lambda k: abs(k - mid), default=mid)
             out.append((s, cut))
             s = cut
         out.append((s, e))
     return [(s, e) for s, e in out if display[s:e].strip(" ，。；：、,;:")]
+
+
+def merge_flashes(display, chunks, starts, end_ms):
+    """Join captions that would flash by in under MIN_CAPTION_MS with the next one."""
+    chunks, starts = list(chunks), list(starts)
+    i = 0
+    while i < len(chunks) - 1:
+        (s, e), (s2, e2) = chunks[i], chunks[i + 1]
+        shown = starts[i + 1] - starts[i]
+        joined = width(clean_caption(display[s:e2]))
+        if shown < MIN_CAPTION_MS and joined <= MAX_CAPTION + 1 and display[e - 1] not in SENTENCE_END:
+            chunks[i] = (s, e2)
+            del chunks[i + 1], starts[i + 1]
+        else:
+            i += 1
+    return chunks, starts
 
 
 def clean_caption(text):
@@ -175,6 +229,7 @@ async def main():
         captions = []
         chunks = caption_chunks(display)
         starts = [time_at(words, s, speech_end) for s, _ in chunks]
+        chunks, starts = merge_flashes(display, chunks, starts, speech_end)
         for i, (s, e) in enumerate(chunks):
             end = starts[i + 1] if i + 1 < len(chunks) else speech_end + 250
             text = clean_caption(display[s:e])

@@ -1,10 +1,10 @@
 import React from 'react';
 import {interpolate} from 'remotion';
-import {color, font, mono} from './theme';
+import {color, font, mono} from '../theme';
 import {
   Appear, Arrow, Chip, ChatPrompt, Check, Code, DinoGame, Dino, Key, Panel, SceneProps, Slider, StepTitle, Terminal,
   Toggle, ToolCall, Window, ramp, usePop,
-} from './ui';
+} from '../ui';
 
 const H: React.FC<{size?: number; c?: string; style?: React.CSSProperties; children: React.ReactNode}> = ({size = 56, c = color.text, style, children}) => (
   <div style={{fontFamily: font, fontWeight: 900, fontSize: size, color: c, lineHeight: 1.25, ...style}}>{children}</div>
@@ -549,7 +549,7 @@ export const Outro: React.FC<SceneProps & {credit: string}> = ({f, cue, credit})
   </div>;
 };
 
-export const sceneRegistry: Record<string, React.FC<SceneProps & {credit: string}>> = {
+export const reaQuickstartScenes: Record<string, React.FC<SceneProps & {credit: string}>> = {
   hook: Hook, what: What, examples: Examples, task: Task, roles: Roles, roadmap: Roadmap, step1: Step1,
   step2Setup: Step2Setup, step2Chrome: Step2Chrome, step3Ask: Step3Ask, step3Answer: Step3Answer, step4Build: Step4Build,
   step4Play: Step4Play, step5Check: Step5Check, step5Why: Step5Why, tips: Tips, outro: Outro,

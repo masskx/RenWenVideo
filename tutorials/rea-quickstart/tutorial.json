@@ -13,6 +13,8 @@
   "musicVolume": 0.07,
   "credit": "内容参考：蓝哥AI（X @0xlangeai）《REA 保姆级上手教程》 · 规则与数据核对自 rea.tools 官方恐龙实验室",
   "source": "https://x.com/0xlangeai/status/2109544824135467312",
+  "steps": ["玩一局", "接工具", "问规则", "做新版", "做核对"],
+  "cover": "hook",
   "scenes": [
     {"id": "hook", "visual": "hook", "step": 0,
      "narration": "GitHub 日榜一天暴涨两万五千颗星，{a}这个叫 REA 的开源工具，到底是什么？{b}今天带你从零上手，五步跑通官方案例。"},

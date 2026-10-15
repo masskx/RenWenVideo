@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Audio} from '@remotion/media';
 import {captionY, color, font, stage} from './theme';
-import {STEPS, sceneRegistry, Hook} from './scenes';
+import {sceneRegistry} from './scenes';
 import {Dino} from './ui';
 import {SceneTiming, TimedCaption, TutorialProps} from './types';
 
@@ -17,20 +17,20 @@ const Background: React.FC = () => {
   </AbsoluteFill>;
 };
 
-const Header: React.FC<{title: string; step: number}> = ({title, step}) => (
+const Header: React.FC<{title: string; step: number; steps: string[]}> = ({title, step, steps}) => (
   <div style={{position: 'absolute', left: stage.left, width: stage.width, top: 196, display: 'flex', alignItems: 'center', gap: 18}}>
     <div style={{fontFamily: font, fontSize: 30, fontWeight: 800, color: color.text, padding: '8px 22px', borderRadius: 14,
       background: 'rgba(34,211,238,0.14)', border: `2px solid ${color.cyan}66`}}>{title}</div>
     <div style={{marginLeft: 'auto', display: 'flex', gap: 10}}>
-      {STEPS.map((s, i) => {
+      {steps.map((label, i) => {
         const n = i + 1;
         const active = n === step;
         const done = step > n;
-        return <div key={s.t} style={{height: 46, minWidth: 46, padding: active ? '0 18px' : 0, borderRadius: 23, display: 'flex', alignItems: 'center',
+        return <div key={label} style={{height: 46, minWidth: 46, padding: active ? '0 18px' : 0, borderRadius: 23, display: 'flex', alignItems: 'center',
           justifyContent: 'center', fontFamily: font, fontSize: 24, fontWeight: 800,
           background: active ? `linear-gradient(135deg, ${color.cyan}, ${color.violet})` : done ? `${color.green}33` : 'rgba(255,255,255,0.06)',
           color: active ? '#0a0e1a' : done ? color.green : color.dim, border: active ? 'none' : `2px solid ${done ? color.green : '#2a3352'}`}}>
-          {active ? `${n} ${s.t}` : done ? '✓' : n}</div>;
+          {active ? `${n} ${label}` : done ? '✓' : n}</div>;
       })}
     </div>
   </div>
@@ -77,7 +77,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
     {timing.scenes.map((t) => {
       const scene = tutorial.scenes.find((s) => s.id === t.id);
       return <Sequence key={t.id} name={t.id} from={t.startFrame} durationInFrames={t.durationFrames}>
-        <Header title={tutorial.title} step={scene?.step ?? 0} />
+        <Header title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />
         <SceneFrame timing={t} visual={scene?.visual ?? ''} credit={tutorial.credit} />
         <Sequence from={leadFrames} name={`${t.id}-voice`}><Audio src={staticFile(t.audioSrc)} /></Sequence>
       </Sequence>;
@@ -91,16 +91,19 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
   </AbsoluteFill>;
 };
 
-/** Static Douyin cover (封面), reusing the hook visuals at their settled state. */
+/** Static Douyin cover (封面): the scene named by `tutorial.cover` (default: the first) at its settled state. */
 export const TutorialCover: React.FC<TutorialProps> = ({tutorial, timing}) => {
-  const hook = timing.scenes[0];
+  const coverId = tutorial.cover ?? tutorial.scenes[0].id;
+  const scene = tutorial.scenes.find((s) => s.id === coverId) ?? tutorial.scenes[0];
+  const t = timing.scenes.find((s) => s.id === scene.id) ?? timing.scenes[0];
+  const Visual = sceneRegistry[scene.visual];
   const {fps} = useVideoConfig();
-  const cue = (name: string, fallback = 0) => (name in hook.cues ? Math.round(hook.cues[name] / 1000 * fps) : fallback);
+  const cue = (name: string, fallback = 0) => (name in t.cues ? Math.round(t.cues[name] / 1000 * fps) : fallback);
   return <AbsoluteFill style={{background: color.bg}}>
     <Background />
-    <Header title={tutorial.title} step={0} />
+    <Header title={tutorial.title} step={0} steps={tutorial.steps ?? []} />
     <div style={{position: 'absolute', left: stage.left, top: stage.top, width: stage.width}}>
-      <Hook f={hook.durationFrames - 10} dur={hook.durationFrames} cue={cue} />
+      {Visual && <Visual f={t.durationFrames - 10} dur={t.durationFrames} cue={cue} credit={tutorial.credit} />}
     </div>
     <div style={{position: 'absolute', top: captionY - 40, left: stage.left, width: stage.width, textAlign: 'center', fontFamily: font, fontWeight: 900,
       fontSize: 66, lineHeight: 1.35, color: '#fff', WebkitTextStroke: '10px #0a0e1a', paintOrder: 'stroke fill'}}>

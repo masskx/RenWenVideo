@@ -20,6 +20,10 @@ export type Tutorial = {
   musicVolume?: number;
   credit: string;
   source?: string;
+  /** Labels for the header step tracker (scene.step 1..n highlights one). */
+  steps?: string[];
+  /** Scene id to freeze for the cover image; defaults to the first scene. */
+  cover?: string;
   scenes: TutorialScene[];
 };
 
