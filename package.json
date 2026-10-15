@@ -1,7 +1,7 @@
 {
-  "name": "zen-video",
+  "name": "renwen-video",
   "version": "1.0.0",
-  "description": "My Remotion video",
+  "description": "把文章做成抖音竖屏讲解视频的 Remotion 工作流",
   "repository": {},
   "license": "UNLICENSED",
   "private": true,
@@ -24,22 +24,10 @@
     "typescript": "5.9.3"
   },
   "scripts": {
-    "dev": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run.ps1 -Mode preview",
-    "lint": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run.ps1 -Mode lint",
-    "render": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run.ps1 -Mode render",
-    "batch": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run.ps1 -Mode batch",
-    "check": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run.ps1 -Mode check",
-    "workbench": "node workbench/server.js",
-    "generate:images2": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generate.ps1 -Provider images2",
-    "generate:doubao": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generate.ps1 -Provider doubao",
-    "series:prepare": "node scripts/create-series.mjs",
-    "series:images": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generate-series-images.ps1",
-    "series:tts": "node scripts/generate-series-voice.mjs",
-    "music:plan": "node scripts/generate-music.mjs",
-    "music:generate": "node scripts/generate-music.mjs --generate",
-    "video:prepare": "node scripts/prepare-gemini-video.mjs",
-    "tts:plan": "node scripts/generate-voice.mjs",
-    "tts:generate": "node scripts/generate-voice.mjs --generate"
+    "dev": "remotion studio src/index.ts",
+    "lint": "eslint src && tsc --noEmit",
+    "explainer:build": "node scripts/build-explainer.mjs --images --voice",
+    "explainer:render": "node scripts/render-explainer.mjs"
   },
   "sideEffects": [
     "*.css"

@@ -2,25 +2,13 @@ node_modules
 node_modules.incomplete
 dist
 .DS_Store
-.env
 
-# Ignore the output video from Git but not videos you import into src/.
-out/*
-!out/
-!out/*.mp4
-!out/*.srt
-!out/*.json
-out/*-draft.mp4
-out/*-silent.mp4
-out/*-draft.json
-out/*-draft.srt
-out/*-silent.json
-out/*-silent.srt
+# Finished videos live in douyin/<id>/; out/ is scratch output.
+out/
+*.raw.mp4
 
 # Local QA screenshots are reproducible and not production artifacts.
 qa/
-qa-transition/
-qa-segmented/
 
 .env
 .env.*
