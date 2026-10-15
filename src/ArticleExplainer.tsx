@@ -6,13 +6,14 @@ import {CutStage, Keyword, KeywordText, LightSweep, Particles, Stamp, anticipate
 
 export type ExplainerScene = {
   id: string; kind: 'hook' | 'intro' | 'chapter' | 'outro'; no?: number;
-  headline: string[]; kicker?: string; quote?: string; disclaimer?: string;
+  headline: string[]; kicker?: string; tagline?: string; quote?: string; disclaimer?: string; recap?: string[];
   /** Main-action beat: a stamp that slams in when `at` (seconds) is spoken. */
   stamp?: {text: string; at: number} | null;
   from: number; durationInFrames: number; images: string[]; imageSwitch: number | null;
 };
 export type ExplainerTimeline = {
-  id: string; title: string; series: string; source: {post: string; author: string; article: string};
+  id: string; title: string; series: string; source: {post: string; author: string; article: string; credit?: string};
+  quoteLabel?: string;
   fps: number; width: number; height: number; durationInFrames: number; chapterCount: number;
   audioSrc: string; music: {src: string; volume: number} | null;
   /** The video's two core nouns, fixed colours A/B everywhere; plus caption emphasis words. */
@@ -104,10 +105,11 @@ const CenterHeadline = ({scene}: {scene: ExplainerScene}) => {
         <Marker p={m}>{scene.headline[1]}</Marker>
       </div>
     </div>
+    {scene.tagline && <div style={{marginTop: 30, fontSize: 44, fontWeight: 700, color: AMBER, opacity: clamp(c)}}>{scene.tagline}</div>}
   </div>;
 };
 
-const QuoteCard = ({text, delay}: {text: string; delay: number}) => {
+const QuoteCard = ({text, delay, label}: {text: string; delay: number; label: string}) => {
   const t = useLocalT();
   const a = enter(t, delay, 0.45, 1.2);
   const sw = sway(t, 1.7, {dy: 3, deg: 0.4, breath: 0.008});
@@ -115,7 +117,7 @@ const QuoteCard = ({text, delay}: {text: string; delay: number}) => {
     opacity: clamp(a * 1.5), transform: `translate(${(1 - a) * -80}px, ${sw.dy}px) rotate(${sw.deg}deg) scale(${sw.s})`,
     background: 'rgba(8,14,28,0.62)', borderLeft: `8px solid ${AMBER}`, borderRadius: 18, padding: '22px 28px',
     boxShadow: '0 10px 40px rgba(0,0,0,0.35)'}}>
-    <div style={{fontSize: 30, fontWeight: 700, color: AMBER, marginBottom: 8, letterSpacing: 2}}>对谈原话</div>
+    <div style={{fontSize: 30, fontWeight: 700, color: AMBER, marginBottom: 8, letterSpacing: 2}}>{label}</div>
     <div style={{fontSize: 42, fontWeight: 500, color: '#f4f6fb', lineHeight: 1.42}}>“{text}”</div>
   </div>;
 };
@@ -124,7 +126,7 @@ const TopBar = ({timeline, current, t}: {timeline: ExplainerTimeline; current: n
   <div style={{position: 'absolute', top: 92, left: 72, right: 72, fontFamily: FONT}}>
     <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 32, fontWeight: 700, color: 'rgba(255,255,255,0.86)'}}>
       <span>{timeline.series}</span>
-      <span style={{fontSize: 26, fontWeight: 500, color: 'rgba(255,255,255,0.6)'}}>整理 @Sunkeke_AI · AI 配图</span>
+      <span style={{fontSize: 26, fontWeight: 500, color: 'rgba(255,255,255,0.6)'}}>{timeline.source.credit ?? timeline.source.author} · AI 配图</span>
     </div>
     <div style={{display: 'flex', gap: 8, marginTop: 18}}>
       {Array.from({length: timeline.chapterCount}, (_, i) => {
@@ -158,12 +160,11 @@ const CaptionLine = ({captions, keywords, t}: {captions: Caption[]; keywords: Ke
   </div>;
 };
 
-const OUTRO_PILLS = ['记录真实数据', '探遍地图', '找价值断点', '练好身体', '坚定执行', '持续更新'];
-
-const OutroSummary = ({beats}: {beats: number[]}) => {
+// Recap pills pop in two per caption beat (recap lines are split on ' · ').
+const RecapPills = ({items, beats}: {items: string[]; beats: number[]}) => {
   const t = useLocalT();
   return <div style={{position: 'absolute', top: 1030, left: 72, right: 150, display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'center', fontFamily: FONT}}>
-    {OUTRO_PILLS.map((label, i) => {
+    {items.map((label, i) => {
       const at = (beats[Math.min(beats.length - 1, Math.floor(i / 2))] ?? 0) + (i % 2) * 0.35;
       const p = enter(t, at, 0.4, 1.7);
       const sw = sway(t, i * 1.3, {dy: 3, deg: 1.2});
@@ -183,12 +184,12 @@ const SceneOverlay = ({scene, timeline}: {scene: ExplainerScene; timeline: Expla
   const beats = timeline.captions.filter((c) => c.startMs / 1000 >= start && c.startMs / 1000 < start + scene.durationInFrames / fps).map((c) => c.startMs / 1000 - start);
   return <AbsoluteFill style={{opacity: out}}>
     {scene.kind === 'chapter' ? <ChapterHeadline scene={scene} total={timeline.chapterCount}/> : <CenterHeadline scene={scene}/>}
-    {scene.quote && <QuoteCard text={scene.quote} delay={Math.min(1.5, beats[1] ?? 1.2)}/>}
-    {scene.stamp && <div style={{position: 'absolute', top: 700, left: 0, right: 90, display: 'flex', justifyContent: 'center'}}>
+    {scene.quote && <QuoteCard text={scene.quote} label={timeline.quoteLabel ?? '原话'} delay={Math.min(1.5, beats[1] ?? 1.2)}/>}
+    {scene.stamp && <div style={{position: 'absolute', top: scene.tagline ? 920 : 700, left: 0, right: 90, display: 'flex', justifyContent: 'center'}}>
       <Stamp t={t} at={scene.stamp.at - start} text={scene.stamp.text} color={AMBER} size={72} deg={-7} font={FONT} style={{position: 'relative'}}/>
     </div>}
     {scene.disclaimer && <div style={{position: 'absolute', top: 1540, left: 0, right: 0, textAlign: 'center', fontFamily: FONT, fontSize: 30, color: 'rgba(255,255,255,0.7)'}}>* {scene.disclaimer}</div>}
-    {scene.kind === 'outro' && <OutroSummary beats={beats}/>}
+    {scene.recap?.length ? <RecapPills items={scene.recap.flatMap((line) => line.split(' · '))} beats={beats}/> : null}
   </AbsoluteFill>;
 };
 

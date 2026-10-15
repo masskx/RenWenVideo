@@ -1,0 +1,416 @@
+{
+  "id": "marketing-engineer",
+  "title": "营销工程师：用 AI Agent 把实验做到 100 倍",
+  "series": "营销工程师实战手册",
+  "source": {
+    "post": "https://x.com/gregisenberg/status/2108188646973313195",
+    "author": "Greg Isenberg @gregisenberg",
+    "article": "Marketing Engineers: 100x More Experiments with AI agents",
+    "credit": "原文 @gregisenberg"
+  },
+  "quoteLabel": "原文金句",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "voice": {
+    "model": "cosyvoice-v3-flash",
+    "voice": "longsanshu_v3",
+    "rate": 1.25,
+    "pitch": 1.0,
+    "volume": 60,
+    "gapSeconds": 0.12
+  },
+  "music": {
+    "tracks": [
+      "audio/music/restart-light-01.mp3",
+      "audio/music/restart-light-02.mp3"
+    ],
+    "crossfadeSeconds": 6,
+    "volume": 0.18
+  },
+  "imageStyle": "cinematic digital illustration, editorial magazine cover art, deep navy and charcoal background with warm amber and electric cyan rim light, volumetric light, soft film grain, rich detail, vertical composition with clear empty space in the upper third, anonymous generic figures only, absolutely no text, no letters, no numbers, no logos, no brand marks, no watermark",
+  "highlights": [
+    {
+      "text": "Agent",
+      "role": "A"
+    },
+    {
+      "text": "客户",
+      "role": "B"
+    }
+  ],
+  "emphasis": [
+    "营销工程师",
+    "上百倍",
+    "一套系统",
+    "等你点头",
+    "千篇一律",
+    "入职培训",
+    "只读",
+    "每个活动一个编号",
+    "真付钱",
+    "原话",
+    "广告标题",
+    "一次只加一个",
+    "工具权限",
+    "代码",
+    "计算器页面",
+    "编辑",
+    "写下原因",
+    "20通录音",
+    "两小时"
+  ],
+  "scenes": [
+    {
+      "id": "hook",
+      "kind": "hook",
+      "headline": [
+        "营销工程师",
+        "一个人顶一个部门"
+      ],
+      "kicker": "AI Agent 营销实战",
+      "tagline": "3 分钟看懂 · 建议收藏",
+      "images": [
+        {
+          "id": "hook",
+          "prompt": "a single marketer at a desk in a dark studio conducting a swarm of small glowing robot assistants, each robot carrying a different marketing asset such as blank ad cards, web page wireframes, envelopes and bar charts, flowing outward like a bright assembly line"
+        }
+      ],
+      "lines": [
+        "下一个最值钱的岗位，可能叫营销工程师",
+        "一个人，带着一群AI Agent",
+        "做营销实验的速度，是传统团队的上百倍"
+      ],
+      "stamp": {
+        "line": 2,
+        "phrase": "上百倍",
+        "text": "100× 速度"
+      }
+    },
+    {
+      "id": "intro",
+      "kind": "intro",
+      "headline": [
+        "营销进化史",
+        "实验成本一直在暴跌"
+      ],
+      "quote": "谁跑的好实验最多，谁就学得最快；谁学得最快，谁就赢。",
+      "images": [
+        {
+          "id": "intro-a",
+          "prompt": "a long corridor of eras seen in perspective: a retro billboard and television studio, then glowing search-ad dashboards, then funnel diagrams and A/B test screens, ending in a bright room full of small AI robot helpers"
+        },
+        {
+          "id": "intro-b",
+          "prompt": "two figures, an idea person holding a lightbulb and a builder holding a wrench, merging into one single glowing figure that holds both"
+        }
+      ],
+      "split": 3,
+      "lines": [
+        "广告狂人时代，一年只有几次出手机会",
+        "搜索广告出现后，每次点击都能算清",
+        "增长黑客时代，每个点子都要排队等工程师",
+        "现在，提想法的人自己就能做出来",
+        "营销的单位，从一次活动变成一套系统"
+      ],
+      "stamp": {
+        "line": 4,
+        "phrase": "一套系统",
+        "text": "活动→系统"
+      }
+    },
+    {
+      "id": "c01",
+      "kind": "chapter",
+      "no": 1,
+      "headline": [
+        "第一步",
+        "搭好你的工作台"
+      ],
+      "images": [
+        {
+          "id": "c01-a",
+          "prompt": "a tiny glowing workspace inside an open paper file folder on a wooden desk, a fast junior robot assistant busily reading and writing documents inside the folder"
+        },
+        {
+          "id": "c01-b",
+          "prompt": "a universal glowing plug hub with cables connecting to many abstract geometric app shapes, a wall clock at seven in the morning, and a large glowing approve button waiting to be pressed"
+        }
+      ],
+      "split": 3,
+      "lines": [
+        "第一步，准备一个Agent工作台",
+        "Claude Code、Codex、Cursor都行",
+        "把它当成住在文件夹里的高速实习生",
+        "再用MCP把CRM、收款、文档接进来",
+        "让它每周一早上自动开工",
+        "但对外发送前，一定要等你点头"
+      ],
+      "stamp": {
+        "line": 5,
+        "phrase": "等你点头",
+        "text": "先审再发"
+      }
+    },
+    {
+      "id": "c02",
+      "kind": "chapter",
+      "no": 2,
+      "headline": [
+        "第二步",
+        "先给AI写一个大脑"
+      ],
+      "quote": "Agent 没问题，问题是上下文太薄。",
+      "images": [
+        {
+          "id": "c02-a",
+          "prompt": "a machine spitting out a pile of identical bland gray paper flyers, repetitive and generic, a disappointed figure looking at the pile"
+        },
+        {
+          "id": "c02-b",
+          "prompt": "a glowing filing cabinet shaped like a brain with six softly colored drawers, a friendly new-hire robot sitting beside it reading onboarding folders"
+        }
+      ],
+      "split": 2,
+      "lines": [
+        "最常见的失败：一上来就开十个Agent",
+        "结果收获一堆千篇一律的废话",
+        "先建一个文件夹，像给新员工做入职培训",
+        "写清公司做什么、卖给谁、能承诺什么",
+        "品牌语气别写形容词，直接贴好坏样例",
+        "再写下创始人观点和踩过的坑"
+      ],
+      "stamp": {
+        "line": 2,
+        "phrase": "入职培训",
+        "text": "入职培训"
+      }
+    },
+    {
+      "id": "c03",
+      "kind": "chapter",
+      "no": 3,
+      "headline": [
+        "第三步",
+        "每个活动一个编号"
+      ],
+      "images": [
+        {
+          "id": "c03-a",
+          "prompt": "streams of data from phone call sound waves, support ticket cards, deal cards and gold coins flowing into one central glowing table"
+        },
+        {
+          "id": "c03-b",
+          "prompt": "a single glowing tag threaded like a bead string through an ad card, a hyperlink chain, an email envelope and a signed contract"
+        }
+      ],
+      "split": 2,
+      "lines": [
+        "接通通话录音、工单、成交和收入数据",
+        "一开始全部只读，写权限要慢慢挣",
+        "最关键的一件小事：每个活动一个编号",
+        "广告、链接、邮件、成交记录都带上它",
+        "才能算清：哪次营销带来了真付钱的客户"
+      ],
+      "stamp": {
+        "line": 2,
+        "phrase": "每个活动一个编号",
+        "text": "一活动一编号"
+      }
+    },
+    {
+      "id": "c04",
+      "kind": "chapter",
+      "no": 4,
+      "headline": [
+        "第四步",
+        "先做客户语言Agent"
+      ],
+      "quote": "人们买的是那个场景，而不是功能。",
+      "images": [
+        {
+          "id": "c04-a",
+          "prompt": "an AI robot reading through a tall stack of call transcripts with a magnifying glass, one single sentence on a page glowing bright amber"
+        },
+        {
+          "id": "c04-b",
+          "prompt": "a tired tradesperson in work clothes at a family dinner table at night, phone ringing beside the plate, warm home lighting, family in soft focus"
+        }
+      ],
+      "split": 3,
+      "lines": [
+        "先把一个Agent做好，再做第二个",
+        "第一个，专门读客户原话",
+        "把最近20到50通销售录音交给它",
+        "第一版大概七成准，错了就改指令",
+        "比如客户总说：受够了吃饭时接电话",
+        "这句话，就是你的广告标题"
+      ],
+      "stamp": {
+        "line": 5,
+        "phrase": "广告标题",
+        "text": "原话=标题"
+      }
+    },
+    {
+      "id": "c05",
+      "kind": "chapter",
+      "no": 5,
+      "headline": [
+        "第五步",
+        "再加五个Agent"
+      ],
+      "images": [
+        {
+          "id": "c05-a",
+          "prompt": "five distinct small robot specialists around a round table, each holding a symbolic tool: a radar dish, a magnifying glass, a paintbrush, a boomerang and a bar chart"
+        },
+        {
+          "id": "c05-b",
+          "prompt": "a Monday morning desk with a short memo card and three stamp blocks shaped as a check mark, a cross and a wrench, coffee steaming beside them"
+        }
+      ],
+      "split": 3,
+      "lines": [
+        "稳定之后，一次只加一个",
+        "触发Agent：盯住刚开新店、刚融资的客户",
+        "搜索Agent：为买前问题做最有用的页面",
+        "创意Agent：换卖点，而不是换五十个标题",
+        "丢单Agent：客户要的功能上线就去提醒",
+        "效果Agent：每周一给出保留或砍掉的结论"
+      ],
+      "stamp": {
+        "line": 0,
+        "phrase": "一次只加一个",
+        "text": "一次加一个"
+      }
+    },
+    {
+      "id": "c06",
+      "kind": "chapter",
+      "no": 6,
+      "headline": [
+        "第六步",
+        "护栏写进工具里"
+      ],
+      "quote": "「发之前先问我」，对模型来说只是一句礼貌的建议。",
+      "images": [
+        {
+          "id": "c06-a",
+          "prompt": "a robot hand reaching for a big glowing red send button, blocked by a transparent glass shield with a padlock"
+        },
+        {
+          "id": "c06-b",
+          "prompt": "a small vault of budget coins with a lock, next to a phone screen showing a large glowing approve button and a waiting progress ring"
+        }
+      ],
+      "split": 2,
+      "lines": [
+        "别指望提示词里那句“先问我”",
+        "真正的护栏，要写进工具权限",
+        "外联Agent只能存草稿，广告默认暂停",
+        "预算上限、黑名单这类硬规则交给代码",
+        "合不合适这种判断，才交给模型"
+      ],
+      "stamp": {
+        "line": 1,
+        "phrase": "工具权限",
+        "text": "护栏进代码"
+      }
+    },
+    {
+      "id": "c07",
+      "kind": "chapter",
+      "no": 7,
+      "headline": [
+        "第七步",
+        "跑通一个完整活动"
+      ],
+      "images": [
+        {
+          "id": "c07-a",
+          "prompt": "an online store owner surrounded by shipping boxes, return labels and receipts, puzzled while looking at a tablet with a big glowing question mark"
+        },
+        {
+          "id": "c07-b",
+          "prompt": "a simple glowing calculator interface floating above a laptop, coins and parcels balanced on a scale, a small team of robots presenting it"
+        }
+      ],
+      "split": 3,
+      "lines": [
+        "比如一家记账公司想接电商客户",
+        "周一，报告发现店主总在问同一句话",
+        "扣掉退货和运费，我到底赚没赚钱？",
+        "周二，各个Agent用这句原话出广告和页面",
+        "周三，你一次审完，砍掉夸大的广告",
+        "两周后，计算器页面转化最好"
+      ],
+      "stamp": {
+        "line": 5,
+        "phrase": "计算器页面",
+        "text": "计算器胜出"
+      }
+    },
+    {
+      "id": "c08",
+      "kind": "chapter",
+      "no": 8,
+      "headline": [
+        "第八步",
+        "每周跑一遍循环"
+      ],
+      "quote": "如果你整天都在修Agent的输出，问题出在上游。",
+      "images": [
+        {
+          "id": "c08-a",
+          "prompt": "a circular track with five glowing stations around it like a weekly loop, a calm editor at the center sorting cards into keep and discard trays"
+        },
+        {
+          "id": "c08-b",
+          "prompt": "a tidy test bench with ten sample cards lined up, a robot checking each one and lighting a small green lamp above it"
+        }
+      ],
+      "split": 2,
+      "lines": [
+        "系统搭好后，你的工作更像编辑",
+        "周一看备忘录做取舍，周四去听销售和客服",
+        "每次否掉一个东西，写下原因放回大脑",
+        "给每个Agent留十个样例，改完就重测"
+      ],
+      "stamp": {
+        "line": 2,
+        "phrase": "写下原因",
+        "text": "写下原因"
+      }
+    },
+    {
+      "id": "outro",
+      "kind": "outro",
+      "headline": [
+        "这周就开始",
+        "先做第一个Agent"
+      ],
+      "recap": [
+        "客户原话 · 活动编号 · 护栏进工具",
+        "先做一个 · 人来批准 · 每周迭代"
+      ],
+      "images": [
+        {
+          "id": "outro",
+          "prompt": "sunrise over a small home office, one person with a laptop and a fleet of tiny glowing robot helpers lined up on the desk ready to launch"
+        }
+      ],
+      "lines": [
+        "做市场的，先用20通录音做客户语言Agent",
+        "做工程的，先旁听5通销售电话",
+        "做老板的，花两小时写下你的观点",
+        "觉得有用，收藏起来，转给做营销的朋友"
+      ],
+      "stamp": {
+        "line": 0,
+        "phrase": "20通录音",
+        "text": "就从这周"
+      }
+    }
+  ]
+}

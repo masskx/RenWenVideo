@@ -16,6 +16,7 @@
 | [`douyin/ai-era-11-rules/`](douyin/ai-era-11-rules/) | 长文讲解：孙宇晨 × 邵艾伦 4 小时对谈，AI 时代年轻人的 11 条反常识 | 3:01 |
 | [`douyin/rea-quickstart/`](douyin/rea-quickstart/) | 教程：REA 保姆级上手（用恐龙小游戏跑通官方案例） | 3:26 |
 | [`douyin/ochiai-claude-code/`](douyin/ochiai-claude-code/) | 教程：落合阳一 × Claude Code，6 个 AI 习惯 | 3:31 |
+| [`douyin/marketing-engineer/`](douyin/marketing-engineer/) | 长文讲解：Greg Isenberg《Marketing Engineers》，用 AI Agent 做营销的 8 步 | 3:10 |
 
 ## 目录结构
 
@@ -44,7 +45,7 @@ src/fx/                          共用动效库：转场、节拍推拉、震�
 scripts/qa/                      出片检查：richness.mjs（丰富度）、scan.mjs（扫片、手机宽度可读性）
 docs/video-craft/                讲解动画规则、动效与画面变化、概念画法
 .claude/skills/video-craft/      给 Claude 的做片工作流和出片检查门槛
-src/Root.tsx                     注册合成：AiEra11Rules、Tutorial、TutorialCover
+src/Root.tsx                     注册合成：AiEra11Rules、MarketingEngineer、Tutorial、TutorialCover
 scripts/run.ps1                  Windows 辅助脚本（项目放在 FAT32/移动盘时使用）
 ```
 
@@ -126,6 +127,7 @@ node scripts/qa/scan.mjs douyin/<id>/video.mp4 --phone=5,60,120  # 缩到 360 �
 | ai-era-11-rules | 12.7 不过 → 17.3 过 |
 | rea-quickstart | 4.4 不过 → 12.8 过 |
 | ochiai-claude-code | 3.4 不过 → 10.6 过 |
+| marketing-engineer | 10.2 不过（25 段几乎不变）→ 16.4 过 |
 
 ## 命令一览
 

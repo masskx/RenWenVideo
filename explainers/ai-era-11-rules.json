@@ -5,8 +5,10 @@
   "source": {
     "post": "https://x.com/Sunkeke_AI/status/2108490720906793005",
     "author": "孙可可 @Sunkeke_AI",
-    "article": "孙宇晨×邵艾伦爆火对谈：年轻人如何抓住 AI 时代的机会？（原稿精华整理版）"
+    "article": "孙宇晨×邵艾伦爆火对谈：年轻人如何抓住 AI 时代的机会？（原稿精华整理版）",
+    "credit": "整理 @Sunkeke_AI"
   },
+  "quoteLabel": "对谈原话",
   "fps": 30,
   "width": 1080,
   "height": 1920,
@@ -505,7 +507,11 @@
         "line": 2,
         "phrase": "旧地图",
         "text": "换新地图"
-      }
+      },
+      "recap": [
+        "记录真实数据 · 探遍地图 · 找价值断点",
+        "练好身体 · 坚定执行 · 持续更新"
+      ]
     }
   ]
 }
