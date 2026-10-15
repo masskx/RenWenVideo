@@ -19,10 +19,11 @@
 | `solitude` | 独处 | 0:33 | 1080×1920 · 25fps | 38.5 MB | 2026-09-19 | 待发布 | [视频](zen/solitude/solitude.mp4) · [字幕](zen/solitude/solitude.srt) |
 | `walk-inward` | 向内走 | 0:33 | 1080×1920 · 25fps | 44.3 MB | 2026-09-19 | 待发布 | [视频](zen/walk-inward/walk-inward.mp4) · [字幕](zen/walk-inward/walk-inward.srt) |
 
-## 科普教程（`tutorials/`）· 1 条
+## 科普教程（`tutorials/`）· 2 条
 
 源配置：`tutorials/<id>/tutorial.json` · 渲染：`npm run tutorial:render -- <id>`
 
 | ID | 标题 | 时长 | 规格 | 大小 | 渲染时间 | 发布 | 文件 |
 |---|---|---|---|---|---|---|---|
+| `ochiai-claude-code` | 落合阳一 × Claude Code | 3:31 | 1080×1920 · 30fps | 42.4 MB | 2026-10-15 | 待发布 | [视频](tutorials/ochiai-claude-code/ochiai-claude-code.mp4) · [封面](tutorials/ochiai-claude-code/ochiai-claude-code-cover.jpg) · [字幕](tutorials/ochiai-claude-code/ochiai-claude-code.srt) · [发布文案](../tutorials/ochiai-claude-code/publish.md) |
 | `rea-quickstart` | REA 保姆级上手 | 3:26 | 1080×1920 · 30fps | 42.8 MB | 2026-10-14 | 待发布 | [视频](tutorials/rea-quickstart/rea-quickstart.mp4) · [封面](tutorials/rea-quickstart/rea-quickstart-cover.jpg) · [字幕](tutorials/rea-quickstart/rea-quickstart.srt) · [发布文案](../tutorials/rea-quickstart/publish.md) |
