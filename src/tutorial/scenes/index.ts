@@ -2,6 +2,7 @@ import React from 'react';
 import {SceneProps} from '../ui';
 import {ochiaiClaudeCodeScenes} from './ochiai-claude-code';
 import {reaQuickstartScenes} from './rea-quickstart';
+import {workbuddySkillsScenes} from './workbuddy-15-skills';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}>;
 
@@ -9,4 +10,5 @@ export type SceneComponent = React.FC<SceneProps & {credit: string}>;
 export const sceneRegistry: Record<string, SceneComponent> = {
   ...reaQuickstartScenes,
   ...ochiaiClaudeCodeScenes,
+  ...workbuddySkillsScenes,
 };

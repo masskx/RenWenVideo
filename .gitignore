@@ -14,3 +14,4 @@ out/
 .env.*
 !.env.example
 public/fonts/*
+__pycache__/

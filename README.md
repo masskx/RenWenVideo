@@ -17,6 +17,7 @@
 | [`douyin/rea-quickstart/`](douyin/rea-quickstart/) | 教程：REA 保姆级上手（用恐龙小游戏跑通官方案例） | 3:26 |
 | [`douyin/ochiai-claude-code/`](douyin/ochiai-claude-code/) | 教程：落合阳一 × Claude Code，6 个 AI 习惯 | 3:31 |
 | [`douyin/marketing-engineer/`](douyin/marketing-engineer/) | 长文讲解：Greg Isenberg《Marketing Engineers》，用 AI Agent 做营销的 8 步 | 3:10 |
+| [`douyin/workbuddy-15-skills/`](douyin/workbuddy-15-skills/) | 教程：WorkBuddy 最值得装的 15 个技能（10 月版） | 3:50 |
 
 ## 目录结构
 
@@ -58,7 +59,7 @@ scripts/run.ps1                  Windows 辅助脚本（项目放在 FAT32/移�
 | 变量 | 用途 |
 | --- | --- |
 | `OPENAI_API_KEY` / `OPENAI_BASE_URL` / `OPENAI_IMAGE_MODEL` | Images2 生图，默认 `gpt-image-2`，输出 1024×1536 |
-| `DASHSCOPE_API_KEY` | 百炼 CosyVoice 配音（长文讲解），音色、语速等参数在 `explainers/<id>.json` 里配置 |
+| `DASHSCOPE_API_KEY` | 百炼 CosyVoice 配音：长文讲解的参数在 `explainers/<id>.json`；教程在 `tutorials/<id>.json` 里加 `tts` 也可以改用它 |
 | `TTS_CA_BUNDLE` | 可选。在使用 TLS 代理的环境里给 edge-tts 指定 CA 证书（教程配音） |
 | `REMOTION_BROWSER_EXECUTABLE` | 可选。Remotion 下载不了 Chrome 时，指定本机 Chrome 或 headless-shell |
 
@@ -100,6 +101,8 @@ npm ci
 教程画面全部由 Remotion 代码绘制，不需要生图。旁白里的 `{a}` 标记会换算成画面动画的触发时间；`[显示|朗读]` 可以让字幕和读音不同，例如 `[9222|九二二二]`。
 
 1. 复制一份 `tutorials/<id>.json`，修改 `id` 和旁白。
+   - 配音默认用 edge-tts（`voice` / `rate`）。想换成百炼 CosyVoice，加上 `"tts": {"provider": "dashscope", "voice": "longsanshu_v3", "rate": 1.22}`：脚本会按标点逐句合成，再切掉每句首尾的静音、补上自然停顿，`{a}` 标记落在句子边界上，所以时间是精确的。
+   - 画面整宽排满的教程，可以用 `"motion": {"amp": 0.05, "drift": 12}` 调小每句换构图的幅度，避免内容碰到画面边缘。
 2. 在 `src/tutorial/scenes/` 新建画面文件 `<id>.tsx`，并在 `scenes/index.ts` 里登记。
 3. 生成配音、底乐，再渲染：
    ```bash
@@ -128,6 +131,7 @@ node scripts/qa/scan.mjs douyin/<id>/video.mp4 --phone=5,60,120  # 缩到 360 �
 | rea-quickstart | 4.4 不过 → 12.8 过 |
 | ochiai-claude-code | 3.4 不过 → 10.6 过 |
 | marketing-engineer | 10.2 不过（25 段几乎不变）→ 16.4 过 |
+| workbuddy-15-skills | 新片，15.9 过 |
 
 ## 命令一览
 

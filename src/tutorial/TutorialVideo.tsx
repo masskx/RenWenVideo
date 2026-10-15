@@ -56,7 +56,7 @@ const Caption: React.FC<{captions: TimedCaption[]}> = ({captions}) => {
 
 // Scene visual with the shared motion layer: entrance, a new framing on every caption line (beatTour) and a
 // slow breath while held (docs/video-craft/动效与画面变化.md §1, §4).
-const SceneVisual: React.FC<{timing: SceneTiming; visual: string; credit: string}> = ({timing, visual, credit}) => {
+const SceneVisual: React.FC<{timing: SceneTiming; visual: string; credit: string; motion?: {amp?: number; drift?: number}}> = ({timing, visual, credit, motion}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const Visual = sceneRegistry[visual];
@@ -65,7 +65,7 @@ const SceneVisual: React.FC<{timing: SceneTiming; visual: string; credit: string
   const beats = useMemo(() => timing.captions.map((c) => c.startMs / 1000), [timing]);
   const enterP = ease.outBack(prog(t, 0, 0.4), 1.2);
   const exit = interpolate(frame, [timing.durationFrames - 8, timing.durationFrames], [1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const bz = beatTour(t, beats, {amp: 0.075, drift: 30});
+  const bz = beatTour(t, beats, {amp: motion?.amp ?? 0.075, drift: motion?.drift ?? 30});
   const sw = sway(t, 0.9, {dy: 3, deg: 0, breath: 0.006});
   return <div style={{position: 'absolute', left: stage.left, top: stage.top, width: stage.width, height: stage.height,
     opacity: Math.min(clamp(enterP * 1.5), exit), transformOrigin: '50% 40%',
@@ -94,7 +94,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
       {timing.scenes.map((s) => {
         const scene = tutorial.scenes.find((x) => x.id === s.id);
         return <Sequence key={s.id} name={s.id} from={s.startFrame} durationInFrames={s.durationFrames}>
-          <SceneVisual timing={s} visual={scene?.visual ?? ''} credit={tutorial.credit} />
+          <SceneVisual timing={s} visual={scene?.visual ?? ''} credit={tutorial.credit} motion={tutorial.motion} />
         </Sequence>;
       })}
     </CutStage>

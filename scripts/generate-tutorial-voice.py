@@ -3,6 +3,13 @@
 Usage:
   python scripts/generate-tutorial-voice.py <id> [--force]     (reads tutorials/<id>.json)
 
+TTS backends (tutorial JSON):
+  "voice"/"rate"                   edge-tts (default), word timings from the service
+  "tts": {"provider": "dashscope", "voice": "longsanshu_v3", "rate": 1.2, "model": "cosyvoice-v3-flash"}
+                                   Alibaba Cloud CosyVoice (DASHSCOPE_API_KEY). Each phrase is synthesized
+                                   separately, so cue marks on phrase boundaries are exact; characters inside a
+                                   phrase are timed proportionally.
+
 Narration markup:
   {a}            cue marker; its time (ms from scene start) is written to timing.cues.a
   [显示|朗读]     caption shows the left side, TTS speaks the right side
@@ -12,6 +19,7 @@ Outputs:
   tutorials/<id>.timeline.json
 """
 import asyncio
+import base64
 import json
 import math
 import os
@@ -19,6 +27,8 @@ import re
 import ssl
 import subprocess
 import sys
+import tempfile
+import urllib.request
 from pathlib import Path
 
 import edge_tts
@@ -178,6 +188,93 @@ async def synthesize(text, voice, rate, out_path):
     return words
 
 
+def load_dotenv():
+    env = ROOT / ".env"
+    if not env.exists():
+        return
+    for line in env.read_text(encoding="utf-8").splitlines():
+        m = re.match(r"\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$", line)
+        if m and m.group(1) not in os.environ:
+            os.environ[m.group(1)] = m.group(2).strip().strip('"').strip("'")
+
+
+def dashscope_phrase(text, tts, out_path):
+    """One CosyVoice request for a short phrase; writes an mp3."""
+    key = os.environ.get("DASHSCOPE_API_KEY")
+    if not key:
+        raise SystemExit("DASHSCOPE_API_KEY is not set (environment or .env)")
+    endpoint = os.environ.get("DASHSCOPE_TTS_ENDPOINT", "https://dashscope.aliyuncs.com/api/v1/services/audio/tts/SpeechSynthesizer")
+    body = {"model": tts.get("model", "cosyvoice-v3-flash"),
+            "input": {"text": text, "voice": tts.get("voice", "longsanshu_v3"), "format": "mp3", "sample_rate": 44100,
+                      "rate": tts.get("rate", 1.0), "pitch": tts.get("pitch", 1.0), "volume": tts.get("volume", 60), "language_hints": ["zh"]}}
+    req = urllib.request.Request(endpoint, data=json.dumps(body).encode(), method="POST",
+                                 headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
+    ctx = ssl.create_default_context(cafile=os.environ.get("SSL_CERT_FILE")) if os.environ.get("SSL_CERT_FILE") else None
+    last = None
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(req, context=ctx, timeout=60) as r:
+                payload = json.loads(r.read())
+            audio = payload.get("output", {}).get("audio", {})
+            if audio.get("data"):
+                data = base64.b64decode(audio["data"])
+            else:
+                with urllib.request.urlopen(audio["url"], context=ctx, timeout=60) as r:
+                    data = r.read()
+            Path(out_path).write_bytes(data)
+            return
+        except Exception as error:  # network hiccups and 429s: back off and retry
+            last = error
+            import time
+            time.sleep(1.5 * (attempt + 1))
+    raise SystemExit(f"DashScope TTS failed for {text!r}: {last}")
+
+
+def phrases(spoken):
+    """Split spoken text after every pause mark; each piece is one TTS request."""
+    out, start = [], 0
+    for i, ch in enumerate(spoken):
+        if ch in BREAK:
+            out.append(spoken[start:i + 1])
+            start = i + 1
+    if spoken[start:].strip():
+        out.append(spoken[start:])
+    return [p for p in out if p.strip(" ，。；：、,;:")]
+
+
+TRIM = ("silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.02,areverse,"
+        "silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.04,areverse")
+
+
+def synthesize_dashscope(text, tts, out_path):
+    """Synthesize phrase by phrase, trim each clip's own lead/tail silence, and join with natural pauses
+    (short after a comma, longer at a sentence end). Returns per-character pseudo word timings."""
+    words, cursor = [], 0.0
+    pause = {"comma": tts.get("commaPauseMs", 120), "stop": tts.get("stopPauseMs", 260)}
+    with tempfile.TemporaryDirectory() as tmp:
+        parts, gaps = [], []
+        for i, phrase in enumerate(phrases(text)):
+            raw = Path(tmp) / f"{i:03d}-raw.mp3"
+            part = Path(tmp) / f"{i:03d}.wav"
+            dashscope_phrase(phrase, tts, raw)
+            subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(raw), "-af", TRIM, "-ar", "44100", "-ac", "2", str(part)], check=True)
+            ms = probe_ms(part)
+            gap_ms = pause["stop"] if phrase.rstrip()[-1:] in SENTENCE_END else pause["comma"]
+            chars = [ch for ch in phrase if ch.strip()]
+            for k, ch in enumerate(chars):
+                words.append({"text": ch, "ms": cursor + ms * k / max(1, len(chars)), "dur": ms / max(1, len(chars))})
+            parts.append(part)
+            gaps.append(gap_ms)
+            cursor += ms + gap_ms
+        inputs, labels = [], []
+        for i, part in enumerate(parts):
+            inputs += ["-i", str(part)]
+            labels.append(f"[{i}:a]aresample=44100,aformat=channel_layouts=stereo,apad=pad_dur={gaps[i] / 1000}[a{i}]")
+        graph = ";".join(labels) + ";" + "".join(f"[a{i}]" for i in range(len(parts))) + f"concat=n={len(parts)}:v=0:a=1[out]"
+        subprocess.run(["ffmpeg", "-y", "-v", "error", *inputs, "-filter_complex", graph, "-map", "[out]", "-c:a", "libmp3lame", "-b:a", "192k", str(out_path)], check=True)
+    return words
+
+
 def probe_ms(path):
     result = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(path)],
                             check=True, capture_output=True, text=True)
@@ -208,6 +305,9 @@ async def main():
     force = "--force" in sys.argv
     spec_path = resolve_tutorial(args[0] if args else None)
     spec = json.loads(spec_path.read_text(encoding="utf-8"))
+    load_dotenv()
+    tts = spec.get("tts") or {"provider": "edge"}
+    voice_key = f"{tts.get('provider')}:{tts.get('voice')}:{tts.get('rate')}" if tts.get("provider") == "dashscope" else f"edge:{spec['voice']}:{spec.get('rate')}"
     audio_dir = ROOT / "public" / "audio" / "tutorials" / spec["id"]
     audio_dir.mkdir(parents=True, exist_ok=True)
     fps, lead, tail = spec["fps"], spec.get("leadMs", 200), spec.get("tailMs", 400)
@@ -217,10 +317,14 @@ async def main():
         rel = f"audio/tutorials/{spec['id']}/{n:02d}-{scene['id']}.mp3"
         mp3 = ROOT / "public" / rel
         words_cache = mp3.with_suffix(".words.json")
-        stale = not words_cache.exists() or json.loads(words_cache.read_text(encoding="utf-8")).get("spoken") != spoken
+        cache = json.loads(words_cache.read_text(encoding="utf-8")) if words_cache.exists() else {}
+        stale = cache.get("spoken") != spoken or cache.get("voice", f"edge:{spec['voice']}:{spec.get('rate')}") != voice_key
         if force or stale or not mp3.exists():
-            words = await synthesize(spoken, spec["voice"], spec.get("rate", "+0%"), mp3)
-            words_cache.write_text(json.dumps({"spoken": spoken, "words": words}, ensure_ascii=False, indent=1), encoding="utf-8")
+            if tts.get("provider") == "dashscope":
+                words = synthesize_dashscope(spoken, tts, mp3)
+            else:
+                words = await synthesize(spoken, spec["voice"], spec.get("rate", "+0%"), mp3)
+            words_cache.write_text(json.dumps({"spoken": spoken, "voice": voice_key, "words": words}, ensure_ascii=False, indent=1), encoding="utf-8")
             print(f"voiced {rel}")
         cached = json.loads(words_cache.read_text(encoding="utf-8"))
         words = align(cached["words"], spoken, to_display)
@@ -240,7 +344,8 @@ async def main():
         scenes.append({"id": scene["id"], "audioSrc": rel, "audioMs": round(audio_ms), "startFrame": start_frame,
                        "durationFrames": duration_frames, "cues": cues, "captions": captions})
         start_frame += duration_frames
-    timing = {"id": spec["id"], "voice": spec["voice"], "rate": spec.get("rate"), "fps": fps, "leadMs": lead,
+    timing = {"id": spec["id"], "voice": tts.get("voice") if tts.get("provider") == "dashscope" else spec["voice"],
+              "rate": tts.get("rate") if tts.get("provider") == "dashscope" else spec.get("rate"), "fps": fps, "leadMs": lead,
               "totalFrames": start_frame, "scenes": scenes}
     out = timeline_path(spec_path)
     out.write_text(json.dumps(timing, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

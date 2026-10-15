@@ -22,6 +22,8 @@ export type Tutorial = {
   source?: string;
   /** Labels for the header step tracker (scene.step 1..n highlights one). */
   steps?: string[];
+  /** Per-line framing tour (fx beatTour); wide layouts need a smaller drift to stay inside the safe area. */
+  motion?: {amp?: number; drift?: number};
   /** Scene id to freeze for the cover image; defaults to the first scene. */
   cover?: string;
   scenes: TutorialScene[];
