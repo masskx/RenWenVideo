@@ -6,7 +6,7 @@ $ErrorActionPreference='Stop'
 $projectDir=Split-Path $PSScriptRoot -Parent
 $runtimeDir=Join-Path $env:LOCALAPPDATA 'zen-video-runtime-20260912'
 New-Item -ItemType Directory -Force -Path $runtimeDir | Out-Null
-foreach ($name in @('src','episodes','tutorials','public','scripts','config','package.json','tsconfig.json','eslint.config.mjs','remotion.config.ts')) {
+foreach ($name in @('src','episodes','explainers','tutorials','public','scripts','config','package.json','tsconfig.json','eslint.config.mjs','remotion.config.ts')) {
   $sourceItem=Get-Item -LiteralPath (Join-Path $projectDir $name)
   $files=if ($sourceItem.PSIsContainer) {Get-ChildItem -LiteralPath $sourceItem.FullName -Recurse -File} else {@($sourceItem)}
   foreach ($file in $files) {
