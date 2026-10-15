@@ -4,11 +4,12 @@ import {Audio} from '@remotion/media';
 
 export type ExplainerScene = {
   id: string; kind: 'hook' | 'intro' | 'chapter' | 'outro'; no?: number;
-  headline: string[]; kicker?: string; quote?: string; disclaimer?: string;
+  headline: string[]; kicker?: string; quote?: string; disclaimer?: string; recap?: string[];
   from: number; durationInFrames: number; images: string[]; imageSwitch: number | null;
 };
 export type ExplainerTimeline = {
-  id: string; title: string; series: string; source: {post: string; author: string; article: string};
+  id: string; title: string; series: string; source: {post: string; author: string; article: string; credit?: string};
+  quoteLabel?: string;
   fps: number; width: number; height: number; durationInFrames: number; chapterCount: number;
   audioSrc: string; music: {src: string; volume: number} | null;
   scenes: ExplainerScene[]; captions: Caption[];
@@ -90,13 +91,13 @@ const CenterHeadline = ({scene}: {scene: ExplainerScene}) => {
   </div>;
 };
 
-const QuoteCard = ({text, delay}: {text: string; delay: number}) => {
+const QuoteCard = ({text, delay, label}: {text: string; delay: number; label: string}) => {
   const a = useEnter(delay);
   return <div style={{position: 'absolute', left: 72, right: 150, top: 1060, fontFamily: FONT,
     opacity: a, transform: `translateY(${(1 - a) * 30}px)`,
     background: 'rgba(8,14,28,0.62)', borderLeft: `8px solid ${AMBER}`, borderRadius: 18, padding: '22px 28px',
     boxShadow: '0 10px 40px rgba(0,0,0,0.35)'}}>
-    <div style={{fontSize: 30, fontWeight: 700, color: AMBER, marginBottom: 8, letterSpacing: 2}}>对谈原话</div>
+    <div style={{fontSize: 30, fontWeight: 700, color: AMBER, marginBottom: 8, letterSpacing: 2}}>{label}</div>
     <div style={{fontSize: 42, fontWeight: 500, color: '#f4f6fb', lineHeight: 1.42}}>“{text}”</div>
   </div>;
 };
@@ -105,7 +106,7 @@ const TopBar = ({timeline, current}: {timeline: ExplainerTimeline; current: numb
   <div style={{position: 'absolute', top: 92, left: 72, right: 72, fontFamily: FONT}}>
     <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 32, fontWeight: 700, color: 'rgba(255,255,255,0.86)'}}>
       <span>{timeline.series}</span>
-      <span style={{fontSize: 26, fontWeight: 500, color: 'rgba(255,255,255,0.6)'}}>整理 @Sunkeke_AI · AI 配图</span>
+      <span style={{fontSize: 26, fontWeight: 500, color: 'rgba(255,255,255,0.6)'}}>{timeline.source.credit ?? timeline.source.author} · AI 配图</span>
     </div>
     <div style={{display: 'flex', gap: 8, marginTop: 18}}>
       {Array.from({length: timeline.chapterCount}, (_, i) => <div key={i} style={{flex: 1, height: 8, borderRadius: 4,
@@ -139,12 +140,11 @@ const SceneOverlay = ({scene, timeline}: {scene: ExplainerScene; timeline: Expla
   const out = interpolate(frame, [scene.durationInFrames - 8, scene.durationInFrames], [1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
   return <AbsoluteFill style={{opacity: out}}>
     {scene.kind === 'chapter' ? <ChapterHeadline scene={scene} total={timeline.chapterCount}/> : <CenterHeadline scene={scene}/>}
-    {scene.quote && <QuoteCard text={scene.quote} delay={Math.min(45, Math.round(scene.durationInFrames * 0.18))}/>}
+    {scene.quote && <QuoteCard text={scene.quote} label={timeline.quoteLabel ?? '原话'} delay={Math.min(45, Math.round(scene.durationInFrames * 0.18))}/>}
     {scene.disclaimer && <div style={{position: 'absolute', top: 1540, left: 0, right: 0, textAlign: 'center', fontFamily: FONT, fontSize: 30, color: 'rgba(255,255,255,0.7)'}}>* {scene.disclaimer}</div>}
-    {scene.kind === 'outro' && <div style={{position: 'absolute', top: 1040, left: 72, right: 72, textAlign: 'center', fontFamily: FONT,
+    {scene.recap?.length && <div style={{position: 'absolute', top: 1040, left: 72, right: 72, textAlign: 'center', fontFamily: FONT,
       background: 'rgba(8,14,28,0.68)', borderRadius: 18, padding: '18px 10px', borderTop: `4px solid ${AMBER}`}}>
-      <div style={{fontSize: 40, fontWeight: 700, color: 'rgba(255,255,255,0.9)', lineHeight: 1.6}}>记录真实数据 · 探遍地图 · 找价值断点</div>
-      <div style={{fontSize: 40, fontWeight: 700, color: 'rgba(255,255,255,0.9)', lineHeight: 1.6}}>练好身体 · 坚定执行 · 持续更新</div>
+      {scene.recap.map((line) => <div key={line} style={{fontSize: 40, fontWeight: 700, color: 'rgba(255,255,255,0.9)', lineHeight: 1.6}}>{line}</div>)}
     </div>}
   </AbsoluteFill>;
 };

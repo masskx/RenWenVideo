@@ -177,7 +177,7 @@ if (config.music?.tracks?.length) {
 }
 
 const timeline = {
-  id, title: config.title, series: config.series, source: config.source,
+  id, title: config.title, series: config.series, source: config.source, quoteLabel: config.quoteLabel,
   fps, width: config.width, height: config.height,
   durationInFrames: Math.round(totalSeconds * fps),
   chapterCount: config.scenes.filter((scene) => scene.kind === 'chapter').length,

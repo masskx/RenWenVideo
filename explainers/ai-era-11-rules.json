@@ -5,8 +5,10 @@
   "source": {
     "post": "https://x.com/Sunkeke_AI/status/2108490720906793005",
     "author": "孙可可 @Sunkeke_AI",
-    "article": "孙宇晨×邵艾伦爆火对谈：年轻人如何抓住 AI 时代的机会？（原稿精华整理版）"
+    "article": "孙宇晨×邵艾伦爆火对谈：年轻人如何抓住 AI 时代的机会？（原稿精华整理版）",
+    "credit": "整理 @Sunkeke_AI"
   },
+  "quoteLabel": "对谈原话",
   "fps": 30,
   "width": 1080,
   "height": 1920,
@@ -156,6 +158,7 @@
     },
     {
       "id": "outro", "kind": "outro",
+      "recap": ["记录真实数据 · 探遍地图 · 找价值断点", "练好身体 · 坚定执行 · 持续更新"],
       "headline": ["别用旧地图", "找新大陆"],
       "images": [{"id": "outro", "prompt": "a young explorer on the bow of a ship at dawn holding an old torn paper map that is glowing and transforming into a holographic digital map, a new continent with light appearing on the horizon"}],
       "lines": ["20岁没人脉、没资源并不可怕", "可怕的是，世界已经变了", "你还在用旧地图找新大陆", "这11条你最认同哪一条？评论区聊聊"]
