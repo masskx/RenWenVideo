@@ -32,7 +32,9 @@
     "tutorial:music": "python scripts/generate-tutorial-music.py",
     "tutorial:render": "node scripts/render-tutorial.mjs",
     "qa:richness": "node scripts/qa/richness.mjs",
-    "qa:scan": "node scripts/qa/scan.mjs"
+    "qa:scan": "node scripts/qa/scan.mjs",
+    "qa:marks": "node scripts/qa/marks.mjs",
+    "qa:palette": "node scripts/qa/palette.mjs"
   },
   "sideEffects": [
     "*.css"

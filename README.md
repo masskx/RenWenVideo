@@ -43,8 +43,8 @@ src/tutorial/                    TutorialVideo 合成、通用 UI、每期画面
 
 # 公共
 src/fx/                          共用动效库：转场、节拍推拉、震屏、印章、粒子、关键词上色（见 docs/video-craft/）
-scripts/qa/                      出片检查：richness.mjs（丰富度）、scan.mjs（扫片、手机宽度可读性）
-docs/video-craft/                讲解动画规则、动效与画面变化、概念画法
+scripts/qa/                      出片检查：richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、palette.mjs（取色）
+docs/video-craft/                讲解动画规则、动效与画面变化、分镜模板、风格词典、风格卡模板、概念画法、踩坑清单
 .claude/skills/video-craft/      给 Claude 的做片工作流和出片检查门槛
 src/Root.tsx                     注册合成：AiEra11Rules、MarketingEngineer、Tutorial、TutorialCover
 scripts/run.ps1                  Windows 辅助脚本（项目放在 FAT32/移动盘时使用）
@@ -123,7 +123,10 @@ npm ci
 node scripts/qa/richness.mjs douyin/<id>/video.mp4             # 丰富度：要显示“判定：过”（相邻 2.5 秒平均变化 ≥ 10，没有几乎不变的段）
 node scripts/qa/scan.mjs douyin/<id>/video.mp4                 # 扫片：每秒 3 帧拼图，查截断、叠字、空白，转场至少 3 种
 node scripts/qa/scan.mjs douyin/<id>/video.mp4 --phone=5,60,120  # 缩到 360 宽（手机屏宽），要读的字必须读得清
+node scripts/qa/marks.mjs douyin/<id>/video.mp4                # 卡点：每个卡点前 0.1 秒没有动作、后 0.35 秒已经出现
 ```
+
+做片流程（分镜 → 风格 → A/B 固定色 → 写画面 → 3 张静帧 → 出片 → 检查 → 发布包）写在 `.claude/skills/video-craft/SKILL.md`，根目录 `CLAUDE.md` 要求每次做片都按它走。分镜写在 `tutorials/<id>.storyboard.md` 或 `explainers/<id>.storyboard.md`（模板：`docs/video-craft/分镜模板.md`，例子：`tutorials/workbuddy-15-skills.storyboard.md`）。想换风格时查 `docs/video-craft/风格词典.md`（27 种风格），照参考图做时用 `node scripts/qa/palette.mjs <参考图>` 取色。
 
 | 视频 | 丰富度（加入 `src/fx` 前 → 后） |
 | --- | --- |
@@ -145,6 +148,8 @@ npm run tutorial:music -- <id>             # 教程底乐
 npm run tutorial:render -- <id> --overwrite  # 渲染教程到 douyin/<id>/（默认 --crf=22）
 npm run qa:richness -- douyin/<id>/video.mp4  # 丰富度检查
 npm run qa:scan -- douyin/<id>/video.mp4      # 扫片
+npm run qa:marks -- douyin/<id>/video.mp4     # 卡点检查
+npm run qa:palette -- <参考图>                 # 取色
 ```
 
 ### Windows / FAT32 磁盘
