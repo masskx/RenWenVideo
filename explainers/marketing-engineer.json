@@ -20,6 +20,7 @@
       "id": "hook", "kind": "hook",
       "headline": ["营销工程师", "一个人顶一个部门"],
       "kicker": "AI Agent 营销实战",
+      "tagline": "3 分钟看懂 · 建议收藏",
       "images": [{"id": "hook", "prompt": "a single marketer at a desk in a dark studio conducting a swarm of small glowing robot assistants, each robot carrying a different marketing asset such as blank ad cards, web page wireframes, envelopes and bar charts, flowing outward like a bright assembly line"}],
       "lines": ["下一个最值钱的岗位，可能叫营销工程师", "一个人，带着一群AI Agent", "做营销实验的速度，是传统团队的上百倍"]
     },
@@ -89,7 +90,7 @@
     {
       "id": "c06", "kind": "chapter", "no": 6,
       "headline": ["第六步", "护栏写进工具里"],
-      "quote": "“发之前先问我”，对模型来说只是一句礼貌的建议。",
+      "quote": "「发之前先问我」，对模型来说只是一句礼貌的建议。",
       "images": [
         {"id": "c06-a", "prompt": "a robot hand reaching for a big glowing red send button, blocked by a transparent glass shield with a padlock"},
         {"id": "c06-b", "prompt": "a small vault of budget coins with a lock, next to a phone screen showing a large glowing approve button and a waiting progress ring"}
@@ -105,7 +106,7 @@
         {"id": "c07-b", "prompt": "a simple glowing calculator interface floating above a laptop, coins and parcels balanced on a scale, a small team of robots presenting it"}
       ],
       "split": 3,
-      "lines": ["比如一家记账公司想接电商客户", "周一，报告发现店主总在问同一句话", "扣掉退货和运费，我到底赚没赚钱？", "周二，各个Agent用这句原话出广告和页面", "周三，你一次审完，砍掉夸大的广告", "两周后，利润计算器页面转化最好"]
+      "lines": ["比如一家记账公司想接电商客户", "周一，报告发现店主总在问同一句话", "扣掉退货和运费，我到底赚没赚钱？", "周二，各个Agent用这句原话出广告和页面", "周三，你一次审完，砍掉夸大的广告", "两周后，计算器页面转化最好"]
     },
     {
       "id": "c08", "kind": "chapter", "no": 8,

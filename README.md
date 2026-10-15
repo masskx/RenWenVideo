@@ -16,6 +16,7 @@
 | [`douyin/ai-era-11-rules/`](douyin/ai-era-11-rules/) | 长文讲解：孙宇晨 × 邵艾伦 4 小时对谈，AI 时代年轻人的 11 条反常识 | 3:01 |
 | [`douyin/rea-quickstart/`](douyin/rea-quickstart/) | 教程：REA 保姆级上手（用恐龙小游戏跑通官方案例） | 3:26 |
 | [`douyin/ochiai-claude-code/`](douyin/ochiai-claude-code/) | 教程：落合阳一 × Claude Code，6 个 AI 习惯 | 3:31 |
+| [`douyin/marketing-engineer/`](douyin/marketing-engineer/) | 长文讲解：Greg Isenberg《Marketing Engineers》，用 AI Agent 做营销的 8 步 | 3:10 |
 
 ## 目录结构
 
@@ -40,7 +41,7 @@ scripts/generate-tutorial-voice.py / generate-tutorial-music.py / render-tutoria
 src/tutorial/                    TutorialVideo 合成、通用 UI、每期画面 scenes/<id>.tsx
 
 # 公共
-src/Root.tsx                     注册合成：AiEra11Rules、Tutorial、TutorialCover
+src/Root.tsx                     注册合成：AiEra11Rules、MarketingEngineer、Tutorial、TutorialCover
 scripts/run.ps1                  Windows 辅助脚本（项目放在 FAT32/移动盘时使用）
 ```
 

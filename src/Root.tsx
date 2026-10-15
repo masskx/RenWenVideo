@@ -4,6 +4,7 @@ import {ArticleExplainer, ExplainerTimeline} from './ArticleExplainer';
 import {TutorialCover, TutorialVideo} from './tutorial/TutorialVideo';
 import {Tutorial, TutorialTiming} from './tutorial/types';
 import aiEra11Rules from '../explainers/ai-era-11-rules.timeline.json';
+import marketingEngineer from '../explainers/marketing-engineer.timeline.json';
 // Studio preview defaults; render-tutorial.mjs passes any tutorials/<id>.json as inputProps.
 import reaQuickstart from '../tutorials/rea-quickstart.json';
 import reaQuickstartTiming from '../tutorials/rea-quickstart.timeline.json';
@@ -11,7 +12,7 @@ import reaQuickstartTiming from '../tutorials/rea-quickstart.timeline.json';
 const reaTutorial = {tutorial: reaQuickstart as Tutorial, timing: reaQuickstartTiming as TutorialTiming};
 
 export const RemotionRoot = () => <>
-  {([['AiEra11Rules', aiEra11Rules]] as const).map(([id, data]) => {
+  {([['AiEra11Rules', aiEra11Rules], ['MarketingEngineer', marketingEngineer]] as const).map(([id, data]) => {
     const timeline = data as ExplainerTimeline;
     return <Composition key={id} id={id} component={ArticleExplainer}
       width={timeline.width} height={timeline.height} fps={timeline.fps}

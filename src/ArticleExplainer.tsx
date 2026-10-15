@@ -4,7 +4,7 @@ import {Audio} from '@remotion/media';
 
 export type ExplainerScene = {
   id: string; kind: 'hook' | 'intro' | 'chapter' | 'outro'; no?: number;
-  headline: string[]; kicker?: string; quote?: string; disclaimer?: string; recap?: string[];
+  headline: string[]; kicker?: string; tagline?: string; quote?: string; disclaimer?: string; recap?: string[];
   from: number; durationInFrames: number; images: string[]; imageSwitch: number | null;
 };
 export type ExplainerTimeline = {
@@ -87,7 +87,7 @@ const CenterHeadline = ({scene}: {scene: ExplainerScene}) => {
     <div style={{fontSize: big ? 118 : 92, fontWeight: 900, lineHeight: 1.16, textShadow: '0 6px 24px rgba(0,0,0,0.7)', opacity: c, transform: `translateY(${(1 - c) * 50}px)`}}>
       <Marker>{scene.headline[1]}</Marker>
     </div>
-    {big && <div style={{marginTop: 30, fontSize: 44, fontWeight: 700, color: AMBER, opacity: c}}>3 分钟看完 · 建议收藏</div>}
+    {scene.tagline && <div style={{marginTop: 30, fontSize: 44, fontWeight: 700, color: AMBER, opacity: c}}>{scene.tagline}</div>}
   </div>;
 };
 

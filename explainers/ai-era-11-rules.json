@@ -18,6 +18,7 @@
   "scenes": [
     {
       "id": "hook", "kind": "hook",
+      "tagline": "3 分钟看完 · 建议收藏",
       "headline": ["4小时对谈", "11条反常识"],
       "kicker": "孙宇晨 × 邵艾伦",
       "images": [{"id": "hook", "prompt": "a young person sitting on a rainy city rooftop at night holding a glowing smartphone, holographic AI data streams and floating screens rising from the phone into the sky, a glowing digital globe, skyline of a huge Chinese city"}],
