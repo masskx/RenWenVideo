@@ -355,7 +355,7 @@ async function renderPublish() {
       <h3>💡 发布流程</h3>
       <ul>
         <li>1. 在视频列表中渲染视频（点击"渲染"按钮）</li>
-        <li>2. 渲染完成后，在 <code>zen-video/out/zen/&lt;id&gt;/</code> 找到 MP4 文件（总目录见 <code>out/INDEX.md</code>）</li>
+        <li>2. 渲染完成后，打开 <code>zen-video/out/</code> 目录找到 MP4 文件</li>
         <li>3. 打开抖音 APP，上传视频并发布</li>
         <li>4. 发布后回到此处，点击"标记已发布"记录状态</li>
       </ul>
@@ -377,7 +377,7 @@ function renderGuide() {
         <li><strong>编辑文案</strong>：在编辑器中修改字幕内容，每行一句话</li>
         <li><strong>调整镜头</strong>：在编辑器中查看镜头序列，可修改每张图的使用时长</li>
         <li><strong>渲染导出</strong>：点击"渲染"生成 1080×1920 MP4；"快速"为 720p 草稿</li>
-        <li><strong>发布</strong>：从 <code>out/&lt;系列&gt;/&lt;id&gt;/</code> 取视频上传抖音，然后在"发布追踪"标记</li>
+        <li><strong>发布</strong>：从 <code>out/</code> 目录取视频上传抖音，然后在"发布追踪"标记</li>
       </ul>
     </div>
 
@@ -420,7 +420,7 @@ PUT  /api/workbench         更新发布状态</pre>
       <ul>
         <li>视频配置：<code>zen-video/episodes/*.json</code></li>
         <li>图片素材：<code>zen-video/public/images/</code></li>
-        <li>渲染输出：<code>zen-video/out/&lt;系列&gt;/&lt;id&gt;/</code>（草稿在其 <code>drafts/</code>，目录总览 <code>out/INDEX.md</code>）</li>
+        <li>渲染输出：<code>zen-video/out/</code></li>
         <li>提示词：<code>zen-video/prompts/</code></li>
       </ul>
     </div>
@@ -706,7 +706,7 @@ function startRenderPoll() {
         renderPollTimer = null;
         hideRenderBar();
         if (status.status === 'done') {
-          showToast('渲染完成！视频已保存到 out/zen/' + status.episodeId + '/ 目录', 'success');
+          showToast('渲染完成！视频已保存到 out/ 目录', 'success');
           if (currentView === 'dashboard') renderDashboard();
           assets = null; // 清缓存
         } else if (status.status === 'error') {
@@ -739,7 +739,7 @@ async function togglePublish(id) {
 function previewVideo(id) {
   // 打开新标签页播放
   const episode = episodes.find((item) => item.id === id);
-  const url = '/api/video-file/' + (episode?.videoPath || `zen/${id}/drafts/${id}-silent.mp4`);
+  const url = '/api/video-file/' + (episode?.videoPath || id + '-silent.mp4');
   window.open(url, '_blank');
 }
 

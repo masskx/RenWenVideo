@@ -1,7 +1,7 @@
 """Generate per-scene narration + caption/cue timing for a tutorial video.
 
 Usage:
-  python scripts/generate-tutorial-voice.py <id> [--force]     (reads tutorials/<id>/tutorial.json)
+  python scripts/generate-tutorial-voice.py <id> [--force]     (reads tutorials/<id>.json)
 
 Narration markup:
   {a}            cue marker; its time (ms from scene start) is written to timing.cues.a
@@ -9,7 +9,7 @@ Narration markup:
 
 Outputs:
   public/audio/tutorials/<id>/<nn>-<scene>.mp3
-  tutorials/<id>/timing.json
+  tutorials/<id>.timeline.json
 """
 import asyncio
 import json
@@ -31,13 +31,15 @@ if _ca and Path(_ca).exists():
     edge_tts.communicate._SSL_CTX = ssl.create_default_context(cafile=_ca)
 
 def resolve_tutorial(arg):
-    """Accept an id ("rea-quickstart"), a folder ("tutorials/rea-quickstart") or a tutorial.json path."""
+    """Accept an id ("rea-quickstart") or a path ("tutorials/rea-quickstart.json")."""
     target = Path(arg or "rea-quickstart")
-    if target.suffix == ".json":
-        return ROOT / target
-    if len(target.parts) == 1:
-        target = Path("tutorials") / target
-    return ROOT / target / "tutorial.json"
+    if target.suffix != ".json":
+        target = Path("tutorials") / f"{target.name}.json"
+    return ROOT / target
+
+
+def timeline_path(spec_path):
+    return spec_path.with_name(f"{spec_path.stem}.timeline.json")
 
 
 TOKEN = re.compile(r"\{([a-z0-9]+)\}|\[([^\]|]+)\|([^\]]+)\]")
@@ -240,7 +242,7 @@ async def main():
         start_frame += duration_frames
     timing = {"id": spec["id"], "voice": spec["voice"], "rate": spec.get("rate"), "fps": fps, "leadMs": lead,
               "totalFrames": start_frame, "scenes": scenes}
-    out = spec_path.with_name("timing.json")
+    out = timeline_path(spec_path)
     out.write_text(json.dumps(timing, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"{len(scenes)} scenes, {start_frame} frames ({start_frame / fps:.1f}s) -> {out.relative_to(ROOT)}")
 

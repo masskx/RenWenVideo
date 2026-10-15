@@ -1,8 +1,14 @@
-# 抖音发布物料 · 落合阳一 × Claude Code
+# 抖音发布包 · 落合阳一 × Claude Code
 
-- 成片：`out/tutorials/ochiai-claude-code/ochiai-claude-code.mp4`（1080×1920 · 30fps · 约 3 分 31 秒）
-- 封面：`out/tutorials/ochiai-claude-code/ochiai-claude-code-cover.jpg`
-- 字幕：`out/tutorials/ochiai-claude-code/ochiai-claude-code.srt`（画面已烧录字幕，SRT 仅备用）
+从落合阳一公开笔记与开源项目里拆出的 6 个 AI 习惯，竖屏 9:16，可以直接发抖音。
+
+| 文件 | 说明 |
+| --- | --- |
+| `video.mp4` | 成片：1080×1920，30fps，H.264 + AAC，211 秒，响度约 -16 LUFS |
+| `cover.jpg` | 封面（1080×1920，取自开场画面） |
+| `subtitles.srt` | 逐句字幕，画面里已经烧录了一份；如果用平台自动字幕，上传这份可以免识别 |
+
+源配置：`tutorials/ochiai-claude-code.json` · 重新渲染：`npm run tutorial:render -- ochiai-claude-code --overwrite`
 
 ## 标题（任选其一，≤ 30 字）
 

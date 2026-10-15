@@ -4,7 +4,7 @@
 
 **Base URL:** `http://localhost:3210`
 
-普通预览不需要本服务：直接打开上级目录的 `workbench.html`，选择 `out/` 文件夹即可（会自动扫描 `out/<系列>/<id>/` 子目录）。
+普通预览不需要本服务：直接打开上级目录的 `workbench.html`，选择 `out/` 文件夹即可。
 
 ## 快速验证
 
@@ -133,5 +133,5 @@ GET /api/spec
 2. 编写文案：`PUT /api/episodes/:id`（更新 captions）
 3. 触发渲染：`POST /api/render`
 4. 轮询状态：`GET /api/render/status`（每2秒）
-5. 渲染完成后，视频在 `zen-video/out/zen/<id>/` 目录；所有成片总览见 `out/INDEX.md`
+5. 渲染完成后，视频在 `zen-video/out/` 目录
 6. 标记发布：`PUT /api/workbench`

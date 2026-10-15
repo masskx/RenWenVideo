@@ -17,9 +17,6 @@ const DATA_FILE = path.join(__dirname, 'data.json');
 const PROVIDERS_FILE = path.join(ROOT, 'config', 'providers.json');
 const VIDEO_PROFILE_FILE = path.join(ROOT, 'config', 'video-profile.json');
 const {assessEpisode, spec: replicationSpec} = require(path.join(ROOT, 'scripts', 'replication-check.cjs'));
-const layout = require(path.join(ROOT, 'scripts', 'output-layout.cjs'));
-// Zen episodes render to out/zen/<id>/<id>.mp4; silent cuts live in that folder's drafts/.
-const episodeVideoFile = (id, ep) => layout.videoFile('zen', id, {silent: !ep.audioSrc}, ROOT);
 
 // Load local credentials for generation helpers without ever sending them to the browser.
 function loadDotEnv(filePath) {
@@ -193,7 +190,7 @@ function listEpisodes() {
       const ep = readJson(path.join(EPISODES_DIR, f));
       const durationSec = (ep.fps > 0) ? ep.shots.reduce((sum, s) => sum + s.duration, 0) / ep.fps : 0;
       const meta = data.episodes[id] || {};
-      const videoFile = episodeVideoFile(id, ep);
+      const videoFile = path.join(OUT_DIR, id + (ep.audioSrc ? '' : '-silent') + '.mp4');
       const hasVideo = fs.existsSync(videoFile);
       const compliance = assessEpisode(ep);
       const media = mediaSummary(ep);
@@ -205,7 +202,7 @@ function listEpisodes() {
         durationSec: Math.round(durationSec * 100) / 100,
         hasAudio: !!ep.audioSrc,
         hasVideo,
-        videoPath: hasVideo ? layout.outRelative(videoFile, ROOT) : null,
+        videoPath: hasVideo ? path.basename(videoFile) : null,
         media,
         compliance,
         published: !!meta.published,
@@ -226,8 +223,8 @@ function getEpisode(id) {
   const episode = readJson(file);
   const data = loadData();
   const meta = data.episodes[id] || {};
-  const videoFile = episodeVideoFile(id, episode);
-  return {...episode, _meta: meta, _hasVideo: fs.existsSync(videoFile), _videoPath: fs.existsSync(videoFile) ? layout.outRelative(videoFile, ROOT) : null, _media: mediaSummary(episode), _compliance: assessEpisode(episode)};
+  const videoFile = path.join(OUT_DIR, id + (episode.audioSrc ? '' : '-silent') + '.mp4');
+  return {...episode, _meta: meta, _hasVideo: fs.existsSync(videoFile), _videoPath: fs.existsSync(videoFile) ? path.basename(videoFile) : null, _media: mediaSummary(episode), _compliance: assessEpisode(episode)};
 }
 
 function createEpisode(body) {
@@ -282,18 +279,15 @@ function listAssets() {
     }
   }
   scan(PUBLIC_DIR);
-  // Also list rendered videos under out/<series>/<id>/ (including drafts/)
-  (function scanOut(dir) {
-    if (!fs.existsSync(dir)) return;
-    for (const item of fs.readdirSync(dir)) {
-      const full = path.join(dir, item);
-      const stats = fs.statSync(full);
-      if (stats.isDirectory()) { scanOut(full); continue; }
-      if (!item.endsWith('.mp4') || item.endsWith('.partial.mp4')) continue;
-      const rel = layout.outRelative(full, ROOT);
-      videos.push({name: item, path: 'out/' + rel, size: stats.size, sizeMB: Math.round(stats.size / 1048576 * 10) / 10, url: '/api/video-file/' + rel, isOutput: true});
+  // Also list videos in out/
+  if (fs.existsSync(OUT_DIR)) {
+    for (const item of fs.readdirSync(OUT_DIR)) {
+      if (item.endsWith('.mp4')) {
+        const stats = fs.statSync(path.join(OUT_DIR, item));
+        videos.push({name: item, path: 'out/' + item, size: stats.size, sizeMB: Math.round(stats.size / 1048576 * 10) / 10, url: '/api/video-file/' + item, isOutput: true});
+      }
     }
-  })(OUT_DIR);
+  }
   return {images: images.sort((a,b) => a.name.localeCompare(b.name)), videos: videos.sort((a,b) => a.name.localeCompare(b.name)), audio};
 }
 
@@ -384,9 +378,8 @@ async function handleApi(req, res, pathname, query) {
   const videoMatch = pathname.match(/^\/api\/video-file\/(.+)$/);
   if (videoMatch && (method === 'GET' || method === 'HEAD')) {
     const fileName = decodeURIComponent(videoMatch[1]);
-    const fullPath = path.resolve(OUT_DIR, fileName);
-    if (!fullPath.startsWith(OUT_DIR + path.sep)) return send(res, 403, {error: 'Forbidden'});
-    if (!fs.existsSync(fullPath) || !fs.statSync(fullPath).isFile()) return send(res, 404, {error: 'Not found'});
+    const fullPath = path.join(OUT_DIR, path.basename(fileName));
+    if (!fs.existsSync(fullPath)) return send(res, 404, {error: 'Not found'});
     res.writeHead(200, {'Content-Type': 'video/mp4'});
     fs.createReadStream(fullPath).pipe(res);
     return;

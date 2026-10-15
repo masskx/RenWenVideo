@@ -41,17 +41,7 @@ try {
   if ($Mode -in @('render','batch')) {
     $outputDir=Join-Path $projectDir 'out'
     New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
-    # Mirror out/<series>/<id>/... back into the project. Loose files at the runtime out/ root are
-    # leftovers from the old flat layout and are skipped; INDEX.md is rebuilt below.
-    $runtimeOut=Join-Path $runtimeDir 'out'
-    Get-ChildItem -LiteralPath $runtimeOut -Recurse -File | Where-Object {$_.Name -notlike '*.partial.mp4'} | ForEach-Object {
-      $relative=$_.FullName.Substring($runtimeOut.Length).TrimStart('\')
-      if ($relative -notlike '*\*') { return }
-      $target=Join-Path $outputDir $relative
-      New-Item -ItemType Directory -Force -Path (Split-Path $target -Parent) | Out-Null
-      Copy-Item -LiteralPath $_.FullName -Destination $target -Force
-    }
-    node (Join-Path $projectDir 'scripts/catalog.mjs')
-    Write-Output "Outputs copied to $outputDir (see out/INDEX.md)"
+    Get-ChildItem -LiteralPath (Join-Path $runtimeDir 'out') -File | Where-Object {$_.Name -notlike '*.partial.mp4'} | Copy-Item -Destination $outputDir -Force
+    Write-Output "Outputs copied to $outputDir"
   }
 } finally { Pop-Location }

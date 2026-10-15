@@ -4,17 +4,18 @@ dist
 .DS_Store
 .env
 
-# Rendered outputs: out/<series>/<id>/ keeps only the final cut, cover, captions and manifest.
-# Draft / silent renders and QA stills go to out/<series>/<id>/drafts/ and stay local.
-out/**
-!out/**/
-!out/INDEX.md
-!out/*/*/*.mp4
-!out/*/*/*.srt
-!out/*/*/*.json
-!out/*/*/*-cover.jpg
-out/**/drafts/
-out/**/*.partial.mp4
+# Ignore the output video from Git but not videos you import into src/.
+out/*
+!out/
+!out/*.mp4
+!out/*.srt
+!out/*.json
+out/*-draft.mp4
+out/*-silent.mp4
+out/*-draft.json
+out/*-draft.srt
+out/*-silent.json
+out/*-silent.srt
 
 # Local QA screenshots are reproducible and not production artifacts.
 qa/

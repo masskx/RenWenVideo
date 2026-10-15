@@ -1,8 +1,14 @@
-# 抖音发布物料 · REA 保姆级上手
+# 抖音发布包 · REA 保姆级上手
 
-- 成片：`out/tutorials/rea-quickstart/rea-quickstart.mp4`（1080×1920 · 30fps · 约 3 分 26 秒）
-- 封面：`out/tutorials/rea-quickstart/rea-quickstart-cover.jpg`
-- 字幕：`out/tutorials/rea-quickstart/rea-quickstart.srt`（画面已烧录字幕，SRT 仅备用）
+用恐龙小游戏跑通 REA 官方案例的 5 步上手教程，竖屏 9:16，可以直接发抖音。
+
+| 文件 | 说明 |
+| --- | --- |
+| `video.mp4` | 成片：1080×1920，30fps，H.264 + AAC，206 秒，响度约 -16 LUFS |
+| `cover.jpg` | 封面（1080×1920，取自开场画面） |
+| `subtitles.srt` | 逐句字幕，画面里已经烧录了一份；如果用平台自动字幕，上传这份可以免识别 |
+
+源配置：`tutorials/rea-quickstart.json` · 重新渲染：`npm run tutorial:render -- rea-quickstart --overwrite`
 
 ## 标题（任选其一，≤ 30 字）
 
