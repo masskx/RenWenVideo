@@ -6,9 +6,10 @@ Remotion project that turns articles and posts into 9:16 Douyin videos. Two pipe
 
 Every time you make, revise or re-render a video in this repo, follow the production rules adapted from [chuspeeism/dashi-animationstyle](https://github.com/chuspeeism/dashi-animationstyle):
 
-- **Invoke the `video-craft` skill first** (`.claude/skills/video-craft/SKILL.md`) and follow its workflow in order: source → style → storyboard with per-shot change lists → A/B colours → build with `src/fx` → 3 stills → full render → QA gates → package.
-- The knowledge base is `docs/video-craft/` (rules, motion, storyboard template, style dictionary, style-card template, concept drawing, known pitfalls). Read the relevant files instead of working from memory.
-- A video is not done, and must not be committed, until `scripts/qa/richness.mjs`, `scripts/qa/marks.mjs`, `scripts/qa/scan.mjs` (sheets and `--phone`) and the format/loudness/size checks all pass.
+- **Invoke the `video-craft` skill first** (`.claude/skills/video-craft/SKILL.md`) and follow its workflow in order: source → reference → director brief → storyboard (subject layers, force & contact frames, phase offsets, SFX per shot) → A/B colours → build with `src/fx` → 3 stills + frame-by-frame look → full render → QA gates → package.
+- **Read `docs/video-craft/导演层.md` first.** It is the director layer adapted from guanmo_ai's article and twoclipping's prompt template: our past videos looked AI-made (synchronized pops, whole-stage push/pull, glow, card stacks, no physics, no sound design). Its ban list and acceptance criteria are mandatory and override older rules where they conflict.
+- The knowledge base is `docs/video-craft/` (director layer, rules, motion, storyboard template, style dictionary, style-card template, concept drawing, known pitfalls). Read the relevant files instead of working from memory.
+- A video is not done, and must not be committed, until `scripts/qa/brief.mjs`, `scripts/qa/richness.mjs`, `scripts/qa/marks.mjs`, `scripts/qa/scan.mjs` (sheets and `--phone`) and the format/loudness/size checks all pass.
 - Write the storyboard to `tutorials/<id>.storyboard.md` or `explainers/<id>.storyboard.md` before scene code.
 - When a new failure mode turns up, add it to `docs/video-craft/踩坑清单.md`.
 

@@ -1,0 +1,998 @@
+{
+  "id": "ai-agent-team",
+  "voice": "longsanshu_v3",
+  "rate": 1.22,
+  "fps": 30,
+  "leadMs": 200,
+  "totalFrames": 6850,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/ai-agent-team/01-hook.mp3",
+      "audioMs": 12957,
+      "startFrame": 0,
+      "durationFrames": 406,
+      "cues": {
+        "a": 2516,
+        "b": 3821,
+        "c": 5170,
+        "d": 8059,
+        "e": 11142,
+        "f": 11972
+      },
+      "captions": [
+        {
+          "text": "你用 AI，是不是还在当胶水？",
+          "startMs": 200,
+          "endMs": 2516
+        },
+        {
+          "text": "在一个窗口查资料",
+          "startMs": 2516,
+          "endMs": 3821
+        },
+        {
+          "text": "到另一个窗口写稿",
+          "startMs": 3821,
+          "endMs": 5170
+        },
+        {
+          "text": "再自己复制",
+          "startMs": 5170,
+          "endMs": 6301
+        },
+        {
+          "text": "粘贴、检查",
+          "startMs": 6301,
+          "endMs": 8059
+        },
+        {
+          "text": "这篇文章换了个做法",
+          "startMs": 8059,
+          "endMs": 9429
+        },
+        {
+          "text": "让 AI 组成一个团队",
+          "startMs": 9429,
+          "endMs": 11142
+        },
+        {
+          "text": "自己交接，你只管拍板",
+          "startMs": 11142,
+          "endMs": 13114
+        }
+      ]
+    },
+    {
+      "id": "idea",
+      "audioSrc": "audio/tutorials/ai-agent-team/02-idea.mp3",
+      "audioMs": 11677,
+      "startFrame": 406,
+      "durationFrames": 368,
+      "cues": {
+        "a": 2638,
+        "b": 4289,
+        "c": 5860,
+        "d": 7669,
+        "e": 10480
+      },
+      "captions": [
+        {
+          "text": "作者 Rahul 用的是",
+          "startMs": 200,
+          "endMs": 1289
+        },
+        {
+          "text": "Teamily AI",
+          "startMs": 1289,
+          "endMs": 2638
+        },
+        {
+          "text": "说白了就是一个群聊",
+          "startMs": 2638,
+          "endMs": 4289
+        },
+        {
+          "text": "一部分群成员是 agent",
+          "startMs": 4289,
+          "endMs": 5860
+        },
+        {
+          "text": "你@谁，谁就干活",
+          "startMs": 5860,
+          "endMs": 7669
+        },
+        {
+          "text": "一个做完",
+          "startMs": 7669,
+          "endMs": 8581
+        },
+        {
+          "text": "下一个直接从群里接着干",
+          "startMs": 8581,
+          "endMs": 10480
+        },
+        {
+          "text": "没人再复制粘贴",
+          "startMs": 10480,
+          "endMs": 11838
+        }
+      ]
+    },
+    {
+      "id": "task",
+      "audioSrc": "audio/tutorials/ai-agent-team/03-task.mp3",
+      "audioMs": 13949,
+      "startFrame": 774,
+      "durationFrames": 436,
+      "cues": {
+        "a": 1791,
+        "b": 3995,
+        "c": 6383,
+        "d": 7612,
+        "e": 8298,
+        "f": 8959,
+        "g": 9648,
+        "h": 10455
+      },
+      "captions": [
+        {
+          "text": "作者拿了个真活来试",
+          "startMs": 200,
+          "endMs": 1791
+        },
+        {
+          "text": "提示词散在几个月的帖子里",
+          "startMs": 1791,
+          "endMs": 3995
+        },
+        {
+          "text": "要做成一页",
+          "startMs": 3995,
+          "endMs": 4950
+        },
+        {
+          "text": "能直接复制的网站",
+          "startMs": 4950,
+          "endMs": 6383
+        },
+        {
+          "text": "拆开是 4 件事",
+          "startMs": 6383,
+          "endMs": 7612
+        },
+        {
+          "text": "调研、写稿",
+          "startMs": 7612,
+          "endMs": 8959
+        },
+        {
+          "text": "建站、审核",
+          "startMs": 8959,
+          "endMs": 10455
+        },
+        {
+          "text": "平常就是 4 个聊天窗口",
+          "startMs": 10455,
+          "endMs": 12600
+        },
+        {
+          "text": "人在中间来回搬",
+          "startMs": 12600,
+          "endMs": 14097
+        }
+      ]
+    },
+    {
+      "id": "roles",
+      "audioSrc": "audio/tutorials/ai-agent-team/04-roles.mp3",
+      "audioMs": 13270,
+      "startFrame": 1210,
+      "durationFrames": 415,
+      "cues": {
+        "a": 2410,
+        "b": 5397,
+        "c": 8039,
+        "d": 10401
+      },
+      "captions": [
+        {
+          "text": "先建群，拉进 4 个 agent",
+          "startMs": 200,
+          "endMs": 2410
+        },
+        {
+          "text": "趋势调研员",
+          "startMs": 2410,
+          "endMs": 3295
+        },
+        {
+          "text": "找粉丝真正收藏的内容",
+          "startMs": 3295,
+          "endMs": 5397
+        },
+        {
+          "text": "文案，页面上的每个字都归它",
+          "startMs": 5397,
+          "endMs": 8039
+        },
+        {
+          "text": "网页开发",
+          "startMs": 8039,
+          "endMs": 8846
+        },
+        {
+          "text": "在 Website Builder 里建站",
+          "startMs": 8846,
+          "endMs": 10401
+        },
+        {
+          "text": "审核编辑，检查一切",
+          "startMs": 10401,
+          "endMs": 12321
+        },
+        {
+          "text": "专门挑刺",
+          "startMs": 12321,
+          "endMs": 13422
+        }
+      ]
+    },
+    {
+      "id": "rules",
+      "audioSrc": "audio/tutorials/ai-agent-team/05-rules.mp3",
+      "audioMs": 14420,
+      "startFrame": 1625,
+      "durationFrames": 450,
+      "cues": {
+        "a": 1725,
+        "b": 3388,
+        "c": 3955,
+        "d": 5066,
+        "e": 6532,
+        "f": 11140
+      },
+      "captions": [
+        {
+          "text": "第一条消息发群规",
+          "startMs": 200,
+          "endMs": 1725
+        },
+        {
+          "text": "每个 agent 写清三件事",
+          "startMs": 1725,
+          "endMs": 3388
+        },
+        {
+          "text": "管什么，输入从哪来",
+          "startMs": 3388,
+          "endMs": 5066
+        },
+        {
+          "text": "做完交接给谁",
+          "startMs": 5066,
+          "endMs": 6532
+        },
+        {
+          "text": "最后一句留给自己",
+          "startMs": 6532,
+          "endMs": 8133
+        },
+        {
+          "text": "我说 ship it 之前",
+          "startMs": 8133,
+          "endMs": 9589
+        },
+        {
+          "text": "什么都不许上线",
+          "startMs": 9589,
+          "endMs": 11140
+        },
+        {
+          "text": "这就是 4 个机器人",
+          "startMs": 11140,
+          "endMs": 13146
+        },
+        {
+          "text": "和一个团队的区别",
+          "startMs": 13146,
+          "endMs": 14571
+        }
+      ]
+    },
+    {
+      "id": "kickoff",
+      "audioSrc": "audio/tutorials/ai-agent-team/06-kickoff.mp3",
+      "audioMs": 9221,
+      "startFrame": 2075,
+      "durationFrames": 294,
+      "cues": {
+        "a": 2094,
+        "b": 3552,
+        "c": 7160,
+        "d": 8191
+      },
+      "captions": [
+        {
+          "text": "接着喂真数据",
+          "startMs": 200,
+          "endMs": 1177
+        },
+        {
+          "text": "别编任务",
+          "startMs": 1177,
+          "endMs": 2094
+        },
+        {
+          "text": "作者导出 X 后台",
+          "startMs": 2094,
+          "endMs": 3552
+        },
+        {
+          "text": "挑出最近 60 天收藏最多的",
+          "startMs": 3552,
+          "endMs": 5877
+        },
+        {
+          "text": "20 条帖子",
+          "startMs": 5877,
+          "endMs": 7160
+        },
+        {
+          "text": "一条消息发出去",
+          "startMs": 7160,
+          "endMs": 8191
+        },
+        {
+          "text": "然后就不打字了",
+          "startMs": 8191,
+          "endMs": 9382
+        }
+      ]
+    },
+    {
+      "id": "pushback",
+      "audioSrc": "audio/tutorials/ai-agent-team/07-pushback.mp3",
+      "audioMs": 9691,
+      "startFrame": 2369,
+      "durationFrames": 308,
+      "cues": {
+        "a": 1424,
+        "b": 5264,
+        "c": 7458
+      },
+      "captions": [
+        {
+          "text": "第一个惊喜来得很早",
+          "startMs": 200,
+          "endMs": 1424
+        },
+        {
+          "text": "文案读完群规就说",
+          "startMs": 1424,
+          "endMs": 3010
+        },
+        {
+          "text": "没有调研，这需求写不了",
+          "startMs": 3010,
+          "endMs": 5264
+        },
+        {
+          "text": "然后点名，找调研员要资料",
+          "startMs": 5264,
+          "endMs": 7458
+        },
+        {
+          "text": "agent 会顶回来",
+          "startMs": 7458,
+          "endMs": 8611
+        },
+        {
+          "text": "这才像个同事",
+          "startMs": 8611,
+          "endMs": 9854
+        }
+      ]
+    },
+    {
+      "id": "chain",
+      "audioSrc": "audio/tutorials/ai-agent-team/08-chain.mp3",
+      "audioMs": 14054,
+      "startFrame": 2677,
+      "durationFrames": 439,
+      "cues": {
+        "a": 1645,
+        "b": 4233,
+        "c": 4957,
+        "d": 5737,
+        "e": 7155,
+        "f": 10480,
+        "g": 12410
+      },
+      "captions": [
+        {
+          "text": "接力正式开始",
+          "startMs": 200,
+          "endMs": 1645
+        },
+        {
+          "text": "调研员发出报告",
+          "startMs": 1645,
+          "endMs": 2820
+        },
+        {
+          "text": "收藏最多的三个话题",
+          "startMs": 2820,
+          "endMs": 4233
+        },
+        {
+          "text": "4.3 万、3.5 万",
+          "startMs": 4233,
+          "endMs": 5737
+        },
+        {
+          "text": "3.3 万次收藏",
+          "startMs": 5737,
+          "endMs": 7155
+        },
+        {
+          "text": "文案照着报告",
+          "startMs": 7155,
+          "endMs": 8243
+        },
+        {
+          "text": "写了 15 条提示词",
+          "startMs": 8243,
+          "endMs": 10480
+        },
+        {
+          "text": "开发没急着动手",
+          "startMs": 10480,
+          "endMs": 11710
+        },
+        {
+          "text": "先发方案",
+          "startMs": 11710,
+          "endMs": 12410
+        },
+        {
+          "text": "还把 3 个问题当众退给文案",
+          "startMs": 12410,
+          "endMs": 14211
+        }
+      ]
+    },
+    {
+      "id": "insight",
+      "audioSrc": "audio/tutorials/ai-agent-team/09-insight.mp3",
+      "audioMs": 13349,
+      "startFrame": 3116,
+      "durationFrames": 418,
+      "cues": {
+        "a": 1697,
+        "b": 2834,
+        "c": 4295,
+        "d": 7694,
+        "f": 8995,
+        "e": 11525
+      },
+      "captions": [
+        {
+          "text": "报告里有一句作者记住了",
+          "startMs": 200,
+          "endMs": 1697
+        },
+        {
+          "text": "炒作帖拿流量",
+          "startMs": 1697,
+          "endMs": 2834
+        },
+        {
+          "text": "教程帖拿收藏",
+          "startMs": 2834,
+          "endMs": 4295
+        },
+        {
+          "text": "一份免费学习资源",
+          "startMs": 4295,
+          "endMs": 5808
+        },
+        {
+          "text": "收藏率 1.89%",
+          "startMs": 5808,
+          "endMs": 7694
+        },
+        {
+          "text": "最火的炒作帖",
+          "startMs": 7694,
+          "endMs": 8995
+        },
+        {
+          "text": "只有 0.17%",
+          "startMs": 8995,
+          "endMs": 11525
+        },
+        {
+          "text": "这一条，决定了页面上放什么",
+          "startMs": 11525,
+          "endMs": 13508
+        }
+      ]
+    },
+    {
+      "id": "block",
+      "audioSrc": "audio/tutorials/ai-agent-team/10-block.mp3",
+      "audioMs": 17607,
+      "startFrame": 3534,
+      "durationFrames": 545,
+      "cues": {
+        "a": 2232,
+        "b": 4837,
+        "c": 7615,
+        "d": 10114,
+        "e": 13619,
+        "f": 15973
+      },
+      "captions": [
+        {
+          "text": "建好第一版",
+          "startMs": 200,
+          "endMs": 1134
+        },
+        {
+          "text": "交给审核员",
+          "startMs": 1134,
+          "endMs": 2232
+        },
+        {
+          "text": "结论：不能上线",
+          "startMs": 2232,
+          "endMs": 3532
+        },
+        {
+          "text": "两个阻断问题",
+          "startMs": 3532,
+          "endMs": 4837
+        },
+        {
+          "text": "页面引用 Anthropic",
+          "startMs": 4837,
+          "endMs": 6565
+        },
+        {
+          "text": "的提示词指南",
+          "startMs": 6565,
+          "endMs": 7615
+        },
+        {
+          "text": "把原文的 Claude",
+          "startMs": 7615,
+          "endMs": 8920
+        },
+        {
+          "text": "写成了 the model",
+          "startMs": 8920,
+          "endMs": 10114
+        },
+        {
+          "text": "就一个词，可它在引号里",
+          "startMs": 10114,
+          "endMs": 11956
+        },
+        {
+          "text": "还署着 Anthropic 的名",
+          "startMs": 11956,
+          "endMs": 13619
+        },
+        {
+          "text": "还有：页面写 16 条",
+          "startMs": 13619,
+          "endMs": 15973
+        },
+        {
+          "text": "实际只有 15 条",
+          "startMs": 15973,
+          "endMs": 17766
+        }
+      ]
+    },
+    {
+      "id": "fix",
+      "audioSrc": "audio/tutorials/ai-agent-team/11-fix.mp3",
+      "audioMs": 16771,
+      "startFrame": 4079,
+      "durationFrames": 520,
+      "cues": {
+        "a": 3385,
+        "b": 4856,
+        "c": 6677,
+        "d": 9081,
+        "e": 11326,
+        "f": 14304
+      },
+      "captions": [
+        {
+          "text": "每一处，它都对照 OpenAI 和",
+          "startMs": 200,
+          "endMs": 1883
+        },
+        {
+          "text": "Anthropic 的线上指南",
+          "startMs": 1883,
+          "endMs": 3385
+        },
+        {
+          "text": "贴出改前、改后",
+          "startMs": 3385,
+          "endMs": 4856
+        },
+        {
+          "text": "开发自己改",
+          "startMs": 4856,
+          "endMs": 5753
+        },
+        {
+          "text": "自己复查",
+          "startMs": 5753,
+          "endMs": 6677
+        },
+        {
+          "text": "测表单，第一次没存进数据库",
+          "startMs": 6677,
+          "endMs": 9081
+        },
+        {
+          "text": "它就一直调",
+          "startMs": 9081,
+          "endMs": 10086
+        },
+        {
+          "text": "直到存进去",
+          "startMs": 10086,
+          "endMs": 11326
+        },
+        {
+          "text": "单个聊天机器人",
+          "startMs": 11326,
+          "endMs": 12564
+        },
+        {
+          "text": "是自己批自己的作业",
+          "startMs": 12564,
+          "endMs": 14304
+        },
+        {
+          "text": "这里写的和查的",
+          "startMs": 14304,
+          "endMs": 15936
+        },
+        {
+          "text": "不是同一个",
+          "startMs": 15936,
+          "endMs": 16920
+        }
+      ]
+    },
+    {
+      "id": "human",
+      "audioSrc": "audio/tutorials/ai-agent-team/12-human.mp3",
+      "audioMs": 16849,
+      "startFrame": 4599,
+      "durationFrames": 523,
+      "cues": {
+        "a": 2746,
+        "b": 4922,
+        "c": 6978,
+        "d": 8229,
+        "i": 10608,
+        "e": 12022,
+        "f": 13315,
+        "g": 14561,
+        "h": 16094
+      },
+      "captions": [
+        {
+          "text": "改到第 8 轮",
+          "startMs": 200,
+          "endMs": 1377
+        },
+        {
+          "text": "agent 还在打磨",
+          "startMs": 1377,
+          "endMs": 2746
+        },
+        {
+          "text": "这时候，就该人来拍板了",
+          "startMs": 2746,
+          "endMs": 4922
+        },
+        {
+          "text": "作者像新访客一样打开页面",
+          "startMs": 4922,
+          "endMs": 6978
+        },
+        {
+          "text": "不知道从哪看起",
+          "startMs": 6978,
+          "endMs": 8229
+        },
+        {
+          "text": "标题还写着“你收藏的帖子”",
+          "startMs": 8229,
+          "endMs": 10608
+        },
+        {
+          "text": "其实是粉丝收藏的",
+          "startMs": 10608,
+          "endMs": 12022
+        },
+        {
+          "text": "作者只发了一条消息",
+          "startMs": 12022,
+          "endMs": 13315
+        },
+        {
+          "text": "照审核意见改",
+          "startMs": 13315,
+          "endMs": 14561
+        },
+        {
+          "text": "顶上加个“从这里开始”",
+          "startMs": 14561,
+          "endMs": 16094
+        },
+        {
+          "text": "然后发布",
+          "startMs": 16094,
+          "endMs": 16991
+        }
+      ]
+    },
+    {
+      "id": "ship",
+      "audioSrc": "audio/tutorials/ai-agent-team/13-ship.mp3",
+      "audioMs": 13897,
+      "startFrame": 5122,
+      "durationFrames": 434,
+      "cues": {
+        "a": 1790,
+        "b": 4120,
+        "c": 6133,
+        "d": 8530,
+        "e": 11311
+      },
+      "captions": [
+        {
+          "text": "开发改完、重测",
+          "startMs": 200,
+          "endMs": 1790
+        },
+        {
+          "text": "然后停下",
+          "startMs": 1790,
+          "endMs": 2668
+        },
+        {
+          "text": "把发布按钮交给作者",
+          "startMs": 2668,
+          "endMs": 4120
+        },
+        {
+          "text": "发不发，是人的事",
+          "startMs": 4120,
+          "endMs": 6133
+        },
+        {
+          "text": "上线后",
+          "startMs": 6133,
+          "endMs": 6866
+        },
+        {
+          "text": "审核员自己打开线上页面",
+          "startMs": 6866,
+          "endMs": 8530
+        },
+        {
+          "text": "五行回复：PASS",
+          "startMs": 8530,
+          "endMs": 11311
+        },
+        {
+          "text": "还真提交了一次表单",
+          "startMs": 11311,
+          "endMs": 12741
+        },
+        {
+          "text": "确认数据库存上了",
+          "startMs": 12741,
+          "endMs": 14053
+        }
+      ]
+    },
+    {
+      "id": "loop",
+      "audioSrc": "audio/tutorials/ai-agent-team/14-loop.mp3",
+      "audioMs": 13662,
+      "startFrame": 5556,
+      "durationFrames": 427,
+      "cues": {
+        "a": 2882,
+        "b": 5041,
+        "c": 5727,
+        "d": 6271,
+        "e": 6943,
+        "f": 8476,
+        "g": 10626
+      },
+      "captions": [
+        {
+          "text": "最后，存成 Loop",
+          "startMs": 200,
+          "endMs": 1985
+        },
+        {
+          "text": "每周照跑",
+          "startMs": 1985,
+          "endMs": 2882
+        },
+        {
+          "text": "在画布上加卡片",
+          "startMs": 2882,
+          "endMs": 4253
+        },
+        {
+          "text": "拖线连起来",
+          "startMs": 4253,
+          "endMs": 5041
+        },
+        {
+          "text": "调研、文案",
+          "startMs": 5041,
+          "endMs": 6271
+        },
+        {
+          "text": "开发，最后一张是作者自己",
+          "startMs": 6271,
+          "endMs": 8476
+        },
+        {
+          "text": "人的卡片只能接收",
+          "startMs": 8476,
+          "endMs": 9672
+        },
+        {
+          "text": "不能往下传",
+          "startMs": 9672,
+          "endMs": 10626
+        },
+        {
+          "text": "所以最后拍板的",
+          "startMs": 10626,
+          "endMs": 12418
+        },
+        {
+          "text": "永远是人",
+          "startMs": 12418,
+          "endMs": 13807
+        }
+      ]
+    },
+    {
+      "id": "lessons",
+      "audioSrc": "audio/tutorials/ai-agent-team/15-lessons.mp3",
+      "audioMs": 15491,
+      "startFrame": 5983,
+      "durationFrames": 482,
+      "cues": {
+        "a": 2773,
+        "b": 4395,
+        "f": 8048,
+        "c": 9354,
+        "d": 10707,
+        "e": 11727
+      },
+      "captions": [
+        {
+          "text": "作者说，有 3 件事会改着来",
+          "startMs": 200,
+          "endMs": 2773
+        },
+        {
+          "text": "第一条消息就给真数据",
+          "startMs": 2773,
+          "endMs": 4395
+        },
+        {
+          "text": "一开工就关掉自动插话",
+          "startMs": 4395,
+          "endMs": 6782
+        },
+        {
+          "text": "不然中途纠正一句",
+          "startMs": 6782,
+          "endMs": 8048
+        },
+        {
+          "text": "会再起一条链",
+          "startMs": 8048,
+          "endMs": 9354
+        },
+        {
+          "text": "给审核员一个终点",
+          "startMs": 9354,
+          "endMs": 10707
+        },
+        {
+          "text": "线上终审",
+          "startMs": 10707,
+          "endMs": 11727
+        },
+        {
+          "text": "5 行内给 PASS 或 FAIL",
+          "startMs": 11727,
+          "endMs": 15636
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "audioSrc": "audio/tutorials/ai-agent-team/16-outro.mp3",
+      "audioMs": 12251,
+      "startFrame": 6465,
+      "durationFrames": 385,
+      "cues": {
+        "a": 3194,
+        "b": 5298,
+        "c": 7709,
+        "d": 8758
+      },
+      "captions": [
+        {
+          "text": "agent 干活",
+          "startMs": 200,
+          "endMs": 1252
+        },
+        {
+          "text": "互相交接、互相挑错",
+          "startMs": 1252,
+          "endMs": 3194
+        },
+        {
+          "text": "人只做一件事",
+          "startMs": 3194,
+          "endMs": 4443
+        },
+        {
+          "text": "拍板",
+          "startMs": 4443,
+          "endMs": 5298
+        },
+        {
+          "text": "你最想把哪份活交给 AI 团队？",
+          "startMs": 5298,
+          "endMs": 7709
+        },
+        {
+          "text": "评论区聊聊",
+          "startMs": 7709,
+          "endMs": 8758
+        },
+        {
+          "text": "内容参考 Rahul 的原文",
+          "startMs": 8758,
+          "endMs": 10138
+        },
+        {
+          "text": "原文是 Teamily AI",
+          "startMs": 10138,
+          "endMs": 11479
+        },
+        {
+          "text": "的合作推广",
+          "startMs": 11479,
+          "endMs": 12400
+        }
+      ]
+    }
+  ]
+}

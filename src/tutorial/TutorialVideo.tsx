@@ -1,13 +1,16 @@
 import React, {useMemo} from 'react';
 import {AbsoluteFill, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Audio} from '@remotion/media';
-import {captionY, color, font, stage} from './theme';
+import {Palette, captionY, color, font, palette, paper, stage} from './theme';
 import {sceneRegistry} from './scenes';
 import {Dino} from './ui';
-import {SceneTiming, TimedCaption, TutorialProps} from './types';
-import {CutStage, Particles, beatTour, clamp, ease, planCuts, prog, sway} from '../fx';
+import {SceneTiming, TimedCaption, Tutorial, TutorialProps} from './types';
+import {CutStage, Particles, beatTour, clamp, ease, follow, hash, planCuts, prog, sway} from '../fx';
 
-const Background: React.FC = () => {
+type Theme = 'dark' | 'paper';
+const themeOf = (tutorial: Tutorial): Theme => tutorial.look?.theme ?? 'dark';
+
+const DarkBackground: React.FC = () => {
   const frame = useCurrentFrame();
   const t = frame / 30;
   return <AbsoluteFill style={{background: color.bg}}>
@@ -18,7 +21,33 @@ const Background: React.FC = () => {
   </AbsoluteFill>;
 };
 
-const Header: React.FC<{title: string; step: number; steps: string[]}> = ({title, step, steps}) => (
+// Paper: warm sheet lit from the top-left, faint fibres drifting slowly (background flows, 导演层 §3),
+// and thin editorial frame ticks. No colour, no glow.
+const FIBRES = Array.from({length: 46}, (_, i) => ({x: hash(i * 3.1) * 1080, y: hash(i * 7.7) * 1920, len: 16 + hash(i * 1.9) * 40,
+  deg: -30 + hash(i * 5.3) * 60, v: 4 + hash(i * 2.3) * 8, a: 0.05 + hash(i * 9.1) * 0.07}));
+const PaperBackground: React.FC = () => {
+  const frame = useCurrentFrame();
+  const t = frame / 30;
+  return <AbsoluteFill style={{background: paper.bg}}>
+    <AbsoluteFill style={{background: `radial-gradient(1400px 1200px at ${22 + Math.sin(t / 7) * 3}% ${12 + Math.cos(t / 9) * 2}%, rgba(255,255,255,0.55), transparent 65%),
+      radial-gradient(1200px 1000px at 90% 95%, rgba(120,100,70,0.10), transparent 70%)`}} />
+    <svg width={1080} height={1920} style={{position: 'absolute', inset: 0}}>
+      {FIBRES.map((p, i) => {
+        const y = (((p.y - t * p.v) % 1920) + 1920) % 1920;
+        const x = p.x + Math.sin(t / 3 + i) * 6;
+        const r = (p.deg * Math.PI) / 180;
+        return <line key={i} x1={x} y1={y} x2={x + Math.cos(r) * p.len} y2={y + Math.sin(r) * p.len} stroke={paper.ink} strokeOpacity={p.a} strokeWidth={1.4} strokeLinecap="round" />;
+      })}
+      {[[60, 150, 1, 1], [1020, 150, -1, 1], [60, 1250, 1, -1], [1020, 1250, -1, -1]].map(([x, y, sx, sy], i) => (
+        <path key={i} d={`M${x} ${y + sy * 26} L${x} ${y} L${x + sx * 26} ${y}`} stroke={paper.ink} strokeOpacity={0.35} strokeWidth={2} fill="none" />
+      ))}
+    </svg>
+  </AbsoluteFill>;
+};
+
+const Background: React.FC<{theme: Theme}> = ({theme}) => (theme === 'paper' ? <PaperBackground /> : <DarkBackground />);
+
+const DarkHeader: React.FC<{title: string; step: number; steps: string[]}> = ({title, step, steps}) => (
   <div style={{position: 'absolute', left: stage.left, width: stage.width, top: 196, display: 'flex', alignItems: 'center', gap: 18}}>
     <div style={{fontFamily: font, fontSize: 30, fontWeight: 800, color: color.text, padding: '8px 22px', borderRadius: 14,
       background: 'rgba(34,211,238,0.14)', border: `2px solid ${color.cyan}66`}}>{title}</div>
@@ -37,13 +66,32 @@ const Header: React.FC<{title: string; step: number; steps: string[]}> = ({title
   </div>
 );
 
-// Highlight latin words and numbers (commands, tool names, values) in captions; the A/B core nouns
-// (tutorial.highlights) take their fixed colours first, exact match, longest first.
+// Editorial header: series title in ink, the steps as a quiet index with the current one set in bold, a hairline.
+const PaperHeader: React.FC<{title: string; step: number; steps: string[]}> = ({title, step, steps}) => (
+  <div style={{position: 'absolute', left: stage.left, width: stage.width, top: 186}}>
+    <div style={{display: 'flex', alignItems: 'baseline', gap: 18}}>
+      <div style={{fontFamily: font, fontSize: 30, fontWeight: 900, color: paper.ink, letterSpacing: 1}}>{title}</div>
+      <div style={{marginLeft: 'auto', display: 'flex', gap: 18, fontFamily: font, fontSize: 26}}>
+        {steps.map((label, i) => {
+          const n = i + 1;
+          return <span key={label} style={{color: n === step ? paper.ink : paper.dim, fontWeight: n === step ? 900 : 500, opacity: n === step ? 1 : 0.75}}>
+            {String(n).padStart(2, '0')} {label}</span>;
+        })}
+      </div>
+    </div>
+    <div style={{height: 2, background: paper.ink, opacity: 0.8, marginTop: 14}} />
+  </div>
+);
+
+const Header: React.FC<{theme: Theme; title: string; step: number; steps: string[]}> = ({theme, ...p}) => (theme === 'paper' ? <PaperHeader {...p} /> : <DarkHeader {...p} />);
+
+// Captions: A/B core nouns (tutorial.highlights) take their fixed colours first, exact match, longest first.
+// The dark look also tints latin words and numbers; the paper look keeps them in ink (≤ 2 accents on screen).
 const TOKEN = /([A-Za-z0-9][A-Za-z0-9.%:\-_/]*)/g;
-const latin = (text: string, key: string) => text.split(TOKEN).map((p, i) => (i % 2
-  ? <span key={`${key}-${i}`} style={{color: color.amber}}>{p}</span>
+const latin = (text: string, key: string, c: string | null) => text.split(TOKEN).map((p, i) => (i % 2 && c
+  ? <span key={`${key}-${i}`} style={{color: c}}>{p}</span>
   : <React.Fragment key={`${key}-${i}`}>{p}</React.Fragment>));
-const Caption: React.FC<{captions: TimedCaption[]; highlights?: {text: string; role: 'A' | 'B'}[]}> = ({captions, highlights = []}) => {
+const Caption: React.FC<{captions: TimedCaption[]; highlights?: {text: string; role: 'A' | 'B'}[]; pal: Palette}> = ({captions, highlights = [], pal}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const ms = frame / fps * 1000;
@@ -56,34 +104,60 @@ const Caption: React.FC<{captions: TimedCaption[]; highlights?: {text: string; r
   for (let i = 0; i < active.text.length;) {
     const hit = keys.find((k) => active.text.startsWith(k.text, i));
     if (hit) {
-      if (buf) parts.push(...latin(buf, `t${i}`));
+      if (buf) parts.push(...latin(buf, `t${i}`, pal.latin));
       buf = '';
-      parts.push(<span key={`k${i}`} style={{color: hit.role === 'A' ? color.keyA : color.keyB}}>{hit.text}</span>);
+      parts.push(<span key={`k${i}`} style={{color: hit.role === 'A' ? pal.keyA : pal.keyB}}>{hit.text}</span>);
       i += hit.text.length;
     } else {
       buf += active.text[i];
       i += 1;
     }
   }
-  if (buf) parts.push(...latin(buf, 'end'));
+  if (buf) parts.push(...latin(buf, 'end', pal.latin));
+  const dark = pal.latin !== null;
   return <div style={{position: 'absolute', top: captionY, left: stage.left - 20, width: stage.width + 40, transform: `translateY(-50%) scale(${pop})`,
-    textAlign: 'center', fontFamily: font, fontWeight: 900, fontSize: 60, whiteSpace: 'nowrap', lineHeight: 1.3, color: '#ffffff', letterSpacing: 1,
-    WebkitTextStroke: '10px #0a0e1a', paintOrder: 'stroke fill', textShadow: '0 6px 20px rgba(0,0,0,0.7)'}}>
+    textAlign: 'center', fontFamily: font, fontWeight: 900, fontSize: 60, whiteSpace: 'nowrap', lineHeight: 1.3, color: pal.text, letterSpacing: 1,
+    WebkitTextStroke: `10px ${pal.stroke}`, paintOrder: 'stroke fill', textShadow: dark ? '0 6px 20px rgba(0,0,0,0.7)' : 'none'}}>
     {parts}
   </div>;
 };
 
-// Scene visual with the shared motion layer: entrance, a new framing on every caption line (beatTour) and a
-// slow breath while held (docs/video-craft/动效与画面变化.md §1, §4).
-const SceneVisual: React.FC<{timing: SceneTiming; visual: string; credit: string; motion?: {amp?: number; drift?: number}}> = ({timing, visual, credit, motion}) => {
+const cueOf = (timing: SceneTiming, fps: number) => (name: string, fallback = 0) => (name in timing.cues ? Math.round(timing.cues[name] / 1000 * fps) : fallback);
+
+// Scene visual. Dark look: the shared motion layer (entrance, a new framing per caption line via beatTour,
+// a slow breath). With look.tour === false the stage stays put and each scene owns its own motion —
+// whole-stage push/pull is on the director layer's ban list (docs/video-craft/导演层.md §8–§9).
+const SceneVisual: React.FC<{timing: SceneTiming; visual: string; credit: string; motion?: {amp?: number; drift?: number}; tour: boolean}> = ({timing, visual, credit, motion, tour}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const Visual = sceneRegistry[visual];
   const t = frame / fps;
-  const cue = (name: string, fallback = 0) => (name in timing.cues ? Math.round(timing.cues[name] / 1000 * fps) : fallback);
+  const cue = cueOf(timing, fps);
   const beats = useMemo(() => timing.captions.map((c) => c.startMs / 1000), [timing]);
-  const enterP = ease.outBack(prog(t, 0, 0.4), 1.2);
   const exit = interpolate(frame, [timing.durationFrames - 8, timing.durationFrames], [1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  if (!tour) {
+    // Motivated camera: the scene says where to look at each event; the camera follows late and critically
+    // damped. Only the picture moves — the frame is clipped above the header and above the caption band.
+    const keys = Visual?.camera?.(cue, timing.durationFrames) ?? [];
+    const cx = follow(t, stage.width / 2, keys.map((k) => ({at: k.at / fps, to: k.x})));
+    const cy = follow(t, stage.height / 2, keys.map((k) => ({at: k.at / fps, to: k.y})));
+    const z = follow(t, 1, keys.map((k) => ({at: k.at / fps, to: k.z})));
+    // Bring the focus part of the way to the centre, so the rest of the layout stays in view.
+    const fx = stage.width / 2 + (cx - stage.width / 2) * 0.55, fy = stage.height / 2 + (cy - stage.height / 2) * 0.55;
+    // Horizontally the whole layout stays on screen (x 24–1000): a sideways pan must never cut a line of text
+    // mid-word or push content under Douyin's button column. Vertical moves crop whole lines through the soft edge.
+    const lo = 24 - stage.left, hi = 1000 - stage.left - stage.width * z;
+    const tx = lo <= hi ? clamp(stage.width / 2 - fx * z, lo, hi) : (lo + hi) / 2;
+    const clipTop = 212, clipBottom = captionY - 84;
+    return <div style={{position: 'absolute', left: 0, top: clipTop, width: 1080, height: clipBottom - clipTop, overflow: 'hidden', opacity: exit,
+      maskImage: 'linear-gradient(180deg, transparent 0, #000 110px, #000 calc(100% - 70px), transparent 100%)'}}>
+      <div style={{position: 'absolute', left: stage.left, top: stage.top - clipTop, width: stage.width, height: stage.height, transformOrigin: '0 0',
+        transform: `translate(${tx}px, ${stage.height / 2 - fy * z}px) scale(${z})`}}>
+        {Visual && <Visual f={frame} dur={timing.durationFrames} cue={cue} credit={credit} />}
+      </div>
+    </div>;
+  }
+  const enterP = ease.outBack(prog(t, 0, 0.4), 1.2);
   const bz = beatTour(t, beats, {amp: motion?.amp ?? 0.075, drift: motion?.drift ?? 30});
   const sw = sway(t, 0.9, {dy: 3, deg: 0, breath: 0.006});
   return <div style={{position: 'absolute', left: stage.left, top: stage.top, width: stage.width, height: stage.height,
@@ -97,32 +171,43 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
   const frame = useCurrentFrame();
   const {durationInFrames, fps, width, height} = useVideoConfig();
   const t = frame / fps;
+  const theme = themeOf(tutorial);
+  const pal = palette(theme);
+  const look = tutorial.look ?? {};
+  const tour = look.tour ?? true;
   const leadFrames = Math.round((timing.leadMs ?? 0) / 1000 * tutorial.fps);
   const stepOf = (id: string) => tutorial.scenes.find((s) => s.id === id)?.step ?? 0;
   // A new step gets a big transition; scenes inside the same step get small ones.
   const cuts = useMemo(() => {
     const list = timing.scenes.slice(1).map((s, i) => ({at: s.startFrame / fps, big: stepOf(s.id) !== stepOf(timing.scenes[i].id)}));
     // The opening is the densest part (a change every 1–1.5 s): reveal the first frame with an iris.
-    return [{at: 0, kind: 'iris' as const}, ...planCuts(list.map((c) => c.at), (i) => list[i].big)];
+    return [{at: 0, kind: 'iris' as const}, ...planCuts(list.map((c) => c.at), (i) => list[i].big, look.cuts)];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timing, tutorial, fps]);
-  return <AbsoluteFill style={{background: color.bg, overflow: 'hidden'}}>
-    <CutStage t={t} cuts={cuts} width={width} height={height} colors={[color.cyan, color.violet, color.bg]} fill={color.bg} paper="#e8ecff">
-      <Background />
-      <Particles t={t} width={width} height={height} kind="glow" n={28} colors={[color.cyan, color.violet, '#ffffff']} area={[0, 260, width, captionY - 110]} alpha={0.4} />
+  const cutColors = theme === 'paper' ? [paper.keyA, paper.ink, paper.bg] : [color.cyan, color.violet, color.bg];
+  return <AbsoluteFill style={{background: pal.bg, overflow: 'hidden'}}>
+    <CutStage t={t} cuts={cuts} width={width} height={height} colors={cutColors} fill={pal.bg} paper={theme === 'paper' ? paper.card : '#e8ecff'}>
+      <Background theme={theme} />
+      {(look.particles ?? true) && <Particles t={t} width={width} height={height} kind="glow" n={28} colors={[color.cyan, color.violet, '#ffffff']} area={[0, 260, width, captionY - 110]} alpha={0.4} />}
       {timing.scenes.map((s) => {
         const scene = tutorial.scenes.find((x) => x.id === s.id);
         return <Sequence key={s.id} name={s.id} from={s.startFrame} durationInFrames={s.durationFrames}>
-          <SceneVisual timing={s} visual={scene?.visual ?? ''} credit={tutorial.credit} motion={tutorial.motion} />
+          <SceneVisual timing={s} visual={scene?.visual ?? ''} credit={tutorial.credit} motion={tutorial.motion} tour={tour} />
         </Sequence>;
       })}
     </CutStage>
     {timing.scenes.map((s) => {
       const scene = tutorial.scenes.find((x) => x.id === s.id);
+      const events = sceneRegistry[scene?.visual ?? '']?.sfx?.(cueOf(s, fps), s.durationFrames) ?? [];
       return <Sequence key={`${s.id}-chrome`} name={`${s.id}-chrome`} from={s.startFrame} durationInFrames={s.durationFrames}>
-        <Header title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />
-        <Caption captions={s.captions} highlights={tutorial.highlights} />
+        <Header theme={theme} title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />
+        <Caption captions={s.captions} highlights={tutorial.highlights} pal={pal} />
         <Sequence from={leadFrames} name={`${s.id}-voice`}><Audio src={staticFile(s.audioSrc)} /></Sequence>
+        {events.filter((e) => e.at >= 0 && e.at < s.durationFrames).map((e, i) => (
+          <Sequence key={`sfx-${i}`} from={e.at} durationInFrames={45} name={`sfx ${e.kind}`}>
+            <Audio src={staticFile(`audio/sfx/${e.kind}.wav`)} volume={() => e.gain ?? 0.3} />
+          </Sequence>
+        ))}
       </Sequence>;
     })}
     {tutorial.musicSrc && <Audio src={staticFile(tutorial.musicSrc)} volume={(f) => {
@@ -141,17 +226,19 @@ export const TutorialCover: React.FC<TutorialProps> = ({tutorial, timing}) => {
   const t = timing.scenes.find((s) => s.id === scene.id) ?? timing.scenes[0];
   const Visual = sceneRegistry[scene.visual];
   const {fps} = useVideoConfig();
-  const cue = (name: string, fallback = 0) => (name in t.cues ? Math.round(t.cues[name] / 1000 * fps) : fallback);
-  return <AbsoluteFill style={{background: color.bg}}>
-    <Background />
-    <Header title={tutorial.title} step={0} steps={tutorial.steps ?? []} />
+  const theme = themeOf(tutorial);
+  const pal = palette(theme);
+  const mascot = tutorial.look?.mascot ?? theme === 'dark';
+  return <AbsoluteFill style={{background: pal.bg}}>
+    <Background theme={theme} />
+    <Header theme={theme} title={tutorial.title} step={0} steps={tutorial.steps ?? []} />
     <div style={{position: 'absolute', left: stage.left, top: stage.top, width: stage.width}}>
-      {Visual && <Visual f={t.durationFrames - 10} dur={t.durationFrames} cue={cue} credit={tutorial.credit} />}
+      {Visual && <Visual f={t.durationFrames - 10} dur={t.durationFrames} cue={cueOf(t, fps)} credit={tutorial.credit} />}
     </div>
     <div style={{position: 'absolute', top: captionY - 40, left: stage.left, width: stage.width, textAlign: 'center', fontFamily: font, fontWeight: 900,
-      fontSize: 66, lineHeight: 1.35, color: '#fff', WebkitTextStroke: '10px #0a0e1a', paintOrder: 'stroke fill'}}>
+      fontSize: 66, lineHeight: 1.35, color: pal.text, WebkitTextStroke: `10px ${pal.stroke}`, paintOrder: 'stroke fill'}}>
       {tutorial.subtitle.split(' · ').map((line) => <div key={line}>{line}</div>)}
     </div>
-    <div style={{position: 'absolute', top: captionY + 150, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}><Dino size={200} run={0} /></div>
+    {mascot && <div style={{position: 'absolute', top: captionY + 150, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}><Dino size={200} run={0} /></div>}
   </AbsoluteFill>;
 };
