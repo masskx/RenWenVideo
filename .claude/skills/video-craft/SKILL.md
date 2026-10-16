@@ -9,6 +9,7 @@ Knowledge lives in `docs/video-craft/` (Chinese) — read the relevant files, do
 
 | File | Read it when |
 | --- | --- |
+| `发布与风格偏好.md` | always, before anything: user feedback — publish on WeChat Channels (verify size/cover specs first; reportedly 6:7 1080×1260), and tech topics need a tech-family look, not paper |
 | `导演层.md` | always, first: why our videos look AI-made, the 8-item brief, order of work, subject / secondary / background and phase offsets, motion chain (anticipation → stretch → impact → squash → overshoot → settle → secondary), physics, one key light, SFX on contact frames, camera, references, ban list, acceptance |
 | `讲解动画规则.md` | always: sizes, contrast, Douyin safe areas, A/B colours (≤ 2 accents on screen), one idea per shot, motion timing |
 | `动效与画面变化.md` | storyboarding and writing scenes: change cadence, transitions, `src/fx` API (springs, toss/drop, squash, follow, ContactShadow, Smear, sfx) |
