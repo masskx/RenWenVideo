@@ -3,7 +3,9 @@ import {Easing, interpolate, spring, useVideoConfig} from 'remotion';
 import {color, font, mono} from './theme';
 import {ease as fxEase, prog as fxProg} from '../fx';
 
-export type SceneProps = {f: number; dur: number; cue: (name: string, fallback?: number) => number};
+/** layer: with a camera, scenes that set a static `hud = true` are drawn twice — 'stage' under the camera, 'hud' fixed
+ * (titles and live numbers that must not be cropped by a camera move). Undefined = draw everything (cover, no camera). */
+export type SceneProps = {f: number; dur: number; cue: (name: string, fallback?: number) => number; layer?: 'stage' | 'hud'};
 
 /**
  * A sound effect placed on a scene frame (导演层 §7). Scenes list them through a static `sfx(cue, dur)` on the

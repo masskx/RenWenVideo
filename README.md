@@ -20,6 +20,7 @@
 | [`douyin/workbuddy-15-skills/`](douyin/workbuddy-15-skills/) | 教程：WorkBuddy 最值得装的 15 个技能（10 月版） | 3:50 |
 | [`douyin/magpie-lessons/`](douyin/magpie-lessons/) | 教程：magpie 的错题本，AI 怎么自己维护项目 | 3:10 |
 | [`douyin/ai-agent-team/`](douyin/ai-agent-team/) | 教程：一个人带 AI 团队，4 个 agent 自己交接、互相挑错（Rahul，原文为 Teamily AI 合作推广）。第一部按导演层做的片子：纸面风格、物理、音效 | 3:48 |
+| [`douyin/tesla-roadster-flight/`](douyin/tesla-roadster-flight/) | 新闻拆解：特斯拉“会飞的车”——新 Roadster 发布会，演示（坡道倒挂翻身、越过车队、0.81 秒）和承诺（2028 投产）分开看。线稿车贯穿全片，标题走 HUD 层 | 2:06 |
 
 ## 目录结构
 
@@ -158,6 +159,7 @@ node scripts/qa/marks.mjs douyin/<id>/video.mp4                # 卡点：每个
 | workbuddy-15-skills | 新片，15.9 过 |
 | magpie-lessons | 新片，12.5 过（卡点 50 个全部对上） |
 | ai-agent-team | 第一版 13.2 过但“AI 味”重；第二版按导演层重做 11.3 过（卡点 92 个对上，导演层检查过） |
+| tesla-roadster-flight | 新片；纸面线稿第一次只有 5.5，给主体分量（实心轮胎、路面）+ 每镜尾巴补真实事件后 10.3 过（卡点 40 个对上） |
 
 ## 命令一览
 
