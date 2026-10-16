@@ -328,9 +328,15 @@ def synthesize_doubao(text, tts, out_path):
     """Doubao (Volcano Engine) TTS v3, whole scene in one request; per-character timestamps via enable_subtitle.
     Default voice: the user's own cloned voice (DOUBAO_VOICE_ZH, resource seed-icl-2.0). Key: DOUBAO_API_KEY."""
     import uuid
-    key = os.environ.get("DOUBAO_API_KEY")
-    if not key:
-        raise SystemExit("DOUBAO_API_KEY is not set (environment or .env)")
+    # Two ways to authenticate (Volcano Engine console): an API key (X-Api-Key), or the app's APP ID + Access
+    # Token (X-Api-App-Id + X-Api-Access-Key) from the app the voices were trained in. App credentials win if set.
+    app_id, token, key = os.environ.get("DOUBAO_APP_ID"), os.environ.get("DOUBAO_ACCESS_TOKEN"), os.environ.get("DOUBAO_API_KEY")
+    if app_id and token:
+        auth = {"X-Api-App-Id": app_id, "X-Api-Access-Key": token}
+    elif key:
+        auth = {"X-Api-Key": key}
+    else:
+        raise SystemExit("Set DOUBAO_API_KEY, or DOUBAO_APP_ID + DOUBAO_ACCESS_TOKEN (environment or .env)")
     voice = tts.get("voice") or os.environ.get(tts.get("voiceEnv", "DOUBAO_VOICE_ZH"))
     if not voice:
         raise SystemExit("No Doubao voice: set tts.voice or DOUBAO_VOICE_ZH")
@@ -348,7 +354,7 @@ def synthesize_doubao(text, tts, out_path):
     last = None
     for attempt in range(4):
         req = urllib.request.Request(endpoint, data=body, method="POST", headers={
-            "Content-Type": "application/json", "X-Api-Key": key, "X-Api-Resource-Id": resource, "X-Api-Request-Id": str(uuid.uuid4())})
+            "Content-Type": "application/json", **auth, "X-Api-Resource-Id": resource, "X-Api-Request-Id": str(uuid.uuid4())})
         audio, words, done = bytearray(), {}, None
         try:
             with urllib.request.urlopen(req, context=ctx, timeout=180) as r:
