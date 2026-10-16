@@ -20,6 +20,16 @@ else {
     for (const [i, name] of items.entries()) if (!new RegExp(`^\\s*${i + 1}\\.\\s*${name}`, 'm').test(brief)) fail.push(`Brief 缺第 ${i + 1} 项「${name}」`);
   }
   if (!/^- 参考：/m.test(md)) warn.push('分镜开头没有写“参考：”（导演层第十节）');
+  // Story first (文案.md): the post is material; the video tells our story from one clear perspective.
+  const card = md.split(/\n## /).find((sec) => sec.startsWith('选题卡'));
+  if (!card) fail.push('分镜里没有“## 选题卡”（文案.md：先定视角、主角、冲突、我们的观点，再写口播）');
+  else {
+    for (const k of ['一句话', '视角', '主角', '冲突', '我们的观点', '观众带走']) {
+      const m = card.match(new RegExp(`^-\\s*${k}[：:]\\s*(.*)$`, 'm'));
+      if (!m || !m[1].trim() || /^<.*>$/.test(m[1].trim())) fail.push(`选题卡缺「${k}」`);
+    }
+    if (!/视角[：:][^\n]*(讲述者|第三方)/.test(card)) fail.push('选题卡的视角要写明“讲述者”或“第三方”');
+  }
   const header = md.split('\n').find((l) => l.startsWith('| 镜头'));
   if (!header) fail.push('分镜里没有“| 镜头 |”开头的镜头表');
   else for (const col of ['主体', '受力', '错相', '音效']) if (!header.includes(col)) fail.push(`镜头表缺“${col}”一列`);
