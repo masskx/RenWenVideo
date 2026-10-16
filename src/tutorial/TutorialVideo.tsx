@@ -1,14 +1,16 @@
 import React, {useMemo} from 'react';
 import {AbsoluteFill, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Audio} from '@remotion/media';
-import {Palette, captionY, color, font, palette, paper, stage} from './theme';
+import {Layout, Palette, blueprint, color, font, layoutOf, mono, palette, paper} from './theme';
 import {sceneRegistry} from './scenes';
 import {Dino} from './ui';
 import {SceneTiming, TimedCaption, Tutorial, TutorialProps} from './types';
 import {CutStage, Particles, beatTour, clamp, ease, follow, hash, planCuts, prog, sway} from '../fx';
 
-type Theme = 'dark' | 'paper';
+type Theme = 'dark' | 'paper' | 'blueprint';
 const themeOf = (tutorial: Tutorial): Theme => tutorial.look?.theme ?? 'dark';
+const LayoutCtx = React.createContext<Layout>(layoutOf(undefined));
+const useLayout = () => React.useContext(LayoutCtx);
 
 const DarkBackground: React.FC = () => {
   const frame = useCurrentFrame();
@@ -45,10 +47,31 @@ const PaperBackground: React.FC = () => {
   </AbsoluteFill>;
 };
 
-const Background: React.FC<{theme: Theme}> = ({theme}) => (theme === 'paper' ? <PaperBackground /> : <DarkBackground />);
+// Blueprint: navy sheet with a fine engineering grid (minor 40 px, major 200 px) that creeps slowly, registration
+// marks at the corners of the safe band, and a mono coordinate scale. Flat — no glow, no gradient labels.
+const BlueprintBackground: React.FC = () => {
+  const frame = useCurrentFrame();
+  const L = useLayout();
+  const off = (frame * 0.25) % 40;
+  const [y0, y1] = L.band ?? [160, 1500];
+  return <AbsoluteFill style={{background: blueprint.bg}}>
+    <svg width={1080} height={1920} style={{position: 'absolute', inset: 0}}>
+      {Array.from({length: 29}, (_, i) => <line key={`v${i}`} x1={i * 40 - off} x2={i * 40 - off} y1={0} y2={1920} stroke={blueprint.grid} strokeWidth={(i * 40) % 200 === 0 ? 2 : 1} />)}
+      {Array.from({length: 50}, (_, i) => <line key={`h${i}`} x1={0} x2={1080} y1={i * 40 + off} y2={i * 40 + off} stroke={blueprint.grid} strokeWidth={(i * 40) % 200 === 0 ? 2 : 1} />)}
+      {[[44, y0 + 14, 1, 1], [1036, y0 + 14, -1, 1], [44, y1 - 14, 1, -1], [1036, y1 - 14, -1, -1]].map(([x, y, sx, sy], i) => (
+        <path key={i} d={`M${x} ${y + sy * 30} L${x} ${y} L${x + sx * 30} ${y}`} stroke={blueprint.dim} strokeOpacity={0.7} strokeWidth={2} fill="none" />
+      ))}
+      {Array.from({length: 10}, (_, i) => <text key={i} x={1052} y={y0 + 60 + i * ((y1 - y0 - 120) / 9)} textAnchor="end" fontFamily={mono} fontSize={14}
+        fill={blueprint.dim} opacity={0.55}>{String(i * 100).padStart(3, '0')}</text>)}
+    </svg>
+  </AbsoluteFill>;
+};
 
-const DarkHeader: React.FC<{title: string; step: number; steps: string[]}> = ({title, step, steps}) => (
-  <div style={{position: 'absolute', left: stage.left, width: stage.width, top: 196, display: 'flex', alignItems: 'center', gap: 18}}>
+const Background: React.FC<{theme: Theme}> = ({theme}) => (theme === 'paper' ? <PaperBackground /> : theme === 'blueprint' ? <BlueprintBackground /> : <DarkBackground />);
+
+const DarkHeader: React.FC<{title: string; step: number; steps: string[]}> = ({title, step, steps}) => {
+  const {stage, headerTop} = useLayout();
+  return <div style={{position: 'absolute', left: stage.left, width: stage.width, top: headerTop + 10, display: 'flex', alignItems: 'center', gap: 18}}>
     <div style={{fontFamily: font, fontSize: 30, fontWeight: 800, color: color.text, padding: '8px 22px', borderRadius: 14,
       background: 'rgba(34,211,238,0.14)', border: `2px solid ${color.cyan}66`}}>{title}</div>
     <div style={{marginLeft: 'auto', display: 'flex', gap: 10}}>
@@ -63,12 +86,13 @@ const DarkHeader: React.FC<{title: string; step: number; steps: string[]}> = ({t
           {active ? `${n} ${label}` : done ? '✓' : n}</div>;
       })}
     </div>
-  </div>
-);
+  </div>;
+};
 
 // Editorial header: series title in ink, the steps as a quiet index with the current one set in bold, a hairline.
-const PaperHeader: React.FC<{title: string; step: number; steps: string[]}> = ({title, step, steps}) => (
-  <div style={{position: 'absolute', left: stage.left, width: stage.width, top: 186}}>
+const PaperHeader: React.FC<{title: string; step: number; steps: string[]}> = ({title, step, steps}) => {
+  const {stage, headerTop} = useLayout();
+  return <div style={{position: 'absolute', left: stage.left, width: stage.width, top: headerTop}}>
     <div style={{display: 'flex', alignItems: 'baseline', gap: 18}}>
       <div style={{fontFamily: font, fontSize: 30, fontWeight: 900, color: paper.ink, letterSpacing: 1}}>{title}</div>
       <div style={{marginLeft: 'auto', display: 'flex', gap: 18, fontFamily: font, fontSize: 26}}>
@@ -80,10 +104,33 @@ const PaperHeader: React.FC<{title: string; step: number; steps: string[]}> = ({
       </div>
     </div>
     <div style={{height: 2, background: paper.ink, opacity: 0.8, marginTop: 14}} />
-  </div>
-);
+  </div>;
+};
 
-const Header: React.FC<{theme: Theme; title: string; step: number; steps: string[]}> = ({theme, ...p}) => (theme === 'paper' ? <PaperHeader {...p} /> : <DarkHeader {...p} />);
+// Engineering title block: series title, the steps as a mono index (current one in ink), a hairline with end ticks.
+const BlueprintHeader: React.FC<{title: string; step: number; steps: string[]}> = ({title, step, steps}) => {
+  const {stage, headerTop} = useLayout();
+  return <div style={{position: 'absolute', left: stage.left, width: stage.width, top: headerTop}}>
+    <div style={{display: 'flex', alignItems: 'baseline', gap: 18}}>
+      <div style={{fontFamily: font, fontSize: 30, fontWeight: 900, color: blueprint.ink, letterSpacing: 1}}>{title}</div>
+      <div style={{marginLeft: 'auto', display: 'flex', gap: 16, fontFamily: font, fontSize: 25}}>
+        {steps.map((label, i) => {
+          const n = i + 1;
+          return <span key={label} style={{color: n === step ? blueprint.ink : blueprint.dim, fontWeight: n === step ? 900 : 500, opacity: n === step ? 1 : 0.8}}>
+            <span style={{fontFamily: mono, fontSize: 21}}>{String(n).padStart(2, '0')}</span> {label}</span>;
+        })}
+      </div>
+    </div>
+    <svg width={stage.width} height={14} style={{display: 'block', marginTop: 10}}>
+      <line x1={0} x2={stage.width} y1={7} y2={7} stroke={blueprint.ink} strokeOpacity={0.7} strokeWidth={2} />
+      <line x1={1} x2={1} y1={0} y2={14} stroke={blueprint.ink} strokeOpacity={0.7} strokeWidth={2} />
+      <line x1={stage.width - 1} x2={stage.width - 1} y1={0} y2={14} stroke={blueprint.ink} strokeOpacity={0.7} strokeWidth={2} />
+    </svg>
+  </div>;
+};
+
+const Header: React.FC<{theme: Theme; title: string; step: number; steps: string[]}> = ({theme, ...p}) => (theme === 'paper' ? <PaperHeader {...p} />
+  : theme === 'blueprint' ? <BlueprintHeader {...p} /> : <DarkHeader {...p} />);
 
 // Captions: A/B core nouns (tutorial.highlights) take their fixed colours first, exact match, longest first.
 // The dark look also tints latin words and numbers; the paper look keeps them in ink (≤ 2 accents on screen).
@@ -94,6 +141,7 @@ const latin = (text: string, key: string, c: string | null) => text.split(TOKEN)
 const Caption: React.FC<{captions: TimedCaption[]; highlights?: {text: string; role: 'A' | 'B'}[]; pal: Palette}> = ({captions, highlights = [], pal}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const {stage, captionY} = useLayout();
   const ms = frame / fps * 1000;
   const active = captions.find((c) => ms >= c.startMs && ms < c.endMs);
   if (!active) return null;
@@ -130,6 +178,9 @@ const cueOf = (timing: SceneTiming, fps: number) => (name: string, fallback = 0)
 const SceneVisual: React.FC<{timing: SceneTiming; visual: string; credit: string; motion?: {amp?: number; drift?: number}; tour: boolean}> = ({timing, visual, credit, motion, tour}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const {stage, captionY, clipTop, band} = useLayout();
+  // The soft top edge ends where the stage starts (the 9:16 layout keeps its original 110 px).
+  const fadeTop = band ? stage.top - clipTop : 110;
   const Visual = sceneRegistry[visual];
   const t = frame / fps;
   const cue = cueOf(timing, fps);
@@ -153,9 +204,9 @@ const SceneVisual: React.FC<{timing: SceneTiming; visual: string; credit: string
     const hz = Math.min(z, 1.05);
     const hx = clamp(stage.width / 2 - fx * hz, 56 - stage.left, Math.max(56 - stage.left, 1000 - stage.left - stage.width * hz));
     const hy = Math.max(0, stage.height / 2 - fy * hz);
-    const clipTop = 212, clipBottom = captionY - 84;
+    const clipBottom = captionY - 84;
     return <><div style={{position: 'absolute', left: 0, top: clipTop, width: 1080, height: clipBottom - clipTop, overflow: 'hidden', opacity: exit,
-      maskImage: 'linear-gradient(180deg, transparent 0, #000 110px, #000 calc(100% - 70px), transparent 100%)'}}>
+      maskImage: `linear-gradient(180deg, transparent 0, #000 ${fadeTop}px, #000 calc(100% - 70px), transparent 100%)`}}>
       <div style={{position: 'absolute', left: stage.left, top: stage.top - clipTop, width: stage.width, height: stage.height, transformOrigin: '0 0',
         transform: `translate(${tx}px, ${stage.height / 2 - fy * z}px) scale(${z})`}}>
         {Visual && <Visual f={frame} dur={timing.durationFrames} cue={cue} credit={credit} layer={Visual.hud ? 'stage' : undefined} />}
@@ -192,11 +243,12 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
     return [{at: 0, kind: 'iris' as const}, ...planCuts(list.map((c) => c.at), (i) => list[i].big, look.cuts)];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timing, tutorial, fps]);
-  const cutColors = theme === 'paper' ? [paper.keyA, paper.ink, paper.bg] : [color.cyan, color.violet, color.bg];
-  return <AbsoluteFill style={{background: pal.bg, overflow: 'hidden'}}>
-    <CutStage t={t} cuts={cuts} width={width} height={height} colors={cutColors} fill={pal.bg} paper={theme === 'paper' ? paper.card : '#e8ecff'}>
+  const L = layoutOf(look.frame);
+  const cutColors = theme === 'paper' ? [paper.keyA, paper.ink, paper.bg] : theme === 'blueprint' ? [blueprint.panelHi, blueprint.line, blueprint.bg] : [color.cyan, color.violet, color.bg];
+  return <LayoutCtx.Provider value={L}><AbsoluteFill style={{background: pal.bg, overflow: 'hidden'}}>
+    <CutStage t={t} cuts={cuts} width={width} height={height} colors={cutColors} fill={pal.bg} paper={theme === 'paper' ? paper.card : theme === 'blueprint' ? blueprint.panel : '#e8ecff'}>
       <Background theme={theme} />
-      {(look.particles ?? true) && <Particles t={t} width={width} height={height} kind="glow" n={28} colors={[color.cyan, color.violet, '#ffffff']} area={[0, 260, width, captionY - 110]} alpha={0.4} />}
+      {(look.particles ?? true) && <Particles t={t} width={width} height={height} kind="glow" n={28} colors={[color.cyan, color.violet, '#ffffff']} area={[0, 260, width, L.captionY - 110]} alpha={0.4} />}
       {timing.scenes.map((s) => {
         const scene = tutorial.scenes.find((x) => x.id === s.id);
         return <Sequence key={s.id} name={s.id} from={s.startFrame} durationInFrames={s.durationFrames}>
@@ -224,7 +276,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
       const fadeOut = Math.min(1, (durationInFrames - f) / 60);
       return Math.max(0, base * Math.min(fadeIn, fadeOut));
     }} />}
-  </AbsoluteFill>;
+  </AbsoluteFill></LayoutCtx.Provider>;
 };
 
 /** Static Douyin cover (封面): the scene named by `tutorial.cover` (default: the first) at its settled state. */
@@ -237,7 +289,9 @@ export const TutorialCover: React.FC<TutorialProps> = ({tutorial, timing}) => {
   const theme = themeOf(tutorial);
   const pal = palette(theme);
   const mascot = tutorial.look?.mascot ?? theme === 'dark';
-  return <AbsoluteFill style={{background: pal.bg}}>
+  const L = layoutOf(tutorial.look?.frame);
+  const {stage, captionY} = L;
+  return <LayoutCtx.Provider value={L}><AbsoluteFill style={{background: pal.bg}}>
     <Background theme={theme} />
     <Header theme={theme} title={tutorial.title} step={0} steps={tutorial.steps ?? []} />
     <div style={{position: 'absolute', left: stage.left, top: stage.top, width: stage.width}}>
@@ -248,5 +302,5 @@ export const TutorialCover: React.FC<TutorialProps> = ({tutorial, timing}) => {
       {tutorial.subtitle.split(' · ').map((line) => <div key={line}>{line}</div>)}
     </div>
     {mascot && <div style={{position: 'absolute', top: captionY + 150, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}><Dino size={200} run={0} /></div>}
-  </AbsoluteFill>;
+  </AbsoluteFill></LayoutCtx.Provider>;
 };

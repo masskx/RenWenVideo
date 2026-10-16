@@ -3,6 +3,7 @@ import {CamKey, SceneProps, SfxEvent} from '../ui';
 import {ochiaiClaudeCodeScenes} from './ochiai-claude-code';
 import {aiAgentTeamScenes} from './ai-agent-team';
 import {teslaRoadsterScenes} from './tesla-roadster-flight';
+import {agentRoadmapScenes} from './agent-engineer-roadmap';
 import {magpieLessonsScenes} from './magpie-lessons';
 import {reaQuickstartScenes} from './rea-quickstart';
 import {workbuddySkillsScenes} from './workbuddy-15-skills';
@@ -18,4 +19,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...magpieLessonsScenes,
   ...aiAgentTeamScenes,
   ...teslaRoadsterScenes,
+  ...agentRoadmapScenes,
 };

@@ -70,6 +70,21 @@ execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', pending, '-c:v', 'copy', '-af
 await unlink(pending);
 console.log(`Saved ${path.relative(root, outputLocation)}`);
 
+// WeChat Channels layout (look.frame "channels"): everything that matters sits in the central 6:7 band, so cut the
+// feed version (1080×1260, y 330) from the 9:16 master, and the 3:4 cover (1080×1440, y 240) from the full cover.
+if (tutorial.look?.frame === 'channels') {
+  const k = draft ? 2 / 3 : 1, r = (v) => Math.round(v * k / 2) * 2;
+  const cut = path.join(outDir, draft ? 'video-draft-6x7.mp4' : 'video-6x7.mp4');
+  execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', outputLocation, '-vf', `crop=${r(1080)}:${r(1260)}:0:${r(330)}`, '-c:v', 'libx264', '-crf', String(crf),
+    '-preset', 'medium', '-pix_fmt', 'yuv420p', '-c:a', 'copy', '-movflags', '+faststart', cut]);
+  console.log(`Saved ${path.relative(root, cut)}`);
+  const full = path.join(outDir, 'cover-9x16.jpg');
+  execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', coverOutput, full]);
+  execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', full, '-vf', 'crop=1080:1440:0:240', '-q:v', '2', coverOutput]);
+  execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', full, '-vf', 'crop=1080:1260:0:330', '-q:v', '2', path.join(outDir, 'cover-6x7.jpg')]);
+  console.log(`Saved cover.jpg (3:4), cover-6x7.jpg, cover-9x16.jpg`);
+}
+
 const stamp = (ms) => {
   const t = Math.round(ms);
   return `${String(Math.floor(t / 3600000)).padStart(2, '0')}:${String(Math.floor(t / 60000) % 60).padStart(2, '0')}:${String(Math.floor(t / 1000) % 60).padStart(2, '0')},${String(t % 1000).padStart(3, '0')}`;
