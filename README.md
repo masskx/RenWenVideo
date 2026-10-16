@@ -57,7 +57,7 @@ scripts/run.ps1                  Windows 辅助脚本（项目放在 FAT32/移�
 
 ## 环境准备
 
-- Node.js 22+ 和 ffmpeg/ffprobe（需要在 PATH 里）；做教程还需要 Python 3 和 `pip install edge-tts numpy`
+- Node.js 22+ 和 ffmpeg/ffprobe（需要在 PATH 里）；做教程还需要 Python 3 和 `pip install edge-tts numpy dashscope`
 - 中文字体：组件按顺序使用 Noto Sans CJK SC、Source Han Sans SC、PingFang SC、Microsoft YaHei，系统里装有其中一个就行
 - 密钥：把 `.env.example` 复制为 `.env` 再填写（`.env` 不会被提交）
 
@@ -106,7 +106,7 @@ npm ci
 教程画面全部由 Remotion 代码绘制，不需要生图。旁白里的 `{a}` 标记会换算成画面动画的触发时间；`[显示|朗读]` 可以让字幕和读音不同，例如 `[9222|九二二二]`。
 
 1. 复制一份 `tutorials/<id>.json`，修改 `id` 和旁白。
-   - 配音默认用 edge-tts（`voice` / `rate`）。想换成百炼 CosyVoice，加上 `"tts": {"provider": "dashscope", "voice": "longsanshu_v3", "rate": 1.22}`：脚本会按标点逐句合成，再切掉每句首尾的静音、补上自然停顿，`{a}` 标记落在句子边界上，所以时间是精确的。
+   - 配音用百炼 TTS：`"tts": {"provider": "dashscope", "model": "qwen-audio-3.1-tts-flash", "voice": "anmingyuan_v3.1", "rate": 1.1}`。每个场景整段一次合成，卡点和字幕时间来自服务端的逐字时间戳；模型、音色、语气指令和读音修正见 `docs/video-craft/配音.md`。（旧的逐句拼接 `"segment": "phrase"` 只留给旧片子；不写 `tts` 时用 edge-tts。）
    - 画面整宽排满的教程，可以用 `"motion": {"amp": 0.05, "drift": 12}` 调小每句换构图的幅度，避免内容碰到画面边缘。
 2. 在 `src/tutorial/scenes/` 新建画面文件 `<id>.tsx`，并在 `scenes/index.ts` 里登记。
 3. 生成配音、底乐，再渲染：

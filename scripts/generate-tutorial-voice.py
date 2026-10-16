@@ -5,10 +5,16 @@ Usage:
 
 TTS backends (tutorial JSON):
   "voice"/"rate"                   edge-tts (default), word timings from the service
-  "tts": {"provider": "dashscope", "voice": "longsanshu_v3", "rate": 1.2, "model": "cosyvoice-v3-flash"}
-                                   Alibaba Cloud CosyVoice (DASHSCOPE_API_KEY). Each phrase is synthesized
-                                   separately, so cue marks on phrase boundaries are exact; characters inside a
-                                   phrase are timed proportionally.
+  "tts": {"provider": "dashscope", "model": "qwen-audio-3.1-tts-flash", "voice": "anmingyuan_v3.1", "rate": 1.1,
+          "instruction": "…", "segment": "scene"}
+                                   Alibaba Cloud Model Studio TTS (DASHSCOPE_API_KEY): CosyVoice and Qwen-Audio-TTS.
+                                   segment "scene" (default): the whole scene is ONE request over the WebSocket API,
+                                   so prosody runs across sentences like a real read; cue and caption times come
+                                   from the service's per-character timestamps (word_timestamp_enabled).
+                                   segment "phrase" (legacy, the old videos): every comma/full-stop phrase is a
+                                   separate request, joined with fixed pauses — exact cues, but each phrase is read
+                                   as its own utterance (pitch resets, choppy). Don't use it for new videos.
+                                   Voices, models and pronunciation fixes: docs/video-craft/配音.md
 
 Narration markup:
   {a}            cue marker; its time (ms from scene start) is written to timing.cues.a
@@ -230,6 +236,86 @@ def dashscope_phrase(text, tts, out_path):
     raise SystemExit(f"DashScope TTS failed for {text!r}: {last}")
 
 
+def synthesize_scene(text, tts, out_path):
+    """The whole scene in one WebSocket request (CosyVoice / Qwen-Audio-TTS), with per-character timestamps.
+    Returns one timing entry per non-space character of `text`, in order."""
+    try:
+        import dashscope
+        from dashscope.audio.tts_v2 import AudioFormat, ResultCallback, SpeechSynthesizer
+    except ImportError:
+        raise SystemExit("pip install dashscope  (needed for segment: scene)")
+    if not os.environ.get("DASHSCOPE_API_KEY"):
+        raise SystemExit("DASHSCOPE_API_KEY is not set (environment or .env)")
+    dashscope.api_key = os.environ["DASHSCOPE_API_KEY"]
+
+    class Collect(ResultCallback):
+        def __init__(self):
+            self.audio, self.sentences, self.error = bytearray(), {}, None
+
+        def on_data(self, data):
+            self.audio += data
+
+        def on_event(self, message):
+            sentence = (json.loads(message).get("payload", {}).get("output", {}) or {}).get("sentence") or {}
+            if sentence.get("words"):  # the same sentence arrives several times; keep the last (complete) one
+                self.sentences[sentence.get("index", 0)] = sentence["words"]
+
+        def on_error(self, message):
+            self.error = str(message)[:400]
+
+    last = None
+    for attempt in range(4):
+        cb = Collect()
+        kw = dict(model=tts.get("model", "qwen-audio-3.1-tts-flash"), voice=tts.get("voice", "anmingyuan_v3.1"),
+                  format=AudioFormat.WAV_44100HZ_MONO_16BIT, callback=cb, speech_rate=tts.get("rate", 1.0),
+                  pitch_rate=tts.get("pitch", 1.0), volume=tts.get("volume", 60),
+                  additional_params={"word_timestamp_enabled": True, **(tts.get("params") or {})})
+        if tts.get("instruction"):
+            kw["instruction"] = tts["instruction"]
+        try:
+            synth = SpeechSynthesizer(**kw)
+            synth.streaming_call(text)
+            synth.streaming_complete()
+        except Exception as error:  # network hiccups and rate limits: back off and retry
+            cb.error = cb.error or str(error)[:400]
+        if not cb.error and cb.audio:
+            break
+        last = cb.error
+        import time
+        time.sleep(2 * (attempt + 1))
+    else:
+        raise SystemExit(f"DashScope TTS failed for scene {text[:30]!r}…: {last}")
+    with tempfile.TemporaryDirectory() as tmp:
+        wav = Path(tmp) / "scene.wav"
+        wav.write_bytes(bytes(cb.audio))
+        # trim only the tail: the head stays, so the service's timestamps need no shift
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(wav), "-af", TAIL_TRIM, "-ar", "44100", "-ac", "2",
+                        "-c:a", "libmp3lame", "-b:a", "192k", str(out_path)], check=True)
+    service = [w for k in sorted(cb.sentences) for w in cb.sentences[k]]
+    # Walk the service's words against our text: same characters advance together; where the service normalized
+    # something ("3" read as "三", "AI" split oddly) the text pointer still advances one character per character.
+    chars = [(i, ch) for i, ch in enumerate(text) if not ch.isspace()]
+    out, k = [], 0
+    for w in service:
+        piece = [ch for ch in w["text"] if not ch.isspace()]
+        if not piece:
+            continue
+        dur = max(1, w["end_time"] - w["begin_time"]) / len(piece)
+        for j, ch in enumerate(piece):
+            if k >= len(chars):
+                break
+            # resync on an exact match within the next few characters (skipped punctuation, normalized digits)
+            for look in range(4):
+                if k + look < len(chars) and chars[k + look][1].lower() == ch.lower():
+                    k += look
+                    break
+            out.append({"text": chars[k][1], "ms": w["begin_time"] + dur * j, "dur": dur})
+            k += 1
+    for i, ch in chars[k:]:  # anything the service did not stamp: put it at the end
+        out.append({"text": ch, "ms": out[-1]["ms"] + out[-1]["dur"] if out else 0.0, "dur": 60})
+    return out
+
+
 def phrases(spoken):
     """Split spoken text after every pause mark; each piece is one TTS request."""
     out, start = [], 0
@@ -244,6 +330,9 @@ def phrases(spoken):
 
 TRIM = ("silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.02,areverse,"
         "silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.04,areverse")
+
+
+TAIL_TRIM = "areverse,silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.08,areverse"
 
 
 def synthesize_dashscope(text, tts, out_path):
@@ -307,7 +396,9 @@ async def main():
     spec = json.loads(spec_path.read_text(encoding="utf-8"))
     load_dotenv()
     tts = spec.get("tts") or {"provider": "edge"}
-    voice_key = f"{tts.get('provider')}:{tts.get('voice')}:{tts.get('rate')}" if tts.get("provider") == "dashscope" else f"edge:{spec['voice']}:{spec.get('rate')}"
+    segment = tts.get("segment", "scene")
+    voice_key = (f"{tts.get('provider')}:{tts.get('voice')}:{tts.get('rate')}" + (f":{tts.get('model')}:{tts.get('instruction', '')}:scene" if segment == "scene" else "")
+                 if tts.get("provider") == "dashscope" else f"edge:{spec['voice']}:{spec.get('rate')}")
     audio_dir = ROOT / "public" / "audio" / "tutorials" / spec["id"]
     audio_dir.mkdir(parents=True, exist_ok=True)
     fps, lead, tail = spec["fps"], spec.get("leadMs", 200), spec.get("tailMs", 400)
@@ -320,7 +411,9 @@ async def main():
         cache = json.loads(words_cache.read_text(encoding="utf-8")) if words_cache.exists() else {}
         stale = cache.get("spoken") != spoken or cache.get("voice", f"edge:{spec['voice']}:{spec.get('rate')}") != voice_key
         if force or stale or not mp3.exists():
-            if tts.get("provider") == "dashscope":
+            if tts.get("provider") == "dashscope" and segment == "scene":
+                words = synthesize_scene(spoken, tts, mp3)
+            elif tts.get("provider") == "dashscope":
                 words = synthesize_dashscope(spoken, tts, mp3)
             else:
                 words = await synthesize(spoken, spec["voice"], spec.get("rate", "+0%"), mp3)
