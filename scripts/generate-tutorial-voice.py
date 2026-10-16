@@ -11,7 +11,10 @@ TTS backends (tutorial JSON):
                                    segment "scene" (default): the whole scene is ONE request over the WebSocket API,
                                    so prosody runs across sentences like a real read; cue and caption times come
                                    from the service's per-character timestamps (word_timestamp_enabled).
-                                   segment "phrase" (legacy, the old videos): every comma/full-stop phrase is a
+                                   "tts": {"provider": "doubao"}    THE DEFAULT FOR NEW VIDEOS: the user's own cloned voice on Doubao (Volcano Engine)
+                                   TTS v3 — DOUBAO_API_KEY, voice from DOUBAO_VOICE_ZH (or "voice"), resource
+                                   seed-icl-2.0; whole scene per request, timestamps via enable_subtitle.
+  segment "phrase" (legacy, the old videos): every comma/full-stop phrase is a
                                    separate request, joined with fixed pauses — exact cues, but each phrase is read
                                    as its own utterance (pitch resets, choppy). Don't use it for new videos.
                                    Voices, models and pronunciation fixes: docs/video-craft/配音.md
@@ -291,7 +294,12 @@ def synthesize_scene(text, tts, out_path):
         # trim only the tail: the head stays, so the service's timestamps need no shift
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(wav), "-af", TAIL_TRIM, "-ar", "44100", "-ac", "2",
                         "-c:a", "libmp3lame", "-b:a", "192k", str(out_path)], check=True)
-    service = [w for k in sorted(cb.sentences) for w in cb.sentences[k]]
+    service = [{"text": w["text"], "begin": w["begin_time"], "end": w["end_time"]} for k in sorted(cb.sentences) for w in cb.sentences[k]]
+    return map_timestamps(text, service)
+
+
+def map_timestamps(text, service):
+    """service: [{"text", "begin", "end"}] in ms. Returns one timing entry per non-space character of `text`."""
     # Walk the service's words against our text: same characters advance together; where the service normalized
     # something ("3" read as "三", "AI" split oddly) the text pointer still advances one character per character.
     chars = [(i, ch) for i, ch in enumerate(text) if not ch.isspace()]
@@ -300,7 +308,7 @@ def synthesize_scene(text, tts, out_path):
         piece = [ch for ch in w["text"] if not ch.isspace()]
         if not piece:
             continue
-        dur = max(1, w["end_time"] - w["begin_time"]) / len(piece)
+        dur = max(1, w["end"] - w["begin"]) / len(piece)
         for j, ch in enumerate(piece):
             if k >= len(chars):
                 break
@@ -309,11 +317,80 @@ def synthesize_scene(text, tts, out_path):
                 if k + look < len(chars) and chars[k + look][1].lower() == ch.lower():
                     k += look
                     break
-            out.append({"text": chars[k][1], "ms": w["begin_time"] + dur * j, "dur": dur})
+            out.append({"text": chars[k][1], "ms": w["begin"] + dur * j, "dur": dur})
             k += 1
     for i, ch in chars[k:]:  # anything the service did not stamp: put it at the end
         out.append({"text": ch, "ms": out[-1]["ms"] + out[-1]["dur"] if out else 0.0, "dur": 60})
     return out
+
+
+def synthesize_doubao(text, tts, out_path):
+    """Doubao (Volcano Engine) TTS v3, whole scene in one request; per-character timestamps via enable_subtitle.
+    Default voice: the user's own cloned voice (DOUBAO_VOICE_ZH, resource seed-icl-2.0). Key: DOUBAO_API_KEY."""
+    import uuid
+    key = os.environ.get("DOUBAO_API_KEY")
+    if not key:
+        raise SystemExit("DOUBAO_API_KEY is not set (environment or .env)")
+    voice = tts.get("voice") or os.environ.get(tts.get("voiceEnv", "DOUBAO_VOICE_ZH"))
+    if not voice:
+        raise SystemExit("No Doubao voice: set tts.voice or DOUBAO_VOICE_ZH")
+    resource = tts.get("resource", "seed-icl-2.0")
+    audio_params = {"format": "mp3", "sample_rate": 24000, "enable_subtitle": True,
+                    # rate 1.0 = normal; Doubao's speech_rate is -50..100 (100 = 2x)
+                    "speech_rate": round((tts.get("rate", 1.0) - 1) * 100), **(tts.get("audio") or {})}
+    req_params = {"text": text, "speaker": voice, "audio_params": audio_params, **(tts.get("params") or {})}
+    model = tts.get("model", resource if resource.startswith("seed-icl") else None)  # cloned voices name the model too
+    if model:
+        req_params["model"] = model
+    body = json.dumps({"req_params": req_params}).encode()
+    endpoint = os.environ.get("DOUBAO_TTS_ENDPOINT", "https://openspeech.bytedance.com/api/v3/tts/unidirectional")
+    ctx = ssl.create_default_context(cafile=os.environ.get("SSL_CERT_FILE")) if os.environ.get("SSL_CERT_FILE") else None
+    last = None
+    for attempt in range(4):
+        req = urllib.request.Request(endpoint, data=body, method="POST", headers={
+            "Content-Type": "application/json", "X-Api-Key": key, "X-Api-Resource-Id": resource, "X-Api-Request-Id": str(uuid.uuid4())})
+        audio, words, done = bytearray(), {}, None
+        try:
+            with urllib.request.urlopen(req, context=ctx, timeout=180) as r:
+                for line in r:
+                    if not line.strip():
+                        continue
+                    msg = json.loads(line)
+                    if msg.get("data"):
+                        audio += base64.b64decode(msg["data"])
+                    sentence = msg.get("sentence") or {}
+                    if sentence.get("words"):  # one event per sentence; times are absolute seconds
+                        for w in sentence["words"]:
+                            words[(round(w["startTime"], 3), w["word"])] = w
+                    if msg.get("code") not in (0, None):
+                        done = msg
+            if done and done.get("code") != 20000000:
+                raise RuntimeError(f"Doubao TTS error {done.get('code')}: {done.get('message')}")
+            if audio:
+                break
+            last = "no audio returned"
+        except urllib.error.HTTPError as error:
+            last = f"HTTP {error.code}: {error.read()[:300]!r}"
+            if error.code in (401, 403):  # permissions won't fix themselves on retry
+                break
+        except Exception as error:
+            last = str(error)[:300]
+        import time
+        time.sleep(2 * (attempt + 1))
+    else:
+        raise SystemExit(f"Doubao TTS failed for scene {text[:30]!r}…: {last}")
+    if not audio:
+        raise SystemExit(f"Doubao TTS failed for scene {text[:30]!r}…: {last}"
+                         + ("\n  -> the API key is not granted the voice-cloning resource; enable 声音复刻 2.0 (seed-icl-2.0) for this key"
+                            " in the Volcano Engine console (see docs/video-craft/配音.md)" if "not granted" in str(last) else ""))
+    with tempfile.TemporaryDirectory() as tmp:
+        raw = Path(tmp) / "scene.mp3"
+        raw.write_bytes(bytes(audio))
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(raw), "-af", TAIL_TRIM, "-ar", "44100", "-ac", "2",
+                        "-c:a", "libmp3lame", "-b:a", "192k", str(out_path)], check=True)
+    service = [{"text": w["word"], "begin": w["startTime"] * 1000, "end": w["endTime"] * 1000}
+               for w in sorted(words.values(), key=lambda w: w["startTime"])]
+    return map_timestamps(text, service)
 
 
 def phrases(spoken):
@@ -397,8 +474,11 @@ async def main():
     load_dotenv()
     tts = spec.get("tts") or {"provider": "edge"}
     segment = tts.get("segment", "scene")
-    voice_key = (f"{tts.get('provider')}:{tts.get('voice')}:{tts.get('rate')}" + (f":{tts.get('model')}:{tts.get('instruction', '')}:scene" if segment == "scene" else "")
-                 if tts.get("provider") == "dashscope" else f"edge:{spec['voice']}:{spec.get('rate')}")
+    if tts.get("provider") == "doubao":
+        voice_key = f"doubao:{tts.get('voice') or os.environ.get(tts.get('voiceEnv', 'DOUBAO_VOICE_ZH'))}:{tts.get('resource', 'seed-icl-2.0')}:{tts.get('rate')}"
+    else:
+        voice_key = (f"{tts.get('provider')}:{tts.get('voice')}:{tts.get('rate')}" + (f":{tts.get('model')}:{tts.get('instruction', '')}:scene" if segment == "scene" else "")
+                     if tts.get("provider") == "dashscope" else f"edge:{spec['voice']}:{spec.get('rate')}")
     audio_dir = ROOT / "public" / "audio" / "tutorials" / spec["id"]
     audio_dir.mkdir(parents=True, exist_ok=True)
     fps, lead, tail = spec["fps"], spec.get("leadMs", 200), spec.get("tailMs", 400)
@@ -411,7 +491,9 @@ async def main():
         cache = json.loads(words_cache.read_text(encoding="utf-8")) if words_cache.exists() else {}
         stale = cache.get("spoken") != spoken or cache.get("voice", f"edge:{spec['voice']}:{spec.get('rate')}") != voice_key
         if force or stale or not mp3.exists():
-            if tts.get("provider") == "dashscope" and segment == "scene":
+            if tts.get("provider") == "doubao":
+                words = synthesize_doubao(spoken, tts, mp3)
+            elif tts.get("provider") == "dashscope" and segment == "scene":
                 words = synthesize_scene(spoken, tts, mp3)
             elif tts.get("provider") == "dashscope":
                 words = synthesize_dashscope(spoken, tts, mp3)
