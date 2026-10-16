@@ -148,14 +148,22 @@ const SceneVisual: React.FC<{timing: SceneTiming; visual: string; credit: string
     // mid-word or push content under Douyin's button column. Vertical moves crop whole lines through the soft edge.
     const lo = 24 - stage.left, hi = 1000 - stage.left - stage.width * z;
     const tx = lo <= hi ? clamp(stage.width / 2 - fx * z, lo, hi) : (lo + hi) / 2;
+    // The HUD layer (titles, live numbers) rides the same camera but never rises into the header fade and never
+    // grows wider than the safe width, so a push-in reads as depth instead of cropping a line of text.
+    const hz = Math.min(z, 1.05);
+    const hx = clamp(stage.width / 2 - fx * hz, 56 - stage.left, Math.max(56 - stage.left, 1000 - stage.left - stage.width * hz));
+    const hy = Math.max(0, stage.height / 2 - fy * hz);
     const clipTop = 212, clipBottom = captionY - 84;
-    return <div style={{position: 'absolute', left: 0, top: clipTop, width: 1080, height: clipBottom - clipTop, overflow: 'hidden', opacity: exit,
+    return <><div style={{position: 'absolute', left: 0, top: clipTop, width: 1080, height: clipBottom - clipTop, overflow: 'hidden', opacity: exit,
       maskImage: 'linear-gradient(180deg, transparent 0, #000 110px, #000 calc(100% - 70px), transparent 100%)'}}>
       <div style={{position: 'absolute', left: stage.left, top: stage.top - clipTop, width: stage.width, height: stage.height, transformOrigin: '0 0',
         transform: `translate(${tx}px, ${stage.height / 2 - fy * z}px) scale(${z})`}}>
-        {Visual && <Visual f={frame} dur={timing.durationFrames} cue={cue} credit={credit} />}
+        {Visual && <Visual f={frame} dur={timing.durationFrames} cue={cue} credit={credit} layer={Visual.hud ? 'stage' : undefined} />}
       </div>
-    </div>;
+    </div>{Visual?.hud && <div style={{position: 'absolute', left: stage.left, top: stage.top, width: stage.width, height: stage.height, opacity: exit, transformOrigin: '0 0',
+      transform: `translate(${hx}px, ${hy}px) scale(${hz})`}}>
+      <Visual f={frame} dur={timing.durationFrames} cue={cue} credit={credit} layer="hud" />
+    </div>}</>;
   }
   const enterP = ease.outBack(prog(t, 0, 0.4), 1.2);
   const bz = beatTour(t, beats, {amp: motion?.amp ?? 0.075, drift: motion?.drift ?? 30});
