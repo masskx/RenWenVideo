@@ -47,7 +47,7 @@ src/tutorial/                    TutorialVideo 合成、通用 UI、每期画面
 
 # 公共
 src/fx/                          共用动效库：闭式弹簧、抛出/下落/弹跳、挤压拉伸、错相、相机跟随、主光/接触影/运动残影、转场、印章、关键词上色（见 docs/video-craft/）
-public/audio/sfx/                合成的免版权音效（scripts/generate-sfx.py），画面组件用 sfx() 放到接触帧上
+public/audio/sfx/                音效：fs-* 是从 Freesound（经 Openverse）下载的真实录音，来源在 CREDITS.json；其余是合成的（scripts/generate-sfx.py）。画面组件用 sfx() 放到接触帧上
 scripts/qa/                      出片检查：brief.mjs（导演层）、richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、frames.mjs（逐帧查看页）、palette.mjs（取色）
 docs/video-craft/                导演层（先读）、讲解动画规则、动效与画面变化、分镜模板、风格词典、风格卡模板、概念画法、踩坑清单
 .claude/skills/video-craft/      给 Claude 的做片工作流和出片检查门槛
@@ -132,7 +132,10 @@ npm ci
 - 教程配置里用 `look` 切换：`{"theme": "paper", "tour": false, "particles": false}`（旧片不写 `look`，保持原样）。
 
 ```bash
-python scripts/generate-sfx.py                                   # 生成音效库 → public/audio/sfx/
+node scripts/fetch-sfx.mjs search "paper slide"                  # 在 Openverse 里找 Freesound 音效（CC0 / CC BY）
+node scripts/fetch-sfx.mjs get <openverse-id> paper-slide       # 下载 → public/audio/sfx/fs-paper-slide.wav，来源记进 CREDITS.json
+node scripts/fetch-sfx.mjs credits src/tutorial/scenes/<file>.tsx  # 发布包要贴的署名
+python scripts/generate-sfx.py                                   # 合成音效库（兜底）→ public/audio/sfx/
 node scripts/qa/brief.mjs <id>                                   # 导演层检查：Brief 八项、逐镜主体/受力/错相/音效、禁止项
 node scripts/qa/frames.mjs douyin/<id>/video.mp4 --at=秒          # 逐帧查看页（← → 翻帧），看预备、接触、压扁、回稳、错相
 ```

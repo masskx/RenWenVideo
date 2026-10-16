@@ -16,6 +16,8 @@ Every time you make, revise or re-render a video in this repo, follow the produc
 
 ## Environment notes
 
-- Narration: Alibaba Cloud Model Studio TTS via `DASHSCOPE_API_KEY` (explainers always; tutorials with `"tts": {"provider": "dashscope", ...}`). **Read `docs/video-craft/配音.md` before voicing**: synthesize each scene in one request (`"segment": "scene"`, the default — never the old phrase-by-phrase splicing, which made the voice choppy), use a high-quality model/voice (Qwen-Audio 3.1 or better; cost is not a concern), fix readings with `[显示|朗读]`. Needs `pip install dashscope`. Illustrations: `gpt-image-2` at `OPENAI_BASE_URL`.
+- Narration: Alibaba Cloud Model Studio TTS via `DASHSCOPE_API_KEY` (explainers always; tutorials with `"tts": {"provider": "dashscope", ...}`). **Read `docs/video-craft/配音.md` before voicing**: synthesize each scene in one request (`"segment": "scene"`, the default — never the old phrase-by-phrase splicing, which made the voice choppy), use a high-quality model/voice (Qwen-Audio 3.1 or better; cost is not a concern), fix readings with `[显示|朗读]`. Needs `pip install dashscope`.
+- Sound effects: prefer real recordings from **Freesound via Openverse** (no key) over the synthesized set — `node scripts/fetch-sfx.mjs search "<what it sounds like>"` / `get <id> <kind>`; only CC0 and CC BY, credit them in the package README (`fetch-sfx.mjs credits`). Rules: `docs/video-craft/音效.md`.
+- Illustrations: `gpt-image-2` at `OPENAI_BASE_URL`.
 - In the cloud container set `REMOTION_BROWSER_EXECUTABLE=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell` for tutorial renders, and `TTS_CA_BUNDLE=/root/.ccr/ca-bundle.crt` for edge-tts.
 - `npm run lint` (ESLint + tsc) must pass. Keep each `douyin/<id>/video.mp4` under 100 MB.

@@ -10,7 +10,8 @@ export type SceneProps = {f: number; dur: number; cue: (name: string, fallback?:
 /**
  * A sound effect placed on a scene frame (导演层 §7). Scenes list them through a static `sfx(cue, dur)` on the
  * component; compute `at` from the same physics that drives the motion, not from hand-typed seconds.
- * kind = a file in public/audio/sfx/ (scripts/generate-sfx.py); gain is relative to the voice (default 0.3).
+ * kind = a file in public/audio/sfx/: synthesized ones (scripts/generate-sfx.py) or real Freesound recordings named fs-*
+ * (scripts/fetch-sfx.mjs, credits in public/audio/sfx/CREDITS.json); gain is relative to the voice (default 0.3).
  */
 export type SfxEvent = {at: number; kind: string; gain?: number};
 
