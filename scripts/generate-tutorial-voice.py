@@ -61,7 +61,11 @@ def timeline_path(spec_path):
     return spec_path.with_name(f"{spec_path.stem}.timeline.json")
 
 
-TOKEN = re.compile(r"\{([a-z0-9]+)\}|\[([^\]|]+)\|([^\]]+)\]")
+TOKEN = re.compile(r"\{([a-z0-9]+)\}|\[([^\]|]+)\|([^\]]+)\]|\{pace:([a-z0-9.]+)\}")
+# Speaking pace (docs/video-craft/配音.md §〇·二): named presets, calibrated to the user's cloned voice, which reads
+# slower than stock TTS voices at rate 1.0. A scene sets one with "pace"; {pace:NAME} inside the narration changes
+# it from the next sentence on. A number works too ({pace:1.15}). Override the table with tts.paces.
+PACES = {"slow": 0.98, "calm": 1.04, "normal": 1.1, "brisk": 1.18, "fast": 1.26}
 BREAK = set("，。？！；：、,?!;:")
 KEEP_TAIL = set("？！?!")
 # Limits are in visual width: a CJK character is 1, latin letters/digits/spaces about 0.55.
@@ -75,8 +79,9 @@ def width(text):
 
 
 def parse(narration):
-    """Return display text, spoken text, spoken->display index map and cue positions (display index)."""
-    display, spoken, to_display, cues = "", "", [], {}
+    """Return display text, spoken text, spoken->display index map, cue positions (display index) and pace changes
+    [(spoken index, pace)]."""
+    display, spoken, to_display, cues, paces = "", "", [], {}, []
     pos = 0
     for m in TOKEN.finditer(narration):
         plain = narration[pos:m.start()]
@@ -86,6 +91,8 @@ def parse(narration):
             spoken += ch
         if m.group(1):
             cues[m.group(1)] = len(display)
+        elif m.group(4):
+            paces.append((len(spoken), m.group(4)))
         else:
             shown, said = m.group(2), m.group(3)
             start = len(display)
@@ -97,7 +104,7 @@ def parse(narration):
         to_display.append(len(display))
         display += ch
         spoken += ch
-    return display, spoken, to_display, cues
+    return display, spoken, to_display, cues, paces
 
 
 SENTENCE_END = set("。？！；?!;")
@@ -400,6 +407,55 @@ def synthesize_doubao(text, tts, out_path):
     return map_timestamps(text, service)
 
 
+def pace_rate(pace, tts):
+    """A pace name (or number) -> rate (1.0 = the voice's natural speed)."""
+    table = {**PACES, **(tts.get("paces") or {})}
+    if pace is None:
+        return tts.get("rate", table["normal"])
+    try:
+        return float(pace)
+    except (TypeError, ValueError):
+        if pace not in table:
+            raise SystemExit(f"Unknown pace {pace!r}; use one of {', '.join(table)} or a number")
+        return table[pace]
+
+
+def synthesize_paced(text, tts, out_path, base_rate, changes, engine):
+    """Voice a scene whose pace changes at sentence boundaries: one request per stretch of equal pace (never split
+    mid-sentence, so each stretch keeps its own intonation), joined with a short breath; timestamps shifted."""
+    def snap(i):  # a pace change takes effect at the start of the sentence it sits in: never split a sentence
+        while i > 0 and text[i - 1] not in SENTENCE_END:
+            i -= 1
+        return i
+    changes = [(snap(i), pace) for i, pace in changes]
+    cuts = sorted({i for i, _ in changes} | {0, len(text)})
+    rate_at, rate = {}, base_rate
+    for i, pace in sorted(changes):
+        rate_at[i] = pace_rate(pace, tts)
+    parts, words, cursor = [], [], 0.0
+    with tempfile.TemporaryDirectory() as tmp:
+        for k in range(len(cuts) - 1):
+            a, b = cuts[k], cuts[k + 1]
+            rate = rate_at.get(a, rate)
+            piece = text[a:b]
+            if not piece.strip():
+                continue
+            mp3 = Path(tmp) / f"{k:02d}.mp3"
+            ws = engine(piece, {**tts, "rate": rate}, mp3)
+            words += [{**w, "ms": w["ms"] + cursor} for w in ws]
+            parts.append(mp3)
+            cursor += probe_ms(mp3) + PACE_BREATH_MS
+        inputs = [x for p in parts for x in ("-i", str(p))]
+        labels = "".join(f"[{i}:a]apad=pad_dur={PACE_BREATH_MS / 1000}[a{i}];" for i in range(len(parts)))
+        graph = labels + "".join(f"[a{i}]" for i in range(len(parts))) + f"concat=n={len(parts)}:v=0:a=1[out]"
+        subprocess.run(["ffmpeg", "-y", "-v", "error", *inputs, "-filter_complex", graph, "-map", "[out]", "-c:a", "libmp3lame", "-b:a", "192k",
+                        str(out_path)], check=True)
+    return words
+
+
+PACE_BREATH_MS = 180
+
+
 def phrases(spoken):
     """Split spoken text after every pause mark; each piece is one TTS request."""
     out, start = [], 0
@@ -491,22 +547,28 @@ async def main():
     fps, lead, tail = spec["fps"], spec.get("leadMs", 200), spec.get("tailMs", 400)
     scenes, start_frame = [], 0
     for n, scene in enumerate(spec["scenes"], 1):
-        display, spoken, to_display, cue_pos = parse(scene["narration"])
+        display, spoken, to_display, cue_pos, pace_changes = parse(scene["narration"])
+        scene_rate = pace_rate(scene.get("pace", tts.get("pace")), tts)
         rel = f"audio/tutorials/{spec['id']}/{n:02d}-{scene['id']}.mp3"
         mp3 = ROOT / "public" / rel
         words_cache = mp3.with_suffix(".words.json")
         cache = json.loads(words_cache.read_text(encoding="utf-8")) if words_cache.exists() else {}
-        stale = cache.get("spoken") != spoken or cache.get("voice", f"edge:{spec['voice']}:{spec.get('rate')}") != voice_key
+        pace_key = f"{scene_rate}:{pace_changes}" if tts.get("provider") in ("doubao", "dashscope") else ""
+        stale = (cache.get("spoken") != spoken or cache.get("voice", f"edge:{spec['voice']}:{spec.get('rate')}") != voice_key
+                 or cache.get("pace", "") != pace_key)
         if force or stale or not mp3.exists():
-            if tts.get("provider") == "doubao":
-                words = synthesize_doubao(spoken, tts, mp3)
-            elif tts.get("provider") == "dashscope" and segment == "scene":
-                words = synthesize_scene(spoken, tts, mp3)
+            engine = synthesize_doubao if tts.get("provider") == "doubao" else synthesize_scene
+            if tts.get("provider") == "doubao" or (tts.get("provider") == "dashscope" and segment == "scene"):
+                if pace_changes:
+                    words = synthesize_paced(spoken, tts, mp3, scene_rate, pace_changes, engine)
+                else:
+                    words = engine(spoken, {**tts, "rate": scene_rate}, mp3)
             elif tts.get("provider") == "dashscope":
                 words = synthesize_dashscope(spoken, tts, mp3)
             else:
                 words = await synthesize(spoken, spec["voice"], spec.get("rate", "+0%"), mp3)
-            words_cache.write_text(json.dumps({"spoken": spoken, "voice": voice_key, "words": words}, ensure_ascii=False, indent=1), encoding="utf-8")
+            words_cache.write_text(json.dumps({"spoken": spoken, "voice": voice_key, "pace": pace_key, "words": words}, ensure_ascii=False, indent=1),
+                                   encoding="utf-8")
             print(f"voiced {rel}")
         cached = json.loads(words_cache.read_text(encoding="utf-8"))
         words = align(cached["words"], spoken, to_display)

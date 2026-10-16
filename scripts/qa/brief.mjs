@@ -23,6 +23,16 @@ else {
   const header = md.split('\n').find((l) => l.startsWith('| 镜头'));
   if (!header) fail.push('分镜里没有“| 镜头 |”开头的镜头表');
   else for (const col of ['主体', '受力', '错相', '音效']) if (!header.includes(col)) fail.push(`镜头表缺“${col}”一列`);
+  // Pacing (配音.md §〇·二): with the user's cloned voice the pace is planned per shot from content and emotion.
+  const cfgPath = [`tutorials/${id}.json`].find((p) => fs.existsSync(p));
+  const cfg = cfgPath ? JSON.parse(fs.readFileSync(cfgPath, 'utf8')) : null;
+  if (cfg?.tts?.provider === 'doubao') {
+    if (header && !header.includes('语速')) fail.push('镜头表缺“语速”一列（复刻音色配音：每个镜头按内容和情绪定语速）');
+    const missing = cfg.scenes.filter((sc) => sc.pace === undefined).map((sc) => sc.id);
+    if (missing.length) fail.push(`这些场景没写 "pace"：${missing.join(', ')}`);
+    const paces = new Set([...cfg.scenes.map((sc) => String(sc.pace)), ...cfg.scenes.flatMap((sc) => [...sc.narration.matchAll(/\{pace:([a-z0-9.]+)\}/g)].map((m) => m[1]))]);
+    if (cfg.scenes.length > 3 && paces.size < 2) warn.push('全片只有一种语速：语速要随内容和情绪变化（钩子、列举偏快，重点、转折、结尾偏慢）');
+  }
 }
 
 const sceneFile = path.join('src/tutorial/scenes', `${id}.tsx`);
