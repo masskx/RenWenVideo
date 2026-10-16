@@ -345,9 +345,10 @@ def synthesize_doubao(text, tts, out_path):
                     # rate 1.0 = normal; Doubao's speech_rate is -50..100 (100 = 2x)
                     "speech_rate": round((tts.get("rate", 1.0) - 1) * 100), **(tts.get("audio") or {})}
     req_params = {"text": text, "speaker": voice, "audio_params": audio_params, **(tts.get("params") or {})}
-    model = tts.get("model", resource if resource.startswith("seed-icl") else None)  # cloned voices name the model too
-    if model:
-        req_params["model"] = model
+    # Don't send "model" by default: with resource seed-icl-2.0 the server rejects "model": "seed-icl-2.0" as
+    # InvalidModel (tested 2026-10-16); the resource header already selects it. Set tts.model only to pick a variant.
+    if tts.get("model"):
+        req_params["model"] = tts["model"]
     body = json.dumps({"req_params": req_params}).encode()
     endpoint = os.environ.get("DOUBAO_TTS_ENDPOINT", "https://openspeech.bytedance.com/api/v3/tts/unidirectional")
     ctx = ssl.create_default_context(cafile=os.environ.get("SSL_CERT_FILE")) if os.environ.get("SSL_CERT_FILE") else None
