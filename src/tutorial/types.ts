@@ -34,6 +34,12 @@ export type Tutorial = {
   highlights?: {text: string; role: 'A' | 'B'}[];
   /** Scene id to freeze for the cover image; defaults to the first scene. */
   cover?: string;
+  /**
+   * Designed cover (docs/video-craft/封面.md): one anchor (a scene visual drawn without HUD), a short headline,
+   * an optional support line and tag — laid out separately for each ratio instead of cropping one frame.
+   * `anchor` in a layout = where the stage centre (440, 400) lands and its scale; `headline` = top-left of the title.
+   */
+  coverCard?: CoverCard;
   scenes: TutorialScene[];
 };
 
@@ -59,3 +65,15 @@ export type TutorialTiming = {
 };
 
 export type TutorialProps = {tutorial: Tutorial; timing: TutorialTiming};
+
+export type CoverRatio = '3:4' | '6:7' | '9:16';
+export type CoverCard = {
+  template: 'number' | 'conflict' | 'comparison' | 'emotion';
+  /** One or two lines; the last line is set in the A colour. */
+  headline: string[];
+  support?: string;
+  tag?: string;
+  anchor: string;
+  layouts: Record<CoverRatio, {headline: [number, number]; size: number; anchor: [number, number, number]; support: number}>;
+};
+export const COVER_SIZE: Record<CoverRatio, [number, number]> = {'3:4': [1080, 1440], '6:7': [1080, 1260], '9:16': [1080, 1920]};

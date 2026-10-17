@@ -4,7 +4,7 @@ import {Audio} from '@remotion/media';
 import {Layout, Palette, blueprint, color, font, layoutOf, mono, palette, paper} from './theme';
 import {sceneRegistry} from './scenes';
 import {Dino} from './ui';
-import {SceneTiming, TimedCaption, Tutorial, TutorialProps} from './types';
+import {CoverRatio, SceneTiming, TimedCaption, Tutorial, TutorialProps} from './types';
 import {CutStage, Particles, beatTour, clamp, ease, follow, hash, planCuts, prog, sway} from '../fx';
 
 type Theme = 'dark' | 'paper' | 'blueprint';
@@ -303,4 +303,33 @@ export const TutorialCover: React.FC<TutorialProps> = ({tutorial, timing}) => {
     </div>
     {mascot && <div style={{position: 'absolute', top: captionY + 150, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}><Dino size={200} run={0} /></div>}
   </AbsoluteFill></LayoutCtx.Provider>;
+};
+
+/**
+ * Designed cover (tutorial.coverCard, docs/video-craft/封面.md): background, one anchor, the headline and a support line,
+ * each placed per ratio. Three text layers at most: tag (small, top-left), headline (60–75 % of the text weight), support.
+ */
+export const TutorialCoverCard: React.FC<TutorialProps & {ratio: CoverRatio}> = ({tutorial, ratio}) => {
+  const card = tutorial.coverCard;
+  const {width, height} = useVideoConfig();
+  const pal = palette(themeOf(tutorial));
+  if (!card) return <AbsoluteFill style={{background: pal.bg}} />;
+  const lay = card.layouts[ratio];
+  const Anchor = sceneRegistry[card.anchor];
+  const [ax, ay, as] = lay.anchor;
+  const grid = themeOf(tutorial) === 'blueprint' ? blueprint.grid : pal.bg;
+  return <AbsoluteFill style={{background: pal.bg, overflow: 'hidden'}}>
+    <svg width={width} height={height} style={{position: 'absolute', inset: 0}}>
+      {Array.from({length: Math.ceil(width / 40) + 1}, (_, i) => <line key={`v${i}`} x1={i * 40} x2={i * 40} y1={0} y2={height} stroke={grid} strokeWidth={i % 5 === 0 ? 2 : 1} />)}
+      {Array.from({length: Math.ceil(height / 40) + 1}, (_, i) => <line key={`h${i}`} x1={0} x2={width} y1={i * 40} y2={i * 40} stroke={grid} strokeWidth={i % 5 === 0 ? 2 : 1} />)}
+    </svg>
+    {Anchor && <div style={{position: 'absolute', left: ax - 440 * as, top: ay - 400 * as, width: 880, height: 800, transform: `scale(${as})`, transformOrigin: '0 0'}}>
+      <Anchor f={0} dur={1} cue={() => 0} credit={tutorial.credit} layer="stage" />
+    </div>}
+    {card.tag && <div style={{position: 'absolute', left: lay.headline[0], top: lay.headline[1] - 54, fontFamily: mono, fontWeight: 700, fontSize: 30, color: pal.dim, letterSpacing: 2}}>{card.tag}</div>}
+    <div style={{position: 'absolute', left: lay.headline[0], top: lay.headline[1], fontFamily: font, fontWeight: 900, fontSize: lay.size, lineHeight: 1.12, letterSpacing: 2}}>
+      {card.headline.map((line, i) => <div key={line} style={{color: i === card.headline.length - 1 && card.headline.length > 1 ? pal.keyA : pal.text}}>{line}</div>)}
+    </div>
+    {card.support && <div style={{position: 'absolute', left: 0, right: 0, top: lay.support, textAlign: 'center', fontFamily: font, fontWeight: 800, fontSize: 50, color: pal.text}}>{card.support}</div>}
+  </AbsoluteFill>;
 };

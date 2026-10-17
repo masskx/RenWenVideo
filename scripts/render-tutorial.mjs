@@ -3,6 +3,7 @@
 //   node scripts/render-tutorial.mjs <id> [--overwrite] [--crf=22]
 //   node scripts/render-tutorial.mjs <id> --draft            -> qa/<id>/video-draft.mp4 (2/3 scale)
 //   node scripts/render-tutorial.mjs <id> --stills=120,900   -> qa/<id>/frame-<n>.png
+//   node scripts/render-tutorial.mjs <id> --cover-only        -> just the three designed covers (needs coverCard)
 // Run scripts/generate-tutorial-voice.py and scripts/generate-tutorial-music.py first.
 import {bundle} from '@remotion/bundler';
 import {renderMedia, renderStill, selectComposition} from '@remotion/renderer';
@@ -49,10 +50,22 @@ if (stillsArg) {
 
 const outDir = draft ? qaDir : packageDir;
 await mkdir(outDir, {recursive: true});
-const cover = await selectComposition({serveUrl, id: 'TutorialCover', inputProps, browserExecutable});
 const coverOutput = path.join(outDir, 'cover.jpg');
-await renderStill({serveUrl, composition: cover, inputProps, browserExecutable, output: coverOutput, imageFormat: 'jpeg', jpegQuality: 92});
-console.log(`Saved ${path.relative(root, coverOutput)}`);
+// A designed cover (tutorial.coverCard, docs/video-craft/封面.md) is laid out per ratio; otherwise freeze a scene.
+const coverCard = Boolean(tutorial.coverCard);
+if (coverCard) {
+  for (const [ratio, comp, file] of [['3:4', 'TutorialCover34', 'cover.jpg'], ['6:7', 'TutorialCover67', 'cover-6x7.jpg'], ['9:16', 'TutorialCover916', 'cover-9x16.jpg']]) {
+    const props = {...inputProps, ratio};
+    const composition = await selectComposition({serveUrl, id: comp, inputProps: props, browserExecutable});
+    await renderStill({serveUrl, composition, inputProps: props, browserExecutable, output: path.join(outDir, file), imageFormat: 'jpeg', jpegQuality: 92});
+    console.log(`Saved ${path.relative(root, path.join(outDir, file))}`);
+  }
+  if (args.includes('--cover-only')) process.exit(0);
+} else {
+  const cover = await selectComposition({serveUrl, id: 'TutorialCover', inputProps, browserExecutable});
+  await renderStill({serveUrl, composition: cover, inputProps, browserExecutable, output: coverOutput, imageFormat: 'jpeg', jpegQuality: 92});
+  console.log(`Saved ${path.relative(root, coverOutput)}`);
+}
 
 const composition = await selectComposition({serveUrl, id: 'Tutorial', inputProps, browserExecutable});
 const outputLocation = path.join(outDir, draft ? 'video-draft.mp4' : 'video.mp4');
@@ -78,11 +91,13 @@ if (tutorial.look?.frame === 'channels') {
   execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', outputLocation, '-vf', `crop=${r(1080)}:${r(1260)}:0:${r(330)}`, '-c:v', 'libx264', '-crf', String(crf),
     '-preset', 'medium', '-pix_fmt', 'yuv420p', '-c:a', 'copy', '-movflags', '+faststart', cut]);
   console.log(`Saved ${path.relative(root, cut)}`);
-  const full = path.join(outDir, 'cover-9x16.jpg');
-  execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', coverOutput, full]);
-  execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', full, '-vf', 'crop=1080:1440:0:240', '-q:v', '2', coverOutput]);
-  execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', full, '-vf', 'crop=1080:1260:0:330', '-q:v', '2', path.join(outDir, 'cover-6x7.jpg')]);
-  console.log(`Saved cover.jpg (3:4), cover-6x7.jpg, cover-9x16.jpg`);
+  if (!coverCard) {
+    const full = path.join(outDir, 'cover-9x16.jpg');
+    execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', coverOutput, full]);
+    execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', full, '-vf', 'crop=1080:1440:0:240', '-q:v', '2', coverOutput]);
+    execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', full, '-vf', 'crop=1080:1260:0:330', '-q:v', '2', path.join(outDir, 'cover-6x7.jpg')]);
+    console.log(`Saved cover.jpg (3:4), cover-6x7.jpg, cover-9x16.jpg`);
+  }
 }
 
 const stamp = (ms) => {

@@ -1,7 +1,7 @@
 import './index.css';
 import {Composition, Still} from 'remotion';
 import {ArticleExplainer, ExplainerTimeline} from './ArticleExplainer';
-import {TutorialCover, TutorialVideo} from './tutorial/TutorialVideo';
+import {TutorialCover, TutorialCoverCard, TutorialVideo} from './tutorial/TutorialVideo';
 import {Tutorial, TutorialTiming} from './tutorial/types';
 import aiEra11Rules from '../explainers/ai-era-11-rules.timeline.json';
 import marketingEngineer from '../explainers/marketing-engineer.timeline.json';
@@ -23,4 +23,8 @@ export const RemotionRoot = () => <>
     calculateMetadata={({props}) => ({durationInFrames: props.timing.totalFrames, fps: props.tutorial.fps,
       width: props.tutorial.width, height: props.tutorial.height})} />
   <Still id="TutorialCover" component={TutorialCover} width={1080} height={1920} defaultProps={reaTutorial} />
+  {/* Designed covers (tutorial.coverCard), one composition per ratio */}
+  <Still id="TutorialCover34" component={TutorialCoverCard} width={1080} height={1440} defaultProps={{...reaTutorial, ratio: '3:4' as const}} />
+  <Still id="TutorialCover67" component={TutorialCoverCard} width={1080} height={1260} defaultProps={{...reaTutorial, ratio: '6:7' as const}} />
+  <Still id="TutorialCover916" component={TutorialCoverCard} width={1080} height={1920} defaultProps={{...reaTutorial, ratio: '9:16' as const}} />
 </>;

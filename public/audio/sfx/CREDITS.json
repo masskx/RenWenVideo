@@ -10,5 +10,41 @@
     "openverse_id": "7092906e-188e-4593-88b8-882b7e1fd4a1",
     "attribution": "\"Paper slide\" by Kingofgamers_cz is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
     "fetched": "2026-10-16"
+  },
+  "fs-watch-tick": {
+    "title": "Watch tick",
+    "creator": "DrMinky",
+    "creator_url": "https://freesound.org/people/DrMinky",
+    "license": "by",
+    "license_version": "4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://freesound.org/people/DrMinky/sounds/174721",
+    "openverse_id": "0679db01-2876-43a3-9472-d6974d89a88b",
+    "attribution": "\"Watch tick\" by DrMinky is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
+    "fetched": "2026-10-17"
+  },
+  "fs-wind-click": {
+    "title": "SingleWind1.wav",
+    "creator": "BMacZero",
+    "creator_url": "https://freesound.org/people/BMacZero",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "https://freesound.org/people/BMacZero/sounds/96149",
+    "openverse_id": "d4f6307e-bdd0-4bfb-80fc-d0adfe2e29f6",
+    "attribution": "\"SingleWind1.wav\" by BMacZero is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+    "fetched": "2026-10-17"
+  },
+  "fs-part-seat": {
+    "title": "jp_tinypadlock01.flac",
+    "creator": "JPolito",
+    "creator_url": "https://freesound.org/people/JPolito",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "https://freesound.org/people/JPolito/sounds/391704",
+    "openverse_id": "372d9944-e8dc-41ce-ac6c-0b22cbed8399",
+    "attribution": "\"jp_tinypadlock01.flac\" by JPolito is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+    "fetched": "2026-10-17"
   }
 }
