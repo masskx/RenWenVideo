@@ -11,6 +11,7 @@ Knowledge lives in `docs/video-craft/` (Chinese) — read the relevant files, do
 | --- | --- |
 | `发布与风格偏好.md` | always, before anything: user feedback — publish on WeChat Channels (verify size/cover specs first; reportedly 6:7 1080×1260), and tech topics need a tech-family look, not paper |
 | `音效.md` | choosing sound effects: real Freesound recordings via Openverse (`scripts/fetch-sfx.mjs`), CC0 / CC BY only, credits in the README |
+| `封面.md` | making the cover: template from the content type (number / conflict / comparison / emotion), one anchor, a separate short headline, ≤ 3 text layers, 80 px thumbnail test, re-layout per ratio, 10-point score |
 | `文案.md` | before writing any narration: turn the post into our own story with one clear perspective; the topic card; story structure; self-checks |
 | `配音.md` | before voicing any video: Alibaba TTS models and voices, whole-scene synthesis with character timestamps (never phrase-by-phrase splicing), instructions, pronunciation fixes |
 | `导演层.md` | always, first: why our videos look AI-made, the 8-item brief, order of work, subject / secondary / background and phase offsets, motion chain (anticipation → stretch → impact → squash → overshoot → settle → secondary), physics, one key light, SFX on contact frames, camera, references, ban list, acceptance |
@@ -41,13 +42,14 @@ node scripts/qa/richness.mjs douyin/<id>/video.mp4        # 判定：过 — avg
 node scripts/qa/marks.mjs douyin/<id>/video.mp4           # every "前" frame lacks the action, every "后" frame shows it
 node scripts/qa/scan.mjs douyin/<id>/video.mp4            # every sheet: no clipped/overlapping text, ≥ 3 transition kinds
 node scripts/qa/scan.mjs douyin/<id>/video.mp4 --phone=s1,s2,s3   # text readable at 360 px wide
+node scripts/qa/cover.mjs <id>                            # 封面卡 complete, headline length, contrast; look at cover-thumbs.png and score the 10 points (≥ 8)
 ffprobe … ; ffmpeg -af ebur128                            # 1080×1920, 30 fps, h264+aac; about −15 LUFS; < 100 MB; voice always clear over SFX
 ```
 
    - Richness fails → give the subject a process, let secondary layers respond, move the camera for a reason, morph into the next state — not particles, not whole-stage push/pull.
    - Iterate with drafts: `render-tutorial.mjs <id> --draft --overwrite` (richness with `--band 860:1000`).
    - Size: explainers `--crf=25`, tutorials `--crf=22`–`25`.
-9. **Package** `douyin/<id>/`: video, cover (a settled frame from the hook — check it), SRT, `README.md` with titles, description, hashtags, pinned comment if the video promises links/commands, and sources (credit the original author; note sponsorship and what was not verified).
+9. **Package** `douyin/<id>/`: video, cover (designed per `封面.md` from the 封面卡 — not just a frozen frame; one anchor, separate short headline, laid out per ratio), SRT, `README.md` with titles, description, hashtags, pinned comment if the video promises links/commands, and sources (credit the original author; note sponsorship and what was not verified).
 10. **Record lessons**: add any new failure to `踩坑清单.md` §二.
 
 ## Hard rules

@@ -48,7 +48,7 @@ src/tutorial/                    TutorialVideo 合成、通用 UI、每期画面
 # 公共
 src/fx/                          共用动效库：闭式弹簧、抛出/下落/弹跳、挤压拉伸、错相、相机跟随、主光/接触影/运动残影、转场、印章、关键词上色（见 docs/video-craft/）
 public/audio/sfx/                音效：fs-* 是从 Freesound（经 Openverse）下载的真实录音，来源在 CREDITS.json；其余是合成的（scripts/generate-sfx.py）。画面组件用 sfx() 放到接触帧上
-scripts/qa/                      出片检查：brief.mjs（导演层）、richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、frames.mjs（逐帧查看页）、palette.mjs（取色）
+scripts/qa/                      出片检查：brief.mjs（导演层）、richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、frames.mjs（逐帧查看页）、palette.mjs（取色）、cover.mjs（封面卡 + 缩略图）
 docs/video-craft/                导演层（先读）、讲解动画规则、动效与画面变化、分镜模板、风格词典、风格卡模板、概念画法、踩坑清单
 .claude/skills/video-craft/      给 Claude 的做片工作流和出片检查门槛
 src/Root.tsx                     注册合成：AiEra11Rules、MarketingEngineer、Tutorial、TutorialCover
@@ -150,6 +150,7 @@ node scripts/qa/richness.mjs douyin/<id>/video.mp4             # 丰富度：要
 node scripts/qa/scan.mjs douyin/<id>/video.mp4                 # 扫片：每秒 3 帧拼图，查截断、叠字、空白，转场至少 3 种
 node scripts/qa/scan.mjs douyin/<id>/video.mp4 --phone=5,60,120  # 缩到 360 宽（手机屏宽），要读的字必须读得清
 node scripts/qa/marks.mjs douyin/<id>/video.mp4                # 卡点：每个卡点前 0.1 秒没有动作、后 0.35 秒已经出现
+node scripts/qa/cover.mjs <id>                                 # 封面：封面卡、标题字数、对比度；看 cover-thumbs.png 按十条打分（docs/video-craft/封面.md）
 ```
 
 做片流程（分镜 → 风格 → A/B 固定色 → 写画面 → 3 张静帧 → 出片 → 检查 → 发布包）写在 `.claude/skills/video-craft/SKILL.md`，根目录 `CLAUDE.md` 要求每次做片都按它走。分镜写在 `tutorials/<id>.storyboard.md` 或 `explainers/<id>.storyboard.md`（模板：`docs/video-craft/分镜模板.md`，例子：`tutorials/workbuddy-15-skills.storyboard.md`）。想换风格时查 `docs/video-craft/风格词典.md`（27 种风格），照参考图做时用 `node scripts/qa/palette.mjs <参考图>` 取色。

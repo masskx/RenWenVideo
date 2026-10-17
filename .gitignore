@@ -15,3 +15,6 @@ out/
 !.env.example
 public/fonts/*
 __pycache__/
+
+# Cover thumbnail sheets from scripts/qa/cover.mjs are reproducible.
+douyin/*/cover-thumbs.png
