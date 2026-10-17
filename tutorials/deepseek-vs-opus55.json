@@ -1,0 +1,46 @@
+{
+  "id": "deepseek-vs-opus55",
+  "title": "Opus vs DeepSeek",
+  "subtitle": "同一句提示词 · 差一个数量级",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "voice": "zh-CN-YunxiNeural",
+  "tts": {"provider": "doubao"},
+  "leadMs": 150,
+  "tailMs": 300,
+  "musicSrc": "audio/tutorials/deepseek-vs-opus55/bgm.mp3",
+  "musicVolume": 0.05,
+  "credit": "素材：@stephanlivera（Opus 5.5）、@NpieAI（DeepSeek V4.1 Flash 1017）、@marcthecreatorr（同题对比）；数字为作者自述",
+  "source": "inputs/deepseek-vs-opus55/素材清单_DeepSeek对比.md",
+  "steps": ["同题", "写代码", "账单", "选择"],
+  "look": {"theme": "blueprint", "frame": "channels", "tour": false, "particles": false, "mascot": false, "cuts": {"big": ["pushUp", "iris"], "small": ["push", "sweep"]}},
+  "highlights": [{"text": "Opus", "role": "A"}, {"text": "DeepSeek", "role": "B"}],
+  "cover": "hook",
+  "coverCard": {
+    "template": "comparison",
+    "headline": ["同一句提示词，", "差一个数量级"],
+    "support": "写代码做视频 · Opus vs DeepSeek",
+    "tag": "AI 写代码做视频",
+    "anchor": "dvo.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 150], "size": 112, "anchor": [540, 820, 0.95], "support": 1290},
+      "6:7": {"headline": [80, 100], "size": 100, "anchor": [540, 690, 0.8], "support": 1150},
+      "9:16": {"headline": [80, 380], "size": 112, "anchor": [540, 1080, 0.95], "support": 1520}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "dvo.hook", "step": 1, "pace": "brisk",
+     "narration": "同一句提示词，上面是 Opus 5.5，{a}下面是刚发布的 [DeepSeek V4.1 Flash 1017|DeepSeek V四点一 Flash 一零一七]。{pace:normal}{b}你看得出差别吗？"},
+    {"id": "truth", "visual": "dvo.truth", "step": 2, "pace": "normal",
+     "narration": "先说清楚：DeepSeek 不会生成视频。{a}它和 Opus 一样，写的是 Remotion 代码，{b}再渲染成视频。{c}比的是：谁写得好、写得快、写得便宜。"},
+    {"id": "numbers", "visual": "dvo.numbers", "step": 3, "pace": "normal",
+     "narration": "看一个同题对比。{a}据作者 [@marcthecreatorr|Marc the creator] 自述：{b}Opus 用了大约[20|二十]分钟，花了约[6|六]美元；{c}DeepSeek 用了大约一小时，只花[0.23|零点二三]美元。"},
+    {"id": "review", "visual": "dvo.review", "step": 3, "pace": "normal",
+     "narration": "作者说，Opus 的动作和细节更好；{a}DeepSeek 很接近，{b}但有几处错误。"},
+    {"id": "cost", "visual": "dvo.cost", "step": 3, "pace": "brisk",
+     "narration": "钱，差了一个数量级；{a}可时间，慢了一截，{b}还得自己挑错。{pace:slow}{c}便宜的那一个，你是拿时间在付账。"},
+    {"id": "verdict", "visual": "dvo.verdict", "step": 4, "pace": "calm",
+     "narration": "所以，接单、赶时间，用 Opus。{a}出草稿、跑批量、预算紧，用 DeepSeek。{pace:slow}{b}你缺的是时间，还是钱？"}
+  ]
+}
