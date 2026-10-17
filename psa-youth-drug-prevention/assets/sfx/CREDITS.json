@@ -1,0 +1,50 @@
+{
+ "fs-heartbeat": {
+  "title": "Single Heartbeat HQ_BeatSmith.wav",
+  "creator": "Lunardrive",
+  "creator_url": "https://freesound.org/people/Lunardrive",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://freesound.org/people/Lunardrive/sounds/22417",
+  "openverse_id": "95973822-14a7-4cc1-a593-a6f6f38f76b2",
+  "attribution": "\"Single Heartbeat HQ_BeatSmith.wav\" by Lunardrive is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "fetched": "2026-10-17"
+ },
+ "fs-whoosh-wipe": {
+  "title": "wipe2.wav",
+  "creator": "Sclolex",
+  "creator_url": "https://freesound.org/people/Sclolex",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://freesound.org/people/Sclolex/sounds/179779",
+  "openverse_id": "bf5f3ccf-e1f9-479f-aa86-aa0845f01979",
+  "attribution": "\"wipe2.wav\" by Sclolex is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "fetched": "2026-10-17"
+ },
+ "fs-phone-buzz": {
+  "title": "phone short buzz",
+  "creator": "richwise",
+  "creator_url": "https://freesound.org/people/richwise",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://freesound.org/people/richwise/sounds/476836",
+  "openverse_id": "c3af46e7-e083-4dcf-a373-4e645078a5c9",
+  "attribution": "\"phone short buzz\" by richwise is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+  "fetched": "2026-10-17"
+ },
+ "fs-impact-deep": {
+  "title": "Deep Cinematic Impact",
+  "creator": "MeijstroAudio",
+  "creator_url": "https://freesound.org/people/MeijstroAudio",
+  "license": "by",
+  "license_version": "4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://freesound.org/people/MeijstroAudio/sounds/377303",
+  "openverse_id": "4eefa3d1-d85b-422a-91dc-3ae12ee26d03",
+  "attribution": "\"Deep Cinematic Impact\" by MeijstroAudio is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
+  "fetched": "2026-10-17"
+ }
+}

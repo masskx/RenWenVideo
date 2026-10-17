@@ -1,0 +1,7 @@
+# Original 4K/1080p Mixkit downloads (≈1.6 GB) are not committed: re-download them with
+#   python tools/fetch_assets.py get video <ids…>   (ids and URLs are in assets/manifest.json / output/sources.csv)
+assets/video/*.mp4
+assets/thumbs/
+# render cache (shots, TTS, intermediate base video)
+work/
+output/qa/frames/
