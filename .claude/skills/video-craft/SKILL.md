@@ -27,6 +27,7 @@ Knowledge lives in `docs/video-craft/` (Chinese) — read the relevant files, do
 ## Workflow (do the steps in order)
 
 1. **Source and pipeline.** Fetch the source (X posts: `api.fxtwitter.com`, articles come as blocks + entityMap; read the images too, they often carry the substance). Pick the pipeline: *explainer* (opinions, interviews, "N conclusions"; AI illustrations + CosyVoice) or *tutorial* (tools, prompts, steps; code-drawn visuals). Narration: CosyVoice via `DASHSCOPE_API_KEY`.
+1a. **Length and pacing** (user rule): the video is **≤ 60 s** unless the user asks for more (`"maxSeconds"` in the config). Budget the narration first (≈ 288 chars for 60 s), cut to one point, hook in 3 s, scenes ≤ 8–10 s, lines written for the ear (`文案.md` §七). Voice: the cloned voice's flatness is fixed by spoken-style writing + pause tightening + expressive model, not by mood prompts (`配音.md` §〇·三).
 1b. **Story and perspective** (`文案.md`, mandatory): the post is material, not the script. Fill the 选题卡 at the top of the storyboard — one-line take, perspective (narrator first person, only true experiences / third-party storyteller), protagonist, conflict, at least one view of our own the source doesn't have, what the viewer takes away, what to cut — then write the narration as a story (hook → protagonist & conflict → knowledge as answers to the story's questions → our take → landing). Run the swap / view / hook / perspective / order tests before storyboarding.
 2. **Reference.** Pick 1–2 pieces from the gallery (https://guanmo-ai.github.io/awesome-ai-motion/, categories 知识讲解 / 短动效 / 产品宣传), look at real frames (fxtwitter gives the mp4 URL; `ffmpeg -vf fps=2,tile=…`), and write down the relations that make them work (subject, motion, light, sound). For static taste (whitespace, typography, hierarchy, palette, opening/cover, micro-interactions) pick from the 10 sites in `审美参考库.md` (Minimal Gallery, Typewolf, Lapa Ninja, Mobbin, Design Spells …). Understand *why* it works — collecting is not taste. Don't copy their assets.
 3. **Director brief** — the 8 items in `导演层.md` §1 (goal, shots & hierarchy, trajectories & camera, motion & physics, material & light, beat & sound, bans, acceptance), at the top of the storyboard. Turn "make it better" into checkable constraints. Fewer freedoms, not more effects.
@@ -37,7 +38,7 @@ Knowledge lives in `docs/video-craft/` (Chinese) — read the relevant files, do
 8. **Full render, then the QA gates — all must pass before committing:**
 
 ```bash
-node scripts/qa/brief.mjs <id>                            # brief has 8 items; shots list subject/force/phase/SFX; no banned patterns in scene code
+node scripts/qa/brief.mjs <id>                            # ≤ 60 s and narration budget (unless maxSeconds); brief has 8 items; shots list subject/force/phase/SFX; no banned patterns in scene code
 node scripts/qa/richness.mjs douyin/<id>/video.mp4        # 判定：过 — avg ≥ 10, no near-static 2.5 s window
 node scripts/qa/marks.mjs douyin/<id>/video.mp4           # every "前" frame lacks the action, every "后" frame shows it
 node scripts/qa/scan.mjs douyin/<id>/video.mp4            # every sheet: no clipped/overlapping text, ≥ 3 transition kinds

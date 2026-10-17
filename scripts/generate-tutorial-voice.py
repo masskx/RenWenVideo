@@ -19,6 +19,11 @@ TTS backends (tutorial JSON):
                                    as its own utterance (pitch resets, choppy). Don't use it for new videos.
                                    Voices, models and pronunciation fixes: docs/video-craft/配音.md
 
+Per scene (doubao): "pace" (slow/calm/normal/brisk/fast), "mood" (a delivery instruction, Doubao context_texts),
+"voiceEnv" (another cloned voice id from the environment, e.g. a high-energy clone for hooks). Every Doubao/DashScope
+scene is then pause-tightened (gaps > 170 ms cut, 240 ms after 。？！; "tts": {"pauses": false} to disable) and run
+through a light presence chain — see docs/video-craft/配音.md §〇·三.
+
 Narration markup:
   {a}            cue marker; its time (ms from scene start) is written to timing.cues.a
   [显示|朗读]     caption shows the left side, TTS speaks the right side
@@ -65,7 +70,17 @@ TOKEN = re.compile(r"\{([a-z0-9]+)\}|\[([^\]|]+)\|([^\]]+)\]|\{pace:([a-z0-9.]+)
 # Speaking pace (docs/video-craft/配音.md §〇·二): named presets, calibrated to the user's cloned voice, which reads
 # slower than stock TTS voices at rate 1.0. A scene sets one with "pace"; {pace:NAME} inside the narration changes
 # it from the next sentence on. A number works too ({pace:1.15}). Override the table with tts.paces.
-PACES = {"slow": 0.98, "calm": 1.04, "normal": 1.1, "brisk": 1.18, "fast": 1.26}
+# Recalibrated 2026-10-17 for short-video pacing: the cloned voice ran at 3.7 chars/s at the old "normal" (1.1) with
+# 29 % of the track in pauses; these rates plus pause tightening (tighten_pauses) land at about 4.8-5.5 chars/s.
+PACES = {"slow": 1.04, "calm": 1.1, "normal": 1.16, "brisk": 1.24, "fast": 1.32}
+# Default Doubao model for the cloned voice: measured on the same line, seed-tts-2.0-expressive + a spoken-style script
+# gave a 19.2-semitone pitch range vs 15.1 for the plain default (docs/video-craft/配音.md §〇·三).
+DOUBAO_MODEL = "seed-tts-2.0-expressive"
+# Pause tightening (short-video "气口" editing): gaps longer than max_ms are cut down to max_ms (sentence ends keep a
+# little more), word timestamps shifted to match. Off with "tts": {"pauses": false}.
+PAUSES = {"max_ms": 170, "sentence_ms": 240, "detect_db": -38}
+# Voice chain for presence on phone speakers: rumble cut, a little 3 kHz presence, gentle compression.
+VOICE_CHAIN = "highpass=f=75,equalizer=f=3000:t=q:w=1.2:g=2.5,acompressor=threshold=-20dB:ratio=3:attack=5:release=80:makeup=2"
 BREAK = set("，。？！；：、,?!;:")
 KEEP_TAIL = set("？！?!")
 # Limits are in visual width: a CJK character is 1, latin letters/digits/spaces about 0.55.
@@ -354,8 +369,11 @@ def synthesize_doubao(text, tts, out_path):
     req_params = {"text": text, "speaker": voice, "audio_params": audio_params, **(tts.get("params") or {})}
     # Don't send "model" by default: with resource seed-icl-2.0 the server rejects "model": "seed-icl-2.0" as
     # InvalidModel (tested 2026-10-16); the resource header already selects it. Set tts.model only to pick a variant.
-    if tts.get("model"):
-        req_params["model"] = tts["model"]
+    model = tts.get("model", DOUBAO_MODEL if resource == "seed-icl-2.0" else None)
+    if model:
+        req_params["model"] = model
+    if tts.get("mood"):  # natural-language delivery instruction (Doubao 2.0 context_texts); weak on cloned voices, see 配音.md
+        req_params["additions"] = json.dumps({"context_texts": [tts["mood"]]}, ensure_ascii=False)
     body = json.dumps({"req_params": req_params}).encode()
     endpoint = os.environ.get("DOUBAO_TTS_ENDPOINT", "https://openspeech.bytedance.com/api/v3/tts/unidirectional")
     ctx = ssl.create_default_context(cafile=os.environ.get("SSL_CERT_FILE")) if os.environ.get("SSL_CERT_FILE") else None
@@ -529,6 +547,51 @@ def time_at(words, display_index, fallback):
     return fallback
 
 
+def tighten_pauses(mp3, words, tts, spoken):
+    """Cut every pause longer than the limit down to it (more room after 。？！), keep the rest, shift timestamps.
+    Then the voice chain. Returns the shifted words. This is what makes a calm read feel like short-video pacing."""
+    cfg = tts.get("pauses", {})
+    if cfg is False:
+        return words
+    cfg = {**PAUSES, **(cfg if isinstance(cfg, dict) else {})}
+    out = subprocess.run(["ffmpeg", "-i", str(mp3), "-af", f"silencedetect=n={cfg['detect_db']}dB:d={cfg['max_ms'] / 1000}", "-f", "null", "-"],
+                         capture_output=True, text=True).stderr
+    starts = [float(x) * 1000 for x in re.findall(r"silence_start: ([\d.]+)", out)]
+    ends = [float(x) * 1000 for x in re.findall(r"silence_end: ([\d.]+)", out)]
+    total = probe_ms(mp3)
+    # sentence ends (in ms) from the word timings: a pause right after 。？！ may keep a little more air
+    sent_end = [w["ms"] for w in words if w.get("text") in SENTENCE_END]  # one entry per character, punctuation included
+    cuts = []
+    for a, b in zip(starts, ends):
+        if a <= 1 or b >= total - 1:   # leave the head and the tail alone (head keeps timestamps aligned)
+            continue
+        keep = cfg["sentence_ms"] if any(abs(a - t) < 120 for t in sent_end) else cfg["max_ms"]
+        if b - a > keep:
+            cuts.append((a + keep / 2, b - keep / 2))
+    if cuts:
+        keep_parts, cursor = [], 0.0
+        for a, b in cuts:
+            keep_parts.append((cursor, a))
+            cursor = b
+        keep_parts.append((cursor, total))
+        expr = "+".join(f"between(t,{a / 1000:.4f},{b / 1000:.4f})" for a, b in keep_parts)
+        tmp = mp3.with_suffix(".tight.mp3")
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(mp3), "-af", f"aselect='{expr}',asetpts=N/SR/TB,{VOICE_CHAIN}",
+                        "-c:a", "libmp3lame", "-b:a", "192k", str(tmp)], check=True)
+        tmp.replace(mp3)
+
+        def shift(t):
+            return t - sum(min(b, t) - a for a, b in cuts if t > a)
+        words = [{**w, "ms": shift(w["ms"])} for w in words]
+    else:
+        tmp = mp3.with_suffix(".tight.mp3")
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(mp3), "-af", VOICE_CHAIN, "-c:a", "libmp3lame", "-b:a", "192k", str(tmp)], check=True)
+        tmp.replace(mp3)
+    removed = sum(b - a for a, b in cuts)
+    print(f"  tightened pauses: {len(cuts)} cut, {removed / 1000:.1f}s of {total / 1000:.1f}s removed")
+    return words
+
+
 async def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     force = "--force" in sys.argv
@@ -538,7 +601,8 @@ async def main():
     tts = spec.get("tts") or {"provider": "edge"}
     segment = tts.get("segment", "scene")
     if tts.get("provider") == "doubao":
-        voice_key = f"doubao:{tts.get('voice') or os.environ.get(tts.get('voiceEnv', 'DOUBAO_VOICE_ZH'))}:{tts.get('resource', 'seed-icl-2.0')}:{tts.get('rate')}"
+        voice_key = (f"doubao:{tts.get('voice') or os.environ.get(tts.get('voiceEnv', 'DOUBAO_VOICE_ZH'))}:{tts.get('resource', 'seed-icl-2.0')}:{tts.get('rate')}"
+                     f":{tts.get('model', DOUBAO_MODEL)}:{json.dumps(tts.get('pauses', PAUSES))}:{VOICE_CHAIN}")
     else:
         voice_key = (f"{tts.get('provider')}:{tts.get('voice')}:{tts.get('rate')}" + (f":{tts.get('model')}:{tts.get('instruction', '')}:scene" if segment == "scene" else "")
                      if tts.get("provider") == "dashscope" else f"edge:{spec['voice']}:{spec.get('rate')}")
@@ -553,20 +617,26 @@ async def main():
         mp3 = ROOT / "public" / rel
         words_cache = mp3.with_suffix(".words.json")
         cache = json.loads(words_cache.read_text(encoding="utf-8")) if words_cache.exists() else {}
-        pace_key = f"{scene_rate}:{pace_changes}" if tts.get("provider") in ("doubao", "dashscope") else ""
+        mood = scene.get("mood", tts.get("mood"))
+        # a scene may use another cloned voice (e.g. a high-energy clone for hooks): "voiceEnv": "DOUBAO_VOICE_ZH_ENERGY"
+        scene_voice = {"voiceEnv": scene["voiceEnv"], "voice": None} if scene.get("voiceEnv") else {}
+        pace_key = (f"{scene_rate}:{pace_changes}:{mood or ''}:{scene.get('voiceEnv', '')}"
+                    if tts.get("provider") in ("doubao", "dashscope") else "")
         stale = (cache.get("spoken") != spoken or cache.get("voice", f"edge:{spec['voice']}:{spec.get('rate')}") != voice_key
                  or cache.get("pace", "") != pace_key)
         if force or stale or not mp3.exists():
             engine = synthesize_doubao if tts.get("provider") == "doubao" else synthesize_scene
             if tts.get("provider") == "doubao" or (tts.get("provider") == "dashscope" and segment == "scene"):
                 if pace_changes:
-                    words = synthesize_paced(spoken, tts, mp3, scene_rate, pace_changes, engine)
+                    words = synthesize_paced(spoken, {**tts, "mood": mood, **scene_voice}, mp3, scene_rate, pace_changes, engine)
                 else:
-                    words = engine(spoken, {**tts, "rate": scene_rate}, mp3)
+                    words = engine(spoken, {**tts, "rate": scene_rate, "mood": mood, **scene_voice}, mp3)
             elif tts.get("provider") == "dashscope":
                 words = synthesize_dashscope(spoken, tts, mp3)
             else:
                 words = await synthesize(spoken, spec["voice"], spec.get("rate", "+0%"), mp3)
+            if tts.get("provider") in ("doubao", "dashscope") and segment == "scene":
+                words = tighten_pauses(mp3, words, tts, spoken)
             words_cache.write_text(json.dumps({"spoken": spoken, "voice": voice_key, "pace": pace_key, "words": words}, ensure_ascii=False, indent=1),
                                    encoding="utf-8")
             print(f"voiced {rel}")

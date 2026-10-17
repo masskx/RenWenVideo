@@ -93,7 +93,8 @@ def doubao_tts(text, rate, out_mp3):
     key, voice = os.environ.get("DOUBAO_API_KEY"), os.environ.get("DOUBAO_VOICE_ZH")
     if not key or not voice:
         raise RuntimeError("DOUBAO_API_KEY / DOUBAO_VOICE_ZH not set")
-    body = json.dumps({"req_params": {"text": text, "speaker": voice, "audio_params": {
+    # expressive model: more pitch movement on the cloned voice (docs/video-craft/配音.md §〇·三)
+    body = json.dumps({"req_params": {"text": text, "speaker": voice, "model": "seed-tts-2.0-expressive", "audio_params": {
         "format": "mp3", "sample_rate": 24000, "enable_subtitle": True, "speech_rate": round((rate - 1) * 100)}}}).encode()
     last = None
     for attempt in range(3):
