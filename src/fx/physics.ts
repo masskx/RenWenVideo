@@ -1,6 +1,6 @@
 // Physics for motion with weight: closed-form springs, throws, drops with bounces, squash/stretch from
 // velocity, impulses, staggered layers and a lagging camera. Everything is a pure function of t (seconds),
-// so any frame renders on its own. Rules behind the numbers: docs/video-craft/导演层.md §3–§5.
+// so any frame renders on its own. Rules behind the numbers: docs/video-craft/archive/导演层.md §3–§5.
 // Closed-form springs summed per target change follow twoclipping's open prompt template (X @twoclipping).
 
 import {clamp} from './motion';

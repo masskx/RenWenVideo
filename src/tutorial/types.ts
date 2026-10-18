@@ -12,8 +12,8 @@ export type Tutorial = {
   fps: number;
   width: number;
   height: number;
-  voice: string;
-  rate?: string;
+  /** Narration: the user's cloned Doubao voice; "edge" is an agreed backup only (scripts/generate-tutorial-voice.py, docs/video-craft/配音.md). */
+  tts?: {provider?: 'doubao' | 'edge'; voice?: string; rate?: number; pace?: string; [key: string]: unknown};
   leadMs?: number;
   tailMs?: number;
   musicSrc?: string | null;
@@ -25,7 +25,7 @@ export type Tutorial = {
   /** Per-line framing tour (fx beatTour); wide layouts need a smaller drift to stay inside the safe area. */
   motion?: {amp?: number; drift?: number};
   /**
-   * Look switches for the director layer (docs/video-craft/导演层.md). Defaults keep the original dark look:
+   * Look switches for the director layer (docs/video-craft/archive/导演层.md). Defaults keep the original dark look:
    * theme "dark", tour (per-caption whole-stage reframing) on, particles on, default cut kinds.
    */
   look?: {theme?: 'dark' | 'paper' | 'blueprint'; frame?: 'douyin' | 'channels'; tour?: boolean; particles?: boolean; mascot?: boolean;

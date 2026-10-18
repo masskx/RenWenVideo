@@ -1,4 +1,4 @@
-// Shared motion toolkit for every composition. Knowledge and rules: docs/video-craft/ (start with 导演层.md).
+// Shared motion toolkit for every composition. Knowledge: docs/video-craft/ (start with quick-reference.md).
 export * from './motion';
 export * from './transitions';
 export * from './layers';

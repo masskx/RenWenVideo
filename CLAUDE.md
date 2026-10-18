@@ -1,26 +1,37 @@
 # RenWenVideo
 
-Remotion project that turns articles and posts into 9:16 Douyin videos. Two pipelines: long-form explainers (`explainers/`, `src/ArticleExplainer.tsx`) and code-drawn tutorials (`tutorials/`, `src/tutorial/`). Finished packages go in `douyin/<id>/`. See `README.md` for commands.
+Remotion pipeline that turns a script plus source material into short vertical videos (1080×1920, 30 fps) about AI tools and AI news. The same video goes to 微信视频号, 抖音 and 小红书. Viewer, niche and platforms are defined in one place: `docs/video-craft/quick-reference.md` §〇. All on-screen text is Simplified Chinese.
 
-## Video production rules (mandatory)
+The script usually comes from a separate planning agent ("growth"): use it and the material as given; adapt scenes, length and visuals to them. No fixed scene count, shot table or animation recipe.
 
-Every time you make, revise or re-render a video in this repo, follow the production rules adapted from [chuspeeism/dashi-animationstyle](https://github.com/chuspeeism/dashi-animationstyle):
+## Priority order
 
-- **Invoke the `video-craft` skill first** (`.claude/skills/video-craft/SKILL.md`) and follow its workflow in order: source → reference → director brief → storyboard (subject layers, force & contact frames, phase offsets, SFX per shot) → A/B colours → build with `src/fx` → 3 stills + frame-by-frame look → full render → QA gates → package.
-- **Length and pacing (user rule, 2026-10-17)**: videos are **≤ 60 seconds unless the user asks for more** (set `"maxSeconds"` in the config then). Past videos were judged too long, flat and not short-video paced: hook in the first 3 s, one point per video, scenes ≤ 8–10 s, narration written for the ear (short sentences ≤ 16 chars, questions / exclamations / turns, no ellipses), ~4.8–5.5 chars/s. Rules in `文案.md` §七; `scripts/qa/brief.mjs` fails over-length videos and scripts.
-- **Story before storyboard (`docs/video-craft/文案.md`)**: never just convert a post into a video. The post is raw material; the video tells *our* story about one topic (a technology, phenomenon or technique) from one clear perspective — the narrator's first person (only things that really happened; the voice is the user's own) or a third-party storyteller. Fill the 选题卡 (one-line take, perspective, protagonist, conflict, at least one view the source doesn't have, what the viewer takes away) before writing narration; don't follow the source's order; cut most of it.
-- **Read `docs/video-craft/发布与风格偏好.md` first of all.** The user publishes on **WeChat Channels (微信视频号), not Douyin**: verify the current size and cover specs before choosing the canvas (reportedly 6:7, 1080×1260 — unverified), and make the cover for it. For tech topics (products, AI, cars, space) the paper look was judged to lack a technological feel — pick a tech-family style (blueprint, dark tech) instead.
-- **Read `docs/video-craft/导演层.md` first.** It is the director layer adapted from guanmo_ai's article and twoclipping's prompt template: our past videos looked AI-made (synchronized pops, whole-stage push/pull, glow, card stacks, no physics, no sound design). Its ban list and acceptance criteria are mandatory and override older rules where they conflict.
-- The knowledge base is `docs/video-craft/` (director layer, rules, motion, storyboard template, style dictionary, style-card template, concept drawing, known pitfalls). Read the relevant files instead of working from memory.
-- **Cover (`docs/video-craft/封面.md`)**: the cover is designed, not a frozen frame. Fill the 封面卡 in the storyboard (template chosen from the content type, a separate short headline, exactly one anchor, colours), keep ≤ 3 text layers, lay out 3:4 / 6:7 / 9:16 separately, and pass `scripts/qa/cover.mjs` plus the 80 px thumbnail look and 10-point score.
-- A video is not done, and must not be committed, until `scripts/qa/brief.mjs`, `scripts/qa/cover.mjs`, `scripts/qa/richness.mjs`, `scripts/qa/marks.mjs`, `scripts/qa/scan.mjs` (sheets and `--phone`) and the format/loudness/size checks all pass.
-- Write the storyboard to `tutorials/<id>.storyboard.md` or `explainers/<id>.storyboard.md` before scene code.
-- When a new failure mode turns up, add it to `docs/video-craft/踩坑清单.md`.
+1. Hook: the first 1–3 seconds must show and say the most interesting thing.
+2. Retention: every few seconds something new happens (new number, new screen, new contrast); cut anything that doesn't earn its time.
+3. Phone readability: big text, full-screen use, nothing important in platform UI zones.
+4. Fidelity to the given script and material (don't invent facts; label creator claims as claims).
+5. Polish (motion design, transitions, sound) — only after 1–4 are satisfied.
 
-## Environment notes
+## Workflow
 
-- Narration: **all videos use the user's own cloned voice on Doubao (Volcano Engine) TTS** — `"tts": {"provider": "doubao"}` (pace per scene), key `DOUBAO_API_KEY` (never print or commit it), voice ids `DOUBAO_VOICE_ZH` / `DOUBAO_VOICE_EN`, resource `seed-icl-2.0`, whole scene per request with `enable_subtitle` timestamps. Do not silently fall back to another voice; if the clone call fails, report it. **Emotion and pacing of the cloned voice (`配音.md` §〇·三)**: the clone copies the delivery of the user's reference recording, and emotion prompts barely move it — emotion comes from writing (spoken-style lines), pacing from automatic pause tightening (on by default) and the faster pace presets, and the biggest lift from re-recording the reference in the target delivery (a second high-energy clone can be selected per scene with `"voiceEnv"`). The default Doubao model for the clone is `seed-tts-2.0-expressive`. **Pace is dynamic, set while writing the script**: every scene gets a `"pace"` (slow / calm / normal / brisk / fast) chosen from its content and emotion, `{pace:…}` at a sentence start changes it mid-scene, and the storyboard has a 语速 column — the voice must follow the video's rhythm (`配音.md` §〇·二). Alibaba Model Studio TTS (`DASHSCOPE_API_KEY`) is the fallback only. **Read `docs/video-craft/配音.md` before voicing**: synthesize each scene in one request (`"segment": "scene"`, the default — never the old phrase-by-phrase splicing, which made the voice choppy), use a high-quality model/voice (Qwen-Audio 3.1 or better; cost is not a concern), fix readings with `[显示|朗读]`. Needs `pip install dashscope`.
-- Sound effects: prefer real recordings from **Freesound via Openverse** (no key) over the synthesized set — `node scripts/fetch-sfx.mjs search "<what it sounds like>"` / `get <id> <kind>`; only CC0 and CC BY, credit them in the package README (`fetch-sfx.mjs credits`). Rules: `docs/video-craft/音效.md`.
-- Illustrations: `gpt-image-2` at `OPENAI_BASE_URL`.
-- In the cloud container set `REMOTION_BROWSER_EXECUTABLE=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell` for tutorial renders, and `TTS_CA_BUNDLE=/root/.ccr/ca-bundle.crt` for edge-tts.
-- `npm run lint` (ESLint + tsc) must pass. Keep each `douyin/<id>/video.mp4` under 100 MB.
+1. **Input** — `inputs/<id>/script.md` (hook, body, ending, titles; free-form is fine) plus material: screenshots, screen recordings, links, numbers.
+2. **Plan** — read script + material; write `tutorials/<id>.json`, `tutorials/<id>.storyboard.md` (brief: 5 required fields, `docs/video-craft/分镜模板.md`) and `src/tutorial/scenes/<id>.tsx`, choosing scenes that fit the material. Print a short plan (hook, scenes with durations, total length) and wait for the user's OK. ≤ 60 s unless the script needs more and the user approves (`"maxSeconds"`).
+3. **Voice** — `npm run tutorial:voice -- <id>`: the user's cloned Doubao voice; per-character timestamps drive cues and subtitles.
+4. **Render** — `npm run tutorial:render -- <id> --overwrite` (1080×1920 H.264, covers).
+5. **QA** — `node scripts/qa/brief.mjs <id>`, `cover.mjs <id>`, `richness.mjs` / `marks.mjs` / `scan.mjs` (+ `--phone`) on the mp4, `npm run lint`; look at the stills yourself before showing them.
+6. **Package** — `douyin/<id>/`: mp4 (not committed), covers, stills, README with separate title / description / hashtags for 视频号, 抖音, 小红书, and credits.
+
+## Hard rules
+
+- Narration: only the user's cloned voice on Doubao TTS (`DOUBAO_API_KEY`, `DOUBAO_VOICE_ZH`; never print or commit keys). edge-tts (`"tts": {"provider": "edge"}`) is a backup only when the user agrees — never a silent fallback. Details: `docs/video-craft/配音.md`.
+- Don't invent facts or numbers; label creator claims (「据 @作者」); first person only for things that really happened.
+- External footage: muted, bottom-right label 「@作者｜案例展示」, author link in the package README.
+- If the script's hook is weak or missing, pick one from `docs/video-craft/hooks.md` and tell the user which.
+- `npm run lint` must pass; each mp4 < 100 MB; record new failure modes in `docs/video-craft/踩坑清单.md`.
+- Cloud container: `REMOTION_BROWSER_EXECUTABLE=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell` for renders; `TTS_CA_BUNDLE=/root/.ccr/ca-bundle.crt` for the edge-tts backup.
+
+## Docs
+
+- **Read every time:** `docs/video-craft/quick-reference.md` (one page).
+- On demand (optional reference): `docs/video-craft/README.md` lists the rest — narration, cover, sound, motion, styles, pitfalls. Old rules live in `docs/video-craft/archive/`.
+- House-style baseline: `tutorials/deepseek-vs-opus55` (+ storyboard, scene file). Commands: `README.md`.

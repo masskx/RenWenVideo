@@ -3,7 +3,7 @@ import {font, paper} from '../theme';
 import {clamp, ease, hash, impulse, springStep, springTrack, toss} from '../../fx';
 import {A, B, Big, CARD, Cue, DIM, INK, Kicker, LINE, Num, P2, Promise, Rise, Root, S, Scene, Strike, cam, draw, dropLift, hitOf, layers, num, phaseOp} from '../paper';
 
-// 特斯拉会飞的车？— the Oct 15, 2026 Roadster reveal, told on the director layer (docs/video-craft/导演层.md).
+// 特斯拉会飞的车？— the Oct 15, 2026 Roadster reveal, told on the director layer (docs/video-craft/archive/导演层.md).
 // Storyboard + brief: tutorials/tesla-roadster-flight.storyboard.md. Reference: wheresryan22 "Anatomy" (a line-drawn
 // machine on a white sheet, one huge live number, one accent). One line-drawn Roadster runs through the film; the
 // only colour on it is the cold-gas thrust (A = 演示, what was actually shown). Everything that was only promised
