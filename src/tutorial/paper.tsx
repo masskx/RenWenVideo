@@ -1,7 +1,7 @@
 // Shared building blocks for paper-look tutorials (look.theme: "paper"), on top of src/fx.
 // Typography with size contrast, labels that rise late on their own springs, content swaps with a short blur,
 // hand-drawn strikes and ticks, ground lines, and the physics helpers scenes use for contact frames.
-// Rules: docs/video-craft/导演层.md. (ai-agent-team keeps its own local copies of these.)
+// Rules: docs/video-craft/archive/导演层.md. (ai-agent-team keeps its own local copies of these.)
 import React from 'react';
 import {font, paper} from './theme';
 import {CamKey, SceneProps, SfxEvent} from './ui';

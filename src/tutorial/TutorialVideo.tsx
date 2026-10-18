@@ -174,7 +174,7 @@ const cueOf = (timing: SceneTiming, fps: number) => (name: string, fallback = 0)
 
 // Scene visual. Dark look: the shared motion layer (entrance, a new framing per caption line via beatTour,
 // a slow breath). With look.tour === false the stage stays put and each scene owns its own motion —
-// whole-stage push/pull is on the director layer's ban list (docs/video-craft/导演层.md §8–§9).
+// whole-stage push/pull was on the old director layer's ban list (docs/video-craft/archive/导演层.md §8–§9).
 const SceneVisual: React.FC<{timing: SceneTiming; visual: string; credit: string; motion?: {amp?: number; drift?: number}; tour: boolean}> = ({timing, visual, credit, motion, tour}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();

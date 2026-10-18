@@ -23,7 +23,7 @@ export const color = {
 export const stage = {left: 80, top: 300, width: 880, height: 960};
 
 /**
- * Matte paper look (docs/video-craft/导演层.md §6, §10): warm paper, near-black ink, two accents only (A/B),
+ * Matte paper look (docs/video-craft/archive/导演层.md §6, §10): warm paper, near-black ink, two accents only (A/B),
  * no glow. Selected per tutorial with `look.theme: "paper"`.
  */
 export const paper = {

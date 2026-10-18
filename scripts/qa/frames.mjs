@@ -1,5 +1,5 @@
 // Frame-by-frame viewer (逐帧查看): every frame of a time range as an HTML page you step through with ← →,
-// to check anticipation, contact, squash, settle and phase offsets around a main event (docs/video-craft/导演层.md §2, §11).
+// to check anticipation, contact, squash, settle and phase offsets around a main event (docs/video-craft/archive/导演层.md §2, §11).
 //   node scripts/qa/frames.mjs douyin/<id>/video.mp4 --from=12.0 --to=13.5 [--width=540] [--outdir=qa/<id>]
 //   -> qa/<id>/frames-12.00-13.50/index.html (+ JPEG frames, a contact strip strip.jpg, and the caption at each frame)
 // Also accepts --at=s (±0.4 s around s). Reads the mp4 only; works on drafts too.

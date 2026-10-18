@@ -1,4 +1,4 @@
-"""Synthesize a small royalty-free SFX library for contact frames (docs/video-craft/导演层.md §7).
+"""Synthesize a small royalty-free SFX library for contact frames (docs/video-craft/archive/导演层.md §7).
 
 Usage:
   python scripts/generate-sfx.py            -> public/audio/sfx/<kind>.wav

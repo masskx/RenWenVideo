@@ -3,7 +3,7 @@ import {font, paper} from '../theme';
 import {CamKey, SceneProps, SfxEvent} from '../ui';
 import {ContactShadow, Smear, clamp, drop, hash, impulse, matte, mix, ripple, springStep, springTrack, squash, toss, twoEdge} from '../../fx';
 
-// 一个人带 AI 团队 — second cut, rebuilt on the director layer (docs/video-craft/导演层.md).
+// 一个人带 AI 团队 — second cut, rebuilt on the director layer (docs/video-craft/archive/导演层.md).
 // Storyboard + brief: tutorials/ai-agent-team.storyboard.md. One subject runs through the film: a terracotta task
 // card (A = 交接) tossed between clay agents along gravity arcs; it ends on the human, the only green thing
 // (B = 拍板). Every main event has a force origin, a contact frame on the keyword, squash, a contact shadow and a

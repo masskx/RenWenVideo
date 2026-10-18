@@ -1,6 +1,6 @@
-# RenWenVideo · 抖音竖屏视频工作流
+# RenWenVideo · AI 工具短视频工作流
 
-基于 [Remotion](https://www.remotion.dev/) 把内容做成 9:16 竖屏视频（1080×1920，30fps），目标平台是抖音。项目有两条流水线：
+基于 [Remotion](https://www.remotion.dev/) 把内容做成 9:16 竖屏视频（1080×1920，30fps），同一条视频发微信视频号、抖音和小红书，题材是 AI 工具和 AI 新闻。项目有两条流水线：
 
 | 流水线 | 适合的内容 | 画面来源 | 配音 |
 | --- | --- | --- | --- |
@@ -48,9 +48,9 @@ src/tutorial/                    TutorialVideo 合成、通用 UI、每期画面
 # 公共
 src/fx/                          共用动效库：闭式弹簧、抛出/下落/弹跳、挤压拉伸、错相、相机跟随、主光/接触影/运动残影、转场、印章、关键词上色（见 docs/video-craft/）
 public/audio/sfx/                音效：fs-* 是从 Freesound（经 Openverse）下载的真实录音，来源在 CREDITS.json；其余是合成的（scripts/generate-sfx.py）。画面组件用 sfx() 放到接触帧上
-scripts/qa/                      出片检查：brief.mjs（导演层）、richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、frames.mjs（逐帧查看页）、palette.mjs（取色）、cover.mjs（封面卡 + 缩略图）
-docs/video-craft/                导演层（先读）、讲解动画规则、动效与画面变化、分镜模板、风格词典、风格卡模板、概念画法、踩坑清单
-.claude/skills/video-craft/      给 Claude 的做片工作流和出片检查门槛
+scripts/qa/                      出片检查：brief.mjs（简报和时长）、richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、frames.mjs（逐帧查看页）、palette.mjs（取色）、cover.mjs（封面卡 + 缩略图）
+docs/video-craft/                quick-reference.md（必读，一页）；其余为可选参考；archive/ 是归档的旧规则
+.claude/skills/video-craft/      给 Claude 的做片流程（指向速查页）
 src/Root.tsx                     注册合成：AiEra11Rules、MarketingEngineer、Tutorial、TutorialCover
 scripts/run.ps1                  Windows 辅助脚本（项目放在 FAT32/移动盘时使用）
 ```
@@ -121,24 +121,16 @@ npm ci
 
 `TutorialVideo` 外层统一加了转场（步骤号变化时用大转场）、开场圆形遮罩、每句字幕换一次构图（`beatTour`）、光点粒子和背景流动，每期的画面文件只管自己的内容和卡点动画。
 
-## 导演层：先定观感，再写代码
+## 做片规则：先抓住人，再打磨
 
-2026-10-15 起，每条视频都先过 [`docs/video-craft/导演层.md`](docs/video-craft/导演层.md)（整理自观默 @guanmo_ai《用 Codex 自动生成顶尖动效视频》和 twoclipping 公开的动效提示词模板）。以前的片子检查都过了，但“AI 味”很重：元素一起弹出、每句整幅推拉、到处发光、卡片堆字、没有物理、没有音效。现在的要求：
-
-- 平时多“浸泡”好设计，做片前按 [`docs/video-craft/审美参考库.md`](docs/video-craft/审美参考库.md) 挑参考（10 个设计灵感网站 + 动效画廊），出静帧时做一次减法自查：这个元素真的有必要吗？
-- 分镜前先写**导演 Brief 八项**（目标、分镜与主次、轨迹与相机、运动与物理、材质与光、节拍与声音、禁止项、验收标准），先在[参考画廊](https://guanmo-ai.github.io/awesome-ai-motion/)里找 1–2 个参考拆关系。
-- 每个主动作写清**受力起点 → 接触帧 → 恢复**，各层按错相晚几帧；至少一个主体贯穿多镜、变形成下一个状态。
-- 一盏主光（左上）、哑光材质、接触影；一屏强调色 ≤ 2；不发光、不渐变、不整幅推拉。
-- 音效从运动里长出来，落在接触帧上，比人声低 12–18 dB。
-- 教程配置里用 `look` 切换：`{"theme": "paper", "tour": false, "particles": false}`（旧片不写 `look`，保持原样）。
+2026-10-18 起，规则只剩一页必读的 [`docs/video-craft/quick-reference.md`](docs/video-craft/quick-reference.md)（观众、优先级、时长、手机可读、必填简报、检查）和根目录 `CLAUDE.md`（端到端流程）。优先级：**钩子 → 留人 → 手机看得清 → 忠于脚本和素材 → 打磨**。旧的导演层规则（禁止项、物理动作链、八项 Brief）已归档到 `docs/video-craft/archive/`，只作可选参考；发光、粒子、整幅推拉不再禁止，按素材决定用不用。
 
 ```bash
 node scripts/fetch-sfx.mjs search "paper slide"                  # 在 Openverse 里找 Freesound 音效（CC0 / CC BY）
 node scripts/fetch-sfx.mjs get <openverse-id> paper-slide       # 下载 → public/audio/sfx/fs-paper-slide.wav，来源记进 CREDITS.json
 node scripts/fetch-sfx.mjs credits src/tutorial/scenes/<file>.tsx  # 发布包要贴的署名
 python scripts/generate-sfx.py                                   # 合成音效库（兜底）→ public/audio/sfx/
-node scripts/qa/brief.mjs <id>                                   # 导演层检查：Brief 八项、逐镜主体/受力/错相/音效、禁止项
-node scripts/qa/frames.mjs douyin/<id>/video.mp4 --at=秒          # 逐帧查看页（← → 翻帧），看预备、接触、压扁、回稳、错相
+node scripts/qa/frames.mjs douyin/<id>/video.mp4 --at=秒          # 逐帧查看页（← → 翻帧）
 ```
 
 ## 出片检查（每条视频提交前都要过）
@@ -146,7 +138,7 @@ node scripts/qa/frames.mjs douyin/<id>/video.mp4 --at=秒          # 逐帧查�
 动效知识和规则在 [`docs/video-craft/`](docs/video-craft/)。改编自 [dashi-animationstyle](https://github.com/chuspeeism/dashi-animationstyle)（MIT），按竖屏抖音重新换算过。
 
 ```bash
-node scripts/qa/brief.mjs <id>                                 # 导演层：Brief 八项、禁止项（发光、渐变、整幅推拉……）
+node scripts/qa/brief.mjs <id>                                 # 简报五项（钩子台词 / 钩子画面 / 核心看点 / 结尾 / 平台标题）、时长和口播字数
 node scripts/qa/richness.mjs douyin/<id>/video.mp4             # 丰富度：要显示“判定：过”（相邻 2.5 秒平均变化 ≥ 10，没有几乎不变的段）
 node scripts/qa/scan.mjs douyin/<id>/video.mp4                 # 扫片：每秒 3 帧拼图，查截断、叠字、空白，转场至少 3 种
 node scripts/qa/scan.mjs douyin/<id>/video.mp4 --phone=5,60,120  # 缩到 360 宽（手机屏宽），要读的字必须读得清
@@ -154,7 +146,7 @@ node scripts/qa/marks.mjs douyin/<id>/video.mp4                # 卡点：每个
 node scripts/qa/cover.mjs <id>                                 # 封面：封面卡、标题字数、对比度；看 cover-thumbs.png 按十条打分（docs/video-craft/封面.md）
 ```
 
-做片流程（分镜 → 风格 → A/B 固定色 → 写画面 → 3 张静帧 → 出片 → 检查 → 发布包）写在 `.claude/skills/video-craft/SKILL.md`，根目录 `CLAUDE.md` 要求每次做片都按它走。分镜写在 `tutorials/<id>.storyboard.md` 或 `explainers/<id>.storyboard.md`（模板：`docs/video-craft/分镜模板.md`，例子：`tutorials/workbuddy-15-skills.storyboard.md`）。想换风格时查 `docs/video-craft/风格词典.md`（27 种风格），照参考图做时用 `node scripts/qa/palette.mjs <参考图>` 取色。
+做片流程写在根目录 `CLAUDE.md`（输入 → 计划 → 配音 → 渲染 → 检查 → 发布包）。分镜写在 `tutorials/<id>.storyboard.md`（模板：`docs/video-craft/分镜模板.md`，必填只有简报五项；画面基准：`tutorials/deepseek-vs-opus55`）。想换风格时查 `docs/video-craft/风格词典.md`（27 种风格），照参考图做时用 `node scripts/qa/palette.mjs <参考图>` 取色。
 
 | 视频 | 丰富度（加入 `src/fx` 前 → 后） |
 | --- | --- |
