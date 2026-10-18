@@ -33,7 +33,7 @@ else {
   const header = md.split('\n').find((l) => l.startsWith('| 镜头'));
   if (!header) fail.push('分镜里没有“| 镜头 |”开头的镜头表');
   else for (const col of ['主体', '受力', '错相', '音效']) if (!header.includes(col)) fail.push(`镜头表缺“${col}”一列`);
-  // Pacing (配音.md §〇·二): with the user's cloned voice the pace is planned per shot from content and emotion.
+  // Pacing (配音.md §三): with the user's cloned voice the pace is planned per shot from content and emotion.
   const cfgPath = [`tutorials/${id}.json`].find((p) => fs.existsSync(p));
   const cfg = cfgPath ? JSON.parse(fs.readFileSync(cfgPath, 'utf8')) : null;
   // Length and short-video pacing (user rule, 2026-10-17): no longer than 60 s unless the config sets maxSeconds.
@@ -42,7 +42,7 @@ else {
     const strip = (n) => n.replace(/\{[^}]*\}/g, '').replace(/\[([^|\]]*)\|[^\]]*\]/g, '$1');
     const count = (n) => (strip(n).match(/[\u4e00-\u9fff]/g) || []).length + (strip(n).match(/[A-Za-z]+|\d+/g) || []).length;
     const chars = cfg.scenes.reduce((sum, sc) => sum + count(sc.narration), 0);
-    const budget = Math.round(maxSec * 4.8);   // ~4.8–5.5 chars/s after pause tightening (配音.md §〇·三)
+    const budget = Math.round(maxSec * 4.8);   // ~4.8–5.5 chars/s after pause tightening (配音.md §四)
     if (chars > budget) fail.push(`口播 ${chars} 字，超过 ${maxSec} 秒的预算 ${budget} 字（文案.md §七：删，不要加快语速硬塞）`);
     const tl = [`tutorials/${id}.timeline.json`].find((p) => fs.existsSync(p));
     if (tl) {
@@ -52,7 +52,7 @@ else {
       for (const sc of t.scenes) if (sc.durationFrames / t.fps > 12) warn.push(`场景 ${sc.id} 有 ${(sc.durationFrames / t.fps).toFixed(1)} 秒：短视频一个场景不超过 8–10 秒，拆开或删`);
     }
     for (const sc of cfg.scenes) {
-      if (/……|\.\.\./.test(sc.narration)) warn.push(`场景 ${sc.id} 的口播有省略号：豆包会读成长停顿，拖慢节奏（配音.md §〇·三）`);
+      if (/……|\.\.\./.test(sc.narration)) warn.push(`场景 ${sc.id} 的口播有省略号：豆包会读成长停顿，拖慢节奏（配音.md §四）`);
       const longest = Math.max(...strip(sc.narration).split(/[。？！；?!;]/).map((x) => (x.match(/[\u4e00-\u9fff]/g) || []).length));
       if (longest > 22) warn.push(`场景 ${sc.id} 有一句 ${longest} 字：口播一句话尽量 ≤ 16 字，长句拆短（文案.md §七）`);
     }

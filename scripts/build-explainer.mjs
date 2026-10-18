@@ -1,7 +1,7 @@
 // Builds assets and a frame timeline for a narrated explainer (explainers/<id>.json).
 //   node scripts/build-explainer.mjs --id=ai-era-11-rules --images --voice
 // --images  generate missing illustrations with Images2 (OPENAI_API_KEY / OPENAI_BASE_URL)
-// --voice   synthesize missing narration segments with CosyVoice (DASHSCOPE_API_KEY)
+// --voice   synthesize missing narration segments with the cloned Doubao voice (DOUBAO_API_KEY, DOUBAO_VOICE_ZH)
 // --force   regenerate even if files exist
 // Always (re)writes explainers/<id>.timeline.json from the audio on disk.
 import {existsSync, readFileSync, writeFileSync, mkdirSync, rmSync} from 'node:fs';
@@ -85,23 +85,12 @@ async function generateImage(image) {
   console.log(`image ${image.id}`);
 }
 
+// One line in the user's cloned Doubao voice, via the tutorial voice script (the only TTS path in this repo).
 async function synthesize(text, target) {
   if (!force && existsSync(target)) return;
-  const apiKey = process.env.DASHSCOPE_API_KEY;
-  if (!apiKey) throw new Error('Missing DASHSCOPE_API_KEY.');
-  const {model, voice, rate, pitch, volume} = config.voice;
-  const response = await fetchWithRetry(process.env.DASHSCOPE_TTS_ENDPOINT || 'https://dashscope.aliyuncs.com/api/v1/services/audio/tts/SpeechSynthesizer', {
-    method: 'POST',
-    headers: {Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json'},
-    body: JSON.stringify({model, input: {text: `${text.replace(/[。！？.!?]+$/u, '')}。`, voice, format: 'mp3', sample_rate: 44100, rate, pitch, volume, language_hints: ['zh']}})
-  });
-  const payload = await response.json();
-  if (!response.ok) throw new Error(`TTS failed (HTTP ${response.status}): ${payload.message || payload.code}`);
-  const audio = payload.output?.audio;
-  const bytes = audio?.data ? Buffer.from(audio.data, 'base64')
-    : audio?.url ? Buffer.from(await (await fetchWithRetry(audio.url)).arrayBuffer()) : null;
-  if (!bytes) throw new Error('TTS response did not include audio.');
-  writeFileSync(target, bytes);
+  const result = spawnSync('python3', [path.join(root, 'scripts', 'generate-tutorial-voice.py'), '--say', target,
+    '--rate', String(config.voice.rate ?? 1.16)], {input: text, encoding: 'utf8', env: process.env});
+  if (result.error || result.status !== 0) throw new Error(`Doubao TTS failed for ${JSON.stringify(text)}: ${result.error?.message || result.stderr}`);
   console.log(`voice ${path.basename(target)}: ${text}`);
 }
 

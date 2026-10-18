@@ -4,8 +4,8 @@
 
 | 流水线 | 适合的内容 | 画面来源 | 配音 |
 | --- | --- | --- | --- |
-| **长文讲解（Explainer）** | 把文章、对谈稿提炼成“N 条结论” | Images2 AI 配图 + 章节标题、原话卡片 | 百炼 CosyVoice |
-| **操作教程（Tutorial）** | 软件、工具的操作步骤 | 代码绘制的终端、聊天窗口、流程图（不生图） | edge-tts |
+| **长文讲解（Explainer）** | 把文章、对谈稿提炼成“N 条结论” | Images2 AI 配图 + 章节标题、原话卡片 | 本人复刻音色（豆包语音） |
+| **操作教程（Tutorial）** | 软件、工具的操作步骤 | 代码绘制的终端、聊天窗口、流程图（不生图） | 本人复刻音色（豆包语音） |
 
 每条视频的成片、封面、字幕和发布文案统一放在 `douyin/<id>/`。
 
@@ -57,15 +57,15 @@ scripts/run.ps1                  Windows 辅助脚本（项目放在 FAT32/移�
 
 ## 环境准备
 
-- Node.js 22+ 和 ffmpeg/ffprobe（需要在 PATH 里）；做教程还需要 Python 3 和 `pip install edge-tts numpy dashscope`
+- Node.js 22+ 和 ffmpeg/ffprobe（需要在 PATH 里）；配音、底乐还需要 Python 3 和 `pip install numpy`（配音只用标准库调用豆包语音接口）
 - 中文字体：组件按顺序使用 Noto Sans CJK SC、Source Han Sans SC、PingFang SC、Microsoft YaHei，系统里装有其中一个就行
 - 密钥：把 `.env.example` 复制为 `.env` 再填写（`.env` 不会被提交）
 
 | 变量 | 用途 |
 | --- | --- |
 | `OPENAI_API_KEY` / `OPENAI_BASE_URL` / `OPENAI_IMAGE_MODEL` | Images2 生图，默认 `gpt-image-2`，输出 1024×1536 |
-| `DASHSCOPE_API_KEY` | 百炼 CosyVoice 配音：长文讲解的参数在 `explainers/<id>.json`；教程在 `tutorials/<id>.json` 里加 `tts` 也可以改用它 |
-| `TTS_CA_BUNDLE` | 可选。在使用 TLS 代理的环境里给 edge-tts 指定 CA 证书（教程配音） |
+| `DOUBAO_API_KEY`（或 `DOUBAO_APP_ID` + `DOUBAO_ACCESS_TOKEN`） | 配音：用户本人的复刻音色（火山引擎豆包语音），本仓库唯一的 TTS |
+| `DOUBAO_VOICE_ZH` / `DOUBAO_VOICE_EN` | 复刻音色 id（`S_` 开头）；可选 `DOUBAO_VOICE_ZH_ENERGY`，场景里用 `"voiceEnv"` 选择 |
 | `REMOTION_BROWSER_EXECUTABLE` | 可选。Remotion 下载不了 Chrome 时，指定本机 Chrome 或 headless-shell |
 
 ```bash
@@ -82,7 +82,7 @@ npm ci
    - `stamp`：`{line, phrase, text}`，第 `line` 句念到 `phrase` 时盖下印章 `text` 并震屏（每个场景的主动作）
    - `highlights` / `emphasis`：全片两个核心名词的 A/B 固定色，以及字幕里要强调的词（规则见 `docs/video-craft/讲解动画规则.md` 第四节）
    - `images`：配图提示词（`imageStyle` 是全片统一的画风）；场景有两张图时，`split` 指定从第几句开始切到第二张
-   - `voice` / `music`：配音参数和底乐素材
+   - `voice` / `music`：配音语速（`{"provider": "doubao", "rate": 1.16}`）和底乐素材
 2. **生成素材和时间轴**（已有的文件会跳过，加 `--force` 全部重做）：
    ```bash
    node scripts/build-explainer.mjs --id=<id> --images --voice
@@ -106,7 +106,7 @@ npm ci
 教程画面全部由 Remotion 代码绘制，不需要生图。旁白里的 `{a}` 标记会换算成画面动画的触发时间；`[显示|朗读]` 可以让字幕和读音不同，例如 `[9222|九二二二]`。
 
 1. 复制一份 `tutorials/<id>.json`，修改 `id` 和旁白。
-   - 配音用百炼 TTS：`"tts": {"provider": "dashscope", "model": "qwen-audio-3.1-tts-flash", "voice": "anmingyuan_v3.1", "rate": 1.1}`。每个场景整段一次合成，卡点和字幕时间来自服务端的逐字时间戳；模型、音色、语气指令和读音修正见 `docs/video-craft/配音.md`。（旧的逐句拼接 `"segment": "phrase"` 只留给旧片子；不写 `tts` 时用 edge-tts。）
+   - 配音只用本人的复刻音色：`"tts": {"provider": "doubao"}`，语速按场景写 `"pace"`。每个场景整段一次合成，卡点和字幕时间来自服务端的逐字时间戳；语速、读音修正见 `docs/video-craft/配音.md`。
    - 画面整宽排满的教程，可以用 `"motion": {"amp": 0.05, "drift": 12}` 调小每句换构图的幅度，避免内容碰到画面边缘。
 2. 在 `src/tutorial/scenes/` 新建画面文件 `<id>.tsx`，并在 `scenes/index.ts` 里登记。
 3. 生成配音、底乐，再渲染：

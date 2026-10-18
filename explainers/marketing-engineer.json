@@ -13,11 +13,8 @@
   "width": 1080,
   "height": 1920,
   "voice": {
-    "model": "cosyvoice-v3-flash",
-    "voice": "longsanshu_v3",
+    "provider": "doubao",
     "rate": 1.25,
-    "pitch": 1.0,
-    "volume": 60,
     "gapSeconds": 0.12
   },
   "music": {

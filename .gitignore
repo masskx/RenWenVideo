@@ -7,6 +7,16 @@ dist
 out/
 *.raw.mp4
 
+# Rendered videos and large raw inputs are not committed from 2026-10-18 on (the files already tracked stay in
+# history). Keep them locally or in cloud storage; the package README says where the mp4 is.
+douyin/**/*.mp4
+releases/**/*.mp4
+inputs/**/*.mp4
+inputs/**/*.mov
+inputs/**/*.webm
+inputs/**/*.mkv
+inputs/**/*.wav
+
 # Local QA screenshots are reproducible and not production artifacts.
 /qa/
 

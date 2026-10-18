@@ -3,26 +3,19 @@
 Usage:
   python scripts/generate-tutorial-voice.py <id> [--force]     (reads tutorials/<id>.json)
 
-TTS backends (tutorial JSON):
-  "voice"/"rate"                   edge-tts (default), word timings from the service
-  "tts": {"provider": "dashscope", "model": "qwen-audio-3.1-tts-flash", "voice": "anmingyuan_v3.1", "rate": 1.1,
-          "instruction": "…", "segment": "scene"}
-                                   Alibaba Cloud Model Studio TTS (DASHSCOPE_API_KEY): CosyVoice and Qwen-Audio-TTS.
-                                   segment "scene" (default): the whole scene is ONE request over the WebSocket API,
-                                   so prosody runs across sentences like a real read; cue and caption times come
-                                   from the service's per-character timestamps (word_timestamp_enabled).
-                                   "tts": {"provider": "doubao"}    THE DEFAULT FOR NEW VIDEOS: the user's own cloned voice on Doubao (Volcano Engine)
-                                   TTS v3 — DOUBAO_API_KEY, voice from DOUBAO_VOICE_ZH (or "voice"), resource
-                                   seed-icl-2.0; whole scene per request, timestamps via enable_subtitle.
-  segment "phrase" (legacy, the old videos): every comma/full-stop phrase is a
-                                   separate request, joined with fixed pauses — exact cues, but each phrase is read
-                                   as its own utterance (pitch resets, choppy). Don't use it for new videos.
-                                   Voices, models and pronunciation fixes: docs/video-craft/配音.md
+TTS: the user's own cloned voice on Doubao (Volcano Engine) TTS v3 — the only voice this repo uses.
+  "tts": {"provider": "doubao"}    DOUBAO_API_KEY (or DOUBAO_APP_ID + DOUBAO_ACCESS_TOKEN), voice from DOUBAO_VOICE_ZH
+                                   (or "voice"), resource seed-icl-2.0. Each scene is ONE request, so prosody runs
+                                   across sentences; per-character timestamps (enable_subtitle) give the cue and
+                                   caption times. Details: docs/video-craft/配音.md
 
-Per scene (doubao): "pace" (slow/calm/normal/brisk/fast), "mood" (a delivery instruction, Doubao context_texts),
-"voiceEnv" (another cloned voice id from the environment, e.g. a high-energy clone for hooks). Every Doubao/DashScope
-scene is then pause-tightened (gaps > 170 ms cut, 240 ms after 。？！; "tts": {"pauses": false} to disable) and run
-through a light presence chain — see docs/video-craft/配音.md §〇·三.
+Per scene: "pace" (slow/calm/normal/brisk/fast), "mood" (a delivery instruction, Doubao context_texts),
+"voiceEnv" (another cloned voice id from the environment, e.g. a high-energy clone for hooks). Every scene is then
+pause-tightened (gaps > 170 ms cut, 240 ms after 。？！; "tts": {"pauses": false} to disable) and run through a light
+presence chain — see docs/video-craft/配音.md.
+
+One line, for the explainer pipeline (scripts/build-explainer.mjs --voice):
+  python scripts/generate-tutorial-voice.py --say <out.mp3> [--rate 1.16] < text
 
 Narration markup:
   {a}            cue marker; its time (ms from scene start) is written to timing.cues.a
@@ -32,7 +25,6 @@ Outputs:
   public/audio/tutorials/<id>/<nn>-<scene>.mp3
   tutorials/<id>.timeline.json
 """
-import asyncio
 import base64
 import json
 import math
@@ -45,15 +37,7 @@ import tempfile
 import urllib.request
 from pathlib import Path
 
-import edge_tts
-import edge_tts.communicate
-
 ROOT = Path(__file__).resolve().parent.parent
-# Behind a TLS-inspecting proxy edge-tts must trust the proxy CA; it pins certifi otherwise.
-_ca = os.environ.get("TTS_CA_BUNDLE") or os.environ.get("SSL_CERT_FILE")
-if _ca and Path(_ca).exists():
-    edge_tts.communicate._SSL_CTX = ssl.create_default_context(cafile=_ca)
-
 def resolve_tutorial(arg):
     """Accept an id ("rea-quickstart") or a path ("tutorials/rea-quickstart.json")."""
     target = Path(arg or "rea-quickstart")
@@ -67,14 +51,14 @@ def timeline_path(spec_path):
 
 
 TOKEN = re.compile(r"\{([a-z0-9]+)\}|\[([^\]|]+)\|([^\]]+)\]|\{pace:([a-z0-9.]+)\}")
-# Speaking pace (docs/video-craft/配音.md §〇·二): named presets, calibrated to the user's cloned voice, which reads
+# Speaking pace (docs/video-craft/配音.md §三): named presets, calibrated to the user's cloned voice, which reads
 # slower than stock TTS voices at rate 1.0. A scene sets one with "pace"; {pace:NAME} inside the narration changes
 # it from the next sentence on. A number works too ({pace:1.15}). Override the table with tts.paces.
 # Recalibrated 2026-10-17 for short-video pacing: the cloned voice ran at 3.7 chars/s at the old "normal" (1.1) with
 # 29 % of the track in pauses; these rates plus pause tightening (tighten_pauses) land at about 4.8-5.5 chars/s.
 PACES = {"slow": 1.04, "calm": 1.1, "normal": 1.16, "brisk": 1.24, "fast": 1.32}
 # Default Doubao model for the cloned voice: measured on the same line, seed-tts-2.0-expressive + a spoken-style script
-# gave a 19.2-semitone pitch range vs 15.1 for the plain default (docs/video-craft/配音.md §〇·三).
+# gave a 19.2-semitone pitch range vs 15.1 for the plain default (docs/video-craft/配音.md §四).
 DOUBAO_MODEL = "seed-tts-2.0-expressive"
 # Pause tightening (short-video "气口" editing): gaps longer than max_ms are cut down to max_ms (sentence ends keep a
 # little more), word timestamps shifted to match. Off with "tts": {"pauses": false}.
@@ -207,18 +191,6 @@ def clean_caption(text):
     return text.strip()
 
 
-async def synthesize(text, voice, rate, out_path):
-    words = []
-    communicate = edge_tts.Communicate(text, voice, rate=rate, boundary="WordBoundary")
-    with open(out_path, "wb") as f:
-        async for chunk in communicate.stream():
-            if chunk["type"] == "audio":
-                f.write(chunk["data"])
-            elif chunk["type"] == "WordBoundary":
-                words.append({"text": chunk["text"], "ms": chunk["offset"] / 10000, "dur": chunk["duration"] / 10000})
-    return words
-
-
 def load_dotenv():
     env = ROOT / ".env"
     if not env.exists():
@@ -227,97 +199,6 @@ def load_dotenv():
         m = re.match(r"\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$", line)
         if m and m.group(1) not in os.environ:
             os.environ[m.group(1)] = m.group(2).strip().strip('"').strip("'")
-
-
-def dashscope_phrase(text, tts, out_path):
-    """One CosyVoice request for a short phrase; writes an mp3."""
-    key = os.environ.get("DASHSCOPE_API_KEY")
-    if not key:
-        raise SystemExit("DASHSCOPE_API_KEY is not set (environment or .env)")
-    endpoint = os.environ.get("DASHSCOPE_TTS_ENDPOINT", "https://dashscope.aliyuncs.com/api/v1/services/audio/tts/SpeechSynthesizer")
-    body = {"model": tts.get("model", "cosyvoice-v3-flash"),
-            "input": {"text": text, "voice": tts.get("voice", "longsanshu_v3"), "format": "mp3", "sample_rate": 44100,
-                      "rate": tts.get("rate", 1.0), "pitch": tts.get("pitch", 1.0), "volume": tts.get("volume", 60), "language_hints": ["zh"]}}
-    req = urllib.request.Request(endpoint, data=json.dumps(body).encode(), method="POST",
-                                 headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
-    ctx = ssl.create_default_context(cafile=os.environ.get("SSL_CERT_FILE")) if os.environ.get("SSL_CERT_FILE") else None
-    last = None
-    for attempt in range(4):
-        try:
-            with urllib.request.urlopen(req, context=ctx, timeout=60) as r:
-                payload = json.loads(r.read())
-            audio = payload.get("output", {}).get("audio", {})
-            if audio.get("data"):
-                data = base64.b64decode(audio["data"])
-            else:
-                with urllib.request.urlopen(audio["url"], context=ctx, timeout=60) as r:
-                    data = r.read()
-            Path(out_path).write_bytes(data)
-            return
-        except Exception as error:  # network hiccups and 429s: back off and retry
-            last = error
-            import time
-            time.sleep(1.5 * (attempt + 1))
-    raise SystemExit(f"DashScope TTS failed for {text!r}: {last}")
-
-
-def synthesize_scene(text, tts, out_path):
-    """The whole scene in one WebSocket request (CosyVoice / Qwen-Audio-TTS), with per-character timestamps.
-    Returns one timing entry per non-space character of `text`, in order."""
-    try:
-        import dashscope
-        from dashscope.audio.tts_v2 import AudioFormat, ResultCallback, SpeechSynthesizer
-    except ImportError:
-        raise SystemExit("pip install dashscope  (needed for segment: scene)")
-    if not os.environ.get("DASHSCOPE_API_KEY"):
-        raise SystemExit("DASHSCOPE_API_KEY is not set (environment or .env)")
-    dashscope.api_key = os.environ["DASHSCOPE_API_KEY"]
-
-    class Collect(ResultCallback):
-        def __init__(self):
-            self.audio, self.sentences, self.error = bytearray(), {}, None
-
-        def on_data(self, data):
-            self.audio += data
-
-        def on_event(self, message):
-            sentence = (json.loads(message).get("payload", {}).get("output", {}) or {}).get("sentence") or {}
-            if sentence.get("words"):  # the same sentence arrives several times; keep the last (complete) one
-                self.sentences[sentence.get("index", 0)] = sentence["words"]
-
-        def on_error(self, message):
-            self.error = str(message)[:400]
-
-    last = None
-    for attempt in range(4):
-        cb = Collect()
-        kw = dict(model=tts.get("model", "qwen-audio-3.1-tts-flash"), voice=tts.get("voice", "anmingyuan_v3.1"),
-                  format=AudioFormat.WAV_44100HZ_MONO_16BIT, callback=cb, speech_rate=tts.get("rate", 1.0),
-                  pitch_rate=tts.get("pitch", 1.0), volume=tts.get("volume", 60),
-                  additional_params={"word_timestamp_enabled": True, **(tts.get("params") or {})})
-        if tts.get("instruction"):
-            kw["instruction"] = tts["instruction"]
-        try:
-            synth = SpeechSynthesizer(**kw)
-            synth.streaming_call(text)
-            synth.streaming_complete()
-        except Exception as error:  # network hiccups and rate limits: back off and retry
-            cb.error = cb.error or str(error)[:400]
-        if not cb.error and cb.audio:
-            break
-        last = cb.error
-        import time
-        time.sleep(2 * (attempt + 1))
-    else:
-        raise SystemExit(f"DashScope TTS failed for scene {text[:30]!r}…: {last}")
-    with tempfile.TemporaryDirectory() as tmp:
-        wav = Path(tmp) / "scene.wav"
-        wav.write_bytes(bytes(cb.audio))
-        # trim only the tail: the head stays, so the service's timestamps need no shift
-        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(wav), "-af", TAIL_TRIM, "-ar", "44100", "-ac", "2",
-                        "-c:a", "libmp3lame", "-b:a", "192k", str(out_path)], check=True)
-    service = [{"text": w["text"], "begin": w["begin_time"], "end": w["end_time"]} for k in sorted(cb.sentences) for w in cb.sentences[k]]
-    return map_timestamps(text, service)
 
 
 def map_timestamps(text, service):
@@ -474,52 +355,7 @@ def synthesize_paced(text, tts, out_path, base_rate, changes, engine):
 PACE_BREATH_MS = 180
 
 
-def phrases(spoken):
-    """Split spoken text after every pause mark; each piece is one TTS request."""
-    out, start = [], 0
-    for i, ch in enumerate(spoken):
-        if ch in BREAK:
-            out.append(spoken[start:i + 1])
-            start = i + 1
-    if spoken[start:].strip():
-        out.append(spoken[start:])
-    return [p for p in out if p.strip(" ，。；：、,;:")]
-
-
-TRIM = ("silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.02,areverse,"
-        "silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.04,areverse")
-
-
 TAIL_TRIM = "areverse,silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.08,areverse"
-
-
-def synthesize_dashscope(text, tts, out_path):
-    """Synthesize phrase by phrase, trim each clip's own lead/tail silence, and join with natural pauses
-    (short after a comma, longer at a sentence end). Returns per-character pseudo word timings."""
-    words, cursor = [], 0.0
-    pause = {"comma": tts.get("commaPauseMs", 120), "stop": tts.get("stopPauseMs", 260)}
-    with tempfile.TemporaryDirectory() as tmp:
-        parts, gaps = [], []
-        for i, phrase in enumerate(phrases(text)):
-            raw = Path(tmp) / f"{i:03d}-raw.mp3"
-            part = Path(tmp) / f"{i:03d}.wav"
-            dashscope_phrase(phrase, tts, raw)
-            subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(raw), "-af", TRIM, "-ar", "44100", "-ac", "2", str(part)], check=True)
-            ms = probe_ms(part)
-            gap_ms = pause["stop"] if phrase.rstrip()[-1:] in SENTENCE_END else pause["comma"]
-            chars = [ch for ch in phrase if ch.strip()]
-            for k, ch in enumerate(chars):
-                words.append({"text": ch, "ms": cursor + ms * k / max(1, len(chars)), "dur": ms / max(1, len(chars))})
-            parts.append(part)
-            gaps.append(gap_ms)
-            cursor += ms + gap_ms
-        inputs, labels = [], []
-        for i, part in enumerate(parts):
-            inputs += ["-i", str(part)]
-            labels.append(f"[{i}:a]aresample=44100,aformat=channel_layouts=stereo,apad=pad_dur={gaps[i] / 1000}[a{i}]")
-        graph = ";".join(labels) + ";" + "".join(f"[a{i}]" for i in range(len(parts))) + f"concat=n={len(parts)}:v=0:a=1[out]"
-        subprocess.run(["ffmpeg", "-y", "-v", "error", *inputs, "-filter_complex", graph, "-map", "[out]", "-c:a", "libmp3lame", "-b:a", "192k", str(out_path)], check=True)
-    return words
 
 
 def probe_ms(path):
@@ -592,20 +428,35 @@ def tighten_pauses(mp3, words, tts, spoken):
     return words
 
 
-async def main():
+def require_doubao(tts, where):
+    if tts.get("provider", "doubao") != "doubao":
+        raise SystemExit(f"{where}: tts.provider {tts.get('provider')!r} is not supported; this repo only voices with the "
+                         'cloned Doubao voice — set "tts": {"provider": "doubao"} (docs/video-craft/配音.md)')
+
+
+def say(argv):
+    """--say <out.mp3> [--rate r]: voice one line read from stdin (used by the explainer pipeline)."""
+    out = Path(argv[argv.index("--say") + 1])
+    rate = float(argv[argv.index("--rate") + 1]) if "--rate" in argv else PACES["normal"]
+    load_dotenv()
+    tts = {"provider": "doubao", "rate": rate}
+    text = sys.stdin.read().strip()
+    words = synthesize_doubao(text, tts, out)
+    tighten_pauses(out, words, tts, text)
+
+
+def main():
+    if "--say" in sys.argv:
+        return say(sys.argv)
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     force = "--force" in sys.argv
     spec_path = resolve_tutorial(args[0] if args else None)
     spec = json.loads(spec_path.read_text(encoding="utf-8"))
     load_dotenv()
-    tts = spec.get("tts") or {"provider": "edge"}
-    segment = tts.get("segment", "scene")
-    if tts.get("provider") == "doubao":
-        voice_key = (f"doubao:{tts.get('voice') or os.environ.get(tts.get('voiceEnv', 'DOUBAO_VOICE_ZH'))}:{tts.get('resource', 'seed-icl-2.0')}:{tts.get('rate')}"
-                     f":{tts.get('model', DOUBAO_MODEL)}:{json.dumps(tts.get('pauses', PAUSES))}:{VOICE_CHAIN}")
-    else:
-        voice_key = (f"{tts.get('provider')}:{tts.get('voice')}:{tts.get('rate')}" + (f":{tts.get('model')}:{tts.get('instruction', '')}:scene" if segment == "scene" else "")
-                     if tts.get("provider") == "dashscope" else f"edge:{spec['voice']}:{spec.get('rate')}")
+    tts = spec.get("tts") or {"provider": "doubao"}
+    require_doubao(tts, spec_path.name)
+    voice_key = (f"doubao:{tts.get('voice') or os.environ.get(tts.get('voiceEnv', 'DOUBAO_VOICE_ZH'))}:{tts.get('resource', 'seed-icl-2.0')}:{tts.get('rate')}"
+                 f":{tts.get('model', DOUBAO_MODEL)}:{json.dumps(tts.get('pauses', PAUSES))}:{VOICE_CHAIN}")
     audio_dir = ROOT / "public" / "audio" / "tutorials" / spec["id"]
     audio_dir.mkdir(parents=True, exist_ok=True)
     fps, lead, tail = spec["fps"], spec.get("leadMs", 200), spec.get("tailMs", 400)
@@ -620,23 +471,15 @@ async def main():
         mood = scene.get("mood", tts.get("mood"))
         # a scene may use another cloned voice (e.g. a high-energy clone for hooks): "voiceEnv": "DOUBAO_VOICE_ZH_ENERGY"
         scene_voice = {"voiceEnv": scene["voiceEnv"], "voice": None} if scene.get("voiceEnv") else {}
-        pace_key = (f"{scene_rate}:{pace_changes}:{mood or ''}:{scene.get('voiceEnv', '')}"
-                    if tts.get("provider") in ("doubao", "dashscope") else "")
-        stale = (cache.get("spoken") != spoken or cache.get("voice", f"edge:{spec['voice']}:{spec.get('rate')}") != voice_key
-                 or cache.get("pace", "") != pace_key)
+        pace_key = f"{scene_rate}:{pace_changes}:{mood or ''}:{scene.get('voiceEnv', '')}"
+        stale = cache.get("spoken") != spoken or cache.get("voice") != voice_key or cache.get("pace", "") != pace_key
         if force or stale or not mp3.exists():
-            engine = synthesize_doubao if tts.get("provider") == "doubao" else synthesize_scene
-            if tts.get("provider") == "doubao" or (tts.get("provider") == "dashscope" and segment == "scene"):
-                if pace_changes:
-                    words = synthesize_paced(spoken, {**tts, "mood": mood, **scene_voice}, mp3, scene_rate, pace_changes, engine)
-                else:
-                    words = engine(spoken, {**tts, "rate": scene_rate, "mood": mood, **scene_voice}, mp3)
-            elif tts.get("provider") == "dashscope":
-                words = synthesize_dashscope(spoken, tts, mp3)
+            scene_tts = {**tts, "mood": mood, **scene_voice}
+            if pace_changes:
+                words = synthesize_paced(spoken, scene_tts, mp3, scene_rate, pace_changes, synthesize_doubao)
             else:
-                words = await synthesize(spoken, spec["voice"], spec.get("rate", "+0%"), mp3)
-            if tts.get("provider") in ("doubao", "dashscope") and segment == "scene":
-                words = tighten_pauses(mp3, words, tts, spoken)
+                words = synthesize_doubao(spoken, {**scene_tts, "rate": scene_rate}, mp3)
+            words = tighten_pauses(mp3, words, tts, spoken)
             words_cache.write_text(json.dumps({"spoken": spoken, "voice": voice_key, "pace": pace_key, "words": words}, ensure_ascii=False, indent=1),
                                    encoding="utf-8")
             print(f"voiced {rel}")
@@ -658,8 +501,7 @@ async def main():
         scenes.append({"id": scene["id"], "audioSrc": rel, "audioMs": round(audio_ms), "startFrame": start_frame,
                        "durationFrames": duration_frames, "cues": cues, "captions": captions})
         start_frame += duration_frames
-    timing = {"id": spec["id"], "voice": tts.get("voice") if tts.get("provider") == "dashscope" else spec["voice"],
-              "rate": tts.get("rate") if tts.get("provider") == "dashscope" else spec.get("rate"), "fps": fps, "leadMs": lead,
+    timing = {"id": spec["id"], "voice": "doubao", "rate": tts.get("rate"), "fps": fps, "leadMs": lead,
               "totalFrames": start_frame, "scenes": scenes}
     out = timeline_path(spec_path)
     out.write_text(json.dumps(timing, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -667,4 +509,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
