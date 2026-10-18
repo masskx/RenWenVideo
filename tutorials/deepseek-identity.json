@@ -1,0 +1,49 @@
+{
+  "id": "deepseek-identity",
+  "title": "DeepSeek 自称 ChatGPT",
+  "subtitle": "它说它是 ChatGPT · 这能证明蒸馏吗？",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "maxSeconds": 60,
+  "tts": {"provider": "doubao"},
+  "leadMs": 120,
+  "tailMs": 260,
+  "musicSrc": "audio/tutorials/deepseek-identity/bgm.mp3",
+  "musicVolume": 0.14,
+  "musicDuckDb": 10,
+  "credit": "截图：X 网友实测（头像、账号已打码）；网友自测条件未公开",
+  "source": "inputs/deepseek-identity/script.md",
+  "look": {"theme": "blueprint", "frame": "full", "header": false, "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["pushUp", "push"], "small": ["push", "sweep"]}},
+  "highlights": [{"text": "ChatGPT", "role": "A"}, {"text": "DeepSeek", "role": "B"}],
+  "cover": "hook",
+  "coverCard": {
+    "template": "conflict",
+    "headline": ["它说它是", "ChatGPT"],
+    "support": "这能证明蒸馏吗？",
+    "tag": "DEEPSEEK · 连问 5 次",
+    "anchor": "dsid.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 150], "size": 132, "anchor": [540, 880, 0.95], "support": 1310},
+      "6:7": {"headline": [80, 120], "size": 120, "anchor": [540, 760, 0.82], "support": 1150},
+      "9:16": {"headline": [80, 330], "size": 132, "anchor": [540, 1120, 0.95], "support": 1560}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "dsid.hook", "step": 1, "pace": "brisk",
+      "narration": "DeepSeek 新模型，连问 5 次你是谁，{a}5 次都说：{b}我是 ChatGPT。"},
+    {"id": "comments", "visual": "dsid.comments", "step": 1, "pace": "brisk",
+      "narration": "{a}评论区炸了：这不就是蒸馏吗？{b}先别急。"},
+    {"id": "twist", "visual": "dsid.twist", "step": 2, "pace": "normal",
+      "narration": "今年 2 月，Claude 用中文问，它说自己是 {a}DeepSeek。{b}按这个逻辑，Claude 是 DeepSeek 蒸馏的？"},
+    {"id": "history", "visual": "dsid.history", "step": 2, "pace": "normal",
+      "narration": "两年前 {a}DeepSeek V3 也这么说过。{b}模型认错自己，不是新鲜事。"},
+    {"id": "mechanism", "visual": "dsid.mechanism", "step": 3, "pace": "normal",
+      "narration": "模型叫自己什么，靠的是{a}系统提示。{b}不给提示，它就按网上最常见的说法答，而网上全是 {c}ChatGPT 写的字。{d}所以在 Claude Code 里接 DeepSeek，它又会说自己是 {e}Claude。"},
+    {"id": "repro", "visual": "dsid.repro", "step": 4, "pace": "brisk",
+      "narration": "网友的复现也对不上：{a}中文问多数说 DeepSeek，{b}英文直调才常说 ChatGPT。"},
+    {"id": "verdict", "visual": "dsid.verdict", "step": 5, "pace": "calm",
+      "narration": "蒸馏的争议一直都有，但{a}模型说自己是谁，证明不了它是怎么来的。"}
+  ]
+}

@@ -54,13 +54,17 @@ export const blueprint = {
 };
 
 /**
- * Where things sit. "douyin": the original 9:16 layout. "channels" (WeChat Channels): still a 1080×1920 canvas, but
+ * Where things sit. "full": full-screen 9:16 for 视频号 / 抖音 / 小红书 — content x 60–960, y 200–1280, captions
+ * centred on y 1390, nothing that matters at x > 960 or below y 1500 (platform buttons and description).
+ * "douyin": the original 9:16 layout. "channels" (WeChat Channels): still a 1080×1920 canvas, but
  * everything that matters lives in the central 6:7 band (y 330–1590), so the feed crop (1080×1260) and the 3:4 cover
  * crop (1080×1440, y 240–1680) both keep it.
  */
 export type Layout = {stage: {left: number; top: number; width: number; height: number}; captionY: number; headerTop: number; clipTop: number;
-  band: [number, number] | null};
-export const layoutOf = (frame: 'douyin' | 'channels' | undefined): Layout => (frame === 'channels'
+  band: [number, number] | null; fadeTop?: number};
+export const layoutOf = (frame: 'full' | 'douyin' | 'channels' | undefined): Layout => (frame === 'full'
+  ? {stage: {left: 60, top: 200, width: 900, height: 1080}, captionY: 1390, headerTop: 110, clipTop: 140, band: null, fadeTop: 50}
+  : frame === 'channels'
   ? {stage: {left: 80, top: 470, width: 880, height: 800}, captionY: 1452, headerTop: 356, clipTop: 420, band: [330, 1590]}
   : {stage, captionY: 1372, headerTop: 186, clipTop: 212, band: null});
 

@@ -92,7 +92,7 @@ def main():
         k += 1
     # gentle soft-knee limiting, global fades
     out = np.tanh(out * 1.4) / 1.4
-    fade_in, fade_out = int(1.0 * SR), int(2.5 * SR)
+    fade_in, fade_out = int(0.15 * SR), int(2.5 * SR)  # the music is audible from frame 0
     out[:fade_in] *= np.linspace(0, 1, fade_in)
     out[-fade_out:] *= np.linspace(1, 0, fade_out)
     out *= 0.89 / max(1e-6, np.max(np.abs(out)))

@@ -178,9 +178,9 @@ const cueOf = (timing: SceneTiming, fps: number) => (name: string, fallback = 0)
 const SceneVisual: React.FC<{timing: SceneTiming; visual: string; credit: string; motion?: {amp?: number; drift?: number}; tour: boolean}> = ({timing, visual, credit, motion, tour}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const {stage, captionY, clipTop, band} = useLayout();
+  const {stage, captionY, clipTop, band, fadeTop: layoutFade} = useLayout();
   // The soft top edge ends where the stage starts (the 9:16 layout keeps its original 110 px).
-  const fadeTop = band ? stage.top - clipTop : 110;
+  const fadeTop = layoutFade ?? (band ? stage.top - clipTop : 110);
   const Visual = sceneRegistry[visual];
   const t = frame / fps;
   const cue = cueOf(timing, fps);
@@ -239,11 +239,14 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
   // A new step gets a big transition; scenes inside the same step get small ones.
   const cuts = useMemo(() => {
     const list = timing.scenes.slice(1).map((s, i) => ({at: s.startFrame / fps, big: stepOf(s.id) !== stepOf(timing.scenes[i].id)}));
-    // The opening is the densest part (a change every 1–1.5 s): reveal the first frame with an iris.
-    return [{at: 0, kind: 'iris' as const}, ...planCuts(list.map((c) => c.at), (i) => list[i].big, look.cuts)];
+    // No opening transition: frame 0 already shows the hook (quick-reference.md §三).
+    return planCuts(list.map((c) => c.at), (i) => list[i].big, look.cuts);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timing, tutorial, fps]);
   const L = layoutOf(look.frame);
+  // Frames where the voice speaks (caption spans, which already include the lead), for ducking the music.
+  const speech = useMemo(() => timing.scenes.flatMap((s) => s.captions.map((c) => [s.startFrame + Math.floor(c.startMs / 1000 * fps),
+    s.startFrame + Math.ceil(c.endMs / 1000 * fps)] as [number, number])), [timing, fps]);
   const cutColors = theme === 'paper' ? [paper.keyA, paper.ink, paper.bg] : theme === 'blueprint' ? [blueprint.panelHi, blueprint.line, blueprint.bg] : [color.cyan, color.violet, color.bg];
   return <LayoutCtx.Provider value={L}><AbsoluteFill style={{background: pal.bg, overflow: 'hidden'}}>
     <CutStage t={t} cuts={cuts} width={width} height={height} colors={cutColors} fill={pal.bg} paper={theme === 'paper' ? paper.card : theme === 'blueprint' ? blueprint.panel : '#e8ecff'}>
@@ -260,7 +263,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
       const scene = tutorial.scenes.find((x) => x.id === s.id);
       const events = sceneRegistry[scene?.visual ?? '']?.sfx?.(cueOf(s, fps), s.durationFrames) ?? [];
       return <Sequence key={`${s.id}-chrome`} name={`${s.id}-chrome`} from={s.startFrame} durationInFrames={s.durationFrames}>
-        <Header theme={theme} title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />
+        {(look.header ?? true) && <Header theme={theme} title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />}
         <Caption captions={s.captions} highlights={tutorial.highlights} pal={pal} />
         <Sequence from={leadFrames} name={`${s.id}-voice`}><Audio src={staticFile(s.audioSrc)} /></Sequence>
         {events.filter((e) => e.at >= 0 && e.at < s.durationFrames).map((e, i) => (
@@ -271,10 +274,15 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
       </Sequence>;
     })}
     {tutorial.musicSrc && <Audio src={staticFile(tutorial.musicSrc)} volume={(f) => {
+      // Music from frame 0, ducked under the voice: full level in the gaps, -musicDuckDb while a caption is spoken,
+      // with a short attack / release so it breathes instead of pumping.
       const base = tutorial.musicVolume ?? 0.07;
-      const fadeIn = Math.min(1, f / 30);
+      const fadeIn = Math.min(1, (f + 1) / 6);
       const fadeOut = Math.min(1, (durationInFrames - f) / 60);
-      return Math.max(0, base * Math.min(fadeIn, fadeOut));
+      const near = speech.reduce((d, [a, b]) => Math.min(d, f < a ? a - f : f > b ? f - b : 0), 1e9);
+      const duck = 10 ** (-(tutorial.musicDuckDb ?? 10) / 20);
+      const k = near <= 0 ? 1 : near >= 8 ? 0 : 1 - near / 8;
+      return Math.max(0, base * (1 - (1 - duck) * k) * Math.min(fadeIn, fadeOut));
     }} />}
   </AbsoluteFill></LayoutCtx.Provider>;
 };

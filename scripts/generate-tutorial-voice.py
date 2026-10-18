@@ -337,7 +337,33 @@ def synthesize_doubao(text, tts, out_path):
                         "-c:a", "libmp3lame", "-b:a", "192k", str(out_path)], check=True)
     service = [{"text": w["word"], "begin": w["startTime"] * 1000, "end": w["endTime"] * 1000}
                for w in sorted(words.values(), key=lambda w: w["startTime"])]
-    return map_timestamps(text, service)
+    return map_timestamps(text, spread_stubs(service))
+
+
+def spread_stubs(service, stub_ms=60):
+    """Doubao stamps some latin words and digits ("DeepSeek", "V3", "2") with a ~30 ms stub that sits either at the
+    start or at the end of the spoken word (measured 2026-10-18: "是 DeepSeek。" -> DeepSeek stamped 1.1 s late).
+    A run of stubs really fills the gap from the previous word's end to the next real word's start: spread it there,
+    in proportion to each stub's visual width."""
+    out = [dict(w) for w in service]
+    i = 0
+    while i < len(out):
+        if out[i]["end"] - out[i]["begin"] >= stub_ms:
+            i += 1
+            continue
+        j = i
+        while j < len(out) and out[j]["end"] - out[j]["begin"] < stub_ms:
+            j += 1
+        start = out[i - 1]["end"] if i else out[i]["begin"]
+        end = out[j]["begin"] if j < len(out) else max(w["end"] for w in out[i:j])
+        if end - start > stub_ms * (j - i):
+            weights = [max(1.0, width(w["text"].strip("，。？！、,.?!"))) for w in out[i:j]]
+            cursor = start
+            for w, k in zip(out[i:j], weights):
+                w["begin"], cursor = cursor, cursor + (end - start) * k / sum(weights)
+                w["end"] = cursor
+        i = j
+    return out
 
 
 def pace_rate(pace, tts):
