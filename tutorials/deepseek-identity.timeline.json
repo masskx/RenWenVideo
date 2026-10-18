@@ -1,0 +1,243 @@
+{
+  "id": "deepseek-identity",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 120,
+  "totalFrames": 1400,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/deepseek-identity/01-hook.mp3",
+      "audioMs": 5460,
+      "startFrame": 0,
+      "durationFrames": 176,
+      "cues": {
+        "a": 3081,
+        "b": 4014
+      },
+      "captions": [
+        {
+          "text": "DeepSeek 新模型",
+          "startMs": 120,
+          "endMs": 1605
+        },
+        {
+          "text": "连问 5 次你是谁",
+          "startMs": 1605,
+          "endMs": 3081
+        },
+        {
+          "text": "5 次都说：我是 ChatGPT",
+          "startMs": 3081,
+          "endMs": 4982
+        }
+      ]
+    },
+    {
+      "id": "comments",
+      "audioSrc": "audio/tutorials/deepseek-identity/02-comments.mp3",
+      "audioMs": 3082,
+      "startFrame": 176,
+      "durationFrames": 104,
+      "cues": {
+        "a": 315,
+        "b": 2444
+      },
+      "captions": [
+        {
+          "text": "评论区炸了",
+          "startMs": 315,
+          "endMs": 1290
+        },
+        {
+          "text": "这不就是蒸馏吗？",
+          "startMs": 1290,
+          "endMs": 2444
+        },
+        {
+          "text": "先别急",
+          "startMs": 2444,
+          "endMs": 3374
+        }
+      ]
+    },
+    {
+      "id": "twist",
+      "audioSrc": "audio/tutorials/deepseek-identity/03-twist.mp3",
+      "audioMs": 6896,
+      "startFrame": 280,
+      "durationFrames": 219,
+      "cues": {
+        "a": 3345,
+        "b": 4049
+      },
+      "captions": [
+        {
+          "text": "今年 2 月",
+          "startMs": 365,
+          "endMs": 1263
+        },
+        {
+          "text": "Claude 用中文问",
+          "startMs": 1263,
+          "endMs": 2505
+        },
+        {
+          "text": "它说自己是 DeepSeek",
+          "startMs": 2505,
+          "endMs": 4049
+        },
+        {
+          "text": "按这个逻辑",
+          "startMs": 4049,
+          "endMs": 5058
+        },
+        {
+          "text": "Claude 是 DeepSeek 蒸馏的？",
+          "startMs": 5058,
+          "endMs": 7158
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "audioSrc": "audio/tutorials/deepseek-identity/04-history.mp3",
+      "audioMs": 5277,
+      "startFrame": 499,
+      "durationFrames": 170,
+      "cues": {
+        "a": 1065,
+        "b": 3328
+      },
+      "captions": [
+        {
+          "text": "两年前 DeepSeek V3 也这么说过",
+          "startMs": 505,
+          "endMs": 3328
+        },
+        {
+          "text": "模型认错自己",
+          "startMs": 3328,
+          "endMs": 4443
+        },
+        {
+          "text": "不是新鲜事",
+          "startMs": 4443,
+          "endMs": 5564
+        }
+      ]
+    },
+    {
+      "id": "mechanism",
+      "audioSrc": "audio/tutorials/deepseek-identity/05-mechanism.mp3",
+      "audioMs": 11860,
+      "startFrame": 669,
+      "durationFrames": 368,
+      "cues": {
+        "a": 2056,
+        "b": 2930,
+        "c": 6752,
+        "d": 8142,
+        "e": 11469
+      },
+      "captions": [
+        {
+          "text": "模型叫自己什么",
+          "startMs": 525,
+          "endMs": 1626
+        },
+        {
+          "text": "靠的是系统提示",
+          "startMs": 1626,
+          "endMs": 2930
+        },
+        {
+          "text": "不给提示",
+          "startMs": 2930,
+          "endMs": 3797
+        },
+        {
+          "text": "它就按网上最常见的说法答",
+          "startMs": 3797,
+          "endMs": 5882
+        },
+        {
+          "text": "而网上全是 ChatGPT 写的字",
+          "startMs": 5882,
+          "endMs": 8142
+        },
+        {
+          "text": "所以在 Claude Code",
+          "startMs": 8142,
+          "endMs": 9392
+        },
+        {
+          "text": "里接 DeepSeek",
+          "startMs": 9392,
+          "endMs": 10433
+        },
+        {
+          "text": "它又会说自己是 Claude",
+          "startMs": 10433,
+          "endMs": 12269
+        }
+      ]
+    },
+    {
+      "id": "repro",
+      "audioSrc": "audio/tutorials/deepseek-identity/06-repro.mp3",
+      "audioMs": 5878,
+      "startFrame": 1037,
+      "durationFrames": 188,
+      "cues": {
+        "a": 1886,
+        "b": 3800
+      },
+      "captions": [
+        {
+          "text": "网友的复现也对不上",
+          "startMs": 435,
+          "endMs": 1886
+        },
+        {
+          "text": "中文问多数说 DeepSeek",
+          "startMs": 1886,
+          "endMs": 3800
+        },
+        {
+          "text": "英文直调才常说 ChatGPT",
+          "startMs": 3800,
+          "endMs": 5340
+        }
+      ]
+    },
+    {
+      "id": "verdict",
+      "audioSrc": "audio/tutorials/deepseek-identity/07-verdict.mp3",
+      "audioMs": 5433,
+      "startFrame": 1225,
+      "durationFrames": 175,
+      "cues": {
+        "a": 2324
+      },
+      "captions": [
+        {
+          "text": "蒸馏的争议一直都有",
+          "startMs": 385,
+          "endMs": 2124
+        },
+        {
+          "text": "但模型说自己是谁",
+          "startMs": 2124,
+          "endMs": 3799
+        },
+        {
+          "text": "证明不了它是怎么来的",
+          "startMs": 3799,
+          "endMs": 5369
+        }
+      ]
+    }
+  ]
+}
