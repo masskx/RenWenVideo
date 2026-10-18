@@ -85,12 +85,13 @@ async function generateImage(image) {
   console.log(`image ${image.id}`);
 }
 
-// One line in the user's cloned Doubao voice, via the tutorial voice script (the only TTS path in this repo).
+// One line in the user's cloned Doubao voice (or the agreed edge-tts backup: voice.provider "edge"), via the tutorial voice script.
 async function synthesize(text, target) {
   if (!force && existsSync(target)) return;
   const result = spawnSync('python3', [path.join(root, 'scripts', 'generate-tutorial-voice.py'), '--say', target,
-    '--rate', String(config.voice.rate ?? 1.16)], {input: text, encoding: 'utf8', env: process.env});
-  if (result.error || result.status !== 0) throw new Error(`Doubao TTS failed for ${JSON.stringify(text)}: ${result.error?.message || result.stderr}`);
+    '--rate', String(config.voice.rate ?? 1.16), '--provider', config.voice.provider ?? 'doubao',
+    ...(config.voice.voice ? ['--voice', config.voice.voice] : [])], {input: text, encoding: 'utf8', env: process.env});
+  if (result.error || result.status !== 0) throw new Error(`TTS failed for ${JSON.stringify(text)}: ${result.error?.message || result.stderr}`);
   console.log(`voice ${path.basename(target)}: ${text}`);
 }
 

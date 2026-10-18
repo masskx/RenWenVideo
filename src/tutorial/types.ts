@@ -12,8 +12,8 @@ export type Tutorial = {
   fps: number;
   width: number;
   height: number;
-  /** Narration: the user's cloned Doubao voice, the only TTS path (scripts/generate-tutorial-voice.py, docs/video-craft/配音.md). */
-  tts?: {provider?: 'doubao'; rate?: number; pace?: string; [key: string]: unknown};
+  /** Narration: the user's cloned Doubao voice; "edge" is an agreed backup only (scripts/generate-tutorial-voice.py, docs/video-craft/配音.md). */
+  tts?: {provider?: 'doubao' | 'edge'; voice?: string; rate?: number; pace?: string; [key: string]: unknown};
   leadMs?: number;
   tailMs?: number;
   musicSrc?: string | null;

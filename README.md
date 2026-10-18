@@ -57,7 +57,7 @@ scripts/run.ps1                  Windows 辅助脚本（项目放在 FAT32/移�
 
 ## 环境准备
 
-- Node.js 22+ 和 ffmpeg/ffprobe（需要在 PATH 里）；配音、底乐还需要 Python 3 和 `pip install numpy`（配音只用标准库调用豆包语音接口）
+- Node.js 22+ 和 ffmpeg/ffprobe（需要在 PATH 里）；配音、底乐还需要 Python 3 和 `pip install numpy`（豆包配音只用标准库；备用的 edge-tts 另装 `pip install edge-tts`）
 - 中文字体：组件按顺序使用 Noto Sans CJK SC、Source Han Sans SC、PingFang SC、Microsoft YaHei，系统里装有其中一个就行
 - 密钥：把 `.env.example` 复制为 `.env` 再填写（`.env` 不会被提交）
 
@@ -66,6 +66,7 @@ scripts/run.ps1                  Windows 辅助脚本（项目放在 FAT32/移�
 | `OPENAI_API_KEY` / `OPENAI_BASE_URL` / `OPENAI_IMAGE_MODEL` | Images2 生图，默认 `gpt-image-2`，输出 1024×1536 |
 | `DOUBAO_API_KEY`（或 `DOUBAO_APP_ID` + `DOUBAO_ACCESS_TOKEN`） | 配音：用户本人的复刻音色（火山引擎豆包语音），本仓库唯一的 TTS |
 | `DOUBAO_VOICE_ZH` / `DOUBAO_VOICE_EN` | 复刻音色 id（`S_` 开头）；可选 `DOUBAO_VOICE_ZH_ENERGY`，场景里用 `"voiceEnv"` 选择 |
+| `TTS_CA_BUNDLE` | 可选。备用 edge-tts 在 TLS 代理环境里用的 CA 证书 |
 | `REMOTION_BROWSER_EXECUTABLE` | 可选。Remotion 下载不了 Chrome 时，指定本机 Chrome 或 headless-shell |
 
 ```bash
@@ -106,7 +107,7 @@ npm ci
 教程画面全部由 Remotion 代码绘制，不需要生图。旁白里的 `{a}` 标记会换算成画面动画的触发时间；`[显示|朗读]` 可以让字幕和读音不同，例如 `[9222|九二二二]`。
 
 1. 复制一份 `tutorials/<id>.json`，修改 `id` 和旁白。
-   - 配音只用本人的复刻音色：`"tts": {"provider": "doubao"}`，语速按场景写 `"pace"`。每个场景整段一次合成，卡点和字幕时间来自服务端的逐字时间戳；语速、读音修正见 `docs/video-craft/配音.md`。
+   - 配音只用本人的复刻音色：`"tts": {"provider": "doubao"}`，语速按场景写 `"pace"`。复刻音色不可用且用户同意时，可临时改用免费的 edge-tts 备用声音：`"tts": {"provider": "edge"}`。每个场景整段一次合成，卡点和字幕时间来自服务端的逐字时间戳；语速、读音修正见 `docs/video-craft/配音.md`。
    - 画面整宽排满的教程，可以用 `"motion": {"amp": 0.05, "drift": 12}` 调小每句换构图的幅度，避免内容碰到画面边缘。
 2. 在 `src/tutorial/scenes/` 新建画面文件 `<id>.tsx`，并在 `scenes/index.ts` 里登记。
 3. 生成配音、底乐，再渲染：

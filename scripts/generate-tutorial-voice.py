@@ -3,11 +3,14 @@
 Usage:
   python scripts/generate-tutorial-voice.py <id> [--force]     (reads tutorials/<id>.json)
 
-TTS: the user's own cloned voice on Doubao (Volcano Engine) TTS v3 — the only voice this repo uses.
+TTS: the user's own cloned voice on Doubao (Volcano Engine) TTS v3 — the voice every video uses.
   "tts": {"provider": "doubao"}    DOUBAO_API_KEY (or DOUBAO_APP_ID + DOUBAO_ACCESS_TOKEN), voice from DOUBAO_VOICE_ZH
                                    (or "voice"), resource seed-icl-2.0. Each scene is ONE request, so prosody runs
                                    across sentences; per-character timestamps (enable_subtitle) give the cue and
                                    caption times. Details: docs/video-craft/配音.md
+  "tts": {"provider": "edge", "voice": "zh-CN-YunxiNeural"}
+                                   BACKUP ONLY, and only when the user agrees: edge-tts (free, `pip install edge-tts`),
+                                   word timings from the service. Never used as a silent fallback for Doubao.
 
 Per scene: "pace" (slow/calm/normal/brisk/fast), "mood" (a delivery instruction, Doubao context_texts),
 "voiceEnv" (another cloned voice id from the environment, e.g. a high-energy clone for hooks). Every scene is then
@@ -15,7 +18,7 @@ pause-tightened (gaps > 170 ms cut, 240 ms after 。？！; "tts": {"pauses": fa
 presence chain — see docs/video-craft/配音.md.
 
 One line, for the explainer pipeline (scripts/build-explainer.mjs --voice):
-  python scripts/generate-tutorial-voice.py --say <out.mp3> [--rate 1.16] < text
+  python scripts/generate-tutorial-voice.py --say <out.mp3> [--rate 1.16] [--provider edge --voice zh-CN-YunxiNeural] < text
 
 Narration markup:
   {a}            cue marker; its time (ms from scene start) is written to timing.cues.a
@@ -189,6 +192,37 @@ def clean_caption(text):
     while text and text[-1] in BREAK and text[-1] not in KEEP_TAIL:
         text = text[:-1]
     return text.strip()
+
+
+EDGE_VOICE = "zh-CN-YunxiNeural"
+
+
+def synthesize_edge(text, tts, out_path):
+    """Backup engine: edge-tts, imported only when chosen. Returns the service's word timings."""
+    import asyncio
+    try:
+        import edge_tts
+        import edge_tts.communicate
+    except ImportError:
+        raise SystemExit("pip install edge-tts  (needed for the edge backup voice)")
+    # Behind a TLS-inspecting proxy edge-tts must trust the proxy CA; it pins certifi otherwise.
+    ca = os.environ.get("TTS_CA_BUNDLE") or os.environ.get("SSL_CERT_FILE")
+    if ca and Path(ca).exists():
+        edge_tts.communicate._SSL_CTX = ssl.create_default_context(cafile=ca)
+    rate = tts.get("rate", 1.0)
+    rate = rate if isinstance(rate, str) else f"{round((rate - 1) * 100):+d}%"  # 1.16 -> "+16%"
+
+    async def run():
+        words = []
+        communicate = edge_tts.Communicate(text, tts.get("voice") or EDGE_VOICE, rate=rate, boundary="WordBoundary")
+        with open(out_path, "wb") as f:
+            async for chunk in communicate.stream():
+                if chunk["type"] == "audio":
+                    f.write(chunk["data"])
+                elif chunk["type"] == "WordBoundary":
+                    words.append({"text": chunk["text"], "ms": chunk["offset"] / 10000, "dur": chunk["duration"] / 10000})
+        return words
+    return asyncio.run(run())
 
 
 def load_dotenv():
@@ -428,20 +462,23 @@ def tighten_pauses(mp3, words, tts, spoken):
     return words
 
 
-def require_doubao(tts, where):
-    if tts.get("provider", "doubao") != "doubao":
-        raise SystemExit(f"{where}: tts.provider {tts.get('provider')!r} is not supported; this repo only voices with the "
-                         'cloned Doubao voice — set "tts": {"provider": "doubao"} (docs/video-craft/配音.md)')
+def engine_for(tts, where):
+    provider = tts.get("provider", "doubao")
+    engines = {"doubao": synthesize_doubao, "edge": synthesize_edge}
+    if provider not in engines:
+        raise SystemExit(f"{where}: tts.provider {provider!r} is not supported; use \"doubao\" (the cloned voice) or, "
+                         'as an agreed backup only, "edge" (docs/video-craft/配音.md)')
+    return engines[provider]
 
 
 def say(argv):
-    """--say <out.mp3> [--rate r]: voice one line read from stdin (used by the explainer pipeline)."""
-    out = Path(argv[argv.index("--say") + 1])
-    rate = float(argv[argv.index("--rate") + 1]) if "--rate" in argv else PACES["normal"]
+    """--say <out.mp3> [--rate r] [--provider edge --voice v]: voice one line read from stdin (explainer pipeline)."""
+    opt = lambda name, default=None: argv[argv.index(name) + 1] if name in argv else default
+    out = Path(opt("--say"))
     load_dotenv()
-    tts = {"provider": "doubao", "rate": rate}
+    tts = {"provider": opt("--provider", "doubao"), "rate": float(opt("--rate", PACES["normal"])), "voice": opt("--voice")}
     text = sys.stdin.read().strip()
-    words = synthesize_doubao(text, tts, out)
+    words = engine_for(tts, "--say")(text, tts, out)
     tighten_pauses(out, words, tts, text)
 
 
@@ -454,9 +491,12 @@ def main():
     spec = json.loads(spec_path.read_text(encoding="utf-8"))
     load_dotenv()
     tts = spec.get("tts") or {"provider": "doubao"}
-    require_doubao(tts, spec_path.name)
-    voice_key = (f"doubao:{tts.get('voice') or os.environ.get(tts.get('voiceEnv', 'DOUBAO_VOICE_ZH'))}:{tts.get('resource', 'seed-icl-2.0')}:{tts.get('rate')}"
-                 f":{tts.get('model', DOUBAO_MODEL)}:{json.dumps(tts.get('pauses', PAUSES))}:{VOICE_CHAIN}")
+    engine = engine_for(tts, spec_path.name)
+    if engine is synthesize_edge:
+        voice_key = f"edge:{tts.get('voice') or EDGE_VOICE}:{tts.get('rate')}:{json.dumps(tts.get('pauses', PAUSES))}"
+    else:
+        voice_key = (f"doubao:{tts.get('voice') or os.environ.get(tts.get('voiceEnv', 'DOUBAO_VOICE_ZH'))}:{tts.get('resource', 'seed-icl-2.0')}:{tts.get('rate')}"
+                     f":{tts.get('model', DOUBAO_MODEL)}:{json.dumps(tts.get('pauses', PAUSES))}:{VOICE_CHAIN}")
     audio_dir = ROOT / "public" / "audio" / "tutorials" / spec["id"]
     audio_dir.mkdir(parents=True, exist_ok=True)
     fps, lead, tail = spec["fps"], spec.get("leadMs", 200), spec.get("tailMs", 400)
@@ -476,9 +516,9 @@ def main():
         if force or stale or not mp3.exists():
             scene_tts = {**tts, "mood": mood, **scene_voice}
             if pace_changes:
-                words = synthesize_paced(spoken, scene_tts, mp3, scene_rate, pace_changes, synthesize_doubao)
+                words = synthesize_paced(spoken, scene_tts, mp3, scene_rate, pace_changes, engine)
             else:
-                words = synthesize_doubao(spoken, {**scene_tts, "rate": scene_rate}, mp3)
+                words = engine(spoken, {**scene_tts, "rate": scene_rate}, mp3)
             words = tighten_pauses(mp3, words, tts, spoken)
             words_cache.write_text(json.dumps({"spoken": spoken, "voice": voice_key, "pace": pace_key, "words": words}, ensure_ascii=False, indent=1),
                                    encoding="utf-8")
@@ -501,7 +541,7 @@ def main():
         scenes.append({"id": scene["id"], "audioSrc": rel, "audioMs": round(audio_ms), "startFrame": start_frame,
                        "durationFrames": duration_frames, "cues": cues, "captions": captions})
         start_frame += duration_frames
-    timing = {"id": spec["id"], "voice": "doubao", "rate": tts.get("rate"), "fps": fps, "leadMs": lead,
+    timing = {"id": spec["id"], "voice": tts.get("provider", "doubao"), "rate": tts.get("rate"), "fps": fps, "leadMs": lead,
               "totalFrames": start_frame, "scenes": scenes}
     out = timeline_path(spec_path)
     out.write_text(json.dumps(timing, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
