@@ -1,0 +1,568 @@
+{
+  "id": "awesome-seedance",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 3354,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/awesome-seedance/01-hook.mp3",
+      "audioMs": 5381,
+      "startFrame": 0,
+      "durationFrames": 171,
+      "cues": {
+        "a": 1458,
+        "b": 2606,
+        "c": 4098
+      },
+      "captions": [
+        {
+          "text": "左边对着空气打",
+          "startMs": 295,
+          "endMs": 1458
+        },
+        {
+          "text": "右边一脚踢实",
+          "startMs": 1458,
+          "endMs": 2606
+        },
+        {
+          "text": "同一类模型",
+          "startMs": 2606,
+          "endMs": 3558
+        },
+        {
+          "text": "差的只是提示词里的一样东西",
+          "startMs": 3558,
+          "endMs": 5478
+        }
+      ]
+    },
+    {
+      "id": "what",
+      "audioSrc": "audio/tutorials/awesome-seedance/02-what.mp3",
+      "audioMs": 10162,
+      "startFrame": 171,
+      "durationFrames": 314,
+      "cues": {
+        "a": 1667,
+        "b": 5813,
+        "c": 7294,
+        "d": 8558
+      },
+      "captions": [
+        {
+          "text": "答案后面揭晓",
+          "startMs": 365,
+          "endMs": 1667
+        },
+        {
+          "text": "先说工具",
+          "startMs": 1667,
+          "endMs": 2439
+        },
+        {
+          "text": "GitHub上有个开源项目叫",
+          "startMs": 2439,
+          "endMs": 4129
+        },
+        {
+          "text": "awesome-seedance",
+          "startMs": 4129,
+          "endMs": 5238
+        },
+        {
+          "text": "专门整理Seedance视频提示词",
+          "startMs": 5238,
+          "endMs": 7294
+        },
+        {
+          "text": "每条都对过原帖",
+          "startMs": 7294,
+          "endMs": 8558
+        },
+        {
+          "text": "还换第二个模型重跑过",
+          "startMs": 8558,
+          "endMs": 10396
+        }
+      ]
+    },
+    {
+      "id": "numbers",
+      "audioSrc": "audio/tutorials/awesome-seedance/03-numbers.mp3",
+      "audioMs": 9352,
+      "startFrame": 485,
+      "durationFrames": 290,
+      "cues": {
+        "a": 1435,
+        "b": 2299,
+        "c": 3353,
+        "d": 4876,
+        "e": 5432,
+        "f": 6370,
+        "g": 6957,
+        "h": 8505
+      },
+      "captions": [
+        {
+          "text": "目前收了800多条案例",
+          "startMs": 335,
+          "endMs": 2299
+        },
+        {
+          "text": "27个模板、80个视频Skill",
+          "startMs": 2299,
+          "endMs": 4721
+        },
+        {
+          "text": "做带货、产品展示",
+          "startMs": 4721,
+          "endMs": 6370
+        },
+        {
+          "text": "vlog，又不想烧积分试错的人",
+          "startMs": 6370,
+          "endMs": 8505
+        },
+        {
+          "text": "直接拿来用",
+          "startMs": 8505,
+          "endMs": 9151
+        }
+      ]
+    },
+    {
+      "id": "tpl12",
+      "audioSrc": "audio/tutorials/awesome-seedance/04-tpl12.mp3",
+      "audioMs": 10736,
+      "startFrame": 775,
+      "durationFrames": 332,
+      "cues": {
+        "a": 1595,
+        "b": 2850,
+        "c": 5042,
+        "d": 6442,
+        "e": 7850,
+        "f": 9948
+      },
+      "captions": [
+        {
+          "text": "新手先用模板",
+          "startMs": 295,
+          "endMs": 1595
+        },
+        {
+          "text": "不用装任何东西",
+          "startMs": 1595,
+          "endMs": 2850
+        },
+        {
+          "text": "第一步，按画面挑类型",
+          "startMs": 2850,
+          "endMs": 4752
+        },
+        {
+          "text": "比如手持UGC vlog",
+          "startMs": 4752,
+          "endMs": 6442
+        },
+        {
+          "text": "第二步，复制模板",
+          "startMs": 6442,
+          "endMs": 7850
+        },
+        {
+          "text": "把方括号换成你的产品",
+          "startMs": 7850,
+          "endMs": 9668
+        },
+        {
+          "text": "比如头戴耳机",
+          "startMs": 9668,
+          "endMs": 10978
+        }
+      ]
+    },
+    {
+      "id": "tpl34",
+      "audioSrc": "audio/tutorials/awesome-seedance/05-tpl34.mp3",
+      "audioMs": 7967,
+      "startFrame": 1107,
+      "durationFrames": 249,
+      "cues": {
+        "a": 355,
+        "b": 1226,
+        "c": 3876,
+        "d": 5376,
+        "e": 7430
+      },
+      "captions": [
+        {
+          "text": "第三步",
+          "startMs": 355,
+          "endMs": 1046
+        },
+        {
+          "text": "连产品图一起发给AI聊天助手",
+          "startMs": 1046,
+          "endMs": 3876
+        },
+        {
+          "text": "改成完整提示词",
+          "startMs": 3876,
+          "endMs": 5376
+        },
+        {
+          "text": "第四步，贴进即梦的Seedance生成",
+          "startMs": 5376,
+          "endMs": 8130
+        }
+      ]
+    },
+    {
+      "id": "result",
+      "audioSrc": "audio/tutorials/awesome-seedance/06-result.mp3",
+      "audioMs": 6374,
+      "startFrame": 1356,
+      "durationFrames": 201,
+      "cues": {
+        "a": 3351,
+        "b": 3816,
+        "c": 4928
+      },
+      "captions": [
+        {
+          "text": "这是原作者用这个模板",
+          "startMs": 325,
+          "endMs": 1885
+        },
+        {
+          "text": "跑出来的耳机vlog",
+          "startMs": 1885,
+          "endMs": 3351
+        },
+        {
+          "text": "手抖、对焦慢半拍",
+          "startMs": 3351,
+          "endMs": 4928
+        },
+        {
+          "text": "很像真人随手拍",
+          "startMs": 4928,
+          "endMs": 6162
+        }
+      ]
+    },
+    {
+      "id": "pitfalls",
+      "audioSrc": "audio/tutorials/awesome-seedance/07-pitfalls.mp3",
+      "audioMs": 10266,
+      "startFrame": 1557,
+      "durationFrames": 317,
+      "cues": {
+        "a": 1585,
+        "b": 2395,
+        "c": 4986,
+        "d": 6969,
+        "e": 7689,
+        "f": 8811
+      },
+      "captions": [
+        {
+          "text": "模板里最值钱的是常见坑",
+          "startMs": 395,
+          "endMs": 2395
+        },
+        {
+          "text": "别在一条提示词里既要手持真实感",
+          "startMs": 2395,
+          "endMs": 4986
+        },
+        {
+          "text": "又要4K电影级打光",
+          "startMs": 4986,
+          "endMs": 6526
+        },
+        {
+          "text": "画面会发塑料",
+          "startMs": 6526,
+          "endMs": 7689
+        },
+        {
+          "text": "最紧拍到胸口",
+          "startMs": 7689,
+          "endMs": 8811
+        },
+        {
+          "text": "大特写容易露出AI脸",
+          "startMs": 8811,
+          "endMs": 10584
+        }
+      ]
+    },
+    {
+      "id": "fight",
+      "audioSrc": "audio/tutorials/awesome-seedance/08-fight.mp3",
+      "audioMs": 9378,
+      "startFrame": 1874,
+      "durationFrames": 291,
+      "cues": {
+        "a": 1549,
+        "b": 3509,
+        "c": 4544,
+        "d": 5668,
+        "e": 6749,
+        "f": 7704
+      },
+      "captions": [
+        {
+          "text": "回到开头",
+          "startMs": 415,
+          "endMs": 1549
+        },
+        {
+          "text": "打斗只写“激烈搏斗”没用",
+          "startMs": 1549,
+          "endMs": 3509
+        },
+        {
+          "text": "要写接触点",
+          "startMs": 3509,
+          "endMs": 4544
+        },
+        {
+          "text": "拳打中哪里",
+          "startMs": 4544,
+          "endMs": 5668
+        },
+        {
+          "text": "对方怎么格挡",
+          "startMs": 5668,
+          "endMs": 6749
+        },
+        {
+          "text": "怎么反击",
+          "startMs": 6749,
+          "endMs": 7704
+        },
+        {
+          "text": "再把招式串成一条链",
+          "startMs": 7704,
+          "endMs": 9569
+        }
+      ]
+    },
+    {
+      "id": "chain",
+      "audioSrc": "audio/tutorials/awesome-seedance/09-chain.mp3",
+      "audioMs": 3631,
+      "startFrame": 2165,
+      "durationFrames": 118,
+      "cues": {
+        "a": 545,
+        "b": 1699,
+        "c": 2959
+      },
+      "captions": [
+        {
+          "text": "7到10秒的打斗",
+          "startMs": 545,
+          "endMs": 1699
+        },
+        {
+          "text": "超过4段动作就看不清了",
+          "startMs": 1699,
+          "endMs": 3759
+        }
+      ]
+    },
+    {
+      "id": "styles",
+      "audioSrc": "audio/tutorials/awesome-seedance/10-styles.mp3",
+      "audioMs": 7367,
+      "startFrame": 2283,
+      "durationFrames": 230,
+      "cues": {
+        "a": 1799,
+        "b": 2747,
+        "c": 5010
+      },
+      "captions": [
+        {
+          "text": "还能指名流派",
+          "startMs": 315,
+          "endMs": 1799
+        },
+        {
+          "text": "同样是踢腿",
+          "startMs": 1799,
+          "endMs": 2747
+        },
+        {
+          "text": "泰拳是全身旋转的大弧线",
+          "startMs": 2747,
+          "endMs": 5010
+        },
+        {
+          "text": "跆拳道是髋部弹出去的直线",
+          "startMs": 5010,
+          "endMs": 7375
+        }
+      ]
+    },
+    {
+      "id": "skill",
+      "audioSrc": "audio/tutorials/awesome-seedance/11-skill.mp3",
+      "audioMs": 9430,
+      "startFrame": 2513,
+      "durationFrames": 292,
+      "cues": {
+        "a": 2865,
+        "b": 4510,
+        "c": 6825,
+        "d": 7487,
+        "e": 8469
+      },
+      "captions": [
+        {
+          "text": "每周都做同一类视频",
+          "startMs": 385,
+          "endMs": 1943
+        },
+        {
+          "text": "就上Skill",
+          "startMs": 1943,
+          "endMs": 2865
+        },
+        {
+          "text": "模板是单个镜头的配方",
+          "startMs": 2865,
+          "endMs": 4510
+        },
+        {
+          "text": "Skill是整条短片的拍摄手册",
+          "startMs": 4510,
+          "endMs": 6555
+        },
+        {
+          "text": "帮你拆分镜",
+          "startMs": 6555,
+          "endMs": 7487
+        },
+        {
+          "text": "写提示词、列检查清单",
+          "startMs": 7487,
+          "endMs": 9629
+        }
+      ]
+    },
+    {
+      "id": "install",
+      "audioSrc": "audio/tutorials/awesome-seedance/12-install.mp3",
+      "audioMs": 4101,
+      "startFrame": 2805,
+      "durationFrames": 133,
+      "cues": {
+        "a": 515,
+        "b": 1445,
+        "c": 2267,
+        "d": 3224
+      },
+      "captions": [
+        {
+          "text": "在Claude Code或",
+          "startMs": 345,
+          "endMs": 1445
+        },
+        {
+          "text": "Codex里一行命令装好",
+          "startMs": 1445,
+          "endMs": 3224
+        },
+        {
+          "text": "直接说需求",
+          "startMs": 3224,
+          "endMs": 4394
+        }
+      ]
+    },
+    {
+      "id": "compare",
+      "audioSrc": "audio/tutorials/awesome-seedance/13-compare.mp3",
+      "audioMs": 5851,
+      "startFrame": 2938,
+      "durationFrames": 185,
+      "cues": {
+        "a": 1523,
+        "b": 2495,
+        "c": 3506,
+        "d": 5007
+      },
+      "captions": [
+        {
+          "text": "同一瓶洗发水",
+          "startMs": 335,
+          "endMs": 1523
+        },
+        {
+          "text": "左边模板版",
+          "startMs": 1523,
+          "endMs": 2495
+        },
+        {
+          "text": "右边Skill版",
+          "startMs": 2495,
+          "endMs": 3506
+        },
+        {
+          "text": "口播和卖点更多",
+          "startMs": 3506,
+          "endMs": 5007
+        },
+        {
+          "text": "更像测评",
+          "startMs": 5007,
+          "endMs": 6057
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "audioSrc": "audio/tutorials/awesome-seedance/14-close.mp3",
+      "audioMs": 6687,
+      "startFrame": 3123,
+      "durationFrames": 231,
+      "cues": {
+        "a": 2096,
+        "b": 2716,
+        "c": 3437,
+        "d": 4206
+      },
+      "captions": [
+        {
+          "text": "先挑一个喜欢的案例",
+          "startMs": 305,
+          "endMs": 2096
+        },
+        {
+          "text": "复制、换词",
+          "startMs": 2096,
+          "endMs": 3437
+        },
+        {
+          "text": "跑起来",
+          "startMs": 3437,
+          "endMs": 4206
+        },
+        {
+          "text": "收藏这条，做视频时照着用",
+          "startMs": 4206,
+          "endMs": 6485
+        }
+      ]
+    }
+  ]
+}
