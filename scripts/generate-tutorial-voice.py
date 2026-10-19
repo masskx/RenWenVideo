@@ -553,7 +553,7 @@ def main():
         words = align(cached["words"], spoken, to_display)
         audio_ms = probe_ms(mp3)
         speech_end = words[-1]["ms"] + words[-1]["dur"] if words else audio_ms
-        duration_frames = math.ceil((lead + audio_ms + tail) / 1000 * fps)
+        duration_frames = math.ceil((lead + audio_ms + scene.get("tailMs", tail)) / 1000 * fps)  # a scene may hold longer (end card)
         cues = {k: round(lead + time_at(words, p, speech_end)) for k, p in cue_pos.items()}
         captions = []
         chunks = caption_chunks(display)
