@@ -1,6 +1,6 @@
 # 一张图 + 一句话 = 360°环绕（豆包）
 
-- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，92.3 秒，约 −15 LUFS，50 MB；不进 git）
+- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，92.3 秒，约 −15 LUFS，50 MB）
 - 封面：`cover.jpg`（3:4，小红书：四宫格）、`cover-6x7.jpg`（6:7，视频号：柠檬罐 + 环绕轨道）、`cover-9x16.jpg`
 - 字幕：`subtitles.srt`；审片静帧：`still-00s.jpg`、`still-01s.jpg`、`still-03s.jpg`、`still-52s.jpg`（指令卡）、`still-84s.jpg`（节点链）
 - 配音：本人复刻音色（豆包语音）
