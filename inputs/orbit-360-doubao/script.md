@@ -15,7 +15,7 @@ Prepared 2026-10-19 (Asia/Taipei). Planning by growth; editing/rendering by clou
 - **Music:** starts at frame 0, upbeat tech/electronic, ducked under the voice (voice clearly dominant; music ≈ −18 to −22 dB relative). Light whoosh/tick SFX on card changes are fine.
 - **External footage:** all clips in `materials/` are AI-generated demo videos from a public X article. **Original audio is already stripped** (keep it muted). Every shot that shows external footage gets a small label **「案例展示」** in the bottom-right corner (no author name, no @handle). Do not put any X username, handle, display name, avatar or link on screen.
 - **Do NOT:** add a next-episode teaser; mention 公众号; show any URL/QR code/external link; add any promotion ("关注我""进群""课程" etc.); use first person for testing ("我试了/我实测") — the user has not tested this; everything is phrased as explanation.
-- Source clips are 834×1112 (3:4), 24 fps, 10.08 s each. For full-bleed shots, scale to cover 1080×1920 and center-crop (keep the subject in frame; check each clip, subjects are centered). For "card" shots, place the clip in a rounded frame on the blueprint background with labels above/below.
+- Source clips are 810×1080 (3:4, re-encoded H.264 CRF 27 for upload size; originals 834×1112 kept off-package), 24 fps, 10.08 s each. For full-bleed shots, scale to cover 1080×1920 and center-crop (keep the subject in frame; check each clip, subjects are centered). For "card" shots, place the clip in a rounded frame on the blueprint background with labels above/below.
 - Douyin: when publishing, the user should tick the AI-generated-content declaration (the demo clips are AI-generated).
 
 ## 1. One-line point (选题卡)
