@@ -226,6 +226,13 @@ const SceneVisual: React.FC<{timing: SceneTiming; visual: string; credit: string
   </div>;
 };
 
+/** A scene's full-frame layer (full-bleed footage), under the stage and the captions. */
+const BackdropLayer: React.FC<{timing: SceneTiming; Backdrop: React.FC<{f: number; dur: number; cue: (name: string, fallback?: number) => number}>}> = ({timing, Backdrop}) => {
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  return <AbsoluteFill><Backdrop f={frame} dur={timing.durationFrames} cue={cueOf(timing, fps)} /></AbsoluteFill>;
+};
+
 export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
   const frame = useCurrentFrame();
   const {durationInFrames, fps, width, height} = useVideoConfig();
@@ -254,7 +261,9 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
       {(look.particles ?? true) && <Particles t={t} width={width} height={height} kind="glow" n={28} colors={[color.cyan, color.violet, '#ffffff']} area={[0, 260, width, L.captionY - 110]} alpha={0.4} />}
       {timing.scenes.map((s) => {
         const scene = tutorial.scenes.find((x) => x.id === s.id);
+        const Backdrop = sceneRegistry[scene?.visual ?? '']?.backdrop;
         return <Sequence key={s.id} name={s.id} from={s.startFrame} durationInFrames={s.durationFrames}>
+          {Backdrop && <BackdropLayer timing={s} Backdrop={Backdrop} />}
           <SceneVisual timing={s} visual={scene?.visual ?? ''} credit={tutorial.credit} motion={tutorial.motion} tour={tour} />
         </Sequence>;
       })}
@@ -323,7 +332,9 @@ export const TutorialCoverCard: React.FC<TutorialProps & {ratio: CoverRatio}> = 
   const pal = palette(themeOf(tutorial));
   if (!card) return <AbsoluteFill style={{background: pal.bg}} />;
   const lay = card.layouts[ratio];
-  const Anchor = sceneRegistry[card.anchor];
+  // a ratio may carry its own copy and anchor (different platforms, different headlines)
+  const headline = lay.text ?? card.headline, support = lay.supportText ?? card.support, tag = lay.tagText ?? card.tag;
+  const Anchor = sceneRegistry[lay.anchorId ?? card.anchor];
   const [ax, ay, as] = lay.anchor;
   const grid = themeOf(tutorial) === 'blueprint' ? blueprint.grid : pal.bg;
   return <AbsoluteFill style={{background: pal.bg, overflow: 'hidden'}}>
@@ -334,10 +345,10 @@ export const TutorialCoverCard: React.FC<TutorialProps & {ratio: CoverRatio}> = 
     {Anchor && <div style={{position: 'absolute', left: ax - 440 * as, top: ay - 400 * as, width: 880, height: 800, transform: `scale(${as})`, transformOrigin: '0 0'}}>
       <Anchor f={0} dur={1} cue={() => 0} credit={tutorial.credit} layer="stage" />
     </div>}
-    {card.tag && <div style={{position: 'absolute', left: lay.headline[0], top: lay.headline[1] - 54, fontFamily: mono, fontWeight: 700, fontSize: 30, color: pal.dim, letterSpacing: 2}}>{card.tag}</div>}
+    {tag && <div style={{position: 'absolute', left: lay.headline[0], top: lay.headline[1] - 54, fontFamily: mono, fontWeight: 700, fontSize: 30, color: pal.dim, letterSpacing: 2}}>{tag}</div>}
     <div style={{position: 'absolute', left: lay.headline[0], top: lay.headline[1], fontFamily: font, fontWeight: 900, fontSize: lay.size, lineHeight: 1.12, letterSpacing: 2}}>
-      {card.headline.map((line, i) => <div key={line} style={{color: i === card.headline.length - 1 && card.headline.length > 1 ? pal.keyA : pal.text}}>{line}</div>)}
+      {headline.map((line, i) => <div key={line} style={{color: i === headline.length - 1 && headline.length > 1 ? pal.keyA : pal.text}}>{line}</div>)}
     </div>
-    {card.support && <div style={{position: 'absolute', left: 0, right: 0, top: lay.support, textAlign: 'center', fontFamily: font, fontWeight: 800, fontSize: 50, color: pal.text}}>{card.support}</div>}
+    {support && <div style={{position: 'absolute', left: 0, right: 0, top: lay.support, textAlign: 'center', fontFamily: font, fontWeight: 800, fontSize: 50, color: pal.text}}>{support}</div>}
   </AbsoluteFill>;
 };

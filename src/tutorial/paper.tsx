@@ -12,7 +12,8 @@ export const num = '"Inter Display", "Inter", "Noto Sans CJK SC", sans-serif';
 export const S = (f: number) => f / 30;
 
 export type Cue = SceneProps['cue'];
-export type Scene = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: Cue, dur: number) => SfxEvent[]; camera?: (cue: Cue, dur: number) => CamKey[]; hud?: boolean};
+export type Scene = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: Cue, dur: number) => SfxEvent[]; camera?: (cue: Cue, dur: number) => CamKey[]; hud?: boolean;
+  /** Full-frame layer (1080 × 1920) drawn under the stage and captions, e.g. full-bleed footage. */ backdrop?: React.FC<SceneProps>};
 export type P2 = [number, number];
 /** Camera key: look at stage point (x, y) at zoom z from frame `at` (the camera itself lags a few frames). */
 export const cam = (at: number, x: number, y: number, z: number): CamKey => ({at, x, y, z});

@@ -76,6 +76,8 @@ export type CoverCard = {
   support?: string;
   tag?: string;
   anchor: string;
-  layouts: Record<CoverRatio, {headline: [number, number]; size: number; anchor: [number, number, number]; support: number}>;
+  /** Per ratio: positions, plus optional copy / anchor that override the card's own for that ratio. */
+  layouts: Record<CoverRatio, {headline: [number, number]; size: number; anchor: [number, number, number]; support: number;
+    text?: string[]; supportText?: string; tagText?: string; anchorId?: string}>;
 };
 export const COVER_SIZE: Record<CoverRatio, [number, number]> = {'3:4': [1080, 1440], '6:7': [1080, 1260], '9:16': [1080, 1920]};
