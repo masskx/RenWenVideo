@@ -1,0 +1,298 @@
+{
+  "id": "huashu-motion-skill",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1623,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/huashu-motion-skill/01-hook.mp3",
+      "audioMs": 4571,
+      "startFrame": 0,
+      "durationFrames": 147,
+      "cues": {
+        "a": 2081,
+        "b": 3430
+      },
+      "captions": [
+        {
+          "text": "这支DeepSeek发布片",
+          "startMs": 375,
+          "endMs": 2081
+        },
+        {
+          "text": "不是官方做的",
+          "startMs": 2081,
+          "endMs": 3097
+        },
+        {
+          "text": "是AI写代码做出来的",
+          "startMs": 3097,
+          "endMs": 4890
+        }
+      ]
+    },
+    {
+      "id": "what",
+      "audioSrc": "audio/tutorials/huashu-motion-skill/02-what.mp3",
+      "audioMs": 7837,
+      "startFrame": 147,
+      "durationFrames": 245,
+      "cues": {
+        "a": 1025,
+        "b": 3355,
+        "c": 5831
+      },
+      "captions": [
+        {
+          "text": "靠的是一个开源skill",
+          "startMs": 345,
+          "endMs": 1848
+        },
+        {
+          "text": "叫huashu-motion",
+          "startMs": 1848,
+          "endMs": 3040
+        },
+        {
+          "text": "装进Claude Code这类编程agent",
+          "startMs": 3040,
+          "endMs": 5170
+        },
+        {
+          "text": "说一句",
+          "startMs": 5170,
+          "endMs": 5831
+        },
+        {
+          "text": "给我的产品做个30秒发布片",
+          "startMs": 5831,
+          "endMs": 7771
+        }
+      ]
+    },
+    {
+      "id": "how",
+      "audioSrc": "audio/tutorials/huashu-motion-skill/03-how.mp3",
+      "audioMs": 5329,
+      "startFrame": 392,
+      "durationFrames": 169,
+      "cues": {
+        "a": 865,
+        "b": 2044,
+        "c": 3572,
+        "d": 4207
+      },
+      "captions": [
+        {
+          "text": "它会先读你的产品",
+          "startMs": 355,
+          "endMs": 1844
+        },
+        {
+          "text": "出三个方向让你挑",
+          "startMs": 1844,
+          "endMs": 3422
+        },
+        {
+          "text": "再写片、作曲",
+          "startMs": 3422,
+          "endMs": 4791
+        },
+        {
+          "text": "配音效",
+          "startMs": 4791,
+          "endMs": 5591
+        }
+      ]
+    },
+    {
+      "id": "edit",
+      "audioSrc": "audio/tutorials/huashu-motion-skill/04-edit.mp3",
+      "audioMs": 5773,
+      "startFrame": 561,
+      "durationFrames": 183,
+      "cues": {
+        "a": 2145,
+        "b": 2770,
+        "c": 3730,
+        "d": 4869
+      },
+      "captions": [
+        {
+          "text": "不满意？",
+          "startMs": 385,
+          "endMs": 1280
+        },
+        {
+          "text": "在编辑器里按C",
+          "startMs": 1280,
+          "endMs": 2770
+        },
+        {
+          "text": "点一下画面",
+          "startMs": 2770,
+          "endMs": 3730
+        },
+        {
+          "text": "写要改什么",
+          "startMs": 3730,
+          "endMs": 4759
+        },
+        {
+          "text": "它只改那一处",
+          "startMs": 4759,
+          "endMs": 5719
+        }
+      ]
+    },
+    {
+      "id": "who",
+      "audioSrc": "audio/tutorials/huashu-motion-skill/05-who.mp3",
+      "audioMs": 4702,
+      "startFrame": 744,
+      "durationFrames": 151,
+      "cues": {
+        "a": 575,
+        "b": 1211,
+        "c": 2014
+      },
+      "captions": [
+        {
+          "text": "做App、独立产品",
+          "startMs": 305,
+          "endMs": 2014
+        },
+        {
+          "text": "开源项目，又不会剪片的人",
+          "startMs": 2014,
+          "endMs": 4030
+        },
+        {
+          "text": "最该试",
+          "startMs": 4030,
+          "endMs": 4960
+        }
+      ]
+    },
+    {
+      "id": "install",
+      "audioSrc": "audio/tutorials/huashu-motion-skill/06-install.mp3",
+      "audioMs": 7837,
+      "startFrame": 895,
+      "durationFrames": 245,
+      "cues": {
+        "a": 435,
+        "b": 2997,
+        "c": 4883
+      },
+      "captions": [
+        {
+          "text": "安装一行命令",
+          "startMs": 435,
+          "endMs": 1602
+        },
+        {
+          "text": "或者跟agent说",
+          "startMs": 1602,
+          "endMs": 2997
+        },
+        {
+          "text": "帮我装huashu-motion",
+          "startMs": 2997,
+          "endMs": 4693
+        },
+        {
+          "text": "要Node 22以上",
+          "startMs": 4693,
+          "endMs": 6042
+        },
+        {
+          "text": "Chrome和FFmpeg",
+          "startMs": 6042,
+          "endMs": 7002
+        }
+      ]
+    },
+    {
+      "id": "result",
+      "audioSrc": "audio/tutorials/huashu-motion-skill/07-result.mp3",
+      "audioMs": 6531,
+      "startFrame": 1140,
+      "durationFrames": 205,
+      "cues": {
+        "a": 3070,
+        "b": 4465,
+        "c": 5420
+      },
+      "captions": [
+        {
+          "text": "据开发者说",
+          "startMs": 355,
+          "endMs": 1449
+        },
+        {
+          "text": "换成DeepSeek做一支22秒动效片",
+          "startMs": 1449,
+          "endMs": 4465
+        },
+        {
+          "text": "不到半小时",
+          "startMs": 4465,
+          "endMs": 5420
+        },
+        {
+          "text": "花了1块9毛5",
+          "startMs": 5420,
+          "endMs": 6516
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "audioSrc": "audio/tutorials/huashu-motion-skill/08-close.mp3",
+      "audioMs": 8438,
+      "startFrame": 1345,
+      "durationFrames": 278,
+      "cues": {
+        "a": 1226,
+        "b": 3492,
+        "c": 5944
+      },
+      "captions": [
+        {
+          "text": "注意两点",
+          "startMs": 375,
+          "endMs": 1226
+        },
+        {
+          "text": "目前只在苹果电脑上实测过",
+          "startMs": 1226,
+          "endMs": 3492
+        },
+        {
+          "text": "它听不见",
+          "startMs": 3492,
+          "endMs": 4383
+        },
+        {
+          "text": "配乐最后得你自己听",
+          "startMs": 4383,
+          "endMs": 5944
+        },
+        {
+          "text": "有产品缺宣传片",
+          "startMs": 5944,
+          "endMs": 7456
+        },
+        {
+          "text": "装上试一支",
+          "startMs": 7456,
+          "endMs": 8656
+        }
+      ]
+    }
+  ]
+}
