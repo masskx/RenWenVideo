@@ -1,6 +1,6 @@
 # Headroom：AI 读日志少烧 token
 
-- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，52.5 秒，约 −15 LUFS；不进 git）
+- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，52.5 秒，约 −15 LUFS）
 - 封面：`cover.jpg`（3:4，小红书）、`cover-6x7.jpg`（6:7，视频号主页）、`cover-9x16.jpg`
 - 字幕：`subtitles.srt`；审片静帧：`still-00s.jpg`、`still-01s.jpg`、`still-03s.jpg`、`still-33s.jpg`、`still-50s.jpg`
 - 配音：本人复刻音色（豆包语音）

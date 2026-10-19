@@ -19,7 +19,7 @@ The script usually comes from a separate planning agent ("growth"): use it and t
 3. **Voice** — `npm run tutorial:voice -- <id>`: the user's cloned Doubao voice; per-character timestamps drive cues and subtitles.
 4. **Render** — `npm run tutorial:render -- <id> --overwrite` (1080×1920 H.264, covers).
 5. **QA** — `node scripts/qa/brief.mjs <id>`, `cover.mjs <id>`, `richness.mjs` / `marks.mjs` / `scan.mjs` (+ `--phone`) on the mp4, `npm run lint`; look at the stills yourself before showing them.
-6. **Package** — `douyin/<id>/`: mp4 (not committed), covers, stills, README with separate title / description / hashtags for 视频号, 抖音, 小红书, and credits.
+6. **Package** — `douyin/<id>/`: mp4 (committed like every other artifact; keep it < 100 MB), covers, stills, README with separate title / description / hashtags for 视频号, 抖音, 小红书, and credits.
 
 ## Hard rules
 
