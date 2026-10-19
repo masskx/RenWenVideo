@@ -129,6 +129,30 @@ const BlueprintHeader: React.FC<{title: string; step: number; steps: string[]}> 
   </div>;
 };
 
+// Chapter bar (look.header "chapters"): one segment per step across the top (y 110–172, the progress band of the safe-zone table);
+// the current one widens, turns amber and shows its label at 40 px. Slides over 10 frames when the step changes.
+const ChapterBar: React.FC<{step: number; prev: number; steps: string[]}> = ({step, prev, steps}) => {
+  const frame = useCurrentFrame();
+  const {headerTop} = useLayout();
+  const k = step === prev ? 1 : ease.inOutCubic(clamp(frame / 10));
+  return <div style={{position: 'absolute', left: 60, width: 960, top: headerTop, display: 'flex', gap: 12}}>
+    {steps.map((label, i) => {
+      const n = i + 1;
+      const on = (n === step ? k : 0) + (n === prev ? 1 - k : 0);
+      return <div key={label} style={{flex: 1 + 1.6 * on, minWidth: 0, overflow: 'hidden'}}>
+        <div style={{height: 50, whiteSpace: 'nowrap', fontFamily: font, fontWeight: 900, fontSize: 40, lineHeight: '48px',
+          color: n === step ? blueprint.keyA : blueprint.dim}}>
+          <span style={{fontFamily: mono}}>{String(n).padStart(2, '0')}</span>
+          <span style={{opacity: on}}> {label}</span>
+        </div>
+        <div style={{height: 8, marginTop: 6, background: n < step ? blueprint.line : blueprint.panelHi}}>
+          <div style={{height: '100%', width: `${100 * on}%`, background: blueprint.keyA}} />
+        </div>
+      </div>;
+    })}
+  </div>;
+};
+
 const Header: React.FC<{theme: Theme; title: string; step: number; steps: string[]}> = ({theme, ...p}) => (theme === 'paper' ? <PaperHeader {...p} />
   : theme === 'blueprint' ? <BlueprintHeader {...p} /> : <DarkHeader {...p} />);
 
@@ -268,11 +292,13 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
         </Sequence>;
       })}
     </CutStage>
-    {timing.scenes.map((s) => {
+    {timing.scenes.map((s, i) => {
       const scene = tutorial.scenes.find((x) => x.id === s.id);
       const events = sceneRegistry[scene?.visual ?? '']?.sfx?.(cueOf(s, fps), s.durationFrames) ?? [];
       return <Sequence key={`${s.id}-chrome`} name={`${s.id}-chrome`} from={s.startFrame} durationInFrames={s.durationFrames}>
-        {(look.header ?? true) && <Header theme={theme} title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />}
+        {look.header === 'chapters'
+          ? <ChapterBar step={scene?.step ?? 0} prev={i ? stepOf(timing.scenes[i - 1].id) : (scene?.step ?? 0)} steps={tutorial.steps ?? []} />
+          : (look.header ?? true) && <Header theme={theme} title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />}
         <Caption captions={s.captions} highlights={tutorial.highlights} pal={pal} />
         <Sequence from={leadFrames} name={`${s.id}-voice`}><Audio src={staticFile(s.audioSrc)} /></Sequence>
         {events.filter((e) => e.at >= 0 && e.at < s.durationFrames).map((e, i) => (

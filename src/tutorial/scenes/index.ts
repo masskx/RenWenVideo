@@ -13,6 +13,7 @@ import {deepseekIdentityScenes} from './deepseek-identity';
 import {headroomScenes} from './headroom';
 import {orbitScenes} from './orbit-360-doubao';
 import {huashuMotionScenes} from './huashu-motion-skill';
+import {awesomeSeedanceScenes} from './awesome-seedance';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -32,4 +33,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...headroomScenes,
   ...orbitScenes,
   ...huashuMotionScenes,
+  ...awesomeSeedanceScenes,
 };
