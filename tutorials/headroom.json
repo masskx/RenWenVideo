@@ -1,0 +1,51 @@
+{
+  "id": "headroom",
+  "title": "Headroom",
+  "subtitle": "AI 读日志 · 少烧 token",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "maxSeconds": 60,
+  "tts": {"provider": "doubao"},
+  "leadMs": 120,
+  "tailMs": 260,
+  "musicSrc": "audio/tutorials/headroom/bgm.mp3",
+  "musicVolume": 0.14,
+  "musicDuckDb": 10,
+  "credit": "@headroomlabs-ai｜案例展示",
+  "source": "inputs/headroom/script.md",
+  "look": {"theme": "blueprint", "frame": "full", "header": false, "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["pushUp", "push"], "small": ["push", "sweep"]}},
+  "highlights": [],
+  "cover": "hook",
+  "coverCard": {
+    "template": "number",
+    "headline": ["AI 读日志", "少烧 token"],
+    "support": "关键报错还在 · 官方数据",
+    "tag": "HEADROOM · 开源",
+    "anchor": "hr.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 150], "size": 120, "anchor": [540, 820, 1.0], "support": 1170},
+      "6:7": {"headline": [80, 110], "size": 108, "anchor": [540, 720, 0.92], "support": 1080},
+      "9:16": {"headline": [80, 330], "size": 120, "anchor": [540, 1020, 1.0], "support": 1400}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "hr.hook", "step": 1, "pace": "brisk",
+      "narration": "一万多 token 的报错日志，{a}压到一千二，关键那行报错{b}还在。"},
+    {"id": "pain", "visual": "hr.pain", "step": 1, "pace": "brisk",
+      "narration": "用 Claude Code 干活，AI 每读一次{a}日志、{b}搜索结果、一大坨 {c}JSON，都在{d}烧你的 token。"},
+    {"id": "what", "visual": "hr.what", "step": 2, "pace": "normal",
+      "narration": "Headroom 就干一件事：在发给{d}模型之前，{c}先在你电脑上{a}把它们压一遍。{b}开源，七万五千多星。"},
+    {"id": "how", "visual": "hr.how", "step": 2, "pace": "brisk",
+      "narration": "用起来很省事：装好以后一条命令，{a}headroom wrap claude，{b}不用改代码。{c}Codex、Copilot 也能接。"},
+    {"id": "range", "visual": "hr.range", "step": 3, "pace": "normal",
+      "narration": "省多少看内容。官方测了{a}四个场景：排查线上故障，省了百分之{b}五十七；搜代码只省百分之{c}二十一。"},
+    {"id": "who", "visual": "hr.who", "step": 3, "pace": "normal",
+      "narration": "所以它最适合{a}跑长任务、工具输出多的人。{b}只是聊聊天、写写文章，基本省不下来。"},
+    {"id": "safe", "visual": "hr.safe", "step": 4, "pace": "calm",
+      "narration": "怕压掉重要信息？{a}原文存在你本地，模型需要的时候{b}能取回来。"},
+    {"id": "verdict", "visual": "hr.verdict", "step": 4, "pace": "slow", "tailMs": 1100,
+      "narration": "天天让 AI 跑代码、看日志，这个值得装上。"}
+  ]
+}

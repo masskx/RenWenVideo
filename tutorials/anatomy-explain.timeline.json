@@ -1,0 +1,482 @@
+{
+  "id": "anatomy-explain",
+  "voice": "zh-CN-YunxiNeural",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 200,
+  "totalFrames": 4568,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/anatomy-explain/01-hook.mp3",
+      "audioMs": 14733,
+      "startFrame": 0,
+      "durationFrames": 461,
+      "cues": {
+        "a": 3205,
+        "b": 5760,
+        "c": 10493
+      },
+      "captions": [
+        {
+          "text": "这块表里，每个齿轮都在转",
+          "startMs": 455,
+          "endMs": 3205
+        },
+        {
+          "text": "一齿咬着一齿",
+          "startMs": 3205,
+          "endMs": 4615
+        },
+        {
+          "text": "严丝合缝",
+          "startMs": 4615,
+          "endMs": 5760
+        },
+        {
+          "text": "现在，这样一台会动的模型",
+          "startMs": 5760,
+          "endMs": 8585
+        },
+        {
+          "text": "AI 一句话就能做出来",
+          "startMs": 8585,
+          "endMs": 10493
+        },
+        {
+          "text": "可你盯着它看十秒",
+          "startMs": 10493,
+          "endMs": 12703
+        },
+        {
+          "text": "说得出它是怎么计时的吗？",
+          "startMs": 12703,
+          "endMs": 14943
+        }
+      ]
+    },
+    {
+      "id": "story",
+      "audioSrc": "audio/tutorials/anatomy-explain/02-story.mp3",
+      "audioMs": 19409,
+      "startFrame": 461,
+      "durationFrames": 601,
+      "cues": {
+        "a": 4995,
+        "b": 7415,
+        "c": 9885,
+        "d": 14155
+      },
+      "captions": [
+        {
+          "text": "它来自一个最近很火的 Skill",
+          "startMs": 485,
+          "endMs": 3345
+        },
+        {
+          "text": "叫 Anatomy",
+          "startMs": 3345,
+          "endMs": 4995
+        },
+        {
+          "text": "它的核心只有一句话",
+          "startMs": 4995,
+          "endMs": 7415
+        },
+        {
+          "text": "物体本身，就是解释",
+          "startMs": 7415,
+          "endMs": 9885
+        },
+        {
+          "text": "你跟它说",
+          "startMs": 9885,
+          "endMs": 11295
+        },
+        {
+          "text": "解释一下机械表怎么计时",
+          "startMs": 11295,
+          "endMs": 14155
+        },
+        {
+          "text": "它就搭出一台能转",
+          "startMs": 14155,
+          "endMs": 16205
+        },
+        {
+          "text": "能拆开看",
+          "startMs": 16205,
+          "endMs": 17470
+        },
+        {
+          "text": "还能自己拧发条的模型",
+          "startMs": 17470,
+          "endMs": 19495
+        }
+      ]
+    },
+    {
+      "id": "conflict",
+      "audioSrc": "audio/tutorials/anatomy-explain/03-conflict.mp3",
+      "audioMs": 15726,
+      "startFrame": 1062,
+      "durationFrames": 491,
+      "cues": {
+        "a": 3615,
+        "b": 6765,
+        "c": 10435,
+        "d": 11870,
+        "e": 13007
+      },
+      "captions": [
+        {
+          "text": "数字生命卡兹克拿它跑了好几个",
+          "startMs": 435,
+          "endMs": 3615
+        },
+        {
+          "text": "发现一个问题",
+          "startMs": 3615,
+          "endMs": 5125
+        },
+        {
+          "text": "动画确实漂亮",
+          "startMs": 5125,
+          "endMs": 6765
+        },
+        {
+          "text": "可他一个不懂机械表的人",
+          "startMs": 6765,
+          "endMs": 8915
+        },
+        {
+          "text": "看一会儿就懵了",
+          "startMs": 8915,
+          "endMs": 10435
+        },
+        {
+          "text": "这个零件是啥？",
+          "startMs": 10435,
+          "endMs": 11870
+        },
+        {
+          "text": "它在干什么？",
+          "startMs": 11870,
+          "endMs": 13007
+        },
+        {
+          "text": "时间，到底是怎么算出来的？",
+          "startMs": 13007,
+          "endMs": 15977
+        }
+      ]
+    },
+    {
+      "id": "turn",
+      "audioSrc": "audio/tutorials/anatomy-explain/04-turn.mp3",
+      "audioMs": 17476,
+      "startFrame": 1553,
+      "durationFrames": 543,
+      "cues": {
+        "a": 6445,
+        "b": 9855,
+        "c": 10915,
+        "d": 12555,
+        "e": 13495,
+        "f": 14723
+      },
+      "captions": [
+        {
+          "text": "他的办法很直接",
+          "startMs": 515,
+          "endMs": 2365
+        },
+        {
+          "text": "让 AI 在动画旁边",
+          "startMs": 2365,
+          "endMs": 4365
+        },
+        {
+          "text": "加上讲解和配音",
+          "startMs": 4365,
+          "endMs": 6445
+        },
+        {
+          "text": "一边演示，一边告诉你四件事",
+          "startMs": 6445,
+          "endMs": 9855
+        },
+        {
+          "text": "这是啥，现在在发生啥",
+          "startMs": 9855,
+          "endMs": 12555
+        },
+        {
+          "text": "为什么，有啥用",
+          "startMs": 12555,
+          "endMs": 14723
+        },
+        {
+          "text": "一轮直出，门外汉也看明白了",
+          "startMs": 14723,
+          "endMs": 17733
+        }
+      ]
+    },
+    {
+      "id": "demo",
+      "audioSrc": "audio/tutorials/anatomy-explain/05-demo.mp3",
+      "audioMs": 19278,
+      "startFrame": 2096,
+      "durationFrames": 597,
+      "cues": {
+        "a": 2520,
+        "b": 4795,
+        "c": 7440,
+        "d": 11435,
+        "e": 14392
+      },
+      "captions": [
+        {
+          "text": "拿这块表试一下",
+          "startMs": 505,
+          "endMs": 2520
+        },
+        {
+          "text": "发条把力气存起来",
+          "startMs": 2520,
+          "endMs": 4795
+        },
+        {
+          "text": "齿轮把它一级一级传下去",
+          "startMs": 4795,
+          "endMs": 7440
+        },
+        {
+          "text": "擒纵叉卡住齿轮",
+          "startMs": 7440,
+          "endMs": 9555
+        },
+        {
+          "text": "一拍只放过一点",
+          "startMs": 9555,
+          "endMs": 11435
+        },
+        {
+          "text": "摆轮来回摆",
+          "startMs": 11435,
+          "endMs": 12825
+        },
+        {
+          "text": "节奏是固定的",
+          "startMs": 12825,
+          "endMs": 14392
+        },
+        {
+          "text": "常见的机芯",
+          "startMs": 14392,
+          "endMs": 15982
+        },
+        {
+          "text": "一秒八拍",
+          "startMs": 15982,
+          "endMs": 17362
+        },
+        {
+          "text": "指针就跟着这个节奏走",
+          "startMs": 17362,
+          "endMs": 19172
+        }
+      ]
+    },
+    {
+      "id": "view",
+      "audioSrc": "audio/tutorials/anatomy-explain/06-view.mp3",
+      "audioMs": 16170,
+      "startFrame": 2693,
+      "durationFrames": 504,
+      "cues": {
+        "a": 4585,
+        "b": 8075,
+        "c": 12797
+      },
+      "captions": [
+        {
+          "text": "我这个频道的视频",
+          "startMs": 565,
+          "endMs": 2555
+        },
+        {
+          "text": "也是和 AI 一起做的",
+          "startMs": 2555,
+          "endMs": 4585
+        },
+        {
+          "text": "做到现在",
+          "startMs": 4585,
+          "endMs": 5865
+        },
+        {
+          "text": "我给自己定了一条规矩",
+          "startMs": 5865,
+          "endMs": 8075
+        },
+        {
+          "text": "说到哪个零件",
+          "startMs": 8075,
+          "endMs": 9705
+        },
+        {
+          "text": "画面上就只让那个零件动",
+          "startMs": 9705,
+          "endMs": 12797
+        },
+        {
+          "text": "画得精细不难",
+          "startMs": 12797,
+          "endMs": 14667
+        },
+        {
+          "text": "难的是讲的顺序",
+          "startMs": 14667,
+          "endMs": 16397
+        }
+      ]
+    },
+    {
+      "id": "caveat",
+      "audioSrc": "audio/tutorials/anatomy-explain/07-caveat.mp3",
+      "audioMs": 21447,
+      "startFrame": 3197,
+      "durationFrames": 662,
+      "cues": {
+        "a": 2580,
+        "b": 10205,
+        "c": 13818,
+        "d": 18318
+      },
+      "captions": [
+        {
+          "text": "还有两件事要说清楚",
+          "startMs": 475,
+          "endMs": 2580
+        },
+        {
+          "text": "他做一部五分钟的视频",
+          "startMs": 2580,
+          "endMs": 4875
+        },
+        {
+          "text": "用最强的模型",
+          "startMs": 4875,
+          "endMs": 6355
+        },
+        {
+          "text": "最高的推理强度",
+          "startMs": 6355,
+          "endMs": 8215
+        },
+        {
+          "text": "跑了大约一个半小时",
+          "startMs": 8215,
+          "endMs": 10205
+        },
+        {
+          "text": "只是自己学",
+          "startMs": 10205,
+          "endMs": 11535
+        },
+        {
+          "text": "用便宜点的配置也够",
+          "startMs": 11535,
+          "endMs": 13818
+        },
+        {
+          "text": "另外，AI 讲得再像样",
+          "startMs": 13818,
+          "endMs": 16588
+        },
+        {
+          "text": "也可能讲错",
+          "startMs": 16588,
+          "endMs": 18318
+        },
+        {
+          "text": "关键的参数和原理",
+          "startMs": 18318,
+          "endMs": 20378
+        },
+        {
+          "text": "要自己核对",
+          "startMs": 20378,
+          "endMs": 21068
+        }
+      ]
+    },
+    {
+      "id": "ending",
+      "audioSrc": "audio/tutorials/anatomy-explain/08-ending.mp3",
+      "audioMs": 22988,
+      "startFrame": 3859,
+      "durationFrames": 709,
+      "cues": {
+        "a": 6065,
+        "b": 8345,
+        "c": 12185,
+        "d": 15045
+      },
+      "captions": [
+        {
+          "text": "以前的学习材料",
+          "startMs": 505,
+          "endMs": 2415
+        },
+        {
+          "text": "是别人提前做好",
+          "startMs": 2415,
+          "endMs": 4375
+        },
+        {
+          "text": "发给所有人的",
+          "startMs": 4375,
+          "endMs": 6065
+        },
+        {
+          "text": "你只能挑一个最接近的",
+          "startMs": 6065,
+          "endMs": 8345
+        },
+        {
+          "text": "现在",
+          "startMs": 8345,
+          "endMs": 9475
+        },
+        {
+          "text": "你突然对一个小问题好奇",
+          "startMs": 9475,
+          "endMs": 12185
+        },
+        {
+          "text": "可以让 AI 专门为你做一节课",
+          "startMs": 12185,
+          "endMs": 15045
+        },
+        {
+          "text": "下次试试，提问时带上这四句",
+          "startMs": 15045,
+          "endMs": 19105
+        },
+        {
+          "text": "这是啥，在发生啥",
+          "startMs": 19105,
+          "endMs": 21295
+        },
+        {
+          "text": "为什么，有啥用",
+          "startMs": 21295,
+          "endMs": 22775
+        }
+      ]
+    }
+  ]
+}

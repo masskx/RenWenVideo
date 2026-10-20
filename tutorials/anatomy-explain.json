@@ -1,0 +1,49 @@
+{
+  "id": "anatomy-explain",
+  "title": "会动，不等于看懂",
+  "subtitle": "会动，不等于看懂 · AI 做科普的一条规矩",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "tts": {"provider": "doubao", "rate": 1.1},
+  "leadMs": 200,
+  "tailMs": 420,
+  "musicSrc": "audio/tutorials/anatomy-explain/bgm.mp3",
+  "musicVolume": 0.05,
+  "credit": "素材：数字生命卡兹克（X @Khazix0918）2026-10-15 长文；Anatomy Skill（github.com/wheresryan22/anatomy）；机芯为示意绘制",
+  "source": "https://x.com/Khazix0918/status/2110587546271191166",
+  "steps": ["动画", "讲解", "顺序", "核对"],
+  "look": {"theme": "blueprint", "frame": "channels", "tour": false, "particles": false, "mascot": false, "cuts": {"big": ["pushUp", "iris"], "small": ["push", "sweep"]}},
+  "highlights": [{"text": "物体", "role": "A"}, {"text": "动画", "role": "A"}, {"text": "讲解", "role": "B"}, {"text": "顺序", "role": "B"}],
+  "cover": "hook",
+  "coverCard": {
+    "template": "conflict",
+    "headline": ["会动，", "不等于看懂"],
+    "support": "AI 做科普视频的一条规矩",
+    "tag": "ANATOMY · 素材：数字生命卡兹克",
+    "anchor": "an.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 150], "size": 132, "anchor": [540, 730, 0.95], "support": 1230},
+      "6:7": {"headline": [80, 110], "size": 120, "anchor": [540, 560, 0.75], "support": 1010},
+      "9:16": {"headline": [80, 380], "size": 132, "anchor": [540, 955, 0.95], "support": 1400}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "an.hook", "step": 1, "pace": "brisk",
+     "narration": "这块表里，每个齿轮都在转，{a}一齿咬着一齿，严丝合缝。{b}现在，这样一台会动的模型，AI 一句话就能做出来。{pace:slow}{c}可你盯着它看十秒，说得出它是怎么计时的吗？"},
+    {"id": "story", "visual": "an.story", "step": 1, "pace": "calm",
+     "narration": "它来自一个最近很火的 Skill，叫 Anatomy。{a}它的核心只有一句话：{b}物体本身，就是解释。{c}你跟它说，解释一下机械表怎么计时，{d}它就搭出一台能转、能拆开看、还能自己拧发条的模型。"},
+    {"id": "conflict", "visual": "an.conflict", "step": 1, "pace": "normal",
+     "narration": "数字生命卡兹克拿它跑了好几个，{a}发现一个问题：动画确实漂亮，{b}可他一个不懂机械表的人，看一会儿就懵了。{c}这个零件是啥？{d}它在干什么？{pace:slow}{e}时间，到底是怎么算出来的？"},
+    {"id": "turn", "visual": "an.turn", "step": 2, "pace": "normal",
+     "narration": "他的办法很直接：让 AI 在动画旁边，加上讲解和配音。{a}一边演示，一边告诉你四件事：{b}这是啥，{c}现在在发生啥，{d}为什么，{e}有啥用。{pace:calm}{f}一轮直出，门外汉也看明白了。"},
+    {"id": "demo", "visual": "an.demo", "step": 2, "pace": "calm",
+     "narration": "拿这块表试一下。{a}发条把力气存起来；{b}齿轮把它一级一级传下去；{c}擒纵叉卡住齿轮，一拍只放过一点；{d}摆轮来回摆，节奏是固定的。{pace:slow}{e}常见的机芯，一秒八拍，指针就跟着这个节奏走。"},
+    {"id": "view", "visual": "an.view", "step": 3, "pace": "calm",
+     "narration": "我这个频道的视频，也是和 AI 一起做的。{a}做到现在，我给自己定了一条规矩：{b}说到哪个零件，画面上就只让那个零件动。{pace:slow}{c}画得精细不难，难的是讲的顺序。"},
+    {"id": "caveat", "visual": "an.caveat", "step": 4, "pace": "normal",
+     "narration": "还有两件事要说清楚。{a}他做一部五分钟的视频，用最强的模型、最高的推理强度，跑了大约一个半小时；{b}只是自己学，用便宜点的配置也够。{pace:slow}{c}另外，AI 讲得再像样，也可能讲错，{d}关键的参数和原理，要自己核对。"},
+    {"id": "ending", "visual": "an.ending", "step": 0, "pace": "calm",
+     "narration": "以前的学习材料，是别人提前做好、发给所有人的，{a}你只能挑一个最接近的。{b}现在，你突然对一个小问题好奇，{c}可以让 AI 专门为你做一节课。{pace:slow}{d}下次试试，提问时带上这四句：这是啥，在发生啥，为什么，有啥用。"}
+  ]
+}

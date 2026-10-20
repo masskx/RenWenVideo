@@ -1,0 +1,256 @@
+{
+  "id": "deepseek-vs-opus55",
+  "voice": "zh-CN-YunxiNeural",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 150,
+  "totalFrames": 1612,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/deepseek-vs-opus55/01-hook.mp3",
+      "audioMs": 8411,
+      "startFrame": 0,
+      "durationFrames": 266,
+      "cues": {
+        "a": 3215,
+        "b": 7202
+      },
+      "captions": [
+        {
+          "text": "同一句提示词",
+          "startMs": 405,
+          "endMs": 1614
+        },
+        {
+          "text": "上面是 Opus 5.5",
+          "startMs": 1614,
+          "endMs": 3215
+        },
+        {
+          "text": "下面是刚发布的",
+          "startMs": 3215,
+          "endMs": 4887
+        },
+        {
+          "text": "DeepSeek V4.1 Flash 1017",
+          "startMs": 4887,
+          "endMs": 7202
+        },
+        {
+          "text": "你看得出差别吗？",
+          "startMs": 7202,
+          "endMs": 8602
+        }
+      ]
+    },
+    {
+      "id": "truth",
+      "audioSrc": "audio/tutorials/deepseek-vs-opus55/02-truth.mp3",
+      "audioMs": 9796,
+      "startFrame": 266,
+      "durationFrames": 308,
+      "cues": {
+        "a": 3133,
+        "b": 5645,
+        "c": 6875
+      },
+      "captions": [
+        {
+          "text": "先说清楚",
+          "startMs": 365,
+          "endMs": 1925
+        },
+        {
+          "text": "DeepSeek 不会生成视频",
+          "startMs": 1925,
+          "endMs": 3133
+        },
+        {
+          "text": "它和 Opus 一样",
+          "startMs": 3133,
+          "endMs": 4236
+        },
+        {
+          "text": "写的是 Remotion 代码",
+          "startMs": 4236,
+          "endMs": 5645
+        },
+        {
+          "text": "再渲染成视频",
+          "startMs": 5645,
+          "endMs": 6875
+        },
+        {
+          "text": "比的是：谁写得好",
+          "startMs": 6875,
+          "endMs": 8322
+        },
+        {
+          "text": "写得快、写得便宜",
+          "startMs": 8322,
+          "endMs": 10005
+        }
+      ]
+    },
+    {
+      "id": "numbers",
+      "audioSrc": "audio/tutorials/deepseek-vs-opus55/03-numbers.mp3",
+      "audioMs": 10318,
+      "startFrame": 574,
+      "durationFrames": 324,
+      "cues": {
+        "a": 1955,
+        "b": 4003,
+        "c": 7664
+      },
+      "captions": [
+        {
+          "text": "看一个同题对比",
+          "startMs": 515,
+          "endMs": 1955
+        },
+        {
+          "text": "据作者 @marcthecreatorr",
+          "startMs": 1955,
+          "endMs": 3430
+        },
+        {
+          "text": "自述：Opus 用了大约20分钟",
+          "startMs": 3430,
+          "endMs": 5944
+        },
+        {
+          "text": "花了约6美元",
+          "startMs": 5944,
+          "endMs": 7664
+        },
+        {
+          "text": "DeepSeek 用了大约一小时",
+          "startMs": 7664,
+          "endMs": 8966
+        },
+        {
+          "text": "只花0.23美元",
+          "startMs": 8966,
+          "endMs": 10249
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "audioSrc": "audio/tutorials/deepseek-vs-opus55/04-review.mp3",
+      "audioMs": 5747,
+      "startFrame": 898,
+      "durationFrames": 186,
+      "cues": {
+        "a": 3378,
+        "b": 4711
+      },
+      "captions": [
+        {
+          "text": "作者说",
+          "startMs": 495,
+          "endMs": 1279
+        },
+        {
+          "text": "Opus 的动作和细节更好",
+          "startMs": 1279,
+          "endMs": 3378
+        },
+        {
+          "text": "DeepSeek 很接近",
+          "startMs": 3378,
+          "endMs": 4711
+        },
+        {
+          "text": "但有几处错误",
+          "startMs": 4711,
+          "endMs": 6051
+        }
+      ]
+    },
+    {
+      "id": "cost",
+      "audioSrc": "audio/tutorials/deepseek-vs-opus55/05-cost.mp3",
+      "audioMs": 7602,
+      "startFrame": 1084,
+      "durationFrames": 242,
+      "cues": {
+        "a": 2143,
+        "b": 3705,
+        "c": 4900
+      },
+      "captions": [
+        {
+          "text": "钱，差了一个数量级",
+          "startMs": 355,
+          "endMs": 2143
+        },
+        {
+          "text": "可时间，慢了一截",
+          "startMs": 2143,
+          "endMs": 3705
+        },
+        {
+          "text": "还得自己挑错",
+          "startMs": 3705,
+          "endMs": 4900
+        },
+        {
+          "text": "便宜的那一个",
+          "startMs": 4900,
+          "endMs": 6042
+        },
+        {
+          "text": "你是拿时间在付账",
+          "startMs": 6042,
+          "endMs": 7832
+        }
+      ]
+    },
+    {
+      "id": "verdict",
+      "audioSrc": "audio/tutorials/deepseek-vs-opus55/06-verdict.mp3",
+      "audioMs": 9064,
+      "startFrame": 1326,
+      "durationFrames": 286,
+      "cues": {
+        "a": 3785,
+        "b": 6945
+      },
+      "captions": [
+        {
+          "text": "所以，接单",
+          "startMs": 365,
+          "endMs": 1800
+        },
+        {
+          "text": "赶时间，用 Opus",
+          "startMs": 1800,
+          "endMs": 3785
+        },
+        {
+          "text": "出草稿、跑批量",
+          "startMs": 3785,
+          "endMs": 5223
+        },
+        {
+          "text": "预算紧，用 DeepSeek",
+          "startMs": 5223,
+          "endMs": 6945
+        },
+        {
+          "text": "你缺的是时间",
+          "startMs": 6945,
+          "endMs": 8347
+        },
+        {
+          "text": "还是钱？",
+          "startMs": 8347,
+          "endMs": 9357
+        }
+      ]
+    }
+  ]
+}

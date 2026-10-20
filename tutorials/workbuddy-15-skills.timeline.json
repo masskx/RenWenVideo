@@ -1,0 +1,911 @@
+{
+  "id": "workbuddy-15-skills",
+  "voice": "longsanshu_v3",
+  "rate": 1.22,
+  "fps": 30,
+  "leadMs": 200,
+  "totalFrames": 6895,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/01-hook.mp3",
+      "audioMs": 13218,
+      "startFrame": 0,
+      "durationFrames": 414,
+      "cues": {
+        "a": 2822,
+        "b": 4810,
+        "c": 8301
+      },
+      "captions": [
+        {
+          "text": "WorkBuddy 的技能市场里",
+          "startMs": 200,
+          "endMs": 1627
+        },
+        {
+          "text": "技能越来越多",
+          "startMs": 1627,
+          "endMs": 2822
+        },
+        {
+          "text": "真正好用的却不好找",
+          "startMs": 2822,
+          "endMs": 4810
+        },
+        {
+          "text": "这条视频",
+          "startMs": 4810,
+          "endMs": 5864
+        },
+        {
+          "text": "带你看 15 个最新的实用技能",
+          "startMs": 5864,
+          "endMs": 8301
+        },
+        {
+          "text": "分成写作、设计",
+          "startMs": 8301,
+          "endMs": 10025
+        },
+        {
+          "text": "职场、开发",
+          "startMs": 10025,
+          "endMs": 11363
+        },
+        {
+          "text": "信息五类，建议先收藏",
+          "startMs": 11363,
+          "endMs": 13359
+        }
+      ]
+    },
+    {
+      "id": "install",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/02-install.mp3",
+      "audioMs": 11285,
+      "startFrame": 414,
+      "durationFrames": 356,
+      "cues": {
+        "a": 2676,
+        "b": 5056,
+        "c": 7112
+      },
+      "captions": [
+        {
+          "text": "先说安装",
+          "startMs": 200,
+          "endMs": 1162
+        },
+        {
+          "text": "15 个技能都一样简单",
+          "startMs": 1162,
+          "endMs": 2676
+        },
+        {
+          "text": "直接对 WorkBuddy 说",
+          "startMs": 2676,
+          "endMs": 3939
+        },
+        {
+          "text": "帮我安装这个技能",
+          "startMs": 3939,
+          "endMs": 5056
+        },
+        {
+          "text": "再贴上它的 GitHub 地址就行",
+          "startMs": 5056,
+          "endMs": 7112
+        },
+        {
+          "text": "装好以后，输入斜杠加技能名",
+          "startMs": 7112,
+          "endMs": 10042
+        },
+        {
+          "text": "就能直接调用",
+          "startMs": 10042,
+          "endMs": 11446
+        }
+      ]
+    },
+    {
+      "id": "s01",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/03-s01.mp3",
+      "audioMs": 14864,
+      "startFrame": 770,
+      "durationFrames": 463,
+      "cues": {
+        "a": 2758,
+        "b": 7462,
+        "c": 9123
+      },
+      "captions": [
+        {
+          "text": "第一个，Humanizer 中文版",
+          "startMs": 200,
+          "endMs": 1672
+        },
+        {
+          "text": "专治 AI 味",
+          "startMs": 1672,
+          "endMs": 2758
+        },
+        {
+          "text": "它内置 24 种",
+          "startMs": 2758,
+          "endMs": 3782
+        },
+        {
+          "text": "AI 写作痕迹规则",
+          "startMs": 3782,
+          "endMs": 5437
+        },
+        {
+          "text": "来自维基百科的识别指南",
+          "startMs": 5437,
+          "endMs": 7462
+        },
+        {
+          "text": "逐句改写，观点不变",
+          "startMs": 7462,
+          "endMs": 9123
+        },
+        {
+          "text": "原文实测",
+          "startMs": 9123,
+          "endMs": 9938
+        },
+        {
+          "text": "破折号滥用 4 处全改掉",
+          "startMs": 9938,
+          "endMs": 11722
+        },
+        {
+          "text": "假对比从 3 处减到 1 处",
+          "startMs": 11722,
+          "endMs": 15015
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/04-s02.mp3",
+      "audioMs": 12408,
+      "startFrame": 1233,
+      "durationFrames": 390,
+      "cues": {
+        "a": 2578,
+        "b": 5233,
+        "c": 7370
+      },
+      "captions": [
+        {
+          "text": "第二个，写作蒸馏器",
+          "startMs": 200,
+          "endMs": 2578
+        },
+        {
+          "text": "丢给它某位作者",
+          "startMs": 2578,
+          "endMs": 3687
+        },
+        {
+          "text": "20 篇左右的文章",
+          "startMs": 3687,
+          "endMs": 5233
+        },
+        {
+          "text": "它会拆出用词",
+          "startMs": 5233,
+          "endMs": 6390
+        },
+        {
+          "text": "句式和结构",
+          "startMs": 6390,
+          "endMs": 7370
+        },
+        {
+          "text": "生成一份 Writing DNA",
+          "startMs": 7370,
+          "endMs": 8999
+        },
+        {
+          "text": "之后让 AI 照这份规则来写",
+          "startMs": 8999,
+          "endMs": 11140
+        },
+        {
+          "text": "风格就稳了",
+          "startMs": 11140,
+          "endMs": 12570
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/05-s03.mp3",
+      "audioMs": 12278,
+      "startFrame": 1623,
+      "durationFrames": 386,
+      "cues": {
+        "a": 4787,
+        "b": 8101,
+        "c": 10105
+      },
+      "captions": [
+        {
+          "text": "第三个，中文小说创作",
+          "startMs": 200,
+          "endMs": 2401
+        },
+        {
+          "text": "AI 写长篇最怕失忆",
+          "startMs": 2401,
+          "endMs": 4787
+        },
+        {
+          "text": "它会把人物设定",
+          "startMs": 4787,
+          "endMs": 5869
+        },
+        {
+          "text": "伏笔和章节摘要都存成文件",
+          "startMs": 5869,
+          "endMs": 8101
+        },
+        {
+          "text": "每写一章先回顾再动笔",
+          "startMs": 8101,
+          "endMs": 10105
+        },
+        {
+          "text": "支持 10 到 50 章",
+          "startMs": 10105,
+          "endMs": 12417
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/06-s04.mp3",
+      "audioMs": 12643,
+      "startFrame": 2009,
+      "durationFrames": 397,
+      "cues": {
+        "a": 1731,
+        "b": 9150,
+        "c": 10792
+      },
+      "captions": [
+        {
+          "text": "第四个，仓颉技能",
+          "startMs": 200,
+          "endMs": 1731
+        },
+        {
+          "text": "它能把书",
+          "startMs": 1731,
+          "endMs": 2668
+        },
+        {
+          "text": "演讲和播客里的方法论",
+          "startMs": 2668,
+          "endMs": 4905
+        },
+        {
+          "text": "蒸馏成一个新的技能",
+          "startMs": 4905,
+          "endMs": 6335
+        },
+        {
+          "text": "原文用张小龙的微信公开课实测",
+          "startMs": 6335,
+          "endMs": 9150
+        },
+        {
+          "text": "跑了 23 分钟",
+          "startMs": 9150,
+          "endMs": 10792
+        },
+        {
+          "text": "生成了 13 张能力卡",
+          "startMs": 10792,
+          "endMs": 12799
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/07-s05.mp3",
+      "audioMs": 12095,
+      "startFrame": 2406,
+      "durationFrames": 380,
+      "cues": {
+        "a": 3240,
+        "b": 5122,
+        "c": 6484
+      },
+      "captions": [
+        {
+          "text": "第五个，UI UX Pro Max",
+          "startMs": 200,
+          "endMs": 3240
+        },
+        {
+          "text": "内置 79 种设计风格",
+          "startMs": 3240,
+          "endMs": 5122
+        },
+        {
+          "text": "192 套配色",
+          "startMs": 5122,
+          "endMs": 6484
+        },
+        {
+          "text": "74 组字体搭配",
+          "startMs": 6484,
+          "endMs": 8169
+        },
+        {
+          "text": "一句话就能生成整套设计系统",
+          "startMs": 8169,
+          "endMs": 10409
+        },
+        {
+          "text": "配色直接给到具体色值",
+          "startMs": 10409,
+          "endMs": 12255
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/08-s06.mp3",
+      "audioMs": 13923,
+      "startFrame": 2786,
+      "durationFrames": 435,
+      "cues": {
+        "a": 2262,
+        "b": 6180,
+        "c": 10631
+      },
+      "captions": [
+        {
+          "text": "第六个，归藏社交媒体卡片",
+          "startMs": 200,
+          "endMs": 2262
+        },
+        {
+          "text": "把文章直接变成小红书图组",
+          "startMs": 2262,
+          "endMs": 4346
+        },
+        {
+          "text": "公众号封面和金句卡",
+          "startMs": 4346,
+          "endMs": 6180
+        },
+        {
+          "text": "先用 HTML 排版再渲染",
+          "startMs": 6180,
+          "endMs": 8279
+        },
+        {
+          "text": "不靠生图模型",
+          "startMs": 8279,
+          "endMs": 9464
+        },
+        {
+          "text": "风格很稳定",
+          "startMs": 9464,
+          "endMs": 10631
+        },
+        {
+          "text": "同一篇文章",
+          "startMs": 10631,
+          "endMs": 11568
+        },
+        {
+          "text": "能出三套完全不同的视觉体系",
+          "startMs": 11568,
+          "endMs": 14072
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/09-s07.mp3",
+      "audioMs": 9352,
+      "startFrame": 3221,
+      "durationFrames": 298,
+      "cues": {
+        "a": 2115,
+        "b": 4172,
+        "c": 6652
+      },
+      "captions": [
+        {
+          "text": "第七个，面试准备助手",
+          "startMs": 200,
+          "endMs": 2115
+        },
+        {
+          "text": "把岗位 JD 和你的简历交给它",
+          "startMs": 2115,
+          "endMs": 4172
+        },
+        {
+          "text": "它会拆解岗位要求",
+          "startMs": 4172,
+          "endMs": 5505
+        },
+        {
+          "text": "找出匹配点",
+          "startMs": 5505,
+          "endMs": 6652
+        },
+        {
+          "text": "预测高频问题",
+          "startMs": 6652,
+          "endMs": 7706
+        },
+        {
+          "text": "再排好 3 天冲刺计划",
+          "startMs": 7706,
+          "endMs": 9496
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/10-s08.mp3",
+      "audioMs": 10397,
+      "startFrame": 3519,
+      "durationFrames": 329,
+      "cues": {
+        "a": 3595,
+        "b": 5006,
+        "c": 6195
+      },
+      "captions": [
+        {
+          "text": "第八个，PM Skills",
+          "startMs": 200,
+          "endMs": 2037
+        },
+        {
+          "text": "产品经理工作流",
+          "startMs": 2037,
+          "endMs": 3595
+        },
+        {
+          "text": "68 个产品技能",
+          "startMs": 3595,
+          "endMs": 5006
+        },
+        {
+          "text": "加 42 个工作流",
+          "startMs": 5006,
+          "endMs": 6195
+        },
+        {
+          "text": "写 PRD、定 OKR",
+          "startMs": 6195,
+          "endMs": 7976
+        },
+        {
+          "text": "设计实验都能直接跑",
+          "startMs": 7976,
+          "endMs": 9517
+        },
+        {
+          "text": "不用先学框架",
+          "startMs": 9517,
+          "endMs": 10548
+        }
+      ]
+    },
+    {
+      "id": "s09",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/11-s09.mp3",
+      "audioMs": 10998,
+      "startFrame": 3848,
+      "durationFrames": 347,
+      "cues": {
+        "a": 2689,
+        "b": 5694,
+        "c": 7392
+      },
+      "captions": [
+        {
+          "text": "第九个，AI 共读拆书",
+          "startMs": 200,
+          "endMs": 2689
+        },
+        {
+          "text": "它先按你的经历生成",
+          "startMs": 2689,
+          "endMs": 4056
+        },
+        {
+          "text": "100 本跨领域书单",
+          "startMs": 4056,
+          "endMs": 5694
+        },
+        {
+          "text": "然后每天陪你拆一本",
+          "startMs": 5694,
+          "endMs": 7392
+        },
+        {
+          "text": "按表面论点",
+          "startMs": 7392,
+          "endMs": 8442
+        },
+        {
+          "text": "核心机制、和你的关系",
+          "startMs": 8442,
+          "endMs": 10088
+        },
+        {
+          "text": "三层往下拆",
+          "startMs": 10088,
+          "endMs": 11138
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/12-s10.mp3",
+      "audioMs": 10423,
+      "startFrame": 4195,
+      "durationFrames": 330,
+      "cues": {
+        "a": 3018,
+        "b": 5613,
+        "c": 7335
+      },
+      "captions": [
+        {
+          "text": "第十个，小红书虚拟产品选品助手",
+          "startMs": 200,
+          "endMs": 3018
+        },
+        {
+          "text": "它会从你的工作经验里",
+          "startMs": 3018,
+          "endMs": 4494
+        },
+        {
+          "text": "挖出能卖的方向",
+          "startMs": 4494,
+          "endMs": 5613
+        },
+        {
+          "text": "再结合平台上的真实案例",
+          "startMs": 5613,
+          "endMs": 7335
+        },
+        {
+          "text": "给出完整方案和 7 天启动计划",
+          "startMs": 7335,
+          "endMs": 10585
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/13-s11.mp3",
+      "audioMs": 11677,
+      "startFrame": 4525,
+      "durationFrames": 368,
+      "cues": {
+        "a": 3992,
+        "b": 5788,
+        "c": 6955
+      },
+      "captions": [
+        {
+          "text": "第十一个",
+          "startMs": 200,
+          "endMs": 1040
+        },
+        {
+          "text": "GitHub README 美化",
+          "startMs": 1040,
+          "endMs": 3992
+        },
+        {
+          "text": "它会先核对项目的真实代码",
+          "startMs": 3992,
+          "endMs": 5788
+        },
+        {
+          "text": "提炼一句话价值",
+          "startMs": 5788,
+          "endMs": 6955
+        },
+        {
+          "text": "再生成贴合主题的 SVG 横幅",
+          "startMs": 6955,
+          "endMs": 9605
+        },
+        {
+          "text": "让访客三秒看懂你的项目",
+          "startMs": 9605,
+          "endMs": 11821
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/14-s12.mp3",
+      "audioMs": 12591,
+      "startFrame": 4893,
+      "durationFrames": 395,
+      "cues": {
+        "a": 3592,
+        "b": 5017,
+        "c": 8477
+      },
+      "captions": [
+        {
+          "text": "第十二个，Waza",
+          "startMs": 200,
+          "endMs": 1407
+        },
+        {
+          "text": "作者是开发者 Tw93",
+          "startMs": 1407,
+          "endMs": 3592
+        },
+        {
+          "text": "一共 8 个子技能",
+          "startMs": 3592,
+          "endMs": 5017
+        },
+        {
+          "text": "比如 /think 先梳理需求",
+          "startMs": 5017,
+          "endMs": 7524
+        },
+        {
+          "text": "出开发计划",
+          "startMs": 7524,
+          "endMs": 8477
+        },
+        {
+          "text": "/hunt 系统地定位 Bug 根因",
+          "startMs": 8477,
+          "endMs": 11079
+        },
+        {
+          "text": "先想清楚，再动手",
+          "startMs": 11079,
+          "endMs": 12743
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/15-s13.mp3",
+      "audioMs": 10606,
+      "startFrame": 5288,
+      "durationFrames": 335,
+      "cues": {
+        "a": 3105,
+        "b": 5890,
+        "c": 8384
+      },
+      "captions": [
+        {
+          "text": "第十三个，横木",
+          "startMs": 200,
+          "endMs": 1825
+        },
+        {
+          "text": "专做架构评审",
+          "startMs": 1825,
+          "endMs": 3105
+        },
+        {
+          "text": "它要求每个问题都拿出仓库里的证据",
+          "startMs": 3105,
+          "endMs": 5890
+        },
+        {
+          "text": "最后输出一份验证过的风险清单",
+          "startMs": 5890,
+          "endMs": 8384
+        },
+        {
+          "text": "问题在哪、怎么修",
+          "startMs": 8384,
+          "endMs": 9733
+        },
+        {
+          "text": "先修哪个",
+          "startMs": 9733,
+          "endMs": 10754
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/16-s14.mp3",
+      "audioMs": 11651,
+      "startFrame": 5623,
+      "durationFrames": 367,
+      "cues": {
+        "a": 2954,
+        "b": 4287,
+        "c": 7070
+      },
+      "captions": [
+        {
+          "text": "第十四个，乔木 SEO",
+          "startMs": 200,
+          "endMs": 2954
+        },
+        {
+          "text": "它会渲染你的网页",
+          "startMs": 2954,
+          "endMs": 4287
+        },
+        {
+          "text": "检查索引、结构",
+          "startMs": 4287,
+          "endMs": 5890
+        },
+        {
+          "text": "内容和代码",
+          "startMs": 5890,
+          "endMs": 7070
+        },
+        {
+          "text": "按影响排序给出修复清单",
+          "startMs": 7070,
+          "endMs": 9307
+        },
+        {
+          "text": "连 AI 搜索的优化也一起覆盖",
+          "startMs": 9307,
+          "endMs": 11811
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/17-s15.mp3",
+      "audioMs": 9639,
+      "startFrame": 5990,
+      "durationFrames": 306,
+      "cues": {
+        "a": 2108,
+        "b": 4796,
+        "c": 7592
+      },
+      "captions": [
+        {
+          "text": "最后一个",
+          "startMs": 200,
+          "endMs": 966
+        },
+        {
+          "text": "Follow Builders",
+          "startMs": 966,
+          "endMs": 2108
+        },
+        {
+          "text": "它帮你盯着二十多位一线",
+          "startMs": 2108,
+          "endMs": 3770
+        },
+        {
+          "text": "AI 创作者",
+          "startMs": 3770,
+          "endMs": 4796
+        },
+        {
+          "text": "把播客",
+          "startMs": 4796,
+          "endMs": 5522
+        },
+        {
+          "text": "X 和博客的动态整理成简报",
+          "startMs": 5522,
+          "endMs": 7592
+        },
+        {
+          "text": "还能设成每周一自动推送",
+          "startMs": 7592,
+          "endMs": 9795
+        }
+      ]
+    },
+    {
+      "id": "summary",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/18-summary.mp3",
+      "audioMs": 10762,
+      "startFrame": 6296,
+      "durationFrames": 340,
+      "cues": {
+        "a": 824,
+        "b": 6215,
+        "c": 8151
+      },
+      "captions": [
+        {
+          "text": "汇总一下：写作四个",
+          "startMs": 200,
+          "endMs": 1989
+        },
+        {
+          "text": "设计两个、职场四个",
+          "startMs": 1989,
+          "endMs": 4462
+        },
+        {
+          "text": "开发三个、信息两个",
+          "startMs": 4462,
+          "endMs": 6215
+        },
+        {
+          "text": "全部来自 GitHub 开源仓库",
+          "startMs": 6215,
+          "endMs": 8151
+        },
+        {
+          "text": "复制地址",
+          "startMs": 8151,
+          "endMs": 9084
+        },
+        {
+          "text": "让 WorkBuddy 安装就行",
+          "startMs": 9084,
+          "endMs": 10910
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "audioSrc": "audio/tutorials/workbuddy-15-skills/19-outro.mp3",
+      "audioMs": 8046,
+      "startFrame": 6636,
+      "durationFrames": 259,
+      "cues": {
+        "a": 1831,
+        "b": 3248,
+        "c": 4249
+      },
+      "captions": [
+        {
+          "text": "这 15 个里",
+          "startMs": 200,
+          "endMs": 1831
+        },
+        {
+          "text": "你最想先试哪一个？",
+          "startMs": 1831,
+          "endMs": 3248
+        },
+        {
+          "text": "评论区告诉我",
+          "startMs": 3248,
+          "endMs": 4249
+        },
+        {
+          "text": "觉得有用就点赞收藏",
+          "startMs": 4249,
+          "endMs": 6176
+        },
+        {
+          "text": "内容参考程序员小灰的原文",
+          "startMs": 6176,
+          "endMs": 8190
+        }
+      ]
+    }
+  ]
+}

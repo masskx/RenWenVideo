@@ -1,0 +1,20 @@
+node_modules
+node_modules.incomplete
+dist
+.DS_Store
+
+# Finished videos live in douyin/<id>/; out/ is scratch output.
+out/
+*.raw.mp4
+
+# Local QA screenshots are reproducible and not production artifacts.
+/qa/
+
+.env
+.env.*
+!.env.example
+public/fonts/*
+__pycache__/
+
+# Cover thumbnail sheets from scripts/qa/cover.mjs are reproducible.
+douyin/*/cover-thumbs.png

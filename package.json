@@ -1,0 +1,42 @@
+{
+  "name": "renwen-video",
+  "version": "1.0.0",
+  "description": "把文章和操作教程做成抖音竖屏视频的 Remotion 工作流",
+  "repository": {},
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@remotion/cli": "4.0.524",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.524",
+    "@remotion/captions": "4.0.524",
+    "@remotion/media": "4.0.524",
+    "@remotion/bundler": "4.0.524",
+    "@remotion/renderer": "4.0.524"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.524",
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "eslint": "9.19.0",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "dev": "remotion studio src/index.ts",
+    "lint": "eslint src && tsc --noEmit",
+    "explainer:build": "node scripts/build-explainer.mjs --images --voice",
+    "explainer:render": "node scripts/render-explainer.mjs",
+    "tutorial:voice": "python scripts/generate-tutorial-voice.py",
+    "tutorial:music": "python scripts/generate-tutorial-music.py",
+    "tutorial:render": "node scripts/render-tutorial.mjs",
+    "qa:richness": "node scripts/qa/richness.mjs",
+    "qa:scan": "node scripts/qa/scan.mjs",
+    "qa:marks": "node scripts/qa/marks.mjs",
+    "qa:palette": "node scripts/qa/palette.mjs"
+  },
+  "sideEffects": [
+    "*.css"
+  ]
+}

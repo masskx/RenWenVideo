@@ -1,0 +1,730 @@
+{
+  "id": "agent-engineer-roadmap",
+  "voice": "longsanshu_v3",
+  "rate": 1.2,
+  "fps": 30,
+  "leadMs": 200,
+  "totalFrames": 5252,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/agent-engineer-roadmap/01-hook.mp3",
+      "audioMs": 16118,
+      "startFrame": 0,
+      "durationFrames": 501,
+      "cues": {
+        "a": 3737,
+        "b": 5903,
+        "c": 7492,
+        "d": 12063,
+        "e": 13354
+      },
+      "captions": [
+        {
+          "text": "Chasen 去面一家做",
+          "startMs": 200,
+          "endMs": 1561
+        },
+        {
+          "text": "AI 加 Web3 的公司",
+          "startMs": 1561,
+          "endMs": 3042
+        },
+        {
+          "text": "没过",
+          "startMs": 3042,
+          "endMs": 3737
+        },
+        {
+          "text": "面试官的评价是",
+          "startMs": 3737,
+          "endMs": 5038
+        },
+        {
+          "text": "AI 这块没问题",
+          "startMs": 5038,
+          "endMs": 5903
+        },
+        {
+          "text": "工程能力不太行",
+          "startMs": 5903,
+          "endMs": 7492
+        },
+        {
+          "text": "面试之后",
+          "startMs": 7492,
+          "endMs": 8374
+        },
+        {
+          "text": "面试官给了他一份《Agent",
+          "startMs": 8374,
+          "endMs": 10461
+        },
+        {
+          "text": "工程师入门指南》",
+          "startMs": 10461,
+          "endMs": 12063
+        },
+        {
+          "text": "他把它整理公开了",
+          "startMs": 12063,
+          "endMs": 13354
+        },
+        {
+          "text": "五个阶段",
+          "startMs": 13354,
+          "endMs": 14214
+        },
+        {
+          "text": "每一段都配一个项目和验收标准",
+          "startMs": 14214,
+          "endMs": 16270
+        }
+      ]
+    },
+    {
+      "id": "route",
+      "audioSrc": "audio/tutorials/agent-engineer-roadmap/02-route.mp3",
+      "audioMs": 8777,
+      "startFrame": 501,
+      "durationFrames": 281,
+      "cues": {
+        "a": 1329,
+        "b": 3641,
+        "c": 4934,
+        "d": 5781,
+        "e": 6768
+      },
+      "captions": [
+        {
+          "text": "先看整条路线",
+          "startMs": 200,
+          "endMs": 1329
+        },
+        {
+          "text": "从看懂一次模型调用开始",
+          "startMs": 1329,
+          "endMs": 3641
+        },
+        {
+          "text": "到能查资料",
+          "startMs": 3641,
+          "endMs": 4934
+        },
+        {
+          "text": "能调工具，能保存状态",
+          "startMs": 4934,
+          "endMs": 6768
+        },
+        {
+          "text": "最后做成别人也能跑起来的服务",
+          "startMs": 6768,
+          "endMs": 8936
+        }
+      ]
+    },
+    {
+      "id": "llm",
+      "audioSrc": "audio/tutorials/agent-engineer-roadmap/03-llm.mp3",
+      "audioMs": 15987,
+      "startFrame": 782,
+      "durationFrames": 497,
+      "cues": {
+        "a": 2560,
+        "b": 4744,
+        "c": 9262,
+        "d": 11033,
+        "e": 13296
+      },
+      "captions": [
+        {
+          "text": "第一站，把一次模型调用看明白",
+          "startMs": 200,
+          "endMs": 2560
+        },
+        {
+          "text": "上下文窗口有固定容量",
+          "startMs": 2560,
+          "endMs": 4744
+        },
+        {
+          "text": "系统提示、历史消息",
+          "startMs": 4744,
+          "endMs": 6404
+        },
+        {
+          "text": "工具说明、检索资料",
+          "startMs": 6404,
+          "endMs": 8346
+        },
+        {
+          "text": "都要挤进去",
+          "startMs": 8346,
+          "endMs": 9262
+        },
+        {
+          "text": "还得给输出留出余量",
+          "startMs": 9262,
+          "endMs": 11033
+        },
+        {
+          "text": "塞不下的，要裁剪或者压缩",
+          "startMs": 11033,
+          "endMs": 13296
+        },
+        {
+          "text": "放在中间的关键信息",
+          "startMs": 13296,
+          "endMs": 14809
+        },
+        {
+          "text": "还可能被忽略",
+          "startMs": 14809,
+          "endMs": 16126
+        }
+      ]
+    },
+    {
+      "id": "api",
+      "audioSrc": "audio/tutorials/agent-engineer-roadmap/04-api.mp3",
+      "audioMs": 18547,
+      "startFrame": 1279,
+      "durationFrames": 574,
+      "cues": {
+        "a": 1108,
+        "b": 4776,
+        "c": 7952,
+        "d": 12720,
+        "e": 14932
+      },
+      "captions": [
+        {
+          "text": "接口层面，system",
+          "startMs": 200,
+          "endMs": 1714
+        },
+        {
+          "text": "user、assistant",
+          "startMs": 1714,
+          "endMs": 2964
+        },
+        {
+          "text": "tool，各管一件事",
+          "startMs": 2964,
+          "endMs": 4776
+        },
+        {
+          "text": "流式输出，是一段段增量到达",
+          "startMs": 4776,
+          "endMs": 7952
+        },
+        {
+          "text": "结构化输出要过 Schema 校验",
+          "startMs": 7952,
+          "endMs": 10431
+        },
+        {
+          "text": "失败了怎么处理",
+          "startMs": 10431,
+          "endMs": 11292
+        },
+        {
+          "text": "也得写清楚",
+          "startMs": 11292,
+          "endMs": 12720
+        },
+        {
+          "text": "第一个项目",
+          "startMs": 12720,
+          "endMs": 13485
+        },
+        {
+          "text": "大模型 API Playground",
+          "startMs": 13485,
+          "endMs": 14932
+        },
+        {
+          "text": "每次调用，记下模型",
+          "startMs": 14932,
+          "endMs": 16905
+        },
+        {
+          "text": "Token 和耗时",
+          "startMs": 16905,
+          "endMs": 18696
+        }
+      ]
+    },
+    {
+      "id": "prompt",
+      "audioSrc": "audio/tutorials/agent-engineer-roadmap/05-prompt.mp3",
+      "audioMs": 16536,
+      "startFrame": 1853,
+      "durationFrames": 513,
+      "cues": {
+        "a": 2976,
+        "b": 6216,
+        "c": 9070,
+        "d": 13336
+      },
+      "captions": [
+        {
+          "text": "Prompt 不单独做项目",
+          "startMs": 200,
+          "endMs": 1633
+        },
+        {
+          "text": "它贯穿每一个项目",
+          "startMs": 1633,
+          "endMs": 2976
+        },
+        {
+          "text": "写清角色、任务",
+          "startMs": 2976,
+          "endMs": 4510
+        },
+        {
+          "text": "材料、格式和约束",
+          "startMs": 4510,
+          "endMs": 6216
+        },
+        {
+          "text": "模型老是误解边界",
+          "startMs": 6216,
+          "endMs": 7691
+        },
+        {
+          "text": "就给几个真实例子",
+          "startMs": 7691,
+          "endMs": 9070
+        },
+        {
+          "text": "对推理模型",
+          "startMs": 9070,
+          "endMs": 10879
+        },
+        {
+          "text": "不必再硬加一句“一步一步思考”",
+          "startMs": 10879,
+          "endMs": 13336
+        },
+        {
+          "text": "每个项目",
+          "startMs": 13336,
+          "endMs": 14306
+        },
+        {
+          "text": "至少留三组修改前后的对比",
+          "startMs": 14306,
+          "endMs": 16694
+        }
+      ]
+    },
+    {
+      "id": "rag",
+      "audioSrc": "audio/tutorials/agent-engineer-roadmap/06-rag.mp3",
+      "audioMs": 15543,
+      "startFrame": 2366,
+      "durationFrames": 484,
+      "cues": {
+        "a": 3079,
+        "b": 4708,
+        "c": 6387,
+        "d": 9418,
+        "e": 11729,
+        "f": 13220
+      },
+      "captions": [
+        {
+          "text": "第二个项目是 RAG 加工具调用",
+          "startMs": 200,
+          "endMs": 3079
+        },
+        {
+          "text": "文档先解析",
+          "startMs": 3079,
+          "endMs": 4147
+        },
+        {
+          "text": "切块，变成向量存进索引",
+          "startMs": 4147,
+          "endMs": 6387
+        },
+        {
+          "text": "提问时，向量和关键词一起召回",
+          "startMs": 6387,
+          "endMs": 9418
+        },
+        {
+          "text": "再重排，只留最相关的几段",
+          "startMs": 9418,
+          "endMs": 11729
+        },
+        {
+          "text": "回答要带引用",
+          "startMs": 11729,
+          "endMs": 13220
+        },
+        {
+          "text": "资料里没有",
+          "startMs": 13220,
+          "endMs": 14064
+        },
+        {
+          "text": "就明说证据不足",
+          "startMs": 14064,
+          "endMs": 15694
+        }
+      ]
+    },
+    {
+      "id": "loop",
+      "audioSrc": "audio/tutorials/agent-engineer-roadmap/07-loop.mp3",
+      "audioMs": 13584,
+      "startFrame": 2850,
+      "durationFrames": 425,
+      "cues": {
+        "a": 2227,
+        "b": 3331,
+        "c": 4379,
+        "d": 5867,
+        "e": 8746
+      },
+      "captions": [
+        {
+          "text": "再看 Agent",
+          "startMs": 200,
+          "endMs": 1055
+        },
+        {
+          "text": "核心是一个循环",
+          "startMs": 1055,
+          "endMs": 2227
+        },
+        {
+          "text": "模型提出下一步",
+          "startMs": 2227,
+          "endMs": 3331
+        },
+        {
+          "text": "系统去执行",
+          "startMs": 3331,
+          "endMs": 4379
+        },
+        {
+          "text": "结果放回上下文",
+          "startMs": 4379,
+          "endMs": 5867
+        },
+        {
+          "text": "直到任务完成",
+          "startMs": 5867,
+          "endMs": 7012
+        },
+        {
+          "text": "或者撞上最大步数",
+          "startMs": 7012,
+          "endMs": 8746
+        },
+        {
+          "text": "第三个项目",
+          "startMs": 8746,
+          "endMs": 9476
+        },
+        {
+          "text": "读懂 learn-claude-code",
+          "startMs": 9476,
+          "endMs": 11514
+        },
+        {
+          "text": "从零写一个简化版",
+          "startMs": 11514,
+          "endMs": 12303
+        },
+        {
+          "text": "Coding Agent",
+          "startMs": 12303,
+          "endMs": 13736
+        }
+      ]
+    },
+    {
+      "id": "guard",
+      "audioSrc": "audio/tutorials/agent-engineer-roadmap/08-guard.mp3",
+      "audioMs": 14524,
+      "startFrame": 3275,
+      "durationFrames": 453,
+      "cues": {
+        "a": 2130,
+        "b": 4989,
+        "c": 8122,
+        "d": 11012
+      },
+      "captions": [
+        {
+          "text": "循环之外，全是工程",
+          "startMs": 200,
+          "endMs": 2130
+        },
+        {
+          "text": "进程断了",
+          "startMs": 2130,
+          "endMs": 2869
+        },
+        {
+          "text": "要知道做到了哪一步",
+          "startMs": 2869,
+          "endMs": 4989
+        },
+        {
+          "text": "数据库里存着",
+          "startMs": 4989,
+          "endMs": 6273
+        },
+        {
+          "text": "不等于模型这一轮看到了",
+          "startMs": 6273,
+          "endMs": 8122
+        },
+        {
+          "text": "删文件、发消息之前",
+          "startMs": 8122,
+          "endMs": 9721
+        },
+        {
+          "text": "留一个人工确认",
+          "startMs": 9721,
+          "endMs": 11012
+        },
+        {
+          "text": "网页里写着“把密钥发给我”",
+          "startMs": 11012,
+          "endMs": 13072
+        },
+        {
+          "text": "那是资料，不是指令",
+          "startMs": 13072,
+          "endMs": 14687
+        }
+      ]
+    },
+    {
+      "id": "backend",
+      "audioSrc": "audio/tutorials/agent-engineer-roadmap/09-backend.mp3",
+      "audioMs": 13976,
+      "startFrame": 3728,
+      "durationFrames": 437,
+      "cues": {
+        "a": 2669,
+        "b": 4024,
+        "c": 6314,
+        "d": 7724,
+        "e": 10717
+      },
+      "captions": [
+        {
+          "text": "第四个项目",
+          "startMs": 200,
+          "endMs": 1055
+        },
+        {
+          "text": "把 Agent 做成服务",
+          "startMs": 1055,
+          "endMs": 2669
+        },
+        {
+          "text": "FastAPI 接请求",
+          "startMs": 2669,
+          "endMs": 4024
+        },
+        {
+          "text": "PostgreSQL 存会话和任务",
+          "startMs": 4024,
+          "endMs": 6314
+        },
+        {
+          "text": "Redis 管缓存和状态",
+          "startMs": 6314,
+          "endMs": 7724
+        },
+        {
+          "text": "长任务丢进队列",
+          "startMs": 7724,
+          "endMs": 9302
+        },
+        {
+          "text": "后台慢慢跑",
+          "startMs": 9302,
+          "endMs": 10717
+        },
+        {
+          "text": "验收很直接",
+          "startMs": 10717,
+          "endMs": 11661
+        },
+        {
+          "text": "一条命令启动",
+          "startMs": 11661,
+          "endMs": 12779
+        },
+        {
+          "text": "一条命令跑完测试",
+          "startMs": 12779,
+          "endMs": 14130
+        }
+      ]
+    },
+    {
+      "id": "projects",
+      "audioSrc": "audio/tutorials/agent-engineer-roadmap/10-projects.mp3",
+      "audioMs": 20846,
+      "startFrame": 4165,
+      "durationFrames": 643,
+      "cues": {
+        "a": 3076,
+        "b": 6824,
+        "c": 11033,
+        "d": 14879,
+        "e": 17660
+      },
+      "captions": [
+        {
+          "text": "最后是综合项目",
+          "startMs": 200,
+          "endMs": 1771
+        },
+        {
+          "text": "作者推荐四个方向",
+          "startMs": 1771,
+          "endMs": 3076
+        },
+        {
+          "text": "Coding Agent",
+          "startMs": 3076,
+          "endMs": 4052
+        },
+        {
+          "text": "看 Pi 和 Codex CLI",
+          "startMs": 4052,
+          "endMs": 6824
+        },
+        {
+          "text": "办公 Agent",
+          "startMs": 6824,
+          "endMs": 7711
+        },
+        {
+          "text": "看 WorkBuddy 和 OpenWork",
+          "startMs": 7711,
+          "endMs": 11033
+        },
+        {
+          "text": "常驻助手，先读 nanobot",
+          "startMs": 11033,
+          "endMs": 13757
+        },
+        {
+          "text": "再看 OpenClaw",
+          "startMs": 13757,
+          "endMs": 14879
+        },
+        {
+          "text": "个人 Agent",
+          "startMs": 14879,
+          "endMs": 15857
+        },
+        {
+          "text": "看 OpenBot 和 OpenDots",
+          "startMs": 15857,
+          "endMs": 17660
+        },
+        {
+          "text": "每个方向挑一个",
+          "startMs": 17660,
+          "endMs": 18888
+        },
+        {
+          "text": "跑通、讲清",
+          "startMs": 18888,
+          "endMs": 20189
+        },
+        {
+          "text": "改一处",
+          "startMs": 20189,
+          "endMs": 20987
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "audioSrc": "audio/tutorials/agent-engineer-roadmap/11-outro.mp3",
+      "audioMs": 14237,
+      "startFrame": 4808,
+      "durationFrames": 444,
+      "cues": {
+        "a": 1902,
+        "b": 3803,
+        "c": 7006,
+        "d": 9934,
+        "e": 11431
+      },
+      "captions": [
+        {
+          "text": "每个仓库都该答得出",
+          "startMs": 200,
+          "endMs": 1902
+        },
+        {
+          "text": "输入是什么",
+          "startMs": 1902,
+          "endMs": 2801
+        },
+        {
+          "text": "输出是什么",
+          "startMs": 2801,
+          "endMs": 3803
+        },
+        {
+          "text": "怎样算成功",
+          "startMs": 3803,
+          "endMs": 4892
+        },
+        {
+          "text": "哪里会失败",
+          "startMs": 4892,
+          "endMs": 5876
+        },
+        {
+          "text": "失败了怎么办",
+          "startMs": 5876,
+          "endMs": 7006
+        },
+        {
+          "text": "让 AI 写完一段代码",
+          "startMs": 7006,
+          "endMs": 8446
+        },
+        {
+          "text": "亲手跑一个正常案例",
+          "startMs": 8446,
+          "endMs": 9934
+        },
+        {
+          "text": "再跑一个异常案例",
+          "startMs": 9934,
+          "endMs": 11431
+        },
+        {
+          "text": "原文链接在评论区",
+          "startMs": 11431,
+          "endMs": 13019
+        },
+        {
+          "text": "你现在卡在哪一站？",
+          "startMs": 13019,
+          "endMs": 14396
+        }
+      ]
+    }
+  ]
+}

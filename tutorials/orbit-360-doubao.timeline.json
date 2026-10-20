@@ -1,0 +1,411 @@
+{
+  "id": "orbit-360-doubao",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 120,
+  "totalFrames": 2765,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/orbit-360-doubao/01-hook.mp3",
+      "audioMs": 6008,
+      "startFrame": 0,
+      "durationFrames": 192,
+      "cues": {
+        "a": 4125
+      },
+      "captions": [
+        {
+          "text": "一张照片，加一句话",
+          "startMs": 325,
+          "endMs": 2132
+        },
+        {
+          "text": "镜头就能绕着它转一整圈",
+          "startMs": 2132,
+          "endMs": 4125
+        },
+        {
+          "text": "不用装软件",
+          "startMs": 4125,
+          "endMs": 5071
+        },
+        {
+          "text": "豆包里就能做",
+          "startMs": 5071,
+          "endMs": 6191
+        }
+      ]
+    },
+    {
+      "id": "what",
+      "audioSrc": "audio/tutorials/orbit-360-doubao/02-what.mp3",
+      "audioMs": 9744,
+      "startFrame": 192,
+      "durationFrames": 304,
+      "cues": {
+        "a": 705,
+        "d": 3429,
+        "b": 5087,
+        "c": 8632
+      },
+      "captions": [
+        {
+          "text": "这叫360度环绕",
+          "startMs": 385,
+          "endMs": 2065
+        },
+        {
+          "text": "也叫子弹时间",
+          "startMs": 2065,
+          "endMs": 3429
+        },
+        {
+          "text": "画面全部定格",
+          "startMs": 3429,
+          "endMs": 4777
+        },
+        {
+          "text": "只有镜头在动",
+          "startMs": 4777,
+          "endMs": 5907
+        },
+        {
+          "text": "AI会根据照片里的空间线索",
+          "startMs": 5907,
+          "endMs": 8632
+        },
+        {
+          "text": "补出别的角度",
+          "startMs": 8632,
+          "endMs": 9931
+        }
+      ]
+    },
+    {
+      "id": "uses",
+      "audioSrc": "audio/tutorials/orbit-360-doubao/03-uses.mp3",
+      "audioMs": 13505,
+      "startFrame": 496,
+      "durationFrames": 416,
+      "cues": {
+        "a": 1111,
+        "b": 3259,
+        "c": 6760,
+        "d": 9947
+      },
+      "captions": [
+        {
+          "text": "能干嘛？",
+          "startMs": 335,
+          "endMs": 1111
+        },
+        {
+          "text": "旅游美食随拍",
+          "startMs": 1111,
+          "endMs": 2314
+        },
+        {
+          "text": "多一个角度",
+          "startMs": 2314,
+          "endMs": 3259
+        },
+        {
+          "text": "美妆，从正面绕到侧面",
+          "startMs": 3259,
+          "endMs": 5368
+        },
+        {
+          "text": "眼影高光看得清",
+          "startMs": 5368,
+          "endMs": 6760
+        },
+        {
+          "text": "产品图",
+          "startMs": 6760,
+          "endMs": 7572
+        },
+        {
+          "text": "瓶身曲面和反光跟着视角变",
+          "startMs": 7572,
+          "endMs": 9947
+        },
+        {
+          "text": "拍好的模特图",
+          "startMs": 9947,
+          "endMs": 11024
+        },
+        {
+          "text": "穿搭图",
+          "startMs": 11024,
+          "endMs": 11817
+        },
+        {
+          "text": "也能再出一条动态素材",
+          "startMs": 11817,
+          "endMs": 13757
+        }
+      ]
+    },
+    {
+      "id": "step1",
+      "audioSrc": "audio/tutorials/orbit-360-doubao/04-step1.mp3",
+      "audioMs": 7889,
+      "startFrame": 912,
+      "durationFrames": 248,
+      "cues": {
+        "a": 1611,
+        "b": 2960,
+        "c": 5161
+      },
+      "captions": [
+        {
+          "text": "做法就两步",
+          "startMs": 345,
+          "endMs": 1611
+        },
+        {
+          "text": "第一步，打开豆包",
+          "startMs": 1611,
+          "endMs": 2960
+        },
+        {
+          "text": "上传一张主体清楚的照片",
+          "startMs": 2960,
+          "endMs": 5161
+        },
+        {
+          "text": "千问、元宝能图生视频",
+          "startMs": 5161,
+          "endMs": 7303
+        },
+        {
+          "text": "也能试",
+          "startMs": 7303,
+          "endMs": 8213
+        }
+      ]
+    },
+    {
+      "id": "step2",
+      "audioSrc": "audio/tutorials/orbit-360-doubao/05-step2.mp3",
+      "audioMs": 14498,
+      "startFrame": 1160,
+      "durationFrames": 446,
+      "cues": {
+        "e": 2634,
+        "a": 3665,
+        "b": 6359,
+        "c": 10640,
+        "d": 11969
+      },
+      "captions": [
+        {
+          "text": "第二步，把指令一起发过去",
+          "startMs": 385,
+          "endMs": 2634
+        },
+        {
+          "text": "核心四句",
+          "startMs": 2634,
+          "endMs": 3665
+        },
+        {
+          "text": "主体和环境定格在原图瞬间",
+          "startMs": 3665,
+          "endMs": 6359
+        },
+        {
+          "text": "摄影机绕主体走水平圆弧",
+          "startMs": 6359,
+          "endMs": 8831
+        },
+        {
+          "text": "镜头始终对着主体",
+          "startMs": 8831,
+          "endMs": 10640
+        },
+        {
+          "text": "高度和距离不变",
+          "startMs": 10640,
+          "endMs": 11969
+        },
+        {
+          "text": "不切镜、不变焦",
+          "startMs": 11969,
+          "endMs": 13470
+        },
+        {
+          "text": "不加新东西",
+          "startMs": 13470,
+          "endMs": 14644
+        }
+      ]
+    },
+    {
+      "id": "pitfalls",
+      "audioSrc": "audio/tutorials/orbit-360-doubao/06-pitfalls.mp3",
+      "audioMs": 14080,
+      "startFrame": 1606,
+      "durationFrames": 434,
+      "cues": {
+        "a": 1085,
+        "b": 5102,
+        "c": 9602
+      },
+      "captions": [
+        {
+          "text": "三个坑",
+          "startMs": 385,
+          "endMs": 1085
+        },
+        {
+          "text": "一，主体和背景要有前后层次",
+          "startMs": 1085,
+          "endMs": 3918
+        },
+        {
+          "text": "视差才明显",
+          "startMs": 3918,
+          "endMs": 5102
+        },
+        {
+          "text": "二，写清楚是镜头在绕",
+          "startMs": 5102,
+          "endMs": 7167
+        },
+        {
+          "text": "不是人在转",
+          "startMs": 7167,
+          "endMs": 8063
+        },
+        {
+          "text": "不然人会自己转身",
+          "startMs": 8063,
+          "endMs": 9602
+        },
+        {
+          "text": "三",
+          "startMs": 9602,
+          "endMs": 10035
+        },
+        {
+          "text": "豆包免费额度用完会提示扣付费额度",
+          "startMs": 10035,
+          "endMs": 13160
+        },
+        {
+          "text": "看到再决定",
+          "startMs": 13160,
+          "endMs": 14148
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "audioSrc": "audio/tutorials/orbit-360-doubao/07-check.mp3",
+      "audioMs": 7941,
+      "startFrame": 2040,
+      "durationFrames": 250,
+      "cues": {
+        "a": 1806,
+        "b": 3152,
+        "c": 4410,
+        "d": 6295
+      },
+      "captions": [
+        {
+          "text": "生成后检查四点",
+          "startMs": 325,
+          "endMs": 1806
+        },
+        {
+          "text": "主体定没定格",
+          "startMs": 1806,
+          "endMs": 3152
+        },
+        {
+          "text": "镜头真没真绕",
+          "startMs": 3152,
+          "endMs": 4410
+        },
+        {
+          "text": "侧面背面变没变形",
+          "startMs": 4410,
+          "endMs": 6295
+        },
+        {
+          "text": "结尾能不能接回开头",
+          "startMs": 6295,
+          "endMs": 8040
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "audioSrc": "audio/tutorials/orbit-360-doubao/08-advanced.mp3",
+      "audioMs": 10971,
+      "startFrame": 2290,
+      "durationFrames": 340,
+      "cues": {
+        "a": 2356,
+        "b": 4011,
+        "c": 5776,
+        "d": 9368
+      },
+      "captions": [
+        {
+          "text": "想自己控参数",
+          "startMs": 325,
+          "endMs": 1806
+        },
+        {
+          "text": "可以用ComfyUI本地跑",
+          "startMs": 1806,
+          "endMs": 3801
+        },
+        {
+          "text": "加360度环绕LoRA",
+          "startMs": 3801,
+          "endMs": 5776
+        },
+        {
+          "text": "但模型几十个G",
+          "startMs": 5776,
+          "endMs": 7224
+        },
+        {
+          "text": "这个LoRA也主要拿人像训练",
+          "startMs": 7224,
+          "endMs": 9368
+        },
+        {
+          "text": "新手先用豆包就够了",
+          "startMs": 9368,
+          "endMs": 11298
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "audioSrc": "audio/tutorials/orbit-360-doubao/09-close.mp3",
+      "audioMs": 3474,
+      "startFrame": 2630,
+      "durationFrames": 135,
+      "cues": {},
+      "captions": [
+        {
+          "text": "先拿你手机里最好看的那张照片",
+          "startMs": 375,
+          "endMs": 2845
+        },
+        {
+          "text": "试一张",
+          "startMs": 2845,
+          "endMs": 3735
+        }
+      ]
+    }
+  ]
+}

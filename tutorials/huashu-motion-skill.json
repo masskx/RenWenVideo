@@ -1,0 +1,52 @@
+{
+  "id": "huashu-motion-skill",
+  "title": "huashu-motion",
+  "subtitle": "一句话 · 让AI拍发布片",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "maxSeconds": 60,
+  "tts": {"provider": "doubao"},
+  "leadMs": 100,
+  "tailMs": 200,
+  "musicSrc": "audio/tutorials/huashu-motion-skill/bgm.mp3",
+  "musicVolume": 0.1,
+  "musicDuckDb": 14,
+  "credit": "案例展示",
+  "source": "inputs/huashu-motion-skill/script.md",
+  "look": {"theme": "blueprint", "frame": "full", "header": false, "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["pushUp", "push"], "small": ["push", "sweep"]}},
+  "highlights": [],
+  "cover": "hook",
+  "coverCard": {
+    "template": "conflict",
+    "headline": ["一句话", "让AI拍发布片"],
+    "support": "开源 Skill · 指着画面改",
+    "tag": "HUASHU-MOTION · 开源",
+    "anchor": "hm.cover67",
+    "layouts": {
+      "3:4": {"headline": [80, 140], "size": 86, "anchor": [540, 880, 1.0], "support": 1320,
+        "text": ["AI 给你的产品拍宣传片", "按C点一下 只改这一处"], "supportText": "附安装命令", "anchorId": "hm.cover34"},
+      "6:7": {"headline": [80, 110], "size": 110, "anchor": [540, 790, 0.95], "support": 1170},
+      "9:16": {"headline": [80, 330], "size": 120, "anchor": [540, 1090, 1.0], "support": 1560}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "hm.hook", "step": 1, "pace": "brisk",
+      "narration": "这支DeepSeek发布片，{a}不是官方做的，是{b}AI写代码做出来的。"},
+    {"id": "what", "visual": "hm.what", "step": 1, "pace": "brisk",
+      "narration": "靠的是一个{a}开源skill，叫huashu-motion。装进{b}Claude Code这类编程agent，说一句：{c}给我的产品做个30秒发布片。"},
+    {"id": "how", "visual": "hm.how", "step": 2, "pace": "brisk",
+      "narration": "它会先{a}读你的产品，出{b}三个方向让你挑，再{c}写片、{d}作曲、配音效。"},
+    {"id": "edit", "visual": "hm.edit", "step": 2, "pace": "normal",
+      "narration": "不满意？在编辑器里{a}按C，{b}点一下画面，{c}写要改什么，它{d}只改那一处。"},
+    {"id": "who", "visual": "hm.who", "step": 3, "pace": "brisk",
+      "narration": "做{a}App、{b}独立产品、{c}开源项目，又不会剪片的人，最该试。"},
+    {"id": "install", "visual": "hm.install", "step": 3, "pace": "normal",
+      "narration": "{a}安装一行命令，或者跟agent说：{b}帮我装huashu-motion。要{c}Node 22以上、Chrome和FFmpeg。"},
+    {"id": "result", "visual": "hm.result", "step": 4, "pace": "normal",
+      "narration": "据开发者说，换成DeepSeek做一支{a}22秒动效片，{b}不到半小时，{c}花了1块9毛5。"},
+    {"id": "close", "visual": "hm.close", "step": 4, "pace": "normal", "tailMs": 700,
+      "narration": "注意两点：{a}目前只在苹果电脑上实测过；{b}它听不见，配乐最后得你自己听。{c}有产品缺宣传片，装上试一支。"}
+  ]
+}
