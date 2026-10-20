@@ -1,0 +1,38 @@
+# deepseek-claude-code-video：DeepSeek 接入 Claude Code，一句话做出动画视频 · 分镜
+
+## 简报
+
+- 钩子台词：这条动画，是 Claude Code 接上 DeepSeek 做的，一分钱 Claude 会员都没花。（脚本自带钩子，没换）
+- 钩子画面：第 0 帧就是案例 A 的数字镜头（289,000 → 971,000 → 1,000,000 → 一整座图书馆，一次对话，读完），上方大字「DeepSeek + Claude Code / 一句话出动画」，慢推 1.00 → 1.06；说到“一分钱会员都没花”时落下「Claude 会员：¥0」
+- 核心看点：四步搭好——① 一行命令装 Claude Code（PowerShell / 终端，claude --version 验证）② DeepSeek 开放平台拿 API Key ③ 8 个环境变量：BASE_URL 指向 DeepSeek 的 Anthropic 兼容接口、Token 填 Key、模型换成 deepseek-flash（[1m] = 100 万上下文）、思考强度 max ④ 问一句“你现在用的是什么模型”验证；然后一句话需求让它用 Remotion 做竖屏动画，studio 预览、中文改、render 导出；成本：输出每百万 token 高峰 8 元、空闲 4 元，工作日白天之外半价
+- 结尾台词：安装、配置、验证、出片，四步搞定。效果比 Opus 还差一点，但胜在便宜，先收藏，今晚就能跑起来。
+- 标题·视频号：DeepSeek 接入 Claude Code，一句话做出动画视频｜四步搭好
+- 标题·抖音：一分钱 Claude 会员不花，DeepSeek + Claude Code 一句话出动画
+- 标题·小红书：DeepSeek接入Claude Code教程｜一句话做动画视频，一条几块钱
+
+## 计划
+
+时长按脚本放宽到约 2 分钟（`maxSeconds` 130）。顶部章节条：01 安装 · 02 拿 Key · 03 配置 · 04 验证 · 05 出片 · 06 成本（开场和结尾不点亮）。字幕在舞台下方（y ≈ 1390），素材和卡片都在舞台里（y 200–1280），所以片子自带的字永远不会压在我们的字幕下面。
+
+| 场景 | 目标时长 | 画面 | 语速 |
+|---|---|---|---|
+| hook | ≈ 6 秒 | 案例 A 12–18 秒数字镜头，满宽，慢推；大标题；「Claude 会员：¥0」 | brisk |
+| intro | ≈ 8 秒 | 上：案例 B 4–10 秒（许愿式编程）；下：案例 C 0–6 秒（居中裁切）；「4 步搭好」盖章 → 安装 → 配置 → 验证 → 出片 | brisk |
+| install | ≈ 14 秒 | 01_install 1:1 满宽；依次框 PowerShell 行 → mac 行 → claude --version → 绿色版本号 + 「✓ 有版本号」 | normal |
+| key | ≈ 6 秒 | 自绘 DeepSeek 开放平台卡（界面示意）：充值 → 创建 API Key → sk-xxxx•••• → 已复制；「别把 Key 发给任何人」 | normal |
+| env | ≈ 22 秒 | 02_env_ps 1:1 满宽，窗口随讲解下移；BASE_URL → TOKEN → 四行 MODEL 括起来 → [1m] 小框 → EFFORT max；切 03_env_mac 框 export | normal |
+| verify | ≈ 10 秒 | 04_verify：逐行打字（mkdir / claude / 提问），绿色回答弹出；「✓ 接通了」；界面示意 | normal |
+| prompt | ≈ 16 秒 | 05_prompt 打字机逐行出现，Remotion / 1080×1920 / 5 个镜头 / 48px 依次框琥珀；主题 · 风格 · 镜头数 · 字号 | normal |
+| case | ≈ 14 秒 | 左 → 右擦入案例 A 30–44 秒（看见 / 也理解 → 把想法，交给它），1.0×；装依赖 / 写代码 / 调动画；「Claude Code + DeepSeek V4.1 Flash 成片」 | normal |
+| render | ≈ 10 秒 | 06_render：studio → 中文反馈 → render → 绿色 mp4；预览 → 改 → 导出 | normal |
+| cost | ≈ 8 秒 | 07_cost（重画超出卡片的标题）；高峰 8 元 / 空闲 4 元；绿色“晚上、周末做视频 = 半价”脉动；背景案例 C 18–26 秒 30 % 虚化 12 px；「一条视频 ≈ 几块钱」 | normal |
+| end | ≈ 9 秒 | 三连蒙太奇各 2 秒（B 40–42 / A 48–50 / C 44–46）；✓ 安装 ✓ 配置 ✓ 验证 ✓ 出片 随口播打勾；四步搞定；比 Opus 差一点 / 胜在便宜；先收藏 | normal |
+
+## 素材和出处
+
+- 卡片 01–07：素材包自绘终端卡（1080 宽、40 px 字），片中一律 1:1 满宽显示、只做纵向裁切，不缩小；Key 只出现 `sk-xxxx`。07 的标题行超出卡片右边框，片中用同字号重画为「官方价 · 人民币 / 百万 tokens」。
+- 案例 A 的时间码按实际画面修正：脚本写的 6–12 秒是 Logo 白屏，数字镜头实际在 **12–18 秒**；场景 8 的“多模态 + 把想法交给它”实际在 **30–44 秒**（同样晚 6 秒）。案例 B、C 的时间码与脚本一致。
+- 外部素材全部静音，左上角「案例展示」（脚本要求：不出现作者名、账号、头像），作者链接只写进发布包 README。剪辑窗口都不超过 14 秒。
+- 第二步的平台卡、第四步的验证卡是示意图，标「界面示意」。
+- “比 Opus 差一点”是多位作者自测的观点，按观点说，不当基准测试。
+- 事实来源：脚本 Fact sources（DeepSeek coding agents 指南、DeepSeek 价格页、Claude Code 安装文档，2026-10-20 核对）。
