@@ -1,6 +1,6 @@
 # RenWenVideo
 
-Remotion pipeline that turns a script plus source material into short vertical videos (1080×1920, 30 fps) about AI tools and AI news. The same video goes to 微信视频号, 抖音 and 小红书. Viewer, niche and platforms are defined in one place: `docs/video-craft/quick-reference.md` §〇. All on-screen text is Simplified Chinese.
+Remotion pipeline that turns a script plus source material into short vertical videos (1080×1920, 30 fps) about AI tools and AI news. 抖音 (Douyin) is the main platform — canvas, pacing, music, covers and copy follow Douyin style; the same video is also posted to 微信视频号 and 小红书. Viewer, niche and platforms are defined in one place: `docs/video-craft/quick-reference.md` §〇. All on-screen text is Simplified Chinese.
 
 The script usually comes from a separate planning agent ("growth"): use it and the material as given; adapt scenes, length and visuals to them. No fixed scene count, shot table or animation recipe.
 
@@ -17,6 +17,7 @@ The script usually comes from a separate planning agent ("growth"): use it and t
 1. **Input** — `inputs/<id>/script.md` (hook, body, ending, titles; free-form is fine) plus material: screenshots, screen recordings, links, numbers (skeleton: `inputs/_template/`).
 2. **Plan** — read script + material; write `tutorials/<id>.json`, `tutorials/<id>.storyboard.md` (brief: 5 required fields, `docs/video-craft/分镜模板.md`) and `src/tutorial/scenes/<id>.tsx`, choosing scenes that fit the material. Print a short plan (hook, scenes with durations, total length) and wait for the user's OK. ≤ 60 s unless the script needs more and the user approves (`"maxSeconds"`).
 3. **Voice** — `npm run tutorial:voice -- <id>`: the user's cloned Doubao voice; per-character timestamps drive cues and subtitles.
+3.5. **Music** — every new video gets a Douyin-style background track (beat-driven, upbeat, no vocals; `"musicSrc"` / `"musicVolume"`, ducked under the voice). Source order and mix: `quick-reference.md` §六·六. Old videos are left as they are.
 4. **Render** — `npm run tutorial:render -- <id> --overwrite` (1080×1920 H.264, covers).
 5. **QA** — `node scripts/qa/brief.mjs <id>`, `cover.mjs <id>`, `richness.mjs` / `marks.mjs` / `scan.mjs` (+ `--phone`) on the mp4, `npm run lint`; look at the stills yourself before showing them.
 6. **Package** — `douyin/<id>/`: mp4 (committed like every other artifact; keep it < 100 MB), covers, stills, README with separate title / description / hashtags for 视频号, 抖音, 小红书, and credits.
