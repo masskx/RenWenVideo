@@ -1,7 +1,7 @@
 import React from 'react';
 import {Img, OffthreadVideo, Sequence, staticFile} from 'remotion';
 import {font} from '../theme';
-import {clamp, ease, springStep} from '../../fx';
+import {clamp, ease, springStep, springTrack} from '../../fx';
 import {Cue, S, Scene, hitOf, phaseOp} from '../paper';
 import {A, B, BG, Big, DIM, INK, LINE, PANEL, mono} from '../tech';
 
@@ -9,7 +9,7 @@ import {A, B, BG, Big, DIM, INK, LINE, PANEL, mono} from '../tech';
 // Script: inputs/deepseek-claude-code-video/script.md; storyboard: tutorials/deepseek-claude-code-video.storyboard.md. Narration and on-screen copy are verbatim.
 // Cards 01–07 are the package's pre-rendered terminal cards (1080 px wide, 40 px type): always shown at 1:1 across the full canvas width,
 // cropped vertically, with highlight boxes placed on their measured text rows. Footage is pre-trimmed to the script's in/out windows
-// (caseA corrected to 12–18 s and 30–44 s, where the shots the script describes really are), muted, labelled 「案例展示」 top-left, no creator names.
+// (caseA corrected to 12.4–18.4 s and 30–44 s, where the shots the script describes really are), muted, labelled 「案例展示」 top-left, no creator names.
 
 const W = 900;
 const RED = '#ff5a5a';
@@ -71,15 +71,25 @@ const Clip: React.FC<{f: number; segs: Seg[]; x: number; y: number; w: number; h
   </div>;
 };
 
-/** A package card at 1:1 across the canvas (stage x −60), cropped to image rows sy … sy + h; children are placed in image pixels. */
-const Card: React.FC<{src: string; y: number; h: number; sy: number; style?: React.CSSProperties; children?: React.ReactNode}> = ({src, y, h, sy, style, children}) => (
-  <div style={{position: 'absolute', left: -60, top: y, width: 1080, height: h, overflow: 'hidden', ...style}}>
-    <div style={{position: 'absolute', left: 0, top: -sy, width: 1080}}>
+/**
+ * A package card across the canvas (stage x −60), cropped to image rows sy … sy + h; children are placed in image pixels.
+ * `cam` keys push in on the row being explained (image row `y` to the window centre at zoom `z` ≥ 1, never smaller than 1:1,
+ * zooming about the card's left text margin so lines stay inside the frame); the view is clamped to the card (`imgH` rows).
+ */
+type CamK = {at: number; y: number; z: number};
+const Card: React.FC<{f?: number; src: string; y: number; h: number; sy: number; imgH?: number; cam?: CamK[]; style?: React.CSSProperties;
+  children?: React.ReactNode}> = ({f = 0, src, y, h, sy, imgH = 1e4, cam = [], style, children}) => {
+  const o = {f: 1.3, z: 0.88};
+  const z = springTrack(S(f), 1, cam.map((k) => ({at: S(k.at), to: k.z})), o);
+  const cy = springTrack(S(f), sy + h / 2, cam.map((k) => ({at: S(k.at), to: k.y})), o);
+  const top = cam.length ? Math.max(0, Math.min(imgH - h / z, cy - h / (2 * z))) : sy;
+  return <div style={{position: 'absolute', left: -60, top: y, width: 1080, height: h, overflow: 'hidden', ...style}}>
+    <div style={{position: 'absolute', left: 0, top: 0, width: 1080, transform: `translate(${60 * (1 - z)}px, ${-top * z}px) scale(${z})`, transformOrigin: '0 0'}}>
       <Img src={IMG(src)} style={{display: 'block', width: 1080}} />
       {children}
     </div>
-  </div>
-);
+  </div>;
+};
 /** Highlight box on a card row (image px). `focus` dims everything else on the card. */
 const Mark: React.FC<{f: number; at: number; until?: number; x?: number; y: number; w?: number; h: number; c?: string; focus?: boolean}> = ({f, at, until = 1e9,
   x = 70, y, w = 900, h, c = A, focus}) => {
@@ -97,7 +107,7 @@ const TypeOn: React.FC<{f: number; at: number; dur: number; y: number; h?: numbe
   const left = x0 + (x1 - x0) * p;
   return <>
     <div style={{position: 'absolute', left, top: y - 6, width: 1030 - left, height: h, background: CARD}} />
-    <div style={{position: 'absolute', left: left + 2, top: y - 2, width: 6, height: h - 10, background: A, opacity: Math.floor(f / 6) % 2 ? 1 : 0.3}} />
+    {f >= at && <div style={{position: 'absolute', left: left + 2, top: y - 2, width: 6, height: h - 10, background: A, opacity: Math.floor(f / 6) % 2 ? 1 : 0.3}} />}
   </>;
 };
 
@@ -109,8 +119,11 @@ const Hook: Scene = ({f, cue}) => {
   return <Root>
     <Abs y={-10} w={W}><div style={{fontFamily: mono, fontWeight: 800, fontSize: 70, color: INK, whiteSpace: 'nowrap'}}>
       <span style={{color: B}}>DeepSeek</span> + <span style={{color: A}}>Claude Code</span></div></Abs>
-    <Abs y={90} w={W}><Big size={124} style={{whiteSpace: 'nowrap'}}>一句话出动画</Big></Abs>
-    <Clip f={f} x={-60} y={290} w={1080} h={608} srcW={1280} srcH={720} scale={1080 / 1280} zoom={1.06} zoomDur={200} segs={[{clip: 'a-hook', from: 0}]}
+    <Abs y={90} w={W}><Big size={124} style={{whiteSpace: 'nowrap'}}>一句话<span style={{position: 'relative', display: 'inline-block'}}>
+      <span style={{position: 'absolute', left: -8, right: -8, top: 14, bottom: 4, background: A, transform: `scaleX(${ease.outCubic(clamp((f - p.a) / 12))})`,
+        transformOrigin: 'left'}} />
+      <span style={{position: 'relative', color: f >= p.a + 6 ? BG : INK}}>出动画</span></span></Big></Abs>
+    <Clip f={f} x={-60} y={290} w={1080} h={608} srcW={1280} srcH={720} scale={1080 / 1280} zoom={1.12} zoomDur={180} segs={[{clip: 'a-hook', from: 0}]}
       border={f >= p.a ? B : LINE} />
     <Abs y={940} w={W}><Pop f={f} at={p.b}><Chip c={A} size={64} fill>Claude 会员：¥0</Chip></Pop></Abs>
   </Root>;
@@ -162,7 +175,8 @@ const Install: Scene = ({f, cue}) => {
   const p = installPlan(cue);
   return <Root>
     <StepHead n="1" t="第一步：安装" />
-    <Card src="01_install.png" y={120} h={940} sy={40} style={phaseOp(f, 0)}>
+    <Card f={f} src="01_install.png" y={120} h={940} sy={40} imgH={1000} style={phaseOp(f, 0)}
+      cam={[{at: 0, y: 300, z: 1.12}, {at: p.a - 6, y: 296, z: 1.3}, {at: p.b - 6, y: 544, z: 1.3}, {at: p.c - 6, y: 790, z: 1.3}]}>
       <Mark f={f} at={p.a} until={p.b} y={232} h={128} w={600} focus />
       <Mark f={f} at={p.b} until={p.c} y={480} h={128} w={600} focus />
       <Mark f={f} at={p.c} until={p.d} y={728} h={64} w={420} focus />
@@ -191,23 +205,24 @@ const Key: Scene = ({f, cue}) => {
   return <Root>
     <StepHead n="2" t="第二步：拿 API Key" />
     <div style={{position: 'absolute', left: -20, top: 130, width: 940, height: 720, background: PANEL, border: `3px solid ${LINE}`, borderRadius: 16, overflow: 'hidden',
-      ...phaseOp(f, 0)}}>
+      ...phaseOp(f, 0), transform: `translateY(${300 * (1 - ease.outCubic(clamp(f / 14)))}px) scale(${(1 + 0.35 * (1 - ease.inOutCubic(clamp((f - 20) / 40)))) * (1 + 0.06 * hitOf(f, [p.a, p.b, p.c], 0.5))})`,
+      transformOrigin: '0 0'}}>
       <div style={{height: 100, display: 'flex', alignItems: 'center', gap: 16, padding: '0 30px', borderBottom: `2px solid ${LINE}`}}>
         <div style={{fontFamily: font, fontWeight: 900, fontSize: 52, color: B}}>DeepSeek 开放平台</div>
       </div>
       <div style={{padding: '34px 30px', display: 'flex', flexDirection: 'column', gap: 40}}>
-        <div style={{display: 'flex', alignItems: 'center', gap: 24}}>
+        <div style={{display: 'flex', alignItems: 'center', gap: 24, ...phaseOp(f, 14)}}>
           <Big size={48} c={DIM} w={700}>余额</Big>
           <div style={{transform: `scale(${press(p.a)})`}}><Btn on={f >= p.a} c={A}>充值</Btn></div>
           {f >= p.a && <Pop f={f} at={p.a + 6}><Big size={48} c={A} w={800}>充几块钱就够</Big></Pop>}
         </div>
         <div style={{height: 2, background: LINE}} />
-        <div style={{display: 'flex', alignItems: 'center', gap: 24}}>
+        <div style={{display: 'flex', alignItems: 'center', gap: 24, ...phaseOp(f, 34)}}>
           <Big size={48} c={INK} w={800}>API Keys</Big>
           <Big size={48} c={DIM} w={700}>→</Big>
           <div style={{transform: `scale(${press(p.b)})`}}><Btn on={f >= p.b}>创建 API Key</Btn></div>
         </div>
-        <div style={{display: 'flex', alignItems: 'center', gap: 20, minHeight: 90, opacity: f >= p.b ? 1 : 0.25}}>
+        <div style={{display: 'flex', alignItems: 'center', gap: 20, minHeight: 90, ...phaseOp(f, 54), opacity: f >= p.b ? 1 : f >= 54 ? 0.25 : 0}}>
           <div style={{flex: 1, padding: '10px 20px', border: `3px dashed ${f >= p.c ? GREEN : LINE}`, borderRadius: 10, fontFamily: mono, fontWeight: 700, fontSize: 50,
             color: GREEN, whiteSpace: 'nowrap', minHeight: 64}}>{shown}</div>
           <div style={{transform: `scale(${press(p.c)})`}}><Btn on={f >= p.c} c={GREEN}>{f >= p.c ? '已复制 ✓' : '复制'}</Btn></div>
@@ -240,20 +255,20 @@ const Env: Scene = ({f, cue}) => {
         return <div key={t} style={{fontFamily: mono, fontWeight: 800, fontSize: 44, padding: '0 14px', border: `3px solid ${f >= at ? A : LINE}`,
           color: f >= at ? A : DIM, background: BG}}>{t}</div>;
       })}
-      {mac && <Pop f={f} at={p.f}><Chip c={B} size={44} fill>macOS / Linux：export</Chip></Pop>}
+      {mac && <Pop f={f} at={p.f}><Chip c={B} size={44} fill>苹果：export</Chip></Pop>}
     </Abs>
-    {!mac && <Card src="02_env_ps.png" y={200} h={870} sy={pan} style={phaseOp(f, 0, p.f - 4)}>
+    {!mac && <Card f={f} src="02_env_ps.png" y={200} h={870} sy={pan} style={phaseOp(f, 0, p.f - 4)}>
       <Mark f={f} at={p.a} until={p.b} y={172} h={124} focus />
       <Mark f={f} at={p.b} until={p.c} y={296} h={124} w={700} focus />
       <Mark f={f} at={p.c} until={p.e} y={420} h={496} focus />
       {f >= p.c && <div style={{position: 'absolute', left: 990, top: 420, width: 30, height: 496 * bracketK, borderRight: `6px solid ${A}`, borderTop: `6px solid ${A}`,
         borderBottom: bracketK >= 1 ? `6px solid ${A}` : undefined}} />}
-      {[494, 618, 742].map((y) => <Mark key={y} f={f} at={p.d} until={p.e} x={408} y={y - 8} w={110} h={58} c={B} />)}
+      {[494, 618, 742].map((y) => <Mark key={y} f={f} at={p.d} until={p.e} x={392} y={y - 8} w={112} h={58} c={B} />)}
       {f >= p.d && f < p.e + 8 && <Abs x={560} y={470} w={420}><Pop f={f} at={p.d + 6}><Chip c={B} size={48} fill>[1m] = 100 万上下文</Chip></Pop></Abs>}
       <Mark f={f} at={p.e} y={1040} h={64} focus />
-      {f >= p.e && <Abs x={640} y={980} w={380}><Pop f={f} at={p.e + 6}><Chip c={A} size={48} fill>思考强度 max</Chip></Pop></Abs>}
+      {f >= p.e && <Abs x={640} y={962} w={380}><Pop f={f} at={p.e + 6}><Chip c={A} size={48} fill>思考强度 max</Chip></Pop></Abs>}
     </Card>}
-    {mac && <Card src="03_env_mac.png" y={200} h={680} sy={40} style={phaseOp(f, p.f - 4)}>
+    {mac && <Card f={f} src="03_env_mac.png" y={200} h={680} sy={40} imgH={760} style={phaseOp(f, p.f - 4)} cam={[{at: p.f + 10, y: 360, z: 1.08}]}>
       {[176, 298, 362, 486].map((y, i) => <Mark key={y} f={f} at={p.f + 4 + i * 4} x={80} y={y} w={138} h={62} c={B} />)}
     </Card>}
   </Root>;
@@ -271,11 +286,17 @@ const Verify: Scene = ({f, cue}) => {
   const p = verifyPlan(cue);
   return <Root>
     <StepHead n="4" t="第四步：验证接通" />
-    <Card src="04_verify.png" y={130} h={640} sy={40} style={phaseOp(f, 0)}>
+    <Card f={f} src="04_verify.png" y={130} h={640} sy={40} imgH={720} style={phaseOp(f, 0)}
+      cam={[{at: 0, y: 240, z: 1.3}, {at: p.b - 4, y: 400, z: 1.3}, {at: p.c - 6, y: 540, z: 1.3}, {at: p.d, y: 380, z: 1.05}]}>
       <TypeOn f={f} at={4} dur={24} y={184} x1={715} />
       <TypeOn f={f} at={p.a} dur={10} y={246} x1={250} />
       <TypeOn f={f} at={p.b} dur={26} y={369} x1={545} />
       {f < p.c && <div style={{position: 'absolute', left: 80, top: 480, width: 940, height: 130, background: CARD}} />}
+      {f >= p.b + 26 && f < p.c && <div style={{position: 'absolute', left: 92, top: 490, display: 'flex', gap: 18, alignItems: 'center'}}>
+        {[0, 1, 2].map((i) => <div key={i} style={{width: 26, height: 26, borderRadius: 13, background: B,
+          opacity: 0.3 + 0.7 * Math.max(0, Math.sin((f - i * 5) / 5))}} />)}
+        <span style={{fontFamily: font, fontWeight: 700, fontSize: 44, color: DIM, marginLeft: 10}}>思考中</span>
+      </div>}
       <Mark f={f} at={p.c} y={478} h={132} w={660} c={GREEN} />
       <Note />
     </Card>
@@ -302,7 +323,8 @@ const Prompt: Scene = ({f, cue}) => {
     <Abs y={104} w={W} style={{display: 'flex', gap: 10}}>
       {['主题', '风格', '镜头数', '字号'].map((t, i) => <Pop key={t} f={f} at={p.b + i * 5}><Chip c={A} size={50}>{t}</Chip></Pop>)}
     </Abs>
-    <Card src="05_prompt.png" y={200} h={700} sy={40} style={phaseOp(f, 0)}>
+    <Card f={f} src="05_prompt.png" y={200} h={700} sy={40} imgH={800} style={phaseOp(f, 0)}
+      cam={[...PROMPT_ROWS.map((y, i) => ({at: t0 + i * per, y: y + 30, z: 1.25})), {at: p.c, y: 420, z: 1.02}]}>
       {PROMPT_ROWS.map((y, i) => <TypeOn key={y} f={f} at={t0 + i * per} dur={per} y={y} x1={PROMPT_W[i] + 10} />)}
       {KEYWORDS.map((k) => <Mark key={k.row} f={f} at={t0 + (k.row + 1) * per} x={k.x} y={PROMPT_ROWS[k.row] - 8} w={k.w} h={60} c={A} />)}
     </Card>
@@ -327,7 +349,7 @@ const Case: Scene = ({f, cue}) => {
     </Abs>
     <Clip f={f} x={-60} y={220} w={1080} h={608} srcW={1280} srcH={720} scale={1080 / 1280} zoom={1.04} zoomDur={420} segs={[{clip: 'a-case', from: 0}]}
       style={{clipPath: `inset(0 ${100 * (1 - wipe)}% 0 0)`}} />
-    <Abs y={870} w={W}><Pop f={f} at={p.d}><Chip c={A} size={50} fill>Claude Code + DeepSeek V4.1 Flash 成片</Chip></Pop></Abs>
+    <Abs y={870} w={W}><Pop f={f} at={p.d}><Chip c={A} size={46} fill>Claude Code + DeepSeek V4.1 Flash 成片</Chip></Pop></Abs>
     {f >= p.e - 1 && <Abs y={970} w={W} style={{display: 'flex', gap: 12}}>
       {['镜头', '转场', '数字动画'].map((t, i) => <Pop key={t} f={f} at={p.e + i * 6}><Chip c={INK} size={48}>{t} ✓</Chip></Pop>)}
     </Abs>}
@@ -352,9 +374,13 @@ const Render: Scene = ({f, cue}) => {
         <Big size={84} c={f >= w.at ? A : DIM}>{w.t}</Big>
       </React.Fragment>)}
     </Abs>
-    <Card src="06_render.png" y={130} h={720} sy={40} style={phaseOp(f, 0)}>
+    <Card f={f} src="06_render.png" y={130} h={720} sy={40} imgH={820} style={phaseOp(f, 0)}
+      cam={[{at: 0, y: 235, z: 1.3}, {at: p.a - 4, y: 420, z: 1.3}, {at: p.b - 4, y: 600, z: 1.3}]}>
       <Mark f={f} at={4} until={p.a} y={172} h={124} w={580} focus />
+      <TypeOn f={f} at={p.a} dur={40} y={369} x1={505} />
+      <TypeOn f={f} at={p.a + 40} dur={36} y={431} x1={505} />
       <Mark f={f} at={p.a} until={p.b} y={357} h={124} w={480} focus />
+      {f >= p.a + 80 && f < p.b + 8 && <Abs x={600} y={380} w={420}><Pop f={f} at={p.a + 80}><Chip c={A} size={48} fill>中文说就行</Chip></Pop></Abs>}
       <Mark f={f} at={p.b} until={p.c} y={544} h={64} w={460} focus />
       <Mark f={f} at={p.c} y={544} h={126} w={620} c={GREEN} focus />
     </Card>
@@ -374,15 +400,17 @@ const Cost: Scene = ({f, cue}) => {
   const pulse = f >= p.c ? 0.5 + 0.5 * Math.sin((f - p.c) / 5) : 0;
   return <Root>
     <Title>花多少钱？</Title>
-    <Card src="07_cost.png" y={110} h={700} sy={40} style={phaseOp(f, 0)}>
+    <Card f={f} src="07_cost.png" y={110} h={700} sy={40} imgH={820} style={phaseOp(f, 0)}
+      cam={[{at: p.a - 4, y: 360, z: 1.2}, {at: p.c - 4, y: 580, z: 1.2}, {at: p.d, y: 400, z: 1.0}]}>
       {/* the card's own title runs past its right edge: redraw it */}
-      <div style={{position: 'absolute', left: 250, top: 70, width: 780, height: 70, background: CARD, display: 'flex', alignItems: 'center',
+      <div style={{position: 'absolute', left: 250, top: 70, width: 830, height: 70, background: CARD, display: 'flex', alignItems: 'center',
         fontFamily: font, fontWeight: 800, fontSize: 40, color: '#a5b4d8', whiteSpace: 'nowrap'}}>官方价 · 人民币 / 百万 tokens</div>
       <Mark f={f} at={p.a} until={p.c} y={357} h={64} w={420} focus />
       <Mark f={f} at={p.a} until={p.c} x={388} y={360} w={100} h={58} c={A} />
       <Mark f={f} at={p.b} until={p.c} x={264} y={360} w={100} h={58} c={GREEN} />
       <Mark f={f} at={p.c} y={606} h={64} w={480} c={GREEN} focus />
       {f >= p.c && <div style={{position: 'absolute', left: 74, top: 610, width: 470, height: 56, background: `rgba(74,222,128,${0.08 + 0.14 * pulse})`, borderRadius: 8}} />}
+      {f >= p.c && <Abs x={600} y={600} w={420}><Pop f={f} at={p.c + 6}><Chip c={GREEN} size={56} fill>半价</Chip></Pop></Abs>}
       {f >= p.a && f < p.c + 8 && <Abs x={600} y={350} w={420}><Pop f={f} at={p.a + 4}><Chip c={A} size={44} fill>高峰 8 元</Chip></Pop></Abs>}
       {f >= p.b && f < p.c + 8 && <Abs x={600} y={430} w={420}><Pop f={f} at={p.b + 4}><Chip c={GREEN} size={44} fill>空闲 4 元</Chip></Pop></Abs>}
     </Card>
@@ -393,6 +421,7 @@ Cost.backdrop = ({f}) => <div style={{position: 'absolute', inset: 0, overflow: 
   <div style={{position: 'absolute', inset: 0, filter: 'blur(12px)', opacity: 0.3}}>
     <Clip f={f} x={0} y={0} w={1080} h={1920} srcW={720} srcH={1080} scale={1920 / 1080} segs={[{clip: 'c-cost', from: 0}]} tag={false} border="transparent" />
   </div>
+  <div style={{position: 'absolute', inset: 0, background: 'rgba(9,17,31,0.45)'}} />
 </div>;
 Cost.sfx = (cue) => {
   const p = costPlan(cue);

@@ -1,0 +1,510 @@
+{
+  "id": "deepseek-claude-code-video",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 3367,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/deepseek-claude-code-video/01-hook.mp3",
+      "audioMs": 5642,
+      "startFrame": 0,
+      "durationFrames": 179,
+      "cues": {
+        "a": 1219,
+        "b": 3845
+      },
+      "captions": [
+        {
+          "text": "这条动画",
+          "startMs": 415,
+          "endMs": 1219
+        },
+        {
+          "text": "是 Claude Code",
+          "startMs": 1219,
+          "endMs": 2474
+        },
+        {
+          "text": "接上 DeepSeek 做的",
+          "startMs": 2474,
+          "endMs": 3845
+        },
+        {
+          "text": "一分钱 Claude 会员都没花",
+          "startMs": 3845,
+          "endMs": 5845
+        }
+      ]
+    },
+    {
+      "id": "intro",
+      "audioSrc": "audio/tutorials/deepseek-claude-code-video/02-intro.mp3",
+      "audioMs": 8150,
+      "startFrame": 179,
+      "durationFrames": 254,
+      "cues": {
+        "a": 5016,
+        "b": 6847
+      },
+      "captions": [
+        {
+          "text": "DeepSeek V4.1 刚更新",
+          "startMs": 100,
+          "endMs": 2904
+        },
+        {
+          "text": "网上一堆人在用它做动画视频",
+          "startMs": 2904,
+          "endMs": 5016
+        },
+        {
+          "text": "今天两分钟",
+          "startMs": 5016,
+          "endMs": 6027
+        },
+        {
+          "text": "手把手教你把这套流程搭起来",
+          "startMs": 6027,
+          "endMs": 7937
+        }
+      ]
+    },
+    {
+      "id": "install",
+      "audioSrc": "audio/tutorials/deepseek-claude-code-video/03-install.mp3",
+      "audioMs": 12330,
+      "startFrame": 433,
+      "durationFrames": 379,
+      "cues": {
+        "a": 2486,
+        "b": 5113,
+        "c": 8182,
+        "d": 10587
+      },
+      "captions": [
+        {
+          "text": "第一步，装 Claude Code",
+          "startMs": 355,
+          "endMs": 2486
+        },
+        {
+          "text": "Windows 打开 PowerShell",
+          "startMs": 2486,
+          "endMs": 4095
+        },
+        {
+          "text": "粘贴这一行",
+          "startMs": 4095,
+          "endMs": 5113
+        },
+        {
+          "text": "苹果和 Linux",
+          "startMs": 5113,
+          "endMs": 6403
+        },
+        {
+          "text": "用终端粘贴下面这行",
+          "startMs": 6403,
+          "endMs": 8182
+        },
+        {
+          "text": "装完输入 claude --version",
+          "startMs": 8182,
+          "endMs": 10587
+        },
+        {
+          "text": "能看到版本号就成功了",
+          "startMs": 10587,
+          "endMs": 12637
+        }
+      ]
+    },
+    {
+      "id": "key",
+      "audioSrc": "audio/tutorials/deepseek-claude-code-video/04-key.mp3",
+      "audioMs": 6243,
+      "startFrame": 812,
+      "durationFrames": 197,
+      "cues": {
+        "a": 3005,
+        "b": 3971,
+        "c": 5557
+      },
+      "captions": [
+        {
+          "text": "第二步，去 DeepSeek 开放平台",
+          "startMs": 385,
+          "endMs": 3005
+        },
+        {
+          "text": "充几块钱",
+          "startMs": 3005,
+          "endMs": 3971
+        },
+        {
+          "text": "创建一个 API Key",
+          "startMs": 3971,
+          "endMs": 5557
+        },
+        {
+          "text": "复制下来",
+          "startMs": 5557,
+          "endMs": 6287
+        }
+      ]
+    },
+    {
+      "id": "env",
+      "audioSrc": "audio/tutorials/deepseek-claude-code-video/05-env.mp3",
+      "audioMs": 18782,
+      "startFrame": 1009,
+      "durationFrames": 573,
+      "cues": {
+        "a": 3202,
+        "b": 6222,
+        "c": 7776,
+        "d": 10740,
+        "e": 13944,
+        "f": 16207
+      },
+      "captions": [
+        {
+          "text": "第三步，最关键",
+          "startMs": 385,
+          "endMs": 1867
+        },
+        {
+          "text": "设置环境变量",
+          "startMs": 1867,
+          "endMs": 3202
+        },
+        {
+          "text": "地址填 DeepSeek 的",
+          "startMs": 3202,
+          "endMs": 4647
+        },
+        {
+          "text": "Anthropic 兼容接口",
+          "startMs": 4647,
+          "endMs": 6222
+        },
+        {
+          "text": "Token 填你刚才的 Key",
+          "startMs": 6222,
+          "endMs": 7776
+        },
+        {
+          "text": "下面四个模型全部换成",
+          "startMs": 7776,
+          "endMs": 9621
+        },
+        {
+          "text": "deepseek-flash",
+          "startMs": 9621,
+          "endMs": 10740
+        },
+        {
+          "text": "后面的方括号 1m",
+          "startMs": 10740,
+          "endMs": 12278
+        },
+        {
+          "text": "代表开一百万上下文",
+          "startMs": 12278,
+          "endMs": 13944
+        },
+        {
+          "text": "最后把思考强度拉到 max",
+          "startMs": 13944,
+          "endMs": 16207
+        },
+        {
+          "text": "苹果用户把前缀换成",
+          "startMs": 16207,
+          "endMs": 17832
+        },
+        {
+          "text": "export 就行",
+          "startMs": 17832,
+          "endMs": 18962
+        }
+      ]
+    },
+    {
+      "id": "verify",
+      "audioSrc": "audio/tutorials/deepseek-claude-code-video/06-verify.mp3",
+      "audioMs": 9247,
+      "startFrame": 1582,
+      "durationFrames": 287,
+      "cues": {
+        "a": 1802,
+        "b": 3384,
+        "c": 6046,
+        "d": 8212
+      },
+      "captions": [
+        {
+          "text": "进到一个空文件夹",
+          "startMs": 315,
+          "endMs": 1802
+        },
+        {
+          "text": "输入 claude 启动",
+          "startMs": 1802,
+          "endMs": 3384
+        },
+        {
+          "text": "先问一句",
+          "startMs": 3384,
+          "endMs": 4296
+        },
+        {
+          "text": "你现在用的是什么模型？",
+          "startMs": 4296,
+          "endMs": 6046
+        },
+        {
+          "text": "回答里出现 deepseek-flash",
+          "startMs": 6046,
+          "endMs": 8212
+        },
+        {
+          "text": "就说明接通了",
+          "startMs": 8212,
+          "endMs": 9102
+        }
+      ]
+    },
+    {
+      "id": "prompt",
+      "audioSrc": "audio/tutorials/deepseek-claude-code-video/07-prompt.mp3",
+      "audioMs": 11807,
+      "startFrame": 1869,
+      "durationFrames": 364,
+      "cues": {
+        "a": 1815,
+        "b": 6739,
+        "c": 9577
+      },
+      "captions": [
+        {
+          "text": "接下来就是做视频",
+          "startMs": 315,
+          "endMs": 1815
+        },
+        {
+          "text": "直接跟它说",
+          "startMs": 1815,
+          "endMs": 2833
+        },
+        {
+          "text": "用 Remotion 新建项目",
+          "startMs": 2833,
+          "endMs": 4442
+        },
+        {
+          "text": "做一条三十秒竖屏科普动画",
+          "startMs": 4442,
+          "endMs": 6739
+        },
+        {
+          "text": "写清主题、风格、镜头数和字号",
+          "startMs": 6739,
+          "endMs": 9577
+        },
+        {
+          "text": "说得越具体",
+          "startMs": 9577,
+          "endMs": 10552
+        },
+        {
+          "text": "出来的东西越像样",
+          "startMs": 10552,
+          "endMs": 12080
+        }
+      ]
+    },
+    {
+      "id": "case",
+      "audioSrc": "audio/tutorials/deepseek-claude-code-video/08-case.mp3",
+      "audioMs": 8124,
+      "startFrame": 2233,
+      "durationFrames": 253,
+      "cues": {
+        "a": 945,
+        "b": 1596,
+        "c": 2262,
+        "d": 3026,
+        "e": 5323
+      },
+      "captions": [
+        {
+          "text": "它会自己装依赖",
+          "startMs": 325,
+          "endMs": 1596
+        },
+        {
+          "text": "写代码、调动画",
+          "startMs": 1596,
+          "endMs": 3026
+        },
+        {
+          "text": "这是别人用同样流程做出来的成片",
+          "startMs": 3026,
+          "endMs": 5323
+        },
+        {
+          "text": "镜头、转场",
+          "startMs": 5323,
+          "endMs": 6445
+        },
+        {
+          "text": "数字动画都是自动生成的",
+          "startMs": 6445,
+          "endMs": 8083
+        }
+      ]
+    },
+    {
+      "id": "render",
+      "audioSrc": "audio/tutorials/deepseek-claude-code-video/09-render.mp3",
+      "audioMs": 10371,
+      "startFrame": 2486,
+      "durationFrames": 321,
+      "cues": {
+        "a": 3339,
+        "b": 8193,
+        "c": 9352
+      },
+      "captions": [
+        {
+          "text": "先用 remotion studio",
+          "startMs": 305,
+          "endMs": 2032
+        },
+        {
+          "text": "在浏览器里预览",
+          "startMs": 2032,
+          "endMs": 3339
+        },
+        {
+          "text": "哪里不满意直接用中文说",
+          "startMs": 3339,
+          "endMs": 5569
+        },
+        {
+          "text": "比如“第三个镜头太挤",
+          "startMs": 5569,
+          "endMs": 7412
+        },
+        {
+          "text": "拆两行”",
+          "startMs": 7412,
+          "endMs": 8193
+        },
+        {
+          "text": "满意了再 render",
+          "startMs": 8193,
+          "endMs": 9352
+        },
+        {
+          "text": "导出 mp4",
+          "startMs": 9352,
+          "endMs": 10012
+        }
+      ]
+    },
+    {
+      "id": "cost",
+      "audioSrc": "audio/tutorials/deepseek-claude-code-video/10-cost.mp3",
+      "audioMs": 8594,
+      "startFrame": 2807,
+      "durationFrames": 267,
+      "cues": {
+        "a": 1562,
+        "b": 3909,
+        "c": 4859,
+        "d": 6801
+      },
+      "captions": [
+        {
+          "text": "成本也说清楚",
+          "startMs": 375,
+          "endMs": 1562
+        },
+        {
+          "text": "输出一百万 token",
+          "startMs": 1562,
+          "endMs": 3160
+        },
+        {
+          "text": "高峰八块、空闲四块",
+          "startMs": 3160,
+          "endMs": 4859
+        },
+        {
+          "text": "工作日白天之外都是半价",
+          "startMs": 4859,
+          "endMs": 6801
+        },
+        {
+          "text": "做一条视频通常几块钱",
+          "startMs": 6801,
+          "endMs": 8346
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/deepseek-claude-code-video/11-end.mp3",
+      "audioMs": 8751,
+      "startFrame": 3074,
+      "durationFrames": 293,
+      "cues": {
+        "a": 445,
+        "b": 1075,
+        "c": 1774,
+        "d": 2368,
+        "e": 2951,
+        "f": 3957,
+        "g": 5726,
+        "h": 6775
+      },
+      "captions": [
+        {
+          "text": "安装、配置",
+          "startMs": 445,
+          "endMs": 1774
+        },
+        {
+          "text": "验证、出片",
+          "startMs": 1774,
+          "endMs": 2951
+        },
+        {
+          "text": "四步搞定",
+          "startMs": 2951,
+          "endMs": 3957
+        },
+        {
+          "text": "效果比 Opus 还差一点",
+          "startMs": 3957,
+          "endMs": 5726
+        },
+        {
+          "text": "但胜在便宜",
+          "startMs": 5726,
+          "endMs": 6775
+        },
+        {
+          "text": "先收藏，今晚就能跑起来",
+          "startMs": 6775,
+          "endMs": 8525
+        }
+      ]
+    }
+  ]
+}

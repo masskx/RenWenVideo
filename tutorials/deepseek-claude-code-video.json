@@ -21,14 +21,14 @@
   "cover": "hook",
   "coverCard": {
     "template": "conflict",
-    "headline": ["DeepSeek + Claude Code", "一句话出动画"],
-    "support": "四步搭好 · 一条视频几块钱",
-    "tag": "保姆级教程 · 2 分钟",
+    "headline": ["不开 Claude 会员", "一句话出动画"],
+    "support": "DeepSeek + Claude Code · 四步搭好",
+    "tag": "保姆级教程 · 一条视频几块钱",
     "anchor": "dcc.cover",
     "layouts": {
-      "3:4": {"headline": [80, 140], "size": 92, "anchor": [540, 900, 1.0], "support": 1330},
-      "6:7": {"headline": [80, 110], "size": 92, "anchor": [540, 760, 0.9], "support": 1170},
-      "9:16": {"headline": [80, 330], "size": 100, "anchor": [540, 1090, 1.0], "support": 1560}
+      "3:4": {"headline": [80, 140], "size": 104, "anchor": [540, 900, 1.0], "support": 1330},
+      "6:7": {"headline": [80, 110], "size": 104, "anchor": [540, 760, 0.9], "support": 1170},
+      "9:16": {"headline": [80, 330], "size": 116, "anchor": [540, 1090, 1.0], "support": 1560}
     }
   },
   "scenes": [
