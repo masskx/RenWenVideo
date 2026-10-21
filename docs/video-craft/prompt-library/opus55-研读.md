@@ -1,6 +1,6 @@
 # opus55 研读：703 条提示词读完以后
 
-> 可选参考，不是规则；和 [quick-reference.md](../quick-reference.md) 冲突时以速查页为准。
+> 单条提示词是参考，不是规则；每期计划时按 §五 / `--fit` 查一遍（[quick-reference.md](../quick-reference.md) §十）。和 [quick-reference.md](../quick-reference.md) 冲突时以速查页为准。
 > 对象：`yihui-dev/awesome-opus5-5-videos` 固定快照 `92aee2f`（`vendor/yihui-dev__awesome-opus5-5-videos/92aee2f/data/videos.json`），2026-10-21 逐条读完，上游 HEAD 当天仍是这个 commit。
 > 每条的人工标注在 [opus55-index.json](opus55-index.json)：中文摘要、形式、适合的脚本类型、可借价值（★★ / ★ / ·）、可借的具体做法。`find.mjs` 会自动读它（见 §八）。
 

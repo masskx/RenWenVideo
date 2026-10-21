@@ -1,10 +1,13 @@
-// Brief check (简报检查): does the storyboard carry the five required brief fields, and does the video fit its
-// length budget? (docs/video-craft/quick-reference.md §三, §七; template: docs/video-craft/分镜模板.md)
+// Brief check (简报检查): does the storyboard carry the five required brief fields and at least one prompt-library
+// reference, and does the video fit its length budget? (docs/video-craft/quick-reference.md §三, §七, §十;
+// template: docs/video-craft/分镜模板.md)
 //   node scripts/qa/brief.mjs <id>
-// Fails (exit 1) on a missing brief field or an over-length script / video. Everything else — shot tables, physics
+// Fails (exit 1) on a missing brief field, a 参考提示词 section without an id that find.mjs can --show, or an
+// over-length script / video. Everything else — shot tables, physics
 // columns (subject / force / contact / phase / SFX), pace per scene, scene length, sentence length — only warns:
 // those are suggestions driven by the material, not gates.
 import fs from 'node:fs';
+import {spawnSync} from 'node:child_process';
 
 const id = process.argv.slice(2).find((a) => !a.startsWith('--'));
 if (!id) { console.log('usage: node scripts/qa/brief.mjs <id>'); process.exit(1); }
@@ -26,6 +29,16 @@ else {
       else fields[k] = v;
     }
   }
+  // Prompt-library references (quick-reference §十): which technique from which stored prompt went into which scene.
+  const refs = md.split(/\n## /).find((s) => s.startsWith('参考提示词'));
+  const ids = [...new Set((refs ?? '').match(/\b(?:(?:opus55|lemo|opuscar98|mg15|ovp|ac55|pdoom|cab)\/[\w.\-/]*\w|[a-z0-9][a-z0-9-]*-\d{6})\b/g) ?? [])];
+  if (!refs) fail.push('分镜里没有“## 参考提示词”一节：计划时按脚本类型跑 find.mjs --fit=<类型> --min=2，写下用了哪一招 → 哪个场景（quick-reference §十）');
+  else if (!ids.length) fail.push('“## 参考提示词”里没有提示词库 id（例如 `opus55/twoclipping-496100 物件变出下一场 → scene2`）');
+  for (const ref of ids) {
+    const r = spawnSync(process.execPath, ['scripts/prompts/find.mjs', `--show=${ref}`], {encoding: 'utf8'});
+    if (r.status !== 0) fail.push(`参考提示词 ${ref} 在提示词库里找不到（node scripts/prompts/find.mjs --list 看全部 id）`);
+  }
+  if (refs && ids.length && !/→|->/.test(refs)) warn.push('参考提示词没写用在哪个场景（格式：id + 哪一招 → 场景）');
 }
 
 const cfgPath = `tutorials/${id}.json`;

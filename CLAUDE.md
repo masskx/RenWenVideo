@@ -15,10 +15,10 @@ The script usually comes from a separate planning agent ("growth"): use it and t
 ## Workflow
 
 1. **Input** — `inputs/<id>/script.md` (hook, body, ending, titles; free-form is fine) plus material: screenshots, screen recordings, links, numbers (skeleton: `inputs/_template/`).
-2. **Plan** — read script + material; write `tutorials/<id>.json`, `tutorials/<id>.storyboard.md` (brief: 5 required fields, `docs/video-craft/分镜模板.md`) and `src/tutorial/scenes/<id>.tsx`, choosing scenes that fit the material. For style, structure or a signature move, optionally pull 1–2 references from the prompt library that fit the script type (`docs/video-craft/prompt-library/选用指南.md`; `node scripts/prompts/find.mjs <keywords>`) and rewrite them for this pipeline. Print a short plan (hook, scenes with durations, total length) and wait for the user's OK. ≤ 60 s unless the script needs more and the user approves (`"maxSeconds"`).
+2. **Plan** — read script + material; write `tutorials/<id>.json`, `tutorials/<id>.storyboard.md` (brief: 5 required fields, `docs/video-craft/分镜模板.md`) and `src/tutorial/scenes/<id>.tsx`, choosing scenes that fit the material. **Always** consult the prompt library: `node scripts/prompts/find.mjs --fit=<script type> --min=2` plus `docs/video-craft/prompt-library/选用指南.md` §二 / `opus55-研读.md` §五, take 1–2 techniques, rewrite them for this pipeline and record them in the storyboard's `## 参考提示词` (id + technique → scene; `brief.mjs` fails without it). Apply the 做片手法 checklist in `quick-reference.md` §十 by default. Print a short plan (hook, scenes with durations, total length, techniques used) and wait for the user's OK. ≤ 60 s unless the script needs more and the user approves (`"maxSeconds"`).
 3. **Voice** — `npm run tutorial:voice -- <id>`: the user's cloned Doubao voice; per-character timestamps drive cues and subtitles.
 4. **Render** — `npm run tutorial:render -- <id> --overwrite` (1080×1920 H.264, covers).
-5. **QA** — `node scripts/qa/brief.mjs <id>`, `cover.mjs <id>`, `richness.mjs` / `marks.mjs` / `scan.mjs` (+ `--phone`) on the mp4, `npm run lint`; look at the stills yourself before showing them.
+5. **QA** — `node scripts/qa/brief.mjs <id>`, `cover.mjs <id>`, `richness.mjs` / `marks.mjs` / `scan.mjs` (+ `--phone`) on the mp4, `npm run lint`; look at the contact sheets (`qa/<id>/richness.png`, stills) yourself before the video, run the self-review in `quick-reference.md` §十, then show the user.
 6. **Package** — `douyin/<id>/`: mp4 (committed like every other artifact; keep it < 100 MB), covers, stills, README with separate title / description / hashtags for 视频号, 抖音, 小红书, and credits.
 
 ## Hard rules
@@ -32,7 +32,7 @@ The script usually comes from a separate planning agent ("growth"): use it and t
 
 ## Docs
 
-- **Read every time:** `docs/video-craft/quick-reference.md` (one page).
+- **Read every time:** `docs/video-craft/quick-reference.md` (one page; §十 is the technique checklist learned from the prompt library).
 - On demand (optional reference): `docs/video-craft/README.md` lists the rest — narration, cover, sound, motion, styles, pitfalls. Old rules live in `docs/video-craft/archive/`.
-- Prompt library (optional): `docs/video-craft/prompt-library/` — pinned verbatim snapshots of 8 Opus-video prompt repos; never edit `vendor/`, refresh with `node scripts/prompts/snapshot.mjs` (adds a new snapshot; `--pin` to switch).
+- Prompt library (consulted every video; individual prompts are references, not rules): `docs/video-craft/prompt-library/` — pinned verbatim snapshots of 8 Opus-video prompt repos, `选用指南.md` (pick by script type, rewrite table), `opus55-研读.md` + `opus55-index.json` (all 703 opus55 prompts annotated); never edit `vendor/`, refresh with `node scripts/prompts/snapshot.mjs` (adds a new snapshot; `--pin` to switch).
 - House-style baseline: `tutorials/deepseek-vs-opus55` (+ storyboard, scene file). Commands: `README.md`.
