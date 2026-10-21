@@ -66,4 +66,4 @@ npm run lint
 
 ## 九、可选参考
 
-[README.md](README.md) 列出全部文档：配音、封面、音效、文案、动效、风格词典、概念画法、踩坑清单、发布与风格偏好、审美参考库。
+[README.md](README.md) 列出全部文档：配音、封面、音效、文案、动效、风格词典、概念画法、踩坑清单、发布与风格偏好、审美参考库。按脚本类型找现成的提示词和风格参考：[prompt-library/选用指南.md](prompt-library/选用指南.md)（`node scripts/prompts/find.mjs <关键词>`）。

@@ -15,7 +15,7 @@ The script usually comes from a separate planning agent ("growth"): use it and t
 ## Workflow
 
 1. **Input** — `inputs/<id>/script.md` (hook, body, ending, titles; free-form is fine) plus material: screenshots, screen recordings, links, numbers (skeleton: `inputs/_template/`).
-2. **Plan** — read script + material; write `tutorials/<id>.json`, `tutorials/<id>.storyboard.md` (brief: 5 required fields, `docs/video-craft/分镜模板.md`) and `src/tutorial/scenes/<id>.tsx`, choosing scenes that fit the material. Print a short plan (hook, scenes with durations, total length) and wait for the user's OK. ≤ 60 s unless the script needs more and the user approves (`"maxSeconds"`).
+2. **Plan** — read script + material; write `tutorials/<id>.json`, `tutorials/<id>.storyboard.md` (brief: 5 required fields, `docs/video-craft/分镜模板.md`) and `src/tutorial/scenes/<id>.tsx`, choosing scenes that fit the material. For style, structure or a signature move, optionally pull 1–2 references from the prompt library that fit the script type (`docs/video-craft/prompt-library/选用指南.md`; `node scripts/prompts/find.mjs <keywords>`) and rewrite them for this pipeline. Print a short plan (hook, scenes with durations, total length) and wait for the user's OK. ≤ 60 s unless the script needs more and the user approves (`"maxSeconds"`).
 3. **Voice** — `npm run tutorial:voice -- <id>`: the user's cloned Doubao voice; per-character timestamps drive cues and subtitles.
 4. **Render** — `npm run tutorial:render -- <id> --overwrite` (1080×1920 H.264, covers).
 5. **QA** — `node scripts/qa/brief.mjs <id>`, `cover.mjs <id>`, `richness.mjs` / `marks.mjs` / `scan.mjs` (+ `--phone`) on the mp4, `npm run lint`; look at the stills yourself before showing them.
@@ -34,4 +34,5 @@ The script usually comes from a separate planning agent ("growth"): use it and t
 
 - **Read every time:** `docs/video-craft/quick-reference.md` (one page).
 - On demand (optional reference): `docs/video-craft/README.md` lists the rest — narration, cover, sound, motion, styles, pitfalls. Old rules live in `docs/video-craft/archive/`.
+- Prompt library (optional): `docs/video-craft/prompt-library/` — pinned verbatim snapshots of 8 Opus-video prompt repos; never edit `vendor/`, refresh with `node scripts/prompts/snapshot.mjs` (adds a new snapshot; `--pin` to switch).
 - House-style baseline: `tutorials/deepseek-vs-opus55` (+ storyboard, scene file). Commands: `README.md`.

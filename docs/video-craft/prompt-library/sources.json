@@ -1,0 +1,99 @@
+{
+  "post": "https://x.com/KinGao476942/status/2112729924943634602",
+  "note": "Sources from the post (see 来源帖.md). `include` = sparse-checkout patterns copied verbatim by scripts/prompts/snapshot.mjs; `pinned` = the snapshot under vendor/ that find.mjs reads. A new snapshot never replaces an old one and only moves the pin with --pin.",
+  "sources": [
+    {
+      "repo": "yihui-dev/awesome-opus5-5-videos",
+      "license": "MIT（仓库）；提示词原文归各自作者，每条带原帖链接",
+      "include": [
+        "/LICENSE",
+        "/README.md",
+        "/data/videos.json"
+      ],
+      "pinned": "92aee2f"
+    },
+    {
+      "repo": "lemomo-ai/lemo-opuscar",
+      "license": "代码和文档 MIT；样片与静帧 CC BY 4.0（只复制了文档，没有复制样片）",
+      "include": [
+        "/LICENSE",
+        "/README.zh-CN.md",
+        "/AGENTS.md",
+        "/DIRECTOR.md",
+        "/TECHNIQUE.md",
+        "/MY-STYLES.md",
+        "/styles/README.md",
+        "/styles/*/STYLE.md",
+        "/styles/*/DEMO.md",
+        "/styles/*/style.json",
+        "/styleboard/opuscar98_styles.json"
+      ],
+      "pinned": "b5e8ef9"
+    },
+    {
+      "repo": "mexicat/pdoom-video",
+      "license": "MIT（歌曲不属于作者，没有复制）",
+      "include": [
+        "/LICENSE",
+        "/README.md",
+        "/docs/*.md"
+      ],
+      "pinned": "fa164b7"
+    },
+    {
+      "repo": "JohnHeibel/PDoomVideo",
+      "license": "仓库没有许可证：只记录版本，不复制文件。同一作者的 ClaudeAnimationBase（MIT）就是从它整理出来的，规则以那份为准",
+      "include": [],
+      "pinned": "fa546a3"
+    },
+    {
+      "repo": "Vincentwei1021/mg-styles-15",
+      "license": "MIT",
+      "include": [
+        "/LICENSE",
+        "/README.zh-CN.md",
+        "/template.md",
+        "/rubric.md",
+        "/prompts/*.md"
+      ],
+      "pinned": "49052d8"
+    },
+    {
+      "repo": "JohnHeibel/ClaudeAnimationBase",
+      "license": "MIT（Clawd 角色形象属于 Anthropic）",
+      "include": [
+        "/LICENSE",
+        "/README.md",
+        "/ANIMATION_GUIDE.md"
+      ],
+      "pinned": "0ac8bf2"
+    },
+    {
+      "repo": "athemeroy/awesome-claude-5-5-videos",
+      "license": "原创文字 CC BY 4.0（署名 athemeroy 并附链接）；作品和截图归各自作者",
+      "include": [
+        "/LICENSE",
+        "/THIRD_PARTY.md",
+        "/README.zh-CN.md",
+        "/docs/prompt-playbook.zh-CN.md",
+        "/docs/prompt-matrix.zh-CN.md",
+        "/docs/production-brief.zh-CN.md",
+        "/docs/workflow-analysis.zh-CN.md",
+        "/docs/visual-effects-fit.zh-CN.md",
+        "/docs/cases-index.zh-CN.md",
+        "/docs/report.zh-CN.md"
+      ],
+      "pinned": "87e5cbf"
+    },
+    {
+      "repo": "joeseesun/opus-video-prompts",
+      "license": "仓库没有许可证文件；README 声明提示词版权归原作者、转载须保留作者与原帖链接（每个文件都保留了）",
+      "include": [
+        "/README.md",
+        "/cases.json",
+        "/prompts/*.md"
+      ],
+      "pinned": "7977c80"
+    }
+  ]
+}

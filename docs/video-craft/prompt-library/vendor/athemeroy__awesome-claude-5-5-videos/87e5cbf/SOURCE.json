@@ -1,0 +1,72 @@
+{
+  "repo": "athemeroy/awesome-claude-5-5-videos",
+  "url": "https://github.com/athemeroy/awesome-claude-5-5-videos",
+  "commit": "87e5cbfaa4bf1f6516a6c69be58c42a9b85a1041",
+  "commitDate": "2026-10-11T08:47:16+08:00",
+  "snapshotAt": "2026-10-21T03:32:55.099Z",
+  "license": "原创文字 CC BY 4.0（署名 athemeroy 并附链接）；作品和截图归各自作者",
+  "include": [
+    "/LICENSE",
+    "/THIRD_PARTY.md",
+    "/README.zh-CN.md",
+    "/docs/prompt-playbook.zh-CN.md",
+    "/docs/prompt-matrix.zh-CN.md",
+    "/docs/production-brief.zh-CN.md",
+    "/docs/workflow-analysis.zh-CN.md",
+    "/docs/visual-effects-fit.zh-CN.md",
+    "/docs/cases-index.zh-CN.md",
+    "/docs/report.zh-CN.md"
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "bytes": 10605,
+      "sha256": "9f7004df6f5177f04939d8a5c67afd10556973cba72bc0bf9c39019ae81b1f51"
+    },
+    {
+      "path": "THIRD_PARTY.md",
+      "bytes": 4110,
+      "sha256": "21babbefbd9a68e35bbeb4dd7a9d28a595d04f295c13d6a8063ac03e5368e7d1"
+    },
+    {
+      "path": "docs/cases-index.zh-CN.md",
+      "bytes": 81546,
+      "sha256": "174b5ebb06a30c6440c77092f242863076cc4bbac63a36ff742498238fc6a460"
+    },
+    {
+      "path": "docs/production-brief.zh-CN.md",
+      "bytes": 3062,
+      "sha256": "4df813be670eb456374c1522139f1a520cab209af3492c45f9acb734c5cf1779"
+    },
+    {
+      "path": "docs/prompt-matrix.zh-CN.md",
+      "bytes": 46376,
+      "sha256": "fb9184cac1b4118bd7b43af90a789cfdb494c4f9653a20413d8f981294087c53"
+    },
+    {
+      "path": "docs/prompt-playbook.zh-CN.md",
+      "bytes": 9130,
+      "sha256": "be1b63b23b2afe006618211627b2b56f7a078cf38a4b9624e3e347878a598643"
+    },
+    {
+      "path": "docs/report.zh-CN.md",
+      "bytes": 43952,
+      "sha256": "5cf5d5b31082184b661f52c0ffbbc199945a9302d87f70cfcb7088a6a079c746"
+    },
+    {
+      "path": "docs/visual-effects-fit.zh-CN.md",
+      "bytes": 10653,
+      "sha256": "d526e3322a7bcd2f5cfa01deddfed4a77b7f4fe923a4c2f8b693db5452ac62ff"
+    },
+    {
+      "path": "docs/workflow-analysis.zh-CN.md",
+      "bytes": 8340,
+      "sha256": "9d986cc457e05303df6c1207e2c9d9b8ddb622baa474dd3401399b896f2c0308"
+    }
+  ]
+}
