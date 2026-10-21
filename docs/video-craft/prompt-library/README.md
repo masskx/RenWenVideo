@@ -15,7 +15,10 @@
    node scripts/prompts/find.mjs '新闻|news' --source=lemo  # 只搜一个来源
    node scripts/prompts/find.mjs --show=lemo/dark-keynote   # 全文 + 来源仓库@commit + 许可
    node scripts/prompts/find.mjs --list --source=mg15       # 列出全部 id
+   node scripts/prompts/find.mjs --fit=盘点 --min=2         # opus55：某类脚本的 ★★ 条目（按研读标注）
    ```
+
+   opus55 的 703 条逐条读过，标注在 [opus55-index.json](opus55-index.json)（中文摘要、形式、适合的脚本类型、★★ 直接可借 / ★ 一招可借 / · 跳过、可借的做法），结论在 [opus55-研读.md](opus55-研读.md)。
 
 3. 用了哪几条，在分镜里记一笔（[分镜模板.md](../分镜模板.md) 的“参考提示词”，可选），以后重做或复盘时知道当时照的是哪一版。
 
@@ -23,7 +26,7 @@
 
 | 前缀 | 来源 | 内容 |
 |---|---|---|
-| `opus55/<slug>` | yihui-dev/awesome-opus5-5-videos | 703 条别人做爆款用的原提示词，带原帖链接和 Skillry 重制版链接 |
+| `opus55/<slug>` | yihui-dev/awesome-opus5-5-videos | 703 条别人做爆款用的原提示词，带原帖链接和 Skillry 重制版链接；搜索结果显示研读标注（★★ 中文摘要 · 形式 · @作者） |
 | `lemo/<风格>`、`lemo/<风格>/demo` | lemomo-ai/lemo-opuscar | 51 份风格提示词（STYLE.md：质感、配色、字体、动效、镜头语法、声音、“原生招式”、坑）和样片拆解（DEMO.md）；`lemo/DIRECTOR`、`lemo/TECHNIQUE` 是导演和制作方法 |
 | `opuscar98/<号>` | lemomo-ai/lemo-opuscar | OPUSCAR 98 的 98 种风格提示词（中英）、镜头表、导演编排 |
 | `mg15/<号-风格>` | Vincentwei1021/mg-styles-15 | 15 份完整 MG 风格提示词；`mg15/template` 写新风格，`mg15/rubric` 让另一个 AI 当评委 |
@@ -39,6 +42,8 @@ sources.json                         来源清单：每个仓库复制哪些文�
 vendor/<owner>__<repo>/<commit>/     原样复制的文件 + SOURCE.json（仓库地址、完整 commit、提交时间、快照时间、每个文件的 sha256）
 来源帖.md                             推荐这 8 个仓库的原帖全文和存档时的核对
 选用指南.md                           按脚本选参考、改写对照、可直接吸收的做法
+opus55-index.json                    opus55 逐条研读标注（本仓库写的，不是上游内容；记着对应的 commit）
+opus55-研读.md                        opus55 读完的结论：形式、家族、可吸收的做法、每类首选、不要照搬的
 ```
 
 ```bash
@@ -48,6 +53,7 @@ node scripts/prompts/snapshot.mjs --only=lemomo-ai/lemo-opuscar --pin   # 抓一
 
 - 快照目录写好以后**不再修改**；`find.mjs` 只读 `pinned` 的那一份。新快照不加 `--pin` 不会被用到，所以更新不会让“昨天好用的版本”消失。
 - 新快照用过、确认更好再 `--pin`；不要手改 `vendor/` 里的文件（要改写就复制到别处，写明出处）。
+- opus55 换快照后，新增条目没有研读标注（照常能搜到，只是不参与 `--fit` / `--min`），按 [opus55-研读.md](opus55-研读.md) §九 补读。
 - 上游仓库没了也没关系：快照还在，`SOURCE.json` 里有原来的地址和 commit。
 
 ## 许可和署名

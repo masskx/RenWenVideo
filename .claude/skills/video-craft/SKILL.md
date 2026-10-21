@@ -17,7 +17,8 @@ Read `docs/video-craft/quick-reference.md` first (one page; it wins over every o
 | `音效.md` | choosing sound effects (Freesound via Openverse, CC0 / CC BY, credits) |
 | `动效与画面变化.md`, `概念画法.md`, `风格词典.md`, `风格卡模板.md`, `审美参考库.md` | polish: motion, `src/fx`, styles, references |
 | `讲解动画规则.md` | layout numbers, font sizes, colours |
-| `prompt-library/选用指南.md` | planning: which stored prompts / style prompts fit this script type, how to rewrite them for 9:16 Remotion + Doubao; search with `node scripts/prompts/find.mjs <keywords>` |
+| `prompt-library/选用指南.md` | planning: which stored prompts / style prompts fit this script type, how to rewrite them for 9:16 Remotion + Doubao; search with `node scripts/prompts/find.mjs <keywords>`; `--fit=<type> --min=2` lists the opus55 prompts worth borrowing for a script type |
+| `prompt-library/opus55-研读.md` | planning, optional: what the 703 opus55 prompts teach — recurring families, practices mapped to the priority order, best picks per script type, what not to copy (CTA, fake data, 16:9) |
 | `踩坑清单.md` | before the final check; add new failure modes here |
 | `archive/` | old rules (director layer, physics chain, ban list) — optional reference only |
 

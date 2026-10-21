@@ -20,7 +20,7 @@
 | [风格卡模板.md](风格卡模板.md) | 新做一套风格时填的风格卡 |
 | [审美参考库.md](审美参考库.md) | 去哪看好设计、静帧的减法自查 |
 | [踩坑清单.md](踩坑清单.md) | 踩过的坑和扫片做法 |
-| [prompt-library/](prompt-library/README.md) | 提示词库：8 个“用 Opus 5.5 写代码做视频”仓库的提示词、风格提示词和制作文档，原样存成固定版本；[选用指南.md](prompt-library/选用指南.md) 按脚本类型挑参考、改写成本仓库的做法 |
+| [prompt-library/](prompt-library/README.md) | 提示词库：8 个“用 Opus 5.5 写代码做视频”仓库的提示词、风格提示词和制作文档，原样存成固定版本；[选用指南.md](prompt-library/选用指南.md) 按脚本类型挑参考、改写成本仓库的做法；[opus55-研读.md](prompt-library/opus55-研读.md) 703 条 opus55 提示词逐条读完的结论和每类首选 |
 | [archive/](archive/) | 已归档的旧规则：导演层（禁止项、物理动作链、八项 Brief）、旧分镜模板、旧 CLAUDE.md 和 SKILL.md |
 
 ## 对应的代码和工具
@@ -35,7 +35,7 @@
 | `scripts/qa/scan.mjs` | 扫片（每秒 3 帧拼图）、手机宽度可读性检查（`--phone`）、切点前后细看（`--around`） |
 | `scripts/qa/marks.mjs` | 卡点检查：每个卡点前 0.1 秒、后 0.35 秒各一帧，看动作是不是卡在说出那个词的时刻 |
 | `scripts/qa/palette.mjs` | 取色：参考图的主色和指定点颜色，做新风格时用 |
-| `scripts/prompts/find.mjs`、`snapshot.mjs` | 提示词库：按关键词搜、看全文（带来源 commit 和许可）；从上游抓新快照（不覆盖旧的） |
+| `scripts/prompts/find.mjs`、`snapshot.mjs` | 提示词库：按关键词搜、看全文（带来源 commit 和许可）、opus55 按脚本类型和可借价值筛（`--fit`、`--min`）；从上游抓新快照（不覆盖旧的） |
 | `.claude/skills/video-craft/SKILL.md`、根目录 `CLAUDE.md` | 给 Claude 的做片流程和优先级；出片前要过的检查见速查页 §八 |
 
 ## 来源与许可

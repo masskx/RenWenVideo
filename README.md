@@ -154,6 +154,7 @@ python scripts/generate-sfx.py                                   # 合成音效�
 node scripts/qa/frames.mjs douyin/<id>/video.mp4 --at=秒          # 逐帧查看页（← → 翻帧）
 node scripts/prompts/find.mjs '发布|launch' 数字                   # 在提示词库里按脚本类型找参考（选用指南：docs/video-craft/prompt-library/选用指南.md）
 node scripts/prompts/find.mjs --show=lemo/dark-keynote           # 看全文（带来源 commit 和许可）
+node scripts/prompts/find.mjs --fit=教程 --min=2                  # opus55 里某类脚本可直接借的条目（研读：docs/video-craft/prompt-library/opus55-研读.md）
 node scripts/prompts/snapshot.mjs                                # 从上游抓新快照，旧版本不动；--pin 才改用新版本
 ```
 
