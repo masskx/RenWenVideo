@@ -62,6 +62,7 @@ src/fx/                          共用动效库：闭式弹簧、抛出/下落/
 public/audio/sfx/                音效：fs-* 是从 Freesound（经 Openverse）下载的真实录音，来源在 CREDITS.json；其余是合成的（scripts/generate-sfx.py）。画面组件用 sfx() 放到接触帧上
 scripts/qa/                      出片检查：brief.mjs（简报和时长）、richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、frames.mjs（逐帧查看页）、palette.mjs（取色）、cover.mjs（封面卡 + 缩略图）
 docs/video-craft/                quick-reference.md（必读，一页）；其余为可选参考；archive/ 是归档的旧规则
+docs/video-craft/prompt-library/ 提示词库：8 个 Opus 视频提示词仓库的原样快照（vendor/<仓库>/<commit>/）+ 选用指南；scripts/prompts/ 搜索和更新
 .claude/skills/video-craft/      给 Claude 的做片流程（指向速查页）
 src/Root.tsx                     注册合成：AiEra11Rules、MarketingEngineer、Tutorial、TutorialCover
 scripts/run.ps1                  Windows 辅助脚本（项目放在 FAT32/移动盘时使用）
@@ -150,6 +151,9 @@ node scripts/fetch-sfx.mjs get <openverse-id> paper-slide       # 下载 → pub
 node scripts/fetch-sfx.mjs credits src/tutorial/scenes/<file>.tsx  # 发布包要贴的署名
 python scripts/generate-sfx.py                                   # 合成音效库（兜底）→ public/audio/sfx/
 node scripts/qa/frames.mjs douyin/<id>/video.mp4 --at=秒          # 逐帧查看页（← → 翻帧）
+node scripts/prompts/find.mjs '发布|launch' 数字                   # 在提示词库里按脚本类型找参考（选用指南：docs/video-craft/prompt-library/选用指南.md）
+node scripts/prompts/find.mjs --show=lemo/dark-keynote           # 看全文（带来源 commit 和许可）
+node scripts/prompts/snapshot.mjs                                # 从上游抓新快照，旧版本不动；--pin 才改用新版本
 ```
 
 ## 出片检查（每条视频提交前都要过）

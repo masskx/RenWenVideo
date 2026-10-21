@@ -1,0 +1,35 @@
+{
+  "repo": "mexicat/pdoom-video",
+  "url": "https://github.com/mexicat/pdoom-video",
+  "commit": "fa164b74fd0b26a99375715b619c55b4a0fb3d05",
+  "commitDate": "2026-10-05T22:24:56+01:00",
+  "snapshotAt": "2026-10-21T03:32:50.903Z",
+  "license": "MIT（歌曲不属于作者，没有复制）",
+  "include": [
+    "/LICENSE",
+    "/README.md",
+    "/docs/*.md"
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 1074,
+      "sha256": "5fc212466ce7183be5d85a3ee34fea461712842d5cd256b470978a83577083cb"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7892,
+      "sha256": "6ca4a3da57a3747d4fdf9f98b5c360e8c14d43e5eae630307f850836687c9289"
+    },
+    {
+      "path": "docs/ENGINE.md",
+      "bytes": 16742,
+      "sha256": "4b3bde397dc9a78a60db0844619a2ef5cfbc130b40a2b6be2c306d8a28df4430"
+    },
+    {
+      "path": "docs/TREATMENT.md",
+      "bytes": 24508,
+      "sha256": "c9dd635a7cef34b7bb4371d20db30b84668082a7eed0a40c70388141e358524e"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "repo": "Vincentwei1021/mg-styles-15",
+  "url": "https://github.com/Vincentwei1021/mg-styles-15",
+  "commit": "49052d80bfaf9fa8412cc9710530e5e95a3b8d8c",
+  "commitDate": "2026-10-05T11:23:16+00:00",
+  "snapshotAt": "2026-10-21T03:32:52.572Z",
+  "license": "MIT",
+  "include": [
+    "/LICENSE",
+    "/README.zh-CN.md",
+    "/template.md",
+    "/rubric.md",
+    "/prompts/*.md"
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 1071,
+      "sha256": "7f03fee9299a401615e13e2c636ead0394f47395da4f816ae60b35ed2d91a932"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "bytes": 15975,
+      "sha256": "672872ef31e6a1f1ac9f95067e32507a07a3b866e6dd0cf1a8b8a08e492a5843"
+    },
+    {
+      "path": "prompts/01-flat-vector.md",
+      "bytes": 8245,
+      "sha256": "0599f4dadbc163066d70e5b98afa190a5580ee00e14bd1ce3473ce8f14c48cf3"
+    },
+    {
+      "path": "prompts/02-line-art.md",
+      "bytes": 7766,
+      "sha256": "1e61c9fcf80059a20029516f3d0fd016e849d98bb69bdcbf8b63a9e53759d3ce"
+    },
+    {
+      "path": "prompts/03-isometric.md",
+      "bytes": 7969,
+      "sha256": "5ace3ffa0d9e4a4a701ae442c102762fcd922229003d675a48f4aa5eb54011e2"
+    },
+    {
+      "path": "prompts/04-3d-render.md",
+      "bytes": 7877,
+      "sha256": "93e7cb0b54cbc6991d4856140afe050cc84e4c6298ac06e369da6a829904521b"
+    },
+    {
+      "path": "prompts/05-cel-boil.md",
+      "bytes": 7791,
+      "sha256": "ec64b2dea47a557f8506f3e913d2b7a3e4e0efddf9bf0309ffdea40e9116dd68"
+    },
+    {
+      "path": "prompts/06-collage.md",
+      "bytes": 7740,
+      "sha256": "556478d4122d1db0535656998f64da8d1805505b14c9eb623f002d3b6aef688d"
+    },
+    {
+      "path": "prompts/07-liquid.md",
+      "bytes": 7615,
+      "sha256": "7c41e4409bf83fdb8a53ceae1dafd90efc72b2fb1d42654e30f294169ecee379"
+    },
+    {
+      "path": "prompts/08-morph.md",
+      "bytes": 7432,
+      "sha256": "75c9e2bb8ca1edbba5686b431ff85e5ee99be1188e84184d9a105e12c0da63aa"
+    },
+    {
+      "path": "prompts/09-bauhaus.md",
+      "bytes": 7960,
+      "sha256": "061828b54389f932f7914bdbc6e5afc25c394a401bcdf06111b7f4687d9f89f5"
+    },
+    {
+      "path": "prompts/10-synthwave.md",
+      "bytes": 7933,
+      "sha256": "a12b216b68afc2fbe51cfe1a410b6eebd71b5cc82f42a2e8c5ca0d85de8747d5"
+    },
+    {
+      "path": "prompts/12-aurora-glass.md",
+      "bytes": 7829,
+      "sha256": "c5e68258e5ae0a5e1c5c3a05c4651a9efb5472da6098f17d468442382b3004b3"
+    },
+    {
+      "path": "prompts/18-hanazi.md",
+      "bytes": 7923,
+      "sha256": "7d6bc0e6e3712778a2ed849fab1a358055d2dfc88cbddc1a27b5694c2f25be69"
+    },
+    {
+      "path": "prompts/19-paperclip.md",
+      "bytes": 8016,
+      "sha256": "808ccae55d57005eefdc78c06007bc324195063faac80d8c47136ff050b4ea05"
+    },
+    {
+      "path": "prompts/20-pixel.md",
+      "bytes": 7601,
+      "sha256": "6eeeb3d60c6a0a1a52417bc6e71c5600113cb62202a623b408460485c96fa9ef"
+    },
+    {
+      "path": "prompts/22-hud.md",
+      "bytes": 7756,
+      "sha256": "42e7ba11855ecba90ab9bea4f6963d56f725dbbfd32ff637daebf9428fabb2c9"
+    },
+    {
+      "path": "rubric.md",
+      "bytes": 3676,
+      "sha256": "1cb93025d54407317c15005ad58bd47389baa9532f4ed359161247fb0def375a"
+    },
+    {
+      "path": "template.md",
+      "bytes": 1945,
+      "sha256": "258709df6bfe71a53a1f9e05d6a130dece77751e667e096ed91d9809aaa24370"
+    }
+  ]
+}

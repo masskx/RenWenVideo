@@ -1,0 +1,30 @@
+{
+  "repo": "JohnHeibel/ClaudeAnimationBase",
+  "url": "https://github.com/JohnHeibel/ClaudeAnimationBase",
+  "commit": "0ac8bf2b31942376cb6b8c4074715595d512acd2",
+  "commitDate": "2026-09-24T00:41:21-07:00",
+  "snapshotAt": "2026-10-21T03:32:53.624Z",
+  "license": "MIT（Clawd 角色形象属于 Anthropic）",
+  "include": [
+    "/LICENSE",
+    "/README.md",
+    "/ANIMATION_GUIDE.md"
+  ],
+  "files": [
+    {
+      "path": "ANIMATION_GUIDE.md",
+      "bytes": 36029,
+      "sha256": "f638e1fb3876f587e39ec11a20e2df3aac91421c926d82c2743768642caab990"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1068,
+      "sha256": "7d25ae95b305b884c08ce898e53b58d2e180ff0119e5d203d8b4ae30420f3b33"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3786,
+      "sha256": "c383c6bf64add0bdd38c0244616faa4adf859e1aae93cb93223a8de822924801"
+    }
+  ]
+}

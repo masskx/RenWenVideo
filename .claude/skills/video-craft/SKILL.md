@@ -17,12 +17,13 @@ Read `docs/video-craft/quick-reference.md` first (one page; it wins over every o
 | `音效.md` | choosing sound effects (Freesound via Openverse, CC0 / CC BY, credits) |
 | `动效与画面变化.md`, `概念画法.md`, `风格词典.md`, `风格卡模板.md`, `审美参考库.md` | polish: motion, `src/fx`, styles, references |
 | `讲解动画规则.md` | layout numbers, font sizes, colours |
+| `prompt-library/选用指南.md` | planning: which stored prompts / style prompts fit this script type, how to rewrite them for 9:16 Remotion + Doubao; search with `node scripts/prompts/find.mjs <keywords>` |
 | `踩坑清单.md` | before the final check; add new failure modes here |
 | `archive/` | old rules (director layer, physics chain, ban list) — optional reference only |
 
 ## Steps
 
 1. Read `inputs/<id>/script.md` and the material. Use the script's hook; if weak or missing, pick from `hooks.md` and say which.
-2. Plan scenes from the material actually available (no fixed count). Write the storyboard 简报 + `tutorials/<id>.json` + scene file. Print the plan (hook, scenes with durations, total) and wait for the user's OK.
+2. Plan scenes from the material actually available (no fixed count). Optionally pick 1–2 references from the prompt library by script type (`prompt-library/选用指南.md` §二) and note them in the storyboard. Write the storyboard 简报 + `tutorials/<id>.json` + scene file. Print the plan (hook, scenes with durations, total) and wait for the user's OK.
 3. Voice, render, run the QA gates in `quick-reference.md` §八, look at the stills (0 s, 1 s, 3 s, payoff) yourself, then show the user.
 4. Package `douyin/<id>/` with per-platform titles / descriptions / hashtags and credits.

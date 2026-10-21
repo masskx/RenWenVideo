@@ -20,6 +20,7 @@
 | [风格卡模板.md](风格卡模板.md) | 新做一套风格时填的风格卡 |
 | [审美参考库.md](审美参考库.md) | 去哪看好设计、静帧的减法自查 |
 | [踩坑清单.md](踩坑清单.md) | 踩过的坑和扫片做法 |
+| [prompt-library/](prompt-library/README.md) | 提示词库：8 个“用 Opus 5.5 写代码做视频”仓库的提示词、风格提示词和制作文档，原样存成固定版本；[选用指南.md](prompt-library/选用指南.md) 按脚本类型挑参考、改写成本仓库的做法 |
 | [archive/](archive/) | 已归档的旧规则：导演层（禁止项、物理动作链、八项 Brief）、旧分镜模板、旧 CLAUDE.md 和 SKILL.md |
 
 ## 对应的代码和工具
@@ -34,6 +35,7 @@
 | `scripts/qa/scan.mjs` | 扫片（每秒 3 帧拼图）、手机宽度可读性检查（`--phone`）、切点前后细看（`--around`） |
 | `scripts/qa/marks.mjs` | 卡点检查：每个卡点前 0.1 秒、后 0.35 秒各一帧，看动作是不是卡在说出那个词的时刻 |
 | `scripts/qa/palette.mjs` | 取色：参考图的主色和指定点颜色，做新风格时用 |
+| `scripts/prompts/find.mjs`、`snapshot.mjs` | 提示词库：按关键词搜、看全文（带来源 commit 和许可）；从上游抓新快照（不覆盖旧的） |
 | `.claude/skills/video-craft/SKILL.md`、根目录 `CLAUDE.md` | 给 Claude 的做片流程和优先级；出片前要过的检查见速查页 §八 |
 
 ## 来源与许可
@@ -41,5 +43,7 @@
 导演层（已归档：`archive/导演层.md`）整理自观默（X @guanmo_ai）的文章《全网首发！用 Codex 自动生成顶尖动效视频》和 twoclipping（X @twoclipping）公开的动效提示词模板，并参考了画廊 [awesome-ai-motion](https://github.com/guanmo-ai/awesome-ai-motion)；这些内容按本项目重写，没有复制原文配图和作品素材。
 
 规则、动效参数和检查方法改编自 [chuspeeism/dashi-animationstyle](https://github.com/chuspeeism/dashi-animationstyle)（commit `aa620f3`，《大师的AI小灶》出品，MIT 许可，许可全文见 [LICENSE-dashi-animationstyle.txt](LICENSE-dashi-animationstyle.txt)）。原项目用 HTML/Canvas + 无头 Chrome 出 16:9 横屏；本项目改写成了 Remotion 组件，按 9:16 抖音竖屏重新换算了字号和安全区，并按本项目的实测补充了 `beatTour`、嵌套转场等做法。
+
+[prompt-library/](prompt-library/) 里是 [@KinGao476942 推荐的 8 个仓库](prompt-library/来源帖.md) 的原样快照，各自的许可和复制范围见 [prompt-library/README.md](prompt-library/README.md)；没有许可证的 PDoomVideo 只记了版本。
 
 风格词典、风格卡模板、分镜写法、卡点检查和取色工具按原项目改写成了本项目的版本；原项目的 HTML 风格模板、示例页和示例口播音频（作者本人声音，仅供试用该 skill）**没有**复制进本仓库。
