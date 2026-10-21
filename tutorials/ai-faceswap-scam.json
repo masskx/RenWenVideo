@@ -1,0 +1,53 @@
+{
+  "id": "ai-faceswap-scam",
+  "title": "AI换脸骗局",
+  "subtitle": "视频里的妈妈找你要钱 · 3招识破",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "tts": {"provider": "doubao"},
+  "leadMs": 100,
+  "tailMs": 100,
+  "musicSrc": "audio/tutorials/ai-faceswap-scam/bgm.mp3",
+  "musicVolume": 0.08,
+  "musicDuckDb": 18,
+  "credit": "画面均为自绘示意",
+  "source": "inputs/ai-faceswap-scam/script.md",
+  "steps": ["挥手侧脸", "按鼻子", "挂断回拨"],
+  "look": {"theme": "blueprint", "frame": "full", "header": "chapters", "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["pushUp", "push"], "small": ["push", "glitch"]}},
+  "highlights": [],
+  "cover": "hook",
+  "coverCard": {
+    "template": "conflict",
+    "headline": ["视频里的“妈妈”", "开口要5万？"],
+    "support": "3招识破AI换脸",
+    "tag": "防骗 · AI换脸",
+    "anchor": "fs.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 130], "size": 104, "anchor": [540, 860, 0.95], "support": 1300},
+      "6:7": {"headline": [80, 100], "size": 96, "anchor": [540, 750, 0.82], "support": 1150},
+      "9:16": {"headline": [80, 330], "size": 112, "anchor": [540, 1070, 1.0], "support": 1560}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "fs.hook", "step": 0, "pace": "brisk",
+      "narration": "视频里是你妈，{a}开口就要[5万|五万]，{b}你转不转？"},
+    {"id": "fake", "visual": "fs.fake", "step": 0, "pace": "brisk",
+      "narration": "现在骗子用AI，{a}脸能换，{b}声音也能仿。"},
+    {"id": "three", "visual": "fs.three", "step": 0, "pace": "brisk",
+      "narration": "记住[3|三]招，{a}[10|十]秒就能识破。"},
+    {"id": "wave", "visual": "fs.wave", "step": 1, "pace": "brisk",
+      "narration": "第一招，{a}让对方在脸前快速挥挥手，{b}或者转个侧脸。{c}实时换脸的画面，{d}很容易出现扭曲、卡顿。"},
+    {"id": "nose", "visual": "fs.nose", "step": 2, "pace": "brisk",
+      "narration": "第二招，{a}让他按一下鼻子。{b}真人的鼻子会变形，{c}AI画面经常露馅。"},
+    {"id": "callback", "visual": "fs.callback", "step": 3, "pace": "brisk",
+      "narration": "第三招最管用：{a}直接挂断，{b}用你手机里存的号码打回去。"},
+    {"id": "safeword", "visual": "fs.safeword", "step": 3, "pace": "brisk",
+      "narration": "再跟家里约个暗号，{a}比如“我们第一次旅游去的哪儿”，{b}答不上来就别信。"},
+    {"id": "police", "visual": "fs.police", "step": 3, "pace": "normal",
+      "narration": "警方反复提醒：{a}只凭一个视频要钱，{b}先别转。{c}拿不准，就打[110|一一零]，{d}或者[96110|九六一一零]问问。"},
+    {"id": "end", "visual": "fs.end", "step": 3, "pace": "calm", "tailMs": 1400,
+      "narration": "眼见不一定为实。{a}转钱之前，{b}多打一个电话。"}
+  ]
+}
