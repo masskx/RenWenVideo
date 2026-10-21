@@ -43,8 +43,8 @@ const Stamp: React.FC<{f: number; at: number; c?: string; size?: number; deg?: n
     padding: '4px 22px', whiteSpace: 'nowrap'}}>{children}</div>;
 };
 /** White app-style tile with a logo inside (logos only identify the platform). */
-const Tile: React.FC<{src: string; size?: number; pad?: number}> = ({src, size = 110, pad = 14}) => (
-  <div style={{width: size, height: size, borderRadius: size * 0.22, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 'none',
+const Tile: React.FC<{src: string; size?: number; pad?: number; bg?: string}> = ({src, size = 110, pad = 14, bg = '#fff'}) => (
+  <div style={{width: size, height: size, borderRadius: size * 0.22, background: bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 'none',
     padding: pad, boxSizing: 'border-box'}}>
     <Img src={IMG(src)} style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'contain'}} />
   </div>
@@ -123,10 +123,10 @@ const HubRing: React.FC<{f: number; n: number; forget: number; land: number; cou
       </g>;
     })}
     <g transform={`translate(${CX} ${CY}) scale(${1 + 0.04 * sq} ${1 - 0.05 * sq})`}>
-      <rect x={-105} y={-185} width={210} height={370} rx={34} fill={BG} stroke={INK} strokeWidth={6} />
+      <rect x={-125} y={-185} width={250} height={370} rx={34} fill={BG} stroke={INK} strokeWidth={6} />
       <rect x={-34} y={-170} width={68} height={14} rx={7} fill={PANEL_HI} />
       <text x={0} y={-90} textAnchor="middle" fontFamily={font} fontWeight={800} fontSize={40} fill={DIM}>手机号</text>
-      <text x={0} y={40} textAnchor="middle" fontFamily={mono} fontWeight={800} fontSize={124} fill={A}>{count}</text>
+      <text x={0} y={40} textAnchor="middle" fontFamily={mono} fontWeight={800} fontSize={112} fill={A}>{count}</text>
       <text x={0} y={120} textAnchor="middle" fontFamily={font} fontWeight={800} fontSize={40} fill={DIM}>个账号</text>
     </g>
   </svg>;
@@ -257,7 +257,7 @@ const Check: Scene = ({f, cue}) => {
       <div style={{position: 'absolute', inset: 0, transform: `translateX(${buzz}px)`}}>
         {/* 0: WeChat search */}
         <div style={{position: 'absolute', inset: 0, ...at(0)}}>
-          <div style={{display: 'flex', justifyContent: 'center', marginTop: 40}}><Tile src="wechat.svg" size={150} pad={18} /></div>
+          <div style={{display: 'flex', justifyContent: 'center', marginTop: 40}}><Tile src="wechat-icon.png" size={150} pad={16} bg={PANEL_HI} /></div>
           <Big size={48} c={DIM} style={{textAlign: 'center', marginTop: 24}}>微信 · 搜一搜</Big>
           <div style={{marginTop: 50}}><SearchBar f={f} text="" at={1e9} /></div>
         </div>
@@ -370,8 +370,8 @@ const Card: Scene = ({f, cue}) => {
         </div>
       </Pop></Abs>
     </div>
-    <Abs y={790} w={W} style={{display: 'flex', justifyContent: 'center'}}><Stamp f={f} at={p.d} c={A} size={70} deg={-4}>⚠ 只在云闪付App内</Stamp></Abs>
-    {f >= p.e - 2 && <Abs y={930} w={W} style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 22}}>
+    <Abs y={770} w={W} style={{display: 'flex', justifyContent: 'center'}}><Stamp f={f} at={p.d} c={A} size={70} deg={-3}>⚠ 只在云闪付App内</Stamp></Abs>
+    {f >= p.e - 2 && <Abs y={950} w={W} style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 22}}>
       <Pop f={f} at={p.e} origin="50% 50%"><div style={{position: 'relative'}}>
         <Chip c={DIM} size={46}>“帮你查卡”的链接 / 电话</Chip>
         <div style={{position: 'absolute', left: -8, right: -8, top: '50%', height: 8, background: RED, transform: `scaleX(${clamp((f - p.e - 6) / 8)})`, transformOrigin: 'left'}} />
@@ -470,19 +470,19 @@ const Risk: Scene = ({f, cue}) => {
         </React.Fragment>)}
       </div>
       <Mono size={40} c={DIM} w={700} style={{marginTop: 30, opacity: clamp((f - p.c - 20) / 8)}}>高风险排前面 · 先处理</Mono>
-      <Abs y={620} x={300} w={560}><Stamp f={f} at={p.c + 34} c={B} size={60} deg={-4}>10 分钟 · 一张清单</Stamp></Abs>
+      <Abs y={600} x={120} w={640} style={{display: 'flex', justifyContent: 'center'}}><Stamp f={f} at={p.c + 30} c={B} size={60} deg={-3}>10 分钟 · 一张清单</Stamp></Abs>
     </Chat>
   </Root>;
 };
 Risk.sfx = (cue) => {
   const p = riskPlan(cue);
-  return [{at: p.a + 6, kind: 'tick', gain: 0.1}, {at: p.b + 6, kind: 'tick', gain: 0.1}, {at: p.c + 4, kind: 'pop', gain: 0.1}, {at: p.c + 34, kind: 'stamp', gain: 0.16}];
+  return [{at: p.a + 6, kind: 'tick', gain: 0.1}, {at: p.b + 6, kind: 'tick', gain: 0.1}, {at: p.c + 4, kind: 'pop', gain: 0.1}, {at: p.c + 30, kind: 'stamp', gain: 0.16}];
 };
 
 /* ---------- 8 step 3: where the delete button lives (paths from §2; 以App内为准) ---------- */
 
 const pathPlan = (cue: Cue) => ({a: cue('a', 36), b: cue('b', 118)});
-const PATHS = [{logo: 'wechat.svg', name: '微信', steps: ['我', '设置', '账号与安全', '微信安全中心', '注销账号'], key: 'a'},
+const PATHS = [{logo: 'wechat-icon.png', name: '微信', steps: ['我', '设置', '账号与安全', '微信安全中心', '注销账号'], key: 'a'},
   {logo: 'douyin.svg', name: '抖音', steps: ['我', '☰', '设置', '账号与安全', '抖音安全中心', '注销账号'], key: 'b'},
   {logo: 'qq.svg', name: 'QQ', steps: ['设置', '账号与安全', '更多安全设置', '注销账号'], key: 'q'},
   {logo: 'weibo.svg', name: '微博', steps: ['我', '设置', '账号与安全', '注销账号'], key: 'w'}];
@@ -498,7 +498,7 @@ const Paths: Scene = ({f, cue}) => {
         const on = r.key === cur;
         return <div key={r.name} style={{display: 'flex', gap: 18, alignItems: 'center', padding: '16px 18px', background: PANEL, border: `4px solid ${on ? A : f >= at ? LINE : '#1b2a3f'}`,
           opacity: f >= at - 1 ? 1 : 0.35, minHeight: 150}}>
-          <Tile src={r.logo} size={104} pad={r.logo === 'wechat.svg' || r.logo === 'douyin.svg' ? 8 : 14} />
+          <Tile src={r.logo} size={104} pad={r.logo === 'douyin.svg' ? 8 : 12} bg={r.logo === 'wechat-icon.png' ? PANEL_HI : '#fff'} />
           <div style={{display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center'}}>
             {r.steps.map((s, i) => {
               const show = f >= at + i * 4;
@@ -567,7 +567,7 @@ const Law: Scene = ({f, cue}) => {
   const doc = springStep(S(f), S(p.a - 6), {f: 1.8, z: 0.8});
   const hl = clamp((f - p.b) / 12);
   return <Root>
-    <div style={{...phaseOp(f, -20, p.a)}}>
+    <div style={{opacity: 1 - clamp((f - p.a + 10) / 8), transform: `translateY(${-60 * clamp((f - p.a + 10) / 8)}px)`}}>
       <Title t={<>不给<span style={{color: A}}>注销按钮</span>？</>} />
       <Phone x={140} y={150} w={620} h={760}>
         <Big size={52} style={{marginBottom: 28}}>账号与安全</Big>
@@ -600,7 +600,7 @@ Law.sfx = (cue) => {
 /* ---------- 11 AI writes the request; refusing needs a reason (art. 50) ---------- */
 
 const letterPlan = (cue: Cue) => ({a: cue('a', 4), b: cue('b', 70), c: cue('c', 100)});
-const LETTER = ['依据《个人信息保护法》第四十七条、第五十条，', '请删除我在贵平台的账号及相关个人信息。', '我可以配合身份核验。', '请在合理期限内书面答复；', '如拒绝，请说明理由。'];
+const LETTER = ['依据《个人信息保护法》', '第四十七条、第五十条，', '请删除我在贵平台的账号及相关个人信息。', '我可以配合身份核验。', '请在合理期限内书面答复；', '如拒绝，请说明理由。'];
 const Letter: Scene = ({f, cue}) => {
   const p = letterPlan(cue);
   const fly = ease.inOutCubic(clamp((f - p.b) / 16));
@@ -610,8 +610,8 @@ const Letter: Scene = ({f, cue}) => {
       <div style={{background: '#e9eef5', color: '#17212e', padding: '26px 32px', boxShadow: '0 20px 50px rgba(0,0,0,0.5)', minHeight: 640}}>
         <div style={{fontFamily: font, fontWeight: 900, fontSize: 48, textAlign: 'center', marginBottom: 18}}>个人信息删除申请</div>
         {LETTER.map((l, i) => {
-          const at = p.a + 8 + i * 9;
-          const last = i >= 3 && f >= p.c;
+          const at = p.a + 8 + i * 8;
+          const last = i >= 4 && f >= p.c;
           return <div key={l} style={{fontFamily: font, fontWeight: 700, fontSize: 40, lineHeight: 1.55, opacity: clamp((f - at) / 6),
             background: last ? 'rgba(255,171,64,0.75)' : undefined}}>{l}</div>;
         })}
@@ -639,8 +639,8 @@ const Complain: Scene = ({f, cue}) => {
   return <Root>
     <Title k="第四步：" t={<><span style={{color: A}}>12321</span> 投诉</>} />
     <Abs y={120} w={W} style={{display: 'flex', alignItems: 'center', gap: 22}}>
-      <Pop f={f} at={p.a - 6}><Tile src="12321-logo.png" size={130} pad={10} /></Pop>
-      <Pop f={f} at={p.a}><div style={{background: '#fff', padding: '14px 18px'}}><Img src={IMG('12321-logo-title.png')} style={{width: 640, display: 'block'}} /></div></Pop>
+      <Pop f={f} at={p.a - 6}><Tile src="12321-logo.png" size={110} pad={8} /></Pop>
+      <Pop f={f} at={p.a}><div style={{background: '#fff', padding: '18px 10px'}}><Img src={IMG('12321-logo-title.png')} style={{width: 740, display: 'block'}} /></div></Pop>
     </Abs>
     <Abs y={300} w={W}><Pop f={f} at={p.a + 8} origin="50% 0%">
       <div style={{border: `4px solid ${STEEL}`, background: PANEL, padding: '24px 26px', position: 'relative'}}>
@@ -651,18 +651,18 @@ const Complain: Scene = ({f, cue}) => {
           fontWeight: 900, fontSize: 46, color: pick ? A : DIM, whiteSpace: 'nowrap'}}>
           {pick ? '账号注销难' : '请选择'}<span style={{marginLeft: 'auto', transform: `rotate(${180 * open}deg)`}}>▾</span>
         </div>
-        <div style={{overflow: 'hidden', height: 380 * open * (pick ? 1 - clamp((f - p.c - 16) / 10) : 1)}}>
+        <div style={{overflow: 'hidden', height: 380 * open}}>
           {TYPES.map((t, i) => <div key={t} style={{marginTop: 12, height: 104, display: 'flex', alignItems: 'center', padding: '0 22px', background: i === 0 && pick ? A : PANEL_HI,
             color: i === 0 && pick ? BG : INK, fontFamily: font, fontWeight: 900, fontSize: i === 1 ? 40 : 46, whiteSpace: 'nowrap'}}>{t}{i === 0 && pick && <span style={{marginLeft: 'auto'}}>✓</span>}</div>)}
         </div>
       </div>
     </Pop></Abs>
-    <Abs y={900} w={W} style={{display: 'flex', justifyContent: 'center'}}><Stamp f={f} at={p.c + 28} c={A} size={66} deg={-3}>选「账号注销难」</Stamp></Abs>
+    <Abs y={920} w={W} style={{display: 'flex', justifyContent: 'center'}}><Stamp f={f} at={p.c + 12} c={A} size={66} deg={-3}>选「账号注销难」</Stamp></Abs>
   </Root>;
 };
 Complain.sfx = (cue) => {
   const p = compPlan(cue);
-  return [{at: p.a, kind: 'tap', gain: 0.12}, {at: p.b, kind: 'tick', gain: 0.1}, {at: p.c, kind: 'tap', gain: 0.16}, {at: p.c + 28, kind: 'stamp', gain: 0.16}];
+  return [{at: p.a, kind: 'tap', gain: 0.12}, {at: p.b, kind: 'tick', gain: 0.1}, {at: p.c, kind: 'tap', gain: 0.16}, {at: p.c + 12, kind: 'stamp', gain: 0.16}];
 };
 
 /* ---------- 13 the prompt pack, the comment keyword, and a door locking (Pexels) ---------- */
