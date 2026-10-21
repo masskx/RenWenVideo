@@ -31,6 +31,7 @@
 | [`douyin/awesome-seedance/`](douyin/awesome-seedance/) | 开源项目：awesome-seedance，800+ 条实测 AI 视频提示词；模板四步、打斗写接触点、模板 vs Skill。顶部章节条 | 1:52 |
 | [`douyin/sticker-alpha-method/`](douyin/sticker-alpha-method/) | 教程：一个角色 → 一整套透明表情包（定角色、换动作、Alpha 透明底、验收）；画面全是按方法现做的 AI 示例 | 1:25 |
 | [`douyin/sweety-handdraw-video/`](douyin/sweety-handdraw-video/) | 开源 Skill：sweety-handdraw-video，没有一笔是人画的手绘讲解视频，三步上手 | 1:33 |
+| [`douyin/ai-digital-cleanup-cn/`](douyin/ai-digital-cleanup-cn/) | 教程：用 AI 清理网上的个人信息（中国版）——一证通查 / 一键查卡、AI 排风险、注销前检查、个保法第 47 条删除权、12321 投诉；手机界面全自绘示意、个人信息全打码；不引流 | 1:25 |
 
 ## 目录结构
 

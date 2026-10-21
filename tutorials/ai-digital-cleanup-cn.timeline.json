@@ -4,7 +4,7 @@
   "rate": null,
   "fps": 30,
   "leadMs": 100,
-  "totalFrames": 2692,
+  "totalFrames": 2557,
   "scenes": [
     {
       "id": "hook",
@@ -182,41 +182,41 @@
     {
       "id": "sort",
       "audioSrc": "audio/tutorials/ai-digital-cleanup-cn/06-sort.mp3",
-      "audioMs": 7863,
+      "audioMs": 8307,
       "startFrame": 1063,
-      "durationFrames": 242,
+      "durationFrames": 256,
       "cues": {
-        "a": 1601,
-        "b": 4873,
-        "c": 5338,
-        "d": 5802,
-        "e": 6597
+        "a": 1661,
+        "b": 5022,
+        "c": 5517,
+        "d": 6010,
+        "e": 6786
       },
       "captions": [
         {
           "text": "第二步，排",
-          "startMs": 415,
-          "endMs": 1601
+          "startMs": 345,
+          "endMs": 1661
         },
         {
-          "text": "把一证通查的结果和你记",
-          "startMs": 1601,
-          "endMs": 3166
+          "text": "把一证通查的结果",
+          "startMs": 1661,
+          "endMs": 2763
         },
         {
-          "text": "得的App全丢给AI",
-          "startMs": 3166,
-          "endMs": 4873
+          "text": "和你记得的App全丢给AI",
+          "startMs": 2763,
+          "endMs": 5022
         },
         {
           "text": "让它按在用",
-          "startMs": 4873,
-          "endMs": 5802
+          "startMs": 5022,
+          "endMs": 6010
         },
         {
           "text": "半年没用、完全不记得分三类",
-          "startMs": 5802,
-          "endMs": 7607
+          "startMs": 6010,
+          "endMs": 8186
         }
       ]
     },
@@ -224,7 +224,7 @@
       "id": "risk",
       "audioSrc": "audio/tutorials/ai-digital-cleanup-cn/07-risk.mp3",
       "audioMs": 4493,
-      "startFrame": 1305,
+      "startFrame": 1319,
       "durationFrames": 141,
       "cues": {
         "a": 405,
@@ -253,7 +253,7 @@
       "id": "paths",
       "audioSrc": "audio/tutorials/ai-digital-cleanup-cn/08-paths.mp3",
       "audioMs": 7680,
-      "startFrame": 1446,
+      "startFrame": 1460,
       "durationFrames": 237,
       "cues": {
         "a": 1359,
@@ -291,7 +291,7 @@
       "id": "precheck",
       "audioSrc": "audio/tutorials/ai-digital-cleanup-cn/09-precheck.mp3",
       "audioMs": 7654,
-      "startFrame": 1683,
+      "startFrame": 1697,
       "durationFrames": 236,
       "cues": {
         "a": 1965,
@@ -333,7 +333,7 @@
       "id": "law",
       "audioSrc": "audio/tutorials/ai-digital-cleanup-cn/10-law.mp3",
       "audioMs": 5721,
-      "startFrame": 1919,
+      "startFrame": 1933,
       "durationFrames": 178,
       "cues": {
         "a": 2644,
@@ -361,7 +361,7 @@
       "id": "letter",
       "audioSrc": "audio/tutorials/ai-digital-cleanup-cn/11-letter.mp3",
       "audioMs": 5146,
-      "startFrame": 2097,
+      "startFrame": 2111,
       "durationFrames": 161,
       "cues": {
         "a": 455,
@@ -390,7 +390,7 @@
       "id": "complain",
       "audioSrc": "audio/tutorials/ai-digital-cleanup-cn/12-complain.mp3",
       "audioMs": 5277,
-      "startFrame": 2258,
+      "startFrame": 2272,
       "durationFrames": 165,
       "cues": {
         "a": 1865,
@@ -418,39 +418,22 @@
     {
       "id": "end",
       "audioSrc": "audio/tutorials/ai-digital-cleanup-cn/13-end.mp3",
-      "audioMs": 8255,
-      "startFrame": 2423,
-      "durationFrames": 269,
+      "audioMs": 3291,
+      "startFrame": 2437,
+      "durationFrames": 120,
       "cues": {
-        "a": 2425,
-        "b": 3626,
-        "c": 5235
+        "c": 1318
       },
       "captions": [
         {
-          "text": "五条提示词我整理好了",
-          "startMs": 435,
-          "endMs": 2425
-        },
-        {
-          "text": "评论区扣「清理」",
-          "startMs": 2425,
-          "endMs": 3626
-        },
-        {
-          "text": "我把资料包放在主页",
-          "startMs": 3626,
-          "endMs": 5235
-        },
-        {
           "text": "花一个下午",
-          "startMs": 5235,
-          "endMs": 6279
+          "startMs": 355,
+          "endMs": 1318
         },
         {
           "text": "把自己从网上收拾干净",
-          "startMs": 6279,
-          "endMs": 8329
+          "startMs": 1318,
+          "endMs": 3314
         }
       ]
     }

@@ -22,7 +22,7 @@
   "coverCard": {
     "template": "number",
     "headline": ["你的手机号", "绑了多少个账号？"],
-    "support": "4步 · 全程合法 · 只查自己",
+    "support": "4步用AI清理 · 只查自己",
     "tag": "个人信息大扫除 · AI",
     "anchor": "dc.cover",
     "layouts": {
@@ -43,7 +43,7 @@
     {"id": "card", "visual": "dc.card", "step": 1, "pace": "brisk",
       "narration": "顺手再用{a}云闪付搜{b}一键查卡，{c}看看名下有没有你不知道的银行卡。{d}这个功能只在云闪付里，{e}别的渠道找你查卡的都是骗子。"},
     {"id": "sort", "visual": "dc.sort", "step": 2, "pace": "fast",
-      "narration": "第二步，排。{a}把一证通查的结果和你记得的App全丢给AI，{b}让它按{c}在用、{d}半年没用、{e}完全不记得分三类。"},
+      "narration": "第二步，排。{a}把一证通查的结果，和你记得的App全丢给AI，{b}让它按{c}在用、{d}半年没用、{e}完全不记得分三类。"},
     {"id": "risk", "visual": "dc.risk", "step": 2, "pace": "brisk",
       "narration": "{a}再按绑没绑银行卡、{b}有没有实名排风险。{c}十分钟出一张清单。"},
     {"id": "paths", "visual": "dc.paths", "step": 3, "pace": "fast",
@@ -56,7 +56,7 @@
       "narration": "{a}让AI帮你写一封删除申请，{b}发给客服，{c}平台拒绝必须说明理由。"},
     {"id": "complain", "visual": "dc.complain", "step": 4, "pace": "brisk",
       "narration": "第四步，还是不理你，{a}就去[12321|一二三二一]投诉，{b}类型直接选{c}账号注销难。"},
-    {"id": "end", "visual": "dc.end", "step": 4, "pace": "normal", "tailMs": 600,
-      "narration": "五条提示词我整理好了，{a}评论区扣「清理」，{b}我把资料包放在主页。{pace:slow}{c}花一个下午，把自己从网上收拾干净。"}
+    {"id": "end", "visual": "dc.end", "step": 4, "pace": "slow", "tailMs": 600,
+      "narration": "{pace:slow}花一个下午，{c}把自己从网上收拾干净。"}
   ]
 }

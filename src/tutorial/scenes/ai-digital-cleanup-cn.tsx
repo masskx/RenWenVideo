@@ -2,7 +2,7 @@ import React from 'react';
 import {Img, OffthreadVideo, staticFile} from 'remotion';
 import {font} from '../theme';
 import {clamp, ease, springStep} from '../../fx';
-import {Cue, S, Scene, hitOf, phaseOp} from '../paper';
+import {Cue, S, Scene, cam, hitOf, phaseOp} from '../paper';
 import {A, B, BG, Big, DIM, INK, LINE, Mono, PANEL, PANEL_HI, STEEL, mono} from '../tech';
 
 // ai-digital-cleanup-cn: clean up your own accounts and personal data with AI, the China version (≈ 88 s, length override in the script).
@@ -419,7 +419,9 @@ const Sort: Scene = ({f, cue}) => {
         <div style={{display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 10}}>
           {APPS.map((a, i) => {
             const go = f >= p.e + 8 ? 1 : 0;
-            return <span key={a} style={{fontSize: 40, padding: '0 12px', border: `3px solid ${STEEL}`, borderRadius: 10, opacity: (1 - go * 0.7) * clamp((f - p.a - 4 - i * 3) / 6)}}>{a}</span>;
+            const at = p.a + 6 + i * Math.max(3, (p.b - p.a - 12) / APPS.length);
+            return <span key={a} style={{fontSize: 40, padding: '0 12px', border: `3px solid ${f >= at && f < at + 10 ? A : STEEL}`, borderRadius: 10,
+              opacity: (1 - go * 0.7) * clamp((f - at) / 6), transform: `translateY(${-30 * (1 - ease.outBack(clamp((f - at) / 8), 1.4))}px)`, display: 'inline-block'}}>{a}</span>;
           })}
         </div>
       </UserMsg>
@@ -441,6 +443,10 @@ const Sort: Scene = ({f, cue}) => {
     </Chat>
   </Root>;
 };
+Sort.camera = (cue) => {
+  const p = sortPlan(cue);
+  return [cam(0, 450, 540, 1.0), cam(p.a, 450, 260, 1.1), cam(p.b - 4, 450, 540, 1.0)];
+};
 Sort.sfx = (cue) => {
   const p = sortPlan(cue);
   return [{at: p.a, kind: 'whoosh-short', gain: 0.07}, {at: p.c, kind: 'tick', gain: 0.1}, {at: p.d, kind: 'tick', gain: 0.1}, {at: p.e, kind: 'tick', gain: 0.1},
@@ -459,11 +465,17 @@ const Risk: Scene = ({f, cue}) => {
   return <Root>
     <Title k="第二步：" t={<>让AI<span style={{color: A}}>排优先级</span></>} />
     <Chat>
-      <div style={{display: 'grid', gridTemplateColumns: '220px 150px 150px 1fr', rowGap: 14, alignItems: 'center', fontFamily: font, fontWeight: 900, fontSize: 44, color: INK}}>
+      {(() => {
+        const col = f >= p.c ? 3 : f >= p.b ? 2 : f >= p.a ? 1 : 0;
+        const x = springStep(S(f), S(p.a), {f: 2.4, z: 0.8}) * 220 + springStep(S(f), S(p.b), {f: 2.4, z: 0.8}) * 150 + springStep(S(f), S(p.c), {f: 2.4, z: 0.8}) * 150;
+        return col > 0 && <div style={{position: 'absolute', left: 22 + x, top: 14, width: col === 3 ? 300 : 150, height: 400, background: 'rgba(255,171,64,0.16)',
+          border: `3px solid ${A}`}} />;
+      })()}
+      <div style={{position: 'relative', display: 'grid', gridTemplateColumns: '220px 150px 150px 1fr', rowGap: 14, alignItems: 'center', fontFamily: font, fontWeight: 900, fontSize: 44, color: INK}}>
         {['App', '绑卡', '实名', '处理'].map((h, i) => <div key={h} style={{color: (i === 1 && f >= p.a) || (i === 2 && f >= p.b) || (i === 3 && f >= p.c) ? A : DIM,
           textAlign: i ? 'center' : 'left'}}>{h}</div>)}
         {TABLE.map((r, i) => <React.Fragment key={r.app}>
-          <div style={{background: PANEL, padding: '8px 12px'}}>{r.app}</div>
+          <div style={{background: r.card && r.real && f >= p.b + 14 ? 'rgba(255,90,90,0.35)' : PANEL, padding: '8px 12px'}}>{r.app}</div>
           <div style={{textAlign: 'center'}}>{mark(r.card, p.a + 6 + i * 4)}</div>
           <div style={{textAlign: 'center'}}>{mark(r.real, p.b + 6 + i * 4)}</div>
           <div style={{textAlign: 'center'}}><Pop f={f} at={p.c + 4 + i * 5} origin="50% 50%"><Chip c={ACTS[r.act].c} size={42} fill={r.act === 2}>{ACTS[r.act].t}</Chip></Pop></div>
@@ -481,38 +493,49 @@ Risk.sfx = (cue) => {
 
 /* ---------- 8 step 3: where the delete button lives (paths from §2; 以App内为准) ---------- */
 
-const pathPlan = (cue: Cue) => ({a: cue('a', 36), b: cue('b', 118)});
-const PATHS = [{logo: 'wechat-icon.png', name: '微信', steps: ['我', '设置', '账号与安全', '微信安全中心', '注销账号'], key: 'a'},
-  {logo: 'douyin.svg', name: '抖音', steps: ['我', '☰', '设置', '账号与安全', '抖音安全中心', '注销账号'], key: 'b'},
+const pathPlan = (cue: Cue, dur = 240) => ({a: cue('a', 36), b: cue('b', 118), dur});
+const PATHS: {logo: string; name: string; steps: string[]; key: string; cool?: string}[] = [
+  {logo: 'wechat-icon.png', name: '微信', steps: ['我', '设置', '账号与安全', '微信安全中心', '注销账号'], key: 'a', cool: '15天可撤销'},
+  {logo: 'douyin.svg', name: '抖音', steps: ['我', '☰', '设置', '账号与安全', '抖音安全中心', '注销账号'], key: 'b', cool: '约7天冷静期'},
   {logo: 'qq.svg', name: 'QQ', steps: ['设置', '账号与安全', '更多安全设置', '注销账号'], key: 'q'},
   {logo: 'weibo.svg', name: '微博', steps: ['我', '设置', '账号与安全', '注销账号'], key: 'w'}];
-const Paths: Scene = ({f, cue}) => {
-  const p = pathPlan(cue);
+const Paths: Scene = ({f, cue, dur}) => {
+  const p = pathPlan(cue, dur);
   const ats: Record<string, number> = {a: p.a, b: p.b, q: p.b + 34, w: p.b + 50};
   const cur = f >= p.b ? 'b' : f >= p.a ? 'a' : '';
+  // the spoken card walks its path step by step until the next card is named
+  const sp: Record<string, number> = {a: Math.max(4, (p.b - p.a - 16) / 5), b: Math.max(4, (p.dur - p.b - 30) / 6), q: 4, w: 4};
   return <Root>
     <Title k="第三步：" t={<span style={{color: A}}>注销入口</span>} />
-    <Abs y={115} w={W} style={{display: 'flex', flexDirection: 'column', gap: 18}}>
+    <Abs y={125} w={W} style={{display: 'flex', flexDirection: 'column', gap: 34}}>
       {PATHS.map((r) => {
         const at = ats[r.key];
         const on = r.key === cur;
-        return <div key={r.name} style={{display: 'flex', gap: 18, alignItems: 'center', padding: '16px 18px', background: PANEL, border: `4px solid ${on ? A : f >= at ? LINE : '#1b2a3f'}`,
+        return <div key={r.name} style={{position: 'relative', display: 'flex', gap: 18, alignItems: 'center', padding: '16px 18px', background: PANEL, border: `4px solid ${on ? A : f >= at ? LINE : '#1b2a3f'}`,
           opacity: f >= at - 1 ? 1 : 0.35, minHeight: 150}}>
           <Tile src={r.logo} size={104} pad={r.logo === 'douyin.svg' ? 8 : 12} bg={r.logo === 'wechat-icon.png' ? PANEL_HI : '#fff'} />
           <div style={{display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center'}}>
             {r.steps.map((s, i) => {
-              const show = f >= at + i * 4;
+              const show = f >= at + i * sp[r.key];
+              const now = on && show && (i === r.steps.length - 1 || f < at + (i + 1) * sp[r.key]);
               return <React.Fragment key={s + i}>
                 {i > 0 && <span style={{fontFamily: font, fontWeight: 900, fontSize: 40, color: DIM, opacity: show ? 1 : 0}}>›</span>}
-                <span style={{fontFamily: font, fontWeight: 900, fontSize: 42, color: i === r.steps.length - 1 ? (on ? A : INK) : INK, whiteSpace: 'nowrap', opacity: show ? 1 : 0.15}}>{s}</span>
+                <span style={{fontFamily: font, fontWeight: 900, fontSize: 42, color: now ? BG : i === r.steps.length - 1 && on ? A : INK, background: now ? A : 'transparent',
+                  padding: '0 6px', whiteSpace: 'nowrap', opacity: show ? 1 : 0.15}}>{s}</span>
               </React.Fragment>;
             })}
           </div>
+          {r.cool && <div style={{position: 'absolute', right: 14, top: -30, ...popIn(f, at + r.steps.length * sp[r.key]), transformOrigin: '100% 50%'}}>
+            <Chip c={B} size={40} fill>{r.cool}</Chip></div>}
         </div>;
       })}
     </Abs>
     <Abs y={990} w={W}><Mono size={40} c={DIM} w={700}>路径以 App 内为准 · 一般有冷静期</Mono></Abs>
   </Root>;
+};
+Paths.camera = (cue) => {
+  const p = pathPlan(cue);
+  return [cam(0, 450, 540, 1.0), cam(p.a, 450, 200, 1.1), cam(p.b, 450, 360, 1.1), cam(p.b + 40, 450, 540, 1.0)];
 };
 Paths.sfx = (cue) => {
   const p = pathPlan(cue);
@@ -530,13 +553,19 @@ const Pre: Scene = ({f, cue}) => {
     <Title k="第三步：" t={<>注销前<span style={{color: A}}>先问AI</span></>} />
     <Chat h={940}>
       <UserMsg f={f} at={0}>{typed('注销前要先清哪些东西？', f, 2, 0.6)}{f < 40 && <Caret f={f} />}</UserMsg>
-      <div style={{marginTop: 26, display: 'flex', flexDirection: 'column', gap: 16}}>
+      {f >= p.a && <Pop f={f} at={p.a}><div style={{marginTop: 22, display: 'inline-block', background: PANEL_HI, border: `3px solid ${STEEL}`, borderRadius: '8px 30px 30px 30px',
+        padding: '10px 22px', fontFamily: font, fontWeight: 800, fontSize: 42, color: INK}}>先处理这 4 样：</div></Pop>}
+      <div style={{marginTop: 18, display: 'flex', flexDirection: 'column', gap: 12}}>
         {items.map((it, i) => {
           // the last one is the item people forget: it stays unticked and turns red on "漏一个"
           const miss = i === 3 && failed;
           const tick = i === 3 ? 0 : clamp((f - it.at - 2) / 8);
+          if (f >= p.a && f < it.at) return <div key={it.t} style={{height: 92, border: `4px dashed ${LINE}`, display: 'flex', alignItems: 'center', gap: 22, padding: '0 24px',
+            opacity: clamp((f - p.a - i * 3) / 6) * 0.7}}>
+            <div style={{width: 52, height: 52, borderRadius: 8, border: `5px solid ${LINE}`}} /><div style={{width: 160 + 60 * (i % 2), height: 28, borderRadius: 14, background: LINE}} />
+          </div>;
           return <Pop key={it.t} f={f} at={it.at}>
-            <div style={{display: 'flex', alignItems: 'center', gap: 22, height: 104, padding: '0 24px', background: miss ? 'rgba(255,90,90,0.16)' : PANEL,
+            <div style={{display: 'flex', alignItems: 'center', gap: 22, height: 92, padding: '0 24px', background: miss ? 'rgba(255,90,90,0.16)' : PANEL,
               border: `4px solid ${miss ? RED : LINE}`}}>
               <svg width={60} height={60} viewBox="0 0 60 60"><rect x={4} y={4} width={52} height={52} rx={8} fill="none" stroke={miss ? RED : B} strokeWidth={5} />
                 <path d="M15 31 L26 42 L46 18" fill="none" stroke={B} strokeWidth={7} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={50} strokeDashoffset={50 * (1 - tick)} /></svg>
@@ -546,7 +575,7 @@ const Pre: Scene = ({f, cue}) => {
           </Pop>;
         })}
       </div>
-      <Abs y={700} x={150} w={560}><Pop f={f} at={p.f + 6} origin="50% 50%">
+      <Abs y={690} x={150} w={560}><Pop f={f} at={p.f + 6} origin="50% 50%">
         <div style={{border: `5px solid ${RED}`, background: BG, padding: '18px 24px', textAlign: 'center'}}>
           <Big size={60} c={RED}>✕ 注销失败</Big>
         </div>
@@ -665,50 +694,33 @@ Complain.sfx = (cue) => {
   return [{at: p.a, kind: 'tap', gain: 0.12}, {at: p.b, kind: 'tick', gain: 0.1}, {at: p.c, kind: 'tap', gain: 0.16}, {at: p.c + 12, kind: 'stamp', gain: 0.16}];
 };
 
-/* ---------- 13 the prompt pack, the comment keyword, and a door locking (Pexels) ---------- */
+/* ---------- 13 end: four steps done, a door locking (Pexels), the closing line. No CTA (Douyin: no off-platform traffic). ---------- */
 
-const endPlan = (cue: Cue) => ({a: cue('a', 66), b: cue('b', 110), c: cue('c', 168)});
-const PACK = ['账号盘点清单', '注销前检查', '删除申请函', '隐私政策审查', '公开信息自查'];
+const endPlan = (cue: Cue) => ({c: cue('c', 40)});
 const End: Scene = ({f, cue}) => {
   const p = endPlan(cue);
-  const film = clamp((f - p.c + 4) / 14);
   return <Root>
-    <div style={{position: 'absolute', inset: 0, opacity: 1 - film}}>
-      <Abs y={0} w={W} style={{display: 'flex', justifyContent: 'space-between'}}>
-        {STEPS.map((s, i) => <Pop key={s} f={f} at={-20 + i * 4} origin="50% 50%"><div style={{width: 196, height: 100, background: PANEL, border: `4px solid ${B}`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, fontFamily: font, fontWeight: 900, fontSize: 48, color: INK}}>
-          <span style={{color: B}}>✓</span>{s}</div></Pop>)}
-      </Abs>
-      <Abs y={150} x={90} w={720}>
-        <div style={{background: '#e9eef5', color: '#17212e', padding: '28px 34px', transform: 'rotate(-2deg)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)'}}>
-          <div style={{fontFamily: mono, fontWeight: 800, fontSize: 32, color: '#5b6878'}}>PROMPT PACK</div>
-          <div style={{fontFamily: font, fontWeight: 900, fontSize: 58, lineHeight: 1.2}}>个人信息大扫除</div>
-          <div style={{fontFamily: font, fontWeight: 900, fontSize: 46, color: '#bf4b2c', marginBottom: 12}}>提示词包 · 5 条</div>
-          {PACK.map((t, i) => <div key={t} style={{fontFamily: font, fontWeight: 700, fontSize: 40, lineHeight: 1.5, opacity: clamp((f - 6 - i * 6) / 6)}}>{`P${i + 1}  ${t}`}</div>)}
-        </div>
-      </Abs>
-      <Abs y={800} w={W} style={{display: 'flex', alignItems: 'center', gap: 18}}>
-        <Pop f={f} at={p.a}><div style={{background: PANEL_HI, border: `4px solid ${A}`, borderRadius: '8px 32px 32px 32px', padding: '10px 26px', fontFamily: font,
-          fontWeight: 900, fontSize: 52, color: INK, whiteSpace: 'nowrap'}}>评论区扣「<span style={{color: A}}>{typed('清理', f, p.a + 6, 0.3) || ' '}</span>」</div></Pop>
-        <Pop f={f} at={p.b}><Chip c={B} size={52} fill>领提示词包</Chip></Pop>
-      </Abs>
-    </div>
-    {film > 0 && <div style={{position: 'absolute', inset: 0, opacity: film}}>
-      <Abs x={-60} y={120} w={1080} h={608} style={{overflow: 'hidden'}}>
-        <OffthreadVideo src={CLIP('lock.mp4')} muted style={{width: '100%', height: '100%', objectFit: 'cover'}} />
-        <div style={{position: 'absolute', right: 0, bottom: 0, background: 'rgba(12,26,44,0.85)', color: INK, fontFamily: font, fontWeight: 700, fontSize: 40,
-          padding: '0 12px'}}>Pexels 素材</div>
-      </Abs>
-      <Abs y={790} w={W} style={{textAlign: 'center'}}>
-        <Big size={64}>花一个下午</Big>
-        <Big size={72} c={A}>把自己从网上收拾干净</Big>
-      </Abs>
-    </div>}
+    <Abs x={-60} y={0} w={1080} h={608} style={{overflow: 'hidden'}}>
+      {/* from 2.3 s in the source: the hand reaches in and turns the lock while the line is spoken; slow push-in */}
+      <OffthreadVideo src={CLIP('lock.mp4')} muted trimBefore={69} style={{width: '100%', height: '100%', objectFit: 'cover',
+        transform: `scale(${1 + 0.1 * clamp(f / 110)})`}} />
+      <div style={{position: 'absolute', right: 0, bottom: 0, background: 'rgba(12,26,44,0.85)', color: INK, fontFamily: font, fontWeight: 700, fontSize: 40,
+        padding: '0 12px'}}>Pexels 素材</div>
+    </Abs>
+    <Abs y={650} w={W} style={{display: 'flex', justifyContent: 'space-between'}}>
+      {STEPS.map((s, i) => <Pop key={s} f={f} at={-12 + i * 5} origin="50% 50%"><div style={{width: 200, height: 100, background: PANEL, border: `4px solid ${B}`,
+        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, fontFamily: font, fontWeight: 900, fontSize: 48, color: INK}}>
+        <span style={{color: B}}>✓</span>{s}</div></Pop>)}
+    </Abs>
+    <Abs y={800} w={W} style={{textAlign: 'center'}}>
+      <Pop f={f} at={2} origin="50% 50%"><Big size={64}>花一个下午</Big></Pop>
+      <Pop f={f} at={p.c} origin="50% 50%"><Big size={76} c={A}>把自己从网上收拾干净</Big></Pop>
+    </Abs>
   </Root>;
 };
 End.sfx = (cue) => {
   const p = endPlan(cue);
-  return [{at: p.a, kind: 'pop', gain: 0.12}, {at: p.b, kind: 'tap', gain: 0.12}, {at: p.c, kind: 'whoosh-short', gain: 0.07}, {at: p.c + 70, kind: 'chime', gain: 0.12}];
+  return [{at: 0, kind: 'tick', gain: 0.08}, {at: p.c, kind: 'tap', gain: 0.12}, {at: p.c + 50, kind: 'chime', gain: 0.12}];
 };
 
 /* ---------- cover anchor (880 × 800): the hub, settled on "25?" ---------- */
