@@ -1,0 +1,43 @@
+{
+  "id": "php2shell-overtime",
+  "title": "PHP2Shell漏洞",
+  "subtitle": "一个漏洞 · 全球程序员连夜加班",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "tts": {"provider": "doubao"},
+  "leadMs": 100,
+  "tailMs": 100,
+  "musicSrc": "audio/tutorials/php2shell-overtime/bgm.mp3",
+  "musicVolume": 0.08,
+  "musicDuckDb": 18,
+  "credit": "画面均为自绘示意",
+  "source": "inputs/php2shell-overtime/script.md",
+  "steps": [],
+  "look": {"theme": "blueprint", "frame": "full", "header": false, "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["pushUp", "push"], "small": ["push", "glitch"]}},
+  "highlights": [],
+  "cover": "hook",
+  "coverCard": {
+    "template": "conflict",
+    "headline": ["一个漏洞", "全球程序员连夜加班"],
+    "support": "PHP2Shell · 危险评分 9.2",
+    "tag": "网络安全 · PHP",
+    "anchor": "p2s.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 130], "size": 100, "anchor": [540, 860, 0.9], "support": 1300},
+      "6:7": {"headline": [80, 100], "size": 92, "anchor": [540, 760, 0.78], "support": 1150},
+      "9:16": {"headline": [80, 330], "size": 104, "anchor": [540, 1070, 1.0], "support": 1560}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "p2s.hook", "step": 0, "pace": "brisk", "narration": "凌晨三点，{a}全球一大批程序员，{b}被同一个漏洞叫醒了。"},
+    {"id": "name", "visual": "p2s.name", "step": 0, "pace": "fast", "narration": "它叫[PHP2Shell|P H P to Shell]，{a}两个漏洞，{b}危险评分[9.2|九点二]，{c}满分是十。"},
+    {"id": "rce", "visual": "p2s.rce", "step": 0, "pace": "fast", "narration": "攻击者不用登录，{a}远程就可能在你的服务器上执行代码。"},
+    {"id": "scope", "visual": "p2s.scope", "step": 0, "pace": "fast", "narration": "[PHP|P H P]撑着大约七到八成的网站，{a}常见的跑网站方式，{b}基本都在影响范围里。"},
+    {"id": "leak", "visual": "p2s.leak", "step": 0, "pace": "fast", "narration": "漏洞细节还提前泄露了，{a}官方紧急发补丁，{b}欧盟和英国都在催大家马上更新。"},
+    {"id": "patch", "visual": "p2s.patch", "step": 0, "pace": "fast", "narration": "有网站的，{a}把[PHP|P H P]升级到这四个版本之一，{b}升级完记得重启服务，{c}不然可能还在跑旧代码。"},
+    {"id": "eol", "visual": "p2s.eol", "step": 0, "pace": "fast", "narration": "还在用[8.1|八点一]及更早版本的，{a}官方已经不管了，{b}赶紧问服务商，{c}或者直接升级。"},
+    {"id": "end", "visual": "p2s.end", "step": 0, "pace": "calm", "tailMs": 1300, "narration": "漏洞不会自己消失，{a}补丁打上，{b}才算真的过夜。"}
+  ]
+}

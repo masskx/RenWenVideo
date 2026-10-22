@@ -19,6 +19,8 @@ import {sweetyHanddrawScenes} from './sweety-handdraw-video';
 import {digitalCleanupScenes} from './ai-digital-cleanup-cn';
 import {faceswapScamScenes} from './ai-faceswap-scam';
 import {literalCrawlerScenes} from './literal-web-crawler';
+import {php2shellScenes} from './php2shell-overtime';
+import {litellmPoisonScenes} from './litellm-pypi-poison';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -44,4 +46,6 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...digitalCleanupScenes,
   ...faceswapScamScenes,
   ...literalCrawlerScenes,
+  ...php2shellScenes,
+  ...litellmPoisonScenes,
 };

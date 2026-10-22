@@ -34,6 +34,8 @@
 | [`douyin/ai-digital-cleanup-cn/`](douyin/ai-digital-cleanup-cn/) | 教程：用 AI 清理网上的个人信息（中国版）——一证通查 / 一键查卡、AI 排风险、注销前检查、个保法第 47 条删除权、12321 投诉；手机界面全自绘示意、个人信息全打码；不引流 | 1:25 |
 | [`douyin/ai-faceswap-scam/`](douyin/ai-faceswap-scam/) | 防骗：视频里的“妈妈”找你要5万——3招识破AI实时换脸（挥手 / 侧脸、按鼻子、挂断回拨 + 家庭暗号）；人物全是剪影、界面全自绘 | 0:45 |
 | [`douyin/literal-web-crawler/`](douyin/literal-web-crawler/) | 开源小项目：字面意义上的“网络爬虫”，一只会撕网页链接的蜘蛛；录屏特写按追踪轨迹跟拍 | 0:46 |
+| [`douyin/php2shell-overtime/`](douyin/php2shell-overtime/) | 安全新闻：PHP2Shell 高危漏洞（9.2 分，无需登录远程执行），升级到哪个版本、记得重启；全自绘，无利用细节 | 0:43 |
+| [`douyin/litellm-pypi-poison/`](douyin/litellm-pypi-poison/) | 安全新闻：LiteLLM 1.107.0 PyPI 投毒，装上就偷 API Key——三步自查（版本号 / cook.pth / 重置 Key）；Key 全是假的且打码 | 0:44 |
 
 ## 目录结构
 
