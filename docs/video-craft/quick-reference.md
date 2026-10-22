@@ -47,6 +47,12 @@
 - 基准：`tutorials/deepseek-vs-opus55`——蓝图深底、细网格、等宽小字标注 + 黑体大字、A/B 两个固定强调色（琥珀 / 青）、一屏一个大主体、外部素材原样嵌入并署名。在它上面改进，不要丢掉这套样子。
 - **不再有“AI 味”禁止项**：发光、粒子、整幅推拉、渐变都可以用，只要它帮钩子和留人、不挡字。是否用按素材决定。
 - 外部素材：静音，右下角「@作者｜案例展示」，作者链接写进发布包 README。
+- **画面减法**（2026-10-22 复盘近 6 条片子：毛病不是“花”，是“碎”——小东西多、主体小，舞台平均只有 10–15% 有东西，约五分之一的帧内容停在 y 900 以上）：
+  - 一屏一个主体（一张图、一个终端、一组卡片），宽 ≥ 舞台的 60%，往下铺到字幕上方，不在字幕上面留一条空带。
+  - 画面上最多两层字：一个 ≤ 10 字的标题（说结论或关键词，不复述同一时刻的字幕）+ 字幕；其余标签只留观众真要读的。
+  - 同屏强调色 ≤ 3：A/B 两色 + 一个语义色（红 = 危险，或绿 = 安全，揭晓时才用）。
+  - “示意”“界面示意”这类说明合并成一处，或写进片尾 / `credit`，不给每个元素挂标签。
+  - “响”的动作（爆炸框、花字、印章、锁定框、震屏）每个场景最多一个；新东西进来时，讲完的旧东西收小或变暗。
 
 ## 七、必填简报（写进 `tutorials/<id>.storyboard.md` 的 `## 简报`）
 
@@ -59,6 +65,7 @@ node scripts/qa/brief.mjs <id>            # 简报五项、时长和口播字数
 node scripts/qa/cover.mjs <id>            # 封面
 node scripts/qa/richness.mjs douyin/<id>/video.mp4
 node scripts/qa/marks.mjs douyin/<id>/video.mp4
+node scripts/qa/clutter.mjs douyin/<id>/video.mp4 [--frame channels]   # 主体大小、字幕上方空带、强调色个数
 node scripts/qa/scan.mjs douyin/<id>/video.mp4 [--phone=s1,s2,s3]
 npm run lint
 ```

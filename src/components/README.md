@@ -12,7 +12,8 @@ Shared rules:
 
 - **Text that informs lands on its word; reactions land 2–3 frames after it.** `KineticTitle`, `CountUp`, `GrowBars` and `LockOn` use the cue frame as is. `BurstCallout` has `lag = 3` built in.
 - **Data never overshoots.** Bars and counters use `curve.data` (ease-out). Overshoot is only for things that carry no value (cards, icons, titles).
-- **At most one loud move at a time.** A burst, a lock-on and a sticker slap on the same frame read as noise. Stagger them 4–8 frames apart.
+- **At most one loud move per scene** (burst, hanazi word, stamp, lock-on, shake), per quick-reference §六. Everything else enters quietly, and finished elements shrink or dim when new ones arrive.
+- **Use less.** These components are for the one moment that matters in a scene, not for every line. Run `node scripts/qa/clutter.mjs` after rendering.
 - **Running subtitles stay still.** They are drawn by `TutorialVideo`. Do not wrap them in `KineticTitle`.
 
 ---
@@ -40,29 +41,29 @@ const s = popScale(f, p.a);                          // spring pop
 
 ## KineticTitle
 
-A headline whose characters pop in one by one: 2-frame stagger, a small drop and tilt, then a slow wiggle while it holds.
+A headline whose characters pop in one by one: 2-frame stagger, a small drop and tilt, then it holds still.
 
 | Prop | Default | Notes |
 | --- | --- | --- |
 | `f`, `at` | — | `at` can be negative so frame 0 already shows a landed title (the hook rule) |
 | `text`, `size`, `color` | —, 88, `#fff` | ≥ 80 px for titles (讲解动画规则 §一) |
 | `stagger` | 2 | frames between characters; 3–4 for long titles |
-| `drop`, `tilt` | 36, 8 | px fall and ° rotate-in, alternating sign |
-| `wiggle` | 1.2 | hold wiggle in degrees. Use 0 for serious topics or when the title sits next to text being read |
+| `drop`, `tilt` | 24, 5 | px fall and ° rotate-in, alternating sign |
+| `wiggle` | 0 | hold wiggle in degrees. Off by default: a moving title competes with the caption. ≈ 1 only for light topics |
 | `outAt` | — | frame to pop the title out |
 | `look` | `"clean"` | `"clean"`: fill + one keyline. `"hanazi"`: fill + thick `inner` stroke + `outer` stroke + hard shadow (综艺花字) |
 | `stroke` / `inner` / `outer` / `strokeWidth` | navy / white / navy / auto | keyline for clean; the two rings for hanazi |
 
 ```tsx
 <KineticTitle f={f} at={-6} text="装个AI工具包" size={96} />                     {/* hook title, landed by frame ~8 */}
-<KineticTitle f={f} at={p.b} text="被偷了" look="hanazi" color={RED} outer="#5a0d16" wiggle={0} />
+<KineticTitle f={f} at={p.b} text="被偷了" look="hanazi" color={RED} outer="#5a0d16" />
 ```
 
 Use for the hook title, section titles and one emotional keyword per scene. Don't use it for running subtitles, or for more than one hanazi word on screen at a time.
 
 ## BurstCallout
 
-爆炸框: a jagged starburst with one short word, slammed in with a spring and a flash of speed lines. The outline redraws every `boil` frames (line boil on decoration only).
+爆炸框: a jagged starburst with one short word, slammed in with a spring and a flash of speed lines. Set `boil` (3–4) to redraw the outline every few frames for playful topics; it is off by default.
 
 | Prop | Default | Notes |
 | --- | --- | --- |
@@ -71,7 +72,7 @@ Use for the hook title, section titles and one emotional keyword per scene. Don'
 | `w`, `h` | 440, 260 | the burst body; the box is 1.7× for the rays |
 | `fill`, `ink`, `edge` | red, white, navy | `edge` is the burst rim and the text keyline |
 | `spikes`, `spike`, `seed` | 13, 0.28, 1 | shape |
-| `rays`, `boil`, `deg` | true, 4, −6 | speed-line flash (10 frames), boil period, base tilt |
+| `rays`, `boil`, `deg` | true, 0, −6 | speed-line flash (10 frames), boil period, base tilt |
 
 Centred on its own box, so place it with `style={{left: cx, top: cy}}` inside a positioned parent.
 

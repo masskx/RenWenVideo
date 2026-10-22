@@ -16,7 +16,7 @@ export type KineticTitleProps = {
   drop?: number;
   /** Characters rotate in from ±tilt degrees (alternating). */
   tilt?: number;
-  /** Hold wiggle in degrees once landed; 0 for a still title. */
+  /** Hold wiggle in degrees once landed. Off by default (a moving title competes with the caption); ≈ 1 for light topics. */
   wiggle?: number;
   /** Frame to pop the whole title out. */
   outAt?: number;
@@ -38,13 +38,13 @@ export type KineticTitleProps = {
 
 /**
  * A title whose characters pop in one by one: scale 0 → 1.15 → 1 in ~8 frames, 2-frame stagger, a small drop
- * and tilt, then a slow wiggle while it holds. Use for the hook headline and section titles — not for running
+ * and tilt, then it holds still (optional slow wiggle). Use for the hook headline and section titles — not for running
  * subtitles (they must sit still to be read).
  *
  *   <KineticTitle f={f} at={-6} text="装个AI工具包" size={96} />
  *   <KineticTitle f={f} at={p.b} text="被偷了" look="hanazi" color="#ff5a5a" outer="#5a0d16" />
  */
-export const KineticTitle: React.FC<KineticTitleProps> = ({f, at, text, size = 88, color = '#ffffff', stagger = 2, drop = 36, tilt = 8, wiggle = 1.2,
+export const KineticTitle: React.FC<KineticTitleProps> = ({f, at, text, size = 88, color = '#ffffff', stagger = 2, drop = 24, tilt = 5, wiggle = 0,
   outAt, look = 'clean', stroke = '#0c1a2c', inner = '#ffffff', outer = '#0c1a2c', strokeWidth, style}) => {
   const sw = strokeWidth ?? Math.round(size * (look === 'hanazi' ? 0.11 : 0.08));
   const chars = Array.from(text);

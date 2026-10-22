@@ -36,6 +36,7 @@
 | `scripts/qa/richness.mjs` | 丰富度检查：每 2.5 秒一格，相邻格平均差 ≥ 10 且没有“几乎没变”才算过 |
 | `scripts/qa/scan.mjs` | 扫片（每秒 3 帧拼图）、手机宽度可读性检查（`--phone`）、切点前后细看（`--around`） |
 | `scripts/qa/marks.mjs` | 卡点检查：每个卡点前 0.1 秒、后 0.35 秒各一帧，看动作是不是卡在说出那个词的时刻 |
+| `scripts/qa/clutter.mjs` | 画面减法检查：每秒一帧，量主体占舞台多少、内容停在多高（字幕上方空带）、同屏几个强调色；只提醒去看，不拦 |
 | `scripts/qa/palette.mjs` | 取色：参考图的主色和指定点颜色，做新风格时用 |
 | `scripts/prompts/find.mjs`、`snapshot.mjs` | 提示词库：按关键词搜、看全文（带来源 commit 和许可）；从上游抓新快照（不覆盖旧的） |
 | `.claude/skills/video-craft/SKILL.md`、根目录 `CLAUDE.md` | 给 Claude 的做片流程和优先级；出片前要过的检查见速查页 §八 |

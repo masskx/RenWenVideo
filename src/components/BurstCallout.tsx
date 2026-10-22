@@ -21,7 +21,7 @@ export type BurstCalloutProps = {
   spike?: number;
   /** Speed lines flashing out on impact. */
   rays?: boolean;
-  /** Redraw the outline every N frames (line boil on decoration only); 0 = still. */
+  /** Redraw the outline every N frames (line boil, decoration only; 3–4 for playful topics); 0 = still (default). */
   boil?: number;
   deg?: number;
   seed?: number;
@@ -46,7 +46,7 @@ const starPath = (rx: number, ry: number, n: number, spike: number, seed: number
  *   <BurstCallout f={f} at={p.b} text="被偷了？" fill="#ff5a5a" style={{position: 'absolute', left: 480, top: 640}} />
  */
 export const BurstCallout: React.FC<BurstCalloutProps> = ({f, at, text, lag = 3, w = 440, h = 260, size = 76, fill = '#ff5a5a', ink = '#ffffff',
-  edge = '#0c1a2c', spikes = 13, spike = 0.28, rays = true, boil = 4, deg = -6, seed = 1, style}) => {
+  edge = '#0c1a2c', spikes = 13, spike = 0.28, rays = true, boil = 0, deg = -6, seed = 1, style}) => {
   const t0 = at + lag;
   const s = popScale(f, t0);
   if (s <= 0.001) return null;
