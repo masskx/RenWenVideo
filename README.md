@@ -131,7 +131,7 @@ npm ci
 2. **计划**：写 `tutorials/<id>.json`、`tutorials/<id>.storyboard.md`（简报五项 + 封面卡）和 `src/tutorial/scenes/<id>.tsx`（在 `scenes/index.ts` 里登记）。新片照 `tutorials/litellm-pypi-poison-cinema.json`（cinema 主题、全屏 9:16）改：
    - 配音只用本人的复刻音色：`"tts": {"provider": "doubao"}`，语速按场景写 `"pace"`。复刻音色不可用且用户同意时，可临时改用免费的 edge-tts 备用声音：`"tts": {"provider": "edge"}`。每个场景整段一次合成，卡点和字幕时间来自服务端的逐字时间戳；语速、读音修正见 `docs/video-craft/配音.md`。
    - 默认 ≤ 60 秒；脚本要求更长且用户同意时写 `"maxSeconds"`。
-   - `"look": {"theme": "cinema", "frame": "full", "header": "progress", "tour": false, "particles": false}`：全屏 9:16，舞台 900×1080 在 (60, 200)，字幕在 y 1390。`"header": "progress"` 是顶部细进度条（左边 `"series"`，右边 `"credit"`，每个 `"steps"` 一段）。场景用 `src/tutorial/cinema.tsx` 的 `Headline`（章节号 + 大标题 + 马克笔）、`Surface`（面板）、`Terminal`、`Reveal`。`"theme": "blueprint"` 留给真要画工程图的片子。
+   - `"look": {"theme": "cinema", "frame": "full", "header": "label", "tour": false, "particles": false}`：全屏 9:16，舞台 900×1080 在 (60, 200)，字幕在 y 1390。`"header": "label"` 是顶部一行小字（左边 `"series"`，右边 `"credit"`），没有进度条。配色是 `src/tutorial/theme.ts` 的 `cinemaPalettes.midnight`（藏青黑底 + 冷光，金色只给字）。场景用 `src/tutorial/cinema.tsx` 的 `Headline`（章节号 + 大标题 + 马克笔）、`Surface`（面板）、`Terminal`、`Reveal`。`"theme": "blueprint"` 留给真要画工程图的片子。
    - `"musicVolume"` + `"musicDuckDb"`：底乐从第 0 帧开始，口播时压低（一般 14–18 dB）。
    - `"coverCard"`：封面标题、辅助句、锚点画面；`layouts["3:4"]` 可以单独换文字（`text` / `supportText`）和锚点（`anchorId`），小红书封面常用。
    - 画面文件里，场景组件可以带 `sfx`（音效卡点）和 `backdrop`（铺满 1080×1920 的底层画面，例如全屏素材）。
@@ -153,7 +153,7 @@ npm ci
 
 2026-10-18 起，规则只剩一页必读的 [`docs/video-craft/quick-reference.md`](docs/video-craft/quick-reference.md)（观众、优先级、时长、手机可读、必填简报、检查）和根目录 `CLAUDE.md`（端到端流程）。优先级：**钩子 → 留人 → 手机看得清 → 忠于脚本和素材 → 打磨**。旧的导演层规则（禁止项、物理动作链、八项 Brief）已归档到 `docs/video-craft/archive/`，只作可选参考；发光、粒子、整幅推拉不再禁止，按素材决定用不用。
 
-2026-10-22 用户反馈：最早的长文讲解（`ai-era-11-rules`、`marketing-engineer`）最好看，后来的片子“装饰元素堆得乱、显得廉价、没有高级感”。对照下来，差别在：早期是一张有光有景深的满屏画面、一个金色章节号 + 两行大标题、一个强调色、一张半透明引文卡；后来是平的深蓝网格底、很多描边小方块和等宽小标注、同屏三四种颜色。现在教程默认用 **cinema 主题**（`"look": {"theme": "cinema", "header": "progress"}`，共用件 `src/tutorial/cinema.tsx`），规则是速查页 §六“高级感”：一个主角一块面板、一个说结论的大标题（不复述字幕）、只用金色一个强调色（红色只表示危险）、不加装饰、字有大小对比、动作平滑不弹跳。样片 `litellm-pypi-poison-cinema`，和原版对照看。
+2026-10-22 用户反馈：最早的长文讲解（`ai-era-11-rules`、`marketing-engineer`）最好看，后来的片子“装饰元素堆得乱、显得廉价、没有高级感”。对照下来，差别在：早期是一张有光有景深的满屏画面、一个金色章节号 + 两行大标题、一个强调色、一张半透明引文卡；后来是平的深蓝网格底、很多描边小方块和等宽小标注、同屏三四种颜色。现在教程默认用 **cinema 主题**（`"look": {"theme": "cinema", "header": "label"}`，共用件 `src/tutorial/cinema.tsx`），规则是速查页 §六“高级感”：一个主角一块面板、一个说结论的大标题（不复述字幕）、只用金色一个强调色（红色只表示危险）、不加装饰、字有大小对比、动作平滑不弹跳。样片 `litellm-pypi-poison-cinema`，和原版对照看。
 
 可复用的动效组件在 `src/components/`（逐字弹出标题、爆炸框、锁定框、数字跳变 / 滚动、贴纸、大画布相机、描线、柱状图），学自 [mg-styles-15](https://github.com/Vincentwei1021/mg-styles-15)（MIT），只借鉴做法、代码重写；用法见 [`src/components/README.md`](src/components/README.md)，拆解、取舍和不用的理由见 [`docs/style-guide.md`](docs/style-guide.md)。组件默认偏克制，只给一个场景里最要紧的那一下用。
 

@@ -62,20 +62,28 @@ export const blueprint = {
  */
 /**
  * Cinema look (docs/video-craft/quick-reference.md §六, taste reference: the early explainers ai-era-11-rules /
- * marketing-engineer): near-black with one warm key light, a vignette and fine grain, white type with one gold accent,
+ * marketing-engineer): navy-black with one cool key light, a vignette and fine grain, white type with one gold accent,
  * big headlines, soft surfaces instead of outlined boxes. Red is a meaning colour (danger) only. `look.theme: "cinema"`.
  */
-export const cinema = {
-  bg: '#07090f',
+const cinemaBase = {
   ink: '#ffffff',
   dim: 'rgba(255,255,255,0.62)',
   faint: 'rgba(255,255,255,0.38)',
   hair: 'rgba(255,255,255,0.13)',
   surface: 'rgba(255,255,255,0.055)',
-  gold: '#ffc53d',
   cool: '#8fd3ff',
-  red: '#ff6b5b',
 };
+/**
+ * Palettes for the cinema look. `key` / `fill` are the two background lights ("r,g,b" + opacity), `pool` the light behind
+ * a scene's hero. "ember" (the first version) lit black with gold, which read as muddy brown; "midnight" keeps the warm
+ * colour for the gold type only and lights a navy-black with cool light, like the early explainers' #070b14.
+ */
+export const cinemaPalettes = {
+  midnight: {...cinemaBase, bg: '#070b14', key: '92,132,255', keyO: 0.13, fill: '56,189,248', fillO: 0.06, pool: '120,150,255', gold: '#ffc53d', red: '#ff4d5e'},
+  graphite: {...cinemaBase, bg: '#0a0a0c', key: '255,255,255', keyO: 0.06, fill: '255,255,255', fillO: 0.03, pool: '255,255,255', gold: '#f2b84b', red: '#ff5257'},
+  ember: {...cinemaBase, bg: '#07090f', key: '255,197,61', keyO: 0.13, fill: '143,211,255', fillO: 0.07, pool: '255,197,61', gold: '#ffc53d', red: '#ff6b5b'},
+};
+export const cinema = cinemaPalettes.midnight;
 /** Headline face: Inter Display for latin and numbers, CJK falls through to the house font. */
 export const display = `"Inter Display", "Inter", ${font}`;
 

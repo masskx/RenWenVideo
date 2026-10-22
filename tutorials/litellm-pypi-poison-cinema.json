@@ -15,7 +15,7 @@
   "credit": "画面为示意 · Key 均为假的",
   "source": "inputs/litellm-pypi-poison/script.md",
   "steps": ["查版本", "找文件", "换Key"],
-  "look": {"theme": "cinema", "frame": "full", "header": "progress", "tour": false, "particles": false, "mascot": false,
+  "look": {"theme": "cinema", "frame": "full", "header": "label", "tour": false, "particles": false, "mascot": false,
     "cuts": {"big": ["pushUp", "push"], "small": ["push", "pushUp"]}},
   "highlights": [],
   "cover": "hook",

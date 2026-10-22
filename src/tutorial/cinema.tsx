@@ -116,7 +116,7 @@ export const Cmd: React.FC<{f: number; at: number; text: string; cps?: number}> 
 };
 
 /** A soft pool of light behind the hero (motivated by the scene's key light), centred at (x, y). */
-export const Pool: React.FC<{x: number; y: number; r?: number; color?: string; o?: number}> = ({x, y, r = 520, color = '255,197,61', o = 0.16}) => (
+export const Pool: React.FC<{x: number; y: number; r?: number; color?: string; o?: number}> = ({x, y, r = 520, color = cinema.pool, o = 0.16}) => (
   <div style={{position: 'absolute', left: x - r, top: y - r, width: 2 * r, height: 2 * r, borderRadius: '50%', pointerEvents: 'none',
     background: `radial-gradient(circle, rgba(${color},${o}) 0%, rgba(${color},${o * 0.35}) 40%, transparent 70%)`}} />
 );
