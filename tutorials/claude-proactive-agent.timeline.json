@@ -1,0 +1,311 @@
+{
+  "id": "claude-proactive-agent",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1796,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/claude-proactive-agent/01-hook.mp3",
+      "audioMs": 2168,
+      "startFrame": 0,
+      "durationFrames": 72,
+      "cues": {
+        "a": 1175
+      },
+      "captions": [
+        {
+          "text": "你还没开口",
+          "startMs": 355,
+          "endMs": 1175
+        },
+        {
+          "text": "AI先来找你了",
+          "startMs": 1175,
+          "endMs": 2470
+        }
+      ]
+    },
+    {
+      "id": "what",
+      "audioSrc": "audio/tutorials/claude-proactive-agent/02-what.mp3",
+      "audioMs": 7811,
+      "startFrame": 72,
+      "durationFrames": 241,
+      "cues": {
+        "a": 2414,
+        "b": 4042,
+        "c": 5372
+      },
+      "captions": [
+        {
+          "text": "Anthropic刚推出Claude Duet",
+          "startMs": 375,
+          "endMs": 2414
+        },
+        {
+          "text": "每天早上给你发一份简报",
+          "startMs": 2414,
+          "endMs": 4042
+        },
+        {
+          "text": "平时有事才提醒你",
+          "startMs": 4042,
+          "endMs": 5372
+        },
+        {
+          "text": "发消息、付款之前",
+          "startMs": 5372,
+          "endMs": 6838
+        },
+        {
+          "text": "先等你点头",
+          "startMs": 6838,
+          "endMs": 7439
+        }
+      ]
+    },
+    {
+      "id": "turn",
+      "audioSrc": "audio/tutorials/claude-proactive-agent/03-turn.mp3",
+      "audioMs": 5799,
+      "startFrame": 313,
+      "durationFrames": 180,
+      "cues": {
+        "a": 3354,
+        "b": 4447
+      },
+      "captions": [
+        {
+          "text": "两个多月里",
+          "startMs": 365,
+          "endMs": 1108
+        },
+        {
+          "text": "已经有四家大公司推出了同类产品",
+          "startMs": 1108,
+          "endMs": 3354
+        },
+        {
+          "text": "别只看又出了什么",
+          "startMs": 3354,
+          "endMs": 4447
+        },
+        {
+          "text": "要看它凭什么能主动干活",
+          "startMs": 4447,
+          "endMs": 5907
+        }
+      ]
+    },
+    {
+      "id": "memory",
+      "audioSrc": "audio/tutorials/claude-proactive-agent/04-memory.mp3",
+      "audioMs": 8647,
+      "startFrame": 493,
+      "durationFrames": 266,
+      "cues": {
+        "a": 1543,
+        "b": 3256,
+        "c": 3810,
+        "d": 5006,
+        "e": 6838
+      },
+      "captions": [
+        {
+          "text": "第一，记忆",
+          "startMs": 415,
+          "endMs": 1543
+        },
+        {
+          "text": "它会沿用你在Claude里的记忆",
+          "startMs": 1543,
+          "endMs": 3256
+        },
+        {
+          "text": "技能和已连接的应用",
+          "startMs": 3256,
+          "endMs": 5006
+        },
+        {
+          "text": "先知道你是谁",
+          "startMs": 5006,
+          "endMs": 6097
+        },
+        {
+          "text": "在忙什么",
+          "startMs": 6097,
+          "endMs": 6838
+        },
+        {
+          "text": "才判断得出哪件事跟你有关",
+          "startMs": 6838,
+          "endMs": 8518
+        }
+      ]
+    },
+    {
+      "id": "schedule",
+      "audioSrc": "audio/tutorials/claude-proactive-agent/05-schedule.mp3",
+      "audioMs": 10371,
+      "startFrame": 759,
+      "durationFrames": 318,
+      "cues": {
+        "a": 1548,
+        "b": 4264,
+        "c": 6002,
+        "d": 7569
+      },
+      "captions": [
+        {
+          "text": "第二，定时任务",
+          "startMs": 335,
+          "endMs": 1548
+        },
+        {
+          "text": "它每隔几个小时检查一次你连接的账号",
+          "startMs": 1548,
+          "endMs": 4264
+        },
+        {
+          "text": "还自带一台云端虚拟机",
+          "startMs": 4264,
+          "endMs": 6002
+        },
+        {
+          "text": "你关了手机它照样干",
+          "startMs": 6002,
+          "endMs": 7569
+        },
+        {
+          "text": "所谓主动",
+          "startMs": 7569,
+          "endMs": 8363
+        },
+        {
+          "text": "说白了就是到点自己醒来干活",
+          "startMs": 8363,
+          "endMs": 10171
+        }
+      ]
+    },
+    {
+      "id": "confirm",
+      "audioSrc": "audio/tutorials/claude-proactive-agent/06-confirm.mp3",
+      "audioMs": 8202,
+      "startFrame": 1077,
+      "durationFrames": 253,
+      "cues": {
+        "a": 2363,
+        "b": 3063,
+        "c": 3554,
+        "d": 4309,
+        "e": 5338,
+        "f": 7020
+      },
+      "captions": [
+        {
+          "text": "第三，关键步骤等你确认",
+          "startMs": 325,
+          "endMs": 2363
+        },
+        {
+          "text": "发消息、付款",
+          "startMs": 2363,
+          "endMs": 3554
+        },
+        {
+          "text": "签文件、删东西之前",
+          "startMs": 3554,
+          "endMs": 5338
+        },
+        {
+          "text": "它会把要做的事摆给你看",
+          "startMs": 5338,
+          "endMs": 7020
+        },
+        {
+          "text": "等你批准了才动手",
+          "startMs": 7020,
+          "endMs": 8008
+        }
+      ]
+    },
+    {
+      "id": "dev",
+      "audioSrc": "audio/tutorials/claude-proactive-agent/07-dev.mp3",
+      "audioMs": 10632,
+      "startFrame": 1330,
+      "durationFrames": 325,
+      "cues": {
+        "a": 2205,
+        "b": 4189,
+        "c": 5524,
+        "d": 7841,
+        "e": 9193
+      },
+      "captions": [
+        {
+          "text": "做Agent开发的人都清楚",
+          "startMs": 355,
+          "endMs": 2205
+        },
+        {
+          "text": "记忆、调度",
+          "startMs": 2205,
+          "endMs": 3347
+        },
+        {
+          "text": "人工确认，单拿出来都不新鲜",
+          "startMs": 3347,
+          "endMs": 5524
+        },
+        {
+          "text": "难的是把它们拼成一个靠得住的系统",
+          "startMs": 5524,
+          "endMs": 7841
+        },
+        {
+          "text": "知道什么时候该出手",
+          "startMs": 7841,
+          "endMs": 9193
+        },
+        {
+          "text": "什么时候该停下来问你",
+          "startMs": 9193,
+          "endMs": 10863
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/claude-proactive-agent/08-end.mp3",
+      "audioMs": 3579,
+      "startFrame": 1655,
+      "durationFrames": 141,
+      "cues": {
+        "a": 1591,
+        "b": 2776
+      },
+      "captions": [
+        {
+          "text": "AI可以主动",
+          "startMs": 585,
+          "endMs": 1591
+        },
+        {
+          "text": "但最后那一下",
+          "startMs": 1591,
+          "endMs": 2776
+        },
+        {
+          "text": "还得你来按",
+          "startMs": 2776,
+          "endMs": 3856
+        }
+      ]
+    }
+  ]
+}
