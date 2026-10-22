@@ -1,0 +1,53 @@
+{
+  "id": "literal-web-crawler",
+  "title": "字面意义上的网络爬虫",
+  "subtitle": "网页被蜘蛛啃了 · 真·网络爬虫",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "tts": {"provider": "doubao"},
+  "leadMs": 100,
+  "tailMs": 100,
+  "musicSrc": "audio/tutorials/literal-web-crawler/bgm.mp3",
+  "musicVolume": 0.08,
+  "musicDuckDb": 18,
+  "credit": "网页演示录屏（开源项目 literal-web-crawler，MIT）",
+  "source": "inputs/literal-web-crawler/script.md",
+  "steps": [],
+  "look": {"theme": "blueprint", "frame": "full", "header": false, "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["push", "pushUp"], "small": ["push", "sweep"]}},
+  "highlights": [],
+  "cover": "hook",
+  "coverCard": {
+    "template": "conflict",
+    "headline": ["网页被", "蜘蛛啃了？"],
+    "support": "字面意义上的「网络爬虫」",
+    "tag": "开源小项目 · 纯网页",
+    "anchor": "lwc.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 130], "size": 120, "anchor": [540, 840, 0.95], "support": 1300},
+      "6:7": {"headline": [80, 100], "size": 108, "anchor": [540, 740, 0.82], "support": 1150},
+      "9:16": {"headline": [80, 330], "size": 132, "anchor": [540, 1060, 1.0], "support": 1560}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "lwc.hook", "step": 0, "pace": "brisk",
+      "narration": "我的网页，{a}被一只蜘蛛啃了。"},
+    {"id": "pun", "visual": "lwc.pun", "step": 0, "pace": "brisk",
+      "narration": "程序员管抓网页的程序叫“网络爬虫”，{a}有人就真把它做成了一只爬虫。"},
+    {"id": "tear", "visual": "lwc.tear", "step": 0, "pace": "brisk",
+      "narration": "它八条腿轮流迈步，{a}四条走、四条抓稳，{b}脚一勾，{c}就把蓝色链接整条撕下来。"},
+    {"id": "slow", "visual": "lwc.slow", "step": 0, "pace": "brisk",
+      "narration": "放慢看，{a}撕下来的碎片还带物理效果，{b}一路往下掉。"},
+    {"id": "follow", "visual": "lwc.follow", "step": 0, "pace": "brisk",
+      "narration": "切到跟随模式，{a}它就追着你的鼠标跑，{b}像养了只电子宠物。"},
+    {"id": "size", "visual": "lwc.size", "step": 0, "pace": "brisk",
+      "narration": "蜘蛛大小、{a}撕得多猛，{b}都能拖滑块调，{c}大到吓人，{d}小到像只蚂蚁。"},
+    {"id": "repair", "visual": "lwc.repair", "step": 0, "pace": "brisk",
+      "narration": "撕烂了也不怕，{a}点一下修复，{b}网页立刻复原。"},
+    {"id": "paste", "visual": "lwc.paste", "step": 0, "pace": "brisk",
+      "narration": "还能贴自己的文字给它啃；{a}Linux 用户甚至能把它装成屏保，{b}让它啃你的桌面。"},
+    {"id": "end", "visual": "lwc.end", "step": 0, "pace": "normal", "tailMs": 900,
+      "narration": "纯网页代码，{a}不靠任何库。{b}灵感来自一位海外创作者的短片，{pace:calm}{c}这才叫字面意义上的爬虫。"}
+  ]
+}
