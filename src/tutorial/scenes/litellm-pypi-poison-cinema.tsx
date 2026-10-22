@@ -170,20 +170,24 @@ const s1Plan = (cue: Cue) => ({a: cue('a', 29), b: cue('b', 106)});
 const Step1: Scene = ({f, dur, cue}) => {
   const p = s1Plan(cue);
   const out = p.a + 26;
-  const hit = rise(f, p.b, 10);
+  const hit = rise(f, p.b, 10), back = rise(f, p.b + 6, 16);
   return <Root f={f} dur={dur}>
     <Pool x={450} y={560} o={0.12} />
     <Abs y={0}><Headline f={f} at={-10} no={1} total={3} lines={['看版本号']} size={100} /></Abs>
-    <Abs y={330}><Reveal f={f} at={p.a - 10}>
+    {/* once the version is read, the terminal steps back and the verdict becomes the hero */}
+    <Abs y={330} style={{opacity: 1 - 0.55 * back, transform: `translateY(${-40 * back}px) scale(${1 - 0.08 * back})`, transformOrigin: '50% 0'}}><Reveal f={f} at={p.a - 10}>
       <Terminal size={52}>
         <Cmd f={f} at={p.a} text="pip show litellm" cps={0.9} />
         <div style={{color: FAINT, opacity: f >= out ? 1 : 0}}>Name: litellm</div>
         <div style={{opacity: f >= out + 4 ? 1 : 0, color: hit > 0 ? RED : INK}}>Version: <Marker p={hit} color={RED}><span style={{color: hit > 0.5 ? INK : undefined}}>1.107.0</span></Marker></div>
       </Terminal>
     </Reveal></Abs>
-    <Abs y={760}>
-      <Reveal f={f} at={p.b + 8}><div style={{display: 'flex', alignItems: 'baseline', gap: 28}}><Big size={84} w={800} c={RED} style={{fontVariantNumeric: 'tabular-nums'}}>1.107.0</Big><Big size={60} c={INK}>中招</Big></div></Reveal>
-      <Reveal f={f} at={p.b + 26}><div style={{display: 'flex', alignItems: 'baseline', gap: 28, marginTop: 10}}><Big size={84} w={800} c={DIM} style={{fontVariantNumeric: 'tabular-nums'}}>1.106.2</Big><Big size={60} c={DIM}>干净 {gold('✓')}</Big></div></Reveal>
+    <Abs y={680}>
+      <Reveal f={f} at={p.b + 8}><div style={{position: 'relative', display: 'flex', alignItems: 'baseline', gap: 30, padding: '10px 0'}}>
+        <Band k={rise(f, p.b + 8, 14)} />
+        <Big size={120} w={800} c={RED} style={{position: 'relative', fontVariantNumeric: 'tabular-nums'}}>1.107.0</Big><Big size={72} c={INK} style={{position: 'relative'}}>中招</Big></div></Reveal>
+      <Reveal f={f} at={p.b + 26}><div style={{display: 'flex', alignItems: 'baseline', gap: 30, marginTop: 18}}>
+        <Big size={96} w={800} c={DIM} style={{fontVariantNumeric: 'tabular-nums'}}>1.106.2</Big><Big size={64} c={DIM}>干净 {gold('✓')}</Big></div></Reveal>
     </Abs>
   </Root>;
 };
