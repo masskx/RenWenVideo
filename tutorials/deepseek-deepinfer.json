@@ -21,8 +21,8 @@
   "cover": "hook",
   "coverCard": {
     "template": "conflict",
-    "headline": ["真正的 OpenAI？", "DeepSeek开源了什么"],
-    "support": "DeepInfer · 内部生产级推理框架",
+    "headline": ["真正的 OpenAI？", "它开源了什么"],
+    "support": "DeepSeek · DeepInfer 推理框架",
     "tag": "AI 新闻 · 开源",
     "anchor": "dsi.cover",
     "layouts": {

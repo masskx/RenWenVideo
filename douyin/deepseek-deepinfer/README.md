@@ -1,8 +1,9 @@
 # DeepSeek这次开源了什么？——DeepInfer，内部生产级推理框架
 
-- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，SECONDS 秒，约 −15 LUFS，SIZE）
+- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，48.1 秒，约 −15 LUFS，13 MB）
 - 封面：`cover-9x16.jpg`（9:16，抖音 / 视频号全屏）；另有 `cover.jpg`（3:4，小红书）、`cover-6x7.jpg`（6:7，信息流）。标题「真正的 OpenAI？ / DeepSeek开源了什么」，锚点是打开的盒子 + DeepInfer
-- 字幕：`subtitles.srt`
+- 字幕：`subtitles.srt`；审片静帧 `still-XXs.jpg` + 拼图 `stills-sheet.jpg`
+- 检查：丰富度 10.8 过（0 段几乎不变）；同屏超过两种颜色的帧 0；封面检查过；响度 −15.3 LUFS
 - 配音：本人复刻音色（豆包语音），语速 1.2–1.25×（钩子 1.25，正文 1.22，结尾 1.2）。**发布时勾选「内容由AI生成」**
 - 画面：cinema 风格，背景 D（透视地面网格 + 远近的光和浮尘）；全部自绘，没有外部素材；DeepSeek、英伟达、华为、OpenAI 只用文字，没有 logo，没有人物、截图、账号
 - 事实：全部来自观察者网 2026-10-22 的报道（核对记录在 `inputs/deepseek-deepinfer/README.md`）；“真正的OpenAI”只说成“海外网友这么叫”；成本只说“可能差很多”，没有数字

@@ -1,6 +1,6 @@
 import React from 'react';
 import {cinema} from '../theme';
-import {clamp, ease} from '../../fx';
+import {beatZoom, clamp, ease} from '../../fx';
 import {Cue, Scene} from '../paper';
 import {Abs, DIM, FAINT, GOLD, HAIR, Headline, INK, Marker, Pool, Reveal, Root, Surface, display, font, leave, rise} from '../cinema';
 
@@ -12,6 +12,18 @@ import {Abs, DIM, FAINT, GOLD, HAIR, Headline, INK, Marker, Pool, Reveal, Root, 
 // product names are plain text, no logos, no people. Cinema look, background D. Reveals run ~1.2× faster than the default.
 
 const R = 13; // reveal length in frames (16 by default; the user asked for 1.2–1.25× pacing)
+
+/**
+ * Scene root with a motivated camera: the content pushes in a little on one spoken cue and settles back on the next
+ * (±5 %, 0.6 s eases), so each point the narration makes is also a visible move — the dark cinema stage otherwise changes
+ * too little between beats. The background (floor grid, light) stays put.
+ */
+const Stage: React.FC<{f: number; dur: number; beats: number[]; children: React.ReactNode}> = ({f, dur, beats, children}) => {
+  const z = beatZoom(f / 30, beats.map((b) => b / 30), {amp: 0.05, drift: 12, d: 0.6});
+  return <Root f={f} dur={dur}>
+    <div style={{position: 'absolute', inset: 0, transformOrigin: '50% 40%', transform: `translate(${z.dx.toFixed(2)}px, ${z.dy.toFixed(2)}px) scale(${z.s.toFixed(4)})`}}>{children}</div>
+  </Root>;
+};
 const gold = (s: string) => <span style={{color: GOLD}}>{s}</span>;
 const Big: React.FC<{size?: number; c?: string; w?: number; style?: React.CSSProperties; children: React.ReactNode}> = ({size = 64, c = INK, w = 900, style, children}) => (
   <div style={{fontFamily: display, fontWeight: w, fontSize: size, lineHeight: 1.18, color: c, whiteSpace: 'nowrap', ...style}}>{children}</div>
@@ -21,7 +33,7 @@ const Kicker: React.FC<{f: number; at: number; children: React.ReactNode}> = ({f
 );
 
 /** The box that opens: closed and grey, then the lid swings back and light pours out (open 0..1). */
-const OpenBox: React.FC<{open: number; w?: number; beam?: number}> = ({open, w = 420, beam = 340}) => {
+const OpenBox: React.FC<{open: number; w?: number; beam?: number; glow?: number}> = ({open, w = 420, beam = 340, glow = 0}) => {
   const h = w * 0.62, k = ease.inOutCubic(clamp(open));
   return <svg width={w + 200} height={h + 420} viewBox={`${-100} ${-360} ${w + 200} ${h + 420}`} style={{overflow: 'visible', display: 'block'}}>
     <defs>
@@ -33,6 +45,7 @@ const OpenBox: React.FC<{open: number; w?: number; beam?: number}> = ({open, w =
     {open > 0 && <polygon points={`${w * 0.12},0 ${w * 0.88},0 ${w + 90 * beam / 340},${-beam} ${-90 * beam / 340},${-beam}`} fill="url(#beam)" opacity={clamp(open * 1.4)} />}
     <rect x={0} y={0} width={w} height={h} rx={22} fill="rgba(255,255,255,0.06)" stroke={open > 0.5 ? GOLD : 'rgba(255,255,255,0.32)'} strokeWidth={3} />
     <rect x={w * 0.08} y={h * 0.38} width={w * 0.84} height={h * 0.18} rx={8} fill={open > 0.5 ? 'rgba(255,197,61,0.25)' : 'rgba(255,255,255,0.08)'} />
+    {glow > 0 && <rect x={0} y={-6} width={w} height={8} rx={4} fill={GOLD} opacity={glow * (1 - clamp(open * 2))} />}
     {/* the lid lifts off and tips back (stays inside the box's own column, never across the headline) */}
     <g transform={`translate(${w * 0.06 * k} ${-90 * k}) rotate(${-12 * k} ${w / 2} -17)`}>
       <rect x={-10} y={-34} width={w + 20} height={34} rx={12} fill={open > 0.5 ? 'rgba(255,197,61,0.85)' : 'rgba(255,255,255,0.3)'} />
@@ -56,13 +69,13 @@ const hookPlan = (cue: Cue) => ({a: cue('a', 30), b: cue('b', 58)});
 const Hook: Scene = ({f, dur, cue}) => {
   const p = hookPlan(cue);
   const open = rise(f, p.b - 6, 16);
-  return <Root f={f} dur={dur}>
+  return <Stage f={f} dur={dur} beats={[p.a, p.b]}>
     <Pool x={450} y={620} o={0.1 + 0.16 * open} />
     <Abs y={0}><Headline f={f} at={-22} lines={['真正的', <Marker key="m" p={rise(f, -6, 14)}>OPEN AI？</Marker>]} size={128} /></Abs>
     <Abs y={330}><Reveal f={f} at={-8} d={R} dy={12}><Big size={40} c={FAINT} w={600} style={{fontFamily: font}}>—— 海外网友对 DeepSeek 的称呼</Big></Reveal></Abs>
     {/* the svg reserves 360 px above the box for the beam: box body at stage y 540–800 */}
-    <Abs x={140} y={180} w={620}><OpenBox open={open} beam={170} /></Abs>
-  </Root>;
+    <Abs x={140} y={180} w={620}><Reveal f={f} at={p.a - 6} d={R} dy={160}><OpenBox open={open} beam={170} glow={rise(f, p.a + 6, 20)} /></Reveal></Abs>
+  </Stage>;
 };
 Hook.sfx = (cue) => {
   const p = hookPlan(cue);
@@ -75,7 +88,7 @@ const openPlan = (cue: Cue) => ({a: cue('a', 30), b: cue('b', 80)});
 const Open: Scene = ({f, dur, cue}) => {
   const p = openPlan(cue);
   const unlock = rise(f, p.b + 6, 14);
-  return <Root f={f} dur={dur}>
+  return <Stage f={f} dur={dur} beats={[p.a, p.b]}>
     <Pool x={450} y={560} o={0.12 + 0.1 * unlock} />
     <Abs y={0}><Reveal f={f} at={-8} d={R}><Big size={150} w={800} c={GOLD} style={{letterSpacing: -3}}>10月20日</Big></Reveal></Abs>
     <Abs y={200}><Reveal f={f} at={0} d={R} dy={14}><Big size={46} c={DIM} w={700} style={{fontFamily: font}}>DeepSeek 开源了</Big></Reveal></Abs>
@@ -91,7 +104,7 @@ const Open: Scene = ({f, dur, cue}) => {
       </Surface>
     </Reveal></Abs>
     <Abs y={760}><Reveal f={f} at={p.b + 12} d={R}><Big size={80} w={900}><Marker p={rise(f, p.b + 18, 14)}>开源了</Marker></Big></Reveal></Abs>
-  </Root>;
+  </Stage>;
 };
 Open.sfx = (cue) => {
   const p = openPlan(cue);
@@ -123,22 +136,23 @@ const Dispatcher: React.FC<{f: number; on: number}> = ({f, on}) => {
 };
 const What: Scene = ({f, dur, cue}) => {
   const p = whatPlan(cue);
-  const flow = rise(f, p.a + 4, 12), back = rise(f, p.c + 10, 14);
-  const asks = [{t: '回答多快', at: p.c}, {t: '能扛多少人', at: p.d}, {t: '要多少硬件', at: p.e}];
-  return <Root f={f} dur={dur}>
+  const flow = rise(f, p.a + 4, 12), back = rise(f, p.c - 6, 14);
+  const asks = [{t: '回答多快', at: p.c}, {t: '扛多少人', at: p.d}, {t: '用多少硬件', at: p.e}];
+  return <Stage f={f} dur={dur} beats={[p.a, p.c, p.d, p.e]}>
     <Pool x={450} y={520} o={0.12} />
     <Abs y={0}><Headline f={f} at={-10} kicker="推理框架是什么" lines={[<span key="l">就像{gold('调度员')}</span>]} size={110} /></Abs>
-    <Abs y={300} style={{opacity: 1 - 0.45 * back, transform: `scale(${1 - 0.12 * back})`, transformOrigin: '50% 0'}}><Reveal f={f} at={p.a - 6} d={R}>
+    <Abs y={300} style={{opacity: 1 - 0.55 * back, transform: `scale(${1 - 0.3 * back})`, transformOrigin: '50% 0'}}><Reveal f={f} at={p.a - 6} d={R}>
       <Surface pad="30px 20px"><Dispatcher f={f} on={flow} /></Surface>
     </Reveal></Abs>
-    <Abs y={720} style={{display: 'flex', gap: 22}}>
-      {asks.map((x) => <Reveal key={x.t} f={f} at={x.at - 4} d={R}>
-        <Surface accent={GOLD} pad="0" style={{width: 285, height: 170, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <Big size={50} w={800}>{x.t}</Big>
+    <Abs y={600} style={{display: 'flex', flexDirection: 'column', gap: 18}}>
+      {asks.map((x, i) => <Reveal key={x.t} f={f} at={x.at - 4} d={R} dy={40}>
+        <Surface accent={GOLD} pad="0 44px" style={{height: 132, display: 'flex', alignItems: 'center', gap: 28}}>
+          <Big size={44} w={800} c={GOLD}>{String(i + 1).padStart(2, '0')}</Big>
+          <Big size={64} w={800}>{x.t}</Big>
         </Surface>
       </Reveal>)}
     </Abs>
-  </Root>;
+  </Stage>;
 };
 What.sfx = (cue) => {
   const p = whatPlan(cue);
@@ -167,14 +181,14 @@ const Lane: React.FC<{f: number; at: number; label: string; blocks: number; hot:
 const Cost: Scene = ({f, dur, cue}) => {
   const p = costPlan(cue);
   const hot = f >= p.b;
-  return <Root f={f} dur={dur}>
+  return <Stage f={f} dur={dur} beats={[p.a, p.b, p.c]}>
     <Pool x={450} y={600} o={0.12} />
     <Abs y={0}><Headline f={f} at={-10} lines={['同一个模型', <Marker key="m" p={rise(f, p.a + 6, 14)}>成本能差很多</Marker>]} size={104} /></Abs>
     <Abs y={330}><Reveal f={f} at={4} d={R}><Lane f={f} at={10} label="框架 A" blocks={9} hot={false} /></Reveal></Abs>
     <Abs y={590}><Reveal f={f} at={p.a - 6} d={R}><Lane f={f} at={p.a} label="框架 B" blocks={3} hot={hot}
       extra={<Reveal f={f} at={p.c - 2} d={R}><Big size={46} w={800} c={GOLD} style={{fontFamily: font}}>⚡ 更省电</Big></Reveal>} /></Reveal></Abs>
     <Abs y={870}><Reveal f={f} at={p.b + 4} d={R}><Big size={56} w={800}>每次请求，{gold('算力更少')}</Big></Reveal></Abs>
-  </Root>;
+  </Stage>;
 };
 Cost.sfx = (cue) => {
   const p = costPlan(cue);
@@ -204,7 +218,7 @@ const Tech: Scene = ({f, dur, cue}) => {
   const p = techPlan(cue);
   const back = rise(f, p.c - 6, 14);
   const hw = [{t: '英伟达', m: 'SM100', at: p.c}, {t: '华为昇腾', m: '950', at: p.d}];
-  return <Root f={f} dur={dur}>
+  return <Stage f={f} dur={dur} beats={[p.a, p.c, p.d]}>
     <Pool x={450} y={540} o={0.12} />
     <Abs y={0}><Headline f={f} at={-10} kicker="DeepInfer 整合了" lines={['分布式推理', <span key="2" style={{opacity: rise(f, p.a - 4, R)}}>+ 投机解码</span>]} size={100} /></Abs>
     <Abs y={330} style={{opacity: 1 - 0.5 * back, transform: `scale(${1 - 0.12 * back})`, transformOrigin: '50% 0'}}><Reveal f={f} at={p.b - 8} d={R}>
@@ -219,7 +233,7 @@ const Tech: Scene = ({f, dur, cue}) => {
         </Surface>
       </Reveal>)}
     </Abs>
-  </Root>;
+  </Stage>;
 };
 Tech.sfx = (cue) => {
   const p = techPlan(cue);
@@ -232,7 +246,7 @@ const moneyPlan = (cue: Cue) => ({a: cue('a', 30), b: cue('b', 75)});
 const Money: Scene = ({f, dur, cue}) => {
   const p = moneyPlan(cue);
   const steps = [{t: '推理成本', arrow: '↓', at: -6}, {t: '服务商利润空间', arrow: '↑', at: p.a - 4}, {t: 'AI 服务价格', arrow: '可能 ↓', at: p.b - 4}];
-  return <Root f={f} dur={dur}>
+  return <Stage f={f} dur={dur} beats={[p.a, p.b]}>
     <Pool x={450} y={520} o={0.12} />
     <Abs y={0}><Kicker f={f} at={-10}>算一笔账</Kicker></Abs>
     <Abs y={90}>
@@ -244,7 +258,7 @@ const Money: Scene = ({f, dur, cue}) => {
         </Surface>
       </Reveal>)}
     </Abs>
-  </Root>;
+  </Stage>;
 };
 Money.sfx = (cue) => {
   const p = moneyPlan(cue);
@@ -258,7 +272,7 @@ const Partial: Scene = ({f, dur, cue}) => {
   const p = partPlan(cue);
   const missing = [{t: 'KV 缓存', at: p.a}, {t: '预填充 / 解码的解耦', at: p.b}, {t: '负载均衡', at: p.c}];
   const core = rise(f, p.e, 14), mark = rise(f, p.d, 12);
-  return <Root f={f} dur={dur}>
+  return <Stage f={f} dur={dur} beats={[p.a, p.b, p.c, p.e]}>
     <Pool x={450} y={480} o={0.1 + 0.12 * core} />
     <Abs y={0}><Headline f={f} at={-10} lines={['没给全套']} size={110} /></Abs>
     {/* the big block: most of the core decoupling — dim until "不过", then lit */}
@@ -269,13 +283,14 @@ const Partial: Scene = ({f, dur, cue}) => {
         <Big size={80} w={900} c={GOLD} style={{opacity: core}}>✓</Big>
       </Surface>
     </Reveal></Abs>
-    {missing.map((m, i) => <Abs key={m.t} y={440 + i * 170}>
-      <div style={{height: 150, borderRadius: 26, border: `3px dashed ${HAIR}`, display: 'flex', alignItems: 'center', padding: '0 44px', gap: 24}}>
-        <Reveal f={f} at={m.at - 4} d={R}><Big size={58} w={800} c={DIM}>{m.t}</Big></Reveal>
+    {missing.map((m, i) => <Abs key={m.t} y={440 + i * 170}><Reveal f={f} at={m.at - 4} d={R} dy={40}>
+      <div style={{height: 150, borderRadius: 26, border: `3px dashed rgba(255,255,255,0.3)`, background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center',
+        padding: '0 44px', gap: 24}}>
+        <Big size={58} w={800} c={DIM}>{m.t}</Big>
         <span style={{marginLeft: 'auto', opacity: mark}}><Big size={40} w={700} c={FAINT} style={{fontFamily: font}}>未全放出</Big></span>
       </div>
-    </Abs>)}
-  </Root>;
+    </Reveal></Abs>)}
+  </Stage>;
 };
 Partial.sfx = (cue) => {
   const p = partPlan(cue);
@@ -288,12 +303,12 @@ const endPlan = (cue: Cue) => ({a: cue('a', 66), b: cue('b', 100)});
 const End: Scene = ({f, dur, cue}) => {
   const p = endPlan(cue);
   const open = rise(f, p.b + 4, 20);
-  return <Root f={f} dur={dur}>
+  return <Stage f={f} dur={dur} beats={[p.a, p.b]}>
     <Pool x={450} y={660} o={0.1 + 0.2 * open} />
     <Abs y={0}><Headline f={f} at={-10} kicker="核心竞争力" lines={['推理技术', <span key="2" style={{opacity: rise(f, p.a - 6, R)}}>很少有人公开</span>]} size={110} /></Abs>
     <Abs x={140} y={380} w={620} style={leave(f, dur + 20)}><OpenBox open={open} /></Abs>
     <Abs y={450} style={{opacity: rise(f, p.b + 14, R), textAlign: 'center'}}><Big size={72} w={900}>这次，摊开了<Marker p={rise(f, p.b + 20, 14)}>一大半</Marker></Big></Abs>
-  </Root>;
+  </Stage>;
 };
 End.sfx = (cue) => {
   const p = endPlan(cue);
@@ -305,7 +320,7 @@ End.sfx = (cue) => {
 const Cover: Scene = () => <div style={{position: 'relative', width: 880, height: 800}}>
   <Pool x={440} y={500} o={0.26} />
   <Abs x={130} y={110} w={620}><OpenBox open={1} /></Abs>
-  <Abs y={300} w={880} style={{textAlign: 'center'}}><Big size={110} w={800}>DeepInfer</Big></Abs>
+  <Abs y={170} w={880} style={{textAlign: 'center'}}><Big size={110} w={800}>DeepInfer</Big></Abs>
 </div>;
 
 export const deepseekDeepinferScenes: Record<string, Scene> = {

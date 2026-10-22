@@ -39,6 +39,7 @@
 | [`douyin/litellm-pypi-poison-cinema/`](douyin/litellm-pypi-poison-cinema/) | 同一条 LiteLLM 投毒片的 **cinema 版**（2026-10-22）：同一段配音、同样的事实，画面按早期长文讲解的口味重做——一个大标题、一块面板一个主角、只有金色一个强调色、不加装饰。**现在的画面基准片**，和原版对照看 | 0:44 |
 | [`douyin/claude-proactive-agent/`](douyin/claude-proactive-agent/) | AI 新闻：Claude Duet——AI 凭什么能主动找你（记忆、定时任务、等你确认三个机制）；口播逐字，Tabler 图标 + 压暗的 Pexels 背景 | 1:00 |
 | [`douyin/claude-proactive-agent-cinema/`](douyin/claude-proactive-agent-cinema/) | 同一条 Claude Duet 片的 **cinema 版**（2026-10-22）：同一段配音、同样的事实，画面按“高级感”重做（一个大标题、一块面板一个主角、金色唯一强调色、顶部只有一行小字），和原版对照看 | 1:00 |
+| [`douyin/deepseek-deepinfer/`](douyin/deepseek-deepinfer/) | AI 新闻：被称为“真正的OpenAI”，DeepSeek 开源内部生产级推理框架 DeepInfer——推理框架是什么、为什么关系成本、整合了什么、没给全套的部分；cinema 风格 + 背景 D，口播 1.2–1.25× | 0:48 |
 
 ## 目录结构
 
