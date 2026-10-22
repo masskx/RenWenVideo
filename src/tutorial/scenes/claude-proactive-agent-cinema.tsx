@@ -24,16 +24,6 @@ const Big: React.FC<{size?: number; c?: string; w?: number; style?: React.CSSPro
 const Kicker: React.FC<{f: number; at: number; children: React.ReactNode}> = ({f, at, children}) => (
   <Reveal f={f} at={at} dy={16}><Big size={36} c={DIM} w={600} style={{fontFamily: font, letterSpacing: 4}}>{children}</Big></Reveal>
 );
-/** A list row on a panel: icon, label, hairline above (rows are position: relative). */
-const Row: React.FC<{f: number; at: number; icon: string; first?: boolean; size?: number; children: React.ReactNode}> = ({f, at, icon, first, size = 58, children}) => {
-  const k = rise(f, at - 4, 14);
-  return <div style={{display: 'flex', alignItems: 'center', gap: 30, padding: '24px 0', borderTop: first ? undefined : `1.5px solid ${HAIR}`,
-    opacity: 0.25 + 0.75 * k, transform: `translateX(${(1 - k) * 24}px)`}}>
-    <Icon n={icon} tone={k > 0.5 ? 'gold' : 'ink'} size={64} />
-    <span style={{fontFamily: display, fontWeight: 800, fontSize: size, color: k > 0.5 ? INK : FAINT, whiteSpace: 'nowrap'}}>{children}</span>
-  </div>;
-};
-
 /** Full-frame background clip: muted, looped, dimmed, optionally blurred, under a navy grade so it sits in the palette. */
 const Footage: React.FC<{name: string; f: number; blur?: number; dim?: number}> = ({name, f, blur = 0, dim = 0.4}) => (
   <AbsoluteFill style={{background: cinema.bg, overflow: 'hidden'}}>
@@ -81,14 +71,20 @@ const What: Scene = ({f, dur, cue}) => {
     <Abs y={20}><Kicker f={f} at={-6}>Anthropic 刚推出</Kicker></Abs>
     <Abs y={80}><Reveal f={f} at={-2}><Big size={136} w={800} style={{letterSpacing: -3}}>Claude Duet</Big></Reveal></Abs>
     <Abs y={270}><Reveal f={f} at={10} dy={12}><Big size={40} c={FAINT} w={600} style={{fontFamily: font, letterSpacing: 4}}>研究预览版</Big></Reveal></Abs>
-    <Abs y={390}><Reveal f={f} at={p.a - 14}>
-      <Surface pad="6px 40px">
-        <Row f={f} at={p.a} icon="mail" first>每天早上发简报</Row>
-        <Row f={f} at={p.b} icon="bell-ringing">有事才提醒你</Row>
-        <Row f={f} at={p.c} icon="hand-stop">关键操作先问你</Row>
-      </Surface>
-    </Reveal></Abs>
-    <Abs y={900}><Reveal f={f} at={p.c + 24} dy={10}><Big size={40} c={FAINT} w={500} style={{fontFamily: font}}>目前仅面向美国部分订阅用户排队开放</Big></Reveal></Abs>
+    {/* one feature at a time, full size, swapping on the spoken words */}
+    {[{n: 'mail', t: '每天早上发简报', at: p.a}, {n: 'bell-ringing', t: '有事才提醒你', at: p.b}, {n: 'hand-stop', t: '关键操作先问你', at: p.c}].map((x, i, all) => {
+      const inn = rise(f, x.at - 8, 14), out = i < all.length - 1 ? rise(f, all[i + 1].at - 8, 12) : 0;
+      if (inn <= 0 || out >= 1) return null;
+      return <Abs key={x.n} y={360} style={{opacity: clamp(inn * 1.4) * (1 - out), transform: `translateX(${(1 - inn) * 140 - out * 140}px)`,
+        filter: inn < 0.98 || out > 0 ? `blur(${((1 - inn) + out) * 8}px)` : undefined}}>
+        <Surface pad="0" style={{height: 480, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 36}}>
+          <Icon n={x.n} tone="gold" size={200} />
+          <Big size={84} w={800}>{x.t}</Big>
+          <Big size={36} c={FAINT} w={600} style={{fontFamily: font, letterSpacing: 6}}>{i + 1} / 3</Big>
+        </Surface>
+      </Abs>;
+    })}
+    <Abs y={890}><Reveal f={f} at={p.c + 24} dy={10}><Big size={40} c={FAINT} w={500} style={{fontFamily: font}}>目前仅面向美国部分订阅用户排队开放</Big></Reveal></Abs>
   </Root>;
 };
 What.sfx = (cue) => {
@@ -130,16 +126,17 @@ const Memory: Scene = ({f, dur, cue}) => {
   const p = memPlan(cue);
   const tags = [{t: '记忆', at: p.a, x: 30, y: 180}, {t: '技能', at: p.b, x: 670, y: 180}, {t: '已连接的应用', at: p.c, x: 270, y: 360}];
   const sink = rise(f, p.d - 6, 18);
+  const grow = rise(f, p.a, 12) + rise(f, p.b, 12) + rise(f, p.c, 12);
   return <Root f={f} dur={dur}>
     <Abs y={0}><Headline f={f} at={-10} no={1} total={3} kicker="记忆" lines={['先知道你是谁']} size={100} /></Abs>
     {/* the brain, with what it carries over flying in */}
     <Abs y={300} h={460} style={{transform: `translateY(${-sink * 40}px) scale(${1 - 0.15 * sink})`, transformOrigin: '50% 0'}}>
-      <Pool x={450} y={220} r={360} o={0.16 + 0.08 * rise(f, p.a, 20)} />
-      <Abs x={330} y={100} w={240}><Reveal f={f} at={4}><Icon n="brain" tone={f >= p.a ? 'gold' : 'ink'} size={240} /></Reveal></Abs>
+      <Pool x={450} y={220} r={300 + 60 * grow} o={0.12 + 0.07 * grow} />
+      <Abs x={330} y={100} w={240} style={{transform: `scale(${1 + 0.1 * grow})`}}><Reveal f={f} at={4}><Icon n="brain" tone={f >= p.a ? 'gold' : 'ink'} size={240} /></Reveal></Abs>
       {tags.map((g) => {
         const k = rise(f, g.at, 18);
         return <Abs key={g.t} x={g.x} y={g.y} w={g.t.length > 2 ? 360 : 200} style={{opacity: clamp(k * 1.4), transform: `translateY(${(1 - k) * 30}px)`, textAlign: 'center'}}>
-          <Big size={56} w={800}>{g.t}</Big>
+          <Big size={64} w={800}>{g.t}</Big>
         </Abs>;
       })}
     </Abs>
@@ -168,10 +165,11 @@ const Schedule: Scene = ({f, dur, cue}) => {
   const p = schedPlan(cue);
   const swap = rise(f, p.b - 6, 16);
   const off = rise(f, p.c, 14);
+  const zin = rise(f, p.c - 6, 16), zout = rise(f, p.d - 4, 18);
   // the clock hand jumps forward a few hours at a time while "每隔几个小时" is said
   const hand = 120 * Math.floor(clamp((f - p.a) / 18, 0, 4));
   return <Root f={f} dur={dur}>
-    <Pool x={450} y={560} o={0.13} />
+    <Pool x={450} y={560} o={0.13 + 0.12 * zout} />
     <Abs y={0}><Headline f={f} at={-10} no={2} total={3} kicker="定时任务" lines={[<Marker key="m" p={rise(f, p.d, 16)}>到点自己醒</Marker>]} size={100} /></Abs>
     {/* part 1: the clock that wakes it every few hours */}
     <Abs y={330} style={{opacity: 1 - swap, transform: `translateY(${-swap * 40}px)`}}>
@@ -189,7 +187,7 @@ const Schedule: Scene = ({f, dur, cue}) => {
       </Reveal>
     </Abs>
     {/* part 2: the phone goes dark, the cloud machine keeps working */}
-    <Abs y={330} style={{opacity: swap}}>
+    <Abs y={330} style={{opacity: swap * (1 - 0.45 * zout), transform: `scale(${1 + 0.12 * zin - 0.12 * zout - 0.1 * zout})`, transformOrigin: '10% 45%'}}>
       <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 40px'}}>
         <div style={{width: 230, height: 400, borderRadius: 40, border: `3px solid ${off > 0 ? HAIR : 'rgba(255,255,255,0.4)'}`, background: `rgba(255,255,255,${0.1 * (1 - off)})`,
           display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
@@ -225,7 +223,10 @@ const Confirm: Scene = ({f, dur, cue}) => {
     <Abs y={0}><Headline f={f} at={-10} no={3} total={3} kicker="等你确认" lines={['关键一步先问你']} size={100} /></Abs>
     <Abs y={380} style={{transform: `scale(${1 - 0.3 * up})`, transformOrigin: '0 0', opacity: 1 - 0.35 * up}}>
       <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', rowGap: 10}}>
-        {acts.map((a) => <Reveal key={a.t} f={f} at={a.at - 4}><Big size={80} w={800} c={f >= a.at + 4 ? INK : DIM}>{a.t}</Big></Reveal>)}
+        {acts.map((a) => <Reveal key={a.t} f={f} at={a.at - 4}>
+          <Big size={96} w={800} c={f >= a.at + 4 ? INK : DIM}>{a.t}</Big>
+          <div style={{width: 200 * rise(f, a.at, 12), height: 6, borderRadius: 3, background: GOLD, marginTop: 4}} />
+        </Reveal>)}
       </div>
     </Abs>
     <Abs y={600} style={{opacity: card, transform: `translateY(${(1 - card) * 40}px)`}}>
@@ -269,16 +270,16 @@ const Dev: Scene = ({f, dur, cue}) => {
     <Abs y={90}><Headline f={f} at={0} lines={['零件不新鲜', <>难在{gold('拼成系统')}</>]} size={100} /></Abs>
     {/* the three pieces, then they close into one panel */}
     <Abs y={400}>
-      <div style={{display: 'flex', justifyContent: 'center', gap: 70 * (1 - join) + 10}}>
+      <div style={{display: 'flex', justifyContent: 'center', gap: 36 * (1 - join) + 6}}>
         {PARTS.map((x, i) => <Reveal key={x.n} f={f} at={ats[i]}>
-          <div style={{textAlign: 'center', width: 220}}>
-            <Icon n={x.n} tone={join > 0.5 ? 'gold' : 'ink'} size={120} />
-            <Big size={48} w={800} c={join > 0.5 ? DIM : INK} style={{marginTop: 12}}>{x.t}</Big>
-          </div>
+          <Surface pad="34px 0" style={{textAlign: 'center', width: 250, ...(join > 0.5 ? {background: 'transparent', border: '1.5px solid transparent', boxShadow: 'none'} : {})}}>
+            <Icon n={x.n} tone={join > 0.5 ? 'gold' : 'ink'} size={150} />
+            <Big size={52} w={800} c={join > 0.5 ? DIM : INK} style={{marginTop: 12}}>{x.t}</Big>
+          </Surface>
         </Reveal>)}
       </div>
     </Abs>
-    <Abs y={360} h={330} style={{opacity: join, transform: `scale(${0.94 + 0.06 * join})`, pointerEvents: 'none'}}>
+    <Abs y={370} h={330} style={{opacity: join, transform: `scale(${0.94 + 0.06 * join})`, pointerEvents: 'none'}}>
       <Surface accent={GOLD} pad="0" style={{height: 330, background: 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))'}}><span /></Surface>
     </Abs>
     <Abs y={880}><Reveal f={f} at={p.d - 4}>

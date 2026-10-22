@@ -213,7 +213,9 @@ const Caption: React.FC<{captions: TimedCaption[]; highlights?: {text: string; r
   }
   if (buf) parts.push(...latin(buf, 'end', pal.latin));
   const dark = pal.latin !== null || pal.bg === cinema.bg;
-  const size = pal.bg === cinema.bg ? 66 : 60;
+  // Cinema captions are 66 px, stepping down for long lines so they stay inside x 40–1040; never below the 60 px rule.
+  const units = [...active.text].reduce((w, ch) => w + ((ch.codePointAt(0) ?? 0) < 128 ? 0.56 : 1), 0) + 0.3;
+  const size = pal.bg === cinema.bg ? Math.max(60, Math.min(66, Math.floor(1000 / units))) : 60;
   return <div style={{position: 'absolute', top: captionY, left: stage.left - 20, width: stage.width + 40, transform: `translateY(-50%) scale(${pop})`,
     textAlign: 'center', fontFamily: font, fontWeight: 900, fontSize: size, whiteSpace: 'nowrap', lineHeight: 1.3, color: pal.text, letterSpacing: 1,
     WebkitTextStroke: `10px ${pal.stroke}`, paintOrder: 'stroke fill', textShadow: dark ? '0 6px 20px rgba(0,0,0,0.7)' : 'none'}}>
