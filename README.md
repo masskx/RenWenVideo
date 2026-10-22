@@ -66,8 +66,9 @@ src/tutorial/                    TutorialVideo 合成、通用 UI、每期画面
 src/components/                  可复用动效组件（学自 mg-styles-15，重写）：花字标题、爆炸框、锁定框、数字滚动、贴纸、大画布相机、描线、柱状图；用法见 src/components/README.md，来源和取舍见 docs/style-guide.md
 src/fx/                          共用动效库：闭式弹簧、抛出/下落/弹跳、挤压拉伸、错相、相机跟随、主光/接触影/运动残影、转场、印章、关键词上色（见 docs/video-craft/）
 public/audio/sfx/                音效：fs-* 是从 Freesound（经 Openverse）下载的真实录音，来源在 CREDITS.json；其余是合成的（scripts/generate-sfx.py）。画面组件用 sfx() 放到接触帧上
-scripts/qa/                      出片检查：brief.mjs（简报和时长）、richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、frames.mjs（逐帧查看页）、palette.mjs（取色）、cover.mjs（封面卡 + 缩略图）
+scripts/qa/                      出片检查：brief.mjs（简报和时长）、richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、clutter.mjs（画面减法：主体大小、字幕上方空带、强调色个数）、frames.mjs（逐帧查看页）、palette.mjs（取色）、cover.mjs（封面卡 + 缩略图）
 docs/video-craft/                quick-reference.md（必读，一页）；其余为可选参考；archive/ 是归档的旧规则
+docs/style-guide.md              从外部仓库学来的风格知识，每个仓库一节、注明来源（目前：mg-styles-15）
 docs/video-craft/prompt-library/ 提示词库：8 个 Opus 视频提示词仓库的原样快照（vendor/<仓库>/<commit>/）+ 选用指南；scripts/prompts/ 搜索和更新
 .claude/skills/video-craft/      给 Claude 的做片流程（指向速查页）
 src/Root.tsx                     注册合成：AiEra11Rules、MarketingEngineer、Tutorial、TutorialCover
@@ -151,6 +152,10 @@ npm ci
 
 2026-10-18 起，规则只剩一页必读的 [`docs/video-craft/quick-reference.md`](docs/video-craft/quick-reference.md)（观众、优先级、时长、手机可读、必填简报、检查）和根目录 `CLAUDE.md`（端到端流程）。优先级：**钩子 → 留人 → 手机看得清 → 忠于脚本和素材 → 打磨**。旧的导演层规则（禁止项、物理动作链、八项 Brief）已归档到 `docs/video-craft/archive/`，只作可选参考；发光、粒子、整幅推拉不再禁止，按素材决定用不用。
 
+2026-10-22 复盘近 6 条片子后加了**画面减法**（速查页 §六）：毛病不是“花”，是“碎”——小元素多、主体小（舞台平均只有 10–15% 有东西）。现在要求一屏一个主体、宽 ≥ 舞台 60% 并铺到字幕上方，画面上最多两层字（≤ 10 字的标题 + 字幕），同屏强调色 ≤ 3，“响”的动作（爆炸框、花字、印章、锁定框、震屏）每个场景最多一个。
+
+可复用的动效组件在 `src/components/`（逐字弹出标题、爆炸框、锁定框、数字跳变 / 滚动、贴纸、大画布相机、描线、柱状图），学自 [mg-styles-15](https://github.com/Vincentwei1021/mg-styles-15)（MIT），只借鉴做法、代码重写；用法见 [`src/components/README.md`](src/components/README.md)，拆解、取舍和不用的理由见 [`docs/style-guide.md`](docs/style-guide.md)。组件默认偏克制，只给一个场景里最要紧的那一下用。
+
 ```bash
 node scripts/fetch-sfx.mjs search "paper slide"                  # 在 Openverse 里找 Freesound 音效（CC0 / CC BY）
 node scripts/fetch-sfx.mjs get <openverse-id> paper-slide       # 下载 → public/audio/sfx/fs-paper-slide.wav，来源记进 CREDITS.json
@@ -172,6 +177,7 @@ node scripts/qa/richness.mjs douyin/<id>/video.mp4             # 丰富度：要
 node scripts/qa/scan.mjs douyin/<id>/video.mp4                 # 扫片：每秒 3 帧拼图，查截断、叠字、空白，转场至少 3 种
 node scripts/qa/scan.mjs douyin/<id>/video.mp4 --phone=5,60,120  # 缩到 360 宽（手机屏宽），要读的字必须读得清
 node scripts/qa/marks.mjs douyin/<id>/video.mp4                # 卡点：每个卡点前 0.1 秒没有动作、后 0.35 秒已经出现
+node scripts/qa/clutter.mjs douyin/<id>/video.mp4 [--frame channels]  # 画面减法：字幕上方空带的帧 ≤ 15%、强调色 > 3 的帧 ≤ 10%（只提醒去看，外部素材的颜色也算）
 node scripts/qa/cover.mjs <id>                                 # 封面：封面卡、标题字数、对比度；看 cover-thumbs.png 按十条打分（docs/video-craft/封面.md）
 ```
 
@@ -211,6 +217,7 @@ npm run tutorial:render -- <id> --overwrite  # 渲染教程到 douyin/<id>/（�
 npm run qa:richness -- douyin/<id>/video.mp4  # 丰富度检查
 npm run qa:scan -- douyin/<id>/video.mp4      # 扫片
 npm run qa:marks -- douyin/<id>/video.mp4     # 卡点检查
+npm run qa:clutter -- douyin/<id>/video.mp4   # 画面减法检查
 npm run qa:palette -- <参考图>                 # 取色
 ```
 
@@ -231,6 +238,7 @@ npm run qa:palette -- <参考图>                 # 取色
 
 - 画布 1080×1920、30fps，H.264 + AAC，响度 -15～-16 LUFS
 - 第 0 帧就要有钩子画面和大字；`--stills=0` 渲一张看看（元素用弹入动画时，第 0 帧该在的东西把触发时间设成负数）
+- 一屏一个主体，宽 ≥ 舞台 60%，往下铺到字幕上方；画面上最多两层字，同屏强调色 ≤ 3（A/B + 一个语义色）；“示意”说明合并成一处
 - 关键信息放在 x 60–930、y 160–1290 之内；字幕带 y 1290–1500 只放字幕；避开抖音底部文案区（y > 1560）和右侧按钮列（x > 930）
 - 配图只用象征性插画，不生成真实人物肖像；画面里标注“AI 配图”，并署名原文作者
 - 外部素材静音，右下角「案例展示」（按方法现做的 AI 图标「AI 生成示例」）；画面里不出现账号、头像、网址，出处链接只写进发布包 README
