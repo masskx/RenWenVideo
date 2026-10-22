@@ -63,6 +63,7 @@ scripts/generate-tutorial-voice.py / generate-tutorial-music.py / render-tutoria
 src/tutorial/                    TutorialVideo 合成、通用 UI、每期画面 scenes/<id>.tsx
 
 # 公共
+src/components/                  可复用动效组件（学自 mg-styles-15，重写）：花字标题、爆炸框、锁定框、数字滚动、贴纸、大画布相机、描线、柱状图；用法见 src/components/README.md，来源和取舍见 docs/style-guide.md
 src/fx/                          共用动效库：闭式弹簧、抛出/下落/弹跳、挤压拉伸、错相、相机跟随、主光/接触影/运动残影、转场、印章、关键词上色（见 docs/video-craft/）
 public/audio/sfx/                音效：fs-* 是从 Freesound（经 Openverse）下载的真实录音，来源在 CREDITS.json；其余是合成的（scripts/generate-sfx.py）。画面组件用 sfx() 放到接触帧上
 scripts/qa/                      出片检查：brief.mjs（简报和时长）、richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、frames.mjs（逐帧查看页）、palette.mjs（取色）、cover.mjs（封面卡 + 缩略图）
