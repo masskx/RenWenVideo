@@ -1,0 +1,231 @@
+{
+  "id": "litellm-pypi-poison-cinema",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1312,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/litellm-pypi-poison/01-hook.mp3",
+      "audioMs": 4754,
+      "startFrame": 0,
+      "durationFrames": 149,
+      "cues": {
+        "a": 1958,
+        "b": 3713
+      },
+      "captions": [
+        {
+          "text": "装了一个AI工具包",
+          "startMs": 405,
+          "endMs": 1958
+        },
+        {
+          "text": "你的大模型API Key",
+          "startMs": 1958,
+          "endMs": 3713
+        },
+        {
+          "text": "可能已经被偷了",
+          "startMs": 3713,
+          "endMs": 4763
+        }
+      ]
+    },
+    {
+      "id": "poison",
+      "audioSrc": "audio/tutorials/litellm-pypi-poison/02-poison.mp3",
+      "audioMs": 5773,
+      "startFrame": 149,
+      "durationFrames": 180,
+      "cues": {
+        "a": 3551,
+        "b": 4983
+      },
+      "captions": [
+        {
+          "text": "开源库LiteLLM的1.107.0版本",
+          "startMs": 385,
+          "endMs": 3551
+        },
+        {
+          "text": "很多人调大模型都在用",
+          "startMs": 3551,
+          "endMs": 4983
+        },
+        {
+          "text": "被人塞了木马",
+          "startMs": 4983,
+          "endMs": 6033
+        }
+      ]
+    },
+    {
+      "id": "autorun",
+      "audioSrc": "audio/tutorials/litellm-pypi-poison/03-autorun.mp3",
+      "audioMs": 5355,
+      "startFrame": 329,
+      "durationFrames": 167,
+      "cues": {
+        "a": 1160,
+        "b": 2981,
+        "c": 4473
+      },
+      "captions": [
+        {
+          "text": "最阴的是",
+          "startMs": 315,
+          "endMs": 1160
+        },
+        {
+          "text": "你代码里没用它也会中招",
+          "startMs": 1160,
+          "endMs": 2981
+        },
+        {
+          "text": "任何Python程序一启动",
+          "startMs": 2981,
+          "endMs": 4473
+        },
+        {
+          "text": "它就自动运行",
+          "startMs": 4473,
+          "endMs": 5378
+        }
+      ]
+    },
+    {
+      "id": "steal",
+      "audioSrc": "audio/tutorials/litellm-pypi-poison/04-steal.mp3",
+      "audioMs": 5851,
+      "startFrame": 496,
+      "durationFrames": 182,
+      "cues": {
+        "a": 2326,
+        "b": 2965,
+        "c": 3756,
+        "d": 5155
+      },
+      "captions": [
+        {
+          "text": "它会翻你的SSH密钥",
+          "startMs": 325,
+          "endMs": 2326
+        },
+        {
+          "text": "云账号、浏览器密码",
+          "startMs": 2326,
+          "endMs": 3756
+        },
+        {
+          "text": "还有各种大模型Key",
+          "startMs": 3756,
+          "endMs": 5155
+        },
+        {
+          "text": "偷偷传走",
+          "startMs": 5155,
+          "endMs": 5985
+        }
+      ]
+    },
+    {
+      "id": "step1",
+      "audioSrc": "audio/tutorials/litellm-pypi-poison/05-step1.mp3",
+      "audioMs": 5277,
+      "startFrame": 678,
+      "durationFrames": 165,
+      "cues": {
+        "a": 957,
+        "b": 3544
+      },
+      "captions": [
+        {
+          "text": "第一步",
+          "startMs": 355,
+          "endMs": 957
+        },
+        {
+          "text": "终端输入pip show litellm",
+          "startMs": 957,
+          "endMs": 3544
+        },
+        {
+          "text": "看是不是1.107.0",
+          "startMs": 3544,
+          "endMs": 5544
+        }
+      ]
+    },
+    {
+      "id": "step2",
+      "audioSrc": "audio/tutorials/litellm-pypi-poison/06-step2.mp3",
+      "audioMs": 4023,
+      "startFrame": 843,
+      "durationFrames": 127,
+      "cues": {
+        "a": 2140
+      },
+      "captions": [
+        {
+          "text": "第二步，看site-packages里",
+          "startMs": 295,
+          "endMs": 2140
+        },
+        {
+          "text": "有没有cook.pth这个文件",
+          "startMs": 2140,
+          "endMs": 4260
+        }
+      ]
+    },
+    {
+      "id": "step3",
+      "audioSrc": "audio/tutorials/litellm-pypi-poison/07-step3.mp3",
+      "audioMs": 5564,
+      "startFrame": 970,
+      "durationFrames": 173,
+      "cues": {
+        "a": 2840,
+        "b": 3659
+      },
+      "captions": [
+        {
+          "text": "第三步，中了就马上重置所有Key",
+          "startMs": 305,
+          "endMs": 2840
+        },
+        {
+          "text": "再卸载，换回干净的1.106.2",
+          "startMs": 2840,
+          "endMs": 5779
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/litellm-pypi-poison/08-end.mp3",
+      "audioMs": 4310,
+      "startFrame": 1143,
+      "durationFrames": 169,
+      "cues": {
+        "a": 2027,
+        "b": 3007
+      },
+      "captions": [
+        {
+          "text": "开源工具很好用",
+          "startMs": 415,
+          "endMs": 2027
+        },
+        {
+          "text": "但装之前，多看一眼版本号",
+          "startMs": 2027,
+          "endMs": 4577
+        }
+      ]
+    }
+  ]
+}

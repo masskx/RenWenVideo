@@ -1,12 +1,12 @@
 // Clutter check (画面减法): is the frame busy in detail but empty in mass? Reads a finished mp4, renders nothing.
 // One frame per second (quarter scale), caption band and below ignored. Per frame it measures:
-//   accents — saturated hue families (30° bins) covering >= 0.2 % of the frame; > 3 means the A/B rule broke
+//   accents — saturated hue families (30° bins) covering >= 0.2 % of the frame; > 2 means more than gold + red speak
 //             (colourful external footage counts too, so look before you change anything)
 //   ink     — share of the content stage that is not background (one big subject ≈ 15–35 %)
 //   bottom  — lowest row with content; a frame whose content stops far above the captions leaves a dead band
 //   node scripts/qa/clutter.mjs douyin/<id>/video.mp4 [--frame full|channels] [--verbose]
-// Thresholds come from the house baseline (deepseek-vs-opus55: 0 dead-band frames, 4 accents only in 3 of 54 footage frames) and
-// docs/video-craft/quick-reference.md §六. Exit code is always 0: this is a prompt to look, not a gate.
+// Rules: docs/video-craft/quick-reference.md §六 "高级感" (one gold accent, red only for danger). Dead-band threshold calibrated
+// on deepseek-vs-opus55 (0 of 54 frames). Exit code is always 0: this is a prompt to look, not a gate.
 import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
 
@@ -54,15 +54,15 @@ for (let k = 0; k < n; k += 1) {
   rows.push({t: k, accents, ink: (100 * ink) / area, bottom});
 }
 
-const flag = (r) => [r.accents > 3 && `${r.accents} 个强调色`, r.bottom < L.dead && `内容止于 y ${r.bottom}`, r.ink < 6 && `舞台只有 ${r.ink.toFixed(0)}% 有东西`].filter(Boolean);
+const flag = (r) => [r.accents > 2 && `${r.accents} 个强调色`, r.bottom < L.dead && `内容止于 y ${r.bottom}`, r.ink < 6 && `舞台只有 ${r.ink.toFixed(0)}% 有东西`].filter(Boolean);
 const avg = (a) => a.reduce((s, x) => s + x, 0) / a.length;
 console.log(`${mp4}: ${n} 帧（每秒一帧），舞台 y ${L.top}–${L.bottom}`);
-console.log(`  强调色  平均 ${avg(rows.map((r) => r.accents)).toFixed(1)}，最多 ${Math.max(...rows.map((r) => r.accents))}（> 3 的帧 ${rows.filter((r) => r.accents > 3).length}）`);
+console.log(`  强调色  平均 ${avg(rows.map((r) => r.accents)).toFixed(1)}，最多 ${Math.max(...rows.map((r) => r.accents))}（> 2 的帧 ${rows.filter((r) => r.accents > 2).length}）`);
 console.log(`  占舞台  平均 ${avg(rows.map((r) => r.ink)).toFixed(1)}%`);
 console.log(`  下半空  ${rows.filter((r) => r.bottom < L.dead).length}/${n} 帧的内容停在 y ${L.dead} 以上（字幕上方留出空带）`);
 for (const r of rows) {
   const f = flag(r);
   if (f.length || verbose) console.log(`  ${String(r.t).padStart(3)} s  强调色 ${r.accents}  占 ${r.ink.toFixed(1).padStart(4)}%  底 ${String(r.bottom).padStart(4)}  ${f.join('；')}`);
 }
-const dead = rows.filter((r) => r.bottom < L.dead).length / n, loud = rows.filter((r) => r.accents > 3).length / n;
-console.log(dead <= 0.15 && loud <= 0.1 ? '结论：过（仍要自己看静帧）' : `结论：去看标出的帧——${dead > 0.15 ? '主体偏小或偏上，往下铺满舞台；' : ''}${loud > 0.1 ? '强调色超过 A/B + 一个语义色（外部素材里的颜色也会算进去，先看是不是素材）；' : ''}`);
+const dead = rows.filter((r) => r.bottom < L.dead).length / n, loud = rows.filter((r) => r.accents > 2).length / n;
+console.log(dead <= 0.15 && loud <= 0.1 ? '结论：过（仍要自己看静帧）' : `结论：去看标出的帧——${dead > 0.15 ? '主体偏小或偏上，往下铺满舞台；' : ''}${loud > 0.1 ? '同屏说话的颜色太多：金色 + 红色之外又来了别的（外部素材里的颜色也会算进去，先看是不是素材）；' : ''}`);

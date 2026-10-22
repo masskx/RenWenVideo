@@ -23,7 +23,7 @@
 | [`douyin/tesla-roadster-flight/`](douyin/tesla-roadster-flight/) | 新闻拆解：特斯拉“会飞的车”——新 Roadster 发布会，演示（坡道倒挂翻身、越过车队、0.81 秒）和承诺（2028 投产）分开看。线稿车贯穿全片，标题走 HUD 层 | 2:06 |
 | [`douyin/agent-engineer-roadmap/`](douyin/agent-engineer-roadmap/) | 教程：Agent 工程师路线图（Chasen 面试后拿到的入门指南：五个阶段、五个项目）。第一部按视频号做：9:16 + 中间 6:7 安全带，另出 6:7 版和 3:4 封面；蓝图科技风 | 2:55 |
 | [`douyin/anatomy-explain/`](douyin/anatomy-explain/) | 讲解：会动，不等于看懂——AI 做科普视频的一条规矩 | 2:32 |
-| [`douyin/deepseek-vs-opus55/`](douyin/deepseek-vs-opus55/) | 实测：同一句提示词，DeepSeek V4.1 Flash 1017 vs Opus 5.5 写代码做视频。**画面基准片**（蓝图深底 + 全屏 9:16） | 0:53 |
+| [`douyin/deepseek-vs-opus55/`](douyin/deepseek-vs-opus55/) | 实测：同一句提示词，DeepSeek V4.1 Flash 1017 vs Opus 5.5 写代码做视频。蓝图深底 + 全屏 9:16（2026-10-17 至 10-22 的画面基准） | 0:53 |
 | [`douyin/deepseek-identity/`](douyin/deepseek-identity/) | 新闻拆解：DeepSeek 连问 5 次都说自己是 ChatGPT，就是蒸馏吗？（中立：自称 ≠ 证据） | 0:47 |
 | [`douyin/headroom/`](douyin/headroom/) | 开源工具：Headroom，AI 读日志之前先压一遍，少烧 token | 0:52 |
 | [`douyin/orbit-360-doubao/`](douyin/orbit-360-doubao/) | 教程：一张图 + 一句话，用豆包做 360° 环绕（子弹时间） | 1:32 |
@@ -36,6 +36,7 @@
 | [`douyin/literal-web-crawler/`](douyin/literal-web-crawler/) | 开源小项目：字面意义上的“网络爬虫”，一只会撕网页链接的蜘蛛；录屏特写按追踪轨迹跟拍 | 0:46 |
 | [`douyin/php2shell-overtime/`](douyin/php2shell-overtime/) | 安全新闻：PHP2Shell 高危漏洞（9.2 分，无需登录远程执行），升级到哪个版本、记得重启；全自绘，无利用细节 | 0:43 |
 | [`douyin/litellm-pypi-poison/`](douyin/litellm-pypi-poison/) | 安全新闻：LiteLLM 1.107.0 PyPI 投毒，装上就偷 API Key——三步自查（版本号 / cook.pth / 重置 Key）；Key 全是假的且打码 | 0:44 |
+| [`douyin/litellm-pypi-poison-cinema/`](douyin/litellm-pypi-poison-cinema/) | 同一条 LiteLLM 投毒片的 **cinema 版**（2026-10-22）：同一段配音、同样的事实，画面按早期长文讲解的口味重做——一个大标题、一块面板一个主角、只有金色一个强调色、不加装饰。**现在的画面基准片**，和原版对照看 | 0:44 |
 
 ## 目录结构
 
@@ -60,13 +61,13 @@ tutorials/<id>.timeline.json     配音脚本生成的字幕和动画时间轴
 public/audio/tutorials/<id>/     分场景配音、逐字时间戳和底乐
 public/video/<id>/、public/images/tutorials/<id>/   从素材包整理出来的工作素材（短文件名、裁切过的截图、定格帧）
 scripts/generate-tutorial-voice.py / generate-tutorial-music.py / render-tutorial.mjs
-src/tutorial/                    TutorialVideo 合成、通用 UI、每期画面 scenes/<id>.tsx
+src/tutorial/                    TutorialVideo 合成、通用 UI、每期画面 scenes/<id>.tsx；cinema.tsx 是 cinema 主题的共用件（大标题 + 马克笔、面板、终端、光）
 
 # 公共
 src/components/                  可复用动效组件（学自 mg-styles-15，重写）：花字标题、爆炸框、锁定框、数字滚动、贴纸、大画布相机、描线、柱状图；用法见 src/components/README.md，来源和取舍见 docs/style-guide.md
 src/fx/                          共用动效库：闭式弹簧、抛出/下落/弹跳、挤压拉伸、错相、相机跟随、主光/接触影/运动残影、转场、印章、关键词上色（见 docs/video-craft/）
 public/audio/sfx/                音效：fs-* 是从 Freesound（经 Openverse）下载的真实录音，来源在 CREDITS.json；其余是合成的（scripts/generate-sfx.py）。画面组件用 sfx() 放到接触帧上
-scripts/qa/                      出片检查：brief.mjs（简报和时长）、richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、clutter.mjs（画面减法：主体大小、字幕上方空带、强调色个数）、frames.mjs（逐帧查看页）、palette.mjs（取色）、cover.mjs（封面卡 + 缩略图）
+scripts/qa/                      出片检查：brief.mjs（简报和时长）、richness.mjs（丰富度）、scan.mjs（扫片、手机宽度）、marks.mjs（卡点）、clutter.mjs（主角大小、字幕上方空带、同屏颜色个数）、frames.mjs（逐帧查看页）、palette.mjs（取色）、cover.mjs（封面卡 + 缩略图）
 docs/video-craft/                quick-reference.md（必读，一页）；其余为可选参考；archive/ 是归档的旧规则
 docs/style-guide.md              从外部仓库学来的风格知识，每个仓库一节、注明来源（目前：mg-styles-15）
 docs/video-craft/prompt-library/ 提示词库：8 个 Opus 视频提示词仓库的原样快照（vendor/<仓库>/<commit>/）+ 选用指南；scripts/prompts/ 搜索和更新
@@ -127,10 +128,10 @@ npm ci
 字卡、终端、流程图由 Remotion 代码绘制，素材包里的录屏、截图、案例片原样嵌进画面（静音、右下角标「案例展示」或「AI 生成示例」）。旁白里的 `{a}` 标记会换算成画面动画的触发时间；`[显示|朗读]` 可以让字幕和读音不同，例如 `[9222|九二二二]`、`[Alpha|阿尔法]`。
 
 1. **输入**：`inputs/<id>/script.md`（钩子、口播、结尾、标题，格式随意）+ `materials/`。先看一遍素材：账号、网址、品牌、血腥画面要避开或打码，记进分镜的“素材和出处”。
-2. **计划**：写 `tutorials/<id>.json`、`tutorials/<id>.storyboard.md`（简报五项 + 封面卡）和 `src/tutorial/scenes/<id>.tsx`（在 `scenes/index.ts` 里登记）。新片照 `tutorials/awesome-seedance.json` 这类全屏片改：
+2. **计划**：写 `tutorials/<id>.json`、`tutorials/<id>.storyboard.md`（简报五项 + 封面卡）和 `src/tutorial/scenes/<id>.tsx`（在 `scenes/index.ts` 里登记）。新片照 `tutorials/litellm-pypi-poison-cinema.json`（cinema 主题、全屏 9:16）改：
    - 配音只用本人的复刻音色：`"tts": {"provider": "doubao"}`，语速按场景写 `"pace"`。复刻音色不可用且用户同意时，可临时改用免费的 edge-tts 备用声音：`"tts": {"provider": "edge"}`。每个场景整段一次合成，卡点和字幕时间来自服务端的逐字时间戳；语速、读音修正见 `docs/video-craft/配音.md`。
    - 默认 ≤ 60 秒；脚本要求更长且用户同意时写 `"maxSeconds"`。
-   - `"look": {"theme": "blueprint", "frame": "full", "header": false, "tour": false}`：全屏 9:16，舞台 900×1080 在 (60, 200)，字幕在 y 1390。`"header": "chapters"` 加顶部章节条（章节名来自 `"steps"`，场景的 `"step"` 决定高亮哪一章）。
+   - `"look": {"theme": "cinema", "frame": "full", "header": "progress", "tour": false, "particles": false}`：全屏 9:16，舞台 900×1080 在 (60, 200)，字幕在 y 1390。`"header": "progress"` 是顶部细进度条（左边 `"series"`，右边 `"credit"`，每个 `"steps"` 一段）。场景用 `src/tutorial/cinema.tsx` 的 `Headline`（章节号 + 大标题 + 马克笔）、`Surface`（面板）、`Terminal`、`Reveal`。`"theme": "blueprint"` 留给真要画工程图的片子。
    - `"musicVolume"` + `"musicDuckDb"`：底乐从第 0 帧开始，口播时压低（一般 14–18 dB）。
    - `"coverCard"`：封面标题、辅助句、锚点画面；`layouts["3:4"]` 可以单独换文字（`text` / `supportText`）和锚点（`anchorId`），小红书封面常用。
    - 画面文件里，场景组件可以带 `sfx`（音效卡点）和 `backdrop`（铺满 1080×1920 的底层画面，例如全屏素材）。
@@ -152,7 +153,7 @@ npm ci
 
 2026-10-18 起，规则只剩一页必读的 [`docs/video-craft/quick-reference.md`](docs/video-craft/quick-reference.md)（观众、优先级、时长、手机可读、必填简报、检查）和根目录 `CLAUDE.md`（端到端流程）。优先级：**钩子 → 留人 → 手机看得清 → 忠于脚本和素材 → 打磨**。旧的导演层规则（禁止项、物理动作链、八项 Brief）已归档到 `docs/video-craft/archive/`，只作可选参考；发光、粒子、整幅推拉不再禁止，按素材决定用不用。
 
-2026-10-22 复盘近 6 条片子后加了**画面减法**（速查页 §六）：毛病不是“花”，是“碎”——小元素多、主体小（舞台平均只有 10–15% 有东西）。现在要求一屏一个主体、宽 ≥ 舞台 60% 并铺到字幕上方，画面上最多两层字（≤ 10 字的标题 + 字幕），同屏强调色 ≤ 3，“响”的动作（爆炸框、花字、印章、锁定框、震屏）每个场景最多一个。
+2026-10-22 用户反馈：最早的长文讲解（`ai-era-11-rules`、`marketing-engineer`）最好看，后来的片子“装饰元素堆得乱、显得廉价、没有高级感”。对照下来，差别在：早期是一张有光有景深的满屏画面、一个金色章节号 + 两行大标题、一个强调色、一张半透明引文卡；后来是平的深蓝网格底、很多描边小方块和等宽小标注、同屏三四种颜色。现在教程默认用 **cinema 主题**（`"look": {"theme": "cinema", "header": "progress"}`，共用件 `src/tutorial/cinema.tsx`），规则是速查页 §六“高级感”：一个主角一块面板、一个说结论的大标题（不复述字幕）、只用金色一个强调色（红色只表示危险）、不加装饰、字有大小对比、动作平滑不弹跳。样片 `litellm-pypi-poison-cinema`，和原版对照看。
 
 可复用的动效组件在 `src/components/`（逐字弹出标题、爆炸框、锁定框、数字跳变 / 滚动、贴纸、大画布相机、描线、柱状图），学自 [mg-styles-15](https://github.com/Vincentwei1021/mg-styles-15)（MIT），只借鉴做法、代码重写；用法见 [`src/components/README.md`](src/components/README.md)，拆解、取舍和不用的理由见 [`docs/style-guide.md`](docs/style-guide.md)。组件默认偏克制，只给一个场景里最要紧的那一下用。
 
@@ -177,11 +178,11 @@ node scripts/qa/richness.mjs douyin/<id>/video.mp4             # 丰富度：要
 node scripts/qa/scan.mjs douyin/<id>/video.mp4                 # 扫片：每秒 3 帧拼图，查截断、叠字、空白，转场至少 3 种
 node scripts/qa/scan.mjs douyin/<id>/video.mp4 --phone=5,60,120  # 缩到 360 宽（手机屏宽），要读的字必须读得清
 node scripts/qa/marks.mjs douyin/<id>/video.mp4                # 卡点：每个卡点前 0.1 秒没有动作、后 0.35 秒已经出现
-node scripts/qa/clutter.mjs douyin/<id>/video.mp4 [--frame channels]  # 画面减法：字幕上方空带的帧 ≤ 15%、强调色 > 3 的帧 ≤ 10%（只提醒去看，外部素材的颜色也算）
+node scripts/qa/clutter.mjs douyin/<id>/video.mp4 [--frame channels]  # 主角大小、字幕上方空带、同屏颜色个数（只提醒去看，外部素材的颜色也算）
 node scripts/qa/cover.mjs <id>                                 # 封面：封面卡、标题字数、对比度；看 cover-thumbs.png 按十条打分（docs/video-craft/封面.md）
 ```
 
-做片流程写在根目录 `CLAUDE.md`（输入 → 计划 → 配音 → 渲染 → 检查 → 发布包）。分镜写在 `tutorials/<id>.storyboard.md`（模板：`docs/video-craft/分镜模板.md`，必填只有简报五项；画面基准：`tutorials/deepseek-vs-opus55`）。想换风格时查 `docs/video-craft/风格词典.md`（27 种风格），照参考图做时用 `node scripts/qa/palette.mjs <参考图>` 取色。
+做片流程写在根目录 `CLAUDE.md`（输入 → 计划 → 配音 → 渲染 → 检查 → 发布包）。分镜写在 `tutorials/<id>.storyboard.md`（模板：`docs/video-craft/分镜模板.md`，必填只有简报五项；画面基准：`tutorials/litellm-pypi-poison-cinema`）。想换风格时查 `docs/video-craft/风格词典.md`（27 种风格），照参考图做时用 `node scripts/qa/palette.mjs <参考图>` 取色。
 
 | 视频 | 丰富度（加入 `src/fx` 前 → 后） |
 | --- | --- |
@@ -195,7 +196,7 @@ node scripts/qa/cover.mjs <id>                                 # 封面：封面
 | agent-engineer-roadmap | 新片；深色蓝图第一稿 7 左右（一次整屏转场把平均数撑到 10），中性块改浅钢 + 有理由的相机后 10.3 过 |
 | tesla-roadster-flight | 新片；纸面线稿第一次只有 5.5，给主体分量（实心轮胎、路面）+ 每镜尾巴补真实事件后 10.3 过（卡点 40 个对上） |
 | anatomy-explain | 10.2 过 |
-| deepseek-vs-opus55 | 29.4 过（画面基准片） |
+| deepseek-vs-opus55 | 29.4 过（2026-10-22 之前的画面基准片） |
 | deepseek-identity | 10.4 过 |
 | headroom | 10.3 过 |
 | orbit-360-doubao | 24.8 过 |
@@ -217,7 +218,7 @@ npm run tutorial:render -- <id> --overwrite  # 渲染教程到 douyin/<id>/（�
 npm run qa:richness -- douyin/<id>/video.mp4  # 丰富度检查
 npm run qa:scan -- douyin/<id>/video.mp4      # 扫片
 npm run qa:marks -- douyin/<id>/video.mp4     # 卡点检查
-npm run qa:clutter -- douyin/<id>/video.mp4   # 画面减法检查
+npm run qa:clutter -- douyin/<id>/video.mp4   # 主角大小 / 空带 / 颜色个数
 npm run qa:palette -- <参考图>                 # 取色
 ```
 
@@ -238,7 +239,7 @@ npm run qa:palette -- <参考图>                 # 取色
 
 - 画布 1080×1920、30fps，H.264 + AAC，响度 -15～-16 LUFS
 - 第 0 帧就要有钩子画面和大字；`--stills=0` 渲一张看看（元素用弹入动画时，第 0 帧该在的东西把触发时间设成负数）
-- 一屏一个主体，宽 ≥ 舞台 60%，往下铺到字幕上方；画面上最多两层字，同屏强调色 ≤ 3（A/B + 一个语义色）；“示意”说明合并成一处
+- 高级感（速查页 §六）：一屏一个主角，一个大标题 + 字幕，金色是唯一强调色（红只表示危险），不加网格、刻度、胶囊、描边小方块；“示意”说明合并成一处
 - 关键信息放在 x 60–930、y 160–1290 之内；字幕带 y 1290–1500 只放字幕；避开抖音底部文案区（y > 1560）和右侧按钮列（x > 930）
 - 配图只用象征性插画，不生成真实人物肖像；画面里标注“AI 配图”，并署名原文作者
 - 外部素材静音，右下角「案例展示」（按方法现做的 AI 图标「AI 生成示例」）；画面里不出现账号、头像、网址，出处链接只写进发布包 README

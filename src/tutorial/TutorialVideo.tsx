@@ -1,13 +1,13 @@
 import React, {useMemo} from 'react';
 import {AbsoluteFill, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Audio} from '@remotion/media';
-import {Layout, Palette, blueprint, color, font, layoutOf, mono, palette, paper} from './theme';
+import {Layout, Palette, blueprint, cinema, color, font, layoutOf, mono, palette, paper} from './theme';
 import {sceneRegistry} from './scenes';
 import {Dino} from './ui';
 import {CoverRatio, SceneTiming, TimedCaption, Tutorial, TutorialProps} from './types';
 import {CutStage, Particles, beatTour, clamp, ease, follow, hash, planCuts, prog, sway} from '../fx';
 
-type Theme = 'dark' | 'paper' | 'blueprint';
+type Theme = 'dark' | 'paper' | 'blueprint' | 'cinema';
 const themeOf = (tutorial: Tutorial): Theme => tutorial.look?.theme ?? 'dark';
 const LayoutCtx = React.createContext<Layout>(layoutOf(undefined));
 const useLayout = () => React.useContext(LayoutCtx);
@@ -67,7 +67,22 @@ const BlueprintBackground: React.FC = () => {
   </AbsoluteFill>;
 };
 
-const Background: React.FC<{theme: Theme}> = ({theme}) => (theme === 'paper' ? <PaperBackground /> : theme === 'blueprint' ? <BlueprintBackground /> : <DarkBackground />);
+// Cinema: near-black lit by one warm key light from the top-left and a faint cool fill from the bottom-right, both drifting
+// slowly; a vignette and a static film grain (static, so it costs no bitrate). No grid, no marks, no scale.
+const GRAIN = `url("data:image/svg+xml;utf8,${encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='256' height='256'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(#n)'/></svg>")}")`;
+export const CinemaBackground: React.FC<{t?: number}> = ({t: tProp}) => {
+  const frame = useCurrentFrame();
+  const t = tProp ?? frame / 30;
+  return <AbsoluteFill style={{background: cinema.bg}}>
+    <AbsoluteFill style={{background: `radial-gradient(1300px 1100px at ${22 + Math.sin(t / 7) * 3}% ${10 + Math.cos(t / 9) * 2}%, rgba(255,197,61,0.13), transparent 62%),
+      radial-gradient(1100px 1000px at ${88 + Math.cos(t / 8) * 3}% ${86 + Math.sin(t / 10) * 2}%, rgba(143,211,255,0.07), transparent 65%)`}} />
+    <AbsoluteFill style={{background: 'radial-gradient(ellipse 90% 70% at 50% 40%, transparent 50%, rgba(0,0,0,0.6) 100%)'}} />
+    <AbsoluteFill style={{backgroundImage: GRAIN, opacity: 0.06, mixBlendMode: 'overlay'}} />
+  </AbsoluteFill>;
+};
+
+const Background: React.FC<{theme: Theme}> = ({theme}) => (theme === 'paper' ? <PaperBackground /> : theme === 'blueprint' ? <BlueprintBackground />
+  : theme === 'cinema' ? <CinemaBackground /> : <DarkBackground />);
 
 const DarkHeader: React.FC<{title: string; step: number; steps: string[]}> = ({title, step, steps}) => {
   const {stage, headerTop} = useLayout();
@@ -153,6 +168,25 @@ const ChapterBar: React.FC<{step: number; prev: number; steps: string[]}> = ({st
   </div>;
 };
 
+// Progress header (look.header "progress", the early explainers' top bar): series name left, credit right, one thin
+// segment per step; finished steps gold, the current one fills while its scene plays. Nothing else at the top.
+const ProgressBar: React.FC<{series: string; credit: string; step: number; steps: string[]; dur: number}> = ({series, credit, step, steps, dur}) => {
+  const frame = useCurrentFrame();
+  const {stage, headerTop} = useLayout();
+  const fill = clamp(frame / Math.max(1, dur));
+  return <div style={{position: 'absolute', left: stage.left + 12, width: stage.width - 24, top: headerTop - 18, fontFamily: font}}>
+    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 24}}>
+      <span style={{fontSize: 32, fontWeight: 700, color: 'rgba(255,255,255,0.88)', whiteSpace: 'nowrap'}}>{series}</span>
+      <span style={{fontSize: 24, fontWeight: 500, color: cinema.faint, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>{credit}</span>
+    </div>
+    {steps.length > 0 && <div style={{display: 'flex', gap: 8, marginTop: 16}}>
+      {steps.map((label, i) => <div key={label} style={{flex: 1, height: 6, borderRadius: 3, background: 'rgba(255,255,255,0.16)', overflow: 'hidden'}}>
+        <div style={{height: '100%', width: `${100 * (i + 1 < step ? 1 : i + 1 === step ? fill : 0)}%`, background: cinema.gold, opacity: i + 1 < step ? 0.75 : 1}} />
+      </div>)}
+    </div>}
+  </div>;
+};
+
 const Header: React.FC<{theme: Theme; title: string; step: number; steps: string[]}> = ({theme, ...p}) => (theme === 'paper' ? <PaperHeader {...p} />
   : theme === 'blueprint' ? <BlueprintHeader {...p} /> : <DarkHeader {...p} />);
 
@@ -186,9 +220,10 @@ const Caption: React.FC<{captions: TimedCaption[]; highlights?: {text: string; r
     }
   }
   if (buf) parts.push(...latin(buf, 'end', pal.latin));
-  const dark = pal.latin !== null;
+  const dark = pal.latin !== null || pal.bg === cinema.bg;
+  const size = pal.bg === cinema.bg ? 66 : 60;
   return <div style={{position: 'absolute', top: captionY, left: stage.left - 20, width: stage.width + 40, transform: `translateY(-50%) scale(${pop})`,
-    textAlign: 'center', fontFamily: font, fontWeight: 900, fontSize: 60, whiteSpace: 'nowrap', lineHeight: 1.3, color: pal.text, letterSpacing: 1,
+    textAlign: 'center', fontFamily: font, fontWeight: 900, fontSize: size, whiteSpace: 'nowrap', lineHeight: 1.3, color: pal.text, letterSpacing: 1,
     WebkitTextStroke: `10px ${pal.stroke}`, paintOrder: 'stroke fill', textShadow: dark ? '0 6px 20px rgba(0,0,0,0.7)' : 'none'}}>
     {parts}
   </div>;
@@ -278,9 +313,9 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
   // Frames where the voice speaks (caption spans, which already include the lead), for ducking the music.
   const speech = useMemo(() => timing.scenes.flatMap((s) => s.captions.map((c) => [s.startFrame + Math.floor(c.startMs / 1000 * fps),
     s.startFrame + Math.ceil(c.endMs / 1000 * fps)] as [number, number])), [timing, fps]);
-  const cutColors = theme === 'paper' ? [paper.keyA, paper.ink, paper.bg] : theme === 'blueprint' ? [blueprint.panelHi, blueprint.line, blueprint.bg] : [color.cyan, color.violet, color.bg];
+  const cutColors = theme === 'paper' ? [paper.keyA, paper.ink, paper.bg] : theme === 'cinema' ? ['#161a22', '#0e1118', cinema.bg] : theme === 'blueprint' ? [blueprint.panelHi, blueprint.line, blueprint.bg] : [color.cyan, color.violet, color.bg];
   return <LayoutCtx.Provider value={L}><AbsoluteFill style={{background: pal.bg, overflow: 'hidden'}}>
-    <CutStage t={t} cuts={cuts} width={width} height={height} colors={cutColors} fill={pal.bg} paper={theme === 'paper' ? paper.card : theme === 'blueprint' ? blueprint.panel : '#e8ecff'}>
+    <CutStage t={t} cuts={cuts} width={width} height={height} colors={cutColors} fill={pal.bg} paper={theme === 'paper' ? paper.card : theme === 'blueprint' ? blueprint.panel : theme === 'cinema' ? '#161a22' : '#e8ecff'}>
       <Background theme={theme} />
       {(look.particles ?? true) && <Particles t={t} width={width} height={height} kind="glow" n={28} colors={[color.cyan, color.violet, '#ffffff']} area={[0, 260, width, L.captionY - 110]} alpha={0.4} />}
       {timing.scenes.map((s) => {
@@ -296,7 +331,9 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
       const scene = tutorial.scenes.find((x) => x.id === s.id);
       const events = sceneRegistry[scene?.visual ?? '']?.sfx?.(cueOf(s, fps), s.durationFrames) ?? [];
       return <Sequence key={`${s.id}-chrome`} name={`${s.id}-chrome`} from={s.startFrame} durationInFrames={s.durationFrames}>
-        {look.header === 'chapters'
+        {look.header === 'progress'
+          ? <ProgressBar series={tutorial.series ?? tutorial.title} credit={tutorial.credit} step={scene?.step ?? 0} steps={tutorial.steps ?? []} dur={s.durationFrames} />
+          : look.header === 'chapters'
           ? <ChapterBar step={scene?.step ?? 0} prev={i ? stepOf(timing.scenes[i - 1].id) : (scene?.step ?? 0)} steps={tutorial.steps ?? []} />
           : (look.header ?? true) && <Header theme={theme} title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />}
         <Caption captions={s.captions} highlights={tutorial.highlights} pal={pal} />
@@ -364,10 +401,10 @@ export const TutorialCoverCard: React.FC<TutorialProps & {ratio: CoverRatio}> = 
   const [ax, ay, as] = lay.anchor;
   const grid = themeOf(tutorial) === 'blueprint' ? blueprint.grid : pal.bg;
   return <AbsoluteFill style={{background: pal.bg, overflow: 'hidden'}}>
-    <svg width={width} height={height} style={{position: 'absolute', inset: 0}}>
+    {themeOf(tutorial) === 'cinema' ? <CinemaBackground t={0} /> : <svg width={width} height={height} style={{position: 'absolute', inset: 0}}>
       {Array.from({length: Math.ceil(width / 40) + 1}, (_, i) => <line key={`v${i}`} x1={i * 40} x2={i * 40} y1={0} y2={height} stroke={grid} strokeWidth={i % 5 === 0 ? 2 : 1} />)}
       {Array.from({length: Math.ceil(height / 40) + 1}, (_, i) => <line key={`h${i}`} x1={0} x2={width} y1={i * 40} y2={i * 40} stroke={grid} strokeWidth={i % 5 === 0 ? 2 : 1} />)}
-    </svg>
+    </svg>}
     {Anchor && <div style={{position: 'absolute', left: ax - 440 * as, top: ay - 400 * as, width: 880, height: 800, transform: `scale(${as})`, transformOrigin: '0 0'}}>
       <Anchor f={0} dur={1} cue={() => 0} credit={tutorial.credit} layer="stage" />
     </div>}

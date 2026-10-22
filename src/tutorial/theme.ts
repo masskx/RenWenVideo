@@ -60,6 +60,25 @@ export const blueprint = {
  * everything that matters lives in the central 6:7 band (y 330–1590), so the feed crop (1080×1260) and the 3:4 cover
  * crop (1080×1440, y 240–1680) both keep it.
  */
+/**
+ * Cinema look (docs/video-craft/quick-reference.md §六, taste reference: the early explainers ai-era-11-rules /
+ * marketing-engineer): near-black with one warm key light, a vignette and fine grain, white type with one gold accent,
+ * big headlines, soft surfaces instead of outlined boxes. Red is a meaning colour (danger) only. `look.theme: "cinema"`.
+ */
+export const cinema = {
+  bg: '#07090f',
+  ink: '#ffffff',
+  dim: 'rgba(255,255,255,0.62)',
+  faint: 'rgba(255,255,255,0.38)',
+  hair: 'rgba(255,255,255,0.13)',
+  surface: 'rgba(255,255,255,0.055)',
+  gold: '#ffc53d',
+  cool: '#8fd3ff',
+  red: '#ff6b5b',
+};
+/** Headline face: Inter Display for latin and numbers, CJK falls through to the house font. */
+export const display = `"Inter Display", "Inter", ${font}`;
+
 export type Layout = {stage: {left: number; top: number; width: number; height: number}; captionY: number; headerTop: number; clipTop: number;
   band: [number, number] | null; fadeTop?: number};
 export const layoutOf = (frame: 'full' | 'douyin' | 'channels' | undefined): Layout => (frame === 'full'
@@ -69,8 +88,10 @@ export const layoutOf = (frame: 'full' | 'douyin' | 'channels' | undefined): Lay
   : {stage, captionY: 1372, headerTop: 186, clipTop: 212, band: null});
 
 export type Palette = {bg: string; text: string; dim: string; stroke: string; keyA: string; keyB: string; latin: string | null; line: string};
-export const palette = (theme: 'dark' | 'paper' | 'blueprint' | undefined): Palette => (theme === 'paper'
+export const palette = (theme: 'dark' | 'paper' | 'blueprint' | 'cinema' | undefined): Palette => (theme === 'paper'
   ? {bg: paper.bg, text: paper.ink, dim: paper.dim, stroke: paper.bg, keyA: paper.keyA, keyB: paper.keyB, latin: null, line: paper.line}
+  : theme === 'cinema'
+  ? {bg: cinema.bg, text: cinema.ink, dim: cinema.dim, stroke: 'rgba(4,6,10,0.92)', keyA: cinema.gold, keyB: cinema.cool, latin: null, line: cinema.hair}
   : theme === 'blueprint'
   ? {bg: blueprint.bg, text: blueprint.ink, dim: blueprint.dim, stroke: blueprint.bg, keyA: blueprint.keyA, keyB: blueprint.keyB, latin: null, line: blueprint.line}
   : {bg: color.bg, text: '#ffffff', dim: color.dim, stroke: '#0a0e1a', keyA: color.keyA, keyB: color.keyB, latin: color.amber, line: '#2a3352'});

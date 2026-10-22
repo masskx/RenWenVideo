@@ -30,8 +30,10 @@ export type Tutorial = {
    * Look switches for the director layer (docs/video-craft/archive/导演层.md). Defaults keep the original dark look:
    * theme "dark", tour (per-caption whole-stage reframing) on, particles on, default cut kinds.
    */
-  look?: {theme?: 'dark' | 'paper' | 'blueprint'; frame?: 'full' | 'douyin' | 'channels'; header?: boolean | 'chapters'; tour?: boolean; particles?: boolean; mascot?: boolean;
+  look?: {theme?: 'dark' | 'paper' | 'blueprint' | 'cinema'; frame?: 'full' | 'douyin' | 'channels'; header?: boolean | 'chapters' | 'progress'; tour?: boolean; particles?: boolean; mascot?: boolean;
     cuts?: {big?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch')[]; small?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch')[]}};
+  /** Series name for the `look.header: "progress"` bar (top-left); defaults to `title`. */
+  series?: string;
   /** The video's two core nouns (A/B): fixed colours in captions and visuals. */
   highlights?: {text: string; role: 'A' | 'B'}[];
   /** Scene id to freeze for the cover image; defaults to the first scene. */

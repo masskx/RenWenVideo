@@ -35,4 +35,4 @@ The script usually comes from a separate planning agent ("growth"): use it and t
 - **Read every time:** `docs/video-craft/quick-reference.md` (one page).
 - On demand (optional reference): `docs/video-craft/README.md` lists the rest — narration, cover, sound, motion, styles, pitfalls. Old rules live in `docs/video-craft/archive/`.
 - Prompt library (optional): `docs/video-craft/prompt-library/` — pinned verbatim snapshots of 8 Opus-video prompt repos; never edit `vendor/`, refresh with `node scripts/prompts/snapshot.mjs` (adds a new snapshot; `--pin` to switch).
-- House-style baseline: `tutorials/deepseek-vs-opus55` (+ storyboard, scene file). Commands: `README.md`.
+- House style (user, 2026-10-22): the early explainers `ai-era-11-rules` / `marketing-engineer` are the taste reference; later videos read as cluttered and cheap. Tutorials use the cinema look (`"theme": "cinema"`, `src/tutorial/cinema.tsx`); baseline `tutorials/litellm-pypi-poison-cinema` (+ scene file). Rules: quick-reference §六 "高级感". Commands: `README.md`.

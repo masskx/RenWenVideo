@@ -1,0 +1,44 @@
+{
+  "id": "litellm-pypi-poison-cinema",
+  "title": "LiteLLM投毒",
+  "subtitle": "装个AI工具包 · API Key被偷了",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "tts": {"provider": "doubao"},
+  "leadMs": 100,
+  "tailMs": 100,
+  "musicSrc": "audio/tutorials/litellm-pypi-poison/bgm.mp3",
+  "musicVolume": 0.08,
+  "musicDuckDb": 18,
+  "series": "AI 安全 · 自查",
+  "credit": "画面为示意 · Key 均为假的",
+  "source": "inputs/litellm-pypi-poison/script.md",
+  "steps": ["查版本", "找文件", "换Key"],
+  "look": {"theme": "cinema", "frame": "full", "header": "progress", "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["pushUp", "push"], "small": ["push", "pushUp"]}},
+  "highlights": [],
+  "cover": "hook",
+  "coverCard": {
+    "template": "conflict",
+    "headline": ["装个AI工具包", "API Key被偷了？"],
+    "support": "LiteLLM 1.107.0 · 3步自查",
+    "tag": "AI安全 · Python",
+    "anchor": "llmc.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 130], "size": 104, "anchor": [540, 870, 0.9], "support": 1300},
+      "6:7": {"headline": [80, 100], "size": 96, "anchor": [540, 770, 0.78], "support": 1150},
+      "9:16": {"headline": [80, 330], "size": 108, "anchor": [540, 1080, 1.0], "support": 1560}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "llmc.hook", "step": 0, "pace": "brisk", "narration": "装了一个AI工具包，{a}你的大模型API Key，{b}可能已经被偷了。"},
+    {"id": "poison", "visual": "llmc.poison", "step": 0, "pace": "fast", "narration": "开源库[LiteLLM|Lite L L M]的[1.107.0|一点一零七点零]版本，{a}很多人调大模型都在用，{b}被人塞了木马。"},
+    {"id": "autorun", "visual": "llmc.autorun", "step": 0, "pace": "fast", "narration": "最阴的是，{a}你代码里没用它也会中招：{b}任何Python程序一启动，{c}它就自动运行。"},
+    {"id": "steal", "visual": "llmc.steal", "step": 0, "pace": "fast", "narration": "它会翻你的[SSH|S S H]密钥、{a}云账号、{b}浏览器密码，{c}还有各种大模型Key，{d}偷偷传走。"},
+    {"id": "step1", "visual": "llmc.step1", "step": 1, "pace": "fast", "narration": "第一步，{a}终端输入[pip show litellm|pip show lite L L M]，{b}看是不是[1.107.0|一点一零七点零]。"},
+    {"id": "step2", "visual": "llmc.step2", "step": 2, "pace": "fast", "narration": "第二步，看[site-packages|site packages]里，{a}有没有[cook.pth|cook 点 P T H]这个文件。"},
+    {"id": "step3", "visual": "llmc.step3", "step": 3, "pace": "fast", "narration": "第三步，中了就马上重置所有Key，{a}再卸载，{b}换回干净的[1.106.2|一点一零六点二]。"},
+    {"id": "end", "visual": "llmc.end", "step": 3, "pace": "calm", "tailMs": 1200, "narration": "开源工具很好用，{a}但装之前，{b}多看一眼版本号。"}
+  ]
+}
