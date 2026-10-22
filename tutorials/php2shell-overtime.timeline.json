@@ -1,0 +1,231 @@
+{
+  "id": "php2shell-overtime",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1300,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/php2shell-overtime/01-hook.mp3",
+      "audioMs": 4101,
+      "startFrame": 0,
+      "durationFrames": 130,
+      "cues": {
+        "a": 1181,
+        "b": 2713
+      },
+      "captions": [
+        {
+          "text": "凌晨三点，全球一大批程序员",
+          "startMs": 295,
+          "endMs": 2713
+        },
+        {
+          "text": "被同一个漏洞叫醒了",
+          "startMs": 2713,
+          "endMs": 4373
+        }
+      ]
+    },
+    {
+      "id": "name",
+      "audioSrc": "audio/tutorials/php2shell-overtime/02-name.mp3",
+      "audioMs": 4571,
+      "startFrame": 130,
+      "durationFrames": 144,
+      "cues": {
+        "a": 1816,
+        "b": 2563,
+        "c": 3777
+      },
+      "captions": [
+        {
+          "text": "它叫PHP2Shell",
+          "startMs": 415,
+          "endMs": 1816
+        },
+        {
+          "text": "两个漏洞，危险评分9.2",
+          "startMs": 1816,
+          "endMs": 3777
+        },
+        {
+          "text": "满分是十",
+          "startMs": 3777,
+          "endMs": 4797
+        }
+      ]
+    },
+    {
+      "id": "rce",
+      "audioSrc": "audio/tutorials/php2shell-overtime/03-rce.mp3",
+      "audioMs": 4023,
+      "startFrame": 274,
+      "durationFrames": 127,
+      "cues": {
+        "a": 1641
+      },
+      "captions": [
+        {
+          "text": "攻击者不用登录",
+          "startMs": 345,
+          "endMs": 1641
+        },
+        {
+          "text": "远程就可能在你的服务器上执行代码",
+          "startMs": 1641,
+          "endMs": 4264
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "audioSrc": "audio/tutorials/php2shell-overtime/04-scope.mp3",
+      "audioMs": 5799,
+      "startFrame": 401,
+      "durationFrames": 180,
+      "cues": {
+        "a": 3024,
+        "b": 4458
+      },
+      "captions": [
+        {
+          "text": "PHP撑着大约七到八成的网站",
+          "startMs": 285,
+          "endMs": 3024
+        },
+        {
+          "text": "常见的跑网站方式",
+          "startMs": 3024,
+          "endMs": 4458
+        },
+        {
+          "text": "基本都在影响范围里",
+          "startMs": 4458,
+          "endMs": 6058
+        }
+      ]
+    },
+    {
+      "id": "leak",
+      "audioSrc": "audio/tutorials/php2shell-overtime/05-leak.mp3",
+      "audioMs": 5851,
+      "startFrame": 581,
+      "durationFrames": 182,
+      "cues": {
+        "a": 2221,
+        "b": 3446
+      },
+      "captions": [
+        {
+          "text": "漏洞细节还提前泄露了",
+          "startMs": 425,
+          "endMs": 2221
+        },
+        {
+          "text": "官方紧急发补丁",
+          "startMs": 2221,
+          "endMs": 3446
+        },
+        {
+          "text": "欧盟和英国都在催大家马上更新",
+          "startMs": 3446,
+          "endMs": 5833
+        }
+      ]
+    },
+    {
+      "id": "patch",
+      "audioSrc": "audio/tutorials/php2shell-overtime/06-patch.mp3",
+      "audioMs": 6635,
+      "startFrame": 763,
+      "durationFrames": 206,
+      "cues": {
+        "a": 1063,
+        "b": 3559,
+        "c": 5206
+      },
+      "captions": [
+        {
+          "text": "有网站的",
+          "startMs": 285,
+          "endMs": 1063
+        },
+        {
+          "text": "把PHP升级到这四个版本之一",
+          "startMs": 1063,
+          "endMs": 3559
+        },
+        {
+          "text": "升级完记得重启服务",
+          "startMs": 3559,
+          "endMs": 5206
+        },
+        {
+          "text": "不然可能还在跑旧代码",
+          "startMs": 5206,
+          "endMs": 6896
+        }
+      ]
+    },
+    {
+      "id": "eol",
+      "audioSrc": "audio/tutorials/php2shell-overtime/07-eol.mp3",
+      "audioMs": 5303,
+      "startFrame": 969,
+      "durationFrames": 166,
+      "cues": {
+        "a": 2273,
+        "b": 3354,
+        "c": 4389
+      },
+      "captions": [
+        {
+          "text": "还在用8.1及更早版本的",
+          "startMs": 285,
+          "endMs": 2273
+        },
+        {
+          "text": "官方已经不管了",
+          "startMs": 2273,
+          "endMs": 3354
+        },
+        {
+          "text": "赶紧问服务商",
+          "startMs": 3354,
+          "endMs": 4389
+        },
+        {
+          "text": "或者直接升级",
+          "startMs": 4389,
+          "endMs": 5085
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/php2shell-overtime/08-end.mp3",
+      "audioMs": 4075,
+      "startFrame": 1135,
+      "durationFrames": 165,
+      "cues": {
+        "a": 1991,
+        "b": 2916
+      },
+      "captions": [
+        {
+          "text": "漏洞不会自己消失",
+          "startMs": 325,
+          "endMs": 1991
+        },
+        {
+          "text": "补丁打上，才算真的过夜",
+          "startMs": 1991,
+          "endMs": 4236
+        }
+      ]
+    }
+  ]
+}
