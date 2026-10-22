@@ -1,0 +1,77 @@
+{
+ "spoken": "你还没开口，AI先来找你了。",
+ "voice": "doubao:S_XH4ScO592:seed-icl-2.0:None:seed-tts-2.0-expressive:{\"max_ms\": 170, \"sentence_ms\": 240, \"detect_db\": -38}:highpass=f=75,equalizer=f=3000:t=q:w=1.2:g=2.5,acompressor=threshold=-20dB:ratio=3:attack=5:release=80:makeup=2",
+ "pace": "1.24:[]::",
+ "words": [
+  {
+   "text": "你",
+   "ms": 255.0,
+   "dur": 120.0
+  },
+  {
+   "text": "还",
+   "ms": 375.0,
+   "dur": 130.0
+  },
+  {
+   "text": "没",
+   "ms": 505.0,
+   "dur": 110.0
+  },
+  {
+   "text": "开",
+   "ms": 615.0,
+   "dur": 180.0
+  },
+  {
+   "text": "口",
+   "ms": 795.0,
+   "dur": 140.0
+  },
+  {
+   "text": "，",
+   "ms": 935.0,
+   "dur": 140.0
+  },
+  {
+   "text": "A",
+   "ms": 1075.0,
+   "dur": 280.0
+  },
+  {
+   "text": "I",
+   "ms": 1143.53,
+   "dur": 280.0
+  },
+  {
+   "text": "先",
+   "ms": 1370.47,
+   "dur": 190.0
+  },
+  {
+   "text": "来",
+   "ms": 1560.47,
+   "dur": 110.0
+  },
+  {
+   "text": "找",
+   "ms": 1670.47,
+   "dur": 180.0
+  },
+  {
+   "text": "你",
+   "ms": 1850.47,
+   "dur": 140.0
+  },
+  {
+   "text": "了",
+   "ms": 1990.47,
+   "dur": 65.0
+  },
+  {
+   "text": "。",
+   "ms": 2055.4700000000003,
+   "dur": 65.0
+  }
+ ]
+}

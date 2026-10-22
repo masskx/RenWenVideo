@@ -36,6 +36,7 @@
 | [`douyin/literal-web-crawler/`](douyin/literal-web-crawler/) | 开源小项目：字面意义上的“网络爬虫”，一只会撕网页链接的蜘蛛；录屏特写按追踪轨迹跟拍 | 0:46 |
 | [`douyin/php2shell-overtime/`](douyin/php2shell-overtime/) | 安全新闻：PHP2Shell 高危漏洞（9.2 分，无需登录远程执行），升级到哪个版本、记得重启；全自绘，无利用细节 | 0:43 |
 | [`douyin/litellm-pypi-poison/`](douyin/litellm-pypi-poison/) | 安全新闻：LiteLLM 1.107.0 PyPI 投毒，装上就偷 API Key——三步自查（版本号 / cook.pth / 重置 Key）；Key 全是假的且打码 | 0:44 |
+| [`douyin/claude-proactive-agent/`](douyin/claude-proactive-agent/) | AI 新闻：Claude Duet——AI 凭什么能主动找你（记忆、定时任务、等你确认三个机制）；口播逐字，Tabler 图标 + 压暗的 Pexels 背景 | 1:00 |
 
 ## 目录结构
 

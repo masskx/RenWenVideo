@@ -1,0 +1,52 @@
+{
+  "id": "claude-proactive-agent",
+  "title": "Claude Duet",
+  "subtitle": "AI 凭什么能主动找你 · 三个机制",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "maxSeconds": 65,
+  "tts": {"provider": "doubao"},
+  "leadMs": 100,
+  "tailMs": 100,
+  "musicSrc": "audio/tutorials/claude-proactive-agent/bgm.mp3",
+  "musicVolume": 0.08,
+  "musicDuckDb": 18,
+  "credit": "图标 Tabler Icons（MIT），背景 Pexels 素材",
+  "source": "inputs/claude-proactive-agent/script.md",
+  "steps": ["记忆", "定时任务", "等你确认"],
+  "look": {"theme": "blueprint", "frame": "full", "header": "chapters", "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["pushUp", "push"], "small": ["push", "sweep"]}},
+  "highlights": [],
+  "cover": "hook",
+  "coverCard": {
+    "template": "conflict",
+    "headline": ["你还没开口", "AI 先来找你了"],
+    "support": "Claude Duet · 三个机制",
+    "tag": "AI Agent · 主动助理",
+    "anchor": "cpa.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 130], "size": 108, "anchor": [540, 880, 0.9], "support": 1300},
+      "6:7": {"headline": [80, 100], "size": 100, "anchor": [540, 770, 0.78], "support": 1150},
+      "9:16": {"headline": [80, 330], "size": 112, "anchor": [540, 1080, 1.0], "support": 1560}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "cpa.hook", "step": 0, "pace": "brisk",
+      "narration": "你还没开口，{a}AI先来找你了。"},
+    {"id": "what", "visual": "cpa.what", "step": 0, "pace": "fast",
+      "narration": "Anthropic刚推出Claude Duet：{a}每天早上给你发一份简报，{b}平时有事才提醒你，{c}发消息、付款之前，先等你点头。"},
+    {"id": "turn", "visual": "cpa.turn", "step": 0, "pace": "fast",
+      "narration": "两个多月里，已经有四家大公司推出了同类产品。{a}别只看又出了什么，{b}要看它凭什么能主动干活。"},
+    {"id": "memory", "visual": "cpa.memory", "step": 1, "pace": "fast",
+      "narration": "第一，记忆。{a}它会沿用你在Claude里的记忆、{b}技能{c}和已连接的应用。{d}先知道你是谁、在忙什么，{e}才判断得出哪件事跟你有关。"},
+    {"id": "schedule", "visual": "cpa.schedule", "step": 2, "pace": "fast",
+      "narration": "第二，定时任务。{a}它每隔几个小时检查一次你连接的账号，{b}还自带一台云端虚拟机，{c}你关了手机它照样干。{d}所谓主动，说白了就是到点自己醒来干活。"},
+    {"id": "confirm", "visual": "cpa.confirm", "step": 3, "pace": "fast",
+      "narration": "第三，关键步骤等你确认。{a}发消息、{b}付款、{c}签文件、{d}删东西之前，{e}它会把要做的事摆给你看，{f}等你批准了才动手。"},
+    {"id": "dev", "visual": "cpa.dev", "step": 3, "pace": "fast",
+      "narration": "做Agent开发的人都清楚：{a}记忆、调度、人工确认，{b}单拿出来都不新鲜。{c}难的是把它们拼成一个靠得住的系统，{d}知道什么时候该出手，{e}什么时候该停下来问你。"},
+    {"id": "end", "visual": "cpa.end", "step": 3, "pace": "calm", "tailMs": 1000,
+      "narration": "AI可以主动，{a}但最后那一下，{b}还得你来按。"}
+  ]
+}
