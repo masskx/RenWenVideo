@@ -11,6 +11,9 @@ import {Abs, Cmd, DIM, Dot, FAINT, GOLD, HAIR, Headline, INK, Marker, Pool, RED,
 const KEYS = [{n: 'DeepSeek Key', tail: '3f9a', fresh: 'c204'}, {n: '豆包 Key', tail: 'b71c', fresh: '9e5d'}, {n: 'Kimi Key', tail: '08de', fresh: 'a6f1'}];
 const red = (s: string) => <span style={{color: RED}}>{s}</span>;
 const gold = (s: string) => <span style={{color: GOLD}}>{s}</span>;
+/** A soft red band behind a row that has just been hit (rows are position: relative). */
+const Band: React.FC<{k: number}> = ({k}) => (k > 0 ? <div style={{position: 'absolute', left: -40, right: -40, top: 0, bottom: 0,
+  background: `linear-gradient(90deg, rgba(255,107,91,${0.16 * k}), rgba(255,107,91,${0.04 * k}))`, transform: `scaleX(${k})`, transformOrigin: '0 50%'}} /> : null);
 const masked = (tail: string) => <>sk-<span style={{letterSpacing: 2, opacity: 0.55}}>••••••</span>{tail}</>;
 const Big: React.FC<{size?: number; c?: string; w?: number; style?: React.CSSProperties; children: React.ReactNode}> = ({size = 64, c = INK, w = 900, style, children}) => (
   <div style={{fontFamily: display, fontWeight: w, fontSize: size, lineHeight: 1.18, color: c, whiteSpace: 'nowrap', ...style}}>{children}</div>
@@ -70,11 +73,19 @@ const Poison: Scene = ({f, dur, cue}) => {
     <Abs y={300}><Reveal f={f} at={14}>
       <Big size={220} w={800} c={turn > 0 ? RED : GOLD} style={{letterSpacing: -6, fontVariantNumeric: 'tabular-nums'}}>1.107.0</Big>
     </Reveal></Abs>
-    <Abs y={640}><Reveal f={f} at={p.b}>
-      <div style={{width: 120 * rise(f, p.b, 14), height: 6, background: RED, marginBottom: 22}} />
+    {/* "很多人都在用": a field of users fills in while it's said, then turns red row by row on "木马" */}
+    <Abs y={600} h={200}>
+      {Array.from({length: 36}, (_, i) => {
+        const col = i % 12, row = Math.floor(i / 12);
+        const k = rise(f, 30 + (col + row * 3) * 2.5, 12), bad = rise(f, p.b - 2 + col * 1.5 + row * 3, 10);
+        return <div key={i} style={{position: 'absolute', left: col * 75, top: row * 66, width: 44, height: 44, borderRadius: 22, opacity: k,
+          transform: `scale(${0.6 + 0.4 * k})`, background: bad > 0 ? `rgba(255,107,91,${0.35 + 0.55 * bad})` : 'rgba(255,255,255,0.16)'}} />;
+      })}
+    </Abs>
+    <Abs y={830}><Reveal f={f} at={p.b}>
       <Big size={104} c={INK}><Marker p={rise(f, p.b + 8, 14)} color={RED}>被塞了木马</Marker></Big>
     </Reveal></Abs>
-    <Abs y={880}><Reveal f={f} at={p.b + 18} dy={12}><Big size={40} c={FAINT} w={500} style={{fontFamily: font}}>10月21日 · 官方仓库已下架</Big></Reveal></Abs>
+    <Abs y={980}><Reveal f={f} at={p.b + 18} dy={12}><Big size={40} c={FAINT} w={500} style={{fontFamily: font}}>10月21日 · 官方仓库已下架</Big></Reveal></Abs>
   </Root>;
 };
 Poison.sfx = (cue) => {
@@ -90,11 +101,13 @@ const Auto: Scene = ({f, dur, cue}) => {
   const p = autoPlan(cue);
   return <Root f={f} dur={dur}>
     <Pool x={450} y={640} o={0.12} />
-    <Abs y={0}><Headline f={f} at={-10} kicker="最阴的是" lines={['没用它', <>也会{red('中招')}</>]} size={104} /></Abs>
-    <Abs y={430}><Reveal f={f} at={4}>
+    <Abs y={0}><Reveal f={f} at={-10} dy={16}><Big size={36} c={DIM} w={600} style={{fontFamily: font, letterSpacing: 4}}>最阴的是</Big></Reveal></Abs>
+    <Abs y={56}><Headline f={f} at={p.a - 6} lines={['没用它', <>也会{red('中招')}</>]} size={104} /></Abs>
+    <Abs y={430}><Reveal f={f} at={p.a + 6}>
       <Surface pad="34px 40px">
         <div style={{fontFamily: mono, fontWeight: 700, fontSize: 40, color: f >= p.c ? RED : FAINT, marginBottom: 18}}>Python 一启动{f >= p.c ? ' → 先跑它' : ''}</div>
-        {RUNS.map((r, i) => <div key={r} style={{display: 'flex', alignItems: 'center', gap: 26, padding: '16px 0', borderTop: i ? `1.5px solid ${HAIR}` : undefined}}>
+        {RUNS.map((r, i) => <div key={r} style={{position: 'relative', display: 'flex', alignItems: 'center', gap: 26, padding: '16px 0', borderTop: i ? `1.5px solid ${HAIR}` : undefined}}>
+          <Band k={rise(f, p.b + 6 + i * 8, 12)} />
           <Dot f={f} at={p.b + 6 + i * 8} />
           <span style={{fontFamily: display, fontWeight: 800, fontSize: 60, color: f >= p.b + 6 + i * 8 ? INK : DIM}}>{r}</span>
         </div>)}
@@ -132,11 +145,13 @@ const Steal: Scene = ({f, dur, cue}) => {
         {LOOT.map((l, i) => {
           const on = f >= ats[i];
           const go = ease.inCubic(clamp((f - p.d - i * 3) / 14));
-          return <div key={l.t} style={{display: 'flex', alignItems: 'center', gap: 34, padding: '26px 0', borderTop: i ? `1.5px solid ${HAIR}` : undefined,
-            opacity: 1 - go, transform: `translateX(${go * 300}px)`, filter: go > 0 ? `blur(${go * 8}px)` : undefined}}>
-            <Icon k={l.k} c={on ? RED : 'rgba(255,255,255,0.35)'} />
-            <span style={{fontFamily: display, fontWeight: 800, fontSize: 68, color: on ? INK : FAINT, whiteSpace: 'nowrap'}}>{l.t}</span>
-            <span style={{marginLeft: 'auto'}}><Dot f={f} at={ats[i]} /></span>
+          const k = rise(f, ats[i] - 6, 14);
+          return <div key={l.t} style={{position: 'relative', display: 'flex', alignItems: 'center', gap: 34, padding: '26px 0', borderTop: i ? `1.5px solid ${HAIR}` : undefined,
+            opacity: k * (1 - go), transform: `translate(${go * 300}px, ${(1 - k) * 30}px)`, filter: go > 0 ? `blur(${go * 8}px)` : k < 0.98 ? `blur(${(1 - k) * 8}px)` : undefined}}>
+            <Band k={rise(f, ats[i], 12)} />
+            <span style={{position: 'relative', display: 'flex'}}><Icon k={l.k} c={on ? RED : 'rgba(255,255,255,0.35)'} /></span>
+            <span style={{position: 'relative', fontFamily: display, fontWeight: 800, fontSize: 68, color: on ? INK : FAINT, whiteSpace: 'nowrap'}}>{l.t}</span>
+            <span style={{position: 'relative', marginLeft: 'auto'}}><Dot f={f} at={ats[i]} /></span>
           </div>;
         })}
       </Surface>
@@ -254,7 +269,8 @@ const End: Scene = ({f, dur, cue}) => {
     <Pool x={450} y={520} o={0.16} />
     <Abs y={120} style={leave(f, p.a - 8)}><Reveal f={f} at={-8}><Big size={80} c={DIM} style={{textAlign: 'center'}}>开源工具很好用</Big></Reveal></Abs>
     <Abs y={90}><Headline f={f} at={p.a - 8} lines={['但装之前', '多看一眼版本号']} mark={1} size={104} align="center" /></Abs>
-    <Abs x={60} y={540} w={780}><Reveal f={f} at={p.b + 6}>
+    {KEYS.map((k, i) => <Abs key={k.n} x={i * 306} y={820} w={282}><Reveal f={f} at={-6 + i * 4}><KeyCard name={k.n} tail={k.fresh} accent={GOLD} /></Reveal></Abs>)}
+    <Abs x={60} y={480} w={780}><Reveal f={f} at={p.b + 6}>
       <Terminal size={54}>
         <Cmd f={f} at={p.b + 8} text="pip show litellm" cps={1.4} />
         <div style={{opacity: f >= p.b + 24 ? 1 : 0}}>Version: 1.106.2 {gold('✓')}</div>
