@@ -3,6 +3,7 @@ import {AbsoluteFill, Sequence, interpolate, staticFile, useCurrentFrame, useVid
 import {Audio} from '@remotion/media';
 import {Layout, Palette, blueprint, cinema, color, font, layoutOf, mono, palette, paper} from './theme';
 import {sceneRegistry} from './scenes';
+import {DepthField, GridFloor} from './space';
 import {Dino} from './ui';
 import {CoverRatio, SceneTiming, TimedCaption, Tutorial, TutorialProps} from './types';
 import {CutStage, Particles, beatTour, clamp, ease, follow, hash, planCuts, prog, sway} from '../fx';
@@ -70,19 +71,22 @@ const BlueprintBackground: React.FC = () => {
 // Cinema: navy-black lit by one key light from the top-left and a faint fill from the bottom-right (cinema palette), both drifting
 // slowly; a vignette and a static film grain (static, so it costs no bitrate). No grid, no marks, no scale.
 const GRAIN = `url("data:image/svg+xml;utf8,${encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='256' height='256'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(#n)'/></svg>")}")`;
-export const CinemaBackground: React.FC<{t?: number}> = ({t: tProp}) => {
+export type Space = 'plain' | 'grid' | 'depth' | 'both';
+export const CinemaBackground: React.FC<{t?: number; space?: Space}> = ({t: tProp, space = 'plain'}) => {
   const frame = useCurrentFrame();
   const t = tProp ?? frame / 30;
   return <AbsoluteFill style={{background: cinema.bg}}>
     <AbsoluteFill style={{background: `radial-gradient(1300px 1100px at ${22 + Math.sin(t / 7) * 3}% ${10 + Math.cos(t / 9) * 2}%, rgba(${cinema.key},${cinema.keyO}), transparent 62%),
       radial-gradient(1100px 1000px at ${88 + Math.cos(t / 8) * 3}% ${86 + Math.sin(t / 10) * 2}%, rgba(${cinema.fill},${cinema.fillO}), transparent 65%)`}} />
+    {(space === 'depth' || space === 'both') && <DepthField t={t} />}
     <AbsoluteFill style={{background: 'radial-gradient(ellipse 90% 70% at 50% 40%, transparent 50%, rgba(0,0,0,0.6) 100%)'}} />
+    {(space === 'grid' || space === 'both') && <GridFloor t={t} />}
     <AbsoluteFill style={{backgroundImage: GRAIN, opacity: 0.06, mixBlendMode: 'overlay'}} />
   </AbsoluteFill>;
 };
 
-const Background: React.FC<{theme: Theme}> = ({theme}) => (theme === 'paper' ? <PaperBackground /> : theme === 'blueprint' ? <BlueprintBackground />
-  : theme === 'cinema' ? <CinemaBackground /> : <DarkBackground />);
+const Background: React.FC<{theme: Theme; space?: Space}> = ({theme, space}) => (theme === 'paper' ? <PaperBackground /> : theme === 'blueprint' ? <BlueprintBackground />
+  : theme === 'cinema' ? <CinemaBackground space={space} /> : <DarkBackground />);
 
 const DarkHeader: React.FC<{title: string; step: number; steps: string[]}> = ({title, step, steps}) => {
   const {stage, headerTop} = useLayout();
@@ -310,7 +314,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
   const cutColors = theme === 'paper' ? [paper.keyA, paper.ink, paper.bg] : theme === 'cinema' ? ['#141a28', '#0d1220', cinema.bg] : theme === 'blueprint' ? [blueprint.panelHi, blueprint.line, blueprint.bg] : [color.cyan, color.violet, color.bg];
   return <LayoutCtx.Provider value={L}><AbsoluteFill style={{background: pal.bg, overflow: 'hidden'}}>
     <CutStage t={t} cuts={cuts} width={width} height={height} colors={cutColors} fill={pal.bg} paper={theme === 'paper' ? paper.card : theme === 'blueprint' ? blueprint.panel : theme === 'cinema' ? '#141a28' : '#e8ecff'}>
-      <Background theme={theme} />
+      <Background theme={theme} space={look.space} />
       {(look.particles ?? true) && <Particles t={t} width={width} height={height} kind="glow" n={28} colors={[color.cyan, color.violet, '#ffffff']} area={[0, 260, width, L.captionY - 110]} alpha={0.4} />}
       {timing.scenes.map((s) => {
         const scene = tutorial.scenes.find((x) => x.id === s.id);
