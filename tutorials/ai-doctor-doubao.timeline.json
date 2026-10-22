@@ -1,0 +1,217 @@
+{
+  "id": "ai-doctor-doubao",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1239,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/ai-doctor-doubao/01-hook.mp3",
+      "audioMs": 4153,
+      "startFrame": 0,
+      "durationFrames": 131,
+      "cues": {
+        "a": 1638,
+        "b": 3593
+      },
+      "captions": [
+        {
+          "text": "检查说你没事",
+          "startMs": 315,
+          "endMs": 1638
+        },
+        {
+          "text": "AI助手却说你可能有大问题",
+          "startMs": 1638,
+          "endMs": 3593
+        },
+        {
+          "text": "你信谁？",
+          "startMs": 3593,
+          "endMs": 4373
+        }
+      ]
+    },
+    {
+      "id": "survey",
+      "audioSrc": "audio/tutorials/ai-doctor-doubao/02-survey.mp3",
+      "audioMs": 6583,
+      "startFrame": 131,
+      "durationFrames": 204,
+      "cues": {
+        "a": 1258,
+        "b": 4704,
+        "c": 5849
+      },
+      "captions": [
+        {
+          "text": "一项调研里",
+          "startMs": 295,
+          "endMs": 1258
+        },
+        {
+          "text": "约七成医生遇到过拿着",
+          "startMs": 1258,
+          "endMs": 3208
+        },
+        {
+          "text": "AI答案来看病的人",
+          "startMs": 3208,
+          "endMs": 4704
+        },
+        {
+          "text": "AI为什么敢这么说？",
+          "startMs": 4704,
+          "endMs": 5849
+        },
+        {
+          "text": "两个原因",
+          "startMs": 5849,
+          "endMs": 6338
+        }
+      ]
+    },
+    {
+      "id": "hallu",
+      "audioSrc": "audio/tutorials/ai-doctor-doubao/03-hallu.mp3",
+      "audioMs": 6478,
+      "startFrame": 335,
+      "durationFrames": 201,
+      "cues": {
+        "a": 1932,
+        "b": 3705,
+        "c": 5422
+      },
+      "captions": [
+        {
+          "text": "第一，大模型会“幻觉”",
+          "startMs": 315,
+          "endMs": 1932
+        },
+        {
+          "text": "它是按概率接着往下说",
+          "startMs": 1932,
+          "endMs": 3705
+        },
+        {
+          "text": "说得越通顺",
+          "startMs": 3705,
+          "endMs": 4703
+        },
+        {
+          "text": "越像真的，但不代表它是对的",
+          "startMs": 4703,
+          "endMs": 6592
+        }
+      ]
+    },
+    {
+      "id": "context",
+      "audioSrc": "audio/tutorials/ai-doctor-doubao/04-context.mp3",
+      "audioMs": 9561,
+      "startFrame": 536,
+      "durationFrames": 293,
+      "cues": {
+        "a": 3469,
+        "b": 5354,
+        "c": 7556
+      },
+      "captions": [
+        {
+          "text": "第二，它看不到你的病史",
+          "startMs": 375,
+          "endMs": 2109
+        },
+        {
+          "text": "用药和完整检查",
+          "startMs": 2109,
+          "endMs": 3469
+        },
+        {
+          "text": "只能根据你打的那几句话回答",
+          "startMs": 3469,
+          "endMs": 5354
+        },
+        {
+          "text": "调研里81.33%的医生",
+          "startMs": 5354,
+          "endMs": 7556
+        },
+        {
+          "text": "认为最大的问题就是缺乏个体化",
+          "startMs": 7556,
+          "endMs": 9436
+        }
+      ]
+    },
+    {
+      "id": "use",
+      "audioSrc": "audio/tutorials/ai-doctor-doubao/05-use.mp3",
+      "audioMs": 8620,
+      "startFrame": 829,
+      "durationFrames": 265,
+      "cues": {
+        "a": 2168,
+        "b": 3718,
+        "c": 5201,
+        "d": 6936
+      },
+      "captions": [
+        {
+          "text": "那AI助手该怎么用？",
+          "startMs": 375,
+          "endMs": 2168
+        },
+        {
+          "text": "帮你整理想说的情况",
+          "startMs": 2168,
+          "endMs": 3718
+        },
+        {
+          "text": "列出要问医生的问题",
+          "startMs": 3718,
+          "endMs": 5201
+        },
+        {
+          "text": "解释报告里看不懂的词",
+          "startMs": 5201,
+          "endMs": 6936
+        },
+        {
+          "text": "诊断和用药",
+          "startMs": 6936,
+          "endMs": 7930
+        },
+        {
+          "text": "交给医生",
+          "startMs": 7930,
+          "endMs": 8420
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/ai-doctor-doubao/06-end.mp3",
+      "audioMs": 3527,
+      "startFrame": 1094,
+      "durationFrames": 145,
+      "cues": {
+        "a": 2163
+      },
+      "captions": [
+        {
+          "text": "AI帮你把问题问清楚",
+          "startMs": 585,
+          "endMs": 2163
+        },
+        {
+          "text": "判断，留给医生",
+          "startMs": 2163,
+          "endMs": 3522
+        }
+      ]
+    }
+  ]
+}

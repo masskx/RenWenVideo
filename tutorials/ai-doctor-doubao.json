@@ -1,0 +1,47 @@
+{
+  "id": "ai-doctor-doubao",
+  "title": "AI为什么敢说你有大问题",
+  "subtitle": "检查说没事 · AI助手说有大问题",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "tts": {"provider": "doubao"},
+  "leadMs": 100,
+  "tailMs": 100,
+  "musicSrc": "audio/tutorials/ai-doctor-doubao/bgm.mp3",
+  "musicVolume": 0.08,
+  "musicDuckDb": 18,
+  "credit": "画面均为自绘动画",
+  "source": "inputs/ai-doctor-doubao/script.md",
+  "steps": ["幻觉", "缺个体化", "怎么用"],
+  "look": {"theme": "blueprint", "frame": "full", "header": "chapters", "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["pushUp", "push"], "small": ["push", "sweep"]}},
+  "highlights": [],
+  "cover": "hook",
+  "coverCard": {
+    "template": "conflict",
+    "headline": ["检查说没事", "AI说有大问题？"],
+    "support": "AI为什么敢这么说 · 两个原因",
+    "tag": "AI助手 · 看病",
+    "anchor": "adr.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 130], "size": 108, "anchor": [540, 870, 0.9], "support": 1300},
+      "6:7": {"headline": [80, 100], "size": 100, "anchor": [540, 770, 0.78], "support": 1150},
+      "9:16": {"headline": [80, 330], "size": 112, "anchor": [540, 1080, 1.0], "support": 1560}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "adr.hook", "step": 0, "pace": "brisk",
+      "narration": "检查说你没事，{a}AI助手却说你可能有大问题。{b}你信谁？"},
+    {"id": "survey", "visual": "adr.survey", "step": 0, "pace": "fast",
+      "narration": "一项调研里，{a}约七成医生遇到过拿着AI答案来看病的人。{b}AI为什么敢这么说？{c}两个原因。"},
+    {"id": "hallu", "visual": "adr.hallu", "step": 1, "pace": "fast",
+      "narration": "第一，大模型会“幻觉”。{a}它是按概率接着往下说，{b}说得越通顺，越像真的，{c}但不代表它是对的。"},
+    {"id": "context", "visual": "adr.context", "step": 2, "pace": "fast",
+      "narration": "第二，它看不到你的病史、用药和完整检查，{a}只能根据你打的那几句话回答。{b}调研里[81.33%|百分之八十一点三三]的医生，{c}认为最大的问题就是缺乏个体化。"},
+    {"id": "use", "visual": "adr.use", "step": 3, "pace": "fast",
+      "narration": "那AI助手该怎么用？{a}帮你整理想说的情况，{b}列出要问医生的问题，{c}解释报告里看不懂的词。{d}诊断和用药，交给医生。"},
+    {"id": "end", "visual": "adr.end", "step": 3, "pace": "calm", "tailMs": 1200,
+      "narration": "AI帮你把问题问清楚，{a}判断，留给医生。"}
+  ]
+}
