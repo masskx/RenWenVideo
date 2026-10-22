@@ -31,7 +31,7 @@ export type Tutorial = {
    * theme "dark", tour (per-caption whole-stage reframing) on, particles on, default cut kinds.
    */
   look?: {theme?: 'dark' | 'paper' | 'blueprint' | 'cinema';
-    /** Cinema only: background depth — 'plain' (default), 'grid' (perspective floor), 'depth' (light + dust), 'both'. */
+    /** Cinema only: background depth — 'both' (default, user's pick 2026-10-22), 'grid' (perspective floor), 'depth' (light + dust), 'plain'. */
     space?: 'plain' | 'grid' | 'depth' | 'both'; frame?: 'full' | 'douyin' | 'channels'; header?: boolean | 'chapters' | 'label'; tour?: boolean; particles?: boolean; mascot?: boolean;
     cuts?: {big?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch')[]; small?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch')[]}};
   /** Series name for the `look.header: "label"` line (top-left); defaults to `title`. */

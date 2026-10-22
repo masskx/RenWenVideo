@@ -72,7 +72,7 @@ const BlueprintBackground: React.FC = () => {
 // slowly; a vignette and a static film grain (static, so it costs no bitrate). No grid, no marks, no scale.
 const GRAIN = `url("data:image/svg+xml;utf8,${encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='256' height='256'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(#n)'/></svg>")}")`;
 export type Space = 'plain' | 'grid' | 'depth' | 'both';
-export const CinemaBackground: React.FC<{t?: number; space?: Space}> = ({t: tProp, space = 'plain'}) => {
+export const CinemaBackground: React.FC<{t?: number; space?: Space}> = ({t: tProp, space = 'both'}) => {
   const frame = useCurrentFrame();
   const t = tProp ?? frame / 30;
   return <AbsoluteFill style={{background: cinema.bg}}>

@@ -16,7 +16,7 @@
   "credit": "画面为示意 · 图标 Tabler · 背景 Pexels",
   "source": "inputs/claude-proactive-agent/script.md",
   "steps": ["记忆", "定时任务", "等你确认"],
-  "look": {"theme": "cinema", "frame": "full", "header": "label", "tour": false, "particles": false, "mascot": false,
+  "look": {"theme": "cinema", "space": "both", "frame": "full", "header": "label", "tour": false, "particles": false, "mascot": false,
     "cuts": {"big": ["pushUp", "push"], "small": ["push", "pushUp"]}},
   "highlights": [],
   "cover": "hook",
