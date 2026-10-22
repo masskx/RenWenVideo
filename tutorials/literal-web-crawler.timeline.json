@@ -1,0 +1,259 @@
+{
+  "id": "literal-web-crawler",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1379,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/literal-web-crawler/01-hook.mp3",
+      "audioMs": 2299,
+      "startFrame": 0,
+      "durationFrames": 75,
+      "cues": {
+        "a": 1185
+      },
+      "captions": [
+        {
+          "text": "我的网页，被一只蜘蛛啃了",
+          "startMs": 385,
+          "endMs": 2545
+        }
+      ]
+    },
+    {
+      "id": "pun",
+      "audioSrc": "audio/tutorials/literal-web-crawler/02-pun.mp3",
+      "audioMs": 5146,
+      "startFrame": 75,
+      "durationFrames": 161,
+      "cues": {
+        "a": 3021
+      },
+      "captions": [
+        {
+          "text": "程序员管抓网页的程序叫“网络爬虫”",
+          "startMs": 305,
+          "endMs": 3021
+        },
+        {
+          "text": "有人就真把它做成了一只爬虫",
+          "startMs": 3021,
+          "endMs": 5291
+        }
+      ]
+    },
+    {
+      "id": "tear",
+      "audioSrc": "audio/tutorials/literal-web-crawler/03-tear.mp3",
+      "audioMs": 6113,
+      "startFrame": 236,
+      "durationFrames": 190,
+      "cues": {
+        "a": 2039,
+        "b": 3441,
+        "c": 4188
+      },
+      "captions": [
+        {
+          "text": "它八条腿轮流迈步",
+          "startMs": 305,
+          "endMs": 2039
+        },
+        {
+          "text": "四条走、四条抓稳",
+          "startMs": 2039,
+          "endMs": 3441
+        },
+        {
+          "text": "脚一勾",
+          "startMs": 3441,
+          "endMs": 4188
+        },
+        {
+          "text": "就把蓝色链接整条撕下来",
+          "startMs": 4188,
+          "endMs": 6193
+        }
+      ]
+    },
+    {
+      "id": "slow",
+      "audioSrc": "audio/tutorials/literal-web-crawler/04-slow.mp3",
+      "audioMs": 4206,
+      "startFrame": 426,
+      "durationFrames": 133,
+      "cues": {
+        "a": 1124,
+        "b": 3371
+      },
+      "captions": [
+        {
+          "text": "放慢看",
+          "startMs": 345,
+          "endMs": 1124
+        },
+        {
+          "text": "撕下来的碎片还带物理效果",
+          "startMs": 1124,
+          "endMs": 3371
+        },
+        {
+          "text": "一路往下掉",
+          "startMs": 3371,
+          "endMs": 4461
+        }
+      ]
+    },
+    {
+      "id": "follow",
+      "audioSrc": "audio/tutorials/literal-web-crawler/05-follow.mp3",
+      "audioMs": 4310,
+      "startFrame": 559,
+      "durationFrames": 136,
+      "cues": {
+        "a": 1631,
+        "b": 2994
+      },
+      "captions": [
+        {
+          "text": "切到跟随模式",
+          "startMs": 345,
+          "endMs": 1631
+        },
+        {
+          "text": "它就追着你的鼠标跑",
+          "startMs": 1631,
+          "endMs": 2994
+        },
+        {
+          "text": "像养了只电子宠物",
+          "startMs": 2994,
+          "endMs": 4578
+        }
+      ]
+    },
+    {
+      "id": "size",
+      "audioSrc": "audio/tutorials/literal-web-crawler/06-size.mp3",
+      "audioMs": 5120,
+      "startFrame": 695,
+      "durationFrames": 160,
+      "cues": {
+        "a": 1166,
+        "b": 2001,
+        "c": 3239,
+        "d": 4045
+      },
+      "captions": [
+        {
+          "text": "蜘蛛大小、撕得多猛",
+          "startMs": 345,
+          "endMs": 2001
+        },
+        {
+          "text": "都能拖滑块调",
+          "startMs": 2001,
+          "endMs": 3239
+        },
+        {
+          "text": "大到吓人，小到像只蚂蚁",
+          "startMs": 3239,
+          "endMs": 5326
+        }
+      ]
+    },
+    {
+      "id": "repair",
+      "audioSrc": "audio/tutorials/literal-web-crawler/07-repair.mp3",
+      "audioMs": 3474,
+      "startFrame": 855,
+      "durationFrames": 111,
+      "cues": {
+        "a": 1363,
+        "b": 2355
+      },
+      "captions": [
+        {
+          "text": "撕烂了也不怕",
+          "startMs": 335,
+          "endMs": 1363
+        },
+        {
+          "text": "点一下修复",
+          "startMs": 1363,
+          "endMs": 2355
+        },
+        {
+          "text": "网页立刻复原",
+          "startMs": 2355,
+          "endMs": 3655
+        }
+      ]
+    },
+    {
+      "id": "paste",
+      "audioSrc": "audio/tutorials/literal-web-crawler/08-paste.mp3",
+      "audioMs": 5486,
+      "startFrame": 966,
+      "durationFrames": 171,
+      "cues": {
+        "a": 2046,
+        "b": 4427
+      },
+      "captions": [
+        {
+          "text": "还能贴自己的文字给它啃",
+          "startMs": 315,
+          "endMs": 2046
+        },
+        {
+          "text": "Linux 用户甚至能把它装成屏保",
+          "startMs": 2046,
+          "endMs": 4427
+        },
+        {
+          "text": "让它啃你的桌面",
+          "startMs": 4427,
+          "endMs": 5607
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/literal-web-crawler/09-end.mp3",
+      "audioMs": 7053,
+      "startFrame": 1137,
+      "durationFrames": 242,
+      "cues": {
+        "a": 1313,
+        "b": 2380,
+        "c": 5018
+      },
+      "captions": [
+        {
+          "text": "纯网页代码",
+          "startMs": 335,
+          "endMs": 1313
+        },
+        {
+          "text": "不靠任何库",
+          "startMs": 1313,
+          "endMs": 2380
+        },
+        {
+          "text": "灵感来自一位海外创作者的短片",
+          "startMs": 2380,
+          "endMs": 5018
+        },
+        {
+          "text": "这才叫字面意义上的爬虫",
+          "startMs": 5018,
+          "endMs": 7108
+        }
+      ]
+    }
+  ]
+}

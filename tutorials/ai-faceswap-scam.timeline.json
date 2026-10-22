@@ -1,0 +1,266 @@
+{
+  "id": "ai-faceswap-scam",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1340,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/ai-faceswap-scam/01-hook.mp3",
+      "audioMs": 3161,
+      "startFrame": 0,
+      "durationFrames": 101,
+      "cues": {
+        "a": 1454,
+        "b": 2575
+      },
+      "captions": [
+        {
+          "text": "视频里是你妈",
+          "startMs": 295,
+          "endMs": 1454
+        },
+        {
+          "text": "开口就要5万",
+          "startMs": 1454,
+          "endMs": 2575
+        },
+        {
+          "text": "你转不转？",
+          "startMs": 2575,
+          "endMs": 3355
+        }
+      ]
+    },
+    {
+      "id": "fake",
+      "audioSrc": "audio/tutorials/ai-faceswap-scam/02-fake.mp3",
+      "audioMs": 3370,
+      "startFrame": 101,
+      "durationFrames": 108,
+      "cues": {
+        "a": 1758,
+        "b": 2420
+      },
+      "captions": [
+        {
+          "text": "现在骗子用AI",
+          "startMs": 295,
+          "endMs": 1758
+        },
+        {
+          "text": "脸能换，声音也能仿",
+          "startMs": 1758,
+          "endMs": 3530
+        }
+      ]
+    },
+    {
+      "id": "three",
+      "audioSrc": "audio/tutorials/ai-faceswap-scam/03-three.mp3",
+      "audioMs": 2456,
+      "startFrame": 209,
+      "durationFrames": 80,
+      "cues": {
+        "a": 1244
+      },
+      "captions": [
+        {
+          "text": "记住3招，10秒就能识破",
+          "startMs": 325,
+          "endMs": 2724
+        }
+      ]
+    },
+    {
+      "id": "wave",
+      "audioSrc": "audio/tutorials/ai-faceswap-scam/04-wave.mp3",
+      "audioMs": 7131,
+      "startFrame": 289,
+      "durationFrames": 220,
+      "cues": {
+        "a": 1013,
+        "b": 3063,
+        "c": 4075,
+        "d": 5306
+      },
+      "captions": [
+        {
+          "text": "第一招，让对方在脸前快速挥挥手",
+          "startMs": 365,
+          "endMs": 3063
+        },
+        {
+          "text": "或者转个侧脸",
+          "startMs": 3063,
+          "endMs": 4075
+        },
+        {
+          "text": "实时换脸的画面",
+          "startMs": 4075,
+          "endMs": 5306
+        },
+        {
+          "text": "很容易出现扭曲",
+          "startMs": 5306,
+          "endMs": 6657
+        },
+        {
+          "text": "卡顿",
+          "startMs": 6657,
+          "endMs": 7327
+        }
+      ]
+    },
+    {
+      "id": "nose",
+      "audioSrc": "audio/tutorials/ai-faceswap-scam/05-nose.mp3",
+      "audioMs": 5329,
+      "startFrame": 509,
+      "durationFrames": 166,
+      "cues": {
+        "a": 1161,
+        "b": 2444,
+        "c": 3749
+      },
+      "captions": [
+        {
+          "text": "第二招，让他按一下鼻子",
+          "startMs": 445,
+          "endMs": 2444
+        },
+        {
+          "text": "真人的鼻子会变形",
+          "startMs": 2444,
+          "endMs": 3749
+        },
+        {
+          "text": "AI画面经常露馅",
+          "startMs": 3749,
+          "endMs": 5566
+        }
+      ]
+    },
+    {
+      "id": "callback",
+      "audioSrc": "audio/tutorials/ai-faceswap-scam/06-callback.mp3",
+      "audioMs": 4310,
+      "startFrame": 675,
+      "durationFrames": 136,
+      "cues": {
+        "a": 1572,
+        "b": 2396
+      },
+      "captions": [
+        {
+          "text": "第三招最管用",
+          "startMs": 435,
+          "endMs": 1572
+        },
+        {
+          "text": "直接挂断",
+          "startMs": 1572,
+          "endMs": 2396
+        },
+        {
+          "text": "用你手机里存的号码打回去",
+          "startMs": 2396,
+          "endMs": 4426
+        }
+      ]
+    },
+    {
+      "id": "safeword",
+      "audioSrc": "audio/tutorials/ai-faceswap-scam/07-safeword.mp3",
+      "audioMs": 4859,
+      "startFrame": 811,
+      "durationFrames": 152,
+      "cues": {
+        "a": 1891,
+        "b": 3709
+      },
+      "captions": [
+        {
+          "text": "再跟家里约个暗号",
+          "startMs": 345,
+          "endMs": 1891
+        },
+        {
+          "text": "比如“我们第一次旅游去的哪儿”",
+          "startMs": 1891,
+          "endMs": 3709
+        },
+        {
+          "text": "答不上来就别信",
+          "startMs": 3709,
+          "endMs": 4919
+        }
+      ]
+    },
+    {
+      "id": "police",
+      "audioSrc": "audio/tutorials/ai-faceswap-scam/08-police.mp3",
+      "audioMs": 6766,
+      "startFrame": 963,
+      "durationFrames": 209,
+      "cues": {
+        "a": 1604,
+        "b": 3035,
+        "c": 3826,
+        "d": 5322
+      },
+      "captions": [
+        {
+          "text": "警方反复提醒",
+          "startMs": 315,
+          "endMs": 1604
+        },
+        {
+          "text": "只凭一个视频要钱",
+          "startMs": 1604,
+          "endMs": 3035
+        },
+        {
+          "text": "先别转",
+          "startMs": 3035,
+          "endMs": 3826
+        },
+        {
+          "text": "拿不准，就打110",
+          "startMs": 3826,
+          "endMs": 5322
+        },
+        {
+          "text": "或者96110问问",
+          "startMs": 5322,
+          "endMs": 6665
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/ai-faceswap-scam/09-end.mp3",
+      "audioMs": 4075,
+      "startFrame": 1172,
+      "durationFrames": 168,
+      "cues": {
+        "a": 2119,
+        "b": 3093
+      },
+      "captions": [
+        {
+          "text": "眼见不一定为实",
+          "startMs": 435,
+          "endMs": 2119
+        },
+        {
+          "text": "转钱之前，多打一个电话",
+          "startMs": 2119,
+          "endMs": 4123
+        }
+      ]
+    }
+  ]
+}

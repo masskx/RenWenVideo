@@ -384,7 +384,8 @@ Paste.camera = (cue) => {
 
 /* ---------- 8 end: plain web code, no libraries — the pun made real ---------- */
 
-const END: Seg[] = [{at: 0, src: 12.6, rate: 0.5, file: 'slow-end.mp4'}];
+// the slowed copy is 7.2 s; a longer end scene carries on from the full recording at the same speed
+const END: Seg[] = [{at: 0, src: 12.6, rate: 0.5, file: 'slow-end.mp4'}, {at: 214, src: 16.17, rate: 0.5}];
 const endPlan = (cue: Cue) => ({a: cue('a', 26), b: cue('b', 56), c: cue('c', 150)});
 const End: Scene = ({f, cue}) => {
   const p = endPlan(cue);
