@@ -284,7 +284,9 @@ const sizeSegs = (p: ReturnType<typeof sizePlan>): Seg[] => [{at: 0, src: 30.4, 
 const Size: Scene = ({f, cue}) => {
   const p = sizePlan(cue);
   const segs = sizeSegs(p);
-  const view = viewOf(segs, f, W, 720, 1.05, 'spider');
+  // push in on the size-2 spider while the sliders are named, back out wide when it shrinks (so the shrink reads)
+  const z = f < p.d - 4 ? 1.05 + 0.55 * ease.inOutCubic(clamp((f - p.a) / 60)) : 1.05;
+  const view = viewOf(segs, f, W, 720, z, 'spider');
   const [sx, sy] = toBox(view, W, 720, spiderAt(srcTime(segs, f)));
   return <Root>
     <Title size={80}>大小、撕的频率{amber('都能调')}</Title>

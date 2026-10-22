@@ -32,6 +32,8 @@
 | [`douyin/sticker-alpha-method/`](douyin/sticker-alpha-method/) | 教程：一个角色 → 一整套透明表情包（定角色、换动作、Alpha 透明底、验收）；画面全是按方法现做的 AI 示例 | 1:25 |
 | [`douyin/sweety-handdraw-video/`](douyin/sweety-handdraw-video/) | 开源 Skill：sweety-handdraw-video，没有一笔是人画的手绘讲解视频，三步上手 | 1:33 |
 | [`douyin/ai-digital-cleanup-cn/`](douyin/ai-digital-cleanup-cn/) | 教程：用 AI 清理网上的个人信息（中国版）——一证通查 / 一键查卡、AI 排风险、注销前检查、个保法第 47 条删除权、12321 投诉；手机界面全自绘示意、个人信息全打码；不引流 | 1:25 |
+| [`douyin/ai-faceswap-scam/`](douyin/ai-faceswap-scam/) | 防骗：视频里的“妈妈”找你要5万——3招识破AI实时换脸（挥手 / 侧脸、按鼻子、挂断回拨 + 家庭暗号）；人物全是剪影、界面全自绘 | 0:45 |
+| [`douyin/literal-web-crawler/`](douyin/literal-web-crawler/) | 开源小项目：字面意义上的“网络爬虫”，一只会撕网页链接的蜘蛛；录屏特写按追踪轨迹跟拍 | 0:46 |
 
 ## 目录结构
 
