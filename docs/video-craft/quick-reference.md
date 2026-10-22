@@ -44,7 +44,7 @@
 
 ## 六、画面风格
 
-- **口味基准（用户 2026-10-22）**：最早的长文讲解 `ai-era-11-rules`、`marketing-engineer` 最好看；后来的片子“装饰元素堆得乱、显得廉价、没有高级感”。教程默认 `"look": {"theme": "cinema", "header": "label"}`，样片 `tutorials/litellm-pypi-poison-cinema`（和原版 `litellm-pypi-poison` 对照看）。科技感靠深底、光和精确的内容，不靠网格和小标注；蓝图主题只在真要画工程图时用。
+- **口味基准（用户 2026-10-22）**：最早的长文讲解 `ai-era-11-rules`、`marketing-engineer` 最好看；后来的片子“装饰元素堆得乱、显得廉价、没有高级感”。教程默认 `"look": {"theme": "cinema", "header": "label"}`，样片 `tutorials/claude-proactive-agent-cinema`、`tutorials/litellm-pypi-poison-cinema`（各自和原版对照看）。**以后每条新片都按这个做**（用户 2026-10-22）；旧片要重做时保留原配音和卡点，只换画面（做法见 `.claude/skills/video-craft/SKILL.md`）。科技感靠深底、光和精确的内容，不靠网格和小标注；蓝图主题只在真要画工程图时用。
 - **高级感**（每条都能在静帧上查）：
   - 一屏一个主角，放在一块面板上；一个大标题（≤ 10 字，说结论，不复述同时出现的字幕）+ 字幕。其他字只留观众真要读的。
   - 一个强调色（金）；红只表示“危险 / 中招”。同屏最多两种颜色在说话（`发布与风格偏好.md` §二）。
