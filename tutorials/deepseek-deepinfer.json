@@ -1,0 +1,52 @@
+{
+  "id": "deepseek-deepinfer",
+  "title": "DeepSeek开源DeepInfer",
+  "subtitle": "真正的 OpenAI？ · DeepSeek这次开源了什么",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "tts": {"provider": "doubao"},
+  "leadMs": 100,
+  "tailMs": 100,
+  "musicSrc": "audio/tutorials/deepseek-deepinfer/bgm.mp3",
+  "musicVolume": 0.08,
+  "musicDuckDb": 18,
+  "series": "AI 新闻 · 开源",
+  "credit": "画面为示意 · 无官方 logo",
+  "source": "inputs/deepseek-deepinfer/script.md",
+  "steps": [],
+  "look": {"theme": "cinema", "space": "both", "frame": "full", "header": "label", "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["pushUp", "push"], "small": ["push", "pushUp"]}},
+  "highlights": [],
+  "cover": "hook",
+  "coverCard": {
+    "template": "conflict",
+    "headline": ["真正的 OpenAI？", "DeepSeek开源了什么"],
+    "support": "DeepInfer · 内部生产级推理框架",
+    "tag": "AI 新闻 · 开源",
+    "anchor": "dsi.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 130], "size": 100, "anchor": [540, 880, 0.9], "support": 1300},
+      "6:7": {"headline": [80, 100], "size": 92, "anchor": [540, 770, 0.78], "support": 1150},
+      "9:16": {"headline": [80, 330], "size": 104, "anchor": [540, 1080, 1.0], "support": 1560}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "dsi.hook", "step": 0, "pace": 1.25,
+      "narration": "“真正的OpenAI”？{a}海外网友这么叫[DeepSeek|Deep Seek]。{b}它这次开源了什么？"},
+    {"id": "open", "visual": "dsi.open", "step": 0, "pace": 1.22,
+      "narration": "10月20日，{a}它开源了内部生产级推理框架，{b}[DeepInfer|Deep Infer]。"},
+    {"id": "what", "visual": "dsi.what", "step": 0, "pace": 1.22,
+      "narration": "推理框架，{a}就像调度员：{c}回答多快、{d}扛多少人、{e}用多少硬件，都看它。"},
+    {"id": "cost", "visual": "dsi.cost", "step": 0, "pace": 1.22,
+      "narration": "同一个模型，换个框架，{a}成本可能差很多。{b}框架越高效，越省算力，{c}还可能更省电。"},
+    {"id": "tech", "visual": "dsi.tech", "step": 0, "pace": 1.22,
+      "narration": "它整合了分布式推理、{a}投机解码，{c}已兼容英伟达[SM100|S M 一百]，{d}和华为昇腾[950|九五零]。"},
+    {"id": "money", "visual": "dsi.money", "step": 0, "pace": 1.22,
+      "narration": "推理更便宜，{a}服务商利润更大，{b}AI服务也可能降价。"},
+    {"id": "partial", "visual": "dsi.partial", "step": 0, "pace": 1.22,
+      "narration": "但它没给全套：{a}[KV|K V]缓存、{b}预填充和解码的解耦、{c}负载均衡，{d}都没全放出来。{e}不过核心解耦功能，大部分在了。"},
+    {"id": "end", "visual": "dsi.end", "step": 0, "pace": 1.2, "tailMs": 1200,
+      "narration": "推理是AI公司的看家本领，{a}很少公开。{b}这次，它摊开了一大半。"}
+  ]
+}

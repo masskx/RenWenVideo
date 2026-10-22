@@ -24,6 +24,7 @@ import {litellmPoisonScenes} from './litellm-pypi-poison';
 import {litellmCinemaScenes} from './litellm-pypi-poison-cinema';
 import {claudeProactiveScenes} from './claude-proactive-agent';
 import {claudeProactiveCinemaScenes} from './claude-proactive-agent-cinema';
+import {deepseekDeepinferScenes} from './deepseek-deepinfer';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -54,4 +55,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...litellmCinemaScenes,
   ...claudeProactiveScenes,
   ...claudeProactiveCinemaScenes,
+  ...deepseekDeepinferScenes,
 };

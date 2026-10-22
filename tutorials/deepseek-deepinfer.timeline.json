@@ -1,0 +1,271 @@
+{
+  "id": "deepseek-deepinfer",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1439,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/deepseek-deepinfer/01-hook.mp3",
+      "audioMs": 4389,
+      "startFrame": 0,
+      "durationFrames": 138,
+      "cues": {
+        "a": 1784,
+        "b": 3277
+      },
+      "captions": [
+        {
+          "text": "“真正的OpenAI”？",
+          "startMs": 100,
+          "endMs": 1784
+        },
+        {
+          "text": "海外网友这么叫DeepSeek",
+          "startMs": 1784,
+          "endMs": 3277
+        },
+        {
+          "text": "它这次开源了什么？",
+          "startMs": 3277,
+          "endMs": 4447
+        }
+      ]
+    },
+    {
+      "id": "open",
+      "audioSrc": "audio/tutorials/deepseek-deepinfer/02-open.mp3",
+      "audioMs": 4441,
+      "startFrame": 138,
+      "durationFrames": 140,
+      "cues": {
+        "a": 1259,
+        "b": 3609
+      },
+      "captions": [
+        {
+          "text": "10月20日",
+          "startMs": 525,
+          "endMs": 1259
+        },
+        {
+          "text": "它开源了内部生产级推理框架",
+          "startMs": 1259,
+          "endMs": 3609
+        },
+        {
+          "text": "DeepInfer",
+          "startMs": 3609,
+          "endMs": 4659
+        }
+      ]
+    },
+    {
+      "id": "what",
+      "audioSrc": "audio/tutorials/deepseek-deepinfer/03-what.mp3",
+      "audioMs": 5930,
+      "startFrame": 278,
+      "durationFrames": 184,
+      "cues": {
+        "a": 1316,
+        "c": 2414,
+        "d": 3261,
+        "e": 4238
+      },
+      "captions": [
+        {
+          "text": "推理框架，就像调度员",
+          "startMs": 375,
+          "endMs": 2414
+        },
+        {
+          "text": "回答多快、扛多少人",
+          "startMs": 2414,
+          "endMs": 4238
+        },
+        {
+          "text": "用多少硬件",
+          "startMs": 4238,
+          "endMs": 5284
+        },
+        {
+          "text": "都看它",
+          "startMs": 5284,
+          "endMs": 5710
+        }
+      ]
+    },
+    {
+      "id": "cost",
+      "audioSrc": "audio/tutorials/deepseek-deepinfer/04-cost.mp3",
+      "audioMs": 6322,
+      "startFrame": 462,
+      "durationFrames": 196,
+      "cues": {
+        "a": 2159,
+        "b": 3456,
+        "c": 5318
+      },
+      "captions": [
+        {
+          "text": "同一个模型",
+          "startMs": 405,
+          "endMs": 1356
+        },
+        {
+          "text": "换个框架，成本可能差很多",
+          "startMs": 1356,
+          "endMs": 3456
+        },
+        {
+          "text": "框架越高效",
+          "startMs": 3456,
+          "endMs": 4465
+        },
+        {
+          "text": "越省算力，还可能更省电",
+          "startMs": 4465,
+          "endMs": 6269
+        }
+      ]
+    },
+    {
+      "id": "tech",
+      "audioSrc": "audio/tutorials/deepseek-deepinfer/05-tech.mp3",
+      "audioMs": 6687,
+      "startFrame": 658,
+      "durationFrames": 207,
+      "cues": {
+        "a": 2101,
+        "c": 3013,
+        "d": 5019
+      },
+      "captions": [
+        {
+          "text": "它整合了分布式推理",
+          "startMs": 305,
+          "endMs": 2101
+        },
+        {
+          "text": "投机解码",
+          "startMs": 2101,
+          "endMs": 3013
+        },
+        {
+          "text": "已兼容英伟达SM100",
+          "startMs": 3013,
+          "endMs": 5019
+        },
+        {
+          "text": "和华为昇腾950",
+          "startMs": 5019,
+          "endMs": 6876
+        }
+      ]
+    },
+    {
+      "id": "money",
+      "audioSrc": "audio/tutorials/deepseek-deepinfer/06-money.mp3",
+      "audioMs": 4232,
+      "startFrame": 865,
+      "durationFrames": 133,
+      "cues": {
+        "a": 1470,
+        "b": 2661
+      },
+      "captions": [
+        {
+          "text": "推理更便宜",
+          "startMs": 395,
+          "endMs": 1470
+        },
+        {
+          "text": "服务商利润更大",
+          "startMs": 1470,
+          "endMs": 2661
+        },
+        {
+          "text": "AI服务也可能降价",
+          "startMs": 2661,
+          "endMs": 4459
+        }
+      ]
+    },
+    {
+      "id": "partial",
+      "audioSrc": "audio/tutorials/deepseek-deepinfer/07-partial.mp3",
+      "audioMs": 7967,
+      "startFrame": 998,
+      "durationFrames": 246,
+      "cues": {
+        "a": 1464,
+        "b": 2415,
+        "c": 4176,
+        "d": 4858,
+        "e": 5887
+      },
+      "captions": [
+        {
+          "text": "但它没给全套",
+          "startMs": 395,
+          "endMs": 1464
+        },
+        {
+          "text": "KV缓存",
+          "startMs": 1464,
+          "endMs": 2415
+        },
+        {
+          "text": "预填充和解码的解耦",
+          "startMs": 2415,
+          "endMs": 4176
+        },
+        {
+          "text": "负载均衡，都没全放出来",
+          "startMs": 4176,
+          "endMs": 5887
+        },
+        {
+          "text": "不过核心解耦功能",
+          "startMs": 5887,
+          "endMs": 7224
+        },
+        {
+          "text": "大部分在了",
+          "startMs": 7224,
+          "endMs": 8184
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/deepseek-deepinfer/08-end.mp3",
+      "audioMs": 5198,
+      "startFrame": 1244,
+      "durationFrames": 195,
+      "cues": {
+        "a": 2608,
+        "b": 3524
+      },
+      "captions": [
+        {
+          "text": "推理是AI公司的看家本领",
+          "startMs": 445,
+          "endMs": 2608
+        },
+        {
+          "text": "很少公开",
+          "startMs": 2608,
+          "endMs": 3524
+        },
+        {
+          "text": "这次，它摊开了一大半",
+          "startMs": 3524,
+          "endMs": 5345
+        }
+      ]
+    }
+  ]
+}
