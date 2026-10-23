@@ -1,0 +1,48 @@
+{
+  "id": "vibe-knowledge-douyin",
+  "title": "Vibe知识片·代码出片",
+  "subtitle": "Vibe知识片先别堆知识点，学会代码出片",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "tts": {"provider": "doubao"},
+  "leadMs": 100,
+  "tailMs": 100,
+  "musicSrc": "audio/tutorials/vibe-knowledge-douyin/bgm.mp3",
+  "musicVolume": 0.08,
+  "musicDuckDb": 18,
+  "series": "AI 创作 · 代码出片",
+  "credit": "数字据观默称 · 话题页截图已脱敏 · 画面为示意",
+  "source": "inputs/vibe-knowledge-douyin/script.md",
+  "steps": [],
+  "look": {"theme": "cinema", "space": "both", "frame": "full", "header": "label", "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["pushUp", "push"], "small": ["push", "pushUp"]}},
+  "highlights": [],
+  "cover": "hook",
+  "coverCard": {
+    "template": "冲突型",
+    "headline": ["先别急着学知识点", "代码出片"],
+    "support": "对标 → 抽参数 → 样片再全片",
+    "tag": "AI 创作 · 代码出片",
+    "anchor": "vkd.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 130], "size": 100, "anchor": [540, 880, 0.9], "support": 1300},
+      "6:7": {"headline": [80, 100], "size": 92, "anchor": [540, 770, 0.78], "support": 1150},
+      "9:16": {"headline": [80, 330], "size": 104, "anchor": [540, 1080, 1.0], "support": 1560}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "vkd.hook", "step": 0, "pace": 1.25,
+      "narration": "据称有人靠「Vibe知识大赏」{a}二十天涨粉{b}近八十万。"},
+    {"id": "code", "visual": "vkd.code", "step": 0, "pace": 1.22,
+      "narration": "先别急着学知识点本身。{a}这类片火，{b}是因为画面用代码写出来，{c}能跟节拍动。"},
+    {"id": "bench", "visual": "vkd.bench", "step": 0, "pace": 1.22,
+      "narration": "第一步先别开写：{a}去话题页找近期涨得猛的对标，{b}看它画面怎么动。"},
+    {"id": "params", "visual": "vkd.params", "step": 0, "pace": 1.22,
+      "narration": "第二步先抽视觉参数——{a}配色、{b}字号、{c}明暗。{d}跳过这步，{e}模型很容易写成旧[PPT|P P T]。"},
+    {"id": "pipe", "visual": "vkd.pipe", "step": 0, "pace": 1.22,
+      "narration": "第三步交给强模型，{a}用Canvas、{b}Playwright、{c}[ffmpeg|F F M peg]出片；{d}先渲十五秒样片，{e}过了再全片。{f}样片是拦返工。"},
+    {"id": "end", "visual": "vkd.end", "step": 0, "pace": 1.16, "tailMs": 1400,
+      "narration": "一支片子，{a}只讲透一个知识点。{b}这是约束提示词不发散。"}
+  ]
+}

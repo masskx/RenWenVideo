@@ -1,0 +1,201 @@
+{
+  "id": "vibe-knowledge-douyin",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1125,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/vibe-knowledge-douyin/01-hook.mp3",
+      "audioMs": 3840,
+      "startFrame": 0,
+      "durationFrames": 122,
+      "cues": {
+        "a": 2361,
+        "b": 3161
+      },
+      "captions": [
+        {
+          "text": "据称有人靠「Vibe知识大赏」",
+          "startMs": 375,
+          "endMs": 2361
+        },
+        {
+          "text": "二十天涨粉近八十万",
+          "startMs": 2361,
+          "endMs": 4081
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "audioSrc": "audio/tutorials/vibe-knowledge-douyin/02-code.mp3",
+      "audioMs": 5878,
+      "startFrame": 122,
+      "durationFrames": 183,
+      "cues": {
+        "a": 2281,
+        "b": 3120,
+        "c": 4980
+      },
+      "captions": [
+        {
+          "text": "先别急着学知识点本身",
+          "startMs": 285,
+          "endMs": 2281
+        },
+        {
+          "text": "这类片火",
+          "startMs": 2281,
+          "endMs": 3120
+        },
+        {
+          "text": "是因为画面用代码写出来",
+          "startMs": 3120,
+          "endMs": 4980
+        },
+        {
+          "text": "能跟节拍动",
+          "startMs": 4980,
+          "endMs": 6100
+        }
+      ]
+    },
+    {
+      "id": "bench",
+      "audioSrc": "audio/tutorials/vibe-knowledge-douyin/03-bench.mp3",
+      "audioMs": 5251,
+      "startFrame": 305,
+      "durationFrames": 164,
+      "cues": {
+        "a": 1831,
+        "b": 4203
+      },
+      "captions": [
+        {
+          "text": "第一步先别开写",
+          "startMs": 355,
+          "endMs": 1831
+        },
+        {
+          "text": "去话题页找近期涨得猛的对标",
+          "startMs": 1831,
+          "endMs": 4203
+        },
+        {
+          "text": "看它画面怎么动",
+          "startMs": 4203,
+          "endMs": 5523
+        }
+      ]
+    },
+    {
+      "id": "params",
+      "audioSrc": "audio/tutorials/vibe-knowledge-douyin/04-params.mp3",
+      "audioMs": 6583,
+      "startFrame": 469,
+      "durationFrames": 204,
+      "cues": {
+        "a": 2077,
+        "b": 2633,
+        "c": 3193,
+        "d": 3884,
+        "e": 4635
+      },
+      "captions": [
+        {
+          "text": "第二步先抽视觉参数——配色",
+          "startMs": 325,
+          "endMs": 2633
+        },
+        {
+          "text": "字号、明暗",
+          "startMs": 2633,
+          "endMs": 3884
+        },
+        {
+          "text": "跳过这步",
+          "startMs": 3884,
+          "endMs": 4635
+        },
+        {
+          "text": "模型很容易写成旧PPT",
+          "startMs": 4635,
+          "endMs": 6845
+        }
+      ]
+    },
+    {
+      "id": "pipe",
+      "audioSrc": "audio/tutorials/vibe-knowledge-douyin/05-pipe.mp3",
+      "audioMs": 8516,
+      "startFrame": 673,
+      "durationFrames": 262,
+      "cues": {
+        "a": 1941,
+        "b": 2798,
+        "c": 3470,
+        "d": 5041,
+        "e": 6423,
+        "f": 7290
+      },
+      "captions": [
+        {
+          "text": "第三步交给强模型",
+          "startMs": 375,
+          "endMs": 1941
+        },
+        {
+          "text": "用Canvas、Playwright",
+          "startMs": 1941,
+          "endMs": 3470
+        },
+        {
+          "text": "ffmpeg出片",
+          "startMs": 3470,
+          "endMs": 5041
+        },
+        {
+          "text": "先渲十五秒样片",
+          "startMs": 5041,
+          "endMs": 6423
+        },
+        {
+          "text": "过了再全片",
+          "startMs": 6423,
+          "endMs": 7290
+        },
+        {
+          "text": "样片是拦返工",
+          "startMs": 7290,
+          "endMs": 8758
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/vibe-knowledge-douyin/06-end.mp3",
+      "audioMs": 4833,
+      "startFrame": 935,
+      "durationFrames": 190,
+      "cues": {
+        "a": 1268,
+        "b": 2814
+      },
+      "captions": [
+        {
+          "text": "一支片子，只讲透一个知识点",
+          "startMs": 305,
+          "endMs": 2814
+        },
+        {
+          "text": "这是约束提示词不发散",
+          "startMs": 2814,
+          "endMs": 5084
+        }
+      ]
+    }
+  ]
+}
