@@ -35,7 +35,7 @@ export type Tutorial = {
   look?: {theme?: 'dark' | 'paper' | 'blueprint' | 'cinema';
     /** Cinema only: background depth — 'both' (default, user's pick 2026-10-22), 'grid' (perspective floor), 'depth' (light + dust), 'plain'. */
     space?: 'plain' | 'grid' | 'depth' | 'both'; frame?: 'full' | 'douyin' | 'channels'; header?: boolean | 'chapters' | 'label'; tour?: boolean; particles?: boolean; mascot?: boolean;
-    cuts?: {big?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch')[]; small?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch')[]}};
+    cuts?: {big?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch' | 'cut')[]; small?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch' | 'cut')[]}};
   /** Series name for the `look.header: "label"` line (top-left); defaults to `title`. */
   series?: string;
   /** The video's two core nouns (A/B): fixed colours in captions and visuals. */
@@ -84,6 +84,8 @@ export type CoverCard = {
   support?: string;
   tag?: string;
   anchor: string;
+  /** The film's own colours (found in its material), replacing the theme's background and text colours on the card. */
+  colors?: {bg: string; text: string; accent: string; dim?: string};
   /** Per ratio: positions, plus optional copy / anchor that override the card's own for that ratio. */
   layouts: Record<CoverRatio, {headline: [number, number]; size: number; anchor: [number, number, number]; support: number;
     text?: string[]; supportText?: string; tagText?: string; anchorId?: string}>;

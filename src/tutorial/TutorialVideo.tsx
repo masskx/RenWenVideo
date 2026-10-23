@@ -390,7 +390,8 @@ export const TutorialCover: React.FC<TutorialProps> = ({tutorial, timing}) => {
 export const TutorialCoverCard: React.FC<TutorialProps & {ratio: CoverRatio}> = ({tutorial, ratio}) => {
   const card = tutorial.coverCard;
   const {width, height} = useVideoConfig();
-  const pal = palette(themeOf(tutorial));
+  const base = palette(themeOf(tutorial));
+  const pal = card?.colors ? {...base, bg: card.colors.bg, text: card.colors.text, keyA: card.colors.accent, dim: card.colors.dim ?? base.dim} : base;
   if (!card) return <AbsoluteFill style={{background: pal.bg}} />;
   const lay = card.layouts[ratio];
   // a ratio may carry its own copy and anchor (different platforms, different headlines)
@@ -399,7 +400,8 @@ export const TutorialCoverCard: React.FC<TutorialProps & {ratio: CoverRatio}> = 
   const [ax, ay, as] = lay.anchor;
   const grid = themeOf(tutorial) === 'blueprint' ? blueprint.grid : pal.bg;
   return <AbsoluteFill style={{background: pal.bg, overflow: 'hidden'}}>
-    {themeOf(tutorial) === 'cinema' ? <CinemaBackground t={0} /> : <svg width={width} height={height} style={{position: 'absolute', inset: 0}}>
+    {card.colors ? <AbsoluteFill style={{background: `radial-gradient(ellipse 85% 55% at 50% 36%, rgba(255,255,255,0.55), transparent 72%), ${card.colors.bg}`}} />
+      : themeOf(tutorial) === 'cinema' ? <CinemaBackground t={0} /> : <svg width={width} height={height} style={{position: 'absolute', inset: 0}}>
       {Array.from({length: Math.ceil(width / 40) + 1}, (_, i) => <line key={`v${i}`} x1={i * 40} x2={i * 40} y1={0} y2={height} stroke={grid} strokeWidth={i % 5 === 0 ? 2 : 1} />)}
       {Array.from({length: Math.ceil(height / 40) + 1}, (_, i) => <line key={`h${i}`} x1={0} x2={width} y1={i * 40} y2={i * 40} stroke={grid} strokeWidth={i % 5 === 0 ? 2 : 1} />)}
     </svg>}

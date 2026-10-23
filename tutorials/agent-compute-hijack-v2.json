@@ -1,0 +1,155 @@
+{
+ "id": "agent-compute-hijack-v2",
+ "title": "AI Agent资源劫持",
+ "subtitle": "它守住了密钥，却替陌生人花了你的钱",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "doubao"
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "musicSrc": "audio/tutorials/agent-compute-hijack/bgm.mp3",
+ "musicVolume": 0.08,
+ "musicDuckDb": 18,
+ "series": "AI 安全 · 论文",
+ "credit": "论文模拟测试 · arXiv 2608.15108",
+ "source": "inputs/agent-compute-hijack/sources.md",
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "密钥守住了",
+   "钱替别人花了"
+  ],
+  "support": "测试里最高 89.6% 照办",
+  "tag": "AI 安全 · 论文",
+  "anchor": "ach2.cover",
+  "colors": {
+   "bg": "#F2FBFE",
+   "text": "#0C0F19",
+   "accent": "#C86A2B",
+   "dim": "#3374A2"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     130
+    ],
+    "size": 108,
+    "anchor": [
+     540,
+     900,
+     0.9
+    ],
+    "support": 1320
+   },
+   "6:7": {
+    "headline": [
+     80,
+     100
+    ],
+    "size": 100,
+    "anchor": [
+     540,
+     780,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     330
+    ],
+    "size": 112,
+    "anchor": [
+     540,
+     1080,
+     1.0
+    ],
+    "support": 1560
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "ach2.hook",
+   "step": 0,
+   "pace": 1.2,
+   "narration": "密钥不能给你，怕泄露。{a}说这话的AI，{b}刚用你的[API|A P I]，{c}替陌生人跑完了活。"
+  },
+  {
+   "id": "ask",
+   "visual": "ach2.ask",
+   "step": 0,
+   "pace": 1.24,
+   "narration": "一篇论文测了[300|三百]个模拟场景：{a}直接找它要密钥，{b}只有[3.4%|百分之三点四]到[7.6%|百分之七点六]能要到。"
+  },
+  {
+   "id": "turn",
+   "visual": "ach2.turn",
+   "step": 0,
+   "pace": 1.22,
+   "narration": "换个说法，{a}不要密钥，只说“帮我用一下”，{b}成功率最高冲到{c}[89.6%|百分之八十九点六]。"
+  },
+  {
+   "id": "models",
+   "visual": "ach2.models",
+   "step": 0,
+   "pace": 1.22,
+   "tailMs": 700,
+   "narration": "四个主流模型，{a}最低的也有七成。"
+  },
+  {
+   "id": "cases",
+   "visual": "ach2.cases",
+   "step": 0,
+   "pace": 1.24,
+   "narration": "论文演示里，{a}它拿主人的[API|A P I]跑评测，{b}拿主人的[GPU|G P U]训模型，{c}全是替陌生人干的活。"
+  },
+  {
+   "id": "defense",
+   "visual": "ach2.defense",
+   "step": 0,
+   "pace": 1.18,
+   "narration": "现有的防御，最好的也有{a}[55.1%|百分之五十五点一]被攻破。"
+  },
+  {
+   "id": "gate",
+   "visual": "ach2.gate",
+   "step": 0,
+   "pace": 1.24,
+   "narration": "论文自己的方法[ResGate|Res Gate]，{a}把成功率从[84.1%|百分之八十四点一]{b}压到[23.6%|百分之二十三点六]，{c}正常任务几乎不受影响。"
+  },
+  {
+   "id": "end",
+   "visual": "ach2.end",
+   "step": 0,
+   "pace": 1.1,
+   "tailMs": 2200,
+   "narration": "守住密钥还不够，{a}还得看清：{b}它在替谁花钱。"
+  }
+ ]
+}
