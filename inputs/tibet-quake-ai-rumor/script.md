@@ -40,3 +40,11 @@
 - Douyin publish: tick 「内容由AI生成」 (cloned voice + any AI schematic frames).
 - Suggested title (CN): 「震后刷到灾情图？三招辨AI假图」 Tags: #防骗 #AI辨假 #地震 #信息核实
 - Reminder before publish: re-check 中国地震台网 / 应急管理部 latest bulletin; if official facts change, update on-screen chips only — still no casualty figures in this cut.
+
+## Preferred stills (AI schematics)
+
+When no suitable live B-roll exists, use these as the **optimal choice**:
+- Shot 1: `assets/schematic_map_pin.jpg`
+- Shot 3: `assets/ai_fake_example_schematic.jpg` (keep 「AI生成示例」 visible entire shot)
+- Shot 4: `assets/reverse_image_search_demo.jpg`
+- Shot 5: `assets/official_name_cards.jpg`
