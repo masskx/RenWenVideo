@@ -43,6 +43,7 @@
 | [`douyin/agent-compute-hijack/`](douyin/agent-compute-hijack/) | AI 安全论文：AI 没泄露密钥，却替别人花了你的钱——资源劫持（arXiv 2608.15108）：直接要 Key ≤7.6% vs 绕着用最高 89.6%（模拟测试）、现有防御、ResGate、OpenShell 作“类似思路”；cinema 风格，节奏参考 huashu-motion | 0:55 |
 | [`douyin/ai-same-take-on-humans/`](douyin/ai-same-take-on-humans/) | AI 实验：12 个 AI 评价人类，35 个有效回答里 29 个是同一句——人更忠于群体，而不是真相；引语中译、$1.54 的实验、我们的解释；cinema 风格，节奏参考 huashu-motion | 0:48 |
 | [`douyin/tibet-quake-ai-rumor/`](douyin/tibet-quake-ai-rumor/) | 信息核实：西藏巴青 7.0 级地震后，三招辨 AI 假灾情图（看细节 / 搜来源 / 对官方）；全部自绘、示意图全程标「AI生成示例」，不报伤亡数字、不画地图轮廓；cinema 风格收着做 | 0:38 |
+| [`douyin/vibe-knowledge-douyin/`](douyin/vibe-knowledge-douyin/) | AI 创作：Vibe 知识片先别堆知识点，学会代码出片——对标、抽视觉参数、Canvas / Playwright / ffmpeg 先渲 15 秒样片再全片；涨粉数字标「据称」，话题页截图已脱敏；cinema 风格，一张 vibe 卡贯穿全片 | 0:38 |
 
 ## 目录结构
 
