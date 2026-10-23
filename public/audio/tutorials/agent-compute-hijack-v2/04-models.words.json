@@ -1,0 +1,82 @@
+{
+ "spoken": "四个主流模型，最低的也有七成。",
+ "voice": "doubao:S_XH4ScO592:seed-icl-2.0:None:seed-tts-2.0-expressive:{\"max_ms\": 170, \"sentence_ms\": 240, \"detect_db\": -38}:highpass=f=75,equalizer=f=3000:t=q:w=1.2:g=2.5,acompressor=threshold=-20dB:ratio=3:attack=5:release=80:makeup=2",
+ "pace": "1.22:[]::",
+ "words": [
+  {
+   "text": "四",
+   "ms": 285.0,
+   "dur": 200.0
+  },
+  {
+   "text": "个",
+   "ms": 485.0,
+   "dur": 110.0
+  },
+  {
+   "text": "主",
+   "ms": 595.0,
+   "dur": 150.0
+  },
+  {
+   "text": "流",
+   "ms": 745.0,
+   "dur": 150.0
+  },
+  {
+   "text": "模",
+   "ms": 895.0,
+   "dur": 140.0
+  },
+  {
+   "text": "型",
+   "ms": 1035.0,
+   "dur": 145.0
+  },
+  {
+   "text": "，",
+   "ms": 1180.0,
+   "dur": 145.0
+  },
+  {
+   "text": "最",
+   "ms": 1484.52,
+   "dur": 200.0
+  },
+  {
+   "text": "低",
+   "ms": 1684.52,
+   "dur": 160.0
+  },
+  {
+   "text": "的",
+   "ms": 1844.52,
+   "dur": 170.0
+  },
+  {
+   "text": "也",
+   "ms": 2014.52,
+   "dur": 100.0
+  },
+  {
+   "text": "有",
+   "ms": 2114.52,
+   "dur": 110.0
+  },
+  {
+   "text": "七",
+   "ms": 2224.52,
+   "dur": 240.0
+  },
+  {
+   "text": "成",
+   "ms": 2464.52,
+   "dur": 115.0
+  },
+  {
+   "text": "。",
+   "ms": 2579.52,
+   "dur": 115.0
+  }
+ ]
+}

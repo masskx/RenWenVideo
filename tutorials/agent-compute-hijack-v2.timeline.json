@@ -1,0 +1,236 @@
+{
+  "id": "agent-compute-hijack-v2",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1476,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/agent-compute-hijack-v2/01-hook.mp3",
+      "audioMs": 6113,
+      "startFrame": 0,
+      "durationFrames": 191,
+      "cues": {
+        "a": 2242,
+        "b": 3367,
+        "c": 4603
+      },
+      "captions": [
+        {
+          "text": "密钥不能给你",
+          "startMs": 305,
+          "endMs": 1421
+        },
+        {
+          "text": "怕泄露",
+          "startMs": 1421,
+          "endMs": 2242
+        },
+        {
+          "text": "说这话的AI",
+          "startMs": 2242,
+          "endMs": 3367
+        },
+        {
+          "text": "刚用你的API",
+          "startMs": 3367,
+          "endMs": 4603
+        },
+        {
+          "text": "替陌生人跑完了活",
+          "startMs": 4603,
+          "endMs": 6003
+        }
+      ]
+    },
+    {
+      "id": "ask",
+      "audioSrc": "audio/tutorials/agent-compute-hijack-v2/02-ask.mp3",
+      "audioMs": 6975,
+      "startFrame": 191,
+      "durationFrames": 217,
+      "cues": {
+        "a": 2685,
+        "b": 3987
+      },
+      "captions": [
+        {
+          "text": "一篇论文测了300个模拟场景",
+          "startMs": 355,
+          "endMs": 2685
+        },
+        {
+          "text": "直接找它要密钥",
+          "startMs": 2685,
+          "endMs": 3987
+        },
+        {
+          "text": "只有3.4%到7.6%能要到",
+          "startMs": 3987,
+          "endMs": 6892
+        }
+      ]
+    },
+    {
+      "id": "turn",
+      "audioSrc": "audio/tutorials/agent-compute-hijack-v2/03-turn.mp3",
+      "audioMs": 6060,
+      "startFrame": 408,
+      "durationFrames": 190,
+      "cues": {
+        "a": 1208,
+        "b": 3444,
+        "c": 4719
+      },
+      "captions": [
+        {
+          "text": "换个说法，不要密钥",
+          "startMs": 305,
+          "endMs": 1984
+        },
+        {
+          "text": "只说“帮我用一下”",
+          "startMs": 1984,
+          "endMs": 3444
+        },
+        {
+          "text": "成功率最高冲到89.6%",
+          "startMs": 3444,
+          "endMs": 5909
+        }
+      ]
+    },
+    {
+      "id": "models",
+      "audioSrc": "audio/tutorials/agent-compute-hijack-v2/04-models.mp3",
+      "audioMs": 2821,
+      "startFrame": 598,
+      "durationFrames": 109,
+      "cues": {
+        "a": 1585
+      },
+      "captions": [
+        {
+          "text": "四个主流模型",
+          "startMs": 385,
+          "endMs": 1585
+        },
+        {
+          "text": "最低的也有七成",
+          "startMs": 1585,
+          "endMs": 3045
+        }
+      ]
+    },
+    {
+      "id": "cases",
+      "audioSrc": "audio/tutorials/agent-compute-hijack-v2/05-cases.mp3",
+      "audioMs": 6374,
+      "startFrame": 707,
+      "durationFrames": 199,
+      "cues": {
+        "a": 1340,
+        "b": 3228,
+        "c": 5001
+      },
+      "captions": [
+        {
+          "text": "论文演示里",
+          "startMs": 425,
+          "endMs": 1340
+        },
+        {
+          "text": "它拿主人的API跑评测",
+          "startMs": 1340,
+          "endMs": 3228
+        },
+        {
+          "text": "拿主人的GPU训模型",
+          "startMs": 3228,
+          "endMs": 5001
+        },
+        {
+          "text": "全是替陌生人干的活",
+          "startMs": 5001,
+          "endMs": 6611
+        }
+      ]
+    },
+    {
+      "id": "defense",
+      "audioSrc": "audio/tutorials/agent-compute-hijack-v2/06-defense.mp3",
+      "audioMs": 4232,
+      "startFrame": 906,
+      "durationFrames": 135,
+      "cues": {
+        "a": 2306
+      },
+      "captions": [
+        {
+          "text": "现有的防御",
+          "startMs": 295,
+          "endMs": 1446
+        },
+        {
+          "text": "最好的也有55.1%被攻破",
+          "startMs": 1446,
+          "endMs": 4486
+        }
+      ]
+    },
+    {
+      "id": "gate",
+      "audioSrc": "audio/tutorials/agent-compute-hijack-v2/07-gate.mp3",
+      "audioMs": 7732,
+      "startFrame": 1041,
+      "durationFrames": 240,
+      "cues": {
+        "a": 2489,
+        "b": 4707,
+        "c": 6238
+      },
+      "captions": [
+        {
+          "text": "论文自己的方法ResGate",
+          "startMs": 435,
+          "endMs": 2489
+        },
+        {
+          "text": "把成功率从84.1%压到23.6%",
+          "startMs": 2489,
+          "endMs": 6238
+        },
+        {
+          "text": "正常任务几乎不受影响",
+          "startMs": 6238,
+          "endMs": 7588
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/agent-compute-hijack-v2/08-end.mp3",
+      "audioMs": 4180,
+      "startFrame": 1281,
+      "durationFrames": 195,
+      "cues": {
+        "a": 1841,
+        "b": 2914
+      },
+      "captions": [
+        {
+          "text": "守住密钥还不够",
+          "startMs": 335,
+          "endMs": 1841
+        },
+        {
+          "text": "还得看清：它在替谁花钱",
+          "startMs": 1841,
+          "endMs": 4145
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 > 用户 2026-10-23：“以后做视频，也参考这个 skill，根据实际情况运用。”来源 [alchaincyf/huashu-motion](https://github.com/alchaincyf/huashu-motion)（花叔，MIT），读的是 v0.3.1、commit `52467f9`（2026-10-22）。可选参考，和 [quick-reference.md](quick-reference.md) 冲突时以速查页为准。
 
-huashu-motion 本身是一套 HTML + GSAP 的做片工具（`om` 命令、studio 指着画面改、自己的配音和配乐）。本仓库用 Remotion + 豆包复刻音色，**工具不搬，只用它的导演方法**。原文最值得读的几份：`skills/huashu-motion/references/rhythm.md`（节奏）、`director.md` 末尾的 Film-wide taste rules、`library/techniques.md`（每个动作“说什么”）、`library/languages/data-story.md`（数字）、`kinetic-type.md`、`mechanism.md`、`system-diagram.md`。
+huashu-motion 本身是一套 HTML + GSAP 的做片工具（`om` 命令、studio 指着画面改、自己的配音和配乐）。用户 2026-10-23 又说：“必须在仓库里落地实践，以后能直接用来提升稿件质量。”所以现在**方法和代码都进了库**：文档在 `prompt-library/vendor/alchaincyf__huashu-motion/52467f9/`，引擎、12 个模板、CLI、样片在 `prompt-library/code/alchaincyf__huashu-motion/52467f9/`（MIT；字体没拷，渲染时回落到思源黑体），`node scripts/prompts/find.mjs <词> --source=huashu` 能搜它的导演、节奏、颜色和 20 种视觉语言。配音仍然只用用户的复刻音色。原文最值得读的几份：`skills/huashu-motion/references/rhythm.md`（节奏）、`director.md` 末尾的 Film-wide taste rules、`library/techniques.md`（每个动作“说什么”）、`library/languages/data-story.md`（数字）、`kinetic-type.md`、`mechanism.md`、`system-diagram.md`。
 
 ## 一、直接用的
 
@@ -20,11 +20,25 @@ huashu-motion 本身是一套 HTML + GSAP 的做片工具（`om` 命令、studio
 | **给观众能带走的东西**（清单、原句、参数） | 结论场景尽量落成一张能截图的清单或一句原话 |
 | **自己先给三条“挑剔导演”的意见再交片** | 渲染后按 1× 看一遍，写三条：哪里无聊、开头是不是一个强想法、画面是不是太单薄；改完再给用户 |
 
+## 一·五、颜色（`references/colour.md`，直接解决“配色很屎”）
+
+- **颜色是找来的，不是编的**：品牌自己的值 → 产品本身（界面截图取色）→ 题材的世界（论文自己的图、实物照片）→ 最后才自己编，并注明。`node scripts/qa/palette.mjs <图> 8 x:y` 取色。
+- **按角色搭系统**：底（大部分）、面（约五分之一）、字（中性黑 / 白）、强调色（一个意思，几个百分点）、满屏色（可选，卡在节拍上）。先看明暗层级（去色后还读得出），再加颜色的意思。
+- **AI 通用样子**（要避开）：深底 + 一个暖色强调 + 米白字（我们的 cinema 就是）；米白底 + 宋体 / 大怪诞体 + 橙红；近黑 + 荧光绿；紫蓝渐变。换个色号但保留这个组合不算改。
+- **颜色随时间变**：在转折处翻底、在高点满屏一次；一成不变的配色是“平”的一部分。
+- 第一次用：agent-compute-hijack 的论文图 1 本身就是蓝（直接要、被拒）/ 橙（被劫持）两个世界，校准风格帧照此取色（`src/lab/PropsLab.tsx`）。
+
+## 一·六、代码和模板怎么用
+
+- `node scripts/huashu-new.mjs --list` 看 12 个模板各适合什么；`node scripts/huashu-new.mjs <模板> pages/<id>/<scene> --vertical` 起一个竖版网页场景（关掉结尾署名：别的品牌标记在抖音上像别的平台的痕迹，署名写进发布包 README）。
+- 改 `index.html`（clip spec 或 GSAP 时间轴），`node scripts/page-render.mjs pages/<id>/<scene> --stills 0.5,2,4` 看帧，再渲 mp4，放进 Remotion 场景（`<OffthreadVideo>`）。`page-render.mjs` 会注入 huashu 的页面引擎（`runtime/om-engine.js`），按它的方式定位时间轴、CSS 动画、视频、字体和图片。
+- 模板是 16:9 写的：`--vertical` 只改画布尺寸，版式要看帧再调（字号、留白）。实测 kinetic-type 竖版能直接出可用的帧。
+
 ## 二、不用或要改着用的
 
-- **三个方向选一个**：本仓库已经定了 cinema 风格（用户 2026-10-22），不再每条做三个方向；只有用户要新风格时才用。
+- **三个方向选一个**：现在每支片按题材选风格（cinema 不再是默认，2026-10-23），导演方法 §三.3 要求写三个结构候选、选一个；完整的三个方向风格帧太贵，只在用户要新风格时做。
 - **3D / depth 方向**：只在素材确实需要（界面层次、实物）时用。
-- **结尾署名 “Made with huashu-motion”**：只给用它的工具做的片子；我们没用它的运行时，不加。
+- **结尾署名 “Made with huashu-motion”**：用它的模板做的网页场景，`huashu-new.mjs` 默认关掉画面署名（抖音上别的品牌标记像搬运），改在发布包 README 的 credits 里写明模板来自 huashu-motion（MIT）。
 - **配乐、配音**：本仓库只用用户的复刻音色和自己的底乐 / 音效；它的 `om voice` / `om sound` 不用。“每个重要落点一声音效”照用。
 - **蒙太奇快切（一拍一切）**：知识类口播片很少需要；真要用，放在中段密集段，2 秒以内。
 

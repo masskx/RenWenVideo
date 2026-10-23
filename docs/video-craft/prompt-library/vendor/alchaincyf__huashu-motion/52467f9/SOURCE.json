@@ -1,0 +1,252 @@
+{
+  "repo": "alchaincyf/huashu-motion",
+  "url": "https://github.com/alchaincyf/huashu-motion",
+  "commit": "52467f99c602b76ba86d511d37acdfe93fa1e16e",
+  "commitDate": "2026-10-22T20:19:32+08:00",
+  "snapshotAt": "2026-10-23T06:08:47.613Z",
+  "license": "MIT（花叔 / alchaincyf）；runtime/clip、art-motion 各带 LICENSE / NOTICE；gsap.min.js 走 GSAP 自己的许可（附 GSAP-LICENSE）；字体 OFL，没拷（渲染时缺字体回落到思源黑体）",
+  "include": [
+    "/LICENSE",
+    "/README.md",
+    "/THIRD_PARTY.md",
+    "/skills/**/*.md",
+    "/skills/**/*.abc"
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 1063,
+      "sha256": "b8fa8ecfc57cf8339ecdab05e62e811a5d00d1e1f9373ff1de64cc9f261e2d3e"
+    },
+    {
+      "path": "README.md",
+      "bytes": 25818,
+      "sha256": "6a5ef0a4874f59a31b1ee994123a288bed9c93a4cc698734ae51fd339606317d"
+    },
+    {
+      "path": "THIRD_PARTY.md",
+      "bytes": 1772,
+      "sha256": "e629438fc82bfe85b1e22422cbd8802954165db1d3a702fbbbd0ec7a2005b927"
+    },
+    {
+      "path": "skills/huashu-motion/SKILL.md",
+      "bytes": 24613,
+      "sha256": "fb114d4dfacbe64a39255e90806958140d7eab4b58fce1de66c07512f93a951f"
+    },
+    {
+      "path": "skills/huashu-motion/references/about-author.md",
+      "bytes": 10181,
+      "sha256": "e1ea9261abb4877b09cfb0b9033b5ebeeae001a8a00823d1731dc55129efd102"
+    },
+    {
+      "path": "skills/huashu-motion/references/colour.md",
+      "bytes": 8864,
+      "sha256": "11d0dede9e2608216a80645ae6a77caf1c3aacbc4c62425f105bb954c1a403df"
+    },
+    {
+      "path": "skills/huashu-motion/references/contract.md",
+      "bytes": 7062,
+      "sha256": "b2221bed5135e2422d1cc3bd1ef021172aa70898d87bf63a147c55efe299bbed"
+    },
+    {
+      "path": "skills/huashu-motion/references/craft.md",
+      "bytes": 3291,
+      "sha256": "8848876be15b82e3c6f64cfbb4462b564b19b1beff69bd144b265baa4d6ffe1e"
+    },
+    {
+      "path": "skills/huashu-motion/references/depth.md",
+      "bytes": 8370,
+      "sha256": "f2663b6cf9bf12e123a2e31a8552c57aab9d698ec788ce21317fd2fc4fefb9f5"
+    },
+    {
+      "path": "skills/huashu-motion/references/director.md",
+      "bytes": 18161,
+      "sha256": "f2edb6c10c50e7307efd703e7413c5ab3840ba7acbb65c98a8a3088778502052"
+    },
+    {
+      "path": "skills/huashu-motion/references/experience.md",
+      "bytes": 27387,
+      "sha256": "51ccbfc58230fd26ae302c186e508e364abcc1d17c46d398ffc901e111e73e39"
+    },
+    {
+      "path": "skills/huashu-motion/references/grammars.md",
+      "bytes": 6852,
+      "sha256": "b2d6ac63291877e299622de847b3891186b828cf3f06a67465a60f81cad58341"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/README.md",
+      "bytes": 6714,
+      "sha256": "2339e200bfa35d2bfc1ec28745d914d381ccedc8b78392eb51b36639f6c58fd4"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/formats.md",
+      "bytes": 9538,
+      "sha256": "12caf909a415f392488b83dca6f13936733b2a4436daa7df0b6326a538a41536"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/3d-object.md",
+      "bytes": 2335,
+      "sha256": "df7b540e602151387af462419ba00ea5133f4b66a46275be4982191a34e8a18b"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/art-styles.md",
+      "bytes": 1359,
+      "sha256": "628c5a94285b53cd58f8203942c9ceeb7a4364326855a83a19cf6afff96ba965"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/card-montage.md",
+      "bytes": 3777,
+      "sha256": "0cd6e5caad01738d41a9ba37ac9ae14bbbc2f896696b0a60bb57754e2608d476"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/character.md",
+      "bytes": 1963,
+      "sha256": "0187538b564f5718e59652c3ec5066522b54404e299b024409ecab43ea8e58da"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/continuous-morph.md",
+      "bytes": 4492,
+      "sha256": "ec261fb00859122320fa4a60e9c23ccb4862f1b1ce51f222d1d10fcbb4e64aab"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/cursor-demo.md",
+      "bytes": 4600,
+      "sha256": "3d9cc40bfe891231cb601ebc2d75f8e575e42434d1c0b661310bdee1efd42768"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/data-story.md",
+      "bytes": 2060,
+      "sha256": "72101951c0c6001c138886f92964252ba8af2f567cd3a57bb5ec9026c7d53d7b"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/editorial-collage.md",
+      "bytes": 1518,
+      "sha256": "05423c1e4b27190c1621b879631846a36315e861d5368b665348b9963034ba0a"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/flat-world.md",
+      "bytes": 1234,
+      "sha256": "29b9d635f63f27e8edcdeba6a9bed7597186d93ab14cd8d0344a47fcaa17cecd"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/generative-field.md",
+      "bytes": 1384,
+      "sha256": "5539275e1e6d6c354999481ceb3dd2fcf6ac3aa7b6c72bbff22f5f296db3b564"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/hand-drawn.md",
+      "bytes": 1489,
+      "sha256": "81749bdafd2ab5987984e71ec75ca86f2f4f77723418a749bb625e9acabe4256"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/kinetic-type.md",
+      "bytes": 3614,
+      "sha256": "c7647d0e4893a39e2d8ef95fc3ba89ee4dabd2f3e84fd355150501e26f24d94f"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/liquid-glass.md",
+      "bytes": 1120,
+      "sha256": "a1108a383ea7cbc63efa0062823d911717f8b623e3d9466db0277b3c9d7c3d89"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/mechanism.md",
+      "bytes": 1539,
+      "sha256": "fb89085eabab7105bb7a96b192ead8a9eda27bfa091300240a693b1b74d69d39"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/modular-grid.md",
+      "bytes": 1726,
+      "sha256": "a94a5256641b842d72cac87c7d8950d6efa1713839e8571cc19b66f0cb575545"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/photo-led.md",
+      "bytes": 1201,
+      "sha256": "7b451709626a6da081a5ed2055705855c10a98bec1cd453e169abb9512d8db5a"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/retro-digital.md",
+      "bytes": 1076,
+      "sha256": "28ee58df5753a0720c88a6cb6817c83c9c1a12cb159ff8e7abe8a479008b9f72"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/showreel.md",
+      "bytes": 2980,
+      "sha256": "358df11aabe7c977c736d971e49b9508c4d69b1bb4b02216bf12884dfe6b5838"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/system-diagram.md",
+      "bytes": 1516,
+      "sha256": "837cd2bfb4d1c93dc6f5d1a40d5974f514a841147bb1a2b555e028012abc9e71"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/languages/talking-head.md",
+      "bytes": 473,
+      "sha256": "6ca40ee1a4f85ac026dd1590150a39379a981f4f0d27ff1d11d5dbbf6660fb0b"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/product-fit.md",
+      "bytes": 7212,
+      "sha256": "3c7fe709105647b92cd881f947dd958c389035295f6fb89487476fb7e2018b55"
+    },
+    {
+      "path": "skills/huashu-motion/references/library/techniques.md",
+      "bytes": 20432,
+      "sha256": "181fbe011ae69778a5a4e53ae10e98daf6bf061c55b16e8b44c1ee9d9f8b997f"
+    },
+    {
+      "path": "skills/huashu-motion/references/music.md",
+      "bytes": 15477,
+      "sha256": "4f7a1f475f331fc5474f75d812b0c84ca5e76650d559e277a0c9a43d6e8e545b"
+    },
+    {
+      "path": "skills/huashu-motion/references/product-demo-continuity.md",
+      "bytes": 8652,
+      "sha256": "84a545faf82bc7e8f94781a8d4313dd063bdd966dd77bd13a0f23b62fe98e41e"
+    },
+    {
+      "path": "skills/huashu-motion/references/provenance.md",
+      "bytes": 2229,
+      "sha256": "139268157eade6168b9835ff2d3011dea6f788193c589b7ee131414382c8c145"
+    },
+    {
+      "path": "skills/huashu-motion/references/rhythm.md",
+      "bytes": 12365,
+      "sha256": "a9a86b12c8d6d30a015a2564c76c24c186359b295f1a7b6e74863fe6e24002d2"
+    },
+    {
+      "path": "skills/huashu-motion/references/scores/first-light.abc",
+      "bytes": 3041,
+      "sha256": "40ae0cb892f0719239edfa7e717cb0e6a51276dc2227cac525b45fd736c08036"
+    },
+    {
+      "path": "skills/huashu-motion/references/scores/four-rooms.abc",
+      "bytes": 4294,
+      "sha256": "816a285c3c061336c2e62ce9504f93a12c94412673ad5c356a2ece6e6a011c74"
+    },
+    {
+      "path": "skills/huashu-motion/references/scores/signal.abc",
+      "bytes": 4038,
+      "sha256": "99ec2f7633745412b01c1cfc1fc3c741f035b4a2c5e4d959d2ae693e26689733"
+    },
+    {
+      "path": "skills/huashu-motion/references/sound.md",
+      "bytes": 13664,
+      "sha256": "558aed0984e895c588fbc782ff4001b53d896f099ad7783adbd6b6447099f31e"
+    },
+    {
+      "path": "skills/huashu-motion/references/talking-head.md",
+      "bytes": 10259,
+      "sha256": "e78d08cf74028059e732ada71f7eabfc0f46a61b2d9be90a8143f6eb3c968ca4"
+    },
+    {
+      "path": "skills/huashu-motion/references/verification.md",
+      "bytes": 2314,
+      "sha256": "982ec8ee30be501e5ded5a6425bc8df7ceec29af0d94cf97a41cf6710d52b6cf"
+    },
+    {
+      "path": "skills/huashu-motion/references/visual-direction.md",
+      "bytes": 9036,
+      "sha256": "5f514f094a221df53ac1354d481b780bc8d29394aa1f879fb94259d42efa8ca0"
+    }
+  ]
+}

@@ -6,7 +6,8 @@ import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {clamp, ease, hash, prog} from './motion';
 
-export type CutKind = 'sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch';
+/** 'cut' is a hard cut (no transition): for films whose scenes hand over by colour or a graphic match. */
+export type CutKind = 'sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch' | 'cut';
 export type Cut = {at: number; kind: CutKind};
 
 /** Kinds that read as a "new section" vs. a step within one. */
@@ -24,7 +25,7 @@ export const planCuts = (times: number[], isBig: (i: number) => boolean, o: {big
 };
 
 const HALF: Record<CutKind, [number, number]> = {
-  sweep: [0.4, 0.3], iris: [0.35, 0.35], pageTurn: [0.3, 0.3], push: [0.25, 0.25], pushUp: [0.25, 0.25], glitch: [0.14, 0.14],
+  sweep: [0.4, 0.3], iris: [0.35, 0.35], pageTurn: [0.3, 0.3], push: [0.25, 0.25], pushUp: [0.25, 0.25], glitch: [0.14, 0.14], cut: [0, 0],
 };
 /** The cut whose transition window contains t, if any. */
 export const activeCut = (t: number, cuts: Cut[]) => cuts.find((c) => t >= c.at - HALF[c.kind][0] && t <= c.at + HALF[c.kind][1]) ?? null;
@@ -37,7 +38,7 @@ type StageProps = {t: number; cuts: Cut[]; width: number; height: number; colors
  */
 export const CutStage: React.FC<StageProps> = ({t, cuts, width: W, height: H, colors = ['#ffc53d', '#5ee7ff', '#070b14'], paper = '#efe7d6', fill = '#070b14', children}) => {
   const cut = activeCut(t, cuts);
-  if (!cut) return <AbsoluteFill>{children}</AbsoluteFill>;
+  if (!cut || cut.kind === 'cut') return <AbsoluteFill>{children}</AbsoluteFill>;
   const c = cut.at;
   if (cut.kind === 'push' || cut.kind === 'pushUp') {
     const h = HALF[cut.kind][0];

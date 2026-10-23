@@ -1,6 +1,6 @@
 {
   "post": "https://x.com/KinGao476942/status/2112729924943634602",
-  "note": "Sources from the post (see 来源帖.md). `include` = sparse-checkout patterns copied verbatim by scripts/prompts/snapshot.mjs; `pinned` = the snapshot under vendor/ that find.mjs reads. A new snapshot never replaces an old one and only moves the pin with --pin.",
+  "note": "Sources from the post (see 来源帖.md). `include` = sparse-checkout patterns copied verbatim by scripts/prompts/snapshot.mjs; `pinned` = the snapshot under vendor/ that find.mjs reads. A new snapshot never replaces an old one and only moves the pin with --pin. A second set `code` (snapshot.mjs --set=code) copies working code, demo source and reference images into code/<owner>__<repo>/<commit>/, pinned by `codePinned`.",
   "sources": [
     {
       "repo": "yihui-dev/awesome-opus5-5-videos",
@@ -14,7 +14,7 @@
     },
     {
       "repo": "lemomo-ai/lemo-opuscar",
-      "license": "代码和文档 MIT；样片与静帧 CC BY 4.0（只复制了文档，没有复制样片）",
+      "license": "代码和文档 MIT；样片、静帧和 poster.jpg 为 CC BY 4.0（署名 LemoLab，附 https://github.com/lemomo-ai/lemo-opuscar）。vendor/ 只有文档；code/ 有引擎、样片源码和 poster",
       "include": [
         "/LICENSE",
         "/README.zh-CN.md",
@@ -28,17 +28,94 @@
         "/styles/*/style.json",
         "/styleboard/opuscar98_styles.json"
       ],
-      "pinned": "b5e8ef9"
+      "pinned": "3961ddb",
+      "code": [
+        "/LICENSE",
+        "/CLAUDE.md",
+        "/MAINTAINING.md",
+        "/package.json",
+        "/core/**/*.js",
+        "/core/**/*.mjs",
+        "/core/**/*.ts",
+        "/core/**/*.py",
+        "/core/**/*.sh",
+        "/core/**/*.html",
+        "/core/**/*.css",
+        "/core/**/*.glsl",
+        "/core/**/*.md",
+        "/core/**/*.json",
+        "/core/**/*.jsonl",
+        "/core/**/*.csv",
+        "/core/**/*.txt",
+        "/tools/**/*.js",
+        "/tools/**/*.mjs",
+        "/tools/**/*.ts",
+        "/tools/**/*.py",
+        "/tools/**/*.sh",
+        "/tools/**/*.html",
+        "/tools/**/*.css",
+        "/tools/**/*.glsl",
+        "/tools/**/*.md",
+        "/tools/**/*.json",
+        "/tools/**/*.jsonl",
+        "/tools/**/*.csv",
+        "/tools/**/*.txt",
+        "/plugin/**/*.js",
+        "/plugin/**/*.mjs",
+        "/plugin/**/*.ts",
+        "/plugin/**/*.py",
+        "/plugin/**/*.sh",
+        "/plugin/**/*.html",
+        "/plugin/**/*.css",
+        "/plugin/**/*.glsl",
+        "/plugin/**/*.md",
+        "/plugin/**/*.json",
+        "/plugin/**/*.jsonl",
+        "/plugin/**/*.csv",
+        "/plugin/**/*.txt",
+        "/styles/*/demo/**/*.js",
+        "/styles/*/demo/**/*.mjs",
+        "/styles/*/demo/**/*.ts",
+        "/styles/*/demo/**/*.py",
+        "/styles/*/demo/**/*.sh",
+        "/styles/*/demo/**/*.html",
+        "/styles/*/demo/**/*.css",
+        "/styles/*/demo/**/*.glsl",
+        "/styles/*/demo/**/*.md",
+        "/styles/*/demo/**/*.json",
+        "/styles/*/demo/**/*.jsonl",
+        "/styles/*/demo/**/*.csv",
+        "/styles/*/demo/**/*.txt",
+        "/styles/*/demo/**/CREDITS",
+        "/styles/*/demo/**/build.sh",
+        "/styles/*/poster.jpg",
+        "/styles/*/*.srt"
+      ],
+      "codePinned": "3961ddb"
     },
     {
       "repo": "mexicat/pdoom-video",
-      "license": "MIT（歌曲不属于作者，没有复制）",
+      "license": "MIT。歌曲、歌词（lyrics/、data/lyrics.json）不属于作者，没有复制；code/ 有渲染器和场景源码、音频分析数据",
       "include": [
         "/LICENSE",
         "/README.md",
         "/docs/*.md"
       ],
-      "pinned": "fa164b7"
+      "pinned": "fa164b7",
+      "code": [
+        "/LICENSE",
+        "/README.md",
+        "/docs/*.md",
+        "/app/src/**",
+        "/app/scripts/**",
+        "/app/*.json",
+        "/app/*.ts",
+        "/app/*.html",
+        "/analysis/*.py",
+        "/analysis/*.toml",
+        "/data/audio.json"
+      ],
+      "codePinned": "fa164b7"
     },
     {
       "repo": "JohnHeibel/PDoomVideo",
@@ -56,7 +133,67 @@
         "/rubric.md",
         "/prompts/*.md"
       ],
-      "pinned": "49052d8"
+      "pinned": "49052d8",
+      "code": [
+        "/LICENSE",
+        "/package.json",
+        "/index.html",
+        "/demos/*/*.js",
+        "/demos/*/*.mjs",
+        "/demos/*/*.ts",
+        "/demos/*/*.py",
+        "/demos/*/*.sh",
+        "/demos/*/*.html",
+        "/demos/*/*.css",
+        "/demos/*/*.glsl",
+        "/demos/*/*.md",
+        "/demos/*/*.json",
+        "/demos/*/*.jsonl",
+        "/demos/*/*.csv",
+        "/demos/*/*.txt",
+        "/demos/*/**/*.js",
+        "/demos/*/**/*.mjs",
+        "/demos/*/**/*.ts",
+        "/demos/*/**/*.py",
+        "/demos/*/**/*.sh",
+        "/demos/*/**/*.html",
+        "/demos/*/**/*.css",
+        "/demos/*/**/*.glsl",
+        "/demos/*/**/*.md",
+        "/demos/*/**/*.json",
+        "/demos/*/**/*.jsonl",
+        "/demos/*/**/*.csv",
+        "/demos/*/**/*.txt",
+        "/harness/**/*.js",
+        "/harness/**/*.mjs",
+        "/harness/**/*.ts",
+        "/harness/**/*.py",
+        "/harness/**/*.sh",
+        "/harness/**/*.html",
+        "/harness/**/*.css",
+        "/harness/**/*.glsl",
+        "/harness/**/*.md",
+        "/harness/**/*.json",
+        "/harness/**/*.jsonl",
+        "/harness/**/*.csv",
+        "/harness/**/*.txt",
+        "/lib/**/*.js",
+        "/lib/**/*.mjs",
+        "/lib/**/*.ts",
+        "/lib/**/*.py",
+        "/lib/**/*.sh",
+        "/lib/**/*.html",
+        "/lib/**/*.css",
+        "/lib/**/*.glsl",
+        "/lib/**/*.md",
+        "/lib/**/*.json",
+        "/lib/**/*.jsonl",
+        "/lib/**/*.csv",
+        "/lib/**/*.txt",
+        "/docs/readme/films/*.webp",
+        "/docs/readme/*.webp"
+      ],
+      "codePinned": "49052d8"
     },
     {
       "repo": "JohnHeibel/ClaudeAnimationBase",
@@ -66,7 +203,19 @@
         "/README.md",
         "/ANIMATION_GUIDE.md"
       ],
-      "pinned": "0ac8bf2"
+      "pinned": "0ac8bf2",
+      "code": [
+        "/LICENSE",
+        "/README.md",
+        "/ANIMATION_GUIDE.md",
+        "/src/**",
+        "/studio.html",
+        "/render.mjs",
+        "/package.json",
+        "/gpu_probe.mjs",
+        "/docs/*.jpg"
+      ],
+      "codePinned": "0ac8bf2"
     },
     {
       "repo": "athemeroy/awesome-claude-5-5-videos",
@@ -83,7 +232,13 @@
         "/docs/cases-index.zh-CN.md",
         "/docs/report.zh-CN.md"
       ],
-      "pinned": "87e5cbf"
+      "pinned": "87e5cbf",
+      "code": [
+        "/LICENSE",
+        "/THIRD_PARTY.md",
+        "/scripts/*.py"
+      ],
+      "codePinned": "87e5cbf"
     },
     {
       "repo": "joeseesun/opus-video-prompts",
@@ -94,6 +249,31 @@
         "/prompts/*.md"
       ],
       "pinned": "7977c80"
+    },
+    {
+      "repo": "alchaincyf/huashu-motion",
+      "license": "MIT（花叔 / alchaincyf）；runtime/clip、art-motion 各带 LICENSE / NOTICE；gsap.min.js 走 GSAP 自己的许可（附 GSAP-LICENSE）；字体 OFL，没拷（渲染时缺字体回落到思源黑体）",
+      "include": [
+        "/LICENSE",
+        "/README.md",
+        "/THIRD_PARTY.md",
+        "/skills/**/*.md",
+        "/skills/**/*.abc"
+      ],
+      "code": [
+        "/LICENSE",
+        "/THIRD_PARTY.md",
+        "/package.json",
+        "/runtime/**",
+        "/cli/**",
+        "/templates/**",
+        "!/templates/**/*.woff",
+        "/examples/**",
+        "!/examples/**/*.woff",
+        "!/examples/**/*.wav"
+      ],
+      "pinned": "52467f9",
+      "codePinned": "52467f9"
     }
   ]
 }
