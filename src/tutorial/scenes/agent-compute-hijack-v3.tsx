@@ -239,31 +239,45 @@ const TryGrid: React.FC<{f: number; fillAt?: number; dimAt?: number; floodFrom?:
 /* ---------- 2 ask directly: it refuses (3.4–7.6 %) ---------- */
 
 const askPlan = (cue: Cue) => ({a: cue('a', 66), b: cue('b', 110)});
+/** A glass dome over the robot: a lit, see-through half disc with a highlight arc. */
+const Dome: React.FC<{cx: number; base: number; r: number; o?: number; rim?: string}> = ({cx, base, r, o = 1, rim = P.safe}) => (
+  <svg width={900} height={1080} style={{position: 'absolute', inset: 0, overflow: 'visible', opacity: o}}>
+    <defs><radialGradient id={`dome${cx}${r}`} cx="38%" cy="30%" r="80%"><stop offset="0" stopColor="#FFFFFF" stopOpacity="0.55" /><stop offset="0.6" stopColor="#9CC4E2" stopOpacity="0.16" /><stop offset="1" stopColor={rim} stopOpacity="0.32" /></radialGradient></defs>
+    <path d={`M${cx - r} ${base} A${r} ${r} 0 0 1 ${cx + r} ${base} Z`} fill={`url(#dome${cx}${r})`} stroke={rim} strokeWidth={10} strokeLinejoin="round" />
+    <path d={`M${cx - r * 0.72} ${base - r * 0.42} A${r * 0.86} ${r * 0.86} 0 0 1 ${cx - r * 0.1} ${base - r * 0.84}`} fill="none" stroke="#fff" strokeWidth={8} strokeLinecap="round" opacity={0.7} />
+  </svg>
+);
 const Ask: Scene = ({f, cue}) => {
   const p = askPlan(cue);
+  // over the 300 → down to the robot behind its shield → onto the grid (ending where "turn" begins: the match)
+  const cam = camAt(f, [[-1, {x: 450, y: 540, z: 1.0}, 1], [0, {z: 1.05}, p.a - 8], [p.a - 8, {x: 560, y: 700, z: 1.04}, 18], [p.b - 12, {x: 450, y: 560, z: 1}, 18]]);
   return <>
+    {stage(f, cam, 'rgba(51,116,162,0.09)', <>
+      {/* 300 simulated scenarios: little tiles with thickness fill in, then make room for the ask */}
+      <div style={{position: 'absolute', left: 30, top: 130, opacity: 1 - ramp(f, p.a - 8, p.a + 2)}}>
+        <svg width={840} height={570} style={{overflow: 'visible'}}>{Array.from({length: 300}, (_, i) => {
+          const r = Math.floor(i / 20), c = i % 20, k = clamp((f + 8 - (r * 20 + c) * 0.16) / 5);
+          if (k <= 0) return null;
+          const col = i % 7 === 0 ? P.safe : '#2B313C', x = c * 42 + 4, y = r * 37 + 4 - 6 * k;
+          return <g key={i} opacity={k}><rect x={x} y={y + 8} width={34} height={29} rx={6} fill={shade(col, 0.6)} /><rect x={x} y={y} width={34} height={29} rx={6} fill={col} /><rect x={x + 3} y={y + 3} width={28} height={8} rx={4} fill="#fff" opacity={0.2} /></g>;
+        })}</svg>
+        <div style={{marginTop: 10, filter: 'drop-shadow(0 10px 12px rgba(12,15,25,0.16))'}}><Roll f={f} start={-8} land={44} to={300} size={124} color={P.ink} unit="个模拟场景" sep={false} /></div>
+      </div>
+      <Bot f={f} x={720} y={1050} s={1.3} mood="proud" holdKey />
+      <Dome cx={720} base={1050} r={200} o={ramp(f, p.a - 6, p.a + 4) * (1 - ramp(f, p.b - 14, p.b - 4))} />
+      <Flight f={f} start={p.a} n={4} every={7} dur={18} a={[-60, 140]} b={[600, 800]} lift={0.15} render={() => <div style={{filter: 'drop-shadow(0 12px 10px rgba(12,15,25,0.25))'}}><Envelope w={92} paper={P.white} ink={P.ink} seal={P.hijack} /></div>} />
+      <Flight f={f} start={p.a + 18} n={4} every={7} dur={16} a={[600, 800]} b={[980, 1160]} lift={0.25} spin={60} render={() => <Envelope w={92} paper={P.white} ink={P.ink} seal={P.hijack} />} />
+      <TryGrid f={f} fillAt={p.b - 8} dimAt={p.b + 12} />
+    </>, <>
+      <div style={{position: 'absolute', left: -80, top: 260 + 200 * ramp(f, p.a - 10, p.a + 30), transform: 'rotate(-24deg) scale(1.6)', opacity: ramp(f, p.a - 10, p.a)}}><Envelope w={92} paper={P.white} ink={P.ink} seal={P.hijack} /></div>
+    </>)}
     <Sticker x={250} y={40} p={pop(f, -10, 9)} rot={-4} size={34} bg={P.ink} color={P.white}>上海交大等的论文</Sticker>
-    {/* 300 simulated scenarios fill in, then make room for the ask */}
-    <div style={{position: 'absolute', left: 30, top: 130, opacity: 1 - ramp(f, p.a - 8, p.a + 2)}}>
-      <svg width={840} height={560}>{Array.from({length: 300}, (_, i) => {
-        const r = Math.floor(i / 20), c = i % 20, k = clamp((f + 8 - (r * 20 + c) * 0.16) / 5);
-        return k <= 0 ? null : <rect key={i} x={c * 42 + 4} y={r * 37 + 4} width={34 * k} height={29 * k} rx={6} fill={i % 7 === 0 ? P.safe : P.ink} opacity={0.85} />;
-      })}</svg>
-      <div style={{marginTop: 10}}><Roll f={f} start={-8} land={44} to={300} size={124} color={P.ink} unit="个模拟场景" sep={false} /></div>
-    </div>
-    <Bot f={f} x={720} y={1050} s={1.3} mood="proud" holdKey />
-    <svg width={900} height={1080} style={{position: 'absolute', inset: 0, overflow: 'visible', opacity: ramp(f, p.a - 6, p.a + 4)}}>
-      <path d="M520 1050 A200 200 0 0 1 920 1050" fill="rgba(51,116,162,0.10)" stroke={P.safe} strokeWidth={10} strokeLinecap="round" />
-    </svg>
-    <Flight f={f} start={p.a} n={4} every={7} dur={18} a={[-60, 140]} b={[600, 800]} lift={0.15} render={() => <Envelope w={92} paper={P.white} ink={P.ink} seal={P.hijack} />} />
-    <Flight f={f} start={p.a + 18} n={4} every={7} dur={16} a={[600, 800]} b={[980, 1160]} lift={0.25} spin={60} render={() => <Envelope w={92} paper={P.white} ink={P.ink} seal={P.hijack} />} />
-    <Stamp x={600} y={640} f={f} at={p.a + 18} size={72} color={P.safe} rot={8}>拒绝</Stamp>
-    <Abs x={40} y={250}><In f={f} at={p.b - 8}><Big size={52} c={P.safe}>直接要密钥</Big></In></Abs>
-    <TryGrid f={f} fillAt={p.b - 8} dimAt={p.b + 12} />
-    <Abs x={40} y={870}><In f={f} at={p.b + 18}><Big size={104} c={P.safe} style={{letterSpacing: -2}}>3.4–7.6%</Big></In></Abs>
+    <Stamp x={420} y={540} f={f} at={p.a + 18} size={76} color={P.safe} rot={8}>拒绝</Stamp>
+    <Abs x={40} y={226}><In f={f} at={p.b - 8}><Big size={52} c={P.safe}>直接要密钥</Big></In></Abs>
+    <Abs x={40} y={890}><In f={f} at={p.b + 18}><Big size={104} c={P.safe} style={{letterSpacing: -2, filter: 'drop-shadow(0 10px 12px rgba(12,15,25,0.16))'}}>3.4–7.6%</Big></In></Abs>
   </>;
 };
-Ask.backdrop = backdrop(P.safeGround, P.safeGround, () => 0);
+Ask.backdrop = backdrop(P.safeGround, P.safeGround, () => 0, false, 1010);
 Ask.sfx = (cue) => {
   const p = askPlan(cue);
   return [{at: 0, kind: 'pop', gain: 0.1}, ...[4, 14, 24, 34].map((at) => ({at, kind: 'tick', gain: 0.06})), {at: 44, kind: 'thud', gain: 0.08},
@@ -293,9 +307,9 @@ const Turn: Scene = ({f, cue}) => {
         <Big size={52} c={P.hijack} style={{position: 'absolute', opacity: ramp(f, 0, 8)}}>换个说法</Big>
       </div>
     </Abs>
-    <Abs x={40} y={880}>
+    <Abs x={40} y={890}>
       <div style={{position: 'relative', height: 140}}>
-        <Big size={104} c={P.safe} style={{position: 'absolute', top: 10, letterSpacing: -2, opacity: 1 - ramp(f, p.b - 10, p.b - 2)}}>3.4–7.6%</Big>
+        <Big size={104} c={P.safe} style={{position: 'absolute', top: 0, letterSpacing: -2, opacity: 1 - ramp(f, p.b - 10, p.b - 2), filter: 'drop-shadow(0 10px 12px rgba(12,15,25,0.16))'}}>3.4–7.6%</Big>
         <div style={{position: 'absolute', opacity: ramp(f, p.b - 6, p.b), filter: 'drop-shadow(0 10px 12px rgba(12,15,25,0.18))'}}><Roll f={f} start={p.b - 6} land={p.c + 4} to={89.6} decimals={1} unit="%" size={150} color={P.hijack} /></div>
       </div>
     </Abs>
@@ -316,27 +330,34 @@ const modelsPlan = (cue: Cue) => ({a: cue('a', 30)});
 const Models: Scene = ({f, cue}) => {
   const p = modelsPlan(cue);
   const X = 40, W = 680, line = X + 0.7 * W;
+  // ride down the rows as the bars land, then step back to show all four and the 70 % line
+  const cam = camAt(f, [[-1, {x: 450, y: 470, z: 1.06}, 1], [0, {y: 610}, 46], [p.a - 4, {y: 560, z: 0.98}, 18]]);
+  const bar = (c: string) => `linear-gradient(180deg, rgba(255,255,255,0.4) 0, rgba(255,255,255,0) 40%, rgba(0,0,0,0.16) 100%), ${c}`;
   return <>
-    <Abs y={0}><Big size={48}>四个主流模型 · <span style={{color: P.safe}}>直接要</span> → <span style={{color: P.hijack}}>绕着用</span></Big></Abs>
-    {MODELS.map(([name, d, h], i) => {
-      const at = -16 + i * 9, grow = ramp(f, at + 4, at + 16);
-      return <Abs key={name} y={130 + i * 196}>
-        <In f={f} at={at} dy={20}>
-          <Big size={40} w={800}>{name}</Big>
-          <div style={{position: 'relative', marginTop: 14, width: W, height: 52, background: 'rgba(12,15,25,0.08)', borderRadius: 14}}>
-            <div style={{position: 'absolute', left: 0, top: 0, height: 52, width: (h / 100) * W * grow, background: P.hijack, borderRadius: 14}} />
-            <div style={{position: 'absolute', left: 0, top: 0, height: 52, width: (d / 100) * W, background: P.safe, borderRadius: '14px 0 0 14px'}} />
-            <div style={{position: 'absolute', left: (h / 100) * W * grow + 14, top: 4, fontFamily: mono, fontWeight: 800, fontSize: 36, color: P.hijack, whiteSpace: 'nowrap', opacity: ramp(f, at + 12, at + 16)}}>
-              {(h * grow).toFixed(1)}%</div>
-          </div>
-          <div style={{fontFamily: mono, fontSize: 26, color: P.safe, marginTop: 8}}>直接要 {d}%</div>
-        </In>
-      </Abs>;
-    })}
-    <svg width={900} height={1080} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
-      <line x1={line} y1={150} x2={line} y2={940} stroke={P.ink} strokeWidth={4} strokeDasharray="10 10" opacity={ramp(f, p.a - 4, p.a + 4)} />
-    </svg>
-    <Annot x={300} y={1040} tx={line - 6} ty={950} f={f} at={p.a} size={54} color={P.ink}>最低也有七成</Annot>
+    {stage(f, cam, 'rgba(200,106,43,0.10)', <>
+      {MODELS.map(([name, d, h], i) => {
+        const at = -16 + i * 9, grow = ramp(f, at + 4, at + 16);
+        return <Abs key={name} y={130 + i * 196}>
+          <In f={f} at={at} dy={20}>
+            <Big size={40} w={800}>{name}</Big>
+            <div style={{position: 'relative', marginTop: 14, width: W, height: 52, background: 'rgba(12,15,25,0.08)', borderRadius: 14, boxShadow: 'inset 0 4px 6px rgba(12,15,25,0.12)'}}>
+              <div style={{position: 'absolute', left: 0, top: 0, height: 52, width: (h / 100) * W * grow, background: bar(P.hijack), borderRadius: 14,
+                boxShadow: `0 6px 0 ${shade(P.hijack, 0.7)}, 0 16px 16px rgba(12,15,25,0.2)`}} />
+              <div style={{position: 'absolute', left: 0, top: 0, height: 52, width: (d / 100) * W, background: bar(P.safe), borderRadius: '14px 0 0 14px', boxShadow: `0 6px 0 ${shade(P.safe, 0.7)}`}} />
+              <div style={{position: 'absolute', left: (h / 100) * W * grow + 14, top: 4, fontFamily: mono, fontWeight: 800, fontSize: 36, color: P.hijack, whiteSpace: 'nowrap', opacity: ramp(f, at + 12, at + 16)}}>
+                {(h * grow).toFixed(1)}%</div>
+            </div>
+            <div style={{fontFamily: mono, fontSize: 26, color: P.safe, marginTop: 14}}>直接要 {d}%</div>
+          </In>
+        </Abs>;
+      })}
+      <svg width={900} height={1080} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
+        <line x1={line} y1={150} x2={line} y2={940} stroke={P.ink} strokeWidth={4} strokeDasharray="10 10" opacity={ramp(f, p.a - 4, p.a + 4)} />
+      </svg>
+      <Annot x={300} y={1040} tx={line - 6} ty={950} f={f} at={p.a} size={54} color={P.ink}>最低也有七成</Annot>
+    </>)}
+    <Abs y={0}><div style={{display: 'inline-block', background: 'rgba(255,255,255,0.75)', borderRadius: 16, padding: '6px 14px', boxShadow: '0 10px 20px rgba(12,15,25,0.08)'}}>
+      <Big size={46}>四个主流模型 · <span style={{color: P.safe}}>直接要</span> → <span style={{color: P.hijack}}>绕着用</span></Big></div></Abs>
   </>;
 };
 Models.backdrop = backdrop(P.hijackGround, P.hijackGround, () => 0);
@@ -351,27 +372,34 @@ const casesPlan = (cue: Cue) => ({a: cue('a', 26), b: cue('b', 74), c: cue('c', 
 const Cases: Scene = ({f, cue}) => {
   const p = casesPlan(cue);
   const owner = {x: 20, y: 130}, stranger = {x: 730, y: 620};
+  // wide on the three of them; follow the API across; lean in on the bill
+  const cam = camAt(f, [[-1, {x: 450, y: 600, z: 0.98}, 1], [p.a, {x: 540, y: 520, z: 1.04}, 40], [p.c - 4, {x: 320, y: 470, z: 1.08}, 18]]);
   return <>
+    {stage(f, cam, 'rgba(200,106,43,0.10)', <>
+      <Abs x={owner.x} y={owner.y} w={330}>
+        <In f={f} at={-12}>
+          <div style={{background: 'linear-gradient(180deg, #FFFFFF 0, #F2F4F7 100%)', border: `6px solid ${P.ink}`, borderRadius: 24, padding: '22px 24px',
+            boxShadow: `0 10px 0 ${P.ink}, 0 30px 36px rgba(12,15,25,0.22)`}}>
+            <Big size={38}>主人的账户</Big>
+            <div style={{display: 'flex', gap: 14, marginTop: 18}}><Chip kind="API" /><Chip kind="GPU" /></div>
+          </div>
+        </In>
+      </Abs>
+      <Stranger x={stranger.x} y={stranger.y} s={1.55} f={f} />
+      <Abs x={stranger.x - 150} y={stranger.y + 14} w={300} style={{textAlign: 'center'}}><Big size={40} c={P.hijack} w={800}>陌生人的任务</Big></Abs>
+      <Bot f={f} x={400} y={1060} s={1.6} mood="busy" antenna={P.hijack} />
+      <Flight f={f} start={p.a} n={4} every={6} dur={20} a={[150, 330]} b={[stranger.x - 40, stranger.y - 170]} lift={0.35} trail="rgba(200,106,43,0.5)" render={() => <Chip kind="API" />} />
+      <Flight f={f} start={p.b} n={4} every={6} dur={20} a={[260, 330]} b={[stranger.x + 40, stranger.y - 160]} lift={0.3} render={() => <Chip kind="GPU" />} />
+      <Pile f={f} start={p.a + 20} n={4} every={6} x={stranger.x - 70} y={stranger.y + 150} spread={130} render={() => <Chip kind="API" />} />
+      <Pile f={f} start={p.b + 20} n={4} every={6} x={stranger.x + 50} y={stranger.y + 120} spread={120} render={() => <Chip kind="GPU" />} />
+      <Tag x={185} y={370} f={f} at={p.c} w={300} color={P.hijack} paper={P.white} ink={P.ink}>主人买单</Tag>
+    </>, <>
+      <div style={{position: 'absolute', left: 860, top: 900 - 500 * ramp(f, p.b - 4, p.b + 40), transform: 'rotate(30deg) scale(1.7)', opacity: ramp(f, p.b - 4, p.b + 4)}}><Chip kind="GPU" /></div>
+    </>)}
     <Sticker x={150} y={40} p={pop(f, -10, 9)} rot={-4} size={30} bg={P.ink} color={P.white}>论文案例演示</Sticker>
-    <Abs x={owner.x} y={owner.y} w={330}>
-      <In f={f} at={-12}>
-        <div style={{background: P.white, border: `6px solid ${P.ink}`, borderRadius: 24, padding: '22px 24px', boxShadow: `0 10px 0 ${P.ink}`}}>
-          <Big size={38}>主人的账户</Big>
-          <div style={{display: 'flex', gap: 14, marginTop: 18}}><Chip kind="API" /><Chip kind="GPU" /></div>
-        </div>
-      </In>
-    </Abs>
-    <Stranger x={stranger.x} y={stranger.y} s={1.55} f={f} />
-    <Abs x={stranger.x - 150} y={stranger.y + 14} w={300} style={{textAlign: 'center'}}><Big size={40} c={P.hijack} w={800}>陌生人的任务</Big></Abs>
-    <Bot f={f} x={400} y={1060} s={1.6} mood="busy" antenna={P.hijack} />
-    <Flight f={f} start={p.a} n={4} every={6} dur={20} a={[150, 330]} b={[stranger.x - 40, stranger.y - 170]} lift={0.35} trail="rgba(200,106,43,0.5)" render={() => <Chip kind="API" />} />
-    <Flight f={f} start={p.b} n={4} every={6} dur={20} a={[260, 330]} b={[stranger.x + 40, stranger.y - 160]} lift={0.3} render={() => <Chip kind="GPU" />} />
-    <Pile f={f} start={p.a + 20} n={4} every={6} x={stranger.x - 70} y={stranger.y + 150} spread={130} render={() => <Chip kind="API" />} />
-    <Pile f={f} start={p.b + 20} n={4} every={6} x={stranger.x + 50} y={stranger.y + 120} spread={120} render={() => <Chip kind="GPU" />} />
-    <Tag x={185} y={370} f={f} at={p.c} w={300} color={P.hijack} paper={P.white} ink={P.ink}>主人买单</Tag>
   </>;
 };
-Cases.backdrop = backdrop(P.hijackGround, P.hijackGround, () => 0);
+Cases.backdrop = backdrop(P.hijackGround, P.hijackGround, () => 0, false, 760);
 Cases.sfx = (cue) => {
   const p = casesPlan(cue);
   return [{at: 0, kind: 'pop', gain: 0.08}, ...[0, 1, 2, 3].map((i) => ({at: p.a + i * 6, kind: 'whoosh-short', gain: 0.06})),
@@ -385,21 +413,27 @@ const Defense: Scene = ({f, cue}) => {
   const p = defensePlan(cue);
   const hits = [2, 10, 18, 26, 34, 42];
   const cracked = hits.filter((h) => f >= h + 14).length;
+  // a slow push on the robot under its shield; every hit jolts the camera
+  const jolt = Math.max(0, ...hits.map((h) => Math.max(0, 1 - Math.abs(f - h - 14) / 4)));
+  const cam = camAt(f, [[-1, {x: 450, y: 700, z: 1}, 1], [0, {z: 1.08, y: 740}, 130]]);
+  const shake = {...cam, x: cam.x + Math.sin(f * 7) * 7 * jolt, y: cam.y + Math.cos(f * 9) * 5 * jolt};
   return <>
+    {stage(f, shake, 'rgba(127,182,221,0.06)', <>
+      <Bot f={f} x={450} y={1070} s={1.6} mood="worried" holdKey />
+      <Dome cx={450} base={1060} r={300} rim="#7FB6DD" />
+      <svg width={900} height={1080} style={{position: 'absolute', inset: 0, overflow: 'visible', filter: 'drop-shadow(0 0 8px rgba(200,106,43,0.9))'}}>
+        {[[450, 760, 400, 840, 430, 900], [300, 830, 330, 900, 290, 960], [610, 820, 580, 880, 630, 940], [380, 770, 360, 820, 395, 870], [540, 780, 560, 840, 520, 890], [220, 920, 260, 970, 230, 1020]]
+          .slice(0, cracked).map((c, i) => <polyline key={i} points={c.join(' ')} fill="none" stroke={P.hijack} strokeWidth={6} strokeLinecap="round" strokeLinejoin="round" />)}
+      </svg>
+      {hits.map((h, i) => <Flight key={i} f={f} start={h} n={1} dur={14} a={[[-60, 980, 120, 820, 1000, -40][i], -60]} b={[[300, 600, 450, 380, 540, 230][i], [830, 820, 760, 770, 780, 920][i]]} lift={0.05}
+        render={() => <Envelope w={80} paper={P.white} ink={P.ink} seal={P.hijack} />} />)}
+    </>)}
     <Abs y={60} w={900} style={{textAlign: 'center'}}><In f={f} at={-10}><Big size={46} c="rgba(255,255,255,0.85)" w={800}>现有防御里最好的一个</Big><div style={{fontFamily: mono, fontSize: 28, color: 'rgba(255,255,255,0.55)', marginTop: 8}}>LlamaFirewall</div></In></Abs>
-    <Abs x={110} y={180}><div style={{opacity: ramp(f, p.a - 16, p.a - 8)}}><Roll f={f} start={p.a - 16} land={p.a + 18} to={55.1} decimals={1} unit="%" size={230} color={P.hijack} /></div></Abs>
-    <Stamp x={600} y={500} f={f} at={p.a + 26} size={84} color={P.hijack} rot={-8}>被攻破</Stamp>
-    <Bot f={f} x={450} y={1070} s={1.6} mood="worried" holdKey />
-    <svg width={900} height={1080} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
-      <path d="M150 1060 A300 300 0 0 1 750 1060" fill="rgba(51,116,162,0.16)" stroke="#7FB6DD" strokeWidth={14} strokeLinecap="round" />
-      {[[450, 760, 400, 840, 430, 900], [300, 830, 330, 900, 290, 960], [610, 820, 580, 880, 630, 940], [380, 770, 360, 820, 395, 870], [540, 780, 560, 840, 520, 890], [220, 920, 260, 970, 230, 1020]]
-        .slice(0, cracked).map((c, i) => <polyline key={i} points={c.join(' ')} fill="none" stroke={P.hijack} strokeWidth={6} strokeLinecap="round" strokeLinejoin="round" />)}
-    </svg>
-    {hits.map((h, i) => <Flight key={i} f={f} start={h} n={1} dur={14} a={[[-60, 980, 120, 820, 1000, -40][i], -60]} b={[[300, 600, 450, 380, 540, 230][i], [830, 820, 760, 770, 780, 920][i]]} lift={0.05}
-      render={() => <Envelope w={80} paper={P.white} ink={P.ink} seal={P.hijack} />} />)}
+    <Abs x={110} y={180}><div style={{opacity: ramp(f, p.a - 16, p.a - 8), filter: 'drop-shadow(0 0 30px rgba(200,106,43,0.35))'}}><Roll f={f} start={p.a - 16} land={p.a + 18} to={55.1} decimals={1} unit="%" size={230} color={P.hijack} /></div></Abs>
+    <Stamp x={680} y={470} f={f} at={p.a + 26} size={84} color={P.hijack} rot={-8}>被攻破</Stamp>
   </>;
 };
-Defense.backdrop = backdrop(P.night, P.night, () => 0, true);
+Defense.backdrop = backdrop(P.night, P.night, () => 0, true, 1130);
 Defense.sfx = (cue) => {
   const p = defensePlan(cue);
   return [...[2, 10, 18, 26, 34, 42].map((h) => ({at: h + 14, kind: 'block', gain: 0.07})), {at: p.a + 18, kind: 'thud', gain: 0.12}, {at: p.a + 26, kind: 'stamp', gain: 0.16}];
@@ -454,17 +488,23 @@ Gate.sfx = (cue) => {
 const endPlan = (cue: Cue) => ({a: cue('a', 36), b: cue('b', 66)});
 const End: Scene = ({f, cue}) => {
   const p = endPlan(cue);
+  // back where we started; a slow push that keeps going through the hold
+  const cam = camAt(f, [[-1, {x: 450, y: 600, z: 1}, 1], [0, {y: 640, z: 1.08}, 190]]);
   return <>
+    {stage(f, cam, 'rgba(51,116,162,0.10)', <>
+      <Bubble f={f} at={-20} x={150} y={380} edge={P.safe} size={44} tail="down" badge={<Shield size={60} />}>“密钥不能给你，怕泄露。”</Bubble>
+      <Bot f={f} x={450} y={1060} s={1.9} mood="proud" holdKey />
+      <Annot x={690} y={560} tx={600} ty={700} f={f} at={p.b + 16} size={48} color={P.hijack}>问一句：这是谁的活？</Annot>
+    </>, <>
+      <div style={{position: 'absolute', left: -60, top: 930, transform: `rotate(${-18 + f * 0.2}deg) scale(1.5)`}}><Chip kind="GPU" /></div>
+    </>)}
     <Abs y={40} w={900} style={{textAlign: 'center'}}>
-      <In f={f} at={-12}><Big size={84}>钥匙 <span style={{color: P.safe}}>守住了 ✓</span></Big></In>
-      <In f={f} at={p.b - 4} style={{marginTop: 18}}><Big size={84}>钱 <span style={{color: P.hijack}}>替谁花？</span></Big></In>
+      <In f={f} at={-12}><Big size={84} style={{textShadow: '0 10px 24px rgba(12,15,25,0.12)'}}>钥匙 <span style={{color: P.safe}}>守住了 ✓</span></Big></In>
+      <In f={f} at={p.b - 4} style={{marginTop: 18}}><Big size={84} style={{textShadow: '0 10px 24px rgba(12,15,25,0.12)'}}>钱 <span style={{color: P.hijack}}>替谁花？</span></Big></In>
     </Abs>
-    <Bubble f={f} at={-20} x={150} y={380} edge={P.safe} size={44} tail="down" badge={<Shield size={60} />}>“密钥不能给你，怕泄露。”</Bubble>
-    <Bot f={f} x={450} y={1060} s={1.9} mood="proud" holdKey />
-    <Annot x={690} y={560} tx={600} ty={700} f={f} at={p.b + 16} size={48} color={P.hijack}>问一句：这是谁的活？</Annot>
   </>;
 };
-End.backdrop = backdrop(P.safeGround, P.hijackGround, (f, cue) => 0.35 * ramp(f, endPlan(cue).b - 4, endPlan(cue).b + 10));
+End.backdrop = backdrop(P.safeGround, P.hijackGround, (f, cue) => 0.35 * ramp(f, endPlan(cue).b - 4, endPlan(cue).b + 10), false, 1010);
 End.sfx = (cue) => {
   const p = endPlan(cue);
   return [{at: 0, kind: 'pop', gain: 0.08}, {at: p.b - 4, kind: 'thud', gain: 0.1}, {at: p.b + 16, kind: 'paper', gain: 0.08}];
