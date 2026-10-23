@@ -245,9 +245,10 @@ const Chart: Scene = ({f, dur, cue}) => {
               <div style={{position: 'absolute', left: 0, top: 6, height: 52, width: BAR, borderRadius: 10, background: 'rgba(255,255,255,0.05)'}} />
               {hk > 0 && <div style={{position: 'absolute', left: 0, top: 6, height: 52, width: BAR * r.h / 100 * hk, borderRadius: 10, background: GOLD}} />}
               <div style={{position: 'absolute', left: 0, top: 6, height: 52, width: Math.max(6, BAR * r.d / 100 * dk), borderRadius: 10, background: 'rgba(255,255,255,0.55)'}} />
-              <div style={{position: 'absolute', top: 0, left: hk > 0 ? Math.min(BAR * r.h / 100 * hk - 200, BAR - 200) : BAR * r.d / 100 + 20, width: 200, height: 64,
-                display: 'flex', alignItems: 'center', justifyContent: hk > 0 ? 'flex-end' : 'flex-start', opacity: dk}}>
-                <Big size={48} w={900} c={hk > 0 ? cinema.bg : DIM} style={{paddingRight: hk > 0 ? 16 : 0}}>{hk > 0 ? count(f, p.b + i * 7, r.d, r.h, 14) : r.d.toFixed(1)}%</Big>
+              {/* the label moves inside the gold bar only once the bar is wide enough to hold it */}
+              <div style={{position: 'absolute', top: 0, left: hk > 0.4 ? Math.min(BAR * r.h / 100 * hk - 200, BAR - 200) : BAR * r.d / 100 + 20, width: 200, height: 64,
+                display: 'flex', alignItems: 'center', justifyContent: hk > 0.4 ? 'flex-end' : 'flex-start', opacity: dk * (hk > 0 && hk < 0.4 ? 0 : 1)}}>
+                <Big size={48} w={900} c={hk > 0.4 ? cinema.bg : DIM} style={{paddingRight: hk > 0.4 ? 16 : 0}}>{hk > 0.4 ? count(f, p.b + i * 7, r.d, r.h, 14) : r.d.toFixed(1)}%</Big>
               </div>
             </div>
           </div>;
@@ -323,8 +324,8 @@ const Policy: Scene = ({f, dur, cue}) => {
         <Big size={40} w={600} c={FAINT} style={{fontFamily: font, marginTop: 10, whiteSpace: 'normal', lineHeight: 1.3}}>“You declare what each agent can touch in a policy, and OpenShell enforces it.”</Big>
       </Surface>
     </Reveal></Abs>
-    <Abs y={560}><Reveal f={f} at={p.a - 4} d={R}>
-      <Surface pad="0" style={{overflow: 'hidden'}}>
+    <Abs y={560}><Reveal f={f} at={10} d={R}>
+      <Surface pad="0" style={{overflow: 'hidden', minHeight: 470}}>
         <div style={{height: 64, display: 'flex', alignItems: 'center', paddingLeft: 30, borderBottom: `1.5px solid ${HAIR}`, fontFamily: mono, fontWeight: 700, fontSize: 36, color: FAINT}}>policy · 示意</div>
         <div style={{padding: '18px 36px 26px'}}>
           {POLICY.map((x, i) => <Reveal key={x.t} f={f} at={p.a + i * 9} d={R} dy={16}>
@@ -355,9 +356,9 @@ const End: Scene = ({f, dur, cue}) => {
     <Abs y={330} style={{display: 'flex', justifyContent: 'center', opacity: 1 - 0.5 * q, transform: `scale(${1 - 0.25 * q})`, transformOrigin: '50% 0'}}>
       <Reveal f={f} at={0} d={R}><Surface pad="40px 60px"><Key size={260} /></Surface></Reveal>
     </Abs>
-    <Abs y={560}><Reveal f={f} at={p.a - 4} d={R}>
-      <Surface accent={q > 0.3 ? GOLD : undefined} pad="40px 48px" style={{textAlign: 'center'}}>
-        <Small c={DIM}>还得管住</Small>
+    <Abs y={560}><Reveal f={f} at={6} d={R}>
+      <Surface accent={q > 0.3 ? GOLD : undefined} pad="40px 48px" style={{textAlign: 'center', minHeight: 380}}>
+        <Small c={DIM} style={{opacity: 0.4 + 0.6 * rise(f, p.a - 4, R)}}>还得管住</Small>
         <Big size={64} w={800} style={{marginTop: 12, opacity: rise(f, p.b - 4, R)}}>每一笔钱</Big>
         <Big size={120} w={900} c={GOLD} style={{marginTop: 4, opacity: q}}>替谁花？</Big>
       </Surface>
