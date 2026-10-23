@@ -103,7 +103,7 @@ const FakePic: React.FC<{w: number; lens?: Spot; lensOn?: number; badge?: boolea
 
 /* ---------- 1 hook: the earthquake, calmly ---------- */
 
-const hookPlan = (cue: Cue) => ({a: cue('a', 50), b: cue('b', 147)});
+const hookPlan = (cue: Cue) => ({a: cue('a', 50), c: cue('c', 95), b: cue('b', 147)});
 const Rings: React.FC<{f: number; calm: number}> = ({f, calm}) => (
   <svg width={900} height={520} viewBox="-450 -260 900 520" style={{display: 'block', overflow: 'visible'}}>
     {/* flattened rings on the ground plane, spreading out slowly from the epicentre */}
@@ -119,16 +119,24 @@ const Rings: React.FC<{f: number; calm: number}> = ({f, calm}) => (
 );
 const Hook: Scene = ({f, dur, cue}) => {
   const p = hookPlan(cue);
-  const calm = rise(f, p.b, 30);
-  return <Stage f={f} dur={dur} beats={[p.a]}>
+  const calm = rise(f, p.b, 30), measured = rise(f, p.c - 2, 18);
+  return <Stage f={f} dur={dur} beats={[p.a, p.c]}>
     <Pool x={450} y={760} o={0.12 + 0.06 * calm} />
     <Abs y={0}><Headline f={f} at={-20} kicker="10月22日 22:33" lines={['西藏巴青', <span key="2">{gold('7.0')}级地震</span>]} size={124} /></Abs>
     <Abs y={360}><Reveal f={f} at={-6} d={R} dy={12}><Small c={DIM}>信息以中国地震台网为准</Small></Reveal></Abs>
-    <Abs y={470}><Reveal f={f} at={-4} d={R}><Rings f={f} calm={calm} /></Reveal></Abs>
-    <Abs y={1000} style={{textAlign: 'center'}}><Reveal f={f} at={p.a + 4} d={R} dy={10}><Small c={FAINT}>北纬32.40° · 东经93.79°</Small></Reveal></Abs>
+    {/* the rings rise and shrink a little to make room for the measurement when 「7.0级」 is said */}
+    <Abs y={470} style={{transform: `translateY(${-70 * measured}px) scale(${1 - 0.18 * measured})`, transformOrigin: '50% 0'}}><Reveal f={f} at={-4} d={R}><Rings f={f} calm={calm} /></Reveal></Abs>
+    <Abs y={1000} style={{textAlign: 'center', opacity: 1 - measured}}><Reveal f={f} at={p.a + 4} d={R} dy={10}><Small c={FAINT}>北纬32.40° · 东经93.79°</Small></Reveal></Abs>
+    <Abs x={90} y={790} w={720}><Reveal f={f} at={p.c - 2} d={18} dy={40}>
+      <Surface pad="22px 36px" style={{textAlign: 'center'}}>
+        <Small c={FAINT}>中国地震台网测定</Small>
+        <Big size={52} w={800} style={{marginTop: 8}}>震源深度 {gold('10')} 千米</Big>
+        <Small c={DIM} style={{marginTop: 6}}>北纬32.40° · 东经93.79°</Small>
+      </Surface>
+    </Reveal></Abs>
   </Stage>;
 };
-Hook.sfx = () => [{at: 0, kind: 'chime', gain: 0.08}];
+Hook.sfx = (cue) => [{at: 0, kind: 'chime', gain: 0.08}, {at: hookPlan(cue).c, kind: 'tick', gain: 0.05}];
 
 /* ---------- 2 the feed fills with "disaster pictures" ---------- */
 

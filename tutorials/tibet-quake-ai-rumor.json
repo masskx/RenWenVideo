@@ -33,7 +33,7 @@
   },
   "scenes": [
     {"id": "hook", "visual": "tqr.hook", "step": 0, "pace": 1.16,
-      "narration": "10月22日晚，{a}西藏[那曲|那区]巴青县发生[7.0级|七点零级]地震，{b}愿灾区平安。"},
+      "narration": "10月22日晚，{a}西藏[那曲|那区]巴青县发生{c}[7.0级|七点零级]地震，{b}愿灾区平安。"},
     {"id": "feed", "visual": "tqr.feed", "step": 0, "pace": 1.22,
       "narration": "这种时候，{a}网上会出现很多“灾情图”和视频，{b}有些是AI生成的。{c}教你三招先辨一辨。"},
     {"id": "detail", "visual": "tqr.detail", "step": 0, "pace": 1.22,
