@@ -1,0 +1,18 @@
+2026-10-23 10:34 马飞龙 已批准开工：写正式抖音剧本+找视频/图片素材（30-40s，纯辨假，不引流）
+2026-10-23 10:34 | Eko | board.csv 已写入 slug=tibet-quake-ai-rumor，状态=已批准待制作；outline 已入库
+2026-10-23 10:36 Asia/Taipei | 小晚 | 脚本完成
+
+2026-10-23 10:37 Asia/Taipei | Eko | 审稿通过：script.md 事实与合规复核 OK；review.md 已写
+2026-10-23 10:38 Asia/Taipei | 小晚 | 按review建议Shot5伤亡改灾情
+2026-10-23 10:43 Asia/Taipei | 小晚 | 已推送 GitHub branch=inputs/tibet-quake-ai-rumor commit=c232c5f（vs main 仅新增 4 文件：script/sources/assets/README）
+
+2026-10-23 10:43 Asia/Taipei | Eko | 核实 GitHub：inputs/tibet-quake-ai-rumor @ c232c5f；Shot5「灾情」已在远端 script
+
+2026-10-23 11:07 Asia/Taipei | Eko | 成片已拷到 G:\剪辑\成片\tibet-quake-ai-rumor\（video.mp4 + cover）
+2026-10-23 11:18 Asia/Taipei | 小晚 | 按新规矩生成4张AI示意配图并写入assets
+
+2026-10-23 11:18 Asia/Taipei | Eko | 小晚已按缺素材规矩补 4 张 AI 示意配图到 assets/
+2026-10-23 11:19 Asia/Taipei | 小晚 | 更新推送 branch=inputs/tibet-quake-ai-rumor commit=24261aa（4 stills + assets.md/script.md；parent=c232c5f，无 force）
+
+2026-10-23 11:20 Asia/Taipei | Eko | 核实 GitHub：示意配图已推 inputs/tibet-quake-ai-rumor @ 24261aa
+2026-10-23 11:24 Asia/Taipei | 小晚 | 按澄清补1:1封面cover_1x1.jpg
