@@ -48,3 +48,9 @@ When no suitable live B-roll exists, use these as the **optimal choice**:
 - Shot 3: `assets/ai_fake_example_schematic.jpg` (keep 「AI生成示例」 visible entire shot)
 - Shot 4: `assets/reverse_image_search_demo.jpg`
 - Shot 5: `assets/official_name_cards.jpg`
+
+## Cover (1:1)
+
+- File: `assets/cover_1x1.jpg`
+- **无合适素材时封面用此图为最优选择**
+- In-shot schematics (map / fake-example / reverse-search / official cards) are optional Remotion helpers, not the cover rule.
