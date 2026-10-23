@@ -14,6 +14,11 @@ out/
 .env.*
 !.env.example
 public/fonts/*
+# OFL fonts the repo ships (src/tutorial/fonts.ts); anything else dropped in public/fonts stays local
+!public/fonts/NotoSerifSC-Black.otf
+!public/fonts/NotoSerifSC-Bold.otf
+!public/fonts/LXGWWenKai-Medium.ttf
+!public/fonts/OFL-*.txt
 __pycache__/
 
 # Cover thumbnail sheets from scripts/qa/cover.mjs are reproducible.
