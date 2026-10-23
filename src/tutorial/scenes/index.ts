@@ -30,6 +30,7 @@ import {aiSameTakeOnHumansScenes} from './ai-same-take-on-humans';
 import {tibetQuakeAiRumorScenes} from './tibet-quake-ai-rumor';
 import {vibeKnowledgeDouyinScenes} from './vibe-knowledge-douyin';
 import {agentComputeHijackV2Scenes} from './agent-compute-hijack-v2';
+import {agentComputeHijackV3Scenes} from './agent-compute-hijack-v3';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -66,4 +67,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...tibetQuakeAiRumorScenes,
   ...vibeKnowledgeDouyinScenes,
   ...agentComputeHijackV2Scenes,
+  ...agentComputeHijackV3Scenes,
 };

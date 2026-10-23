@@ -319,11 +319,53 @@ export const Meter: React.FC<{x: number; y: number; w: number; f: number; a: num
  * Two grounds and `k` 0 → 1 between them: 底色就是情绪 (Xian) — flip the ground on the turn (huashu colour §7), e.g. the
  * paper's "safe" blue world to its "hijacked" orange world. `light` is the falloff colour (default white).
  */
-export const Ground: React.FC<{a?: string; b?: string; k?: number; w?: number; h?: number; light?: string; t?: number}> = ({a = TONE.paper, b = TONE.night, k = 0, w = 1080, h = 1920, light = 'rgba(255,255,255,0.55)', t = 0}) => (
+export const Ground: React.FC<{a?: string; b?: string; k?: number; w?: number; h?: number; light?: string; t?: number; horizon?: number; grain?: number}> = ({
+  a = TONE.paper, b = TONE.night, k = 0, w = 1080, h = 1920, light = 'rgba(255,255,255,0.55)', t = 0, horizon, grain = 0.5,
+}) => (
   <div style={{position: 'absolute', left: 0, top: 0, width: w, height: h, overflow: 'hidden', background: a}}>
     {k > 0.001 && <div style={{position: 'absolute', inset: 0, background: b, opacity: clamp(k)}} />}
     <div style={{position: 'absolute', inset: 0, background: `radial-gradient(ellipse 85% 55% at ${50 + 4 * Math.sin(t / 5)}% 36%, ${light}, transparent 72%)`}} />
+    {/* a floor: below the horizon the ground darkens a step and fades into the distance, so things stand on something */}
+    {horizon !== undefined && <div style={{position: 'absolute', left: 0, right: 0, top: horizon, bottom: 0,
+      background: 'linear-gradient(180deg, rgba(0,0,0,0.05) 0, rgba(0,0,0,0.085) 6%, rgba(0,0,0,0.04) 45%, rgba(0,0,0,0.02) 100%)',
+      boxShadow: '0 -1px 0 rgba(255,255,255,0.5)'}} />}
     <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 120% 90% at 50% 45%, transparent 60%, rgba(0,0,0,0.10) 100%)'}} />
-    <div style={{position: 'absolute', inset: 0, opacity: 0.5, backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.025) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgba(0,0,0,0.02) 0 1px, transparent 1px 4px)'}} />
+    {grain > 0 && <Grain w={w} h={h} o={grain} seed={Math.floor(t * 12) % 4} />}
   </div>
 );
+
+/** Paper grain: fine noise over the whole frame (a few still variations cycled slowly, so it lives without flickering). */
+export const Grain: React.FC<{w: number; h: number; o?: number; seed?: number}> = ({w, h, o = 0.5, seed = 0}) => (
+  <svg width={w} height={h} style={{position: 'absolute', inset: 0, opacity: 0.22 * o, mixBlendMode: 'multiply'}}>
+    <filter id={`grain${seed}`}><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves={2} seed={seed + 3} stitchTiles="stitch" /><feColorMatrix type="saturate" values="0" /></filter>
+    <rect width={w} height={h} filter={`url(#grain${seed})`} />
+  </svg>
+);
+
+/** A soft contact shadow under something standing at (x, y): darker and tighter the closer it sits to the floor. */
+export const ContactShadow: React.FC<{x: number; y: number; w: number; lift?: number; o?: number}> = ({x, y, w, lift = 0, o = 0.28}) => (
+  <div style={{position: 'absolute', left: x - (w * (1 + lift * 0.4)) / 2, top: y - w * 0.07, width: w * (1 + lift * 0.4), height: w * 0.14, borderRadius: '50%',
+    background: `rgba(12,15,25,${o * (1 - Math.min(0.7, lift * 0.5))})`, filter: `blur(${8 + lift * 10}px)`}} />
+);
+
+/**
+ * A 2D camera (平面运镜): keys [frame, {x, y, z}] with x / y the stage point to centre and z the zoom; each key eases in
+ * over `d` frames from where the camera is. Layers read it with a depth — far things move less, near things more —
+ * which is what makes a flat drawing feel like a space (parallax), with no 3D engine (user, 2026-10-23: 2D first).
+ */
+export type Cam2 = {x: number; y: number; z: number};
+export const camAt = (f: number, keys: [number, Partial<Cam2>, number?][], base: Cam2 = {x: 450, y: 540, z: 1}): Cam2 => {
+  let c = {...base};
+  for (const [at, to, d = 20] of keys) {
+    const p = ease.inOutCubic(clamp((f - at) / Math.max(1, d)));
+    if (p <= 0) continue;
+    c = {x: c.x + ((to.x ?? c.x) - c.x) * p, y: c.y + ((to.y ?? c.y) - c.y) * p, z: c.z + ((to.z ?? c.z) - c.z) * p};
+  }
+  return c;
+};
+/** One depth layer of the stage (900 × 1080): depth 0 = fixed far backdrop, 1 = the subject plane, > 1 = in front. */
+export const Layer: React.FC<{cam: Cam2; depth: number; blur?: number; children: React.ReactNode}> = ({cam, depth, blur = 0, children}) => {
+  const z = 1 + (cam.z - 1) * depth, dx = (450 - cam.x) * depth, dy = (540 - cam.y) * depth;
+  return <div style={{position: 'absolute', left: 0, top: 0, width: 900, height: 1080, transformOrigin: '450px 540px',
+    transform: `translate(${dx.toFixed(2)}px, ${dy.toFixed(2)}px) scale(${z.toFixed(4)})`, filter: blur ? `blur(${blur}px)` : undefined}}>{children}</div>;
+};
