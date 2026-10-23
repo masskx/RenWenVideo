@@ -1,0 +1,218 @@
+{
+  "id": "tibet-quake-ai-rumor",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1148,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/tibet-quake-ai-rumor/01-hook.mp3",
+      "audioMs": 5904,
+      "startFrame": 0,
+      "durationFrames": 184,
+      "cues": {
+        "a": 1683,
+        "c": 3689,
+        "b": 4912
+      },
+      "captions": [
+        {
+          "text": "10月22日晚",
+          "startMs": 555,
+          "endMs": 1683
+        },
+        {
+          "text": "西藏那曲巴青县发生7.0级地震",
+          "startMs": 1683,
+          "endMs": 4912
+        },
+        {
+          "text": "愿灾区平安",
+          "startMs": 4912,
+          "endMs": 6102
+        }
+      ]
+    },
+    {
+      "id": "feed",
+      "audioSrc": "audio/tutorials/tibet-quake-ai-rumor/02-feed.mp3",
+      "audioMs": 6322,
+      "startFrame": 184,
+      "durationFrames": 196,
+      "cues": {
+        "a": 1229,
+        "b": 3584,
+        "c": 4986
+      },
+      "captions": [
+        {
+          "text": "这种时候",
+          "startMs": 405,
+          "endMs": 1229
+        },
+        {
+          "text": "网上会出现很多“灾情图”",
+          "startMs": 1229,
+          "endMs": 2879
+        },
+        {
+          "text": "和视频",
+          "startMs": 2879,
+          "endMs": 3584
+        },
+        {
+          "text": "有些是AI生成的",
+          "startMs": 3584,
+          "endMs": 4986
+        },
+        {
+          "text": "教你三招先辨一辨",
+          "startMs": 4986,
+          "endMs": 6231
+        }
+      ]
+    },
+    {
+      "id": "detail",
+      "audioSrc": "audio/tutorials/tibet-quake-ai-rumor/03-detail.mp3",
+      "audioMs": 6034,
+      "startFrame": 380,
+      "durationFrames": 188,
+      "cues": {
+        "a": 1606,
+        "b": 2803,
+        "c": 3793,
+        "d": 4858
+      },
+      "captions": [
+        {
+          "text": "第一，看细节",
+          "startMs": 355,
+          "endMs": 1606
+        },
+        {
+          "text": "文字招牌乱码",
+          "startMs": 1606,
+          "endMs": 2803
+        },
+        {
+          "text": "人手手指不对",
+          "startMs": 2803,
+          "endMs": 3793
+        },
+        {
+          "text": "建筑结构扭曲",
+          "startMs": 3793,
+          "endMs": 4858
+        },
+        {
+          "text": "AI图常露馅",
+          "startMs": 4858,
+          "endMs": 6312
+        }
+      ]
+    },
+    {
+      "id": "search",
+      "audioSrc": "audio/tutorials/tibet-quake-ai-rumor/04-search.mp3",
+      "audioMs": 6060,
+      "startFrame": 568,
+      "durationFrames": 188,
+      "cues": {
+        "a": 1586,
+        "b": 3163,
+        "c": 4206,
+        "d": 5204
+      },
+      "captions": [
+        {
+          "text": "第二，搜来源",
+          "startMs": 355,
+          "endMs": 1586
+        },
+        {
+          "text": "截图用以图搜图",
+          "startMs": 1586,
+          "endMs": 3163
+        },
+        {
+          "text": "看最早出处",
+          "startMs": 3163,
+          "endMs": 4206
+        },
+        {
+          "text": "是不是旧图",
+          "startMs": 4206,
+          "endMs": 5204
+        },
+        {
+          "text": "别的地方的图",
+          "startMs": 5204,
+          "endMs": 5909
+        }
+      ]
+    },
+    {
+      "id": "official",
+      "audioSrc": "audio/tutorials/tibet-quake-ai-rumor/05-official.mp3",
+      "audioMs": 7393,
+      "startFrame": 756,
+      "durationFrames": 228,
+      "cues": {
+        "a": 1678,
+        "b": 2378,
+        "c": 2957,
+        "d": 3701,
+        "e": 5151,
+        "f": 6074
+      },
+      "captions": [
+        {
+          "text": "第三，对官方",
+          "startMs": 335,
+          "endMs": 1678
+        },
+        {
+          "text": "震级、位置",
+          "startMs": 1678,
+          "endMs": 2957
+        },
+        {
+          "text": "灾情，只认中国地震台网",
+          "startMs": 2957,
+          "endMs": 5151
+        },
+        {
+          "text": "应急管理部和权威媒体的通报",
+          "startMs": 5151,
+          "endMs": 7275
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/tibet-quake-ai-rumor/06-end.mp3",
+      "audioMs": 3840,
+      "startFrame": 984,
+      "durationFrames": 164,
+      "cues": {
+        "a": 1620,
+        "b": 2371
+      },
+      "captions": [
+        {
+          "text": "拿不准的内容",
+          "startMs": 475,
+          "endMs": 1620
+        },
+        {
+          "text": "不转发，就是最简单的帮忙",
+          "startMs": 1620,
+          "endMs": 3611
+        }
+      ]
+    }
+  ]
+}
