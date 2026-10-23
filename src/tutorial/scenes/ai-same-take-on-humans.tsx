@@ -266,7 +266,8 @@ const Why: Scene = ({f, dur, cue}) => {
       <Big size={64} w={800} c={strike > 0.5 ? FAINT : INK}>不是 <span style={{position: 'relative', display: 'inline-block'}}>AI 有了想法
         <span style={{position: 'absolute', left: -6, right: -6, top: '54%', height: 6, borderRadius: 3, background: INK, transform: `scaleX(${strike})`, transformOrigin: 'left'}} /></span></Big>
     </Reveal></Abs>
-    <Abs y={340}><Reveal f={f} at={p.c - 6} d={R}>
+    {/* the diagram is there from the question on (dim), and comes alive on 「相似的人类文字」 */}
+    <Abs y={340} style={{opacity: 0.45 + 0.55 * rise(f, p.c - 6, R), transform: `scale(${0.94 + 0.06 * rise(f, p.c - 6, R)})`, transformOrigin: '50% 0'}}><Reveal f={f} at={2} d={R}>
       <Surface pad="30px 34px" style={{display: 'flex', alignItems: 'center', gap: 24, position: 'relative'}}>
         <div style={{textAlign: 'center'}}><Pages /><Small style={{marginTop: 12}}>相似的人类文字</Small></div>
         <div style={{flex: 1, position: 'relative', height: 40}}>
