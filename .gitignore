@@ -18,6 +18,10 @@ public/fonts/*
 !public/fonts/NotoSerifSC-Black.otf
 !public/fonts/NotoSerifSC-Bold.otf
 !public/fonts/LXGWWenKai-Medium.ttf
+!public/fonts/NotoSansSC-VF.otf
+!public/fonts/NotoSansSC-500.otf
+!public/fonts/NotoSansSC-700.otf
+!public/fonts/NotoSansSC-900.otf
 !public/fonts/OFL-*.txt
 __pycache__/
 

@@ -30,24 +30,29 @@ import puppeteer from 'puppeteer-core';
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CHROME = process.env.PAGE_CHROME || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
 const FONT_FALLBACK = process.env.PAGE_FONT_FALLBACK || '/root/.local/share/fonts/NotoSansCJKsc-VF.otf';
-// Static weights of the fallback (a variable font loaded through FontFace without a weight renders Regular, so a page asking
-// for NotoSansSC-900.woff got thin type). Made once per container with fontTools:
-//   pip install fonttools && for w in 400 500 700 800 900; do python3 -m fontTools.varLib.instancer \
-//     /root/.local/share/fonts/NotoSansCJKsc-VF.otf wght=$w -o /root/.cache/page-render-fonts/NotoSansCJKsc-$w.otf; done
-// Serif requests get the repo's 思源宋体 (public/fonts). Without the cache the variable font is served as before.
-const FONT_DIR = process.env.PAGE_FONT_DIR || '/root/.cache/page-render-fonts';
+// A missing font gets a static weight of 思源黑体 that matches its file name (a variable font loaded through FontFace without
+// a weight renders Regular, so a page asking for NotoSansSC-900.woff got thin type). The weights ship with the repo
+// (public/fonts/NotoSansSC-500/700/900.otf, OFL, GB2312 subset), so every container renders the same; serif requests get
+// the repo's 思源宋体. PAGE_FONT_DIR can point at full static instances instead (NotoSansCJKsc-<weight>.otf).
+const FONT_DIR = process.env.PAGE_FONT_DIR;
 const WEIGHTS = {thin: 100, extralight: 200, light: 300, regular: 400, normal: 400, medium: 500, semibold: 600, demibold: 600, bold: 700, extrabold: 800, heavy: 800, black: 900};
 const fallbackFor = (file) => {
   const name = path.basename(file).toLowerCase();
   const w = +(name.match(/[-_ ]([1-9]00)\b/)?.[1] ?? Object.entries(WEIGHTS).sort((a, b) => b[0].length - a[0].length).find(([k]) => name.includes(k))?.[1] ?? 400);
+  const fonts = path.join(REPO, 'public/fonts');
   if (/serif|song|ming|garamond|baskerville|cinzel|playfair/.test(name)) {
-    const serif = path.join(REPO, 'public/fonts', w >= 800 ? 'NotoSerifSC-Black.otf' : 'NotoSerifSC-Bold.otf');
+    const serif = path.join(fonts, w >= 800 ? 'NotoSerifSC-Black.otf' : 'NotoSerifSC-Bold.otf');
     if (fs.existsSync(serif)) return serif;
   }
-  const have = [400, 500, 700, 800, 900].filter((k) => fs.existsSync(path.join(FONT_DIR, `NotoSansCJKsc-${k}.otf`)));
-  if (!have.length) return FONT_FALLBACK;
-  const best = have.reduce((a, b) => (Math.abs(b - w) < Math.abs(a - w) ? b : a));
-  return path.join(FONT_DIR, `NotoSansCJKsc-${best}.otf`);
+  if (FONT_DIR) {
+    const have = [400, 500, 700, 800, 900].filter((k) => fs.existsSync(path.join(FONT_DIR, `NotoSansCJKsc-${k}.otf`)));
+    if (have.length) return path.join(FONT_DIR, `NotoSansCJKsc-${have.reduce((a, b) => (Math.abs(b - w) < Math.abs(a - w) ? b : a))}.otf`);
+  }
+  if (w >= 450) {
+    const best = [500, 700, 900].reduce((a, b) => (Math.abs(b - w) < Math.abs(a - w) ? b : a));
+    if (fs.existsSync(path.join(fonts, `NotoSansSC-${best}.otf`))) return path.join(fonts, `NotoSansSC-${best}.otf`);
+  }
+  return fs.existsSync(FONT_FALLBACK) ? FONT_FALLBACK : path.join(fonts, 'NotoSansSC-VF.otf');
 };
 const OM_ENGINE = path.join(REPO, 'docs/video-craft/prompt-library/code/alchaincyf__huashu-motion/52467f9/runtime/om-engine.js');
 const argv = process.argv.slice(2);
@@ -79,7 +84,7 @@ const server = http.createServer((req, res) => {
   if (fs.existsSync(p) && fs.statSync(p).isDirectory()) p = path.join(p, 'index.html');
   // A missing font file (reference repos often leave licensed fonts out) gets a CJK fallback instead of a 404, so
   // document.fonts.load() resolves and the page still renders; the lettering then differs from the original.
-  if (!fs.existsSync(p) && /\.(ttf|otf|woff2?)$/i.test(p) && fs.existsSync(FONT_FALLBACK)) {
+  if (!fs.existsSync(p) && /\.(ttf|otf|woff2?)$/i.test(p)) {
     const sub = fallbackFor(p);
     console.log(`[font fallback] ${u.pathname} → ${path.basename(sub)}`);
     res.writeHead(200, {'Content-Type': 'font/otf'});

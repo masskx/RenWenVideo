@@ -1,4 +1,5 @@
 import './index.css';
+import './tutorial/fonts'; // repo fonts (public/fonts) for every composition
 import {Composition, Still} from 'remotion';
 import {ArticleExplainer, ExplainerTimeline} from './ArticleExplainer';
 import {TutorialCover, TutorialCoverCard, TutorialVideo} from './tutorial/TutorialVideo';
