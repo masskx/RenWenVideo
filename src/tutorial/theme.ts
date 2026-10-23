@@ -1,4 +1,6 @@
-export const font = '"Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif';
+// "RW Sans" is the repo's own copy (public/fonts, loaded by src/tutorial/fonts.ts), so a container without the system font
+// still renders the same face.
+export const font = '"Noto Sans CJK SC", "RW Sans", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif';
 export const mono = '"JetBrains Mono", "DejaVu Sans Mono", Menlo, Consolas, monospace';
 
 export const color = {

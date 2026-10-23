@@ -14,6 +14,10 @@ Input is **an idea plus material** (user, 2026-10-23: "from now on I'll only pro
 
 ## Workflow
 
+**New session or container: run `npm run doctor` first** (dependencies, render browser, voice keys present, repo fonts, branch up to date with `main`); fix what it lists, then read the docs below. Everything learned so far lives in the repo (docs, `经验.md`, components), not in any session's memory.
+
+**Where we are (2026-10-23):** baseline film `douyin/agent-compute-hijack-v3` (user score 7, "及格了，之后做片再慢慢优化"); v2 scored 6 ("still too flat"). Knowledge videos are **2D first** (user: "像我这种只是分享知识的，还是优先在 2D 层面优化比较好"; no 3D engine unless asked). Start every new film from the v3 approach: props (`src/tutorial/props.tsx`) plus the 2D depth kit — lit drawings, floor line and grain (`Ground horizon/grain`), `ContactShadow`, a 2D camera (`camAt`) and parallax `Layer`s; see `src/tutorial/scenes/agent-compute-hijack-v3.tsx`. Next thing to improve: the characters act (v3's robot only floats).
+
 Method: `docs/video-craft/导演方法.md` (built from the eight Opus-video repos, huashu-motion and Xian's 梵高 explainer; notes and "where each lesson is enforced" in `docs/video-craft/学习/README.md`). Read `docs/video-craft/经验.md` before each video. The six rules for every shot: one sentence one picture (no static text > 2 s), concrete props instead of abstractions, ground colour by emotion, visuals grown from the subject, one hero per frame, hold the climax ≥ 1.5 s.
 
 1. **Input** — `inputs/<id>/`: `idea.md` (what to say, why now, facts with sources) plus material (screenshots, recordings, photos, links, numbers); skeleton `inputs/_template/`.

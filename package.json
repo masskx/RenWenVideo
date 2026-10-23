@@ -39,7 +39,8 @@
     "qa:clutter": "node scripts/qa/clutter.mjs",
     "qa:palette": "node scripts/qa/palette.mjs",
     "prompts:find": "node scripts/prompts/find.mjs",
-    "prompts:snapshot": "node scripts/prompts/snapshot.mjs"
+    "prompts:snapshot": "node scripts/prompts/snapshot.mjs",
+    "doctor": "node scripts/doctor.mjs"
   },
   "sideEffects": [
     "*.css"
