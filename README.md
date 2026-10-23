@@ -40,7 +40,7 @@
 | [`douyin/claude-proactive-agent/`](douyin/claude-proactive-agent/) | AI 新闻：Claude Duet——AI 凭什么能主动找你（记忆、定时任务、等你确认三个机制）；口播逐字，Tabler 图标 + 压暗的 Pexels 背景 | 1:00 |
 | [`douyin/claude-proactive-agent-cinema/`](douyin/claude-proactive-agent-cinema/) | 同一条 Claude Duet 片的 **cinema 版**（2026-10-22）：同一段配音、同样的事实，画面按“高级感”重做（一个大标题、一块面板一个主角、金色唯一强调色、顶部只有一行小字），和原版对照看 | 1:00 |
 | [`douyin/deepseek-deepinfer/`](douyin/deepseek-deepinfer/) | AI 新闻：被称为“真正的OpenAI”，DeepSeek 开源内部生产级推理框架 DeepInfer——推理框架是什么、为什么关系成本、整合了什么、没给全套的部分；cinema 风格 + 背景 D，口播 1.2–1.25× | 0:48 |
-| [`douyin/agent-compute-hijack/`](douyin/agent-compute-hijack/) | AI 安全论文：AI 没泄露密钥，却替别人花了你的钱——资源劫持（arXiv 2608.15108）：直接要 Key ≤7.6% vs 绕着用最高 89.6%（模拟测试）、现有防御、ResGate、OpenShell 作“类似思路”；cinema 风格，节奏参考 huashu-motion | 0:54 |
+| [`douyin/agent-compute-hijack/`](douyin/agent-compute-hijack/) | AI 安全论文：AI 没泄露密钥，却替别人花了你的钱——资源劫持（arXiv 2608.15108）：直接要 Key ≤7.6% vs 绕着用最高 89.6%（模拟测试）、现有防御、ResGate、OpenShell 作“类似思路”；cinema 风格，节奏参考 huashu-motion | 0:55 |
 | [`douyin/ai-same-take-on-humans/`](douyin/ai-same-take-on-humans/) | AI 实验：12 个 AI 评价人类，35 个有效回答里 29 个是同一句——人更忠于群体，而不是真相；引语中译、$1.54 的实验、我们的解释；cinema 风格，节奏参考 huashu-motion | 0:48 |
 
 ## 目录结构
