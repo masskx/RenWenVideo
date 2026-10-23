@@ -16,6 +16,7 @@
     "resolveJsonModule": true
   },
   "exclude": [
+    "docs/video-craft/prompt-library",
     "remotion.config.ts",
     "node_modules",
     "node_modules.incomplete"

@@ -1,0 +1,90 @@
+{
+  "repo": "athemeroy/awesome-claude-5-5-videos",
+  "url": "https://github.com/athemeroy/awesome-claude-5-5-videos",
+  "commit": "87e5cbfaa4bf1f6516a6c69be58c42a9b85a1041",
+  "commitDate": "2026-10-11T08:47:16+08:00",
+  "snapshotAt": "2026-10-23T05:41:13.766Z",
+  "license": "原创文字 CC BY 4.0（署名 athemeroy 并附链接）；作品和截图归各自作者",
+  "include": [
+    "/LICENSE",
+    "/THIRD_PARTY.md",
+    "/scripts/*.py"
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    },
+    {
+      "path": "THIRD_PARTY.md",
+      "bytes": 4110,
+      "sha256": "21babbefbd9a68e35bbeb4dd7a9d28a595d04f295c13d6a8063ac03e5368e7d1"
+    },
+    {
+      "path": "scripts/check_color_modes.py",
+      "bytes": 18307,
+      "sha256": "6a0650e43f7b32c87ca6b82977a0097ddb9fed21f2d99c41ffa8689fb5ecf639"
+    },
+    {
+      "path": "scripts/generate_case_thumbnails.py",
+      "bytes": 10223,
+      "sha256": "17e1cc1338cb22a87138c401e67e8b36705d6ff13e0d22a0daf42aa2c67eb3b4"
+    },
+    {
+      "path": "scripts/generate_cases.py",
+      "bytes": 10120,
+      "sha256": "d1926a03ed9c4e5bc823f6b68aa809a8b48eb6c65eb79bce8e0a96571823fa9d"
+    },
+    {
+      "path": "scripts/generate_collection_summary.py",
+      "bytes": 23228,
+      "sha256": "7e1a274e8eee1026a3ad7262481e6256b87a3c3e1cec6682507049b3928b4605"
+    },
+    {
+      "path": "scripts/generate_color_charts.py",
+      "bytes": 15758,
+      "sha256": "58fb6dea04774c386e92993a49c1ed9f2e16ae058a618ac11d4129d7086f9748"
+    },
+    {
+      "path": "scripts/generate_domain_style_atlas.py",
+      "bytes": 44087,
+      "sha256": "60fec538030bc0c88c847b5b2427641d0a21a98dc0dd95891272e5962dd8d5e6"
+    },
+    {
+      "path": "scripts/generate_intro_charts.py",
+      "bytes": 11197,
+      "sha256": "7e6f1d57e215ff00ab03bf79b2d5a41cceb28e8b11e9bf232ba54bd21d7c083a"
+    },
+    {
+      "path": "scripts/generate_new_case_thumbnails.py",
+      "bytes": 4982,
+      "sha256": "a384ea0e900895e0105c35d783d5c6e742bc55d5e00e9877d74d8f8a0e7b4a19"
+    },
+    {
+      "path": "scripts/generate_stat_charts.py",
+      "bytes": 17226,
+      "sha256": "cc3f40bc7f7cb80c1b0acce8523e4655e90fd87640c9f4dbadfa5377fa2d3bcf"
+    },
+    {
+      "path": "scripts/generate_statistics.py",
+      "bytes": 35040,
+      "sha256": "a8927e70c784e69b67655de0543a3c78008345a7ff2974f49365c28d3223ce6f"
+    },
+    {
+      "path": "scripts/maintain.py",
+      "bytes": 2759,
+      "sha256": "b9fa5a8b4bd3fe19257b3cdf7cd64195b0b6482f772ad186837e42a8b0cbf459"
+    },
+    {
+      "path": "scripts/plot_domain_labels.py",
+      "bytes": 353,
+      "sha256": "c915e00b4c9bf74cbb948ab5f1aa310783e810e2cfffbb17fb05314ac710291e"
+    },
+    {
+      "path": "scripts/refresh_case_engagement.py",
+      "bytes": 23332,
+      "sha256": "34a819ff2d2f06f03f22fd232f8cd96486bdec519683ba5bead6158ce9d462b1"
+    }
+  ]
+}
