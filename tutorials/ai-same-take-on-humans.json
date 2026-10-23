@@ -1,0 +1,52 @@
+{
+  "id": "ai-same-take-on-humans",
+  "title": "12个AI评价人类",
+  "subtitle": "12个AI评价人类，29次说了同一句话",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "tts": {"provider": "doubao"},
+  "leadMs": 100,
+  "tailMs": 100,
+  "musicSrc": "audio/tutorials/ai-same-take-on-humans/bgm.mp3",
+  "musicVolume": 0.08,
+  "musicDuckDb": 18,
+  "series": "AI 实验 · 大模型",
+  "credit": "题目与引语为英文原话中译 · 背景 Pexels",
+  "source": "inputs/ai-same-take-on-humans/script.md",
+  "steps": [],
+  "look": {"theme": "cinema", "space": "both", "frame": "full", "header": "label", "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["pushUp", "push"], "small": ["push", "pushUp"]}},
+  "highlights": [],
+  "cover": "hook",
+  "coverCard": {
+    "template": "conflict",
+    "headline": ["12个AI评价人类", "29次说了同一句"],
+    "support": "人更忠于群体，而不是真相？",
+    "tag": "AI 实验 · 大模型",
+    "anchor": "ast.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 130], "size": 100, "anchor": [540, 880, 0.9], "support": 1300},
+      "6:7": {"headline": [80, 100], "size": 92, "anchor": [540, 770, 0.78], "support": 1150},
+      "9:16": {"headline": [80, 330], "size": 104, "anchor": [540, 1080, 1.0], "support": 1560}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "ast.hook", "step": 0, "pace": 1.25,
+      "narration": "[12个|十二个]AI，每个问[3遍|三遍]，{a}[35个|三十五个]有效回答里，{b}[29个|二十九个]说的是同一件事。"},
+    {"id": "question", "visual": "ast.question", "step": 0, "pace": 1.22,
+      "narration": "题目是：{a}说说你对人类最有争议的看法，{b}别和稀泥。"},
+    {"id": "answer", "visual": "ast.answer", "step": 0, "pace": 1.22,
+      "narration": "答案出奇地像：{a}人更忠于群体，而不是真相。{b}[DeepSeek|Deep Seek]说，人类没有原则，只有站队；{c}Kimi说，人类没有信念，只有归属。"},
+    {"id": "grok", "visual": "ast.grok", "step": 0, "pace": 1.2,
+      "narration": "Grok说：{a}宁可一起错，也不愿独自对。"},
+    {"id": "claude", "visual": "ast.claude", "step": 0, "pace": 1.22,
+      "narration": "最唱反调的一次来自Claude：{a}人类其实比自己以为的更体面、{b}更善良。"},
+    {"id": "cost", "visual": "ast.cost", "step": 0, "pace": 1.22,
+      "narration": "整个实验，{a}[60次|六十次]调用，{b}总共才花了[1.54美元|一点五四美元]。"},
+    {"id": "why", "visual": "ast.why", "step": 0, "pace": 1.2,
+      "narration": "为什么这么像？{a}我们的理解是：{b}不是AI有了想法，{c}而是它们学的都是相似的人类文字，{d}人最常骂自己的那句，{e}它们也就学会了。"},
+    {"id": "end", "visual": "ast.end", "step": 0, "pace": 1.16, "tailMs": 1300,
+      "narration": "AI照出来的，{a}可能只是我们自己最常说的那句话。"}
+  ]
+}

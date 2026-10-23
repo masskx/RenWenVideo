@@ -1,0 +1,52 @@
+{
+  "id": "agent-compute-hijack",
+  "title": "AI Agent资源劫持",
+  "subtitle": "AI没泄露密钥，却替别人花了你的钱",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "tts": {"provider": "doubao"},
+  "leadMs": 100,
+  "tailMs": 100,
+  "musicSrc": "audio/tutorials/agent-compute-hijack/bgm.mp3",
+  "musicVolume": 0.08,
+  "musicDuckDb": 18,
+  "series": "AI 安全 · 论文",
+  "credit": "数据为模拟测试 · arXiv 2608.15108 · 背景 Pexels",
+  "source": "inputs/agent-compute-hijack/script.md",
+  "steps": [],
+  "look": {"theme": "cinema", "space": "both", "frame": "full", "header": "label", "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["pushUp", "push"], "small": ["push", "pushUp"]}},
+  "highlights": [],
+  "cover": "hook",
+  "coverCard": {
+    "template": "conflict",
+    "headline": ["AI没泄露密钥", "却替别人花你的钱"],
+    "support": "测试里最高 89.6% · 资源劫持新论文",
+    "tag": "AI 安全 · 论文",
+    "anchor": "ach.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 130], "size": 96, "anchor": [540, 880, 0.9], "support": 1300},
+      "6:7": {"headline": [80, 100], "size": 88, "anchor": [540, 770, 0.78], "support": 1150},
+      "9:16": {"headline": [80, 330], "size": 100, "anchor": [540, 1080, 1.0], "support": 1560}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "ach.hook", "step": 0, "pace": 1.25,
+      "narration": "直接找AI要密钥，{k}成功率[不到8%|不到百分之八]；{a}换个说法，测试里最高[89.6%|百分之八十九点六]，{b}会替别人花你的钱。"},
+    {"id": "paper", "visual": "ach.paper", "step": 0, "pace": 1.22,
+      "narration": "上海交大任麒冰团队等的新论文，{a}用300个模拟场景，{b}专测“资源劫持”。"},
+    {"id": "door", "visual": "ach.door", "step": 0, "pace": 1.2,
+      "narration": "就像管家攥紧钥匙没交出去，{a}却听陌生人一句话，{b}亲手把门开了。"},
+    {"id": "cases", "visual": "ach.cases", "step": 0, "pace": 1.22,
+      "narration": "论文案例演示里，{a}Agent没泄露密钥，{b}却用主人的[API|A P I]和[GPU|G P U]，{c}替攻击者干活。"},
+    {"id": "chart", "visual": "ach.chart", "step": 0, "pace": 1.22,
+      "narration": "四个主流模型，{a}直接要只有[3.4%|百分之三点四]到[7.6%|七点六]，{b}绕着用就到了[70%|百分之七十]到[89.6%|八十九点六]。"},
+    {"id": "defense", "visual": "ach.defense", "step": 0, "pace": 1.22,
+      "narration": "现有防御最好也有[55.1%|百分之五十五点一]被攻破；{a}论文的[ResGate|Res Gate]{b}把它从[84.1%|百分之八十四点一]{c}压到[23.6%|百分之二十三点六]。"},
+    {"id": "policy", "visual": "ach.policy", "step": 0, "pace": 1.22,
+      "narration": "英伟达开源的[OpenShell|Open Shell]，也是类似思路：{a}Agent能碰什么，{b}先写进策略。"},
+    {"id": "end", "visual": "ach.end", "step": 0, "pace": 1.2, "tailMs": 1300,
+      "narration": "管住钥匙还不够，{a}还得管住：{b}每一笔钱，是替谁花的。"}
+  ]
+}

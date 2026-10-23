@@ -21,6 +21,7 @@
 | [审美参考库.md](审美参考库.md) | 去哪看好设计、静帧的减法自查 |
 | [踩坑清单.md](踩坑清单.md) | 踩过的坑和扫片做法 |
 | [prompt-library/](prompt-library/README.md) | 提示词库：8 个“用 Opus 5.5 写代码做视频”仓库的提示词、风格提示词和制作文档，原样存成固定版本；[选用指南.md](prompt-library/选用指南.md) 按脚本类型挑参考、改写成本仓库的做法 |
+| [huashu-motion.md](huashu-motion.md) | huashu-motion（花叔）的导演方法怎么用到本仓库：第 0 帧即海报、贯穿物件、中段密集段、数字落在字上、压暗强调、交片前自评（用户 2026-10-23：每条片按实际情况参考） |
 | [../style-guide.md](../style-guide.md) | 从外部仓库学来的风格知识（每个仓库一节，注明来源）：mg-styles-15 的节奏、动效参数、转场、字幕版式、配色、提示词写法，以及哪些不适合知识类短视频、为什么 |
 | [archive/](archive/) | 已归档的旧规则：导演层（禁止项、物理动作链、八项 Brief）、旧分镜模板、旧 CLAUDE.md 和 SKILL.md |
 

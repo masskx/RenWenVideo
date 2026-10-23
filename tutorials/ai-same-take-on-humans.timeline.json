@@ -1,0 +1,261 @@
+{
+  "id": "ai-same-take-on-humans",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1430,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/ai-same-take-on-humans/01-hook.mp3",
+      "audioMs": 5904,
+      "startFrame": 0,
+      "durationFrames": 184,
+      "cues": {
+        "a": 2438,
+        "b": 3973
+      },
+      "captions": [
+        {
+          "text": "12个AI，每个问3遍",
+          "startMs": 285,
+          "endMs": 2438
+        },
+        {
+          "text": "35个有效回答里",
+          "startMs": 2438,
+          "endMs": 3973
+        },
+        {
+          "text": "29个说的是同一件事",
+          "startMs": 3973,
+          "endMs": 5429
+        }
+      ]
+    },
+    {
+      "id": "question",
+      "audioSrc": "audio/tutorials/ai-same-take-on-humans/02-question.mp3",
+      "audioMs": 4049,
+      "startFrame": 184,
+      "durationFrames": 128,
+      "cues": {
+        "a": 1065,
+        "b": 3237
+      },
+      "captions": [
+        {
+          "text": "题目是",
+          "startMs": 315,
+          "endMs": 1065
+        },
+        {
+          "text": "说说你对人类最有争议的看法",
+          "startMs": 1065,
+          "endMs": 3237
+        },
+        {
+          "text": "别和稀泥",
+          "startMs": 3237,
+          "endMs": 4302
+        }
+      ]
+    },
+    {
+      "id": "answer",
+      "audioSrc": "audio/tutorials/ai-same-take-on-humans/03-answer.mp3",
+      "audioMs": 9143,
+      "startFrame": 312,
+      "durationFrames": 281,
+      "cues": {
+        "a": 1445,
+        "b": 3709,
+        "c": 6461
+      },
+      "captions": [
+        {
+          "text": "答案出奇地像",
+          "startMs": 345,
+          "endMs": 1445
+        },
+        {
+          "text": "人更忠于群体",
+          "startMs": 1445,
+          "endMs": 2787
+        },
+        {
+          "text": "而不是真相",
+          "startMs": 2787,
+          "endMs": 3709
+        },
+        {
+          "text": "DeepSeek说",
+          "startMs": 3709,
+          "endMs": 4631
+        },
+        {
+          "text": "人类没有原则",
+          "startMs": 4631,
+          "endMs": 5731
+        },
+        {
+          "text": "只有站队",
+          "startMs": 5731,
+          "endMs": 6461
+        },
+        {
+          "text": "Kimi说，人类没有信念",
+          "startMs": 6461,
+          "endMs": 8403
+        },
+        {
+          "text": "只有归属",
+          "startMs": 8403,
+          "endMs": 9383
+        }
+      ]
+    },
+    {
+      "id": "grok",
+      "audioSrc": "audio/tutorials/ai-same-take-on-humans/04-grok.mp3",
+      "audioMs": 3161,
+      "startFrame": 593,
+      "durationFrames": 101,
+      "cues": {
+        "a": 1026
+      },
+      "captions": [
+        {
+          "text": "Grok说：宁可一起错",
+          "startMs": 335,
+          "endMs": 2140
+        },
+        {
+          "text": "也不愿独自对",
+          "startMs": 2140,
+          "endMs": 3430
+        }
+      ]
+    },
+    {
+      "id": "claude",
+      "audioSrc": "audio/tutorials/ai-same-take-on-humans/05-claude.mp3",
+      "audioMs": 5224,
+      "startFrame": 694,
+      "durationFrames": 163,
+      "cues": {
+        "a": 2373,
+        "b": 4608
+      },
+      "captions": [
+        {
+          "text": "最唱反调的一次来自Claude",
+          "startMs": 385,
+          "endMs": 2373
+        },
+        {
+          "text": "人类其实比自己以为的更体面",
+          "startMs": 2373,
+          "endMs": 4608
+        },
+        {
+          "text": "更善良",
+          "startMs": 4608,
+          "endMs": 5358
+        }
+      ]
+    },
+    {
+      "id": "cost",
+      "audioSrc": "audio/tutorials/ai-same-take-on-humans/06-cost.mp3",
+      "audioMs": 4180,
+      "startFrame": 857,
+      "durationFrames": 132,
+      "cues": {
+        "a": 1329,
+        "b": 2302
+      },
+      "captions": [
+        {
+          "text": "整个实验，60次调用",
+          "startMs": 375,
+          "endMs": 2302
+        },
+        {
+          "text": "总共才花了1.54美元",
+          "startMs": 2302,
+          "endMs": 4521
+        }
+      ]
+    },
+    {
+      "id": "why",
+      "audioSrc": "audio/tutorials/ai-same-take-on-humans/07-why.mp3",
+      "audioMs": 9169,
+      "startFrame": 989,
+      "durationFrames": 282,
+      "cues": {
+        "a": 1473,
+        "b": 2520,
+        "c": 3923,
+        "d": 6422,
+        "e": 8061
+      },
+      "captions": [
+        {
+          "text": "为什么这么像？",
+          "startMs": 405,
+          "endMs": 1473
+        },
+        {
+          "text": "我们的理解是",
+          "startMs": 1473,
+          "endMs": 2520
+        },
+        {
+          "text": "不是AI有了想法",
+          "startMs": 2520,
+          "endMs": 3923
+        },
+        {
+          "text": "而是它们学的都是相似的人类文字",
+          "startMs": 3923,
+          "endMs": 6422
+        },
+        {
+          "text": "人最常骂自己的那句",
+          "startMs": 6422,
+          "endMs": 8061
+        },
+        {
+          "text": "它们也就学会了",
+          "startMs": 8061,
+          "endMs": 9051
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/ai-same-take-on-humans/08-end.mp3",
+      "audioMs": 3892,
+      "startFrame": 1271,
+      "durationFrames": 159,
+      "cues": {
+        "a": 1443
+      },
+      "captions": [
+        {
+          "text": "AI照出来的",
+          "startMs": 625,
+          "endMs": 1443
+        },
+        {
+          "text": "可能只是我们自己最常说的那句话",
+          "startMs": 1443,
+          "endMs": 4153
+        }
+      ]
+    }
+  ]
+}
