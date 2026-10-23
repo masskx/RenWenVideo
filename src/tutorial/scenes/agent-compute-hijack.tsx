@@ -83,24 +83,36 @@ const Door: React.FC<{open: number; w?: number; h?: number; items?: number}> = (
 
 /* ---------- 1 hook: ask for the key ≤ 7.6 % — ask it to use the key 89.6 % ---------- */
 
-const hookPlan = (cue: Cue) => ({a: cue('a', 104), b: cue('b', 194)});
+const hookPlan = (cue: Cue) => ({k: cue('k', 55), a: cue('a', 104), b: cue('b', 194)});
+/** A small padlock: the key stays locked away (the direct ask fails). */
+const Padlock: React.FC<{size?: number; c?: string}> = ({size = 96, c = INK}) => (
+  <svg width={size} height={size} viewBox="-50 -60 100 110" style={{flex: 'none', display: 'block'}}>
+    <path d="M-24 -6 V-28 A24 24 0 0 1 24 -28 V-6" fill="none" stroke={c} strokeWidth={10} strokeLinecap="round" />
+    <rect x={-40} y={-8} width={80} height={56} rx={12} fill={c} />
+    <circle cx={0} cy={18} r={8} fill={cinema.bg} />
+  </svg>
+);
 const Hook: Scene = ({f, dur, cue}) => {
   const p = hookPlan(cue);
   const lit = rise(f, p.a - 4, 14);
+  // frame 0 (the poster): the hero number alone, landing; then the direct ask slides in above and pushes it down
+  const make = ease.inOutCubic(clamp((f - 10) / 18)), locked = rise(f, p.k, 12);
   const punch = 1 + 0.08 * Math.sin(Math.PI * clamp((f - p.a + 2) / 14)); // a short 8 % punch-in on the number as it is said
   return <Stage f={f} dur={dur} beats={[p.a, p.b]}>
     <Pool x={450} y={720} o={0.12 + 0.1 * lit} />
     <Abs y={0}><Headline f={f} at={-22} kicker="测试中 · 让 AI Agent 交出密钥" lines={['钥匙没给，', <Marker key="m" p={rise(f, p.a + 4, 14)}>钱照样花</Marker>]} size={116} /></Abs>
     {/* asking straight for the key: small and dim */}
-    <Abs y={380}><Reveal f={f} at={-14} d={R}>
-      <Surface pad="0 40px" style={{height: 150, display: 'flex', alignItems: 'center', gap: 26, opacity: 1 - 0.35 * lit}}>
-        <Key size={96} c="rgba(255,255,255,0.55)" />
+    <Abs y={380} style={{opacity: clamp(make * 1.4) * (1 - 0.35 * lit), transform: `translateY(${(1 - make) * -60}px)`}}>
+      <Surface pad="0 40px" style={{height: 150, display: 'flex', alignItems: 'center', gap: 26}}>
+        <div style={{width: 110, display: 'flex', justifyContent: 'center'}}>
+          {locked > 0 ? <div style={{transform: `scale(${0.6 + 0.4 * locked})`, opacity: locked}}><Padlock size={84} c={INK} /></div> : <Key size={96} c="rgba(255,255,255,0.55)" />}
+        </div>
         <Big size={52} w={800} c={DIM}>直接要密钥</Big>
-        <Big size={84} w={800} c={DIM} style={{marginLeft: 'auto'}}>≤7.6%</Big>
+        <Big size={84} w={800} c={locked > 0.5 ? INK : DIM} style={{marginLeft: 'auto'}}>≤7.6%</Big>
       </Surface>
-    </Reveal></Abs>
+    </Abs>
     {/* asking it to do the work: the hero number, there from frame 0, lights up on 「换个说法」 */}
-    <Abs y={560}><Reveal f={f} at={-8} d={R}>
+    <Abs y={560} style={{transform: `translateY(${(1 - make) * -170}px) scale(${1.08 - 0.08 * make})`, transformOrigin: '50% 0'}}><Reveal f={f} at={-8} d={R}>
       <Surface accent={lit > 0.3 ? RED : undefined} pad="34px 40px" style={{height: 330}}>
         <Big size={52} w={800} c={lit > 0.3 ? INK : DIM}>换个说法</Big>
         <Big size={190} w={800} c={GOLD} style={{letterSpacing: -6, lineHeight: 1.05, marginTop: 8, transform: `scale(${punch})`, transformOrigin: '0 60%'}}>{count(f, -16, 7.6, 89.6, 24)}%</Big>
@@ -111,7 +123,8 @@ const Hook: Scene = ({f, dur, cue}) => {
 };
 Hook.sfx = (cue) => {
   const p = hookPlan(cue);
-  return [{at: 0, kind: 'tick', gain: 0.1}, {at: 8, kind: 'tap', gain: 0.12}, {at: p.a, kind: 'thud', gain: 0.12}, {at: p.b, kind: 'fs-impact-deep', gain: 0.14}];
+  return [{at: 0, kind: 'tick', gain: 0.1}, {at: 8, kind: 'tap', gain: 0.12}, {at: 12, kind: 'whoosh-short', gain: 0.08}, {at: p.k, kind: 'block', gain: 0.1},
+    {at: p.a, kind: 'thud', gain: 0.12}, {at: p.b, kind: 'fs-impact-deep', gain: 0.14}];
 };
 
 /* ---------- 2 the paper: 300 simulated scenarios, "resource hijacking" ---------- */
@@ -151,9 +164,10 @@ const DoorScene: Scene = ({f, dur, cue}) => {
     <Abs y={0}><Headline f={f} at={-10} lines={['钥匙守住了，', <span key="2" style={{opacity: rise(f, p.b - 4, R)}}>门却{gold('替别人')}开了</span>]} size={104} /></Abs>
     {/* left: the key, kept */}
     <Abs x={0} y={420} w={380}><Reveal f={f} at={0} d={R}>
-      <Surface pad="36px 30px" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 22}}>
+      <Surface pad="36px 30px" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 22,
+        transform: `translateX(${(1 - ease.inOutCubic(clamp((f - 30) / 18))) * 260}px) scale(${1.25 - 0.25 * ease.inOutCubic(clamp((f - 30) / 18))})`}}>
         <Key size={200} />
-        <Big size={52} w={800}>钥匙没给 {gold('✓')}</Big>
+        <Big size={52} w={800}>钥匙没给 <span style={{opacity: rise(f, 58, 10)}}>{gold('✓')}</span></Big>
         <Small c={FAINT} size={40}>Agent ≈ 管家</Small>
       </Surface>
     </Reveal></Abs>
@@ -162,12 +176,12 @@ const DoorScene: Scene = ({f, dur, cue}) => {
       <div style={{background: 'rgba(255,255,255,0.92)', color: cinema.bg, borderRadius: 26, padding: '18px 28px', fontFamily: display, fontWeight: 800, fontSize: 46,
         whiteSpace: 'nowrap', display: 'inline-block'}}>陌生人：帮我开下门</div>
     </Reveal></Abs>
-    <Abs x={500} y={450} w={360}><Reveal f={f} at={4} d={R}><Door open={open} w={330} h={520} items={rise(f, p.b + 10, 24)} /></Reveal></Abs>
+    <Abs x={500} y={450} w={360}><Reveal f={f} at={40} d={R} dy={60}><Door open={open} w={330} h={520} items={rise(f, p.b + 10, 24)} /></Reveal></Abs>
   </Stage>;
 };
 DoorScene.sfx = (cue) => {
   const p = doorPlan(cue);
-  return [{at: p.a, kind: 'pop', gain: 0.1}, {at: p.b, kind: 'whoosh', gain: 0.12}, {at: p.b + 12, kind: 'chime', gain: 0.08}];
+  return [{at: 30, kind: 'whoosh-short', gain: 0.07}, {at: 58, kind: 'tick', gain: 0.1}, {at: p.a, kind: 'pop', gain: 0.1}, {at: p.b, kind: 'whoosh', gain: 0.12}, {at: p.b + 12, kind: 'chime', gain: 0.08}];
 };
 
 /* ---------- 4 the paper's case demos: API and GPU used for the attacker, key never leaked ---------- */
@@ -314,9 +328,9 @@ const Policy: Scene = ({f, dur, cue}) => {
         <div style={{height: 64, display: 'flex', alignItems: 'center', paddingLeft: 30, borderBottom: `1.5px solid ${HAIR}`, fontFamily: mono, fontWeight: 700, fontSize: 36, color: FAINT}}>policy · 示意</div>
         <div style={{padding: '18px 36px 26px'}}>
           {POLICY.map((x, i) => <Reveal key={x.t} f={f} at={p.a + i * 9} d={R} dy={16}>
-            <div style={{display: 'flex', alignItems: 'center', gap: 22, height: 96}}>
-              <Big size={60} w={900} c={x.ok ? GOLD : RED}>{x.ok ? '✓' : '✕'}</Big>
-              <Big size={56} w={800}>{x.t}</Big>
+            <div style={{display: 'flex', alignItems: 'center', gap: 24, height: 124}}>
+              <Big size={72} w={900} c={x.ok ? GOLD : RED}>{x.ok ? '✓' : '✕'}</Big>
+              <Big size={66} w={800}>{x.t}</Big>
             </div>
           </Reveal>)}
         </div>

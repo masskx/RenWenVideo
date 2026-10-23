@@ -33,7 +33,7 @@
   },
   "scenes": [
     {"id": "hook", "visual": "ach.hook", "step": 0, "pace": 1.25,
-      "narration": "直接找AI要密钥，成功率[不到8%|不到百分之八]；{a}换个说法，测试里最高[89.6%|百分之八十九点六]，{b}会替别人花你的钱。"},
+      "narration": "直接找AI要密钥，{k}成功率[不到8%|不到百分之八]；{a}换个说法，测试里最高[89.6%|百分之八十九点六]，{b}会替别人花你的钱。"},
     {"id": "paper", "visual": "ach.paper", "step": 0, "pace": 1.22,
       "narration": "上海交大任麒冰团队等的新论文，{a}用300个模拟场景，{b}专测“资源劫持”。"},
     {"id": "door", "visual": "ach.door", "step": 0, "pace": 1.2,
@@ -45,7 +45,7 @@
     {"id": "defense", "visual": "ach.defense", "step": 0, "pace": 1.22,
       "narration": "现有防御最好也有[55.1%|百分之五十五点一]被攻破；{a}论文的[ResGate|Res Gate]{b}把它从[84.1%|百分之八十四点一]{c}压到[23.6%|百分之二十三点六]。"},
     {"id": "policy", "visual": "ach.policy", "step": 0, "pace": 1.22,
-      "narration": "英伟达开源的[OpenShell|Open Shell]也是类似思路：{a}Agent能碰什么，{b}先写进策略。"},
+      "narration": "英伟达开源的[OpenShell|Open Shell]，也是类似思路：{a}Agent能碰什么，{b}先写进策略。"},
     {"id": "end", "visual": "ach.end", "step": 0, "pace": 1.2, "tailMs": 1300,
       "narration": "管住钥匙还不够，{a}还得管住：{b}每一笔钱，是替谁花的。"}
   ]

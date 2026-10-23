@@ -4,7 +4,7 @@
   "rate": null,
   "fps": 30,
   "leadMs": 100,
-  "totalFrames": 1618,
+  "totalFrames": 1633,
   "scenes": [
     {
       "id": "hook",
@@ -13,6 +13,7 @@
       "startFrame": 0,
       "durationFrames": 242,
       "cues": {
+        "k": 1832,
         "a": 3455,
         "b": 6480
       },
@@ -189,28 +190,33 @@
     {
       "id": "policy",
       "audioSrc": "audio/tutorials/agent-compute-hijack/07-policy.mp3",
-      "audioMs": 5303,
+      "audioMs": 5825,
       "startFrame": 1277,
-      "durationFrames": 166,
+      "durationFrames": 181,
       "cues": {
-        "a": 3147,
-        "b": 4353
+        "a": 3626,
+        "b": 4783
       },
       "captions": [
         {
-          "text": "英伟达开源的OpenShell也是类似思路",
-          "startMs": 375,
-          "endMs": 3147
+          "text": "英伟达开源的OpenShell",
+          "startMs": 495,
+          "endMs": 2469
+        },
+        {
+          "text": "也是类似思路",
+          "startMs": 2469,
+          "endMs": 3626
         },
         {
           "text": "Agent能碰什么",
-          "startMs": 3147,
-          "endMs": 4353
+          "startMs": 3626,
+          "endMs": 4783
         },
         {
           "text": "先写进策略",
-          "startMs": 4353,
-          "endMs": 5578
+          "startMs": 4783,
+          "endMs": 5749
         }
       ]
     },
@@ -218,7 +224,7 @@
       "id": "end",
       "audioSrc": "audio/tutorials/agent-compute-hijack/08-end.mp3",
       "audioMs": 4415,
-      "startFrame": 1443,
+      "startFrame": 1458,
       "durationFrames": 175,
       "cues": {
         "a": 1694,
