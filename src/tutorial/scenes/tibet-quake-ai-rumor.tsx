@@ -32,8 +32,10 @@ const Small: React.FC<{c?: string; size?: number; style?: React.CSSProperties; c
 
 /* ---------- the drawn "AI disaster picture": flat, schematic, no people, no rubble ---------- */
 
-// Spots the lens visits (in the drawing's 800 × 500 space).
-const SPOT = {sign: [230, 175], hand: [215, 395], building: [610, 250]} as const;
+// Spots the lens visits (in the drawing's 800 × 500 space) and its zoom there: enough to read the flaw, not so much that it
+// turns into a blob (all six fingers must stay inside the lens).
+type Spot = readonly [number, number, number];
+const SPOT: Record<'sign' | 'hand' | 'building', Spot> = {sign: [230, 176, 2], hand: [214, 372, 1.3], building: [612, 250, 1.6]};
 
 /** Glyph-like scribbles for the garbled sign (deterministic). */
 const Garble: React.FC<{x: number; y: number}> = ({x, y}) => {
@@ -79,19 +81,19 @@ const Defs: React.FC<{id: string}> = ({id}) => (
   </defs>
 );
 /** The fake picture at width w, with an optional magnifying lens (spot, zoom k, appear 0..1). */
-const FakePic: React.FC<{w: number; lens?: readonly [number, number]; lensOn?: number; badge?: boolean; uid: string}> = ({w, lens, lensOn = 0, badge = true, uid}) => {
+const FakePic: React.FC<{w: number; lens?: Spot; lensOn?: number; badge?: boolean; uid: string}> = ({w, lens, lensOn = 0, badge = true, uid}) => {
   const h = w * 500 / 800;
   return <div style={{position: 'relative', width: w, height: h}}>
     <svg width={w} height={h} viewBox="0 0 800 500" style={{display: 'block'}}>
       <Defs id={`clip-${uid}`} />
       <g clipPath={`url(#clip-${uid})`}><Drawing /></g>
       {lens && lensOn > 0 && <g opacity={clamp(lensOn * 1.5)}>
-        <clipPath id={`lens-${uid}`}><circle cx={lens[0]} cy={lens[1]} r={110 * lensOn} /></clipPath>
+        <clipPath id={`lens-${uid}`}><circle cx={lens[0]} cy={lens[1]} r={118 * lensOn} /></clipPath>
         <rect x={0} y={0} width={800} height={500} fill="rgba(7,11,20,0.45)" />
         <g clipPath={`url(#lens-${uid})`}>
-          <g transform={`translate(${lens[0]} ${lens[1]}) scale(2) translate(${-lens[0]} ${-lens[1]})`}><Drawing /></g>
+          <g transform={`translate(${lens[0]} ${lens[1]}) scale(${lens[2]}) translate(${-lens[0]} ${-lens[1]})`}><Drawing /></g>
         </g>
-        <circle cx={lens[0]} cy={lens[1]} r={110 * lensOn} fill="none" stroke={GOLD} strokeWidth={6} />
+        <circle cx={lens[0]} cy={lens[1]} r={118 * lensOn} fill="none" stroke={GOLD} strokeWidth={6} />
       </g>}
     </svg>
     {badge && <div style={{position: 'absolute', right: 12, top: 12, background: '#ffffff', color: cinema.bg, fontFamily: font, fontWeight: 900,
@@ -181,11 +183,11 @@ Feed.sfx = (cue) => {
 /* ---------- 3 one: look at the details (the lens visits sign, hand, building) ---------- */
 
 const detailPlan = (cue: Cue) => ({a: cue('a', 48), b: cue('b', 84), c: cue('c', 114), d: cue('d', 146)});
-const lerp2 = (a: readonly [number, number], b: readonly [number, number], k: number) => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k] as const;
+const lerp3 = (a: Spot, b: Spot, k: number): Spot => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, a[2] + (b[2] - a[2]) * k];
 const Detail: Scene = ({f, dur, cue}) => {
   const p = detailPlan(cue);
   const m1 = ease.inOutCubic(clamp((f - p.b + 6) / 12)), m2 = ease.inOutCubic(clamp((f - p.c + 6) / 12));
-  const spot = m2 > 0 ? lerp2(SPOT.hand, SPOT.building, m2) : lerp2(SPOT.sign, SPOT.hand, m1);
+  const spot = m2 > 0 ? lerp3(SPOT.hand, SPOT.building, m2) : lerp3(SPOT.sign, SPOT.hand, m1);
   const lensOn = rise(f, p.a - 6, 12) * (1 - rise(f, p.d, 12));
   const items = [{t: '招牌乱码', at: p.a}, {t: '手指不对', at: p.b}, {t: '建筑扭曲', at: p.c}];
   return <Stage f={f} dur={dur} beats={[p.a, p.b, p.c, p.d]}>
