@@ -1,0 +1,777 @@
+{
+  "repo": "alchaincyf/huashu-motion",
+  "url": "https://github.com/alchaincyf/huashu-motion",
+  "commit": "52467f99c602b76ba86d511d37acdfe93fa1e16e",
+  "commitDate": "2026-10-22T20:19:32+08:00",
+  "snapshotAt": "2026-10-23T06:08:48.756Z",
+  "license": "MIT（花叔 / alchaincyf）；runtime/clip、art-motion 各带 LICENSE / NOTICE；gsap.min.js 走 GSAP 自己的许可（附 GSAP-LICENSE）；字体 OFL，没拷（渲染时缺字体回落到思源黑体）",
+  "include": [
+    "/LICENSE",
+    "/THIRD_PARTY.md",
+    "/package.json",
+    "/runtime/**",
+    "/cli/**",
+    "/templates/**",
+    "!/templates/**/*.woff",
+    "/examples/**",
+    "!/examples/**/*.woff",
+    "!/examples/**/*.wav"
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 1063,
+      "sha256": "b8fa8ecfc57cf8339ecdab05e62e811a5d00d1e1f9373ff1de64cc9f261e2d3e"
+    },
+    {
+      "path": "THIRD_PARTY.md",
+      "bytes": 1772,
+      "sha256": "e629438fc82bfe85b1e22422cbd8802954165db1d3a702fbbbd0ec7a2005b927"
+    },
+    {
+      "path": "cli/lib/audio.js",
+      "bytes": 5867,
+      "sha256": "360ecd8f48df354b579278ea1232db7d4427ccea29a50986acb077366078b7c5"
+    },
+    {
+      "path": "cli/lib/beats.js",
+      "bytes": 18579,
+      "sha256": "efd6005269284209aac3b890898a327403dcca3e373ce82a848698b138011163"
+    },
+    {
+      "path": "cli/lib/browser.js",
+      "bytes": 1775,
+      "sha256": "15b27e4051f32f41261da70479587fd6d04f4f3b868379cf1f5c0c0e01e98981"
+    },
+    {
+      "path": "cli/lib/capture.js",
+      "bytes": 7920,
+      "sha256": "540a3d8de635a3ce6a550b6487cabae116f3082a8cac35d572c4305977850fb4"
+    },
+    {
+      "path": "cli/lib/cdp.js",
+      "bytes": 11413,
+      "sha256": "313d260d1dc50bec7a9b9063292e89bad3a2498046c9328c121eb9a4597d4b97"
+    },
+    {
+      "path": "cli/lib/check.js",
+      "bytes": 28187,
+      "sha256": "d112421c8056f07910b78f49aabae286b73a7e87640592eb9d937661992ef606"
+    },
+    {
+      "path": "cli/lib/composed.js",
+      "bytes": 8759,
+      "sha256": "286609045ae111d0979ec27fd2c38356cae3916800b9f0b5cfaaade04319e8ac"
+    },
+    {
+      "path": "cli/lib/composer.js",
+      "bytes": 23997,
+      "sha256": "c01e42e1f56cd74ec1829e9e37f3052d68500480f1ca0dc3d4bfa3fd8f46e828"
+    },
+    {
+      "path": "cli/lib/dsp.js",
+      "bytes": 12042,
+      "sha256": "2609e6d93ac51667f67345d3ba84d71d83c3b792656de97e95d12da57c6235fa"
+    },
+    {
+      "path": "cli/lib/export.js",
+      "bytes": 25330,
+      "sha256": "81080995d01ea00bd3753f68a52f7fa44b0cf6a36cc97b82166979af5fbdac3a"
+    },
+    {
+      "path": "cli/lib/fonts.js",
+      "bytes": 2484,
+      "sha256": "3a3e66633c572dc5b0800a785dba7678eb77f0a245408daea8771958eb4f8bf0"
+    },
+    {
+      "path": "cli/lib/fork.js",
+      "bytes": 4954,
+      "sha256": "02a4cbec6531294937f0820874d03b4b5da849a1b28337648ea8be618f77166c"
+    },
+    {
+      "path": "cli/lib/frames.js",
+      "bytes": 6696,
+      "sha256": "256eb60fd14db7cf8557c0e0d5bdb05a53bdde2f7389e6567b22cf2f8b025050"
+    },
+    {
+      "path": "cli/lib/fx.js",
+      "bytes": 19397,
+      "sha256": "ea7f52c6cc313221b739dbd305419f06becdb0117387fc593ad8a945cc7989d1"
+    },
+    {
+      "path": "cli/lib/grab.js",
+      "bytes": 18277,
+      "sha256": "d53fef60c274580323fda2ccc5b74875131391997acccfe5780339510480e911"
+    },
+    {
+      "path": "cli/lib/inbox.js",
+      "bytes": 3567,
+      "sha256": "d695b93a0333c460202a0e901ab6fd269abc5176f8309d678cd596c90e600ddf"
+    },
+    {
+      "path": "cli/lib/kokoro.py",
+      "bytes": 2280,
+      "sha256": "dd8627f39ff84c6c5cbc283e2462d9ca05c578dbc42f6f7f03e5e871a7c2e3a3"
+    },
+    {
+      "path": "cli/lib/learn.js",
+      "bytes": 8421,
+      "sha256": "d3fc7213aefeb90f92e37276eb435e7bcb5cab65bd9bb9416b010c9300cbebcb"
+    },
+    {
+      "path": "cli/lib/project.js",
+      "bytes": 11368,
+      "sha256": "d7140a102f421ff76248bc542481636d301f2d55c5bb7b336622eb40193dc4c8"
+    },
+    {
+      "path": "cli/lib/qa.js",
+      "bytes": 8211,
+      "sha256": "6f3b58646485aae8ccc118f7703f6d7ad3e2073796e59bee685a4676eda49731"
+    },
+    {
+      "path": "cli/lib/render-om.js",
+      "bytes": 18774,
+      "sha256": "e1de8327e81a5c4270b46ec6cd11f4861246fb9678a58dc2f2e2716d32db2710"
+    },
+    {
+      "path": "cli/lib/render.js",
+      "bytes": 6512,
+      "sha256": "d522b8492cde356136a55b01574ba6cf7897c1d7fb6d52b48468e2a900502801"
+    },
+    {
+      "path": "cli/lib/samples-build.js",
+      "bytes": 27434,
+      "sha256": "65fa21018f49d23ad7f2d2a81f2f43b4edecbf3a7fe3881616c1ba40a8515abc"
+    },
+    {
+      "path": "cli/lib/samples.js",
+      "bytes": 7645,
+      "sha256": "834a5eaa0f0ed954a64ba75efe6226b4fe9bbf383a46b86767256e09cbd06bd1"
+    },
+    {
+      "path": "cli/lib/score.js",
+      "bytes": 48117,
+      "sha256": "5e753eb638d4e0aee80cc9e878809bbb8344cfbecc947e2da6cbf4801fbc6215"
+    },
+    {
+      "path": "cli/lib/server.js",
+      "bytes": 8806,
+      "sha256": "b8b58b0d8ccf4ba725bcca8e20e6d02f3b0cb38ddb32ef47374e44c48abfe27a"
+    },
+    {
+      "path": "cli/lib/share.js",
+      "bytes": 6325,
+      "sha256": "e329a8342014772832952985311a46728b021b8eca4bdadfed3762ea9a3f8a4d"
+    },
+    {
+      "path": "cli/lib/sound.js",
+      "bytes": 44217,
+      "sha256": "2050c684ac0db4f9277be812a8a2bc7b731a29006fca2c0c6c70b71c1fa1eb7b"
+    },
+    {
+      "path": "cli/lib/soundprint.js",
+      "bytes": 4449,
+      "sha256": "a4e42a7a054b53c9fe32673535dd92c3b911da831958bb4c69822f1b21bc493c"
+    },
+    {
+      "path": "cli/lib/still.js",
+      "bytes": 1903,
+      "sha256": "13d1dfd39b98e573bdac716c4df6f3015d8045773692f5465bd6b35b01f90293"
+    },
+    {
+      "path": "cli/lib/swatch.js",
+      "bytes": 8171,
+      "sha256": "2d34f18eaa65d27ded6b2a2e08769542f76129ca7ef4100346a5e7ff4e19043a"
+    },
+    {
+      "path": "cli/lib/voice.js",
+      "bytes": 38114,
+      "sha256": "a49b87545e3cacf3f4893d15a6abe0f94410bcfb23f1b5176b35c0176d3d9fc9"
+    },
+    {
+      "path": "cli/om.js",
+      "bytes": 24663,
+      "sha256": "a1073267e1b05f2487fae26f2780c94c278b88195f3a0e3013d0984058ad5c77"
+    },
+    {
+      "path": "examples/.npmignore",
+      "bytes": 21,
+      "sha256": "2e781fa4d9fdbeead02e2ba348850217ad34485a3df35641383329342acd0f13"
+    },
+    {
+      "path": "examples/showcase/assets/fonts/LICENSES.md",
+      "bytes": 4498,
+      "sha256": "00b5f86c4d5162e6fee6d600b527c052933eb2884a61a5fab0f89fa4d4656ecd"
+    },
+    {
+      "path": "examples/showcase/assets/fonts/OFL.txt",
+      "bytes": 4430,
+      "sha256": "67c5d5206b96f8340b95fabd02ae60701e0b20ce2594d976216f1065e5aa3822"
+    },
+    {
+      "path": "examples/showcase/index.html",
+      "bytes": 10849,
+      "sha256": "fee4d83e8c04ce60a5e036ea09186b48d5b12249d5c2dcd019cc02a3cd47273b"
+    },
+    {
+      "path": "examples/showcase/vendor/GSAP-LICENSE.html",
+      "bytes": 76456,
+      "sha256": "dee09c66ff27d61c2390da9cac6b558bc0c5c705f59abef900cc3563c81ee8b4"
+    },
+    {
+      "path": "examples/showcase/vendor/GSAP-LICENSE.txt",
+      "bytes": 153,
+      "sha256": "2e16f4e771c504532e976df3a422dc02d611f4a227bac77131be1fc6c9ab2baf"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/LICENSE",
+      "bytes": 1086,
+      "sha256": "6d6a2a9caf2e6d2b76974050427053b2892d8aa4c33fd168ce63a537fcee9d96"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/NOTICE.md",
+      "bytes": 1198,
+      "sha256": "51b1a6d3ac377244f553015041ccb0a1ff323f9dadff96f48dfba295b51ff946"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/engine.js",
+      "bytes": 15982,
+      "sha256": "2ecd3659912e5e2fed75cc62c8eab974c99dabf1bb773699967b822d2ac05259"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/eras.js",
+      "bytes": 6119,
+      "sha256": "2ccc90bed5e9ef337f8cf3444058705dc720743a78c9315a0e5ee814cd130fc9"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/lib/brush.js",
+      "bytes": 11850,
+      "sha256": "6e548a35b25ead20ac6e81042e8b841166d06f53cb0560326444fc125203ba64"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/lib/kit.js",
+      "bytes": 6542,
+      "sha256": "77821ce0ae8278c462b5669449bca473659c95317c3b62fc8b008e2bdf87209f"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/lib/paint.js",
+      "bytes": 15339,
+      "sha256": "aa61a2cb14b0bbd96e072865fb8b24bdd118b4f62aca3ff2c320ca17593aca25"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/lib/post.js",
+      "bytes": 9939,
+      "sha256": "c57ba51a2242e9505a1b35dbb2645c1e3541465069c99de704c3fba9066914a3"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/lib/render.js",
+      "bytes": 17315,
+      "sha256": "5bcde2a2711759c934722d91a456f13eecb5cd6679f9b3b601df728e18c08432"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/lib/rig.js",
+      "bytes": 34157,
+      "sha256": "88c4df6dc105cafdc7249a5f31c79928db6c05b372f04e2e0f14059e8620f17f"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/lib/util.js",
+      "bytes": 6416,
+      "sha256": "86045b05656183cd7017e43fb891aa65d1a1e76477885c4dbee81635ee8b7a1d"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/01_cave.js",
+      "bytes": 31438,
+      "sha256": "d5423bbf71393ab57b8ec24763bf178b2e5c3a0afa2c1e8d7fe3cf4cf3a7df9a"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/02_egypt.js",
+      "bytes": 50018,
+      "sha256": "ce4acdce7f65f41686f7e5f04336fdf150bfd53a560a20f2a83a3db495a86353"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/03_greek.js",
+      "bytes": 40744,
+      "sha256": "58e259062257ebf15d2fb141e10441119df0691e0cc2bd212922a8cffb3be184"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/04_roman.js",
+      "bytes": 47611,
+      "sha256": "a5678635c8199b61700785915de9308fcb20abbff34f98a143b50ef740faeaf8"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/05_gothic.js",
+      "bytes": 40426,
+      "sha256": "a5b24f49d1dc01cc5d5eebba9404f6c6ebd6d6de1a61ef6c2eae36c1f591b327"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/06_renaissance.js",
+      "bytes": 31437,
+      "sha256": "ab7dca1e5f6f5911a55cb132eeea405ab3d0001f2f6ceed01cc624bacbf9279e"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/08_impressionism.js",
+      "bytes": 20908,
+      "sha256": "6d5e4ee5f4329d7551ef84edc7f15d4396effd7b80e7091074c20920dabc7d24"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/09_postimp.js",
+      "bytes": 16299,
+      "sha256": "a1806dd4dfbfe32ed9a18e70174750c0e932a2a2beca832be8dc25708c76277e"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/10_nouveau.js",
+      "bytes": 30381,
+      "sha256": "4a390aa2d70b4a6afe0b35862e502ef78f42c36ff960f3ef49482be67320ca39"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/11_cubism.js",
+      "bytes": 27428,
+      "sha256": "dbdd5cba2eb07ecd75445c534d04b40d6206bbb252c28e31ecefeb08a83ee249"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/12_bauhaus.js",
+      "bytes": 17535,
+      "sha256": "647e3d52272eda0630150d04ed3f299da095c4e8e564e3fa7c84330c2993efad"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/13_pop.js",
+      "bytes": 24647,
+      "sha256": "80a893a23dc2d0a6350323b0b63a0cf4929e48908391f796422c402aa272935c"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/14_8bit.js",
+      "bytes": 17139,
+      "sha256": "3351f505bd0f272a623061a8f49993b877339c619dceb2f5e08c05933397b71e"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/15_raytrace.js",
+      "bytes": 25794,
+      "sha256": "b77169305a158c5161c6a4f30ed8f00adf0128cbfe837b0c4f37ebbc120213b4"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/16_2026.js",
+      "bytes": 50054,
+      "sha256": "915ab9a19ee937027ec1f449b8c3d358422df29d21986d237ac7c73169a5e710"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/scenes/index.js",
+      "bytes": 2439,
+      "sha256": "22da1210908a8083658eb53289656eeb578026b6deabc666928014d01ddae23e"
+    },
+    {
+      "path": "examples/showcase/vendor/art-motion/transitions.js",
+      "bytes": 69064,
+      "sha256": "22dface64bccee924faf56a49bfa380c65c65258b462acd800fc59ca654e2c8d"
+    },
+    {
+      "path": "examples/showcase/vendor/gsap.min.js",
+      "bytes": 72779,
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280"
+    },
+    {
+      "path": "examples/showcase/vendor/om.js",
+      "bytes": 11086,
+      "sha256": "7ee5dfa00497d80d47354f350d478910895f0daea3d2ec9e1baa2868d57011e8"
+    },
+    {
+      "path": "examples/voice-demo/assets/fonts/LICENSES.md",
+      "bytes": 4498,
+      "sha256": "00b5f86c4d5162e6fee6d600b527c052933eb2884a61a5fab0f89fa4d4656ecd"
+    },
+    {
+      "path": "examples/voice-demo/assets/fonts/OFL.txt",
+      "bytes": 4430,
+      "sha256": "67c5d5206b96f8340b95fabd02ae60701e0b20ce2594d976216f1065e5aa3822"
+    },
+    {
+      "path": "examples/voice-demo/assets/voice.words.json",
+      "bytes": 2487,
+      "sha256": "cba457ba2f9fdcecc1d12a38b0e0c1ca1a99ffb0575cd9901a1e899fe3d09de9"
+    },
+    {
+      "path": "examples/voice-demo/index.html",
+      "bytes": 13052,
+      "sha256": "7f2e8e115e6ac790a6fd7c6b096d97390989e9128ba69f9ea394b7678ee70909"
+    },
+    {
+      "path": "examples/voice-demo/script.txt",
+      "bytes": 193,
+      "sha256": "c63b04e0afabe00dc3f30174ede12a8dfad5bb0636c507ffe175e8931b8c04eb"
+    },
+    {
+      "path": "examples/voice-demo/vendor/GSAP-LICENSE.html",
+      "bytes": 76456,
+      "sha256": "dee09c66ff27d61c2390da9cac6b558bc0c5c705f59abef900cc3563c81ee8b4"
+    },
+    {
+      "path": "examples/voice-demo/vendor/GSAP-LICENSE.txt",
+      "bytes": 153,
+      "sha256": "2e16f4e771c504532e976df3a422dc02d611f4a227bac77131be1fc6c9ab2baf"
+    },
+    {
+      "path": "examples/voice-demo/vendor/gsap.min.js",
+      "bytes": 72779,
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280"
+    },
+    {
+      "path": "examples/voice-demo/vendor/om.js",
+      "bytes": 11086,
+      "sha256": "7ee5dfa00497d80d47354f350d478910895f0daea3d2ec9e1baa2868d57011e8"
+    },
+    {
+      "path": "package.json",
+      "bytes": 915,
+      "sha256": "07094b7b0b9bacf94a74b306e7e476c391e02aa3c38eebb552fce736eaa4b4d7"
+    },
+    {
+      "path": "runtime/camera-rig.js",
+      "bytes": 3597,
+      "sha256": "4bc315a50d230ec10e6c5980e464aa3df1b03cfc259bc6896b3719e23486c79d"
+    },
+    {
+      "path": "runtime/clip/LICENSE",
+      "bytes": 1086,
+      "sha256": "6d6a2a9caf2e6d2b76974050427053b2892d8aa4c33fd168ce63a537fcee9d96"
+    },
+    {
+      "path": "runtime/clip/NOTICE.md",
+      "bytes": 2524,
+      "sha256": "17de851ebbc87158da3a987cc1294f98ba63cceb8acef9b8fb649877b7e52ee0"
+    },
+    {
+      "path": "runtime/clip/clip.js",
+      "bytes": 15549,
+      "sha256": "8a4b67e1cbd5627bc7e2d1a70e154edf4d5d011b1c0e8f6da0af5b1597ce7e1e"
+    },
+    {
+      "path": "runtime/clip/cues.js",
+      "bytes": 3956,
+      "sha256": "3f626e4451da257234d5ba3e4e2aa05982d76dae6b268e2569d9b85f9122d362"
+    },
+    {
+      "path": "runtime/clip/grammars/t1_3b1b.js",
+      "bytes": 19308,
+      "sha256": "c954bd4d4eeb113018ce17df6310b40b8e94286e323202631fa43834f086c278"
+    },
+    {
+      "path": "runtime/clip/grammars/t2_keynote_ui.js",
+      "bytes": 27295,
+      "sha256": "d8e3b36dbeb9204ef18b9e5a6eb2f3e3f4f512b38de040f18c9732f8c5de983d"
+    },
+    {
+      "path": "runtime/clip/grammars/t3_finance_chart.js",
+      "bytes": 21148,
+      "sha256": "ab6838b9003cffe332a0c2d5631b8f6f028b93d47ea7366af96db6a4f1190762"
+    },
+    {
+      "path": "runtime/clip/grammars/y1_kurzgesagt.js",
+      "bytes": 15230,
+      "sha256": "c2147e2c950580b11dc42e2d2b6aab7f8920ab8e5f1d88431c91e4e8a4369083"
+    },
+    {
+      "path": "runtime/clip/grammars/y2_vox.js",
+      "bytes": 14569,
+      "sha256": "7a80ba1176051eb1ce1e5272dae5d5d733eb83cd79461bfa94a973e5c0e42de1"
+    },
+    {
+      "path": "runtime/clip/grammars/y3_whiteboard.js",
+      "bytes": 22588,
+      "sha256": "1743ad3473b2892d20b262e3e102e8c017384b1f1bd2e5c69078013dbb6c7a83"
+    },
+    {
+      "path": "runtime/clip/grammars/y4_storytime.js",
+      "bytes": 19715,
+      "sha256": "207c8115ab6b10bc2942a27db864488c0d39f06db782e7378607570e8e90f69a"
+    },
+    {
+      "path": "runtime/clip/grammars/y5_kinetic_type.js",
+      "bytes": 13373,
+      "sha256": "606647df0fe8c3ce701abc44e0d3fabc62f80a0510366094a56c679e7137e92a"
+    },
+    {
+      "path": "runtime/clip/lib/camera.js",
+      "bytes": 5391,
+      "sha256": "cfacc134a963015cc1354621503e5821e971d709b714e0534f518a37a06d8d5a"
+    },
+    {
+      "path": "runtime/clip/lib/chart.js",
+      "bytes": 10870,
+      "sha256": "93d3605cba7d7cf0bdda2c2dd8f9797734dd06c1f64fa18ef7a492f8755a8d27"
+    },
+    {
+      "path": "runtime/clip/lib/collage.js",
+      "bytes": 8972,
+      "sha256": "4dcd3d15f8895dc6e3d4f2e4d82766782a4e77876fb863ded9480320b8959d93"
+    },
+    {
+      "path": "runtime/clip/lib/diagram.js",
+      "bytes": 20080,
+      "sha256": "98b15ba5f883dd95eca2ff52ba1d768c10a5bea7862bd13aee6d84b875e2b8c5"
+    },
+    {
+      "path": "runtime/clip/lib/kit.js",
+      "bytes": 6542,
+      "sha256": "77821ce0ae8278c462b5669449bca473659c95317c3b62fc8b008e2bdf87209f"
+    },
+    {
+      "path": "runtime/clip/lib/motion.js",
+      "bytes": 7891,
+      "sha256": "7e70b8ef328c7497fe1403d37700fcdfbb2cc9d2175f16ea46ae3e69b49dbe15"
+    },
+    {
+      "path": "runtime/clip/lib/paint.js",
+      "bytes": 15339,
+      "sha256": "aa61a2cb14b0bbd96e072865fb8b24bdd118b4f62aca3ff2c320ca17593aca25"
+    },
+    {
+      "path": "runtime/clip/lib/toon.js",
+      "bytes": 13188,
+      "sha256": "83a83f6562578646ea0430c25e4a83a98dad77f32d631c869a49bb34a4e0225e"
+    },
+    {
+      "path": "runtime/clip/lib/typo.js",
+      "bytes": 9998,
+      "sha256": "30db0cc68145dca22532e487da01aeb3ec97155e8b2c3a0747a009ce6638be8f"
+    },
+    {
+      "path": "runtime/clip/lib/ui.js",
+      "bytes": 10548,
+      "sha256": "2608da0a38bfd429a9fe41c1a93a5d080d54c5fcccea80e7fea764e6ca3a97bf"
+    },
+    {
+      "path": "runtime/clip/lib/util.js",
+      "bytes": 6416,
+      "sha256": "86045b05656183cd7017e43fb891aa65d1a1e76477885c4dbee81635ee8b7a1d"
+    },
+    {
+      "path": "runtime/clip/test/cues.test.js",
+      "bytes": 6557,
+      "sha256": "c19a6403ab3a6f56da1777d0b4590ca38fca0345dff385c3f15eff57b08a3f0d"
+    },
+    {
+      "path": "runtime/om-engine.js",
+      "bytes": 25602,
+      "sha256": "59d41ca9e6f1e35a1e2b8c9bbb3f7b665822b137939282cce8f6113aeb6873ce"
+    },
+    {
+      "path": "runtime/om-player.js",
+      "bytes": 9225,
+      "sha256": "2c598f659357d0f668b05a94f983659fb28a7fb17556725f5d8b4b4e1de5da59"
+    },
+    {
+      "path": "runtime/om.js",
+      "bytes": 20691,
+      "sha256": "be8b8fc0033c022f6c9f33607df001edd1096b0b6814061a62ea030028ca77f5"
+    },
+    {
+      "path": "runtime/three/LICENSE",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "path": "runtime/three/entry.js",
+      "bytes": 1810,
+      "sha256": "8950c8f3d62988c45cf7cb3ff649454059a696662ca4aa1738c86ead25e3dce6"
+    },
+    {
+      "path": "runtime/three/om-three.js",
+      "bytes": 15703,
+      "sha256": "c2086bb4df17c56f82bf089baa5e25ebe43d11644e9815e58a65b1e90a2577d6"
+    },
+    {
+      "path": "runtime/three/three.min.js",
+      "bytes": 864197,
+      "sha256": "ec9d18ffe1cad8c392ede99a6c4ea158b85b5762237f5aee261c40b40af71135"
+    },
+    {
+      "path": "templates/.npmignore",
+      "bytes": 21,
+      "sha256": "2e781fa4d9fdbeead02e2ba348850217ad34485a3df35641383329342acd0f13"
+    },
+    {
+      "path": "templates/blank/assets/fonts/LICENSES.md",
+      "bytes": 4498,
+      "sha256": "00b5f86c4d5162e6fee6d600b527c052933eb2884a61a5fab0f89fa4d4656ecd"
+    },
+    {
+      "path": "templates/blank/assets/fonts/OFL.txt",
+      "bytes": 4430,
+      "sha256": "67c5d5206b96f8340b95fabd02ae60701e0b20ce2594d976216f1065e5aa3822"
+    },
+    {
+      "path": "templates/blank/index.html",
+      "bytes": 5992,
+      "sha256": "7964d82c915b508866731be902c53925d87b27ba1fa119fa689d5a8753341e61"
+    },
+    {
+      "path": "templates/blank/template.json",
+      "bytes": 258,
+      "sha256": "aadb80c902741871841c9daa35beb5cb2cc0d081db839d8a0464cb99b1eebef5"
+    },
+    {
+      "path": "templates/blank/vendor/GSAP-LICENSE.html",
+      "bytes": 76456,
+      "sha256": "dee09c66ff27d61c2390da9cac6b558bc0c5c705f59abef900cc3563c81ee8b4"
+    },
+    {
+      "path": "templates/blank/vendor/GSAP-LICENSE.txt",
+      "bytes": 153,
+      "sha256": "2e16f4e771c504532e976df3a422dc02d611f4a227bac77131be1fc6c9ab2baf"
+    },
+    {
+      "path": "templates/blank/vendor/gsap.min.js",
+      "bytes": 72779,
+      "sha256": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280"
+    },
+    {
+      "path": "templates/finance-chart/index.html",
+      "bytes": 6985,
+      "sha256": "2d7c7b0fec9294604d9ff472ee65c41100931b55173254fad930956effccdbc5"
+    },
+    {
+      "path": "templates/finance-chart/template.json",
+      "bytes": 1232,
+      "sha256": "bb7e204148eea582dcae3f163b34551bd6c5063ed33b8763f4643623c4ecd965"
+    },
+    {
+      "path": "templates/keynote-ui/assets/chart.png",
+      "bytes": 96255,
+      "sha256": "4fc03c0ba8303a0f7521561214625488a0aaf3f8d29aba4dc56c089b6f7381b0"
+    },
+    {
+      "path": "templates/keynote-ui/index.html",
+      "bytes": 9170,
+      "sha256": "a98b1368e40dafc8bcd8feabd2e51ae892c09841510cfc4196df1abfd8bd6467"
+    },
+    {
+      "path": "templates/keynote-ui/template.json",
+      "bytes": 1245,
+      "sha256": "4ff22cfdf19912f8fde6e1055b0489591466277d5359fa814020d4e9ac53f21b"
+    },
+    {
+      "path": "templates/kinetic-type/index.html",
+      "bytes": 6329,
+      "sha256": "94d8cce670eee999ae9027a0b37fb68db4e50a5c80277a410169b42b695ffb98"
+    },
+    {
+      "path": "templates/kinetic-type/template.json",
+      "bytes": 1270,
+      "sha256": "f5819aa9adc7e08d3718ffe88f4708d0f495122f3190b54e60fb616be0372100"
+    },
+    {
+      "path": "templates/kurzgesagt/index.html",
+      "bytes": 6479,
+      "sha256": "1b390a8624a764f29a304438f7f43692c5bcab7e35def5e6e2c3c967ebe3e048"
+    },
+    {
+      "path": "templates/kurzgesagt/template.json",
+      "bytes": 1167,
+      "sha256": "e2a7efa6768048432e1bb0857b27fa3c255a90835d3b56f0b5f43cba35bed513"
+    },
+    {
+      "path": "templates/math-3b1b/index.html",
+      "bytes": 8086,
+      "sha256": "7d887a87b50e3c96ee6a2e2cfadc5d92f6a3af60cd713ff520733ceeead1199c"
+    },
+    {
+      "path": "templates/math-3b1b/template.json",
+      "bytes": 1307,
+      "sha256": "66dead76d556e18aa769d4744fb29975cd66be6cd67d12bdafa4282c7b0313cd"
+    },
+    {
+      "path": "templates/object-3d/assets/comment.svg",
+      "bytes": 112,
+      "sha256": "a9e48f15e0d1cf6f9a1f96a7fa86184fba6076ae297a121721cfffd3f8c57972"
+    },
+    {
+      "path": "templates/object-3d/assets/cursor.svg",
+      "bytes": 116,
+      "sha256": "367c3df7eb8c5dd628cdc13a61705d5070255b280921b943f0072605c7925eec"
+    },
+    {
+      "path": "templates/object-3d/assets/studio.jpg",
+      "bytes": 793872,
+      "sha256": "4b8c2daa443e938b702f80909b85a6727da1bafd8b17d5a09fac77aac3bf0590"
+    },
+    {
+      "path": "templates/object-3d/index.html",
+      "bytes": 10292,
+      "sha256": "4c907e2e87da52c11ae45998b76535d7c97c9dd35a5627335d53ae6715c21615"
+    },
+    {
+      "path": "templates/object-3d/materials.md",
+      "bytes": 451,
+      "sha256": "1b94dbb8a3e7c730d3831e66524281b3ee255c87cae96c4f4f4f369b164c1167"
+    },
+    {
+      "path": "templates/object-3d/template.json",
+      "bytes": 1188,
+      "sha256": "96cde38098716b23d120be001a68060b38e94fea0fb951f282c980adff1619d2"
+    },
+    {
+      "path": "templates/storytime/index.html",
+      "bytes": 6155,
+      "sha256": "5f4657cc22abc346e4eb19462053b9aa2614216f23f445b8821471fa0673163e"
+    },
+    {
+      "path": "templates/storytime/template.json",
+      "bytes": 1188,
+      "sha256": "a2a18b05351d9079ea0fb3dbf8dd2aa54d4522cfda48bf1a32af62507c9fe8c7"
+    },
+    {
+      "path": "templates/talking-head/index.html",
+      "bytes": 26018,
+      "sha256": "6c18af543ed5c6da008c9a0c5f50300940cae94e6bc6fa79f3ae26b127878539"
+    },
+    {
+      "path": "templates/talking-head/template.json",
+      "bytes": 905,
+      "sha256": "3372be9f0992e96118c23fbe06e60f629ec44d9fa9eecfa368a2d53a81348bae"
+    },
+    {
+      "path": "templates/ui-space/index.html",
+      "bytes": 10567,
+      "sha256": "e9730fdcd96b30d76b8a3e4c3b97061d838b9cdc7aed830da71b6937af692680"
+    },
+    {
+      "path": "templates/ui-space/materials.md",
+      "bytes": 451,
+      "sha256": "1b94dbb8a3e7c730d3831e66524281b3ee255c87cae96c4f4f4f369b164c1167"
+    },
+    {
+      "path": "templates/ui-space/template.json",
+      "bytes": 1117,
+      "sha256": "cfd973af68af9253929041f1004451fa0b9d4a42496efb2de6a2fc01826323d4"
+    },
+    {
+      "path": "templates/vox-collage/assets/kline.png",
+      "bytes": 136588,
+      "sha256": "04a61f9be80bc4895136cfb168ed102860d96af41edab1957e326d647993cb19"
+    },
+    {
+      "path": "templates/vox-collage/assets/revenue-portrait.png",
+      "bytes": 84147,
+      "sha256": "ee8f0bbb8e4a9aa89b2ce48a67ce70962babf5ff28831ae1d1c08d4ff898675d"
+    },
+    {
+      "path": "templates/vox-collage/index.html",
+      "bytes": 5481,
+      "sha256": "dcc61085a8a547f739190f49d52af8e5dee785ff15ff9cda9cf4c77a24e153df"
+    },
+    {
+      "path": "templates/vox-collage/template.json",
+      "bytes": 1200,
+      "sha256": "5644ed1cc7ca48f090e0c9c1fd8d77bd077095c40d1b70b66292f20df7435a88"
+    },
+    {
+      "path": "templates/whiteboard/index.html",
+      "bytes": 7203,
+      "sha256": "5c74c5b6cdb48d26d3daccdc22ca0607ccfe4f63a3715752f9f8bb44ec5960e1"
+    },
+    {
+      "path": "templates/whiteboard/template.json",
+      "bytes": 1102,
+      "sha256": "afc45fc719432b2f218c7c9ca927c5314193023425699ef4faf6539fbd6a3fab"
+    }
+  ]
+}

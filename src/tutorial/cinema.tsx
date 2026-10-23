@@ -3,6 +3,7 @@
 // number, soft translucent surfaces with a left accent bar instead of outlined boxes, one gold accent, light and depth.
 // Rules: docs/video-craft/quick-reference.md §六 (高级感). Motion is smooth deceleration — type never bounces.
 import React from 'react';
+import {AbsoluteFill, Img, staticFile} from 'remotion';
 import {cinema, display, font, mono} from './theme';
 import {clamp, ease} from '../fx';
 
@@ -126,4 +127,22 @@ export const Dot: React.FC<{f: number; at: number; color?: string; size?: number
   const k = rise(f, at, 10);
   return <span style={{display: 'inline-block', width: size, height: size, borderRadius: size / 2, flex: 'none',
     background: k > 0 ? color : 'rgba(255,255,255,0.18)', boxShadow: k > 0 ? `0 0 ${18 * k}px ${color}` : 'none', transform: `scale(${1 + 0.25 * (1 - k) * (k > 0 ? 1 : 0)})`}} />;
+};
+
+/**
+ * An illustrated plate: one generated picture filling the whole 1080 × 1920 frame, the way the early explainers carry each
+ * point (scripts/generate-tutorial-images.mjs; docs/video-craft/插画底图.md). Use it as a scene's `backdrop`. A slow push
+ * (in on even plates, out on odd ones, like the explainers' Ken Burns) and the explainers' shade — dark at the top for the
+ * headline, clear through the middle where the picture speaks, dark again under the captions.
+ * `src` is the plate id under images/tutorials/<id>/; `focus` moves the picture up (−) or down (+) in px.
+ */
+export const Plate: React.FC<{id: string; src: string; f: number; dur: number; index?: number; focus?: number; shade?: number}> = ({id, src, f, dur, index = 0, focus = 0, shade = 1}) => {
+  const p = clamp(f / Math.max(1, dur));
+  const zoomIn = index % 2 === 0;
+  const scale = zoomIn ? 1.04 + p * 0.09 : 1.13 - p * 0.09;
+  const y = focus + (zoomIn ? -24 * p : -24 * (1 - p));
+  return <AbsoluteFill style={{background: cinema.bg, overflow: 'hidden'}}>
+    <Img src={staticFile(`images/tutorials/${id}/${src}.jpg`)} style={{width: '100%', height: '100%', objectFit: 'cover', transform: `translateY(${y.toFixed(1)}px) scale(${scale.toFixed(4)})`}} />
+    <AbsoluteFill style={{opacity: shade, background: 'linear-gradient(180deg, rgba(7,11,20,0.92) 0%, rgba(7,11,20,0.72) 22%, rgba(7,11,20,0.05) 42%, rgba(7,11,20,0.05) 55%, rgba(7,11,20,0.78) 72%, rgba(7,11,20,0.9) 100%)'}} />
+  </AbsoluteFill>;
 };

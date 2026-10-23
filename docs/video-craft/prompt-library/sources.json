@@ -249,6 +249,31 @@
         "/prompts/*.md"
       ],
       "pinned": "7977c80"
+    },
+    {
+      "repo": "alchaincyf/huashu-motion",
+      "license": "MIT（花叔 / alchaincyf）；runtime/clip、art-motion 各带 LICENSE / NOTICE；gsap.min.js 走 GSAP 自己的许可（附 GSAP-LICENSE）；字体 OFL，没拷（渲染时缺字体回落到思源黑体）",
+      "include": [
+        "/LICENSE",
+        "/README.md",
+        "/THIRD_PARTY.md",
+        "/skills/**/*.md",
+        "/skills/**/*.abc"
+      ],
+      "code": [
+        "/LICENSE",
+        "/THIRD_PARTY.md",
+        "/package.json",
+        "/runtime/**",
+        "/cli/**",
+        "/templates/**",
+        "!/templates/**/*.woff",
+        "/examples/**",
+        "!/examples/**/*.woff",
+        "!/examples/**/*.wav"
+      ],
+      "pinned": "52467f9",
+      "codePinned": "52467f9"
     }
   ]
 }

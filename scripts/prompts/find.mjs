@@ -7,7 +7,7 @@
 //   node scripts/prompts/find.mjs --list [--source=mg15]     # every entry id
 // Sources: opus55 (703 prompts) · lemo (51 STYLE.md + DEMO.md + guides) · opuscar98 (98 style prompts) ·
 // mg15 (15 MG style prompts) · ovp (18 Chinese-annotated prompts) · ac55 (prompt templates and case research) ·
-// pdoom · cab (ClaudeAnimationBase).
+// pdoom · cab (ClaudeAnimationBase) · huashu (huashu-motion: director, rhythm, colour, 20 visual languages, techniques).
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -20,6 +20,7 @@ const ALIAS = {
   'JohnHeibel/ClaudeAnimationBase': 'cab',
   'athemeroy/awesome-claude-5-5-videos': 'ac55',
   'joeseesun/opus-video-prompts': 'ovp',
+  'alchaincyf/huashu-motion': 'huashu',
 };
 
 const args = process.argv.slice(2);
@@ -71,7 +72,7 @@ for (const src of cfg.sources) {
       const title = `${s.cn ?? slug[1]} ${s.en ?? ''}${slug[2] === 'DEMO' ? ' · 样片拆解' : ''} · ${s.category_cn ?? ''} · ${(s.uses || []).join(', ')}`;
       add(slug[2] === 'DEMO' ? `${slug[1]}/demo` : slug[1], title, `${s.line_cn ?? ''}\n\n${text}`, f);
     } else {
-      add(f.replace(/^prompts\/|^docs\//, '').replace(/\.md$/, ''), (text.match(/^#\s+(.+)$/m)?.[1] ?? f).trim(), text, f);
+      add(f.replace(/^prompts\/|^docs\/|^skills\/huashu-motion\/references\//, '').replace(/\.md$/, ''), (text.match(/^#\s+(.+)$/m)?.[1] ?? f).trim(), text, f);
     }
   }
 }

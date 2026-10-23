@@ -3,6 +3,8 @@ export type TutorialScene = {
   visual: string;
   step: number;
   narration: string;
+  /** Illustrated plates for this scene (scripts/generate-tutorial-images.mjs → public/images/tutorials/<id>/<plate id>.jpg). */
+  plates?: {id: string; prompt: string}[];
 };
 
 export type Tutorial = {
@@ -46,6 +48,8 @@ export type Tutorial = {
    * `anchor` in a layout = where the stage centre (440, 400) lands and its scale; `headline` = top-left of the title.
    */
   coverCard?: CoverCard;
+  /** Style sentence appended to every plate prompt (the explainers' house style is the default to start from). */
+  imageStyle?: string;
   scenes: TutorialScene[];
 };
 

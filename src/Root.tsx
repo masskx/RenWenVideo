@@ -3,6 +3,7 @@ import {Composition, Still} from 'remotion';
 import {ArticleExplainer, ExplainerTimeline} from './ArticleExplainer';
 import {TutorialCover, TutorialCoverCard, TutorialVideo} from './tutorial/TutorialVideo';
 import {Tutorial, TutorialTiming} from './tutorial/types';
+import {LAB_FRAMES, PropsLab} from './lab/PropsLab';
 import aiEra11Rules from '../explainers/ai-era-11-rules.timeline.json';
 import marketingEngineer from '../explainers/marketing-engineer.timeline.json';
 // Studio preview defaults; render-tutorial.mjs passes any tutorials/<id>.json as inputProps.
@@ -27,4 +28,6 @@ export const RemotionRoot = () => <>
   <Still id="TutorialCover34" component={TutorialCoverCard} width={1080} height={1440} defaultProps={{...reaTutorial, ratio: '3:4' as const}} />
   <Still id="TutorialCover67" component={TutorialCoverCard} width={1080} height={1260} defaultProps={{...reaTutorial, ratio: '6:7' as const}} />
   <Still id="TutorialCover916" component={TutorialCoverCard} width={1080} height={1920} defaultProps={{...reaTutorial, ratio: '9:16' as const}} />
+  {/* Style frames for the props kit (src/lab/PropsLab.tsx) */}
+  <Composition id="PropsLab" component={PropsLab} width={1080} height={1920} fps={30} durationInFrames={LAB_FRAMES} defaultProps={{shot: 'hook' as const}} />
 </>;
