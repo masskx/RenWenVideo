@@ -257,14 +257,30 @@ Pipe.sfx = (cue) => {
 const endPlan = (cue: Cue) => ({a: cue('a', 38), b: cue('b', 84)});
 const End: Scene = ({f, dur, cue}) => {
   const p = endPlan(cue);
+  // five cards drift apart (a prompt that wanders), collapse into one on 「只讲透一个知识点」, and brackets close on 「约束」
+  const one = ease.inOutCubic(clamp((f - p.a + 4) / 20)), hold = ease.outCubic(clamp((f - p.b + 2) / 14));
+  const spread = [[-300, 40, -12], [-150, -10, -6], [0, 0, 0], [150, -10, 6], [300, 40, 12]];
   return <Stage f={f} dur={dur} beats={[p.a, p.b]}>
-    <Pool x={450} y={640} o={0.14 + 0.08 * rise(f, p.a, 16)} />
+    <Pool x={450} y={640} o={0.14 + 0.1 * one} />
     <Abs y={0} style={{textAlign: 'center'}}><Headline f={f} at={-12} lines={['一支片子', <span key="2" style={{opacity: rise(f, p.a - 6, R)}}>只讲{gold('一个知识点')}</span>]} size={112} align="center" /></Abs>
-    <Abs x={290} y={320} w={320}><Reveal f={f} at={-2} d={R}><VibeCard f={f} w={320} beat={pulse(f, 0.7)} /></Reveal></Abs>
-    <Abs y={930} style={{textAlign: 'center'}}><Reveal f={f} at={p.b - 4} d={R} dy={12}><Small c={DIM} size={44}>约束提示词，不发散</Small></Reveal></Abs>
+    <Abs y={320} h={600}>
+      {spread.map(([x, y, r], i) => {
+        const drift = 1 + 0.15 * clamp(f / 30);
+        const k = i === 2 ? 1 : 1 - one;
+        return <div key={i} style={{position: 'absolute', left: 450 - 160 + x * drift * (1 - one), top: y * (1 - one), opacity: (i === 2 ? 1 : 0.55) * k * rise(f, -6 + i * 2, R),
+          transform: `rotate(${r * (1 - one)}deg) scale(${i === 2 ? 1 : 0.85})`, zIndex: i === 2 ? 2 : 1}}>
+          <VibeCard f={f + i * 17} w={320} beat={i === 2 ? pulse(f, 0.7) : 0.1} />
+        </div>;
+      })}
+      {/* the constraint: two gold brackets close in around the one card */}
+      {hold > 0 && [-1, 1].map((sd) => <div key={sd} style={{position: 'absolute', top: -20, height: 609, width: 46, left: 450 + sd * (200 + 160 * (1 - hold)) - 23,
+        border: `8px solid ${GOLD}`, borderLeft: sd < 0 ? `8px solid ${GOLD}` : 'none', borderRight: sd > 0 ? `8px solid ${GOLD}` : 'none', borderRadius: 14,
+        opacity: hold, boxSizing: 'border-box'}} />)}
+    </Abs>
+    <Abs y={960} style={{textAlign: 'center'}}><Reveal f={f} at={p.b - 4} d={R} dy={12}><Small c={DIM} size={44}>约束提示词，不发散</Small></Reveal></Abs>
   </Stage>;
 };
-End.sfx = (cue) => [{at: endPlan(cue).a, kind: 'chime', gain: 0.08}];
+End.sfx = (cue) => [{at: endPlan(cue).a, kind: 'whoosh-short', gain: 0.08}, {at: endPlan(cue).b, kind: 'chime', gain: 0.08}];
 
 /* ---------- cover anchor (880 × 800): the pipeline into one glowing card ---------- */
 
