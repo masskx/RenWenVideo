@@ -1,0 +1,48 @@
+{
+  "id": "tibet-quake-ai-rumor",
+  "title": "震后三招辨AI假图",
+  "subtitle": "震后刷到灾情图？三招辨AI假图",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "tts": {"provider": "doubao"},
+  "leadMs": 100,
+  "tailMs": 100,
+  "musicSrc": "audio/tutorials/tibet-quake-ai-rumor/bgm.mp3",
+  "musicVolume": 0.06,
+  "musicDuckDb": 18,
+  "series": "AI 辨假 · 信息核实",
+  "credit": "画面均为自绘示意 · 信息以中国地震台网为准",
+  "source": "inputs/tibet-quake-ai-rumor/script.md",
+  "steps": [],
+  "look": {"theme": "cinema", "space": "both", "frame": "full", "header": "label", "tour": false, "particles": false, "mascot": false,
+    "cuts": {"big": ["pushUp", "push"], "small": ["push", "pushUp"]}},
+  "highlights": [],
+  "cover": "hook",
+  "coverCard": {
+    "template": "对比型",
+    "headline": ["震后刷到灾情图？", "三招辨AI假图"],
+    "support": "看细节 · 搜来源 · 对官方",
+    "tag": "AI 辨假 · 信息核实",
+    "anchor": "tqr.cover",
+    "layouts": {
+      "3:4": {"headline": [80, 130], "size": 100, "anchor": [540, 880, 0.9], "support": 1300},
+      "6:7": {"headline": [80, 100], "size": 92, "anchor": [540, 770, 0.78], "support": 1150},
+      "9:16": {"headline": [80, 330], "size": 104, "anchor": [540, 1080, 1.0], "support": 1560}
+    }
+  },
+  "scenes": [
+    {"id": "hook", "visual": "tqr.hook", "step": 0, "pace": 1.16,
+      "narration": "10月22日晚，{a}西藏[那曲|那区]巴青县发生[7.0级|七点零级]地震，{b}愿灾区平安。"},
+    {"id": "feed", "visual": "tqr.feed", "step": 0, "pace": 1.22,
+      "narration": "这种时候，{a}网上会出现很多“灾情图”和视频，{b}有些是AI生成的。{c}教你三招先辨一辨。"},
+    {"id": "detail", "visual": "tqr.detail", "step": 0, "pace": 1.22,
+      "narration": "第一，看细节：{a}文字招牌乱码、{b}人手手指不对、{c}建筑结构扭曲，{d}AI图常[露馅|漏馅]。"},
+    {"id": "search", "visual": "tqr.search", "step": 0, "pace": 1.22,
+      "narration": "第二，搜来源：{a}截图用以图搜图，{b}看最早出处，{c}是不是旧图、{d}别的地方的图。"},
+    {"id": "official", "visual": "tqr.official", "step": 0, "pace": 1.22,
+      "narration": "第三，对官方：{a}震级、{b}位置、{c}灾情，{d}只认中国地震台网、{e}应急管理部{f}和权威媒体的通报。"},
+    {"id": "end", "visual": "tqr.end", "step": 0, "pace": 1.1, "tailMs": 1500,
+      "narration": "拿不准的内容，{a}不转发，{b}就是最简单的帮忙。"}
+  ]
+}

@@ -27,6 +27,7 @@ import {claudeProactiveCinemaScenes} from './claude-proactive-agent-cinema';
 import {deepseekDeepinferScenes} from './deepseek-deepinfer';
 import {agentComputeHijackScenes} from './agent-compute-hijack';
 import {aiSameTakeOnHumansScenes} from './ai-same-take-on-humans';
+import {tibetQuakeAiRumorScenes} from './tibet-quake-ai-rumor';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -60,4 +61,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...deepseekDeepinferScenes,
   ...agentComputeHijackScenes,
   ...aiSameTakeOnHumansScenes,
+  ...tibetQuakeAiRumorScenes,
 };
