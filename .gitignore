@@ -30,3 +30,6 @@ douyin/*/cover-thumbs.png
 
 # page renders (scripts/page-render.mjs): stills and clips are build output
 pages/**/out/
+
+# Raw source footage too large to commit; trimmed clips live in public/video/<id>/ (see inputs/<id>/README.md)
+inputs/kimi-k3-1-pro/material/

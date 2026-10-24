@@ -1,0 +1,41 @@
+{
+ "id": "kimi-k3-1-pro",
+ "title": "Kimi K3.1 Pro",
+ "subtitle": "这条龙，是AI写代码搭出来的",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "doubao"
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "series": "AI 新模型",
+ "credit": "演示：Kimi 官方博客",
+ "source": "inputs/kimi-k3-1-pro/idea.md",
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": ["cut"],
+   "small": ["cut"]
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "scenes": [
+  {"id": "hook", "visual": "kimi.hook", "step": 0, "pace": "brisk", "narration": "这条龙不是生成的视频，{a}是AI自己写代码，{b}在虚幻引擎里搭的。"},
+  {"id": "name", "visual": "kimi.name", "step": 0, "pace": "brisk", "narration": "这是月之暗面刚发布的{a}[Kimi K3.1 Pro|Kimi K 三点一 Pro]。"},
+  {"id": "blender", "visual": "kimi.blender", "step": 0, "pace": "brisk", "narration": "它不用插件，{a}直接写脚本开 Blender，{b}一座教堂，{c}从白模到打光。"},
+  {"id": "engine", "visual": "kimi.engine", "step": 0, "pace": "brisk", "narration": "两千一百个零件的发动机，{a}能拆开，{b}还能转。"},
+  {"id": "lamp", "visual": "kimi.lamp", "step": 0, "pace": "brisk", "narration": "建个台灯模型，{a}打印出来，{b}真能亮。"},
+  {"id": "walk", "visual": "kimi.walk", "step": 0, "pace": "brisk", "narration": "最狠的是教肌肉人走路：{a}它跑了[167|一百六十七]轮，{b}还自己揪出模拟器里[36|三十六]处错。"},
+  {"id": "bench", "visual": "kimi.bench", "step": 0, "pace": "brisk", "tailMs": 900, "narration": "编程测试，{a}只比[Claude Opus 5.5|Claude Opus 五点五]{b}少[0.7|零点七]分。"},
+  {"id": "end", "visual": "kimi.end", "step": 0, "pace": "normal", "tailMs": 1600, "narration": "权重[11月4号|十一月四号]前{a}开源。"}
+ ]
+}

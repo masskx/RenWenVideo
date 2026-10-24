@@ -1,0 +1,203 @@
+{
+  "id": "kimi-k3-1-pro",
+  "voice": "doubao",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1098,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/kimi-k3-1-pro/01-hook.mp3",
+      "audioMs": 4728,
+      "startFrame": 0,
+      "durationFrames": 150,
+      "cues": {
+        "a": 2219,
+        "b": 3479
+      },
+      "captions": [
+        {
+          "text": "这条龙不是生成的视频",
+          "startMs": 325,
+          "endMs": 2219
+        },
+        {
+          "text": "是AI自己写代码",
+          "startMs": 2219,
+          "endMs": 3479
+        },
+        {
+          "text": "在虚幻引擎里搭的",
+          "startMs": 3479,
+          "endMs": 5019
+        }
+      ]
+    },
+    {
+      "id": "name",
+      "audioSrc": "audio/tutorials/kimi-k3-1-pro/02-name.mp3",
+      "audioMs": 3736,
+      "startFrame": 150,
+      "durationFrames": 120,
+      "cues": {
+        "a": 2135
+      },
+      "captions": [
+        {
+          "text": "这是月之暗面刚发布的",
+          "startMs": 305,
+          "endMs": 2135
+        },
+        {
+          "text": "Kimi K3.1 Pro",
+          "startMs": 2135,
+          "endMs": 3975
+        }
+      ]
+    },
+    {
+      "id": "blender",
+      "audioSrc": "audio/tutorials/kimi-k3-1-pro/03-blender.mp3",
+      "audioMs": 5042,
+      "startFrame": 270,
+      "durationFrames": 159,
+      "cues": {
+        "a": 1412,
+        "b": 3119,
+        "c": 3920
+      },
+      "captions": [
+        {
+          "text": "它不用插件",
+          "startMs": 355,
+          "endMs": 1412
+        },
+        {
+          "text": "直接写脚本开 Blender",
+          "startMs": 1412,
+          "endMs": 3119
+        },
+        {
+          "text": "一座教堂，从白模到打光",
+          "startMs": 3119,
+          "endMs": 5250
+        }
+      ]
+    },
+    {
+      "id": "engine",
+      "audioSrc": "audio/tutorials/kimi-k3-1-pro/04-engine.mp3",
+      "audioMs": 3683,
+      "startFrame": 429,
+      "durationFrames": 118,
+      "cues": {
+        "a": 2273,
+        "b": 3077
+      },
+      "captions": [
+        {
+          "text": "两千一百个零件的发动机",
+          "startMs": 465,
+          "endMs": 2273
+        },
+        {
+          "text": "能拆开，还能转",
+          "startMs": 2273,
+          "endMs": 3907
+        }
+      ]
+    },
+    {
+      "id": "lamp",
+      "audioSrc": "audio/tutorials/kimi-k3-1-pro/05-lamp.mp3",
+      "audioMs": 2847,
+      "startFrame": 547,
+      "durationFrames": 93,
+      "cues": {
+        "a": 1599,
+        "b": 2274
+      },
+      "captions": [
+        {
+          "text": "建个台灯模型",
+          "startMs": 345,
+          "endMs": 1599
+        },
+        {
+          "text": "打印出来，真能亮",
+          "startMs": 1599,
+          "endMs": 3109
+        }
+      ]
+    },
+    {
+      "id": "walk",
+      "audioSrc": "audio/tutorials/kimi-k3-1-pro/06-walk.mp3",
+      "audioMs": 5642,
+      "startFrame": 640,
+      "durationFrames": 177,
+      "cues": {
+        "a": 2119,
+        "b": 3461
+      },
+      "captions": [
+        {
+          "text": "最狠的是教肌肉人走路",
+          "startMs": 355,
+          "endMs": 2119
+        },
+        {
+          "text": "它跑了167轮",
+          "startMs": 2119,
+          "endMs": 3461
+        },
+        {
+          "text": "还自己揪出模拟器里36处错",
+          "startMs": 3461,
+          "endMs": 5873
+        }
+      ]
+    },
+    {
+      "id": "bench",
+      "audioSrc": "audio/tutorials/kimi-k3-1-pro/07-bench.mp3",
+      "audioMs": 3997,
+      "startFrame": 817,
+      "durationFrames": 150,
+      "cues": {
+        "a": 1328,
+        "b": 2988
+      },
+      "captions": [
+        {
+          "text": "编程测试",
+          "startMs": 345,
+          "endMs": 1328
+        },
+        {
+          "text": "只比Claude Opus 5.5少0.7分",
+          "startMs": 1328,
+          "endMs": 4248
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/kimi-k3-1-pro/08-end.mp3",
+      "audioMs": 2638,
+      "startFrame": 967,
+      "durationFrames": 131,
+      "cues": {
+        "a": 2135
+      },
+      "captions": [
+        {
+          "text": "权重11月4号前开源",
+          "startMs": 335,
+          "endMs": 2885
+        }
+      ]
+    }
+  ]
+}
