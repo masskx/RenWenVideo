@@ -34,7 +34,7 @@ Method: `docs/video-craft/导演方法.md` (built from the eight Opus-video repo
 - External footage: muted, bottom-right label 「@作者｜案例展示」, author link in the package README.
 - The hook is mine to design from the material (references: `docs/video-craft/hooks.md`); say in the plan what it is and why.
 - `npm run lint` must pass; each mp4 < 100 MB; record new failure modes in `docs/video-craft/踩坑清单.md`.
-- Cloud container: `REMOTION_BROWSER_EXECUTABLE=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell` for renders; `TTS_CA_BUNDLE=/root/.ccr/ca-bundle.crt` for the edge-tts backup.
+- Cloud container: renders find the installed headless shell themselves (`chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell`, older images `chromium_headless_shell-1194/chrome-linux/headless_shell`; override with `REMOTION_BROWSER_EXECUTABLE`); `TTS_CA_BUNDLE=/root/.ccr/ca-bundle.crt` for the edge-tts backup.
 
 ## Docs
 
