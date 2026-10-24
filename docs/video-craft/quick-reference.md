@@ -40,7 +40,7 @@
 
 ## 五、配音
 
-- 只用用户本人的复刻音色（豆包语音），每个场景整段合成，逐字时间戳驱动字幕和卡点；edge-tts 只在用户同意时作备用。见 [配音.md](配音.md)。
+- **默认用用户的 MiniMax 音色 `MashuaiDouyin01`**（用户 2026-10-24：“以后帮我做视频都用这个新的 MiniMax 音色”；`MINIMAX_API_KEY`；中文口播里夹英文名词它自己会读）。配置写 `"tts": {"provider": "minimax"}` 或不写 `tts`。每个场景整段合成，逐词时间戳驱动字幕和卡点。之前的豆包复刻音色保留（`"provider": "doubao"`），旧片和用户点名时用；edge-tts 只在用户同意时作备用。见 [配音.md](配音.md)。
 - 每个场景写 `"pace"`（slow / calm / normal / brisk / fast），钩子一般 brisk。
 
 ## 六、画面风格

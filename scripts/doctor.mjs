@@ -20,7 +20,8 @@ check('必需', 'python3（配音脚本）', has('python3', ['--version']), '装
 const shells = ['/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell', '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell'];
 const shell = process.env.REMOTION_BROWSER_EXECUTABLE || shells.find((s) => fs.existsSync(s)) || shells[0];
 check('必需', `Remotion 浏览器（${shell}）`, fs.existsSync(shell), '云端容器：export REMOTION_BROWSER_EXECUTABLE=… （见 CLAUDE.md Hard rules）；本机：npx remotion browser ensure');
-check('必需', '豆包配音密钥 DOUBAO_API_KEY / DOUBAO_VOICE_ZH（只看有没有）', process.env.DOUBAO_API_KEY && process.env.DOUBAO_VOICE_ZH, '在环境的 secrets / .env 里设置（docs/video-craft/配音.md）；不要贴进对话或提交');
+check('必需', 'MiniMax 配音密钥 MINIMAX_API_KEY（默认音色 MashuaiDouyin01，只看有没有）', process.env.MINIMAX_API_KEY, '在环境的 secrets / .env 里设置（docs/video-craft/配音.md §〇）；不要贴进对话或提交');
+check('可选', '豆包配音密钥 DOUBAO_API_KEY / DOUBAO_VOICE_ZH（旧音色，重配旧片时用；只看有没有）', process.env.DOUBAO_API_KEY && process.env.DOUBAO_VOICE_ZH, '在环境的 secrets / .env 里设置（docs/video-craft/配音.md）；不要贴进对话或提交');
 check('可选', '生图 OPENAI_API_KEY（缺素材时的辅助）', process.env.OPENAI_API_KEY, '需要生图时再设');
 check('可选', '网页渲染用的 Chromium（scripts/page-render.mjs）', fs.existsSync(process.env.PAGE_CHROME || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'), 'PAGE_CHROME=<chrome 路径>');
 check('必需', '仓库字体 public/fonts（思源黑体 / 宋体 / 霞鹜文楷）', ['NotoSansSC-VF.otf', 'NotoSansSC-900.otf', 'NotoSerifSC-Black.otf', 'LXGWWenKai-Medium.ttf'].every((f) => exists(`public/fonts/${f}`)), 'git pull（字体随仓库提交）');

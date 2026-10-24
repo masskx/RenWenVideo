@@ -3,14 +3,19 @@
 Usage:
   python scripts/generate-tutorial-voice.py <id> [--force]     (reads tutorials/<id>.json)
 
-TTS: the user's own cloned voice on Doubao (Volcano Engine) TTS v3 — the voice every video uses.
-  "tts": {"provider": "doubao"}    DOUBAO_API_KEY (or DOUBAO_APP_ID + DOUBAO_ACCESS_TOKEN), voice from DOUBAO_VOICE_ZH
+TTS: the user's own voice. Default since 2026-10-24 (user: "from now on always use this new MiniMax voice"):
+  "tts": {"provider": "minimax"}   MiniMax T2A v2 (speech-2.8-hd), voice MashuaiDouyin01 (or MINIMAX_VOICE_ID / "voice"),
+                                   key MINIMAX_API_KEY. Reads mixed Chinese + English nouns itself (language_boost auto).
+                                   One request per scene; word timestamps (subtitle_type "word") give the cue and caption
+                                   times. A config without "tts" uses it too.
+  "tts": {"provider": "doubao"}    The earlier cloned voice, kept for older films and when asked for: DOUBAO_API_KEY
+                                   (or DOUBAO_APP_ID + DOUBAO_ACCESS_TOKEN), voice from DOUBAO_VOICE_ZH
                                    (or "voice"), resource seed-icl-2.0. Each scene is ONE request, so prosody runs
                                    across sentences; per-character timestamps (enable_subtitle) give the cue and
                                    caption times. Details: docs/video-craft/配音.md
   "tts": {"provider": "edge", "voice": "zh-CN-YunxiNeural"}
                                    BACKUP ONLY, and only when the user agrees: edge-tts (free, `pip install edge-tts`),
-                                   word timings from the service. Never used as a silent fallback for Doubao.
+                                   word timings from the service. Never used as a silent fallback for the main voice.
 
 Per scene: "pace" (slow/calm/normal/brisk/fast), "mood" (a delivery instruction, Doubao context_texts),
 "voiceEnv" (another cloned voice id from the environment, e.g. a high-energy clone for hooks). Every scene is then
@@ -60,6 +65,13 @@ TOKEN = re.compile(r"\{([a-z0-9]+)\}|\[([^\]|]+)\|([^\]]+)\]|\{pace:([a-z0-9.]+)
 # Recalibrated 2026-10-17 for short-video pacing: the cloned voice ran at 3.7 chars/s at the old "normal" (1.1) with
 # 29 % of the track in pauses; these rates plus pause tightening (tighten_pauses) land at about 4.8-5.5 chars/s.
 PACES = {"slow": 1.04, "calm": 1.1, "normal": 1.16, "brisk": 1.24, "fast": 1.32}
+# The MiniMax voice (MashuaiDouyin01) reads much faster than the Doubao clone: the kimi-k3-1-pro narration at 1.05
+# came out at 5.6 chars/s after pause tightening (measured 2026-10-24), so it gets its own, lower table aimed at the
+# same 4.8-5.5 chars/s. MiniMax accepts speed 0.5-2.
+MINIMAX_PACES = {"slow": 0.88, "calm": 0.92, "normal": 0.96, "brisk": 1.0, "fast": 1.05}
+MINIMAX_VOICE = "MashuaiDouyin01"
+MINIMAX_MODEL = "speech-2.8-hd"
+DEFAULT_PROVIDER = "minimax"
 # Default Doubao model for the cloned voice: measured on the same line, seed-tts-2.0-expressive + a spoken-style script
 # gave a 19.2-semitone pitch range vs 15.1 for the plain default (docs/video-craft/配音.md §四).
 DOUBAO_MODEL = "seed-tts-2.0-expressive"
@@ -340,6 +352,64 @@ def synthesize_doubao(text, tts, out_path):
     return map_timestamps(text, spread_stubs(service))
 
 
+def synthesize_minimax(text, tts, out_path):
+    """MiniMax T2A v2, whole scene in one request; word timestamps via subtitle_enable + subtitle_type "word" (a
+    subtitle file the response links to). Voice: MINIMAX_VOICE_ID or MashuaiDouyin01. Key: MINIMAX_API_KEY."""
+    import time
+    key = os.environ.get("MINIMAX_API_KEY")
+    if not key:
+        raise SystemExit("Set MINIMAX_API_KEY (environment or .env) for the MiniMax voice")
+    voice = tts.get("voice") or os.environ.get(tts.get("voiceEnv", "MINIMAX_VOICE_ID")) or MINIMAX_VOICE
+    body = {"model": tts.get("model", MINIMAX_MODEL), "text": text, "stream": False, "language_boost": tts.get("languageBoost", "auto"),
+            "voice_setting": {"voice_id": voice, "speed": min(2.0, max(0.5, tts.get("rate", 1.0))), "vol": 1.0, "pitch": 0,
+                              **({"emotion": tts["emotion"]} if tts.get("emotion") else {})},
+            "audio_setting": {"format": "mp3", "sample_rate": 32000, "bitrate": 128000, "channel": 1},
+            "output_format": "hex", "subtitle_enable": True, "subtitle_type": "word", **(tts.get("params") or {})}
+    endpoint = os.environ.get("MINIMAX_TTS_ENDPOINT", "https://api.minimax.cn/v1/t2a_v2")
+    ctx = ssl.create_default_context(cafile=os.environ.get("SSL_CERT_FILE")) if os.environ.get("SSL_CERT_FILE") else None
+    last, audio, subs = None, None, []
+    for attempt in range(4):
+        req = urllib.request.Request(endpoint, data=json.dumps(body).encode(), method="POST",
+                                     headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
+        try:
+            with urllib.request.urlopen(req, context=ctx, timeout=180) as r:
+                result = json.load(r)
+            status = (result.get("base_resp") or {}).get("status_code")
+            if status != 0:
+                last = f"MiniMax error {status}: {(result.get('base_resp') or {}).get('status_msg')}"
+                if status in (1004, 2049):  # auth / invalid key: retrying won't help
+                    break
+                raise RuntimeError(last)
+            data = result.get("data") or {}
+            if data.get("status") != 2 or not data.get("audio"):
+                raise RuntimeError("incomplete audio returned")
+            audio = bytes.fromhex(data["audio"])
+            if data.get("subtitle_file"):
+                with urllib.request.urlopen(data["subtitle_file"], context=ctx, timeout=60) as r:
+                    subs = json.load(r)
+            break
+        except urllib.error.HTTPError as error:
+            last = f"HTTP {error.code}: {error.read()[:300]!r}"
+            if error.code in (401, 403):
+                break
+        except Exception as error:
+            last = str(error)[:300]
+        time.sleep(2 * (attempt + 1))
+    if not audio:
+        raise SystemExit(f"MiniMax TTS failed for scene {text[:30]!r}…: {last}")
+    with tempfile.TemporaryDirectory() as tmp:
+        raw = Path(tmp) / "scene.mp3"
+        raw.write_bytes(audio)
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(raw), "-af", TAIL_TRIM, "-ar", "44100", "-ac", "2",
+                        "-c:a", "libmp3lame", "-b:a", "192k", str(out_path)], check=True)
+    # word times are ms from the start of the audio; "word" is the original text (before 5.5 -> 五点五 normalization)
+    service = [{"text": w["word"], "begin": w["time_begin"], "end": w["time_end"]}
+               for seg in subs for w in seg.get("timestamped_words") or [] if w.get("word", "").strip()]
+    if not service:
+        raise SystemExit(f"MiniMax returned no word timestamps for scene {text[:30]!r}… (subtitle_type \"word\")")
+    return map_timestamps(text, service)
+
+
 def spread_stubs(service, stub_ms=60):
     """Doubao stamps some latin words and digits ("DeepSeek", "V3", "2") with a ~30 ms stub that sits either at the
     start or at the end of the spoken word (measured 2026-10-18: "是 DeepSeek。" -> DeepSeek stamped 1.1 s late).
@@ -368,7 +438,7 @@ def spread_stubs(service, stub_ms=60):
 
 def pace_rate(pace, tts):
     """A pace name (or number) -> rate (1.0 = the voice's natural speed)."""
-    table = {**PACES, **(tts.get("paces") or {})}
+    table = {**(MINIMAX_PACES if tts.get("provider", DEFAULT_PROVIDER) == "minimax" else PACES), **(tts.get("paces") or {})}
     if pace is None:
         return tts.get("rate", table["normal"])
     try:
@@ -489,11 +559,11 @@ def tighten_pauses(mp3, words, tts, spoken):
 
 
 def engine_for(tts, where):
-    provider = tts.get("provider", "doubao")
-    engines = {"doubao": synthesize_doubao, "edge": synthesize_edge}
+    provider = tts.get("provider", DEFAULT_PROVIDER)
+    engines = {"minimax": synthesize_minimax, "doubao": synthesize_doubao, "edge": synthesize_edge}
     if provider not in engines:
-        raise SystemExit(f"{where}: tts.provider {provider!r} is not supported; use \"doubao\" (the cloned voice) or, "
-                         'as an agreed backup only, "edge" (docs/video-craft/配音.md)')
+        raise SystemExit(f"{where}: tts.provider {provider!r} is not supported; use \"minimax\" (the default voice), "
+                         '"doubao" (the earlier cloned voice) or, as an agreed backup only, "edge" (docs/video-craft/配音.md)')
     return engines[provider]
 
 
@@ -502,7 +572,9 @@ def say(argv):
     opt = lambda name, default=None: argv[argv.index(name) + 1] if name in argv else default
     out = Path(opt("--say"))
     load_dotenv()
-    tts = {"provider": opt("--provider", "doubao"), "rate": float(opt("--rate", PACES["normal"])), "voice": opt("--voice")}
+    provider = opt("--provider", DEFAULT_PROVIDER)
+    tts = {"provider": provider, "voice": opt("--voice")}
+    tts["rate"] = float(opt("--rate", pace_rate("normal", tts)))
     text = sys.stdin.read().strip()
     words = engine_for(tts, "--say")(text, tts, out)
     tighten_pauses(out, words, tts, text)
@@ -516,10 +588,13 @@ def main():
     spec_path = resolve_tutorial(args[0] if args else None)
     spec = json.loads(spec_path.read_text(encoding="utf-8"))
     load_dotenv()
-    tts = spec.get("tts") or {"provider": "doubao"}
+    tts = {"provider": DEFAULT_PROVIDER, **(spec.get("tts") or {})}
     engine = engine_for(tts, spec_path.name)
     if engine is synthesize_edge:
         voice_key = f"edge:{tts.get('voice') or EDGE_VOICE}:{tts.get('rate')}:{json.dumps(tts.get('pauses', PAUSES))}"
+    elif engine is synthesize_minimax:
+        voice_key = (f"minimax:{tts.get('voice') or os.environ.get(tts.get('voiceEnv', 'MINIMAX_VOICE_ID')) or MINIMAX_VOICE}:{tts.get('model', MINIMAX_MODEL)}"
+                     f":{tts.get('rate')}:{tts.get('emotion', '')}:{json.dumps(tts.get('pauses', PAUSES))}:{VOICE_CHAIN}")
     else:
         voice_key = (f"doubao:{tts.get('voice') or os.environ.get(tts.get('voiceEnv', 'DOUBAO_VOICE_ZH'))}:{tts.get('resource', 'seed-icl-2.0')}:{tts.get('rate')}"
                      f":{tts.get('model', DOUBAO_MODEL)}:{json.dumps(tts.get('pauses', PAUSES))}:{VOICE_CHAIN}")
@@ -535,7 +610,7 @@ def main():
         words_cache = mp3.with_suffix(".words.json")
         cache = json.loads(words_cache.read_text(encoding="utf-8")) if words_cache.exists() else {}
         mood = scene.get("mood", tts.get("mood"))
-        # a scene may use another cloned voice (e.g. a high-energy clone for hooks): "voiceEnv": "DOUBAO_VOICE_ZH_ENERGY"
+        # a scene may use another voice id from the environment (e.g. a high-energy clone for hooks): "voiceEnv": "…"
         scene_voice = {"voiceEnv": scene["voiceEnv"], "voice": None} if scene.get("voiceEnv") else {}
         pace_key = f"{scene_rate}:{pace_changes}:{mood or ''}:{scene.get('voiceEnv', '')}"
         stale = cache.get("spoken") != spoken or cache.get("voice") != voice_key or cache.get("pace", "") != pace_key
@@ -567,7 +642,7 @@ def main():
         scenes.append({"id": scene["id"], "audioSrc": rel, "audioMs": round(audio_ms), "startFrame": start_frame,
                        "durationFrames": duration_frames, "cues": cues, "captions": captions})
         start_frame += duration_frames
-    timing = {"id": spec["id"], "voice": tts.get("provider", "doubao"), "rate": tts.get("rate"), "fps": fps, "leadMs": lead,
+    timing = {"id": spec["id"], "voice": tts["provider"], "rate": tts.get("rate"), "fps": fps, "leadMs": lead,
               "totalFrames": start_frame, "scenes": scenes}
     out = timeline_path(spec_path)
     out.write_text(json.dumps(timing, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

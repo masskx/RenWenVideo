@@ -1,7 +1,7 @@
 // Builds assets and a frame timeline for a narrated explainer (explainers/<id>.json).
 //   node scripts/build-explainer.mjs --id=ai-era-11-rules --images --voice
 // --images  generate missing illustrations with Images2 (OPENAI_API_KEY / OPENAI_BASE_URL)
-// --voice   synthesize missing narration segments with the cloned Doubao voice (DOUBAO_API_KEY, DOUBAO_VOICE_ZH)
+// --voice   synthesize missing narration segments with the user's voice (MiniMax by default: MINIMAX_API_KEY; voice.provider "doubao" for the clone)
 // --force   regenerate even if files exist
 // Always (re)writes explainers/<id>.timeline.json from the audio on disk.
 import {existsSync, readFileSync, writeFileSync, mkdirSync, rmSync} from 'node:fs';
@@ -85,11 +85,12 @@ async function generateImage(image) {
   console.log(`image ${image.id}`);
 }
 
-// One line in the user's cloned Doubao voice (or the agreed edge-tts backup: voice.provider "edge"), via the tutorial voice script.
+// One line in the user's voice (MiniMax by default, "doubao" for the earlier clone, or the agreed edge-tts backup "edge"), via the
+// tutorial voice script; without voice.rate the script uses that provider's "normal" pace.
 async function synthesize(text, target) {
   if (!force && existsSync(target)) return;
   const result = spawnSync('python3', [path.join(root, 'scripts', 'generate-tutorial-voice.py'), '--say', target,
-    '--rate', String(config.voice.rate ?? 1.16), '--provider', config.voice.provider ?? 'doubao',
+    ...(config.voice.rate ? ['--rate', String(config.voice.rate)] : []), '--provider', config.voice.provider ?? 'minimax',
     ...(config.voice.voice ? ['--voice', config.voice.voice] : [])], {input: text, encoding: 'utf8', env: process.env});
   if (result.error || result.status !== 0) throw new Error(`TTS failed for ${JSON.stringify(text)}: ${result.error?.message || result.stderr}`);
   console.log(`voice ${path.basename(target)}: ${text}`);
