@@ -1,6 +1,6 @@
 ---
 name: video-craft
-description: How every short video in this repo is made — AI tools / AI news videos for 微信视频号, 抖音 and 小红书 built from the user's idea plus source material (the script and storyboard are ours to write). Use whenever making, revising, re-rendering or packaging a video, or reviewing why one doesn't hook or hold viewers. Priority order (hook → retention → phone readability → fidelity → polish), the directing method learned from eight code-video repos + huashu-motion + Xian's 梵高 explainer (one idea, one sentence one picture, found colours, props), the required brief + directing section, voicing with the user's cloned Doubao voice, render, QA gates (brief, echo, jury) and packaging.
+description: How every short video in this repo is made — AI tools / AI news videos for 微信视频号, 抖音 and 小红书 built from the user's idea plus source material (the script and storyboard are ours to write). Use whenever making, revising, re-rendering or packaging a video, or reviewing why one doesn't hook or hold viewers. Priority order (hook → retention → phone readability → fidelity → polish), the directing method learned from eight code-video repos + huashu-motion + Xian's 梵高 explainer (one idea, one sentence one picture, found colours, props), the required brief + directing section, voicing with the user's MiniMax voice (MashuaiDouyin01; the Doubao clone kept as an option), render, QA gates (brief, echo, jury) and packaging.
 ---
 
 # video-craft
@@ -16,7 +16,7 @@ In a new session run `npm run doctor` first. Read every time: `docs/video-craft/
 | `平台与合规.md` | Douyin / 视频号 / 小红书 habits, safe zones, the implicit rules (§三) before publishing |
 | `评审表.md` | the jury rubric; `node scripts/qa/jury.mjs <id>` builds the packet |
 | `huashu-motion.md` | huashu's directing, colour and its templates (`scripts/huashu-new.mjs`) |
-| `配音.md` | voicing: cloned Doubao voice, timestamps → subtitles, pace presets, readings |
+| `配音.md` | voicing: the MiniMax voice (default) or the Doubao clone, timestamps → subtitles, pace presets, readings |
 | `文案.md`, `hooks.md` | writing the narration for the ear; hooks |
 | `封面.md`, `音效.md` | covers; sound effects (CC0 / CC BY, credits) |
 | `prompt-library/` | the pinned docs (`vendor/`) and code (`code/`) of the reference repos; `node scripts/prompts/find.mjs <words>` |

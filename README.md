@@ -4,8 +4,8 @@
 
 | 流水线 | 适合的内容 | 画面来源 | 配音 |
 | --- | --- | --- | --- |
-| **长文讲解（Explainer）** | 把文章、对谈稿提炼成“N 条结论” | Images2 AI 配图 + 章节标题、原话卡片 | 本人复刻音色（豆包语音） |
-| **操作教程（Tutorial）** | 工具上手、AI 新闻拆解、开源项目介绍 | 代码绘制的字卡、终端、流程图 + 素材包里的录屏、截图、案例片（标「案例展示」） | 本人复刻音色（豆包语音） |
+| **长文讲解（Explainer）** | 把文章、对谈稿提炼成“N 条结论” | Images2 AI 配图 + 章节标题、原话卡片 | 本人音色（MiniMax，默认；豆包复刻保留） |
+| **操作教程（Tutorial）** | 工具上手、AI 新闻拆解、开源项目介绍 | 代码绘制的字卡、终端、流程图 + 素材包里的录屏、截图、案例片（标「案例展示」） | 本人音色（MiniMax，默认；豆包复刻保留） |
 
 每条视频的成片、三种比例封面、字幕、审片静帧和三个平台的发布文案统一放在 `douyin/<id>/`，和代码一样用 git 管理（成片也提交，单个 < 100 MB）。新片从 `inputs/<id>/`（`idea.md` 想法 + 素材包；脚本可选）开始，做法见 `docs/video-craft/导演方法.md` 和根目录 `CLAUDE.md`。
 
@@ -87,14 +87,15 @@ scripts/run.ps1                  Windows 辅助脚本（项目放在 FAT32/移�
 
 ## 环境准备
 
-- Node.js 22+ 和 ffmpeg/ffprobe（需要在 PATH 里）；配音、底乐还需要 Python 3 和 `pip install numpy`（豆包配音只用标准库；备用的 edge-tts 另装 `pip install edge-tts`）
+- Node.js 22+ 和 ffmpeg/ffprobe（需要在 PATH 里）；配音、底乐还需要 Python 3 和 `pip install numpy`（MiniMax / 豆包配音只用标准库；备用的 edge-tts 另装 `pip install edge-tts`）
 - 中文字体：组件按顺序使用 Noto Sans CJK SC、Source Han Sans SC、PingFang SC、Microsoft YaHei，系统里装有其中一个就行
 - 密钥：把 `.env.example` 复制为 `.env` 再填写（`.env` 不会被提交）
 
 | 变量 | 用途 |
 | --- | --- |
 | `OPENAI_API_KEY` / `OPENAI_BASE_URL` / `OPENAI_IMAGE_MODEL` | Images2 生图，默认 `gpt-image-2`，输出 1024×1536 |
-| `DOUBAO_API_KEY`（或 `DOUBAO_APP_ID` + `DOUBAO_ACCESS_TOKEN`） | 配音：用户本人的复刻音色（火山引擎豆包语音），本仓库唯一的 TTS |
+| `MINIMAX_API_KEY` | 配音（默认）：用户的 MiniMax 音色 `MashuaiDouyin01`（可用 `MINIMAX_VOICE_ID` 换） |
+| `DOUBAO_API_KEY`（或 `DOUBAO_APP_ID` + `DOUBAO_ACCESS_TOKEN`） | 配音（保留）：之前的复刻音色（火山引擎豆包语音），`"provider": "doubao"` 时用 |
 | `DOUBAO_VOICE_ZH` / `DOUBAO_VOICE_EN` | 复刻音色 id（`S_` 开头）；可选 `DOUBAO_VOICE_ZH_ENERGY`，场景里用 `"voiceEnv"` 选择 |
 | `TTS_CA_BUNDLE` | 可选。备用 edge-tts 在 TLS 代理环境里用的 CA 证书 |
 | `REMOTION_BROWSER_EXECUTABLE` | 可选。Remotion 下载不了 Chrome 时，指定本机 Chrome 或 headless-shell |
@@ -113,7 +114,7 @@ npm ci
    - `stamp`：`{line, phrase, text}`，第 `line` 句念到 `phrase` 时盖下印章 `text` 并震屏（每个场景的主动作）
    - `highlights` / `emphasis`：全片两个核心名词的 A/B 固定色，以及字幕里要强调的词（规则见 `docs/video-craft/讲解动画规则.md` 第四节）
    - `images`：配图提示词（`imageStyle` 是全片统一的画风）；场景有两张图时，`split` 指定从第几句开始切到第二张
-   - `voice` / `music`：配音语速（`{"provider": "doubao", "rate": 1.16}`）和底乐素材
+   - `voice` / `music`：配音（`{"provider": "minimax"}`，不写就是 MiniMax；旧片 `"doubao"`）和底乐素材
 2. **生成素材和时间轴**（已有的文件会跳过，加 `--force` 全部重做）：
    ```bash
    node scripts/build-explainer.mjs --id=<id> --images --voice
@@ -138,7 +139,7 @@ npm ci
 
 1. **输入**：`inputs/<id>/script.md`（钩子、口播、结尾、标题，格式随意）+ `materials/`。先看一遍素材：账号、网址、品牌、血腥画面要避开或打码，记进分镜的“素材和出处”。
 2. **计划**：写 `tutorials/<id>.json`、`tutorials/<id>.storyboard.md`（简报五项 + 封面卡）和 `src/tutorial/scenes/<id>.tsx`（在 `scenes/index.ts` 里登记）。新片照 `tutorials/litellm-pypi-poison-cinema.json`（cinema 主题、全屏 9:16）改：
-   - 配音只用本人的复刻音色：`"tts": {"provider": "doubao"}`，语速按场景写 `"pace"`。复刻音色不可用且用户同意时，可临时改用免费的 edge-tts 备用声音：`"tts": {"provider": "edge"}`。每个场景整段一次合成，卡点和字幕时间来自服务端的逐字时间戳；语速、读音修正见 `docs/video-craft/配音.md`。
+   - 配音默认用本人的 MiniMax 音色：`"tts": {"provider": "minimax"}`（或不写 `tts`），之前的豆包复刻音色保留为 `"provider": "doubao"`；语速按场景写 `"pace"`。本人音色不可用且用户同意时，可临时改用免费的 edge-tts 备用声音：`"tts": {"provider": "edge"}`。每个场景整段一次合成，卡点和字幕时间来自服务端的逐字时间戳；语速、读音修正见 `docs/video-craft/配音.md`。
    - 默认 ≤ 60 秒；脚本要求更长且用户同意时写 `"maxSeconds"`。
    - `"look": {"theme": "cinema", "frame": "full", "header": "label", "tour": false, "particles": false}`：全屏 9:16，舞台 900×1080 在 (60, 200)，字幕在 y 1390。`"header": "label"` 是顶部一行小字（左边 `"series"`，右边 `"credit"`），没有进度条。配色是 `src/tutorial/theme.ts` 的 `cinemaPalettes.midnight`（藏青黑底 + 冷光，金色只给字）。`"space"` 给背景加纵深（`src/tutorial/space.tsx`）：`"both"`（默认，用户 2026-10-22 选定：透视地面网格 + 远近的光和浮尘）、`"grid"`（只要地面网格）、`"depth"`（只要光和浮尘）、`"plain"`（纯色 + 光）；四种对照见 `docs/video-craft/assets/backgrounds.mp4`。场景用 `src/tutorial/cinema.tsx` 的 `Headline`（章节号 + 大标题 + 马克笔）、`Surface`（面板）、`Terminal`、`Reveal`。`"theme": "blueprint"` 留给真要画工程图的片子。
    - `"musicVolume"` + `"musicDuckDb"`：底乐从第 0 帧开始，口播时压低（一般 14–18 dB）。
