@@ -8,6 +8,7 @@
 import {bundle} from '@remotion/bundler';
 import {renderMedia, renderStill, selectComposition} from '@remotion/renderer';
 import {access, mkdir, readFile, unlink, writeFile} from 'node:fs/promises';
+import {existsSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -33,7 +34,9 @@ for (const src of [...timing.scenes.map((s) => s.audioSrc), tutorial.musicSrc].f
 
 const inputProps = {tutorial, timing};
 const serveUrl = await bundle({entryPoint: path.join(root, 'src/index.ts')});
-const browserExecutable = process.env.REMOTION_BROWSER_EXECUTABLE;
+// Cloud containers: fall back to whichever headless-shell build is installed (the path has changed between images).
+const browserExecutable = process.env.REMOTION_BROWSER_EXECUTABLE
+  || ['/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell', '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell'].find((c) => existsSync(c));
 const packageDir = path.join(root, 'douyin', id);
 const qaDir = path.join(root, 'qa', id);
 

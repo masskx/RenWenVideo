@@ -16,7 +16,9 @@ const exists = (p) => fs.existsSync(path.isAbsolute(p) ? p : path.join(REPO, p))
 check('必需', 'node_modules（remotion、puppeteer-core）', exists('node_modules/remotion') && exists('node_modules/puppeteer-core'), 'npm ci');
 check('必需', 'ffmpeg / ffprobe', has('ffmpeg') && has('ffprobe'), '装 ffmpeg（环境的 setup script）');
 check('必需', 'python3（配音脚本）', has('python3', ['--version']), '装 python3');
-const shell = process.env.REMOTION_BROWSER_EXECUTABLE || '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell';
+// Cloud containers have shipped different headless-shell builds; accept whichever is installed.
+const shells = ['/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell', '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell'];
+const shell = process.env.REMOTION_BROWSER_EXECUTABLE || shells.find((s) => fs.existsSync(s)) || shells[0];
 check('必需', `Remotion 浏览器（${shell}）`, fs.existsSync(shell), '云端容器：export REMOTION_BROWSER_EXECUTABLE=… （见 CLAUDE.md Hard rules）；本机：npx remotion browser ensure');
 check('必需', '豆包配音密钥 DOUBAO_API_KEY / DOUBAO_VOICE_ZH（只看有没有）', process.env.DOUBAO_API_KEY && process.env.DOUBAO_VOICE_ZH, '在环境的 secrets / .env 里设置（docs/video-craft/配音.md）；不要贴进对话或提交');
 check('可选', '生图 OPENAI_API_KEY（缺素材时的辅助）', process.env.OPENAI_API_KEY, '需要生图时再设');

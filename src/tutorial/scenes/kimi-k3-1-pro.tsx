@@ -1,5 +1,5 @@
 import React from 'react';
-import {OffthreadVideo, Sequence, staticFile} from 'remotion';
+import {Img, OffthreadVideo, Sequence, staticFile} from 'remotion';
 import {clamp, ease} from '../../fx';
 import {font, mono} from '../theme';
 import {Cue, Scene} from '../paper';
@@ -458,6 +458,14 @@ End.backdrop = ({f, cue}) => {
 };
 End.sfx = (cue) => [{at: 2, kind: 'fs-whoosh-wipe', gain: 0.1}, {at: endPlan(cue).a - 2, kind: 'stamp', gain: 0.14}];
 
+/** Cover anchor (880 × 800, rendered at f = 0): the dragon from the demo, edges fading into the palace ground. */
+const Cover: Scene = () => <div style={{position: 'absolute', inset: 0, overflow: 'hidden', borderRadius: 24}}>
+  <Img src={staticFile('images/tutorials/kimi-k3-1-pro/dragon.jpg')} style={{width: '100%', height: '100%', objectFit: 'cover', objectPosition: '55% 40%'}} />
+  <div style={{position: 'absolute', inset: 0, background: `radial-gradient(ellipse 75% 70% at 55% 45%, transparent 55%, ${P.palace} 100%)`}} />
+  <CaseTag />
+</div>;
+
 export const kimiK31ProScenes: Record<string, Scene> = {
   'kimi.hook': Hook, 'kimi.name': Name, 'kimi.blender': Blender, 'kimi.engine': Engine, 'kimi.lamp': Lamp, 'kimi.walk': Walk, 'kimi.bench': Bench, 'kimi.end': End,
+  'kimi.cover': Cover,
 };
