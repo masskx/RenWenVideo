@@ -1,0 +1,62 @@
+{
+ "spoken": "权重十一月四号前开源。",
+ "voice": "doubao:S_XH4ScO592:seed-icl-2.0:None:seed-tts-2.0-expressive:{\"max_ms\": 170, \"sentence_ms\": 240, \"detect_db\": -38}:highpass=f=75,equalizer=f=3000:t=q:w=1.2:g=2.5,acompressor=threshold=-20dB:ratio=3:attack=5:release=80:makeup=2",
+ "pace": "1.16:[]::",
+ "words": [
+  {
+   "text": "权",
+   "ms": 235.0,
+   "dur": 270.0
+  },
+  {
+   "text": "重",
+   "ms": 505.0,
+   "dur": 330.0
+  },
+  {
+   "text": "十",
+   "ms": 885.0,
+   "dur": 310.0
+  },
+  {
+   "text": "一",
+   "ms": 1195.0,
+   "dur": 100.0
+  },
+  {
+   "text": "月",
+   "ms": 1295.0,
+   "dur": 170.0
+  },
+  {
+   "text": "四",
+   "ms": 1465.0,
+   "dur": 200.0
+  },
+  {
+   "text": "号",
+   "ms": 1665.0,
+   "dur": 180.0
+  },
+  {
+   "text": "前",
+   "ms": 1845.0,
+   "dur": 190.00000000000023
+  },
+  {
+   "text": "开",
+   "ms": 2035.0000000000002,
+   "dur": 229.99999999999977
+  },
+  {
+   "text": "源",
+   "ms": 2265.0,
+   "dur": 135.0
+  },
+  {
+   "text": "。",
+   "ms": 2400.0,
+   "dur": 135.0
+  }
+ ]
+}
