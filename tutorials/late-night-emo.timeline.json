@@ -1,0 +1,340 @@
+{
+  "id": "late-night-emo",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1746,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/late-night-emo/01-hook.mp3",
+      "audioMs": 3814,
+      "startFrame": 0,
+      "durationFrames": 122,
+      "cues": {
+        "a": 1593,
+        "b": 2553
+      },
+      "captions": [
+        {
+          "text": "你一定见过这种朋友圈",
+          "startMs": 143,
+          "endMs": 1593
+        },
+        {
+          "text": "凌晨两点发",
+          "startMs": 1593,
+          "endMs": 2553
+        },
+        {
+          "text": "早上八点删",
+          "startMs": 2553,
+          "endMs": 4047
+        }
+      ]
+    },
+    {
+      "id": "feel",
+      "audioSrc": "audio/tutorials/late-night-emo/02-feel.mp3",
+      "audioMs": 5930,
+      "startFrame": 122,
+      "durationFrames": 186,
+      "cues": {
+        "a": 1848,
+        "b": 3613,
+        "c": 4411
+      },
+      "captions": [
+        {
+          "text": "发的时候，是真难过",
+          "startMs": 144,
+          "endMs": 1848
+        },
+        {
+          "text": "删的时候，是真清醒",
+          "startMs": 1848,
+          "endMs": 3613
+        },
+        {
+          "text": "两个都是你",
+          "startMs": 3613,
+          "endMs": 4411
+        },
+        {
+          "text": "只是不在同一个钟点",
+          "startMs": 4411,
+          "endMs": 6286
+        }
+      ]
+    },
+    {
+      "id": "turn",
+      "audioSrc": "audio/tutorials/late-night-emo/03-turn.mp3",
+      "audioMs": 3527,
+      "startFrame": 308,
+      "durationFrames": 114,
+      "cues": {
+        "a": 1033,
+        "b": 2199
+      },
+      "captions": [
+        {
+          "text": "不是你矫情",
+          "startMs": 144,
+          "endMs": 1033
+        },
+        {
+          "text": "是夜里的大脑",
+          "startMs": 1033,
+          "endMs": 2199
+        },
+        {
+          "text": "换了个人值班",
+          "startMs": 2199,
+          "endMs": 3806
+        }
+      ]
+    },
+    {
+      "id": "brake",
+      "audioSrc": "audio/tutorials/late-night-emo/04-brake.mp3",
+      "audioMs": 5721,
+      "startFrame": 422,
+      "durationFrames": 180,
+      "cues": {
+        "a": 1935,
+        "b": 3514,
+        "c": 4220
+      },
+      "captions": [
+        {
+          "text": "管情绪的杏仁核像油门",
+          "startMs": 143,
+          "endMs": 1935
+        },
+        {
+          "text": "前额叶是刹车",
+          "startMs": 1935,
+          "endMs": 3514
+        },
+        {
+          "text": "熬到深夜，刹车最先没电",
+          "startMs": 3514,
+          "endMs": 6007
+        }
+      ]
+    },
+    {
+      "id": "almond",
+      "audioSrc": "audio/tutorials/late-night-emo/05-almond.mp3",
+      "audioMs": 4859,
+      "startFrame": 602,
+      "durationFrames": 154,
+      "cues": {
+        "a": 1508,
+        "b": 2732,
+        "c": 4198
+      },
+      "captions": [
+        {
+          "text": "有实验让人一夜不睡",
+          "startMs": 143,
+          "endMs": 1508
+        },
+        {
+          "text": "再看负面图片",
+          "startMs": 1508,
+          "endMs": 2732
+        },
+        {
+          "text": "杏仁核的反应高了六成多",
+          "startMs": 2732,
+          "endMs": 5088
+        }
+      ]
+    },
+    {
+      "id": "clock",
+      "audioSrc": "audio/tutorials/late-night-emo/06-clock.mp3",
+      "audioMs": 6818,
+      "startFrame": 756,
+      "durationFrames": 213,
+      "cues": {
+        "a": 1967,
+        "b": 3117,
+        "c": 4978
+      },
+      "captions": [
+        {
+          "text": "还有研究者提出一个假说",
+          "startMs": 144,
+          "endMs": 1967
+        },
+        {
+          "text": "凌晨一到四点",
+          "startMs": 1967,
+          "endMs": 3117
+        },
+        {
+          "text": "好心情跌到一天最低",
+          "startMs": 3117,
+          "endMs": 4978
+        },
+        {
+          "text": "人最容易往坏处想",
+          "startMs": 4978,
+          "endMs": 7104
+        }
+      ]
+    },
+    {
+      "id": "cave",
+      "audioSrc": "audio/tutorials/late-night-emo/07-cave.mp3",
+      "audioMs": 5721,
+      "startFrame": 969,
+      "durationFrames": 180,
+      "cues": {
+        "a": 767,
+        "b": 2808,
+        "c": 4275
+      },
+      "captions": [
+        {
+          "text": "他们推测，远古时",
+          "startMs": 144,
+          "endMs": 1629
+        },
+        {
+          "text": "夜里最危险",
+          "startMs": 1629,
+          "endMs": 2808
+        },
+        {
+          "text": "爱往坏处想的人",
+          "startMs": 2808,
+          "endMs": 4275
+        },
+        {
+          "text": "反而更容易活下来",
+          "startMs": 4275,
+          "endMs": 6094
+        }
+      ]
+    },
+    {
+      "id": "quiet",
+      "audioSrc": "audio/tutorials/late-night-emo/08-quiet.mp3",
+      "audioMs": 5407,
+      "startFrame": 1149,
+      "durationFrames": 170,
+      "cues": {
+        "a": 1445,
+        "b": 2917,
+        "c": 4174
+      },
+      "captions": [
+        {
+          "text": "再加上夜里太安静",
+          "startMs": 146,
+          "endMs": 1445
+        },
+        {
+          "text": "没消息，没待办",
+          "startMs": 1445,
+          "endMs": 2917
+        },
+        {
+          "text": "白天压下去的事",
+          "startMs": 2917,
+          "endMs": 4174
+        },
+        {
+          "text": "排着队回来",
+          "startMs": 4174,
+          "endMs": 5727
+        }
+      ]
+    },
+    {
+      "id": "tired",
+      "audioSrc": "audio/tutorials/late-night-emo/09-tired.mp3",
+      "audioMs": 3579,
+      "startFrame": 1319,
+      "durationFrames": 115,
+      "cues": {
+        "a": 1833,
+        "b": 2898
+      },
+      "captions": [
+        {
+          "text": "所以凌晨想通的那些道理",
+          "startMs": 144,
+          "endMs": 1833
+        },
+        {
+          "text": "多半不是答案",
+          "startMs": 1833,
+          "endMs": 2898
+        },
+        {
+          "text": "是累了",
+          "startMs": 2898,
+          "endMs": 3897
+        }
+      ]
+    },
+    {
+      "id": "draft",
+      "audioSrc": "audio/tutorials/late-night-emo/10-draft.mp3",
+      "audioMs": 4676,
+      "startFrame": 1434,
+      "durationFrames": 148,
+      "cues": {
+        "a": 1744,
+        "b": 2867,
+        "c": 3452
+      },
+      "captions": [
+        {
+          "text": "下次凌晨想发点什么",
+          "startMs": 144,
+          "endMs": 1744
+        },
+        {
+          "text": "先存草稿",
+          "startMs": 1744,
+          "endMs": 2867
+        },
+        {
+          "text": "睡一觉，早上八点再看",
+          "startMs": 2867,
+          "endMs": 4931
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/late-night-emo/11-end.mp3",
+      "audioMs": 3135,
+      "startFrame": 1582,
+      "durationFrames": 164,
+      "cues": {
+        "a": 749,
+        "b": 1459
+      },
+      "captions": [
+        {
+          "text": "还想发，再发",
+          "startMs": 146,
+          "endMs": 1459
+        },
+        {
+          "text": "那才是你真正想说的",
+          "startMs": 1459,
+          "endMs": 3344
+        }
+      ]
+    }
+  ]
+}

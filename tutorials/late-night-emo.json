@@ -1,0 +1,115 @@
+{
+ "id": "late-night-emo",
+ "title": "为什么越到深夜越emo",
+ "subtitle": "凌晨两点发，早上八点删",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax"
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "series": "深夜心理",
+ "credit": "Yoo 等 2007 · Tubbs 等 2022",
+ "source": "inputs/late-night-emo/idea.md",
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "lne.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "你一定见过这种朋友圈：{a}凌晨两点发，{b}早上八点删。"
+  },
+  {
+   "id": "feel",
+   "visual": "lne.feel",
+   "step": 0,
+   "pace": "normal",
+   "narration": "发的时候，是真难过；{a}删的时候，是真清醒。{b}两个都是你，{c}只是不在同一个钟点。"
+  },
+  {
+   "id": "turn",
+   "visual": "lne.turn",
+   "step": 0,
+   "pace": "normal",
+   "narration": "不是你矫情，{a}是夜里的大脑，{b}换了个人值班。"
+  },
+  {
+   "id": "brake",
+   "visual": "lne.brake",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "管情绪的杏仁核像油门，{a}前额叶是刹车。{b}熬到深夜，{c}刹车最先没电。"
+  },
+  {
+   "id": "almond",
+   "visual": "lne.almond",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "有实验让人一夜不睡，{a}再看负面图片，{b}杏仁核的反应高了{c}六成多。"
+  },
+  {
+   "id": "clock",
+   "visual": "lne.clock",
+   "step": 0,
+   "pace": "normal",
+   "narration": "还有研究者提出一个假说：{a}凌晨一到四点，{b}好心情跌到一天最低，{c}人最容易往坏处想。"
+  },
+  {
+   "id": "cave",
+   "visual": "lne.cave",
+   "step": 0,
+   "pace": "normal",
+   "narration": "他们推测，{a}远古时，夜里最危险，{b}爱往坏处想的人，{c}反而更容易活下来。"
+  },
+  {
+   "id": "quiet",
+   "visual": "lne.quiet",
+   "step": 0,
+   "pace": "calm",
+   "narration": "再加上夜里太安静，{a}没消息，没待办，{b}白天压下去的事，{c}排着队回来。"
+  },
+  {
+   "id": "tired",
+   "visual": "lne.tired",
+   "step": 0,
+   "pace": "normal",
+   "narration": "所以凌晨想通的那些道理，{a}多半不是答案，{b}是累了。"
+  },
+  {
+   "id": "draft",
+   "visual": "lne.draft",
+   "step": 0,
+   "pace": "normal",
+   "narration": "下次凌晨想发点什么，{a}先存草稿。{b}睡一觉，{c}早上八点再看。"
+  },
+  {
+   "id": "end",
+   "visual": "lne.end",
+   "step": 0,
+   "pace": "calm",
+   "tailMs": 2200,
+   "narration": "还想发，{a}再发。{b}那才是你真正想说的。"
+  }
+ ]
+}
