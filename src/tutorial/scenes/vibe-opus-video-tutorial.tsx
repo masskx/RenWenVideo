@@ -1239,7 +1239,7 @@ const End: Scene = () => null;
 End.backdrop = ({f, cue, dur}) => {
   const p = endPlan(cue);
   const global = TOTAL_FRAMES - dur + f;
-  const flip = 1 - ease.inOutCubic(clamp((f - p.c - 20) / 20));
+  const flip = 1 - ease.inOutCubic(clamp((f - p.b - 10) / 20));
   const nodes: [string, number][] = [['10 s', p.a], ['AI 评委', p.b], ['×2', p.b + 24], ['长片', p.c]];
   return <>
     <Bg c={P.code} f={f} dark />
@@ -1278,11 +1278,32 @@ const Cover: Scene = () => <div style={{position: 'absolute', inset: 0, overflow
     {i === 1 && <CodeSide k={0.55} lines={['renderAt(t)', 'ctx.draw(f)', 'ffmpeg -i …']} size={30} />}
     {i === 1 && <ScanLine y={394 * 0.55} w={434} />}
   </div>)}
+  <CaseTag who="Vincent" />
 </div>;
 
-export const vibeOpusVideoTutorialScenes: Record<string, Scene> = {
+/**
+ * A slow push over the whole scene (1 → 1.045 across its length), so holds on text and code never sit dead still
+ * (richness.mjs flagged 2.5 s stretches); scenes keep their own cameras on top of it.
+ */
+const drift = (sc: Scene): Scene => {
+  const Inner = sc.backdrop;
+  if (!Inner) return sc;
+  const Out: Scene = Object.assign((() => null) as unknown as Scene, sc);
+  const Backdrop: React.FC<Parameters<NonNullable<Scene['backdrop']>>[0]> = (props) => (
+    <div style={{position: 'absolute', inset: 0, transformOrigin: '50% 42%', transform: `scale(${(1 + 0.045 * clamp(props.f / Math.max(1, props.dur))).toFixed(4)})`}}>
+      <Inner {...props} />
+    </div>
+  );
+  Out.backdrop = Backdrop;
+  return Out;
+};
+
+const SCENES: Record<string, Scene> = {
   'vot.hook': Hook, 'vot.topic': Topic, 'vot.why': Why, 'vot.vincent': Vincent, 'vot.stars': Stars, 'vot.official': Official, 'vot.essence': Essence,
   'vot.step1': Step1, 'vot.step2': Step2, 'vot.step3': Step3, 'vot.step4': Step4, 'vot.prompt': Prompt, 'vot.block1': Block1, 'vot.block2': Block2,
   'vot.block3': Block3, 'vot.done': Done, 'vot.fail': Fail, 'vot.jury': Jury, 'vot.scores': Scores, 'vot.mine': Mine, 'vot.m1': M1, 'vot.m2': M2,
-  'vot.m3': M3, 'vot.m4': M4, 'vot.others': Others, 'vot.budget': Budget, 'vot.end': End, 'vot.cover': Cover,
+  'vot.m3': M3, 'vot.m4': M4, 'vot.others': Others, 'vot.budget': Budget, 'vot.end': End,
+};
+export const vibeOpusVideoTutorialScenes: Record<string, Scene> = {
+  ...Object.fromEntries(Object.entries(SCENES).map(([k, v]) => [k, drift(v)])), 'vot.cover': Cover,
 };
