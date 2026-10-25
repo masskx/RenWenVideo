@@ -251,6 +251,10 @@ Topic.sfx = (cue) => {
 
 /* ---------- 03 why: Anthropic's page, the Sep 22 entry, the quote, the cost bar ---------- */
 
+/** A highlighter stroke growing under a run of text (k 0–1). */
+const Mark: React.FC<{k: number; children: React.ReactNode}> = ({k, children}) => <span style={{backgroundImage: `linear-gradient(180deg, transparent 55%, rgba(222,115,86,0.45) 55%, rgba(222,115,86,0.45) 92%, transparent 92%)`,
+  backgroundRepeat: 'no-repeat', backgroundSize: `${clamp(k) * 100}% 100%`}}>{children}</span>;
+
 const whyPlan = (cue: Cue) => ({a: cue('a', 52), b: cue('b', 140), c: cue('c', 241)});
 const Why: Scene = () => null;
 Why.backdrop = ({f, cue}) => {
@@ -262,31 +266,31 @@ Why.backdrop = ({f, cue}) => {
   const hl = ramp(f, p.b - 2, p.b + 26);
   return <>
     <Bg c={P.ivory} f={f} />
-    <Win x={40} y={200} w={1000} h={620} light title="anthropic.com/claude/opus">
+    <Win x={40} y={200} w={1000} h={520} light title="anthropic.com/claude/opus">
       <div style={{position: 'absolute', left, top, width: 1920 * s, height: 1080 * s}}>
         <Img src={img('opus-page.png')} style={{width: '100%', height: '100%'}} />
-        {/* highlighter over the quote: "performs at the level of Claude Fable 5.1 on most work" */}
-        <div style={{position: 'absolute', left: 860 * s, top: 592 * s, width: 420 * s * hl, height: 28 * s, background: 'rgba(222,115,86,0.35)'}} />
-        <div style={{position: 'absolute', left: 593 * s, top: 618 * s, width: 210 * s * ramp(f, p.c - 4, p.c + 14), height: 28 * s, background: 'rgba(222,115,86,0.35)'}} />
       </div>
-      <svg width={1000} height={620} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
+      <svg width={1000} height={520} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
         <HandRing cx={150} cy={95} rx={150} ry={46} p={ramp(f, p.a + 14, p.a + 28)} color={P.clay} sw={6} />
       </svg>
+      <div style={{position: 'absolute', right: 20, bottom: 20}}><Chip f={f} at={p.a + 20} dark={false} color={P.ink}><span style={{color: P.clay}}>✳</span>2026.09.22</Chip></div>
     </Win>
-    <Abs y={870} style={{display: 'flex', justifyContent: 'center', gap: 22}}>
-      <Chip f={f} at={p.a + 20} dark={false} color={P.ink}><span style={{color: P.clay}}>✳</span>2026.09.22</Chip>
-      <Chip f={f} at={p.b + 10} dark={false} color={P.ink}>≈ Fable 5.1</Chip>
+    {/* the official sentence, set large (原文) */}
+    <Abs x={60} y={800} w={960} style={{opacity: ramp(f, p.b - 10, p.b)}}>
+      <div style={{background: P.white, borderRadius: 20, padding: '22px 30px', boxShadow: '0 20px 40px rgba(20,19,19,0.1)', fontFamily: '"Inter", ' + font, fontWeight: 700, fontSize: 42, lineHeight: 1.34, color: P.ink}}>
+        <span style={{fontFamily: font, fontSize: 26, color: P.mute, marginRight: 12}}>原文</span>It performs <Mark k={hl}>at the level of Claude Fable 5.1</Mark> on most work and <Mark k={ramp(f, p.c - 2, p.c + 14)}>costs 40% less to run</Mark> than Opus 5.
+      </div>
     </Abs>
     {/* cost to run: Opus 5 = 100 %, Opus 5.5 shrinks to 60 % */}
-    <Abs x={90} y={1010} w={900} style={{opacity: ramp(f, p.c - 10, p.c)}}>
+    <Abs x={90} y={1085} w={900} style={{opacity: ramp(f, p.c - 10, p.c)}}>
       {[['Opus 5', 1, P.grey], ['Opus 5.5', 1 - 0.4 * ramp(f, p.c, p.c + 18), P.clay]].map(([n, k, c], i) => (
-        <div key={i} style={{display: 'flex', alignItems: 'center', gap: 20, marginBottom: 18}}>
+        <div key={i} style={{display: 'flex', alignItems: 'center', gap: 20, marginBottom: 12}}>
           <div style={{width: 190, fontFamily: font, fontWeight: 800, fontSize: 36, color: P.ink}}>{n as string}</div>
-          <div style={{width: 560 * (k as number), height: 52, borderRadius: 12, background: c as string}} />
-          {i === 1 && f >= p.c + 10 && <span style={{fontFamily: font, fontWeight: 900, fontSize: 56, color: P.clay}}>−40%</span>}
+          <div style={{width: 560 * (k as number), height: 46, borderRadius: 12, background: c as string}} />
+          {i === 1 && f >= p.c + 10 && <span style={{fontFamily: font, fontWeight: 900, fontSize: 52, color: P.clay}}>−40%</span>}
         </div>
       ))}
-      <div style={{fontFamily: font, fontWeight: 600, fontSize: 30, color: P.mute, marginTop: 4}}>运行成本 · $4 / $20 每百万 token（据官方）</div>
+      <div style={{fontFamily: font, fontWeight: 600, fontSize: 28, color: P.mute}}>$4 / $20 每百万 token（输入 / 输出）</div>
     </Abs>
     <Top ch={1} dark={false} />
   </>;
@@ -321,7 +325,7 @@ Vincent.backdrop = ({f, cue}) => {
       <div style={{position: 'absolute', left: 60, top: 545, width: 960, height: 540, borderRadius: 18, overflow: 'hidden', background: '#000', opacity: ramp(f, p.a - 4, p.a + 6),
         boxShadow: '0 34px 70px rgba(0,0,0,0.55)', outline: `3px solid ${wall ? 'transparent' : 'rgba(194,108,74,0.6)'}`}}>
         {!wall && SHOW.map((c, i) => i === idx ? <Footage key={c} f={f} segs={[{clip: c, src: 2, from: i === 0 ? -10 : p.b + i * step}]} /> : null)}
-        {wall && <Footage f={f} segs={[{clip: 'v-mosaic', src: 1.5, from: p.c}]} />}
+        {wall && <Img src={img('mosaic.jpg')} style={{width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${1.02 + 0.06 * ramp(f, p.c, p.c + 90)})`}} />}
         <CaseTag who="Vincent" />
       </div>
     </View>
@@ -789,7 +793,7 @@ const DONE = ['10.000 s · 1080×1920 · mp4', '手机上每个字都看得清',
 const Done: Scene = () => null;
 Done.backdrop = ({f, cue}) => {
   const p = donePlan(cue);
-  const cam = camOf(f, [[-1, {x: 540, y: 1150, z: 1.15}, 1]], {x: 540, y: 1150, z: 1.15});
+  const cam = camOf(f, [[0, {z: 1.14}, 40]], {x: 540, y: 1000, z: 1.06});
   return <>
     <Bg c={P.code} f={f} dark />
     <View cam={cam}>
@@ -1139,7 +1143,7 @@ M4.backdrop = ({f, cue}) => {
     {/* one tick per word, with its time */}
     <Abs x={0} y={330} w={W}>
       {WORDS.map(([w, s], i) => {
-        const x = 90 + (s / 4.8) * 900 * 2.6;
+        const x = 120 + (s / 1.45) * 840;
         return <div key={i} style={{position: 'absolute', left: x, top: 0, opacity: t >= s ? 1 : 0.25, textAlign: 'center', transform: 'translateX(-50%)'}}>
           <div style={{fontFamily: font, fontWeight: 900, fontSize: 44, color: P.white, whiteSpace: 'nowrap'}}>{w}</div>
           <div style={{fontFamily: mono, fontWeight: 700, fontSize: 22, color: P.blue}}>{s.toFixed(2)}s</div>
@@ -1149,9 +1153,9 @@ M4.backdrop = ({f, cue}) => {
     {/* a cue lands and a prop pops on that exact frame */}
     <Abs x={0} y={880} w={W} style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30}}>
       <span style={{fontFamily: mono, fontWeight: 800, fontSize: 40, color: '#C9CED6', opacity: ramp(f, p.a - 12, p.a - 4)}}>{'{a}'} = {(p.a / 30).toFixed(2)}s</span>
-      <Stamp x={0} y={0} f={f} at={p.a} size={70} color={P.blue} rot={-6}>卡点</Stamp>
     </Abs>
-    <Abs y={1080} style={{textAlign: 'center'}}><In f={f} at={p.a + 14}><Chip f={f} at={p.a + 14}>MiniMax · 逐字时间戳</Chip></In></Abs>
+    <Stamp x={540} y={1060} f={f} at={p.a} size={84} color={P.blue} rot={-6}>卡点</Stamp>
+    <Abs y={1170} style={{textAlign: 'center'}}><In f={f} at={p.a + 14}><Chip f={f} at={p.a + 14}>MiniMax · 逐字时间戳</Chip></In></Abs>
     <Top ch={6} />
   </>;
 };
