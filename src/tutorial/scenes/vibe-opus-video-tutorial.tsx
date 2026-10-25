@@ -263,7 +263,7 @@ Why.backdrop = ({f, cue}) => {
   const z = ramp(f, p.a - 8, p.a + 18);
   const s = 0.52 + (1.32 - 0.52) * z;
   const left = -(560 * s - 40) * z, top = -(470 * s) * z;
-  const hl = ramp(f, p.b - 2, p.b + 26);
+  const hl = ramp(f, p.b - 2, p.c - 12);
   return <>
     <Bg c={P.ivory} f={f} />
     <Win x={40} y={200} w={1000} h={520} light title="anthropic.com/claude/opus">
@@ -914,7 +914,7 @@ Scores.backdrop = ({f, cue}) => {
   const p = scoresPlan(cue);
   const v = f < p.a ? 5.4 : f < p.b - 30 ? 5.4 + 0.7 * ramp(f, p.a + 10, p.a + 24) : 6.1 + 0.9 * ramp(f, p.b - 14, p.b + 4);
   const x0 = 90, w = 900, sx = (s: number) => x0 + (s / 10) * w;
-  const cam = camOf(f, [[p.c - 6, {z: 1.05, y: 800}, 30]]);
+  const cam = camOf(f, [[0, {z: 1.08, y: 720}, 70], [p.b, {z: 1, y: 760}, 24], [p.c - 6, {z: 1.05, y: 800}, 30]]);
   return <>
     <Bg c={P.white} f={f} />
     <Sticker x={300} y={210} p={pop(f, 0, 8)} rot={-3} size={36} bg={P.terra} color={P.white}>据作者实测 · 拼贴风</Sticker>
@@ -1089,6 +1089,7 @@ M3.backdrop = ({f, cue}) => {
   return <>
     <Bg c={P.code} f={f} dark />
     <HabitNo n={3} f={f} />
+    <View cam={camOf(f, [[0, {z: 1.06, y: 560}, 40], [p.b - 22, {z: 1.03, y: 860}, 26]])}>
     <Term x={40} y={290} w={1000} h={720} title="qa">
       <Code f={f} start={2} cps={3} size={30} prompt="$ " lines={['node scripts/qa/echo.mjs ai-same-take…']} />
       {f >= 24 && <div style={{marginTop: 18}}>
@@ -1113,12 +1114,14 @@ M3.backdrop = ({f, cue}) => {
         </div>
       </div>}
     </Term>
+    <Stamp x={760} y={800} f={f} at={p.a} size={96} color={P.red} rot={-8}>FAIL</Stamp>
+    </View>
     <Top ch={6} />
   </>;
 };
 M3.sfx = (cue) => {
   const p = m3Plan(cue);
-  return [{at: 44, kind: 'thud', gain: 0.09}, {at: p.b + 6, kind: 'chime', gain: 0.08}];
+  return [{at: 44, kind: 'thud', gain: 0.09}, {at: p.a, kind: 'stamp', gain: 0.12}, {at: p.b + 6, kind: 'chime', gain: 0.08}];
 };
 
 const m4Plan = (cue: Cue) => ({a: cue('a', 58)});
