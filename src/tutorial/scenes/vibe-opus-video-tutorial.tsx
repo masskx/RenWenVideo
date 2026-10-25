@@ -266,6 +266,7 @@ Why.backdrop = ({f, cue}) => {
   const hl = ramp(f, p.b - 2, p.c - 12);
   return <>
     <Bg c={P.ivory} f={f} />
+    <View cam={camOf(f, [[p.b, {z: 1.07}, 90]])}>
     <Win x={40} y={200} w={1000} h={520} light title="anthropic.com/claude/opus">
       <div style={{position: 'absolute', left, top, width: 1920 * s, height: 1080 * s}}>
         <Img src={img('opus-page.png')} style={{width: '100%', height: '100%'}} />
@@ -275,6 +276,7 @@ Why.backdrop = ({f, cue}) => {
       </svg>
       <div style={{position: 'absolute', right: 20, bottom: 20}}><Chip f={f} at={p.a + 20} dark={false} color={P.ink}><span style={{color: P.clay}}>✳</span>2026.09.22</Chip></div>
     </Win>
+    </View>
     {/* the official sentence, set large (原文) */}
     <Abs x={60} y={800} w={960} style={{opacity: ramp(f, p.b - 10, p.b)}}>
       <div style={{background: P.white, borderRadius: 20, padding: '22px 30px', boxShadow: '0 20px 40px rgba(20,19,19,0.1)', fontFamily: '"Inter", ' + font, fontWeight: 700, fontSize: 42, lineHeight: 1.34, color: P.ink}}>
