@@ -1,0 +1,897 @@
+{
+  "id": "vibe-opus-video-tutorial",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 5144,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/01-hook.mp3",
+      "audioMs": 5329,
+      "startFrame": 0,
+      "durationFrames": 168,
+      "cues": {
+        "a": 1465,
+        "b": 2915
+      },
+      "captions": [
+        {
+          "text": "你现在看的这条视频",
+          "startMs": 143,
+          "endMs": 1465
+        },
+        {
+          "text": "没开过剪辑软件",
+          "startMs": 1465,
+          "endMs": 2915
+        },
+        {
+          "text": "每一帧都是 AI",
+          "startMs": 2915,
+          "endMs": 4220
+        },
+        {
+          "text": "写代码画出来的",
+          "startMs": 4220,
+          "endMs": 5579
+        }
+      ]
+    },
+    {
+      "id": "topic",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/02-topic.mp3",
+      "audioMs": 6687,
+      "startFrame": 168,
+      "durationFrames": 209,
+      "cues": {
+        "a": 2549,
+        "b": 5004
+      },
+      "captions": [
+        {
+          "text": "抖音最近的话题 Vibe知识大赏",
+          "startMs": 143,
+          "endMs": 2549
+        },
+        {
+          "text": "据报道播放超过11.7亿",
+          "startMs": 2549,
+          "endMs": 5004
+        },
+        {
+          "text": "很多爆款都是这么做的",
+          "startMs": 5004,
+          "endMs": 6933
+        }
+      ]
+    },
+    {
+      "id": "why",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/03-why.mp3",
+      "audioMs": 10501,
+      "startFrame": 377,
+      "durationFrames": 323,
+      "cues": {
+        "a": 1721,
+        "b": 4674,
+        "c": 8033
+      },
+      "captions": [
+        {
+          "text": "起点是9月22号",
+          "startMs": 143,
+          "endMs": 1721
+        },
+        {
+          "text": "Anthropic 发布了",
+          "startMs": 1721,
+          "endMs": 2970
+        },
+        {
+          "text": "Claude Opus 5.5",
+          "startMs": 2970,
+          "endMs": 4674
+        },
+        {
+          "text": "官方说，它大多数工作达到",
+          "startMs": 4674,
+          "endMs": 6795
+        },
+        {
+          "text": "Fable 5.1 的水平",
+          "startMs": 6795,
+          "endMs": 8033
+        },
+        {
+          "text": "运行成本比 Opus 5 低四成",
+          "startMs": 8033,
+          "endMs": 10693
+        }
+      ]
+    },
+    {
+      "id": "vincent",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/04-vincent.mp3",
+      "audioMs": 7967,
+      "startFrame": 700,
+      "durationFrames": 247,
+      "cues": {
+        "a": 1593,
+        "b": 3425,
+        "c": 5212
+      },
+      "captions": [
+        {
+          "text": "一位叫 Vincent 的开发者",
+          "startMs": 143,
+          "endMs": 1593
+        },
+        {
+          "text": "一种风格写一段提示词",
+          "startMs": 1593,
+          "endMs": 3425
+        },
+        {
+          "text": "做了十五种风格的短片",
+          "startMs": 3425,
+          "endMs": 5212
+        },
+        {
+          "text": "画面、音乐",
+          "startMs": 5212,
+          "endMs": 6536
+        },
+        {
+          "text": "音效，全是代码",
+          "startMs": 6536,
+          "endMs": 8310
+        }
+      ]
+    },
+    {
+      "id": "stars",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/05-stars.mp3",
+      "audioMs": 5407,
+      "startFrame": 947,
+      "durationFrames": 170,
+      "cues": {
+        "a": 2359,
+        "b": 3599
+      },
+      "captions": [
+        {
+          "text": "他把提示词和源码都开源了",
+          "startMs": 143,
+          "endMs": 2359
+        },
+        {
+          "text": "据报道不到三周",
+          "startMs": 2359,
+          "endMs": 3599
+        },
+        {
+          "text": "就拿到快两千个星标",
+          "startMs": 3599,
+          "endMs": 5655
+        }
+      ]
+    },
+    {
+      "id": "official",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/06-official.mp3",
+      "audioMs": 6766,
+      "startFrame": 1117,
+      "durationFrames": 211,
+      "cues": {
+        "a": 1849,
+        "b": 3491,
+        "c": 4922
+      },
+      "captions": [
+        {
+          "text": "连 Claude 官方也下场了",
+          "startMs": 143,
+          "endMs": 1849
+        },
+        {
+          "text": "Claude Motion 的原话是",
+          "startMs": 1849,
+          "endMs": 3491
+        },
+        {
+          "text": "不用任何视频模型",
+          "startMs": 3491,
+          "endMs": 4922
+        },
+        {
+          "text": "每一支都是代码写的",
+          "startMs": 4922,
+          "endMs": 7045
+        }
+      ]
+    },
+    {
+      "id": "essence",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/07-essence.mp3",
+      "audioMs": 7001,
+      "startFrame": 1328,
+      "durationFrames": 218,
+      "cues": {
+        "a": 1789,
+        "b": 2935,
+        "c": 4282
+      },
+      "captions": [
+        {
+          "text": "所以它不是生成视频",
+          "startMs": 144,
+          "endMs": 1789
+        },
+        {
+          "text": "它先写一个网页",
+          "startMs": 1789,
+          "endMs": 2935
+        },
+        {
+          "text": "再一帧一帧截图",
+          "startMs": 2935,
+          "endMs": 4282
+        },
+        {
+          "text": "最后用 ffmpeg 拼成视频",
+          "startMs": 4282,
+          "endMs": 7272
+        }
+      ]
+    },
+    {
+      "id": "step1",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/08-step1.mp3",
+      "audioMs": 5878,
+      "startFrame": 1546,
+      "durationFrames": 184,
+      "cues": {
+        "a": 1337,
+        "b": 4114
+      },
+      "captions": [
+        {
+          "text": "上手只要四步",
+          "startMs": 143,
+          "endMs": 1337
+        },
+        {
+          "text": "第一，在空文件夹里打开",
+          "startMs": 1337,
+          "endMs": 3432
+        },
+        {
+          "text": "Claude Code，模型选 Opus 5.5",
+          "startMs": 3432,
+          "endMs": 6189
+        }
+      ]
+    },
+    {
+      "id": "step2",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/09-step2.mp3",
+      "audioMs": 3997,
+      "startFrame": 1730,
+      "durationFrames": 128,
+      "cues": {
+        "a": 2653
+      },
+      "captions": [
+        {
+          "text": "第二，装上 Remotion",
+          "startMs": 143,
+          "endMs": 1459
+        },
+        {
+          "text": "和它的官方技能",
+          "startMs": 1459,
+          "endMs": 2653
+        },
+        {
+          "text": "两行命令就够",
+          "startMs": 2653,
+          "endMs": 4325
+        }
+      ]
+    },
+    {
+      "id": "step3",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/10-step3.mp3",
+      "audioMs": 5120,
+      "startFrame": 1858,
+      "durationFrames": 162,
+      "cues": {
+        "a": 1702,
+        "b": 2966
+      },
+      "captions": [
+        {
+          "text": "第三，贴一段提示词",
+          "startMs": 143,
+          "endMs": 1702
+        },
+        {
+          "text": "把素材拖进去",
+          "startMs": 1702,
+          "endMs": 2966
+        },
+        {
+          "text": "缺什么工具",
+          "startMs": 2966,
+          "endMs": 3969
+        },
+        {
+          "text": "让它自己装",
+          "startMs": 3969,
+          "endMs": 5385
+        }
+      ]
+    },
+    {
+      "id": "step4",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/11-step4.mp3",
+      "audioMs": 4545,
+      "startFrame": 2020,
+      "durationFrames": 144,
+      "cues": {
+        "a": 1406,
+        "b": 2649
+      },
+      "captions": [
+        {
+          "text": "第四，等它渲染",
+          "startMs": 143,
+          "endMs": 1406
+        },
+        {
+          "text": "有人只写了一句话",
+          "startMs": 1406,
+          "endMs": 2649
+        },
+        {
+          "text": "就拿到一支十五秒的片头",
+          "startMs": 2649,
+          "endMs": 4885
+        }
+      ]
+    },
+    {
+      "id": "prompt",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/12-prompt.mp3",
+      "audioMs": 4415,
+      "startFrame": 2164,
+      "durationFrames": 140,
+      "cues": {
+        "a": 2540
+      },
+      "captions": [
+        {
+          "text": "但想做得好看",
+          "startMs": 143,
+          "endMs": 1081
+        },
+        {
+          "text": "关键在提示词",
+          "startMs": 1081,
+          "endMs": 2540
+        },
+        {
+          "text": "好的提示词",
+          "startMs": 2540,
+          "endMs": 3431
+        },
+        {
+          "text": "分三块",
+          "startMs": 3431,
+          "endMs": 4725
+        }
+      ]
+    },
+    {
+      "id": "block1",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/13-block1.mp3",
+      "audioMs": 6896,
+      "startFrame": 2304,
+      "durationFrames": 215,
+      "cues": {
+        "a": 1937,
+        "b": 4963
+      },
+      "captions": [
+        {
+          "text": "第一块，定角色和标准",
+          "startMs": 143,
+          "endMs": 1937
+        },
+        {
+          "text": "你是导演、动效师",
+          "startMs": 1937,
+          "endMs": 3407
+        },
+        {
+          "text": "工程师和音效师",
+          "startMs": 3407,
+          "endMs": 4963
+        },
+        {
+          "text": "做得像模板",
+          "startMs": 4963,
+          "endMs": 5984
+        },
+        {
+          "text": "就算失败",
+          "startMs": 5984,
+          "endMs": 7225
+        }
+      ]
+    },
+    {
+      "id": "block2",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/14-block2.mp3",
+      "audioMs": 5512,
+      "startFrame": 2519,
+      "durationFrames": 173,
+      "cues": {
+        "a": 1577,
+        "b": 4260
+      },
+      "captions": [
+        {
+          "text": "第二块，创意种子",
+          "startMs": 143,
+          "endMs": 1577
+        },
+        {
+          "text": "讲什么、用什么颜色",
+          "startMs": 1577,
+          "endMs": 3337
+        },
+        {
+          "text": "出现什么画面",
+          "startMs": 3337,
+          "endMs": 4260
+        },
+        {
+          "text": "你只改这一块",
+          "startMs": 4260,
+          "endMs": 5814
+        }
+      ]
+    },
+    {
+      "id": "block3",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/15-block3.mp3",
+      "audioMs": 4833,
+      "startFrame": 2692,
+      "durationFrames": 153,
+      "cues": {
+        "a": 1939,
+        "b": 3662
+      },
+      "captions": [
+        {
+          "text": "第三块，风格的招牌特征",
+          "startMs": 143,
+          "endMs": 1939
+        },
+        {
+          "text": "它决定像不像这种风格",
+          "startMs": 1939,
+          "endMs": 3662
+        },
+        {
+          "text": "千万别删",
+          "startMs": 3662,
+          "endMs": 5029
+        }
+      ]
+    },
+    {
+      "id": "done",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/16-done.mp3",
+      "audioMs": 4467,
+      "startFrame": 2845,
+      "durationFrames": 142,
+      "cues": {
+        "a": 1651,
+        "b": 3404
+      },
+      "captions": [
+        {
+          "text": "结尾再加一句 Done means",
+          "startMs": 143,
+          "endMs": 1651
+        },
+        {
+          "text": "写清楚做到什么程度",
+          "startMs": 1651,
+          "endMs": 3404
+        },
+        {
+          "text": "才算完成",
+          "startMs": 3404,
+          "endMs": 4721
+        }
+      ]
+    },
+    {
+      "id": "fail",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/17-fail.mp3",
+      "audioMs": 7784,
+      "startFrame": 2987,
+      "durationFrames": 242,
+      "cues": {
+        "a": 1551,
+        "b": 4281,
+        "c": 5700
+      },
+      "captions": [
+        {
+          "text": "第一版通常会翻车",
+          "startMs": 143,
+          "endMs": 1551
+        },
+        {
+          "text": "有作者实测",
+          "startMs": 1551,
+          "endMs": 2746
+        },
+        {
+          "text": "字卡说用手掌打",
+          "startMs": 2746,
+          "endMs": 4281
+        },
+        {
+          "text": "画面却拿着拍子",
+          "startMs": 4281,
+          "endMs": 5700
+        },
+        {
+          "text": "白字配白描边",
+          "startMs": 5700,
+          "endMs": 6800
+        },
+        {
+          "text": "直接糊掉",
+          "startMs": 6800,
+          "endMs": 8045
+        }
+      ]
+    },
+    {
+      "id": "jury",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/18-jury.mp3",
+      "audioMs": 6949,
+      "startFrame": 3229,
+      "durationFrames": 216,
+      "cues": {
+        "a": 2233,
+        "b": 3504,
+        "c": 4753
+      },
+      "captions": [
+        {
+          "text": "办法是再找一个 AI 当评委",
+          "startMs": 143,
+          "endMs": 2233
+        },
+        {
+          "text": "每半秒截一张图",
+          "startMs": 2233,
+          "endMs": 3504
+        },
+        {
+          "text": "按七项打分",
+          "startMs": 3504,
+          "endMs": 4753
+        },
+        {
+          "text": "低于7.5的，照意见改",
+          "startMs": 4753,
+          "endMs": 7208
+        }
+      ]
+    },
+    {
+      "id": "scores",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/19-scores.mp3",
+      "audioMs": 7758,
+      "startFrame": 3445,
+      "durationFrames": 263,
+      "cues": {
+        "a": 825,
+        "b": 2972,
+        "c": 4128,
+        "d": 6242
+      },
+      "captions": [
+        {
+          "text": "改了两轮，他的拼贴风从5.4分",
+          "startMs": 143,
+          "endMs": 2972
+        },
+        {
+          "text": "涨到了七分",
+          "startMs": 2972,
+          "endMs": 4128
+        },
+        {
+          "text": "按他的说法",
+          "startMs": 4128,
+          "endMs": 4904
+        },
+        {
+          "text": "六分是剪映模板",
+          "startMs": 4904,
+          "endMs": 6242
+        },
+        {
+          "text": "八分是广告公司",
+          "startMs": 6242,
+          "endMs": 7940
+        }
+      ]
+    },
+    {
+      "id": "mine",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/20-mine.mp3",
+      "audioMs": 4754,
+      "startFrame": 3708,
+      "durationFrames": 151,
+      "cues": {
+        "a": 1167,
+        "b": 3191
+      },
+      "captions": [
+        {
+          "text": "我这个号的片子",
+          "startMs": 143,
+          "endMs": 1167
+        },
+        {
+          "text": "也是 Claude Code",
+          "startMs": 1167,
+          "endMs": 2381
+        },
+        {
+          "text": "写代码做的",
+          "startMs": 2381,
+          "endMs": 3191
+        },
+        {
+          "text": "我最常用的是四招",
+          "startMs": 3191,
+          "endMs": 5039
+        }
+      ]
+    },
+    {
+      "id": "m1",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/21-m1.mp3",
+      "audioMs": 4911,
+      "startFrame": 3859,
+      "durationFrames": 155,
+      "cues": {
+        "a": 1389,
+        "b": 3109
+      },
+      "captions": [
+        {
+          "text": "一，先写分镜表",
+          "startMs": 143,
+          "endMs": 1389
+        },
+        {
+          "text": "一句口播配一个画面",
+          "startMs": 1389,
+          "endMs": 3109
+        },
+        {
+          "text": "纯文字不停超过两秒",
+          "startMs": 3109,
+          "endMs": 5237
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/22-m2.mp3",
+      "audioMs": 3657,
+      "startFrame": 4014,
+      "durationFrames": 118,
+      "cues": {
+        "a": 1903
+      },
+      "captions": [
+        {
+          "text": "二，颜色从素材里取",
+          "startMs": 143,
+          "endMs": 1903
+        },
+        {
+          "text": "不让 AI 自己编配色",
+          "startMs": 1903,
+          "endMs": 3929
+        }
+      ]
+    },
+    {
+      "id": "m3",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/23-m3.mp3",
+      "audioMs": 5303,
+      "startFrame": 4132,
+      "durationFrames": 167,
+      "cues": {
+        "a": 2125,
+        "b": 3522
+      },
+      "captions": [
+        {
+          "text": "三，屏幕上的字不重复口播",
+          "startMs": 143,
+          "endMs": 2125
+        },
+        {
+          "text": "重复超过三分之一",
+          "startMs": 2125,
+          "endMs": 3522
+        },
+        {
+          "text": "检查脚本直接判不过",
+          "startMs": 3522,
+          "endMs": 5577
+        }
+      ]
+    },
+    {
+      "id": "m4",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/24-m4.mp3",
+      "audioMs": 4754,
+      "startFrame": 4299,
+      "durationFrames": 151,
+      "cues": {
+        "a": 1936
+      },
+      "captions": [
+        {
+          "text": "四，配音用我自己的声音",
+          "startMs": 143,
+          "endMs": 1936
+        },
+        {
+          "text": "逐字时间戳",
+          "startMs": 1936,
+          "endMs": 3145
+        },
+        {
+          "text": "卡字幕、卡动作",
+          "startMs": 3145,
+          "endMs": 5108
+        }
+      ]
+    },
+    {
+      "id": "others",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/25-others.mp3",
+      "audioMs": 10005,
+      "startFrame": 4450,
+      "durationFrames": 308,
+      "cues": {
+        "a": 1679,
+        "b": 4422,
+        "c": 6201,
+        "d": 7440
+      },
+      "captions": [
+        {
+          "text": "也不是非用 Opus 不可",
+          "startMs": 143,
+          "endMs": 1679
+        },
+        {
+          "text": "DeepSeek 这些模型",
+          "startMs": 1679,
+          "endMs": 2820
+        },
+        {
+          "text": "也能写同样的代码",
+          "startMs": 2820,
+          "endMs": 4422
+        },
+        {
+          "text": "有创作者同题对比过",
+          "startMs": 4422,
+          "endMs": 6201
+        },
+        {
+          "text": "DeepSeek 便宜很多",
+          "startMs": 6201,
+          "endMs": 7440
+        },
+        {
+          "text": "细节稍弱一点",
+          "startMs": 7440,
+          "endMs": 8703
+        },
+        {
+          "text": "还得自己挑错",
+          "startMs": 8703,
+          "endMs": 10193
+        }
+      ]
+    },
+    {
+      "id": "budget",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/26-budget.mp3",
+      "audioMs": 4101,
+      "startFrame": 4758,
+      "durationFrames": 131,
+      "cues": {
+        "a": 2233
+      },
+      "captions": [
+        {
+          "text": "所以预算紧",
+          "startMs": 143,
+          "endMs": 996
+        },
+        {
+          "text": "先用它练手",
+          "startMs": 996,
+          "endMs": 2233
+        },
+        {
+          "text": "要交作品，再换 Opus",
+          "startMs": 2233,
+          "endMs": 4477
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/vibe-opus-video-tutorial/27-end.mp3",
+      "audioMs": 6583,
+      "startFrame": 4889,
+      "durationFrames": 255,
+      "cues": {
+        "a": 1033,
+        "b": 3119,
+        "c": 5338
+      },
+      "captions": [
+        {
+          "text": "最后一个建议",
+          "startMs": 144,
+          "endMs": 1033
+        },
+        {
+          "text": "先挑一种风格",
+          "startMs": 1033,
+          "endMs": 2189
+        },
+        {
+          "text": "只做十秒",
+          "startMs": 2189,
+          "endMs": 3119
+        },
+        {
+          "text": "让另一个 AI 挑毛病",
+          "startMs": 3119,
+          "endMs": 4674
+        },
+        {
+          "text": "改两轮，再去做长片",
+          "startMs": 4674,
+          "endMs": 6847
+        }
+      ]
+    }
+  ]
+}

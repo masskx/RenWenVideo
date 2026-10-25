@@ -1,0 +1,286 @@
+{
+ "id": "vibe-opus-video-tutorial",
+ "title": "Opus 5.5 代码做视频",
+ "subtitle": "每一帧都是 AI 写代码画的",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax"
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "series": "AI 工具教程",
+ "credit": "示例：开源项目 mg-styles-15（MIT）",
+ "source": "inputs/vibe-opus-video-tutorial/materials.md",
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "没开剪辑软件",
+   "每帧都是代码画的"
+  ],
+  "support": "Opus 5.5 做视频 · 四步上手",
+  "tag": "AI 工具教程",
+  "anchor": "vot.cover",
+  "colors": {
+   "bg": "#22242D",
+   "text": "#FFFFFF",
+   "accent": "#2B93F2",
+   "dim": "#B4BCC5"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 104,
+    "anchor": [
+     540,
+     860,
+     0.92
+    ],
+    "support": 1310
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 96,
+    "anchor": [
+     540,
+     760,
+     0.8
+    ],
+    "support": 1150
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 108,
+    "anchor": [
+     540,
+     1080,
+     1.15
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "vot.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "你现在看的这条视频，{a}没开过剪辑软件，{b}每一帧都是 AI 写代码画出来的。"
+  },
+  {
+   "id": "topic",
+   "visual": "vot.topic",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "抖音最近的话题 [Vibe知识大赏|Vibe 知识大赏]，{a}据报道播放超过[11.7亿|十一点七亿]，{b}很多爆款都是这么做的。"
+  },
+  {
+   "id": "why",
+   "visual": "vot.why",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "起点是[9月22号|九月二十二号]，{a}Anthropic 发布了 [Claude Opus 5.5|Claude Opus 五点五]。{b}官方说，它大多数工作达到 [Fable 5.1|Fable 五点一] 的水平，{c}运行成本比 [Opus 5|Opus 五] 低四成。"
+  },
+  {
+   "id": "vincent",
+   "visual": "vot.vincent",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "一位叫 Vincent 的开发者，{a}一种风格写一段提示词，{b}做了十五种风格的短片，{c}画面、音乐、音效，全是代码。"
+  },
+  {
+   "id": "stars",
+   "visual": "vot.stars",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "他把提示词和源码都开源了，{a}据报道不到三周，{b}就拿到快两千个星标。"
+  },
+  {
+   "id": "official",
+   "visual": "vot.official",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "连 Claude 官方也下场了。{a}Claude Motion 的原话是：{b}不用任何视频模型，{c}每一支都是代码写的。"
+  },
+  {
+   "id": "essence",
+   "visual": "vot.essence",
+   "step": 0,
+   "pace": "normal",
+   "narration": "所以它不是生成视频。{a}它先写一个网页，{b}再一帧一帧截图，{c}最后用 [ffmpeg|F F mpeg] 拼成视频。"
+  },
+  {
+   "id": "step1",
+   "visual": "vot.step1",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "上手只要四步。{a}第一，在空文件夹里打开 Claude Code，{b}模型选 [Opus 5.5|Opus 五点五]。"
+  },
+  {
+   "id": "step2",
+   "visual": "vot.step2",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "第二，装上 Remotion 和它的官方技能，{a}两行命令就够。"
+  },
+  {
+   "id": "step3",
+   "visual": "vot.step3",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "第三，贴一段提示词，{a}把素材拖进去，{b}缺什么工具，让它自己装。"
+  },
+  {
+   "id": "step4",
+   "visual": "vot.step4",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "第四，等它渲染。{a}有人只写了一句话，{b}就拿到一支十五秒的片头。"
+  },
+  {
+   "id": "prompt",
+   "visual": "vot.prompt",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "但想做得好看，关键在提示词。{a}好的提示词，分三块。"
+  },
+  {
+   "id": "block1",
+   "visual": "vot.block1",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "第一块，定角色和标准：{a}你是导演、动效师、工程师和音效师，{b}做得像模板，就算失败。"
+  },
+  {
+   "id": "block2",
+   "visual": "vot.block2",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "第二块，创意种子：{a}讲什么、用什么颜色、出现什么画面，{b}你只改这一块。"
+  },
+  {
+   "id": "block3",
+   "visual": "vot.block3",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "第三块，风格的招牌特征，{a}它决定像不像这种风格，{b}千万别删。"
+  },
+  {
+   "id": "done",
+   "visual": "vot.done",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "结尾再加一句 [Done means|Done means]，{a}写清楚做到什么程度，{b}才算完成。"
+  },
+  {
+   "id": "fail",
+   "visual": "vot.fail",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "第一版通常会翻车。{a}有作者实测：字卡说用手掌打，{b}画面却拿着拍子；{c}白字配白描边，直接糊掉。"
+  },
+  {
+   "id": "jury",
+   "visual": "vot.jury",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "办法是再找一个 AI 当评委。{a}每半秒截一张图，{b}按七项打分，{c}低于[7.5|七点五]的，照意见改。"
+  },
+  {
+   "id": "scores",
+   "visual": "vot.scores",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "改了两轮，{a}他的拼贴风从[5.4|五点四]分，{b}涨到了七分。{c}按他的说法，六分是剪映模板，{d}八分是广告公司。",
+   "tailMs": 900
+  },
+  {
+   "id": "mine",
+   "visual": "vot.mine",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "我这个号的片子，{a}也是 Claude Code 写代码做的。{b}我最常用的是四招。"
+  },
+  {
+   "id": "m1",
+   "visual": "vot.m1",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "一，先写分镜表，{a}一句口播配一个画面，{b}纯文字不停超过两秒。"
+  },
+  {
+   "id": "m2",
+   "visual": "vot.m2",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "二，颜色从素材里取，{a}不让 AI 自己编配色。"
+  },
+  {
+   "id": "m3",
+   "visual": "vot.m3",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "三，屏幕上的字不重复口播，{a}重复超过三分之一，{b}检查脚本直接判不过。"
+  },
+  {
+   "id": "m4",
+   "visual": "vot.m4",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "四，配音用我自己的声音，{a}逐字时间戳，卡字幕、卡动作。"
+  },
+  {
+   "id": "others",
+   "visual": "vot.others",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "也不是非用 Opus 不可。{a}DeepSeek 这些模型，也能写同样的代码。{b}有创作者同题对比过：{c}DeepSeek 便宜很多，{d}细节稍弱一点，还得自己挑错。"
+  },
+  {
+   "id": "budget",
+   "visual": "vot.budget",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "所以预算紧，先用它练手；{a}要交作品，再换 Opus。"
+  },
+  {
+   "id": "end",
+   "visual": "vot.end",
+   "step": 0,
+   "pace": "normal",
+   "narration": "最后一个建议：{a}先挑一种风格，只做十秒，{b}让另一个 AI 挑毛病，改两轮，{c}再去做长片。",
+   "tailMs": 1800
+  }
+ ],
+ "maxSeconds": 185
+}
