@@ -1,10 +1,10 @@
 # 每一帧都是AI写代码画的——Opus 5.5 做视频教程
 
-- 成片：`video.mp4`（SPECS）
+- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，2 分 51.6 秒，−15.1 LUFS，55 MB）
 - 封面：`cover-9x16.jpg`（抖音 / 视频号全屏）、`cover.jpg`（3:4，小红书）、`cover-6x7.jpg`（6:7，信息流）；标题「没开剪辑软件 / 每帧都是代码画的」，辅助句「Opus 5.5 做视频 · 四步上手」
 - 字幕：`subtitles.srt`；静帧 `still-XXs.jpg`、总览 `stills-sheet.jpg`、和最近几支并排 `compare.jpg`
 - 分镜：`tutorials/vibe-opus-video-tutorial.storyboard.md`；事实和出处：`inputs/vibe-opus-video-tutorial/`（materials / sources / review）
-- 检查：CHECKS
+- 检查：简报 + 导演十项过；复述检查过（1 %，每秒 2.1 个上屏字）；丰富度过（平均 46.4，0 段几乎不变）；封面过；lint 过；clutter 在片尾作品墙提醒“强调色多”，是 15 种风格作品本身的颜色；时长经用户同意超过 60 秒（`maxSeconds` 185）
 - 配音：本人音色（MiniMax `MashuaiDouyin01`）。**发布时勾选「内容由AI生成」**
 - 画面：创作者公开作品（静音，右下「作者｜案例展示」，不显示账号 handle）+ 代码绘制的窗口、终端、提示词文件、帧卡和扫描线；提示词文件里的「示意」内容、评分条的分数片中都标了「示意」
 - 用户要求的委婉口径：不说“最强”“只能用 Opus”；“DeepSeek 这些模型也能写同样的代码……便宜很多，细节稍弱一点，还得自己挑错”，对比数字标「据作者自述」
