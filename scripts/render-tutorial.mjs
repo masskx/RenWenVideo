@@ -8,7 +8,7 @@
 import {bundle} from '@remotion/bundler';
 import {renderMedia, renderStill, selectComposition} from '@remotion/renderer';
 import {access, mkdir, readFile, unlink, writeFile} from 'node:fs/promises';
-import {existsSync} from 'node:fs';
+import {existsSync, statSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -24,6 +24,21 @@ const stillsArg = args.find((a) => a.startsWith('--stills='));
 const target = args.find((a) => !a.startsWith('--')) ?? 'rea-quickstart';
 const id = path.basename(target, '.json');
 const readJson = async (file) => JSON.parse((await readFile(file, 'utf8')).replace(/^﻿/, ''));
+
+// Every film gets a score (docs/video-craft/音效.md §六): compose it when the film has no music yet, or recompose it when
+// the voice timeline is newer than its score (the arrangement follows the edit). Films on other music keep it.
+// --no-score skips this.
+if (!stillsArg && !args.includes('--no-score')) {
+  const cfg0 = await readJson(path.join('tutorials', `${id}.json`));
+  const scoreRel = `audio/tutorials/${id}/score.mp3`, scoreAbs = path.join(root, 'public', scoreRel);
+  const tlAbs = path.join(root, 'tutorials', `${id}.timeline.json`);
+  const stale = existsSync(scoreAbs) && existsSync(tlAbs) && statSync(scoreAbs).mtimeMs < statSync(tlAbs).mtimeMs;
+  if (!cfg0.musicSrc || (cfg0.musicSrc === scoreRel && (!existsSync(scoreAbs) || stale))) {
+    if (!cfg0.score?.mood) console.log(`note: tutorials/${id}.json has no "score": {"mood": …}; composing with the default mood (news)`);
+    const py = ['python3', 'python'].find((p) => { try { execFileSync(p, ['--version'], {stdio: 'ignore'}); return true; } catch { return false; } });
+    execFileSync(py, ['scripts/generate-score.py', id], {stdio: 'inherit'});
+  }
+}
 
 const tutorial = await readJson(path.join('tutorials', `${id}.json`));
 const timing = await readJson(path.join('tutorials', `${id}.timeline.json`));

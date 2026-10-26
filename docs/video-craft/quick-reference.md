@@ -44,6 +44,7 @@
 
 - **默认用用户的 MiniMax 音色 `MashuaiDouyin01`**（用户 2026-10-24：“以后帮我做视频都用这个新的 MiniMax 音色”；`MINIMAX_API_KEY`；中文口播里夹英文名词它自己会读）。配置写 `"tts": {"provider": "minimax"}` 或不写 `tts`。每个场景整段合成，逐词时间戳驱动字幕和卡点。之前的豆包复刻音色保留（`"provider": "doubao"`），旧片和用户点名时用；edge-tts 只在用户同意时作备用。见 [配音.md](配音.md)。
 - 每个场景写 `"pace"`（slow / calm / normal / brisk / fast），钩子一般 brisk。
+- **每支片都有配乐**（用户 2026-10-26）：配置写 `"score": {"mood": tension / news / warm / wonder / playful, "climax": <场景 id>, "lifts": [场景 id]}`，`npm run tutorial:score -- <id> --preview` 出配乐和人声混音预览（`qa/<id>/score-preview.mp3`）；渲染时没有配乐或配音改过会自动重新生成。音量按配音自动定，不要手调回 0.07。见 [音效.md](音效.md) §六。
 
 ## 六、画面风格
 
