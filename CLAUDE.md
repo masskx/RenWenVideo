@@ -39,7 +39,7 @@ Method: `docs/video-craft/导演方法.md` (built from the eight Opus-video repo
 
 ## Docs
 
-- **Read every time:** `docs/video-craft/quick-reference.md` (one page), `docs/video-craft/导演方法.md` (the method), `docs/video-craft/经验.md` (what past films taught, the user's own words), `docs/video-craft/hooks.md` (the first line, frame 0 and the first 10 s, from our own platform data).
+- **Read every time:** `docs/video-craft/quick-reference.md` (one page), `docs/video-craft/导演方法.md` (the method), `docs/video-craft/经验.md` (what past films taught, the user's own words), `docs/video-craft/hooks.md` (the first line, frame 0 and the first 10 s, from our own platform data), `docs/video-craft/抖音技巧.md` (the middle, the five endings, tail ≤ 1 s, publishing on 抖音).
 - On demand (optional reference): `docs/video-craft/README.md` lists the rest — narration, cover, sound, motion, styles, pitfalls. Old rules live in `docs/video-craft/archive/`.
 - huashu-motion (user, 2026-10-23: refer to it for every video and put it into practice): `docs/video-craft/huashu-motion.md` — its directing, colour method and templates; docs and code pinned in the prompt library.
 - Xian's 梵高 explainer (user, 2026-10-23: "must be used to actually optimize our videos"): `docs/video-craft/学习/xian-梵高做片法.md`; its props rewritten in `src/tutorial/props.tsx` (the skill repo has no licence — nothing copied).

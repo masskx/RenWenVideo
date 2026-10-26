@@ -73,6 +73,10 @@ if (cfg) {
     } else if (!said.some((c) => c.at <= 10 && /\d|[一二三四五六七八九十百千万亿]+[个次倍成%％]/.test(c.text))) {
       warn.push('前 10 秒的口播里没有数字：核心看点的数字或结论放进前 10 秒（hooks.md §三）');
     }
+    // Ending (抖音技巧.md §三): "完播" means the last frame; once the voice stops people swipe, so end ≤ 1 s after the last word.
+    const last = t.scenes[t.scenes.length - 1];
+    const tail = last ? last.durationFrames / t.fps - last.audioMs / 1000 : 0;
+    if (tail > 1.05) warn.push(`最后一句说完还停 ${tail.toFixed(1)} 秒：完播算的是看到最后一帧，口播一停就有人划走；片尾留白 ≤ 1 秒（最后一个场景 "tailMs" ≤ 1000），“高潮停留”放在最后一句之前（抖音技巧.md §三）`);
     if (sec > 50 && cfg.kind !== 'tutorial') warn.push(`成片 ${sec.toFixed(1)} 秒：知识快讯 35–50 秒表现最好；长片只在值得收藏的教程里用（配置写 "kind": "tutorial"，hooks.md §四）`);
   }
   if (cfg.kind === 'tutorial' && storyboard && !/收藏点[：:]/.test(fs.readFileSync(storyboard, 'utf8'))) warn.push('教程片：分镜「简报」里写一个「收藏点」——能截图的清单画面（步骤 / 命令 / 检查项，停 ≥ 2 秒），长片的收藏从这里来（hooks.md §四）');
@@ -87,6 +91,9 @@ if (cfg) {
     const longest = Math.max(...strip(sc.narration).split(/[。？！；?!;]/).map((x) => (x.match(/[一-鿿]/g) || []).length));
     if (longest > 22) warn.push(`场景 ${sc.id} 有一句 ${longest} 字：口播一句尽量 ≤ 16 字`);
   }
+  // No follow / like / "comment 1" calls (平台与合规.md §三, 抖音技巧.md §三): low quality or off-site traffic to the platform.
+  const cta = cfg.scenes.map((sc) => strip(sc.narration)).join('').match(/关注我|点个?关注|点个?赞|一键三连|评论区扣|扣\s*1|私信|主页领|加微信|资料包/);
+  if (cta) fail.push(`口播里有「${cta[0]}」：不喊关注 / 点赞 / 扣 1 / 私信，结尾落在内容本身（抖音技巧.md §三）`);
   const noPace = cfg.scenes.filter((sc) => sc.pace === undefined).map((sc) => sc.id);
   if (noPace.length) warn.push(`这些场景没写 "pace"（按 normal 配）：${noPace.join(', ')}`);
 } else if (!storyboard?.startsWith('explainers/')) warn.push(`没有找到 ${cfgPath}，只检查了分镜`);

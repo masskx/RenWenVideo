@@ -17,6 +17,7 @@ In a new session run `npm run doctor` first. Read every time: `docs/video-craft/
 | `评审表.md` | the jury rubric; `node scripts/qa/jury.mjs <id>` builds the packet |
 | `huashu-motion.md` | huashu's directing, colour and its templates (`scripts/huashu-new.mjs`) |
 | `配音.md` | voicing: the MiniMax voice (default) or the Doubao clone, timestamps → subtitles, pace presets, readings |
+| `抖音技巧.md` | always — opening layers, the second hook at 15–20 s, the five endings, tail ≤ 1 s, titles / tags / comments on 抖音 |
 | `hooks.md` | always — the first line, frame 0, the first 10 s and film length, from our own platform data (`数据复盘-2026-10-26.md`) |
 | `文案.md` | writing the narration for the ear |
 | `封面.md`, `音效.md` | covers; sound effects (CC0 / CC BY, credits) |
