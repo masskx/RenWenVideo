@@ -76,3 +76,15 @@
 - `assets/img/selfcheck_ci-sync分支列表_示意.png`（策划自制示意）→ check 一场按它的内容在代码里重排（分支后缀随机，标「示意」）。
 - `assets/hook/*`：策划的钩子示意，只作参考（日志红字的构图、850+ 的数字冲击、“删了分支 ≠ 没事了”）。
 - 不用：`wiz_blog_full_codehidden.png`（整页长图，手机上读不了）、几张 GitHub docs 截图（字太小，结论已在口播里）。攻击工作流代码一律不出现。
+
+## 封面卡
+
+- 模板：冲突型（conflict，封面.md）
+- 封面标题：你的CI在打印你的密钥
+- 辅助句：850+ 账号中招 · 据 Wiz Research
+- 锚点：`ghs.cover`——红色 base32 日志窗口 + 「你的密钥」红章 + 粉色小幽灵
+- 颜色：字 #FFFFFF / 底 #1D1C25（Wiz 头图）/ 强调 #FF4D4D（泄露的密钥）
+
+## 配乐
+
+- `scripts/generate-pulse-bed.py gheist-github-secrets --turn=41.7`：自己合成，无版权问题。暗处是 D 小调低频铺底 + 100 bpm 的心跳式脉冲；到“自查”（41.7 秒，翻白底）脉冲停，换成一个敞开的 D 大调加九和弦，一直到结尾。

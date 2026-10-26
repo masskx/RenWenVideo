@@ -158,7 +158,7 @@ const scalePlan = (cue: Cue) => ({a: cue('a', 92), b: cue('b', 131), c: cue('c',
 const Scale: Scene = ({f, cue}) => {
   const p = scalePlan(cue);
   const grid = ramp(f, p.b - 14, p.b - 4);
-  const cam = camAt(f, [[-1, {x: 450, y: 420, z: 1.08}, 1], [p.b - 16, {x: 450, y: 600, z: 1.0}, 18], [p.c, {z: 0.96}, 20]]);
+  const cam = camAt(f, [[-1, {x: 450, y: 420, z: 1.08}, 1], [p.b - 16, {x: 450, y: 600, z: 1.0}, 18], [p.c, {z: 0.96}, 20], [p.c + 26, {x: 470, y: 720, z: 1.12}, 80]]);
   const cols = 17, n = 17 * 13, cell = 900 / cols;
   return <>
     {stage(cam, <Far />, <>
@@ -351,25 +351,25 @@ const Lane: React.FC<{f: number; y: number; label: string; gate: boolean; at: nu
   return <div style={{position: 'absolute', left: 0, top: y, width: 900, height: 150}}>
     <div style={{position: 'absolute', left: 0, right: 0, top: 96, height: 10, borderRadius: 5, background: 'rgba(255,255,255,0.15)'}} />
     <div style={{position: 'absolute', left: 0, top: -6, fontFamily: font, fontWeight: 900, fontSize: 40, color: '#fff'}}>{label}</div>
-    {gate && <div style={{position: 'absolute', left: 560, top: 0, width: 22, height: 120, borderRadius: 8, background: P.blue, border: `4px solid ${P.ink}`, transform: `translateY(${-140 * (1 - ramp(f, at - 20, at - 8))}px)`}} />}
-    {f >= at - 4 && <div style={{position: 'absolute', left: x + 200, top: 48, width: 280, height: 64, borderRadius: 14, background: '#161B22', border: `4px solid ${gate ? '#D29922' : P.pink}`,
+    {gate && <div style={{position: 'absolute', left: 680, top: 0, width: 22, height: 120, borderRadius: 8, background: P.blue, border: `4px solid ${P.ink}`, transform: `translateY(${-140 * (1 - ramp(f, at - 20, at - 8))}px)`}} />}
+    {f >= at - 4 && <div style={{position: 'absolute', left: x + 200, top: 48, width: 300, height: 64, borderRadius: 14, background: '#161B22', border: `4px solid ${gate ? '#D29922' : P.pink}`,
       display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: mono, fontWeight: 700, fontSize: 30, color: gate ? '#D29922' : P.pinkHi, opacity: gate ? 1 : 1 - ramp(f, at + 34, at + 40)}}>
       {gate && held > 0.5 ? 'action_required' : 'sync-check'}</div>}
   </div>;
 };
 const Hold: Scene = ({f, cue}) => {
   const p = holdPlan(cue);
-  const cam = camAt(f, [[-1, {x: 450, y: 360, z: 1.05}, 1], [p.a - 12, {x: 450, y: 640, z: 1.0}, 18]]);
+  const cam = camAt(f, [[-1, {x: 450, y: 360, z: 1.05}, 1], [p.a - 12, {x: 450, y: 640, z: 1.0}, 18], [p.a + 6, {x: 450, y: 700, z: 1.04}, 40], [p.b - 4, {x: 450, y: 760, z: 1.07}, 30]]);
   return <>
     {stage(cam, <Far c="rgba(35,84,215,0.22)" />, <>
       <Shot src={IMG('gh-title')} w={860} f={f} at={-12} x={20} y={60} rot={-1.5} label="@GitHub｜Changelog 2026-07-28" />
       <Shot src={IMG('gh-public-only')} w={760} f={f} at={p.a - 6} x={70} y={330} rot={1} />
       <Lane f={f} y={520} label="公开仓库" gate at={40} held={ramp(f, 66, 70)} />
+      <Abs x={600} y={470}><In f={f} at={72}><div style={{fontFamily: font, fontWeight: 900, fontSize: 40, color: '#D29922'}}>扣下 · 等人批准</div></In></Abs>
       <Lane f={f} y={700} label="私有仓库" gate={false} at={p.a + 6} />
       <Lane f={f} y={880} label="Enterprise Server" gate={false} at={p.b + 2} />
-      <Ghost f={f} x={820} y={1060} s={0.75} look={-1} grin o={ramp(f, p.a + 20, p.a + 30)} />
+      <Ghost f={f} x={f < p.b ? 250 + 640 * ramp(f, p.a + 6, p.a + 46) : 250 + 640 * ramp(f, p.b + 2, p.b + 42)} y={f < p.b ? 740 : 920} s={0.75} look={1} grin o={ramp(f, p.a + 2, p.a + 8)} />
     </>)}
-    <Abs x={600} y={540}><In f={f} at={72}><div style={{fontFamily: font, fontWeight: 900, fontSize: 40, color: '#D29922'}}>扣下 · 等人批准</div></In></Abs>
   </>;
 };
 Hold.backdrop = backdrop(P.gh, P.ghDeep, (f) => ramp(f, -4, 16), false, 'GitHub Changelog · Wiz Research');
