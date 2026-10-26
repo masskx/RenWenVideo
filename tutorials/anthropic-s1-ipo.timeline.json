@@ -1,0 +1,165 @@
+{
+  "id": "anthropic-s1-ipo",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 887,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/anthropic-s1-ipo/01-hook.mp3",
+      "audioMs": 4310,
+      "startFrame": 0,
+      "durationFrames": 137,
+      "cues": {
+        "a": 2148
+      },
+      "captions": [
+        {
+          "text": "半年亏了807亿美元",
+          "startMs": 143,
+          "endMs": 2148
+        },
+        {
+          "text": "Anthropic还是递了上市申请",
+          "startMs": 2148,
+          "endMs": 4637
+        }
+      ]
+    },
+    {
+      "id": "ticker",
+      "audioSrc": "audio/tutorials/anthropic-s1-ipo/02-ticker.mp3",
+      "audioMs": 2873,
+      "startFrame": 137,
+      "durationFrames": 94,
+      "cues": {
+        "a": 911,
+        "b": 2011
+      },
+      "captions": [
+        {
+          "text": "代码ANT，发行价那一栏",
+          "startMs": 143,
+          "endMs": 2011
+        },
+        {
+          "text": "还空着",
+          "startMs": 2011,
+          "endMs": 3161
+        }
+      ]
+    },
+    {
+      "id": "revenue",
+      "audioSrc": "audio/tutorials/anthropic-s1-ipo/03-revenue.mp3",
+      "audioMs": 3971,
+      "startFrame": 231,
+      "durationFrames": 127,
+      "cues": {
+        "a": 2105
+      },
+      "captions": [
+        {
+          "text": "上半年收入163亿美元",
+          "startMs": 143,
+          "endMs": 2105
+        },
+        {
+          "text": "同比涨了1300%",
+          "startMs": 2105,
+          "endMs": 4281
+        }
+      ]
+    },
+    {
+      "id": "loss",
+      "audioSrc": "audio/tutorials/anthropic-s1-ipo/04-loss.mp3",
+      "audioMs": 7445,
+      "startFrame": 358,
+      "durationFrames": 231,
+      "cues": {
+        "a": 1744,
+        "b": 5959
+      },
+      "captions": [
+        {
+          "text": "那807亿的亏损里",
+          "startMs": 144,
+          "endMs": 1744
+        },
+        {
+          "text": "有724亿是估值涨了",
+          "startMs": 1744,
+          "endMs": 4160
+        },
+        {
+          "text": "可转债重算出来的账面数",
+          "startMs": 4160,
+          "endMs": 5959
+        },
+        {
+          "text": "不是烧掉的现金",
+          "startMs": 5959,
+          "endMs": 7657
+        }
+      ]
+    },
+    {
+      "id": "adjusted",
+      "audioSrc": "audio/tutorials/anthropic-s1-ipo/05-adjusted.mp3",
+      "audioMs": 6113,
+      "startFrame": 589,
+      "durationFrames": 191,
+      "cues": {
+        "a": 996,
+        "b": 3998
+      },
+      "captions": [
+        {
+          "text": "按公司口径",
+          "startMs": 143,
+          "endMs": 996
+        },
+        {
+          "text": "调整后营业利润是正的16亿美元",
+          "startMs": 996,
+          "endMs": 3998
+        },
+        {
+          "text": "按会计准则",
+          "startMs": 3998,
+          "endMs": 5090
+        },
+        {
+          "text": "仍是亏损",
+          "startMs": 5090,
+          "endMs": 6408
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/anthropic-s1-ipo/06-end.mp3",
+      "audioMs": 2952,
+      "startFrame": 780,
+      "durationFrames": 107,
+      "cues": {
+        "a": 1074
+      },
+      "captions": [
+        {
+          "text": "一股卖多少钱？",
+          "startMs": 146,
+          "endMs": 1074
+        },
+        {
+          "text": "招股书上，还是空白",
+          "startMs": 1074,
+          "endMs": 3262
+        }
+      ]
+    }
+  ]
+}

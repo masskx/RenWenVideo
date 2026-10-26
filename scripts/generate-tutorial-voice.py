@@ -407,7 +407,16 @@ def synthesize_minimax(text, tts, out_path):
                for seg in subs for w in seg.get("timestamped_words") or [] if w.get("word", "").strip()]
     if not service:
         raise SystemExit(f"MiniMax returned no word timestamps for scene {text[:30]!r}… (subtitle_type \"word\")")
-    return map_timestamps(text, service)
+    # MiniMax stamps a number once per spoken syllable with the whole token ("807亿" five times for 八百零七亿, measured
+    # 2026-10-26): merge a run of identical tokens that contain digits or latin letters into one word, or the aligner
+    # reads them as five words and every caption after the number comes in seconds early.
+    merged = []
+    for w in service:
+        if merged and w["text"] == merged[-1]["text"] and any(ch.isdigit() or ch.isascii() and ch.isalpha() for ch in w["text"]):
+            merged[-1]["end"] = w["end"]
+        else:
+            merged.append(dict(w))
+    return map_timestamps(text, merged)
 
 
 def spread_stubs(service, stub_ms=60):
