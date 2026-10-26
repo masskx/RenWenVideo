@@ -83,8 +83,8 @@ const Ticket: React.FC<{f?: number; typeAt?: number; w?: number}> = ({f = 0, typ
   <div style={{width: w, padding: '16px 20px', background: '#FFFDF6', border: `5px solid ${P.ink}`, borderRadius: 12, boxShadow: '0 10px 18px rgba(43,33,28,0.25)', transform: 'rotate(-8deg)',
     backgroundImage: `radial-gradient(circle at 0 50%, ${P.paper} 12px, transparent 13px), radial-gradient(circle at 100% 50%, ${P.paper} 12px, transparent 13px)`}}>
     <div style={{fontFamily: font, fontWeight: 800, fontSize: 22, color: P.tanD}}>自己申请的</div>
-    <div style={{fontFamily: mono, fontWeight: 800, fontSize: 36, color: P.ink, whiteSpace: 'nowrap'}}>
-      {typeAt === undefined ? 'access token' : <Typed f={f} start={typeAt} text="access token" cps={24} size={36} family={mono} weight={800} color={P.ink} caret={false} />}</div>
+    <div style={{fontFamily: mono, fontWeight: 800, fontSize: w * 0.13, color: P.ink, whiteSpace: 'nowrap'}}>
+      {typeAt === undefined ? 'access token' : <Typed f={f} start={typeAt} text="access token" cps={24} size={w * 0.13} family={mono} weight={800} color={P.ink} caret={false} />}</div>
   </div>
 );
 /**
@@ -129,13 +129,13 @@ const Hook: Scene = ({f, cue}) => {
   const cam = camAt(f, [[-1, {x: 450, y: 600, z: 1.0}, 1], [0, {z: 1.08, x: 420}, p.a + 20], [p.b - 6, {x: 470, y: 620, z: 1.0}, 16]]);
   return <>
     {stage(cam, <Ledger />, <>
-      <Gate x={600} y={1050} open={open} s={1.5} />
+      <Gate x={670} y={1050} open={open} s={1.5} />
       <Robot f={f} x={rx} y={1050} s={1.7} walk={walk > 0 && walk < 1} mood={walk > 0 ? 'proud' : 'busy'}
-        hold={insert < 0.95 ? <Ticket f={f} typeAt={p.a - 2} w={210} /> : undefined} />
+        hold={insert < 0.95 ? <Ticket f={f} typeAt={p.a - 2} w={170} /> : undefined} />
       <Abs x={560} y={240}><Note w={320} /></Abs>
     </>)}
     <Abs x={20} y={40} w={520}><div style={{fontFamily: font, fontWeight: 900, fontSize: 120, color: P.ink, letterSpacing: 2, lineHeight: 1.05}}>没人<br />下令</div></Abs>
-    <Stamp x={560} y={820} f={f} at={p.b + 14} size={80} color={P.red} rot={-8}>未付费</Stamp>
+    <Stamp x={630} y={820} f={f} at={p.b + 14} size={80} color={P.red} rot={-8}>未付费</Stamp>
   </>;
 };
 Hook.backdrop = backdrop(P.paper, P.paper, () => 0);
@@ -186,9 +186,9 @@ const What: Scene = ({f, cue}) => {
           <div style={{marginTop: 30, width: 120, height: 22, background: P.red}} />
         </div>
       </div>
-      <Abs x={380} y={560}><Board f={f} at={p.b - 6} /></Abs>
-      <Gate x={210} y={1060} open={1} sign={false} />
-      <Robot f={f} x={480 + 260 * out} y={1060} s={0.95} walk={out > 0 && out < 1} mood="proud"
+      <Abs x={380} y={470}><Board f={f} at={p.b - 6} /></Abs>
+      <Gate x={230} y={1060} open={1} sign={false} s={1.25} />
+      <Robot f={f} x={500 + 240 * out} y={1060} s={1.3} walk={out > 0 && out < 1} mood="proud"
         hold={out > 0 ? <div style={{width: 120, height: 90, background: P.white, border: `4px solid ${P.ink}`, transform: 'rotate(6deg)', display: 'flex', alignItems: 'flex-end', gap: 8, padding: 10, boxSizing: 'border-box'}}>
           {[0.5, 0.8, 0.4, 0.7].map((h, i) => <div key={i} style={{width: 16, height: 60 * h, background: i % 2 ? P.tan : P.sage}} />)}</div> : undefined} />
     </>)}
@@ -295,8 +295,8 @@ End.sfx = (cue) => {
 
 /** Cover anchor (880 × 800, rendered at f = 0): the robot at the gate holding its own ticket, the empty note. */
 const Cover: Scene = () => <>
-  <Gate x={600} y={780} open={0} />
-  <Robot f={0} x={300} y={780} s={1.25} mood="busy" hold={<Ticket w={240} />} />
+  <Gate x={680} y={780} open={0} />
+  <Robot f={0} x={260} y={780} s={1.25} mood="busy" hold={<Ticket w={190} />} />
   <Abs x={10} y={80}><Note w={300} /></Abs>
 </>;
 

@@ -51,3 +51,15 @@
 - `public/images/tutorials/claude-georgia-paywall/fox-headline.jpg`：Fox Business 标题（`foxbusiness_top.png` 裁切），右下「@FOX Business｜报道截图」。
 - Axios 页截图失败（见 materials.md §8），口播说“据 Axios 报道”，画面用 Fox Business / Anthropic 两张截图。
 - 不用：Axios 头图（真人照片，不需要）；02–04 AI 生成示意图（横版、生成图）；摘录卡（字太小）。
+
+## 封面卡
+
+- 模板：冲突型（conflict，封面.md）
+- 封面标题：没人下令，Claude 自己绕开了付费墙
+- 辅助句：只拿了汇总计票 · 据 Axios / Anthropic
+- 锚点：`cgp.cover`——闸机前举着自制 access token 的机器人 + 空的指令便签
+- 颜色：字 #2B211C / 底 #F8F7F2（Anthropic 报告页）/ 强调 #BD3730（报告头图的红）
+
+## 配乐
+
+- `scripts/generate-pulse-bed.py claude-georgia-paywall --turn=12.9`：前 13 秒低频脉冲（事情发生），到“先说清楚”换成一个敞开的和弦（澄清）。
