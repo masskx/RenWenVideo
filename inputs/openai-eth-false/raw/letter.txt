@@ -1,0 +1,41 @@
+﻿Dear colleagues,
+OpenAI has informed us that it has obtained a claimed refutation of the Exponential Time Hypothesis and plans to release the supporting documents to the community. Our names may appear in connection with that release. We would like to explain our perspective and invite your participation in two related but distinct efforts: examining this particular claim, and considering how our community should respond to AI-generated breakthroughs more generally.
+Our involvement should not be taken as certification of the claim. A result of this significance requires careful, independent scrutiny and an understanding that others can reconstruct, question, and build upon. We would like to work with the community toward that understanding.
+1. Organizing the community’s examination of the ETH claim
+The immediate task is to examine the argument, establish its correctness or identify its limitations, and understand its consequences. Coordination can help distribute this work, make progress visible, and avoid unnecessary duplication. It should remain open to independent approaches and criticism, without conferring ownership of the effort on a company or a selected group of researchers, including ourselves.
+We would welcome your ideas on the following questions:
+* How should we (the research community) organize the examination of the proof so that researchers can contribute independently while sharing questions, gaps, corrections, and verified steps?
+* How can we make the argument accessible through explanations, simplified proofs, seminars, and other shared resources?
+* How should we organize the study of its consequences for algorithms, lower bounds, and existing research directions, while clearly distinguishing established conclusions from possibilities that remain to be explored?
+If the claim is correct, it will change an important part of theoretical computer science. ETH has helped organize decades of research, connecting problems and sharpening our understanding of computational difficulty. The ideas, reductions, and techniques developed through that work retain their value, even as some of their interpretations may change. There should be room both for excitement about new possibilities and for thoughtful reassessment of directions many of us have pursued for years. 
+2. Developing norms for AI-generated breakthroughs
+Beyond this particular claim, we should expect further AI-generated results that challenge established assumptions or open new research directions. These developments raise questions that extend beyond the organization of any one verification effort.
+Early access can help researchers check a result before release, but it also creates opportunities unavailable to others. As discoveries come faster, recognition may go mainly to those who publish first or have the most powerful tools, while the work of checking, explaining, and building on results receives less credit. We should consider these issues openly rather than rely on good intentions alone.
+We would welcome discussion of three broader questions:
+* What expectations should govern early access to AI-generated results, disclosure of conflicts of interest, and the use of unpublished material for subsequent research?
+* How should credit recognize both new discoveries and the work of checking, fixing, simplifying, explaining, and extending them?
+* How can we support students and researchers as methods and research directions change, while preserving the understanding and judgment needed to question results and develop new ideas?
+We do not have final answers. We hope to work with the community both on the immediate ETH effort and on these broader questions. Our aim is to advance what is known while strengthening our shared capacity to understand, teach, and extend it.
+Russell Impagliazzo (UC San Diego)
+Ramamohan Paturi (UC San Diego)
+Ryan Williams (MIT)
+
+
+
+
+Appendix  Proposed arrangements for community participation
+A. Resources
+1. OpenAI’s original results
+ETH release URL: https://openai.com/index/building-scientific-understanding-with-academic-communities/
+This is the authoritative location for the original PDFs, any accompanying source or formalization, and subsequent corrections. 
+2. Community findings
+Findings URL: ETH_Repository  maintained by Russell, Mohan and Ryan  to facilitate dissemination of researchers’  notes, explanations, comments, corrections, and follow-up results
+
+
+3. Public discussion
+Blog URL: [Link will be posted soon; check back in a day or two]
+
+
+4. Structured responses
+Google Form URL: [Link will be posted soon; check back in a day or two]
+Use the form for structured feedback.
