@@ -130,5 +130,12 @@
     "support": 1620
    }
   }
+ },
+ "score": {
+  "mood": "news",
+  "climax": "bounds",
+  "lifts": [
+   "end"
+  ]
  }
 }

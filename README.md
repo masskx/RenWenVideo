@@ -148,7 +148,8 @@ npm ci
 3. **配音、底乐、渲染**：
    ```bash
    npm run tutorial:voice -- <id>                  # 分场景配音 + 字幕/动画时间轴 → tutorials/<id>.timeline.json
-   npm run tutorial:music -- <id>                  # 合成无版权底乐
+   python scripts/generate-score.py <id> --preview # 按情绪和剪辑编曲的配乐（默认；音效.md §六）
+   npm run tutorial:music -- <id>                  # 旧的合成底乐（旧片在用）
    npm run tutorial:render -- <id> --stills=0,300,1200   # 抽帧检查 → qa/<id>/frame-N.png
    npm run tutorial:render -- <id> --overwrite     # → douyin/<id>/video.mp4、三种封面、subtitles.srt
    node scripts/render-tutorial.mjs <id> --cover-only   # 只重出封面
