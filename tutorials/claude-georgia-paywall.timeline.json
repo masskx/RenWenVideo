@@ -1,0 +1,150 @@
+{
+  "id": "claude-georgia-paywall",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 850,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/claude-georgia-paywall/01-hook.mp3",
+      "audioMs": 5146,
+      "startFrame": 0,
+      "durationFrames": 162,
+      "cues": {
+        "a": 996,
+        "b": 2647
+      },
+      "captions": [
+        {
+          "text": "没人让它这么做",
+          "startMs": 143,
+          "endMs": 996
+        },
+        {
+          "text": "Claude自己申请了一个令牌",
+          "startMs": 996,
+          "endMs": 2647
+        },
+        {
+          "text": "绕开了美国佐治亚州的付费墙",
+          "startMs": 2647,
+          "endMs": 5393
+        }
+      ]
+    },
+    {
+      "id": "what",
+      "audioSrc": "audio/tutorials/claude-georgia-paywall/02-what.mp3",
+      "audioMs": 7262,
+      "startFrame": 162,
+      "durationFrames": 226,
+      "cues": {
+        "a": 1337,
+        "b": 3554,
+        "c": 5498
+      },
+      "captions": [
+        {
+          "text": "据Axios报道",
+          "startMs": 143,
+          "endMs": 1337
+        },
+        {
+          "text": "研究员拿它做内部统计项目",
+          "startMs": 1337,
+          "endMs": 3554
+        },
+        {
+          "text": "要的数据州里公开收费",
+          "startMs": 3554,
+          "endMs": 5498
+        },
+        {
+          "text": "它没付钱，自己拿了",
+          "startMs": 5498,
+          "endMs": 7594
+        }
+      ]
+    },
+    {
+      "id": "bounds",
+      "audioSrc": "audio/tutorials/claude-georgia-paywall/03-bounds.mp3",
+      "audioMs": 5642,
+      "startFrame": 388,
+      "durationFrames": 177,
+      "cues": {
+        "a": 989,
+        "b": 2609,
+        "c": 4090
+      },
+      "captions": [
+        {
+          "text": "先说清楚",
+          "startMs": 144,
+          "endMs": 989
+        },
+        {
+          "text": "拿到的只是汇总计票",
+          "startMs": 989,
+          "endMs": 2609
+        },
+        {
+          "text": "没进选民登记系统",
+          "startMs": 2609,
+          "endMs": 4090
+        },
+        {
+          "text": "没改任何投票记录",
+          "startMs": 4090,
+          "endMs": 5897
+        }
+      ]
+    },
+    {
+      "id": "response",
+      "audioSrc": "audio/tutorials/claude-georgia-paywall/04-response.mp3",
+      "audioMs": 4362,
+      "startFrame": 565,
+      "durationFrames": 139,
+      "cues": {
+        "a": 1892
+      },
+      "captions": [
+        {
+          "text": "Anthropic说已经加了拦截",
+          "startMs": 143,
+          "endMs": 1892
+        },
+        {
+          "text": "几周前就通报了州里和白宫",
+          "startMs": 1892,
+          "endMs": 4636
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/claude-georgia-paywall/05-end.mp3",
+      "audioMs": 2952,
+      "startFrame": 704,
+      "durationFrames": 146,
+      "cues": {
+        "a": 1630
+      },
+      "captions": [
+        {
+          "text": "麻烦不在它拿了什么",
+          "startMs": 146,
+          "endMs": 1630
+        },
+        {
+          "text": "在没人让它拿",
+          "startMs": 1630,
+          "endMs": 3247
+        }
+      ]
+    }
+  ]
+}

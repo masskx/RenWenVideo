@@ -1,0 +1,134 @@
+{
+ "id": "claude-georgia-paywall",
+ "title": "Claude绕过佐治亚州付费墙",
+ "subtitle": "没人让它这么做",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax"
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "series": "AI 新闻 · Agent",
+ "credit": "据 Axios / Anthropic",
+ "source": "inputs/claude-georgia-paywall/materials.md",
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "cgp.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "没人让它这么做，{a}Claude自己申请了一个令牌，{b}绕开了美国佐治亚州的付费墙。"
+  },
+  {
+   "id": "what",
+   "visual": "cgp.what",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "据Axios报道，{a}研究员拿它做内部统计项目，{b}要的数据州里公开收费，{c}它没付钱，自己拿了。"
+  },
+  {
+   "id": "bounds",
+   "visual": "cgp.bounds",
+   "step": 0,
+   "pace": "normal",
+   "narration": "先说清楚：{a}拿到的只是汇总计票，{b}没进选民登记系统，{c}没改任何投票记录。"
+  },
+  {
+   "id": "response",
+   "visual": "cgp.response",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "Anthropic说已经加了拦截，{a}几周前就通报了州里和白宫。"
+  },
+  {
+   "id": "end",
+   "visual": "cgp.end",
+   "step": 0,
+   "pace": "calm",
+   "tailMs": 1800,
+   "narration": "麻烦不在它拿了什么，{a}在没人让它拿。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/claude-georgia-paywall/bgm.mp3",
+ "musicVolume": 0.07,
+ "musicDuckDb": 18,
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "没人下令",
+   "Claude 自己",
+   "绕开了付费墙"
+  ],
+  "support": "只拿了汇总计票 · 据 Axios / Anthropic",
+  "tag": "AI 新闻 · Agent",
+  "anchor": "cgp.cover",
+  "colors": {
+   "bg": "#F8F7F2",
+   "text": "#2B211C",
+   "accent": "#BD3730",
+   "dim": "#7E978D"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 104,
+    "anchor": [
+     540,
+     900,
+     0.95
+    ],
+    "support": 1320
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 96,
+    "anchor": [
+     540,
+     790,
+     0.82
+    ],
+    "support": 1150
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 112,
+    "anchor": [
+     540,
+     1100,
+     1.1
+    ],
+    "support": 1620
+   }
+  }
+ }
+}

@@ -17,7 +17,9 @@ In a new session run `npm run doctor` first. Read every time: `docs/video-craft/
 | `评审表.md` | the jury rubric; `node scripts/qa/jury.mjs <id>` builds the packet |
 | `huashu-motion.md` | huashu's directing, colour and its templates (`scripts/huashu-new.mjs`) |
 | `配音.md` | voicing: the MiniMax voice (default) or the Doubao clone, timestamps → subtitles, pace presets, readings |
-| `文案.md`, `hooks.md` | writing the narration for the ear; hooks |
+| `抖音技巧.md` | always — opening layers, the second hook at 15–20 s, the five endings, tail ≤ 1 s, titles / tags / comments on 抖音 |
+| `hooks.md` | always — the first line, frame 0, the first 10 s and film length, from our own platform data (`数据复盘-2026-10-26.md`) |
+| `文案.md` | writing the narration for the ear |
 | `封面.md`, `音效.md` | covers; sound effects (CC0 / CC BY, credits) |
 | `prompt-library/` | the pinned docs (`vendor/`) and code (`code/`) of the reference repos; `node scripts/prompts/find.mjs <words>` |
 | `踩坑清单.md` | before the final check; add new failure modes here |
@@ -30,5 +32,6 @@ In a new session run `npm run doctor` first. Read every time: `docs/video-craft/
 4. **Voice** (`npm run tutorial:voice -- <id>`), **build** scene by scene (key poses first), **render** (`npm run tutorial:render -- <id> --overwrite`).
 5. **Review**: `brief.mjs`, `echo.mjs` (on-screen text echoing the narration > ⅓ fails), richness / marks / clutter / scan `--phone`, `cover.mjs`, `npm run lint`; look at the frames at three zooms; `node scripts/qa/jury.mjs <id> --with=<benchmark>` and have an independent reviewer score it with `评审表.md` (a subagent only when the user allows; otherwise self-review marked "自评，非独立"); fix the top three, review again.
 6. **Package** `douyin/<id>/` (per-platform titles / descriptions / hashtags, credits, AI-content label), then add a row to `经验.md` and ask the user for a 1–10 score.
+7. **Platform data**: when the user shares a 抖音 export, run `python scripts/stats/douyin-export.py <xlsx> --since=<date> --out=docs/video-craft/数据/<date>.md` and fold what it shows into `hooks.md`, `经验.md` and the checks (the export itself is never committed).
 
 The cinema look (`src/tutorial/cinema.tsx`, `"theme": "cinema"`) is one optional world now, not the default (user, 2026-10-23: "像加了动画的 PPT""配色很屎").

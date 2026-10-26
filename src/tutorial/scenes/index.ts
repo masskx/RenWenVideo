@@ -35,6 +35,7 @@ import {kimiK31ProScenes} from './kimi-k3-1-pro';
 import {vibeOpusVideoTutorialScenes} from './vibe-opus-video-tutorial';
 import {lateNightEmoScenes} from './late-night-emo';
 import {gheistGithubSecretsScenes} from './gheist-github-secrets';
+import {claudeGeorgiaPaywallScenes} from './claude-georgia-paywall';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -76,4 +77,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...vibeOpusVideoTutorialScenes,
   ...lateNightEmoScenes,
   ...gheistGithubSecretsScenes,
+  ...claudeGeorgiaPaywallScenes,
 };

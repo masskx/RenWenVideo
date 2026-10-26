@@ -26,6 +26,7 @@ Method: `docs/video-craft/导演方法.md` (built from the eight Opus-video repo
 4. **Render** — `npm run tutorial:render -- <id> --overwrite` (1080×1920 H.264, covers); page scenes via `node scripts/page-render.mjs pages/<id>/<scene>`.
 5. **Review** — machine checks (`node scripts/qa/brief.mjs <id>`, `echo.mjs <id>` (on-screen text echoing the narration > ⅓ fails), `cover.mjs <id>`, `richness.mjs` / `marks.mjs` / `scan.mjs --phone` / `clutter.mjs` on the mp4, `npm run lint`) are the floor, not the goal. Then: contact sheets, 0.1–0.2 s strips of key moves, crops; side by side with the benchmark and our last three films (`compare.mjs` — at least four of structure / opening / signature shot / camera path / score shape / ending must differ); an independent jury pass (`node scripts/qa/jury.mjs <id>`, rubric `docs/video-craft/评审表.md`; a subagent only when the user allows, else a self-review marked as such); fix the top three issues and look again.
 6. **Package** — `douyin/<id>/`: mp4 (committed; < 100 MB), covers, stills, README with separate title / description / hashtags for 视频号, 抖音, 小红书, and credits. Then add a line to `docs/video-craft/经验.md` and ask the user for a 1–10 score and one sentence.
+7. **Learn from the numbers** — when the user shares a platform export (抖音 creator-centre 作品数据 .xlsx): `python scripts/stats/douyin-export.py <xlsx> --since=<date> --out=docs/video-craft/数据/<date>.md` matches each post to its film, length and first line; write what changed into `经验.md` / `hooks.md` and the checks. Never commit the export itself. What the data says so far (2026-10-26, `docs/video-craft/数据复盘-2026-10-26.md`): viewers stay 6–16 s on average, so the first line is a concrete event + a number / moment (no date, greeting or "this video" opener — `brief.mjs` fails it), the core number lands in the first 10 s, explainers run 35–50 s, long films only as save-worthy tutorials, and risk topics end on one action the viewer can take now.
 
 ## Hard rules
 
@@ -38,7 +39,7 @@ Method: `docs/video-craft/导演方法.md` (built from the eight Opus-video repo
 
 ## Docs
 
-- **Read every time:** `docs/video-craft/quick-reference.md` (one page), `docs/video-craft/导演方法.md` (the method), `docs/video-craft/经验.md` (what past films taught, the user's own words).
+- **Read every time:** `docs/video-craft/quick-reference.md` (one page), `docs/video-craft/导演方法.md` (the method), `docs/video-craft/经验.md` (what past films taught, the user's own words), `docs/video-craft/hooks.md` (the first line, frame 0 and the first 10 s, from our own platform data), `docs/video-craft/抖音技巧.md` (the middle, the five endings, tail ≤ 1 s, publishing on 抖音).
 - On demand (optional reference): `docs/video-craft/README.md` lists the rest — narration, cover, sound, motion, styles, pitfalls. Old rules live in `docs/video-craft/archive/`.
 - huashu-motion (user, 2026-10-23: refer to it for every video and put it into practice): `docs/video-craft/huashu-motion.md` — its directing, colour method and templates; docs and code pinned in the prompt library.
 - Xian's 梵高 explainer (user, 2026-10-23: "must be used to actually optimize our videos"): `docs/video-craft/学习/xian-梵高做片法.md`; its props rewritten in `src/tutorial/props.tsx` (the skill repo has no licence — nothing copied).
