@@ -66,13 +66,13 @@
    "visual": "cgp.end",
    "step": 0,
    "pace": "calm",
-   "tailMs": 1800,
+   "tailMs": 600,
    "narration": "麻烦不在它拿了什么，{a}在没人让它拿。"
   }
  ],
- "musicSrc": "audio/tutorials/claude-georgia-paywall/bgm.mp3",
- "musicVolume": 0.07,
- "musicDuckDb": 18,
+ "musicSrc": "audio/tutorials/claude-georgia-paywall/score.mp3",
+ "musicVolume": 0.143,
+ "musicDuckDb": 10,
  "coverCard": {
   "template": "conflict",
   "headline": [

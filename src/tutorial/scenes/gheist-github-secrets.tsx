@@ -479,20 +479,21 @@ const TokenCard: React.FC<{title: string; lines: string[]; good?: boolean; strik
 );
 const End: Scene = ({f, cue}) => {
   const p = endPlan(cue);
-  const cam = camAt(f, [[-1, {x: 450, y: 600, z: 1.08}, 1], [0, {z: 1.14}, 180]]);
+  const cam = camAt(f, [[-1, {x: 450, y: 600, z: 1.0}, 1], [0, {x: 450, y: 560, z: 1.14}, 140]]);
+  // in the order the line says them: the fine-grained token first (with its expiry tag), then the long-lived one is struck
   return <>
     {stage(cam, <></>, <>
-      <Abs x={0} y={300}><In f={f} at={-10}><TokenCard title="长期个人 token" lines={['能碰你所有仓库', '不过期']} strike={ramp(f, 20, 32)} /></In></Abs>
-      <Abs x={470} y={300}><In f={f} at={p.a - 6}><TokenCard good title="细粒度 token" lines={['只给 1 个仓库', '只读 / 按需权限']} /></In></Abs>
-      <Tag x={670} y={640} f={f} at={p.a + 8} w={320} color={P.green} ink={P.ink}>30 天到期</Tag>
-      <Abs x={0} y={900}><In f={f} at={p.a + 30}><div style={{fontFamily: font, fontSize: 30, color: '#57606A'}}>GitHub Docs：尽量用 fine-grained token，可限定仓库、权限和过期时间</div></In></Abs>
+      <Abs x={20} y={260}><In f={f} at={-6}><TokenCard good title="细粒度 token" lines={['只给 1 个仓库', '只读 / 按需权限']} /></In></Abs>
+      <Tag x={220} y={590} f={f} at={14} w={320} color={P.green} ink={P.ink}>30 天到期</Tag>
+      <Abs x={480} y={260}><In f={f} at={p.a - 10}><TokenCard title="长期个人 token" lines={['能碰你所有仓库', '不过期']} strike={ramp(f, p.a, p.a + 12)} /></In></Abs>
+      <Abs x={0} y={940}><In f={f} at={p.a + 16}><div style={{fontFamily: font, fontSize: 30, color: '#57606A'}}>GitHub Docs：尽量用 fine-grained token，可限定仓库、权限和过期时间</div></In></Abs>
     </>)}
   </>;
 };
 End.backdrop = backdrop(P.white, P.white, () => 0, true, 'Wiz Research · Harden');
 End.sfx = (cue) => {
   const p = endPlan(cue);
-  return [{at: 0, kind: 'pop', gain: 0.08}, {at: 22, kind: 'paper', gain: 0.1}, {at: p.a - 4, kind: 'pop', gain: 0.1}, {at: p.a + 8, kind: 'chime', gain: 0.1}];
+  return [{at: 0, kind: 'pop', gain: 0.08}, {at: 14, kind: 'chime', gain: 0.08}, {at: p.a - 10, kind: 'pop', gain: 0.1}, {at: p.a, kind: 'paper', gain: 0.1}];
 };
 
 /** Cover anchor (880 × 800, rendered at f = 0): the log with the red base32 lines, stamped 你的密钥, the ghost beside it. */

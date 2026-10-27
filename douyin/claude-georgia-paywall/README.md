@@ -1,6 +1,6 @@
 # 没人下令，Claude 自己绕开了付费墙——佐治亚州汇总计票事件
 
-- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，28.4 秒，−15 LUFS，约 9 MB）
+- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，27.2 秒，−15.0 LUFS，约 8 MB）。2026-10-27 重渲染：换成按情绪编曲的配乐、片尾留白 0.6 秒
 - 封面：`cover-9x16.jpg`（抖音 / 视频号全屏）、`cover.jpg`（3:4，小红书）、`cover-6x7.jpg`（6:7，信息流）；标题「没人下令 / Claude 自己 / 绕开了付费墙」，辅助句「只拿了汇总计票 · 据 Axios / Anthropic」，锚点是闸机前举着自制 access token 的机器人 + 空的指令便签
 - 字幕：`subtitles.srt`；静帧 `still-XXs.jpg`，每 0.5 秒一帧的总览 `stills-sheet.jpg`
 - 分镜：`tutorials/claude-georgia-paywall.storyboard.md`；事实和出处：`inputs/claude-georgia-paywall/materials.md`、`sources.md`；审稿：`review.md`、`REVIEW-DOUYIN.md`（Eko 10-26）
@@ -8,7 +8,7 @@
 - 配音：用户本人的 MiniMax 音色（MashuaiDouyin01）。**发布时勾选「内容由AI生成」**；**不要勾「原创」**（审稿意见：这是整理解读）
 - 画面：FOX Business 标题截图（「@FOX Business｜报道截图」）、Anthropic 10-09 报告标题截图（「@Anthropic｜10-09 官方报告」）+ 代码绘制的闸机、机器人、便签、看板、抽屉、拦截杆；机器人是我们画的，没有 Anthropic / Claude 标志。没用 Axios 头图（真人照片）和 AI 生成示意图
 - 口径（审稿红线）：说「内部统计项目」不说「训练」；边界三句都在（只拿了汇总计票 / 没进选民登记系统 / 没改任何投票记录）；不说「黑进选举」；不写攻击步骤；不写具体日期、时长、数据量；「几周前」出自 Axios（weeks ago）
-- 配乐：`scripts/generate-pulse-bed.py claude-georgia-paywall --turn=12.9`（自己合成）
+- 配乐：`scripts/generate-score.py`（news，高潮落在“先说清楚”那一拍，lifts = end；按配音定音量，代码合成，无版权问题）
 - **不引流**：片中、封面和文案都没有链接、二维码、资料包、评论区关键词、主页
 
 ## 抖音

@@ -260,13 +260,14 @@ Hook.sfx = (cue) => {
 /* ---------- 2 feel: both are true — at night, and in the morning ---------- */
 
 const feelPlan = (cue: Cue) => ({a: cue('a', 55), b: cue('b', 108), c: cue('c', 132)});
-const Feel: Scene = ({f, cue}) => {
+const Feel: Scene = ({f, cue, dur}) => {
   const p = feelPlan(cue);
   // the split: night fills the stage, then the morning half slides in from the right on 删的时候
   const split = 900 - 450 * ease.outCubic(ramp(f, p.a - 4, p.a + 10));
   const sweep = ramp(f, p.b, p.c + 24);
   const ang = -90 + (2 + 13 / 60) * 30 + sweep * (8 - 2.22) * 30;
-  return <>
+  // a slow push over the whole split, so the second half of the scene keeps moving
+  return <div style={{position: 'absolute', inset: 0, transformOrigin: '450px 560px', transform: `scale(${1 + 0.08 * ease.inOutCubic(ramp(f, 0, dur))})`}}>
     {/* night half */}
     <div style={{position: 'absolute', left: -60, top: -200, width: 60 + split, height: 1500, overflow: 'hidden'}}>
       <div style={{position: 'absolute', left: 60, top: 200, width: 900, height: 1080}}>
@@ -299,7 +300,7 @@ const Feel: Scene = ({f, cue}) => {
         <circle r={10} fill={P.ink} />
       </svg>
     </div>}
-  </>;
+  </div>;
 };
 Feel.backdrop = backdrop(() => 0, 960);
 Feel.sfx = (cue) => {
