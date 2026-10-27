@@ -4,7 +4,7 @@
   "rate": null,
   "fps": 30,
   "leadMs": 100,
-  "totalFrames": 1746,
+  "totalFrames": 1698,
   "scenes": [
     {
       "id": "hook",
@@ -318,7 +318,7 @@
       "audioSrc": "audio/tutorials/late-night-emo/11-end.mp3",
       "audioMs": 3135,
       "startFrame": 1582,
-      "durationFrames": 164,
+      "durationFrames": 116,
       "cues": {
         "a": 749,
         "b": 1459

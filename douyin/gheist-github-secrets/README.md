@@ -1,6 +1,6 @@
 # 你的CI在打印你的密钥——Gheist 攻击（据 Wiz Research）
 
-- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，60.0 秒，−15.1 LUFS，14 MB）
+- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，60.5 秒，−15.2 LUFS，14 MB）。2026-10-27 重渲染：修了数字处字幕提前（重配音）、换成按情绪编曲的配乐、片尾留白 0.35 秒、结尾卡片按口播顺序出现
 - 封面：`cover-9x16.jpg`（抖音 / 视频号全屏）、`cover.jpg`（3:4，小红书）、`cover-6x7.jpg`（6:7，信息流）；标题「你的CI / 在打印你的密钥」，辅助句「850+ 账号中招 · 据 Wiz Research」，锚点是红色 base32 日志 +「你的密钥」红章 + 粉色小幽灵
 - 字幕：`subtitles.srt`；静帧 `still-XXs.jpg`，每 0.5 秒一帧的总览 `stills-sheet.jpg`
 - 分镜：`tutorials/gheist-github-secrets.storyboard.md`；事实和出处：`inputs/gheist-github-secrets/materials.md`、`sources.md`；审稿：`review.md`（Eko 10-26，四条全部照办）
@@ -8,7 +8,7 @@
 - 配音：用户本人的 MiniMax 音色（MashuaiDouyin01）。**发布时勾选「内容由AI生成」**
 - 画面：Wiz 原文截图（右下「@Wiz Research｜案例展示」）、GitHub Changelog 截图（「@GitHub｜Changelog 2026-07-28」）+ 代码绘制的日志窗口、保险柜、遮罩条、管道、三条车道、分支列表、锁和 token 卡；粉色小幽灵是我们画的，不是 Wiz 的插画。日志里的 base32 是随机字符、分支后缀是随机的，片中标「示意」。**没有任何攻击工作流代码**（sync-check 只出现文件名）
 - 事实：数字和时间全部出自 Wiz 原文；攻击“仍在进行”（截至 10-24）；分支数说“超过 13,500”；删除时间只说“几秒后”。结尾“30 天到期”是细粒度 token 的示例设置，不是来源里的数字
-- 配乐：`scripts/generate-pulse-bed.py` 合成（无版权问题）：暗处低频脉冲，到“自查”换成一个敞开的和弦
+- 配乐：`scripts/generate-score.py`（tension：D 小调低频脉冲，高潮落在“遮罩对不上”那一拍，lifts = hold / check；按配音定音量，代码合成，无版权问题）
 - **不引流**：片中、封面和文案都没有链接、二维码、资料包、评论区关键词、主页
 
 ## 抖音

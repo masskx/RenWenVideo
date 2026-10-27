@@ -4,7 +4,7 @@
   "rate": null,
   "fps": 30,
   "leadMs": 100,
-  "totalFrames": 850,
+  "totalFrames": 814,
   "scenes": [
     {
       "id": "hook",
@@ -129,7 +129,7 @@
       "audioSrc": "audio/tutorials/claude-georgia-paywall/05-end.mp3",
       "audioMs": 2952,
       "startFrame": 704,
-      "durationFrames": 146,
+      "durationFrames": 110,
       "cues": {
         "a": 1630
       },

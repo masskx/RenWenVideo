@@ -108,7 +108,7 @@
    "visual": "lne.end",
    "step": 0,
    "pace": "calm",
-   "tailMs": 2200,
+   "tailMs": 600,
    "narration": "还想发，{a}再发。{b}那才是你真正想说的。"
   }
  ],
@@ -121,5 +121,62 @@
  },
  "musicSrc": "audio/tutorials/late-night-emo/score.mp3",
  "musicVolume": 0.127,
- "musicDuckDb": 10
+ "musicDuckDb": 10,
+ "coverCard": {
+  "template": "emotion",
+  "headline": [
+   "凌晨两点发",
+   "早上八点删"
+  ],
+  "support": "为什么越到深夜越emo",
+  "tag": "深夜心理",
+  "anchor": "lne.cover",
+  "colors": {
+   "bg": "#111A33",
+   "text": "#FFFFFF",
+   "accent": "#8EC1FF",
+   "dim": "#FFC94A"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 120,
+    "anchor": [
+     540,
+     900,
+     0.95
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 108,
+    "anchor": [
+     540,
+     800,
+     0.82
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 128,
+    "anchor": [
+     540,
+     1120,
+     1.1
+    ],
+    "support": 1620
+   }
+  }
+ }
 }
