@@ -1,0 +1,180 @@
+{
+  "id": "openai-eth-false",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1122,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/openai-eth-false/01-hook.mp3",
+      "audioMs": 4571,
+      "startFrame": 0,
+      "durationFrames": 145,
+      "cues": {
+        "a": 2063
+      },
+      "captions": [
+        {
+          "text": "几百篇论文共用的一个前提",
+          "startMs": 143,
+          "endMs": 2063
+        },
+        {
+          "text": "OpenAI说，被它的AI推翻了",
+          "startMs": 2063,
+          "endMs": 4883
+        }
+      ]
+    },
+    {
+      "id": "what",
+      "audioSrc": "audio/tutorials/openai-eth-false/02-what.mp3",
+      "audioMs": 7027,
+      "startFrame": 145,
+      "durationFrames": 219,
+      "cues": {
+        "a": 783,
+        "b": 2024,
+        "c": 4776
+      },
+      "captions": [
+        {
+          "text": "它叫ETH，不是以太坊",
+          "startMs": 143,
+          "endMs": 2024
+        },
+        {
+          "text": "它假设：3-SAT这类难题",
+          "startMs": 2024,
+          "endMs": 4776
+        },
+        {
+          "text": "不可能比指数时间快太多",
+          "startMs": 4776,
+          "endMs": 7208
+        }
+      ]
+    },
+    {
+      "id": "claim",
+      "audioSrc": "audio/tutorials/openai-eth-false/03-claim.mp3",
+      "audioMs": 4754,
+      "startFrame": 364,
+      "durationFrames": 151,
+      "cues": {
+        "a": 1124,
+        "b": 2861
+      },
+      "captions": [
+        {
+          "text": "OpenAI的模型",
+          "startMs": 143,
+          "endMs": 1124
+        },
+        {
+          "text": "给出了一个更快的算法",
+          "startMs": 1124,
+          "endMs": 2861
+        },
+        {
+          "text": "还用Lean做了机器验证",
+          "startMs": 2861,
+          "endMs": 5057
+        }
+      ]
+    },
+    {
+      "id": "but",
+      "audioSrc": "audio/tutorials/openai-eth-false/04-but.mp3",
+      "audioMs": 6635,
+      "startFrame": 515,
+      "durationFrames": 207,
+      "cues": {
+        "a": 1033,
+        "b": 2752,
+        "c": 4463
+      },
+      "captions": [
+        {
+          "text": "但先别激动",
+          "startMs": 144,
+          "endMs": 1033
+        },
+        {
+          "text": "它仍比多项式慢得多",
+          "startMs": 1033,
+          "endMs": 2752
+        },
+        {
+          "text": "不等于P=NP",
+          "startMs": 2752,
+          "endMs": 4463
+        },
+        {
+          "text": "也没说手里的软件会变快",
+          "startMs": 4463,
+          "endMs": 6971
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "audioSrc": "audio/tutorials/openai-eth-false/05-check.mp3",
+      "audioMs": 6452,
+      "startFrame": 722,
+      "durationFrames": 202,
+      "cues": {
+        "a": 825,
+        "b": 3308,
+        "c": 4545
+      },
+      "captions": [
+        {
+          "text": "带头核查的，就有ETH的提出者本人",
+          "startMs": 143,
+          "endMs": 3308
+        },
+        {
+          "text": "他们在公开信里写",
+          "startMs": 3308,
+          "endMs": 4545
+        },
+        {
+          "text": "参与核查，不等于认证",
+          "startMs": 4545,
+          "endMs": 6685
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/openai-eth-false/06-end.mp3",
+      "audioMs": 5982,
+      "startFrame": 924,
+      "durationFrames": 198,
+      "cues": {
+        "a": 796,
+        "b": 3074
+      },
+      "captions": [
+        {
+          "text": "如果成立",
+          "startMs": 146,
+          "endMs": 796
+        },
+        {
+          "text": "它会改变理论计算机的一大块",
+          "startMs": 796,
+          "endMs": 3074
+        },
+        {
+          "text": "在那之前，它还只是OpenAI的说法",
+          "startMs": 3074,
+          "endMs": 6361
+        }
+      ]
+    }
+  ]
+}
