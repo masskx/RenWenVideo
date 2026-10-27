@@ -1,0 +1,545 @@
+[7.4-12.9] It's a great pleasure to have Yash's own Dix and here today he has some advice
+[14.2-19.0] Not just for young people I think for all of us and that's given my warm welcome
+[26.0-28.0] Hey there. I'm I'm
+[28.2-30.2] Excited and grateful to be here
+[30.2-35.7] I think Tom was already telling me that he disagrees with the advice, so I think I think this is gonna go well
+[36.0-38.0] Um
+[38.9-45.3] So the the title for this talk is a play on a very maybe like opinionated and
+[45.9-51.6] Pregmatic book by by Ramoni Cahal who's like a one of the founders like Nobel Prize winner of
+[52.4-54.2] Modern neuroscience
+[54.2-56.2] to get you in the right mindset
+[56.8-60.6] on the right here. We have a plot of
+[61.9-63.9] GDP versus time and
+[64.6-66.6] That is you
+[66.6-70.1] Standing on top of that curve and and you're thinking to yourself
+[70.3-75.3] You know, I live in in a pretty normal world like some things are maybe gonna change
+[76.0-81.5] But the future is gonna look mostly like a linear extrapolation of
+[82.2-85.5] the present and the plot should
+[86.1-90.6] Maybe suggest that this is not the right perspective on on the future
+[91.1-96.8] This this plot by the way looks surprisingly similar if you plot it like semi-log why
+[97.1-102.0] We did not settle on our current rate of like exponential growth until like around 1950
+[104.8-108.4] Okay, so the purpose of this talk is to
+[109.1-111.4] convince you that the future may
+[111.9-115.0] Be very different than than the present
+[115.6-123.3] AI is in the process of transforming the world early stages still and it's not likely to be a small transformation
+[123.3-129.0] And if you believe this you should make decisions about like your career and your research projects
+[129.0-131.3] Maybe even your personal life that are like
+[132.0-135.2] Motivated by the ways in which AI is gonna change the world
+[135.2-143.4] I also am gonna try to emphasize that you have like really immense like you in this room have like really immense leverage
+[144.0-149.7] On on how the future unrolls. I think I think this can feel like some kind of like monolithic thing that's happening
+[149.8-154.1] That's beyond our our individual control and that is just like
+[155.4-160.4] Completely wrong and finally I'm gonna end with a few practical suggestions
+[161.1-167.2] For how to choose choose research projects and think about career. Okay
+[167.8-170.9] Let's talk about geologic epochs
+[171.9-173.9] They are measures of
+[174.3-176.3] of deep time
+[176.3-186.4] Divided by distinct changes in in lifeforms climate and and geological processes that that we can observe in rock strata
+[187.8-192.1] Humans are starting to have a geologic impact on on the world
+[192.6-196.3] We're causing the like sixth mass extinction and the history of the earth
+[197.3-203.9] Radio isotopes from nuclear weapons tests are are getting captured in in rock strata like
+[204.6-208.8] Billions of years in the future. You are going to be able to tell that we were here
+[209.3-213.5] There's there's a proposal to name this current period of
+[214.3-218.4] human driven global change the the Anthropocene epoch and
+[218.8-223.6] That this focus on human driven change is interesting because we are perhaps
+[224.1-230.7] Near the end of the period of humans being the primary intellects driving driving global change
+[231.3-237.6] The like central conceit of this talk and and partially because I really like the title is that very much
+[237.6-241.6] Depending on the way in which AI plays out. This could be a very very short
+[242.6-247.1] Geologic epoch. Okay, so
+[247.8-249.8] Here's a plot of
+[250.0-252.0] Compute used to train
+[252.0-255.8] Notable AI models starting at the very beginning of the Anthropocene
+[256.3-258.1] Around around 1950
+[259.5-263.2] You can see by the way at a change in in slope here
+[264.6-271.2] Where an AI models transitioned from from being like academically interesting to to being commercially relevant
+[273.5-282.5] Each tick on the y-axis here is two orders of magnitude larger than the one below it the compute used to train the
+[282.9-288.8] Biggest models has increased about 10 million fold in in the last decade
+[290.0-298.9] In the upper right. I've circled a very rough plausible range for the the compute performed by human brain in an entire lifetime
+[299.9-305.3] My own like back at the envelope estimate if you imagine that every sign-ups does like one flop per
+[305.8-311.4] Millisecond then you get about one trillion petaflops of like compute in the human brain over a lifetime
+[312.5-314.5] And that would put
+[314.5-320.2] Lifetime human compute like a fraction of a grid division above the the biggest model on this chart
+[320.7-322.7] so we are getting to
+[322.7-324.7] scales of
+[324.7-326.7] Model training compute
+[326.7-330.1] Similar to those in a human brain across the lifetime
+[331.1-338.1] This is like not sufficient and and probably not even necessary to to approach like human levels of intelligence
+[338.1-342.1] But it maybe makes the the comparison somehow a little bit more plausible
+[343.5-345.5] I am by the way
+[345.5-349.1] Going to try to pause and get questions during the talk. I should have said at the very beginning
+[349.1-354.2] So so if you want to like disagree with something there'll be more disagreeable stuff to come
+[354.2-358.2] But if you want to disagree with something feel free to raise your hand that I'll I'll call on you
+[360.7-362.4] Okay
+[362.4-367.3] It's not just the scale of of AI compute that has been increasing
+[367.9-369.9] Here is a
+[369.9-379.1] Recent study from an organization called beta looking at the time scale of diverse software tasks that AI models can perform unated
+[379.8-381.8] With 50% probability of success
+[382.7-387.4] The time scale is not how long it takes the AI to do the task the time scale is
+[388.2-394.8] Done is figured out by like a sign in the task to humans and seeing how long it takes human beings to perform the same task without AI
+[395.5-399.8] And here on the x-axis we have the year the model is released and
+[400.9-403.2] Here on the y-axis we have the time scale and
+[404.6-407.8] The key thing to observe is that it is increasing
+[408.9-410.4] exponentially
+[410.4-411.6] I
+[411.6-415.0] gave this talk first roughly less than a year ago and
+[416.3-417.4] At that time
+[417.4-422.9] I would tell people that we expect models to be able to form a full days work in software in like
+[422.9-432.2] 2026 or 2027 and we are now like less than a year later already like increased by a factor of 10 and like past that point
+[433.9-438.8] The curves for higher success rates have the same slope
+[439.5-444.0] Just a different intercept. So if you want to have a model that's like
+[444.7-451.2] 80% likely to do the task successfully or like 90% you to add like a year or two years to your timeline
+[455.9-457.9] people sometimes say that
+[458.5-461.5] AI can only solve problems that are in its training data
+[462.2-465.7] And and like this isn't like obviously this is not literally true
+[465.7-473.0] Like if you type more than a few words into an AI model then then you're like sequences out of the convex hole of like sequences in the training data
+[473.0-479.2] So so everything they do is generalization, but there's somehow this notion that there's this like magic type of generalization
+[479.2-482.1] which is is different that the models can't achieve and
+[483.1-485.1] and
+[486.0-491.3] Maybe as a piece of evidence towards their not being something like magical. I shouldn't use this word
+[491.3-493.3] There's not being some scale of generalization
+[494.0-496.0] beyond which
+[496.0-497.1] at which
+[497.1-499.9] Some qualitatively different type of generalization that AI models can achieve
+[500.4-507.9] We can start looking at AI solving problems that were like open problems left by by humans
+[508.6-510.6] Polarosh
+[510.8-517.0] Was this like super prolific mathematician who left behind like many many open conjectures and questions
+[517.3-519.3] Which have been like
+[519.3-521.3] formalized and gathered since his death and
+[523.4-527.6] Real mathematicians tried to solve these problems and in the last like roughly seven months
+[528.4-531.0] AI models have started to to solve
+[531.7-536.7] These these problems as well. So AI models are now solving things that
+[538.0-539.5] you can
+[539.5-547.9] That push out the frontier of of what is known about about math. I'm sure someone hasn't complained about this
+[547.9-551.7] So so please yeah
+[562.5-564.5] so
+[565.4-568.9] What I can say is is that like
+[569.6-571.6] basically any
+[571.8-576.0] Time someone comes up with like a quantifiable benchmark for AI performance
+[576.0-580.9] You see like rapid improvement on that benchmark and and those benchmarks exist in health care
+[580.9-582.6] Although I don't have a slide slide for it here
+[583.8-585.8] All right, I'm gonna keep on going
+[585.8-586.8] um
+[586.8-593.1] I gave a version of this talk at Harvard less than a year ago and I got this like
+[593.8-598.7] Fascinated unsolicited email where the entire message was like what a batshit crazy abstract
+[601.1-603.7] There's this concept called the overton window
+[604.3-608.2] The overton window is a set of ideas that are like considered
+[609.2-616.0] Acceptable to express or or publicly hold and at least on the surface. This email is a statement that like
+[616.7-623.2] Predicting a GI is outside the overton window or at least that it's like inside the overton window to call to call those predictions crazy
+[623.5-625.5] um and
+[625.5-628.7] I think this is actually much less true than it was a year ago
+[628.7-636.4] But nonetheless like a primary purpose of this talk is to like urge you slash give you permission to take this stuff seriously
+[637.0-643.9] What I am staying in this talk is like normal like respected and well-known people and institutions say the same things
+[643.9-648.0] And they're like still respected you're allowed to discuss it. You're allowed to think it
+[648.0-652.9] You don't have to like like censor censor your worries or or your concerns and
+[654.6-656.6] um
+[657.6-664.7] To illustrate this I'm just gonna like read some quotes from respected and well-known people and institutions
+[664.7-666.7] um
+[667.4-674.5] Saying these things and remaining respected. Here's like Rishi Sunak the UK Prime Minister like the competition for AGI
+[674.5-679.7] AI that surpasses humans at all cognitive tasks is the fundamental geopolitical importance here
+[679.7-686.3] We have like Raqobama as profound as as cell phone technology has been AI will be more impactful and it's going to come faster
+[686.4-690.1] We are now starting to see these models these platforms be able to perform
+[690.6-695.4] Really high level we consider to be really high level intellectual work and then there's Eric Schmidt
+[695.8-699.4] We believe that in the next year. This was actually a statement in the last year
+[699.4-705.3] We believe that in the next year the vast majority of programmers will be replaced by AI within three to five years
+[705.3-712.4] We'll see AGI systems as smart as the best humans and in six years artificial superintelligence smarter than all of us combined
+[712.6-719.3] This is happening fast and society isn't ready. This one is maybe interesting and that has probably been about a year since that statement
+[719.3-723.7] And it is true that AI models do most of what programmers used to do
+[723.7-728.1] But it's also true that that the other parts of programish jobs have like expanded and
+[729.1-732.6] With the exceptions most programmers do not find themselves out of out of work
+[734.6-735.9] Okay
+[735.9-744.9] It's not just individuals journalists also flirting with the ideas the economist talking about the economic superintelligence the New York Times with like a strongly
+[744.9-746.9] worded title for an interview
+[747.9-749.9] and
+[750.1-754.1] With with Ben Buchanan who used to be the the like AI's are for Biden White House
+[757.1-758.4] Okay
+[758.4-760.9] so models are getting better very fast and
+[762.0-766.6] I've set either an ominous or a promising tone
+[767.7-769.7] by talking about
+[769.7-771.2] the
+[771.2-773.7] Start and end of a geologic epoch
+[774.3-780.2] I've talked about how the idea of AGI is normal enough now that you're like allowed to believe it in play company
+[780.4-783.0] But but when can we expect it to happen?
+[783.9-789.0] When can we expect models to be like human or or superhuman on on different
+[789.3-797.6] Different things especially when can we expect them to automate the kind of like intellectual tasks that make up the like core part of our of our work?
+[798.7-801.5] If you live in the SF AI bubble
+[802.3-806.5] That I live in that consensus answer is is just a few years
+[809.0-815.0] If you go to like a party and someone describes themselves as having a long timeline and you like pushed them a little bit on it
+[815.0-817.6] It turns out they mean it's gonna take 10 years like
+[818.7-827.5] This is actually I think unusual in and of itself my wife is in biotech and if you talk with people in biotech about how like
+[827.5-834.2] Cancer rates in the first world are like exponentially dropping and like are we going to cure cancer the next the next 10 minutes are spent with like a
+[835.0-840.2] Explanation of all the ways that curing cancers really really really hard and it's gonna take way longer than than you would predict
+[840.4-848.7] If you talk to people that work on these models, they're just like yeah, we don't we don't see a barrier between where we are and and and super intelligent models
+[850.9-856.5] So the people that are closest to the thing that usually are the ones that see the most immediate barriers
+[856.5-859.3] Don't don't see those barriers. This is an important thing to realize
+[861.3-865.3] We I showed some like straight lines on log plots on the previous slides
+[865.3-868.9] There's a lot more of those you could do an entire talk on like straight lines and log plots
+[870.0-878.2] If you think there is something that we're not measuring that shows that AI is plateauing in some capability that we care about
+[878.2-883.5] I like urge you to like operationalize that quantify it make a benchmark
+[883.5-892.4] People will be very very happy for your contribution. You'll get lots of citations. I should also warn you though the way in which
+[893.5-899.9] Almost all past attempts to do this have gone which is that someone makes a benchmark and if you made a benchmark in like the 1990s
+[899.9-906.6] It took 20 years before people were able to build AI that could that could achieve human-lover performance on your benchmark
+[906.6-910.6] So this is like basically a chance and this is human-level performance
+[911.6-916.4] If you make a benchmark now, it takes like a few months to a few years before
+[917.1-920.4] Human-level achievement is achieved in this benchmark and this is like
+[921.1-926.0] Fairly reliable and inconsistent. I was like one of the co-creators of this benchmark called big bench
+[926.6-934.3] A few years ago and like we have like papers getting state of the art on like portions of it before the paper was even our paper was even published
+[936.7-938.7] Personally I
+[938.7-940.7] Work with Claude every day
+[940.7-948.8] It feels like working within eager and like utterly gifted at execution like grad student
+[950.1-954.5] Luckily at the moment a grad student who's like brilliant but has surprisingly poor research tastes
+[954.5-956.5] So I still feel like I'm doing something
+[957.2-960.0] But this wasn't true a year ago like a year ago
+[960.2-966.0] Like I wouldn't be able to give Claude a high-level problem and then have it generate some plots and look at the plots
+[966.0-971.3] I would have had to be like deep in the every little bit of it and this isn't going to be a true a year from now either
+[971.9-979.6] The models are going to be better
+[979.6-981.6] Okay, if we take
+[981.8-985.5] The I should go I should I was gonna pause I should pause here for a moment
+[986.3-1001.2] Like the people people this is like now just the accepted norm norm belief. Yeah, yeah
+[1025.0-1027.0] I
+[1027.5-1037.9] Think that we are going to have both general purpose and specialized models, but I am not familiar enough with with young's proposal to have a take
+[1057.5-1059.5] The same
+[1064.4-1069.4] I don't know it's kind of it's kind of a coincidence if something has like
+[1070.2-1076.8] Proceeded for 11 and 13 15 17 if something if a trend has continued for 21 orders of magnitude
+[1076.8-1079.6] It'll be really weird if we're like
+[1081.0-1085.4] Twoish orders of magnitude away from you know oneish order magnitude away from it like
+[1085.9-1091.1] Reaching like some kind of like human-like endpoint, but that just happens to be when we hit the resource constraints
+[1091.1-1096.9] I mean we live in a physical world right like no exponential can go on forever, but I will be
+[1097.5-1104.6] Shocked if this plot turns right here and stops and this goes flat like that that would be that would be unusual to me
+[1107.1-1110.4] Yeah
+[1110.4-1115.8] Sorry unfortunate. We won't get it on the recording. Yeah, you could come to the microphone if you want
+[1116.8-1131.5] You mentioned no plateaus observed until the Rato AGI would you be able to give a more detailed breakdown into what the ladder the scaffolding needed to reach AGI where we are now that's
+[1132.0-1136.9] Not AGI loosely everybody kind of has a sense as we all use cloud code every day
+[1138.2-1140.2] But in detail
+[1140.2-1146.5] From here to there. What are we missing or what yeah exactly what what needs to happen? Yeah
+[1148.6-1150.6] I think that
+[1151.5-1158.1] I'm probably not going to spend too much on this because I think that's more of like a technical question than then then like a like a what does it mean question?
+[1158.9-1160.9] but I
+[1162.9-1167.9] Think that to first order like I have been repeatedly
+[1168.8-1176.2] Shocked and disappointed and or amazed at how well doing the naive thing like one order magnitude more scale keeps on working
+[1176.5-1178.9] I think we are doing things that are massively inefficient
+[1178.9-1185.9] I think the brain is like you know for orders of magnitude more data efficient than than our current approaches like clearly we're doing things that are wrong
+[1186.3-1192.3] But I don't think that means they don't work. It just means they're inefficient. So I actually don't think there is something
+[1193.3-1195.8] Missing in that I don't think there's a hard blocker
+[1196.7-1201.2] That will prevent us from getting there. I think there are just things missing that are like we're doing things that are
+[1201.7-1203.7] Wotally embarrassingly inefficient
+[1203.9-1207.4] All right, I'm going to do one more and then move on. Okay. Yeah
+[1215.4-1219.8] Following on Dennis's question about resources. How do you think about
+[1220.4-1224.7] People getting access to those resources and one of the concerns are
+[1225.3-1228.8] There'll be the haves and the have knots of access to tokens
+[1229.6-1232.8] Maybe that's team up your your next slide about what what we should do
+[1232.8-1238.7] But I'm really curious about this kind of growing inequity of those who can burn and those who can't
+[1239.4-1249.1] Yeah, I I think making sure that the vast wealth that we're going to create gets like distributed is like clearly very important
+[1249.1-1254.3] I think like part of that is like intelligence is just going to get exponentially cheaper
+[1254.3-1257.1] Which is like amazing and also kind of scary, but I think also
+[1257.6-1263.2] Like socially I personally believe that socially we're going to want mechanisms that look like
+[1263.9-1267.5] redistribution that look like a large tax on on like
+[1268.2-1273.9] Intelligence on AI companies and that redistribute that I think that's because of our government system
+[1273.9-1278.3] I suspect that's going to work pretty well in the US because I think people are going to lose jobs and be like
+[1278.8-1280.1] You know
+[1280.1-1283.7] They're going to advocate very well for themselves. I'm maybe more worried globally
+[1283.7-1288.8] But this is we can have a longer discussion later. Yeah, okay
+[1289.6-1291.6] If we take these timelines seriously
+[1292.2-1296.3] What should we as as individuals do these are like
+[1298.0-1301.3] plausibly our last moments to to intellectually shine
+[1303.4-1309.4] First we should make sure our our projects are still going to be relevant when they're when they're completed
+[1309.8-1311.8] There is like some like
+[1312.0-1317.4] Improving curve of like science that can be done with like minimal human effort just by
+[1318.1-1324.8] Prompting the best best current foundation model and one outcome that you really really want to avoid is that you work like
+[1325.2-1329.2] super hard for two years and and make significant linear progress
+[1329.5-1336.7] But by the time you're done someone can achieve something better like just by asking a a foundation model
+[1337.1-1344.9] This this suggests working like untargeted projects like with others so that you can go fast and and stay ahead of the exponential
+[1345.4-1348.9] It it discourages slow meandering exploration
+[1349.3-1355.7] Which I which is like really unfortunate because that's like the kind of science I like love doing the most so so so so I hate saying this
+[1355.7-1358.5] But I think it is nonetheless like like as the world is
+[1361.0-1368.5] In 2019 Richard Sutton published and a great essay called called the bitter lesson he observed that
+[1368.5-1378.7] He observed that general methods that leverage computation are ultimately the most effective
+[1379.2-1384.1] The bitter lesson has maybe a positive and and a negative take away
+[1386.9-1390.9] If you work on projects that become more
+[1391.7-1397.3] Effective as compute and intelligent scales or even better feedback into that process
+[1397.7-1401.8] Then the results will be like much higher impact than you then you wouldn't anticipate
+[1402.4-1408.8] The the negative is that you like really really don't want to work on projects that are going to be solved anyway with scale
+[1409.5-1412.3] Like possibly before you even even finish the project
+[1414.6-1417.9] You should force yourself to use the AI tools available to you
+[1418.5-1420.1] They provide like
+[1420.1-1423.7] Fundamentally new oh man. Okay, a massive affordances
+[1424.4-1428.5] Um
+[1428.5-1432.5] Oh good good. That's the that's the question period wait is that I've been watching the clock in the back wall
+[1433.3-1436.4] Okay, okay, okay, good. I'm good. I'm good. Okay. That was terrifying
+[1440.7-1442.7] Yeah, much faster um
+[1443.3-1448.1] All right, um, okay AI models the UX often still sucks
+[1449.0-1451.0] They're like a horseless carriage
+[1451.7-1453.7] Um, it doesn't matter
+[1454.0-1456.5] They they still provide a lot of benefit
+[1456.9-1459.7] Um, you should use them you should use them to like
+[1460.7-1464.8] brainstorm and iterate and research ideas you should use them to like get feedback on your writing
+[1465.1-1469.7] Please don't use them to write the first draft, but but please do use them to to tell you all the ways you're wrong
+[1470.8-1474.9] You should I don't write any code at all anymore. I barely even look at code
+[1475.5-1477.5] Even though I like code every day
+[1478.3-1485.4] You should use them to like iterate on like whatever complex analysis your heart desires like I I spin up a custom dashboard
+[1485.4-1489.7] Whatever I curious about something and it makes like you know pages of plots and it's amazing
+[1490.3-1491.6] um
+[1491.6-1497.9] This is also partially an answer to the previous slide you can't like fall behind the exponential if you are like on the exponential, right
+[1499.1-1500.4] Um
+[1500.4-1507.4] Working with LOMs is a lot like being a PI like they're both great practice for each other. They require
+[1508.2-1508.8] um
+[1508.8-1516.1] clear scoping and and communication of tasks um and expectations um, so if you want to be a PI like
+[1516.7-1519.9] Practice telling the models what to do if you are a PI you you should have
+[1520.5-1523.6] Very targeted training and you should be greater this um
+[1525.3-1530.9] This talk was motivated by a conversation I had with a with a very capable grad student
+[1531.3-1535.8] And they were talking about how they thought we were gonna have a GI in three years and then a few minutes later
+[1536.5-1539.6] They were like, oh yeah, I'm gonna finish my PhD in a couple years
+[1539.6-1544.8] And then I'm gonna get a postdoc and then after that I figure out a lot of faculty jobs and and I was
+[1546.9-1552.7] If you believe in like one part of your brain that that this like world changing technology is coming you should also
+[1554.0-1556.0] Believe in other parts of your blame
+[1556.1-1557.1] um
+[1557.1-1561.1] I don't know what an academic job is gonna look like in like 10 or 20 years
+[1561.7-1565.8] Um, I I don't know what any job is gonna look like in in 10 or 20 years
+[1566.0-1569.7] But I am like very sure it is gonna look very different than it does today
+[1570.2-1573.9] So you should be planning with an assumption that your
+[1574.9-1576.9] Current career path is like
+[1577.7-1579.7] not a stable one
+[1582.0-1584.0] People often make life decisions
+[1584.7-1591.0] Balancing risk and reward right like you like choose the safe option over the one where where
+[1591.1-1593.1] Maybe the best possible outcome is like better
+[1594.3-1596.3] If AI is is
+[1597.2-1599.2] Going to cause large scale disruption
+[1600.2-1606.8] Then there is like a high baseline level of unavoidable risk the the safe option is not actually the safe option
+[1607.3-1608.6] so
+[1608.6-1612.0] What you are actually doing is you're just sacrificing potential reward
+[1612.8-1616.6] without actually buying like like more more safety so
+[1617.9-1619.9] you should be
+[1620.0-1626.7] Totally separate from AI people are way too risk averse, but but especially in this context you should do
+[1627.8-1630.9] The interesting thing instead of instead of the safe thing
+[1632.1-1636.5] um
+[1636.5-1641.4] If you have a limited time to contribute and and the stakes are high
+[1642.5-1644.0] You should do
+[1644.0-1646.0] Something that you're going to be proud of
+[1646.2-1647.8] after you've like
+[1647.8-1650.3] Retired to your like villa in the Dyson Swarm
+[1651.3-1655.3] You you want to feel somehow that you helped us get to the good outcome
+[1656.2-1660.2] You should like choose projects that looking back will have mattered
+[1661.9-1663.9] This means that you should
+[1664.4-1672.1] Prefer projects that will like positively shift the trajectory post-AGI rather than induce like a transient change in the near term
+[1673.3-1676.4] The photo on the right is is the the big reveal
+[1677.2-1684.5] The the geologic epoch after the Anthropocene is is observable by examining a rock strata because like it has the rock strata like
+[1684.8-1686.8] Distributed in the Dyson Swarm around the Sun
+[1688.2-1689.7] I
+[1689.7-1692.8] Think this is a new unlikely in the next five years, but but nonetheless
+[1693.7-1700.4] um on that point of like doing something that you're proud of
+[1701.6-1706.4] Sometimes I think people feel a lack of agency over over the big picture trajectory
+[1707.2-1708.8] um the
+[1708.8-1713.9] Progress in the field of AI can like feel like some process that's beyond our control
+[1714.6-1716.8] This is like completely false
+[1717.5-1720.5] Despite like current like really dramatic capabilities
+[1721.1-1725.1] We are still like much earlier than you think in the AI exponential
+[1725.8-1732.6] To the right you can see an extrapolation by epoch AI to to compute in in 2030
+[1734.0-1738.7] The important part of this image is that compute has the potential to be
+[1739.6-1744.6] 10,000 times larger like in 2030 than it was in in 2025
+[1746.2-1754.7] Looking back our our state today is going to be like visually indistinguishable from zero on a linear access compute plot
+[1755.1-1762.0] We are still super early in the exponential in terms of resources and compute being spent on on AI
+[1764.4-1766.8] Okay, so we're still in the early part of the exponential
+[1767.2-1769.2] Why does that matter
+[1770.0-1777.4] It matters because small interventions early and exponential growth have like huge consequences
+[1777.8-1785.7] They're like countless examples in science and engineering and government and economics where small decisions made early in the process
+[1786.2-1792.1] Led to to dramatically different outcomes. We could talk about like any of these, but maybe maybe just go do a few
+[1792.8-1798.8] In like 1980 two scientists proposed a standardized protocol for exchanging emails and as a result of that
+[1799.2-1802.0] Every one of you can send emails to every other person in this room
+[1802.5-1807.2] No one did the same thing for like chat messages until like roughly a decade later
+[1807.6-1813.6] And as a result of that you can only send chat messages to people that are using the same like product that you're using and it's like a mess
+[1818.1-1822.3] There's like the Haberbosh Nature and the Fixation process where like a small team of scientists
+[1822.8-1827.7] Like developed technology that both like enables us to mostly feed everyone in the world today
+[1827.9-1835.3] Like we would have nowhere near our current food production without without this and also like powers most modern explosives
+[1837.2-1839.2] There's like decisions
+[1839.7-1846.9] Early in like American law or American medicine to create the AMA or the American bar association
+[1846.9-1849.7] These are like decisions that like small numbers of people made
+[1850.7-1855.6] That now completely determine the medical and legal landscape in in our country
+[1856.5-1862.0] Similarly probably for similarly not probably similarly for academic peer review system our current peer review system for all
+[1862.0-1864.8] It's like flaws and successes is like
+[1865.7-1867.7] Not at all the only way you could have gone
+[1867.8-1875.6] We could have a very very vastly different incentive structure and science today if people had made slightly different decisions like a couple centuries before
+[1876.3-1878.3] um
+[1878.3-1880.3] Okay, so
+[1881.3-1888.9] Because we are very early in the exponential and because you are like highly capable people with highly relevant skills you have like
+[1889.7-1893.2] immense power and leverage over over the future of AI
+[1894.7-1901.6] Individual small choices you make will determine the future commercial social and like political landscape that we that we live in
+[1902.0-1907.3] Um like what research research problem you work on like where you work do you call something a capability or a risk
+[1907.6-1913.7] Do you like proposed model architectures that are like interpretable or inscrutable do you publicly share an ethical stance
+[1914.9-1919.4] What trajectory or tech tree does your your project like encourage to be developed
+[1920.0-1920.8] um
+[1920.8-1923.2] This is you should feel like you have a lot of power. This is great
+[1923.6-1926.3] You should also feel this is a responsibility. Please take that seriously
+[1926.7-1928.0] um
+[1928.0-1931.7] plea to you to be like intentional and and thoughtful about
+[1932.4-1938.4] Your projects and and other choices um the world is going to change and like remarkable ways is changing
+[1939.0-1944.1] And you personally have the leverage to make that much better or or much worse
+[1946.1-1948.1] um
+[1948.1-1950.4] The future is unknowable of course if I have to guess though
+[1951.2-1958.1] This is roughly what I think your intellectual leverage on the world is going to look like in in the medium-term future
+[1958.8-1959.7] um
+[1959.7-1962.5] I think there will be a period where you are like
+[1963.1-1965.1] complementary to and
+[1965.4-1967.7] unlock the ability of like
+[1967.7-1969.7] vast teams of AI agents to do work
+[1970.2-1970.7] um
+[1970.7-1975.0] You will be able to do in like a week what you would have been unable to do in your entire career
+[1975.8-1978.2] um, it will be like an astounding global
+[1978.7-1980.1] golden age
+[1980.5-1982.1] And then I think some time later than that
+[1982.7-1989.0] There will come a period where you no longer stick out in a direction that AI is able to stick out in
+[1989.8-1993.9] Where you no longer unlock intellectual work that it would be unable to do
+[1994.9-1998.0] And I think you should enjoy and make
+[1999.1-2003.5] full use of this golden age as as as best as you can
+[2004.1-2009.8] um use the tools do something like amazing with with the power afford to you
+[2010.7-2012.7] um
+[2012.9-2015.1] Okay, I told you AI is coming soon
+[2015.8-2021.4] Um, and I think this should motivate you as you make personal and professional and and research decisions
+[2022.3-2026.1] I've talked about a few specific way at ways it might feed into that decision-making process
+[2026.8-2028.0] um
+[2028.0-2030.5] And I did promise I would give some specifics so here are like some
+[2031.2-2033.0] particular project areas I like um
+[2033.0-2037.7] This list is like massively incomplete and the most impactful things to do are probably
+[2038.3-2040.9] ones no one is thinking about yet, but just to like talk of through
+[2041.7-2044.8] AI for science this should actually make this particular crowd feel really good
+[2046.0-2050.5] I this is things like material discovery protein folding like weather modeling fusion reactor plasma
+[2050.5-2052.4] monitoring like I think
+[2053.1-2055.1] understanding the world better is
+[2056.3-2057.8] typically
+[2057.8-2063.3] in expectation is unambiguously positive and and AI enables us to do it much more effectively
+[2064.2-2067.3] There's doing science on the AI models
+[2067.3-2072.5] This is like taking techniques from another field and using it to treat AI as the object of study
+[2073.2-2079.6] Like interpretability is like maybe the canonical example of this which is basically during doing neuroscience on AI models
+[2080.1-2082.9] You can also do like statistical physics on on
+[2083.9-2088.6] Like the internals of AI models you can do psychology on AI models you can do economics on AI models
+[2090.3-2091.7] It might be
+[2091.7-2097.6] Worth like sitting down for an hour and just brainstorming the ways in which your particular expertise could like
+[2098.1-2104.0] Be turned on AI models as the the objective study rather than the object that you it's currently applied to
+[2105.2-2107.8] There's like straight up AI safety research
+[2109.7-2113.7] Terrifyingly this is something you can get in on on the ground floor of
+[2114.7-2118.9] Many of the right questions to ask are still like poorly poorly defined
+[2119.3-2122.4] It's like importance relative. It's growing rapidly
+[2122.4-2126.7] But it's importance relative to field sides is still like vastly miscaled
+[2128.0-2131.0] There's prediction and extrapolation of capabilities
+[2131.7-2136.2] Understanding what's coming more precisely is likely to make it go better
+[2137.4-2139.4] There's questions of access
+[2140.4-2142.4] like equity and and like
+[2144.3-2146.8] Fairness if we want this technology to benefit everyone
+[2147.3-2150.2] Then we're going to have to work very hard to make this happen
+[2151.0-2152.4] I
+[2152.5-2159.7] Think this is also likely to be like a toxic and very stressful sub like area to work in so so if you feel that you can make like
+[2159.9-2164.7] pragmatic decisions where people are yelling at you that you're a terrible human being and this is
+[2166.0-2170.3] You can have amazing positive leverage on the world on that same note
+[2170.9-2172.0] um
+[2172.0-2177.0] If you were equipped in like technicality and personality to like do work on policy and governance
+[2178.0-2181.4] You should do it government governments are like absolutely desperate
+[2182.0-2189.3] For competent technical people to like advise them as they try to like regulate and develop policy for for AI
+[2190.6-2194.9] The really good people keep on like leaving for bigger paychecks and like less politics
+[2198.9-2200.6] It's amazingly high leverage
+[2201.4-2205.2] This is also like a comparative vantage you have as an academic
+[2206.3-2211.1] Like governments will trust you at the very least in a different way than they they trust people from labs
+[2211.4-2215.5] So you you are a voice that can influence things in a way that that other people can't
+[2217.4-2220.9] Cool, and I'm gonna stop there and you can heckle me for another eight minutes
+[2228.4-2231.7] All right, we still have a few minutes for questions. Missella. Yeah
+[2232.7-2236.0] Um, I just had a quick question about research taste
+[2236.7-2242.5] Um, do you think they're good benchmarks for it and do you think it's like slowing meandering by definition?
+[2243.3-2245.3] Or do you think it can get faster?
+[2246.7-2248.0] um
+[2248.0-2256.5] I think that any benchmark we came up with for research taste that got solved people would say it didn't measure research taste
+[2257.1-2258.0] um
+[2258.1-2260.1] But I don't know how it what to do about that
+[2260.9-2265.6] Um, I think well part of what you do about that is you wait for the models to make some discovery
+[2266.0-2270.2] Which is kind of like inarguably like like significant like you wait till a model like
+[2270.8-2275.3] Comes up with some new conceptual approach and so room temperature superconductor and then you know
+[2275.3-2279.2] You can say it wasn't really demonstrating research taste, but it's um
+[2281.7-2285.6] I think in terms of like does he have to be slow in meandering I think
+[2287.3-2289.3] I think slow in meandering is great
+[2289.3-2292.9] If you don't know what is going to have benefits in the future, which is almost always true
+[2293.3-2295.3] Um, I think you can probably
+[2295.9-2299.4] Do the meandering part without the slow part if you're think fast enough
+[2300.0-2302.5] Um, but yeah, great. Thank you
+[2304.8-2314.2] Um, hi, thanks for the great talk. So um as graded students like most of the code we are writing a cloud could write with the right guidance
+[2314.3-2320.0] Right so do you think there's still value to like spending the hours writing it ourselves?
+[2320.5-2324.6] As like an even like just an educational exercise or
+[2325.3-2333.8] It's worthless because like coding agents are only getting better and like like where do you stand in on trade-off of investing time doing it yourself versus
+[2334.3-2337.5] It is it is important that you understand
+[2338.2-2340.2] What the code does
+[2340.2-2346.6] Um, which means you need to have some experience writing it, but probably a lot less than you have
+[2347.3-2355.0] Um, you can also understand what the code does the way your advisor probably does and like ask the model to generate some plots and like ask it
+[2355.0-2358.1] why the plot isn't consistent and and so I think it's
+[2358.6-2363.9] possible that in the same way you can code and python when people use tafta code and like you know
+[2364.4-2365.6] Um, punch cards
+[2365.6-2370.6] Um, and you probably have a much weaker understanding of the internals of the computer than the person that was coding a punch cards
+[2370.8-2373.0] But you're thinking at a high level abstraction. It's great
+[2373.7-2376.5] You can do that same thing. You just need to make sure that you still
+[2377.2-2380.8] Interrogate and think um, I would encourage you like
+[2382.8-2385.3] It's worth I think especially as a grad student
+[2385.4-2388.0] It can feel like you don't have a lot of money or you're not being paid a lot
+[2388.0-2390.6] And like you can undervalue your time your time is worth a lot
+[2390.6-2394.2] You should you should like use use the tools that make the best use of your time
+[2395.8-2399.0] And that microphone please thanks for the great talk
+[2399.5-2404.9] I want to dive a little bit deeper into the first part where you mentioned that AI is very good at generalizing everything
+[2405.5-2409.3] But then in the second part you see we cannot even use it to actually get a first draft for
+[2409.8-2415.2] Whatever thing you want to write. Then it doesn't then it seems to me that what we can use it for is more like an assistant
+[2415.2-2418.6] To actually be able to help us solve all the problems that we already have
+[2418.8-2421.5] And it doesn't really look like or anywhere close to AGI
+[2422.1-2424.0] More is like what you have
+[2424.0-2429.5] Microsoft outlook for example replaced us having to go to the post office and sending our letters to colleagues
+[2429.9-2434.9] I think in my opinion is very similar there and AGI based on this. I don't think we're anywhere close there
+[2435.4-2436.9] I mean, I think
+[2436.9-2442.1] So okay, so to first point the advice about not having it right for you was was for your benefit
+[2442.2-2444.5] Not not because the AGI couldn't couldn't write
+[2445.2-2451.4] It's because like writing is thinking and if you outsource your you're writing then what you've actually done is you've outsource your thinking
+[2451.6-2453.4] And you won't actually understand what's going on
+[2453.9-2455.4] um
+[2455.5-2456.5] To the second point
+[2457.3-2463.2] I think if you believe that it is not anywhere close to being able to do the kinds of things that humans can do
+[2463.9-2468.9] Like quantify and operationalize that don't just have that as like a vague idea in your head have like a
+[2469.4-2472.9] Here is a precise measure of the way in which AGI falls short
+[2473.2-2475.3] You don't have to publish it. It's gonna be like a private benchmark
+[2475.3-2480.8] You just like you know my bench you put a number out for something and then watch what happens with that number with time
+[2481.2-2485.1] Like I think I think measure the thing that you don't believe is making progress
+[2485.2-2489.1] And then if the your measurement shows it's not making progress. I will believe it a lot more
+[2490.0-2494.8] I guess there for example based on the Erdoche's problem stores are the ones that we came up with as the ones
+[2494.8-2497.2] We were using it for right. It's not necessarily coming up
+[2497.9-2500.7] Solving new difficult problems to solve. I think the
+[2501.6-2506.5] Ah, I mean I could have
+[2507.4-2511.0] The thing is I think we don't have a the reason I chose the Erdoche problems
+[2511.4-2516.8] Okay, one more question after this. The reason maybe the Erdoche problems was was interesting is because like
+[2516.8-2519.2] This is something that humans have already read our good questions
+[2519.6-2523.7] I think like if you can come up with that. How do you how do you measure whether something's a good question?
+[2524.1-2526.6] And and this is maybe the challenge, but I
+[2527.1-2529.1] I wish I had a whiteboard
+[2529.4-2532.7] I think that you're kind of positing that like
+[2535.0-2539.5] That there's a lot of levels that was generalization happened generalization happened like I'm gonna sub in like a
+[2539.7-2546.1] Sit in them for this word in the sentence or generalization can be like I'm gonna apply the additional rhythm with different numbers
+[2546.5-2555.0] Or I'm going to apply this like logical step or I'm gonna like use calculus and you know do integration for like different problems
+[2555.4-2561.1] Um, and I think what you should imagine it's not that like you should imagine there's like this like ladder a hierarchy
+[2561.3-2568.5] We generalize at higher and higher scales and to me it's not clear at all that there's some like break in this ladder
+[2568.7-2575.6] We're like somehow generalization at like things that are conceptually simpler than this is like easy and generalization things
+[2575.7-2582.9] Above that are like impossible, but um, I don't know all right. Um, I'm about time's up. So we'll have one more actually one more rush
+[2583.7-2584.9] Sorry
+[2584.9-2586.9] The Raj had his hand up first
+[2591.4-2598.1] So something I've noticed is that um while like AI has been very prevalent in the theoretical sciences
+[2598.7-2602.7] The experimental sciences have been fairly insulated from its effect and
+[2603.5-2609.1] Um, part of this reason is because a lot of the experimental sciences work in a domain where
+[2609.8-2614.3] Problems are neither computationally nor formally verifiable, right?
+[2614.3-2617.1] So there's a reason NASA aims still has to run physical
+[2617.8-2622.2] wind tunnels because computational fluid dynamics is not is often not sufficient
+[2622.6-2627.9] There's a reason that over half of all chemicals discovered every year were discovered accidentally because no one could
+[2628.1-2633.3] predict what was happening and so I was wondering if you see a vision where this kind of like
+[2633.8-2635.5] gap gets bridged because
+[2635.5-2639.5] A lot of my colleagues in like material science and the experimental sciences
+[2640.0-2646.0] Think that LM's are all hype and not like really doing any benefit for the physical sciences
+[2647.2-2652.8] Yeah, so this is interesting um, like a few a few things. Um, one is eventually robots are gonna work
+[2653.0-2657.8] Like I think the timescale line at which robots work is like much harder to predict but but like
+[2658.1-2663.5] I will be surprised if like 15 years from now or 10 years from now we don't have robots that can do physical experiments for us
+[2664.1-2668.4] Um, I think also the fact that like theory is
+[2669.1-2674.3] So poorly predictive of experimental results is like something of a failure of the theoretical sciences, right?
+[2674.5-2680.3] To agree that you can strengthen those you can like reduce the number of experiments that you that you need to run
+[2680.8-2683.1] And I think that is that is very much possible
+[2683.8-2684.8] um
+[2684.8-2685.8] but
+[2685.8-2687.5] but um
+[2687.6-2693.4] Yeah, I think it probably depends what you're using it for and and also probably depends if you figure it out the right like UX to actually
+[2694.7-2697.9] make it
+[2697.9-2699.2] like
+[2699.2-2702.1] Interact in a way where the interaction cost is not larger than the games
+[2704.0-2706.6] Right, thank you very good. Let's thank yash again
