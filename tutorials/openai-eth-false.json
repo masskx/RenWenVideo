@@ -1,0 +1,147 @@
+{
+ "id": "openai-eth-false",
+ "title": "OpenAI称AI推翻ETH",
+ "subtitle": "几百篇论文的前提，被AI推翻了？",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax"
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "series": "AI 新闻 · 研究",
+ "credit": "OpenAI 2026-10-26 · 公开信",
+ "source": "inputs/openai-eth-false/materials.md",
+ "score": {
+  "mood": "news",
+  "climax": "claim",
+  "lifts": [
+   "check"
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "eth.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "几百篇论文共用的一个前提，{a}OpenAI说，被它的AI推翻了。"
+  },
+  {
+   "id": "what",
+   "visual": "eth.what",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "它叫ETH，{a}不是以太坊。{b}它假设：[3-SAT|三SAT]这类难题，{c}不可能比指数时间快太多。"
+  },
+  {
+   "id": "claim",
+   "visual": "eth.claim",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "OpenAI的模型，{a}给出了一个更快的算法，{b}还用Lean做了机器验证。"
+  },
+  {
+   "id": "but",
+   "visual": "eth.but",
+   "step": 0,
+   "pace": "normal",
+   "narration": "但先别激动：{a}它仍比多项式慢得多，{b}不等于[P=NP|P等于NP]，{c}也没说手里的软件会变快。"
+  },
+  {
+   "id": "check",
+   "visual": "eth.check",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "带头核查的，{a}就有ETH的提出者本人；{b}他们在公开信里写：{c}参与核查，不等于认证。"
+  },
+  {
+   "id": "end",
+   "visual": "eth.end",
+   "step": 0,
+   "pace": "calm",
+   "tailMs": 500,
+   "narration": "如果成立，{a}它会改变理论计算机的一大块；{b}在那之前，它还只是OpenAI的说法。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/openai-eth-false/score.mp3",
+ "musicVolume": 0.136,
+ "musicDuckDb": 10,
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "几百篇论文的前提",
+   "OpenAI说被AI推翻了"
+  ],
+  "support": "不等于 P=NP · 核查还没完成",
+  "tag": "AI 新闻 · 研究",
+  "anchor": "eth.cover",
+  "colors": {
+   "bg": "#14161C",
+   "text": "#FFFFFF",
+   "accent": "#FBC137",
+   "dim": "#8C8F96"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 96,
+    "anchor": [
+     540,
+     960,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     840,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 94,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ }
+}
