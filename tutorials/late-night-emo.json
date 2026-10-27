@@ -111,5 +111,15 @@
    "tailMs": 2200,
    "narration": "还想发，{a}再发。{b}那才是你真正想说的。"
   }
- ]
+ ],
+ "score": {
+  "mood": "warm",
+  "climax": "tired",
+  "lifts": [
+   "draft"
+  ]
+ },
+ "musicSrc": "audio/tutorials/late-night-emo/score.mp3",
+ "musicVolume": 0.127,
+ "musicDuckDb": 10
 }

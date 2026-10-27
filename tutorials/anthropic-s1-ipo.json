@@ -1,0 +1,148 @@
+{
+ "id": "anthropic-s1-ipo",
+ "title": "Anthropic递交上市申请",
+ "subtitle": "半年亏807亿美元，还是要上市",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax"
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "maxSeconds": 30,
+ "series": "AI 新闻 · 公司",
+ "credit": "SEC Form S-1 · 2026-10-26",
+ "source": "inputs/anthropic-s1-ipo/materials.md",
+ "score": {
+  "mood": "news",
+  "climax": "loss",
+  "lifts": [
+   "adjusted"
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "s1.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "半年亏了807亿美元，{a}Anthropic还是递了上市申请。"
+  },
+  {
+   "id": "ticker",
+   "visual": "s1.ticker",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "代码ANT，{a}发行价那一栏，{b}还空着。"
+  },
+  {
+   "id": "revenue",
+   "visual": "s1.revenue",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "上半年收入163亿美元，{a}同比涨了[1300%|百分之一千三百]。"
+  },
+  {
+   "id": "loss",
+   "visual": "s1.loss",
+   "step": 0,
+   "pace": "normal",
+   "narration": "那807亿的亏损里，{a}有724亿是估值涨了、可转债重算出来的账面数，{b}不是烧掉的现金。"
+  },
+  {
+   "id": "adjusted",
+   "visual": "s1.adjusted",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "按公司口径，{a}调整后营业利润是正的16亿美元；{b}按会计准则，仍是亏损。"
+  },
+  {
+   "id": "end",
+   "visual": "s1.end",
+   "step": 0,
+   "pace": "calm",
+   "tailMs": 500,
+   "narration": "一股卖多少钱？{a}招股书上，还是空白。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/anthropic-s1-ipo/score.mp3",
+ "musicVolume": 0.13,
+ "musicDuckDb": 10,
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "Anthropic要上市",
+   "半年亏807亿美元"
+  ],
+  "support": "其中724亿是账面数 · 据 S-1",
+  "tag": "AI 新闻 · 公司",
+  "anchor": "s1.cover",
+  "colors": {
+   "bg": "#17171A",
+   "text": "#FFFFFF",
+   "accent": "#DE1A1E",
+   "dim": "#ECEBE3"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 100,
+    "anchor": [
+     540,
+     880,
+     0.95
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 92,
+    "anchor": [
+     540,
+     780,
+     0.82
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 110,
+    "anchor": [
+     540,
+     1100,
+     1.1
+    ],
+    "support": 1620
+   }
+  }
+ }
+}

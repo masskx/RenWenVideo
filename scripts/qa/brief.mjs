@@ -94,6 +94,10 @@ if (cfg) {
   // No follow / like / "comment 1" calls (平台与合规.md §三, 抖音技巧.md §三): low quality or off-site traffic to the platform.
   const cta = cfg.scenes.map((sc) => strip(sc.narration)).join('').match(/关注我|点个?关注|点个?赞|一键三连|评论区扣|扣\s*1|私信|主页领|加微信|资料包/);
   if (cta) fail.push(`口播里有「${cta[0]}」：不喊关注 / 点赞 / 扣 1 / 私信，结尾落在内容本身（抖音技巧.md §三）`);
+  // Music that cannot be heard (踩坑清单 2026-10-26): base level × duck far below the voice.
+  if (!cfg.musicSrc) warn.push('没有配乐：npm run tutorial:score -- <id> --preview（渲染时也会自动生成；音效.md §六）');
+  if ((!cfg.musicSrc || cfg.musicSrc === `audio/tutorials/${id}/score.mp3`) && !cfg.score?.mood) warn.push('配置里没写 "score": {"mood", "climax", "lifts"}：配乐的情绪和高潮场景要按这支片选（音效.md §六）');
+  else if ((cfg.musicVolume ?? 0.07) * 10 ** (-(cfg.musicDuckDb ?? 10) / 20) < 0.012) warn.push(`配乐在说话时几乎听不见（musicVolume ${cfg.musicVolume ?? 0.07}，压低 ${cfg.musicDuckDb ?? 10} dB）：用 scripts/generate-score.py 按配音定音量（音效.md §六）`);
   const noPace = cfg.scenes.filter((sc) => sc.pace === undefined).map((sc) => sc.id);
   if (noPace.length) warn.push(`这些场景没写 "pace"（按 normal 配）：${noPace.join(', ')}`);
 } else if (!storyboard?.startsWith('explainers/')) warn.push(`没有找到 ${cfgPath}，只检查了分镜`);
