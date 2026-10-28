@@ -5,7 +5,7 @@
 
 | 笔记 | 仓库 | 一句话 |
 |---|---|---|
-| [lemo-opuscar.md](lemo-opuscar.md) | lemomo-ai/lemo-opuscar | 51 种风格圣经 + 导演方法（对标、三个结构、镜头表、先证明画面、不要又做成样片） |
+| [lemo-opuscar.md](lemo-opuscar.md) | lemomo-ai/lemo-opuscar | 59 种风格圣经 + 导演方法（对标、三个结构、镜头表、先证明画面、不要又做成样片）；2026-10-28 补「精修」：剪辑与纪实 / 实证影像 16 种新风格、字幕即画面、包装系统、字体分工、统一调色和颗粒、OPUSCAR 98 提示词的精度 |
 | [pdoom-video.md](pdoom-video.md) | mexicat/pdoom-video | 一个统一设定 + 一条变形的母题 + 每句一个视觉双关 + 字是画面的一部分 |
 | [PDoomVideo.md](PDoomVideo.md) | JohnHeibel/PDoomVideo | 字要少、每个镜头都有事发生、布景不是卡片、主角占画面 40 % |
 | [ClaudeAnimationBase.md](ClaudeAnimationBase.md) | JohnHeibel/ClaudeAnimationBase | 替观众建模的时间（reads）、动画原理在代码里的样子、三档审片 |

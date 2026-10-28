@@ -22,6 +22,9 @@ public/fonts/*
 !public/fonts/NotoSansSC-500.otf
 !public/fonts/NotoSansSC-700.otf
 !public/fonts/NotoSansSC-900.otf
+!public/fonts/BarlowCondensed-600.woff2
+!public/fonts/BarlowCondensed-800.woff2
+!public/fonts/IBMPlexMono-500.woff2
 !public/fonts/OFL-*.txt
 __pycache__/
 
