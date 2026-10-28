@@ -369,3 +369,83 @@ export const Layer: React.FC<{cam: Cam2; depth: number; blur?: number; children:
   return <div style={{position: 'absolute', left: 0, top: 0, width: 900, height: 1080, transformOrigin: '450px 540px',
     transform: `translate(${dx.toFixed(2)}px, ${dy.toFixed(2)}px) scale(${z.toFixed(4)})`, filter: blur ? `blur(${blur}px)` : undefined}}>{children}</div>;
 };
+
+/**
+ * A person who acts (CLAUDE.md: the next thing to improve is that the characters act — v3's robot only floats). A lit 2D
+ * figure of jointed parts (head, torso, two-segment arms and legs), posed per frame by angles, so it can walk, carry, turn
+ * its head, reach, type, write and slump. (x, y) is the hip; about 420 px tall standing at s = 1. Angles are degrees on
+ * screen (0 = the limb hangs straight down, positive = clockwise); `near` limbs are drawn in front of the torso, `far`
+ * ones behind. `look` -1 … 1 slides the face across the head (it turns), `eyes` 0 … 1 opens them, `mouth` -1 … 1 frowns
+ * or smiles. `facing` -1 mirrors the whole figure. Colours are the film's (`skin`, `hair`, `top`, `bottom`).
+ */
+export type Pose = {lean?: number; head?: number; look?: number; eyes?: number; mouth?: number; bob?: number;
+  armNear?: [number, number]; armFar?: [number, number]; legNear?: [number, number]; legFar?: [number, number]};
+export const POSE_STAND: Required<Pose> = {lean: 0, head: 0, look: 0.6, eyes: 1, mouth: 0.3, bob: 0, armNear: [8, -8], armFar: [-6, -10], legNear: [2, 0], legFar: [-2, 0]};
+export const POSE_SIT: Required<Pose> = {...POSE_STAND, lean: -4, armNear: [-40, -70], armFar: [-46, -66], legNear: [-84, 88], legFar: [-80, 84]};
+/** Mix two poses (k 0 → 1); every angle eases independently, so a pose change reads as one move. */
+export const mixPose = (a: Pose, b: Pose, k: number): Required<Pose> => {
+  const A = {...POSE_STAND, ...a}, B = {...POSE_STAND, ...b}, m = (u: number, v: number) => u + (v - u) * k;
+  const m2 = (u: [number, number], v: [number, number]): [number, number] => [m(u[0], v[0]), m(u[1], v[1])];
+  return {lean: m(A.lean, B.lean), head: m(A.head, B.head), look: m(A.look, B.look), eyes: m(A.eyes, B.eyes), mouth: m(A.mouth, B.mouth), bob: m(A.bob, B.bob),
+    armNear: m2(A.armNear, B.armNear), armFar: m2(A.armFar, B.armFar), legNear: m2(A.legNear, B.legNear), legFar: m2(A.legFar, B.legFar)};
+};
+/** A walk cycle at phase t (cycles): legs swing, knees bend on the passing leg, arms swing against the legs, the body bobs. */
+export const walkPose = (t: number, amp = 1, base: Pose = POSE_STAND): Required<Pose> => {
+  const s = Math.sin(t * Math.PI * 2), c = Math.cos(t * Math.PI * 2), B = {...POSE_STAND, ...base};
+  return {...B, lean: B.lean - 4 * amp, bob: -Math.abs(c) * 8 * amp,
+    legNear: [-26 * s * amp, Math.max(0, 34 * c) * amp], legFar: [26 * s * amp, Math.max(0, -34 * c) * amp],
+    armNear: [22 * s * amp, -18 * amp], armFar: [-22 * s * amp, -18 * amp]};
+};
+const shade = (hex: string, k: number) => {
+  const n = parseInt(hex.slice(1), 16), f = (v: number) => Math.round(Math.min(255, Math.max(0, v * k)));
+  return `rgb(${f((n >> 16) & 255)}, ${f((n >> 8) & 255)}, ${f(n & 255)})`;
+};
+const Limb: React.FC<{x: number; y: number; a: [number, number]; l1: number; l2: number; w: number; c: string; end: React.ReactNode}> = ({x, y, a, l1, l2, w, c, end}) => (
+  <g transform={`translate(${x} ${y}) rotate(${a[0]})`}>
+    <rect x={-w / 2} y={-w / 2} width={w} height={l1 + w} rx={w / 2} fill={c} />
+    <g transform={`translate(0 ${l1}) rotate(${a[1]})`}>
+      <rect x={-w / 2 + 1} y={-w / 2} width={w - 2} height={l2 + w / 2} rx={(w - 2) / 2} fill={c} />
+      <g transform={`translate(0 ${l2})`}>{end}</g>
+    </g>
+  </g>
+);
+export const Person: React.FC<{x: number; y: number; s?: number; pose?: Pose; facing?: 1 | -1; skin?: string; hair?: string; top?: string; bottom?: string; shoe?: string; glasses?: boolean;
+  hold?: React.ReactNode; shadow?: boolean | number}> = ({
+  x, y, s = 1, pose = {}, facing = 1, skin = '#F2C9A6', hair = '#2B2420', top = '#4F7C6B', bottom = '#2F3440', shoe = '#1D1F24', glasses = false, hold, shadow = true,
+}) => {
+  const P = {...POSE_STAND, ...pose};
+  const lx = P.look * 15, eyeH = Math.max(0.6, 6 * P.eyes);
+  const hand = (c: string) => <circle cx={0} cy={4} r={13} fill={c} />;
+  const foot = (c: string) => <ellipse cx={12} cy={6} rx={22} ry={11} fill={c} />;
+  return <div style={{position: 'absolute', left: x, top: y, width: 0, height: 0}}>
+    {shadow !== false && <ContactShadow x={0} y={(P.legNear[1] > 45 ? 60 : 168) * s} w={150 * s} o={typeof shadow === 'number' ? shadow : 0.3} />}
+    <svg width={1} height={1} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
+      <g transform={`scale(${s * facing} ${s}) translate(0 ${P.bob})`}>
+        <Limb x={-7} y={0} a={P.legFar} l1={80} l2={80} w={30} c={shade(bottom, 0.78)} end={foot(shade(shoe, 0.8))} />
+        <g transform={`rotate(${P.lean})`}>
+          <Limb x={-5} y={-134} a={P.armFar} l1={64} l2={60} w={24} c={shade(top, 0.76)} end={hand(shade(skin, 0.86))} />
+          {/* torso, lit from the upper left */}
+          <path d="M-36 6 Q-40 -80 -42 -128 Q-40 -152 -14 -156 L14 -156 Q40 -152 42 -128 Q40 -80 36 6 Z" fill={top} />
+          <path d="M-36 6 Q-40 -80 -42 -128 Q-40 -152 -14 -156 L-4 -156 Q-20 -100 -14 6 Z" fill="#fff" opacity={0.16} />
+          <path d="M36 6 Q40 -80 42 -128 L30 -120 Q30 -60 24 6 Z" fill="#000" opacity={0.12} />
+          <rect x={-38} y={-10} width={76} height={24} rx={10} fill={bottom} />
+          <rect x={-9} y={-170} width={18} height={20} rx={6} fill={shade(skin, 0.9)} />
+          <g transform={`translate(4 -204) rotate(${P.head})`}>
+            <circle cx={0} cy={0} r={40} fill={skin} />
+            <circle cx={-12} cy={-12} r={22} fill="#fff" opacity={0.14} />
+            <path d={`M${-41 - lx * 0.4} 4 Q${-44 - lx * 0.4} -44 ${2 - lx * 0.3} -44 Q${38 - lx * 0.2} -44 ${40 - lx * 0.1} -14 Q${12 + lx} -26 ${-20 - lx * 0.5} -18 Q${-30 - lx * 0.5} -6 ${-33 - lx * 0.4} 8 Z`} fill={hair} />
+            <circle cx={-33 - lx * 0.4} cy={8} r={8} fill={shade(skin, 0.9)} />
+            {[-10, 12].map((ex) => <ellipse key={ex} cx={ex + lx} cy={0} rx={4.6} ry={eyeH} fill="#1B1B1F" />)}
+            {glasses && <g fill="none" stroke="#1B1B1F" strokeWidth={3}><circle cx={-10 + lx} cy={0} r={11} /><circle cx={12 + lx} cy={0} r={11} /><path d={`M${1 + lx} 0 L${1 + lx} 0`} /></g>}
+            <path d={`M${-6 + lx} ${19 - 3 * P.mouth} Q${1 + lx} ${19 + 6 * P.mouth} ${8 + lx} ${19 - 3 * P.mouth}`} fill="none" stroke="#5A2E2A" strokeWidth={3.5} strokeLinecap="round" />
+            {P.eyes < 0.45 && [-10, 12].map((ex) => <path key={ex} d={`M${ex + lx - 6} 9 Q${ex + lx} 12 ${ex + lx + 6} 9`} fill="none" stroke={shade(skin, 0.7)} strokeWidth={2.5} />)}
+          </g>
+        </g>
+        <Limb x={7} y={0} a={P.legNear} l1={80} l2={80} w={30} c={bottom} end={foot(shoe)} />
+        <g transform={`rotate(${P.lean})`}>
+          <Limb x={5} y={-134} a={P.armNear} l1={64} l2={60} w={24} c={top} end={<>{hand(skin)}{hold && <g transform="translate(0 6)">{hold}</g>}</>} />
+        </g>
+      </g>
+    </svg>
+  </div>;
+};

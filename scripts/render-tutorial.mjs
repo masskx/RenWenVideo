@@ -96,7 +96,11 @@ await renderMedia({serveUrl, composition, inputProps, browserExecutable, outputL
   audioBitrate: '192k', scale: draft ? 2 / 3 : 1, concurrency: Number(process.env.RENDER_CONCURRENCY ?? 4), overwrite: true,
   onProgress: ({progress}) => { const n = Math.floor(progress * 20); if (n !== last) { last = n; console.log(`${id}: ${n * 5}%`); } }});
 // Short-video platforms play back around -14…-16 LUFS; normalize the mix without touching the video stream.
-execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', pending, '-c:v', 'copy', '-af', 'loudnorm=I=-15:TP=-1.5:LRA=11',
+// Template films (look.grain, lemo mux.sh): film grain is added here, in the master — grain drawn in the page makes every
+// frame incompressible and slow; temporal noise re-encodes the picture once.
+const grain = Number(tutorial.look?.grain ?? 0);
+const vcodec = grain > 0 ? ['-vf', `noise=c0s=${grain}:allf=t`, '-c:v', 'libx264', '-crf', String(crf), '-preset', 'medium', '-pix_fmt', 'yuv420p'] : ['-c:v', 'copy'];
+execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', pending, ...vcodec, '-af', 'loudnorm=I=-15:TP=-1.5:LRA=11',
   '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-movflags', '+faststart', outputLocation]);
 await unlink(pending);
 console.log(`Saved ${path.relative(root, outputLocation)}`);

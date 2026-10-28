@@ -1,6 +1,6 @@
-# lemo-opuscar：51 种风格 + 一套导演方法
+# lemo-opuscar：59 种风格 + OPUSCAR 98 + 一套导演方法
 
-> 仓库 lemomo-ai/lemo-opuscar（代码和文档 MIT；样片、poster 为 CC BY 4.0，署名 LemoLab）。本仓库的快照：文档 `../prompt-library/vendor/lemomo-ai__lemo-opuscar/3961ddb/`，引擎和样片源码、poster `../prompt-library/code/lemomo-ai__lemo-opuscar/3961ddb/`。2026-10-23 读。
+> 仓库 lemomo-ai/lemo-opuscar（代码和文档 MIT；样片、poster 为 CC BY 4.0，署名 LemoLab）。本仓库的快照：文档 `../prompt-library/vendor/lemomo-ai__lemo-opuscar/3961ddb/`，引擎和样片源码、poster `../prompt-library/code/lemomo-ai__lemo-opuscar/3961ddb/`。2026-10-23 读；2026-10-28 用户说“你的片子总缺一点精致、高级的质感”，让我停下手里的两支片回来重读（上游最新 413a6bd 只比快照多一个感谢片提交，差距不在文件，在没吸收），补了下面的「精修」一节。
 
 ## 它是什么
 
@@ -33,3 +33,30 @@
 
 - 16:9 构图照搬到 9:16；它的英文旁白节奏（英文字数换算不适用中文）。
 - 样片本身（“不要又做成样片”是它自己的规则）；任何现实品牌、角色、旋律。
+
+## 精修：为什么它的片子看着“高级”，我们的看着“廉价”（2026-10-28 重读）
+
+用户原话（2026-10-28）：“我总觉得你的视频缺少一种精致、高质量的感觉。”对照的是它新加的两类风格——**剪辑与纪实**（`caption-news`、`news-package`、`newsreel`、`countdown`、`city-symphony`、`visual-investigation`、`kino-montage`、`telestrator`）和**实证影像**（`satellite-briefing`、`briefing-board`、`lidar-survey`、`white-model`、`data-physical`、`teardown`、`microscope`、`archive-lighttable`）。这 16 种都是“用真实材料 + 每个数字有出处”做片，正是我们的 AI 新闻题材；`news-package` 的样片就叫《本周 AI 四件事》。样片抽帧：[lemo-caption-news-抽帧.jpg](lemo-caption-news-抽帧.jpg)、[lemo-news-package-抽帧.jpg](lemo-news-package-抽帧.jpg)（每 2 秒一帧，CC BY 4.0 LemoLab，https://github.com/lemomo-ai/lemo-opuscar）。
+
+差距不在“画得好不好”，在**有没有一套系统**。按影响排：
+
+1. **字幕本身就是画面**（caption-news §4）。我们的字幕是居中、白字、10 px 黑描边的一条——抖音最常见、也最廉价的样子，压在任何画面上都像“PPT + 念稿”。它的字幕卡：左对齐到版心（x 120），思源黑体 900 特大号，一句拆成 2–3 块依次“砸”进来（1.3→1 倍，0.13 s，回弹），**一句只有一个关键词放在强调色色块里**（色块 0.12 s 从左擦出，字变深色），下面一行小字（英文原句或出处）。竖屏另排：字幕叠在画面下方两行，不是把横版裁窄。
+2. **一套“包装”贯穿每一帧**（news-package §3）：左上角台标（强调色块 + 话题牌）、数据镜头的「来源」标签（等宽字体写日期和出处）、每段素材右上 / 右下的署名条、下三分之一的人物 / 地点条。观众先读到“系统”，再读字——这就是“像正规节目”的感觉。我们每支片的页眉只是两行灰字。
+3. **字体有层级、有分工**：中文思源黑体 900 / 700；数字和英文名用窄体 Barlow Condensed 800（**等宽数字**，滚动计数不抖）；日期、出处、坐标轴用 IBM Plex Mono 全大写加字距。我们只有思源黑体一种 + 系统等宽字体。
+4. **真实素材铺满，统一调色**：所有素材走同一条调色（`contrast(1.07) saturate(0.92) brightness(0.98)` + 6 % 暖色柔光层）、底部渐变垫字、暗角；**颗粒在最后合成时用 ffmpeg 加**（`noise=c0s=2:allf=t`），不画在页面里。素材放大不超过 1.5 倍（老档案 2.5 倍），看不清就重新排版原文。我们是把截图缩成小贴纸放在扁平插画旁边。
+5. **一个数字一屏、一个强调色**：最大的数字在第 4 帧落地，放在强调色色块里滚到位；红只给“坏数字”；其他一律象牙白 / 灰。图表标题 ≤ 6 个字、左上对齐，关键点一个大点 + 扩散圈 + 色块标签。
+6. **剪辑语法固定**：120 BPM 半拍网格上切；硬切为主，转折处 1–2 帧白闪，卡片带速度线从右滑入，冻结帧 + 白闪 + 角标括号，局部 0.3 s 推近到“元凶”上画圈；**没有淡入淡出、没有翻页**。每 0.5–1 s 一个包装动作（翻牌、计数、盖章、打勾、换条），任何一帧静止不超过 1 s。
+7. **声音是半部片**：每个图形动作都有声音（字块砸下 = 咔 + 闷响、计数每 45 ms 一声、荧光笔吱声、冻结帧快门声）；转折前两次真正的安静；120 BPM 采样乐器配乐，不是通用钢琴弦乐。我们的配乐是合成垫底，图形动作大多没声音。
+
+**OPUSCAR 98**（`styleboard/opuscar98_styles.json`，本库 id `opuscar98/<号>`，快照里有但我们一次没用过）：98 部最佳影片各一种画风（2D 77 / 2.5D 4 / 3D 17），每条带复刻提示词、镜头表（每镜几秒、机位）、导演编排。要学的是**提示词的精度**：每条都把颜色写成 hex、把占比写成百分数（“深黑占画面 25%–35%”“白位向 #FFCC80 混一半”）、把质感写成参数（片门抖动 ±1 px、闪烁 ±5 %、网点约画宽 1/250）、写明招牌镜头、切点节奏（“每 2–3 秒一切”）、对标和“避免”清单。我们分镜里的「风格」一项只写“颜色取自素材”，没有一个数——以后照这个精度写。适合 AI / 科技题的几条：#88 Spotlight（缩微胶片阅读机 + 报纸网点，调查题）、#74 A Beautiful Mind（窗上公式 + 金色连线，算法 / 数学题）、#82 The Hurt Locker（拆弹教范线图，安全 / 漏洞题）、#61 Rain Man（喷枪插画 + 等宽计数标注，数据题）、#30 Bridge on the River Kwai（氰版蓝图，工程题）。
+
+### 在我们仓库里先证明了什么
+
+`src/lab/PackageLab.tsx`（`npx remotion still src/index.ts PackageLab qa/lab/package-<shot>.png --props='{"shot":"burnHook"}'`）：用 caption-news / news-package 的语法，把暂停的两支片各重做两帧——同样的事实、同样的素材，只换“包装”：字幕卡、台标 + 来源标签、窄体等宽数字、统一调色 + 暗角 + 颗粒。前后对比：[../assets/精修-package-前后-burnout.jpg](../assets/精修-package-前后-burnout.jpg)、[../assets/精修-package-前后-phd.jpg](../assets/精修-package-前后-phd.jpg)。新字体 Barlow Condensed 600 / 800、IBM Plex Mono 500（OFL，`public/fonts/`，`src/tutorial/fonts.ts` 的 `cond` / `plex`）。
+
+### 还没落地、要用户点头的
+
+- 把字幕卡做成账号层的默认字幕（替换现在的描边字幕）——这是全账号的样子，改之前要用户确认（[../账号风格.md](../账号风格.md)）。
+- 把“包装”（台标、来源标签、署名条、下三分之一条）做成 `src/tutorial/` 里的通用零件，每支片换强调色和话题名。
+- 合成时统一加颗粒、调色；图形动作配拟音；120 BPM 网格卡点。
+- 新闻题默认从 `caption-news` / `news-package` / `visual-investigation` 里选风格，读完整份 STYLE.md 再写分镜；“风格”一项照 OPUSCAR 98 的精度写数字。

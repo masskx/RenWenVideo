@@ -4,7 +4,9 @@
 // Fails (exit 1) on a missing brief field, a missing directing field (## 导演, 导演方法.md §三.5 — the decisions the eight
 // reference repos, huashu-motion and Xian's 梵高 explainer all make before any code: one idea, a benchmark, three
 // structures, a style, ground colour by emotion, one object carried through, a signature shot, a poster frame 0, a held
-// climax, and how this film differs from the last ones) or an over-length script / video. --legacy skips the directing
+// climax, and how this film differs from the last ones), a missing or unknown template (「模板」: the one style template
+// from the library this film applies — user, 2026-10-28: pick the best-fitting template for every new topic, then apply
+// it; prompt-library/选用指南.md §〇) or an over-length script / video. --legacy skips the directing
 // section for films made before 2026-10-23. Everything else only warns.
 import fs from 'node:fs';
 
@@ -18,6 +20,13 @@ const REQUIRED = ['钩子台词', '钩子画面', '核心看点', '结尾台词'
 // Directing decisions (导演方法.md §三): each is one line in "## 导演"; where it comes from is in 分镜模板.md.
 const DIRECTING = ['点子', '对标', '结构候选', '风格', '底色', '贯穿物件', '招牌镜头', '第0帧', '高潮停留', '和上一支不同'];
 const legacy = process.argv.includes('--legacy');
+// 「模板」 must name a template that exists in the pinned library snapshot: lemo/<style> (a styles/<style>/STYLE.md),
+// opuscar98/<1–98>, or another library id (mg15/…, huashu/…, ovp/…). Films delivered before the rule only get a warning.
+const lib = 'docs/video-craft/prompt-library';
+const lemoPin = (() => { try { return JSON.parse(fs.readFileSync(`${lib}/sources.json`, 'utf8')).sources.find((x) => x.repo === 'lemomo-ai/lemo-opuscar')?.pinned; } catch { return null; } })();
+const templateIds = (v) => [...v.matchAll(/\b(lemo|opuscar98|mg15|huashu|ovp)\/([\w.-]+)/g)].filter(([, src, name]) =>
+  src === 'lemo' ? fs.existsSync(`${lib}/vendor/lemomo-ai__lemo-opuscar/${lemoPin}/styles/${name}/STYLE.md`)
+    : src === 'opuscar98' ? Number(name) >= 1 && Number(name) <= 98 : true).map((m) => m[0]);
 const fields = {};
 if (!storyboard) fail.push(`没有分镜文件 tutorials/${id}.storyboard.md（模板：docs/video-craft/分镜模板.md）`);
 else {
@@ -38,6 +47,13 @@ else {
     else for (const k of DIRECTING) {
       const v = directing.match(new RegExp(`^-\\s*${k}[：:]\\s*(.*)$`, 'm'))?.[1].trim() ?? '';
       if (!v || /^<.*>$/.test(v)) fail.push(`导演一节缺「${k}」`);
+    }
+    if (directing) {
+      const tpl = directing.match(/^-\s*模板[：:]\s*(.*)$/m)?.[1].trim() ?? '';
+      const delivered = fs.existsSync(`douyin/${id}/video.mp4`) && !tpl;
+      const msg = !tpl ? '导演一节缺「模板」：从模板库选最合适的一个并照它做（lemo/<风格> 或 opuscar98/<号>；prompt-library/选用指南.md §〇）'
+        : !templateIds(tpl).length ? `「模板」里没有库里存在的模板 id（写成 lemo/caption-news、opuscar98/88 这样；查：node scripts/prompts/find.mjs --list --source=lemo）：${tpl}` : '';
+      if (msg) (delivered ? warn : fail).push(msg);
     }
     if (directing && !/^-\s*结构候选[：:].*(1|一|①).*(2|二|②).*(3|三|③)/m.test(directing)) warn.push('「结构候选」要写三个，再说选了哪个、为什么（lemo：第一个想到的通常是套路）');
     const shots = md.split(/\n## /).find((s) => s.startsWith('镜头表'));

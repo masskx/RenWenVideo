@@ -3,7 +3,8 @@
 Usage:
   python scripts/generate-score.py <id> [--mood=tension] [--climax=<scene id>] [--seed=1] [--preview] [--use]
 
-Settings come from tutorials/<id>.json → "score": {"mood": …, "climax": <scene id>, "lifts": [scene ids], "seed": n, "key": <midi root>, "bpm": n}
+Settings come from tutorials/<id>.json → "score": {"mood": …, "climax": <scene id>, "lifts": [scene ids], "seed": n, "key": <midi root>, "bpm": n,
+"silences": [{"scene": <id>, "at": <s into the scene>, "dur": <s>}]}
 (flags override them). Writes public/audio/tutorials/<id>/score.mp3; sets musicSrc to it when the film has no music yet (or
 with --use), and musicVolume / musicDuckDb when missing. --preview also writes qa/<id>/mix-preview.mp3: the narration placed on the
 timeline with the score at the renderer's exact gain curve, so the mix can be heard without rendering the video.
@@ -313,6 +314,21 @@ def compose(cfg, tl, opts):
         mix[:, c] = fft_filter(mix[:, c], lambda f: dip(f) * hp(f))
     mix = np.tanh(mix * 1.15) / 1.15
     mix *= 0.89 / max(1e-6, np.max(np.abs(mix)))
+    # real silences ("score": {"silences": [{"scene": id, "at": s, "dur": s}]}): the music stops dead before a turn and
+    # comes back on it (lemo DIRECTOR §6: at least two, and the first sound after one is among the most important)
+    sc_at = {s['id']: s['startFrame'] / fps for s in tl['scenes']}
+    for sl in opts.get('silences', []):
+        if sl.get('scene') not in sc_at:
+            continue
+        a0 = int((sc_at[sl['scene']] + sl.get('at', 0)) * SR)
+        a1 = int(min(n_total, a0 + sl.get('dur', 0.5) * SR))
+        e = int(0.03 * SR)
+        if a0 >= n_total or a1 <= a0:
+            continue
+        mix[max(0, a0 - e):a0] *= np.linspace(1, 0, a0 - max(0, a0 - e))[:, None]
+        mix[a0:a1] = 0
+        back = min(e, n_total - a1)
+        mix[a1:a1 + back] *= np.linspace(0, 1, back)[:, None]
     return mix, dict(bpm=round(4 * 60 / bar, 1), climax_t=round(climax_bar * bar, 2), end_t=round(end_t, 2))
 
 

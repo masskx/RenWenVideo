@@ -38,6 +38,8 @@ import {gheistGithubSecretsScenes} from './gheist-github-secrets';
 import {claudeGeorgiaPaywallScenes} from './claude-georgia-paywall';
 import {anthropicS1IpoScenes} from './anthropic-s1-ipo';
 import {openaiEthFalseScenes} from './openai-eth-false';
+import {anthropicPhdCareerResetScenes} from './anthropic-phd-career-reset';
+import {aiMoreWorkBurnoutScenes} from './ai-more-work-burnout';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -82,4 +84,6 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...claudeGeorgiaPaywallScenes,
   ...anthropicS1IpoScenes,
   ...openaiEthFalseScenes,
+  ...anthropicPhdCareerResetScenes,
+  ...aiMoreWorkBurnoutScenes,
 };
