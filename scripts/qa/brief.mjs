@@ -9,6 +9,7 @@
 // it; prompt-library/选用指南.md §〇) or an over-length script / video. --legacy skips the directing
 // section for films made before 2026-10-23. Everything else only warns.
 import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
 
 const id = process.argv.slice(2).find((a) => !a.startsWith('--'));
 if (!id) { console.log('usage: node scripts/qa/brief.mjs <id>'); process.exit(1); }
@@ -54,6 +55,24 @@ else {
       const msg = !tpl ? '导演一节缺「模板」：从模板库选最合适的一个并照它做（lemo/<风格> 或 opuscar98/<号>；prompt-library/选用指南.md §〇）'
         : !templateIds(tpl).length ? `「模板」里没有库里存在的模板 id（写成 lemo/caption-news、opuscar98/88 这样；查：node scripts/prompts/find.mjs --list --source=lemo）：${tpl}` : '';
       if (msg) (delivered ? warn : fail).push(msg);
+      // 「模板改造」 (user, 2026-10-28: customise the template to the content so the films don't all look the same; lemo
+      // MY-STYLES.md): 3–5 changes to the base, each "what: base → now (why)", separated by ；. Free per film anyway:
+      // structure, opening, ending, pacing; the template's essence and engine stay (else pick another template).
+      if (tpl && templateIds(tpl).length) {
+        const mod = directing.match(/^-\s*模板改造[：:]\s*(.*)$/m)?.[1].trim() ?? '';
+        const n = mod ? mod.split(/[；;]/).map((x) => x.trim()).filter(Boolean).length : 0;
+        const modMsg = !mod ? '导演一节缺「模板改造」：按内容改模板，3–5 处，每处写“改了什么：模板原来 → 这支 （为什么）”，用；分开（选用指南.md §〇.3）'
+          : n < 3 ? `「模板改造」只有 ${n} 处：至少 3 处（配色从素材取、字体 / 动效节奏、声音、换一个原生招式……），不然又是样片的样子` : '';
+        if (modMsg) (delivered ? warn : fail).push(modMsg);
+        if (n > 5) warn.push(`「模板改造」有 ${n} 处：一支片最多 5 处（lemo MY-STYLES：多了判断不了，也容易改丢模板的本质）`);
+        // the same base among the last three films: say how this one differs
+        const base = templateIds(tpl)[0];
+        const when = (f) => { try { return Number(execFileSync('git', ['log', '-1', '--format=%ct', '--', f], {encoding: 'utf8'}).trim()) || fs.statSync(f).mtimeMs / 1000; } catch { return fs.statSync(f).mtimeMs / 1000; } };
+        const others = fs.readdirSync('tutorials').filter((f) => f.endsWith('.storyboard.md') && f !== `${id}.storyboard.md`).map((f) => `tutorials/${f}`)
+          .map((f) => ({f, t: when(f), tpl: fs.readFileSync(f, 'utf8').match(/^-\s*模板[：:]\s*(.*)$/m)?.[1] ?? ''})).filter((o) => o.tpl).sort((x, y) => y.t - x.t).slice(0, 3);
+        const same = others.filter((o) => templateIds(o.tpl)[0] === base);
+        if (same.length) warn.push(`最近三支里 ${same.map((o) => o.f.replace(/^tutorials\/|\.storyboard\.md$/g, '')).join('、')} 也用了 ${base}：这支的「模板改造」要和它们不一样（配色、开场、招牌招式、结构至少换三样；记录在 模板记录.md）`);
+      }
     }
     if (directing && !/^-\s*结构候选[：:].*(1|一|①).*(2|二|②).*(3|三|③)/m.test(directing)) warn.push('「结构候选」要写三个，再说选了哪个、为什么（lemo：第一个想到的通常是套路）');
     const shots = md.split(/\n## /).find((s) => s.startsWith('镜头表'));
