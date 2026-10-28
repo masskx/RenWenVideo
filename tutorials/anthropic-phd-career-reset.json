@@ -17,11 +17,24 @@
  "credit": "Jascha Sohl-Dickstein · 斯坦福 PAI26",
  "source": "inputs/anthropic-phd-career-reset/materials.md",
  "score": {
-  "mood": "wonder",
+  "mood": "news",
+  "bpm": 120,
   "climax": "path",
   "lifts": [
    "safe",
    "write"
+  ],
+  "silences": [
+   {
+    "scene": "path",
+    "at": 3.15,
+    "dur": 0.5
+   },
+   {
+    "scene": "write",
+    "at": 2.0,
+    "dur": 0.5
+   }
   ]
  },
  "steps": [],
@@ -39,6 +52,24 @@
    "small": [
     "cut"
    ]
+  },
+  "captions": "bar",
+  "captionTop": 1365,
+  "grain": 2,
+  "pk": {
+   "bg": "#121417",
+   "panel": "#1B1E23",
+   "ink": "#F4F1E8",
+   "accent": "#3A9AAD",
+   "onAccent": "#FFFFFF",
+   "dim": "#9AA1AC",
+   "second": "#D0705A"
+  },
+  "breaks": {
+   "说完这句，这个博士生开始规划": "说完这句|这个博士生开始规划",
+   "十年里，最大模型的训练算力": "十年里|最大模型的训练算力",
+   "所以他说：去做有意思的事": "所以他说|去做有意思的事",
+   "选稳的，只是放弃了上限": "选稳的|只是放弃了上限"
   }
  },
  "highlights": [],
@@ -105,10 +136,10 @@
   "tag": "AI 新闻 · 观点",
   "anchor": "phd.cover",
   "colors": {
-   "bg": "#FFFFFF",
-   "text": "#111928",
-   "accent": "#2F9DAD",
-   "dim": "#6B7280"
+   "bg": "#121417",
+   "text": "#F4F1E8",
+   "accent": "#3A9AAD",
+   "dim": "#9AA1AC"
   },
   "layouts": {
    "3:4": {
@@ -152,7 +183,27 @@
    }
   }
  },
+ "keywords": [
+  "3年内",
+  "开始规划",
+  "Anthropic研究员",
+  "1000万倍",
+  "一半",
+  "也该信",
+  "很不一样",
+  "根本不存在",
+  "反直觉",
+  "并不稳妥",
+  "躲不开",
+  "放弃了上限",
+  "有意思的事",
+  "看起来安全",
+  "自己做",
+  "写作",
+  "就是思考",
+  "外包的是思考"
+ ],
  "musicSrc": "audio/tutorials/anthropic-phd-career-reset/score.mp3",
- "musicVolume": 0.124,
+ "musicVolume": 0.129,
  "musicDuckDb": 10
 }

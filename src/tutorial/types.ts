@@ -35,7 +35,19 @@ export type Tutorial = {
   look?: {theme?: 'dark' | 'paper' | 'blueprint' | 'cinema';
     /** Cinema only: background depth — 'both' (default, user's pick 2026-10-22), 'grid' (perspective floor), 'depth' (light + dust), 'plain'. */
     space?: 'plain' | 'grid' | 'depth' | 'both'; frame?: 'full' | 'douyin' | 'channels'; header?: boolean | 'chapters' | 'label'; tour?: boolean; particles?: boolean; mascot?: boolean;
-    cuts?: {big?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch' | 'cut')[]; small?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch' | 'cut')[]}};
+    cuts?: {big?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch' | 'cut')[]; small?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch' | 'cut')[]};
+    /** Subtitle design: 'stroke' (default, centred outline), or a template's own — 'card' (caption-news caption card), 'bar' (news-package: one line under the strap). src/tutorial/package.tsx */
+    captions?: 'stroke' | 'card' | 'bar';
+    /** The film's package palette (one accent, from its material) for 'card' / 'bar' captions. */
+    pk?: {bg: string; panel: string; ink: string; accent: string; onAccent: string; dim: string; second?: string};
+    /** Caption card / bar position (top, px) when the film needs it elsewhere. */
+    captionTop?: number;
+    /** Exact line breaks for template captions: {"原句": "前半|后半"}. */
+    breaks?: Record<string, string>;
+    /** Film grain added in the master by ffmpeg (noise strength, lemo mux.sh: 2 is light; 0 / unset = none). */
+    grain?: number};
+  /** Keywords that get the accent block in a template caption (one per caption, longest match first). */
+  keywords?: string[];
   /** Series name for the `look.header: "label"` line (top-left); defaults to `title`. */
   series?: string;
   /** The video's two core nouns (A/B): fixed colours in captions and visuals. */

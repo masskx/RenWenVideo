@@ -1,11 +1,12 @@
 # AI 说好让他少干活，结果 8 月一个月 427 次贡献——一位技术副总裁的 GitHub 数据
 
-- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，约 35 秒）
+- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，34.7 秒，−15.2 LUFS）
+- 模板：`lemo/caption-news`（字幕新闻，lemo-opuscar；分镜里写了照搬了它哪些：字幕卡、台标 + 来源标签、账本数据卡、文件高亮、亮格、冻结帧、统一调色 + 颗粒）
 - 封面：`cover-9x16.jpg`（抖音 / 视频号全屏）、`cover.jpg`（3:4，小红书）、`cover-6x7.jpg`（6:7，信息流）；标题「AI说好让他少干活 / 结果8月427次贡献」，辅助句「一位技术副总裁的 GitHub 数据」，锚点是橙色月度曲线、尖峰 427 和便利贴
 - 字幕：`subtitles.srt`；静帧 `still-XXs.jpg`，总览 `stills-sheet.jpg`
 - 分镜：`tutorials/ai-more-work-burnout.storyboard.md`；事实和出处：`inputs/ai-more-work-burnout/transcript/article_fulltext.md`（原文逐字）、`sources-materials.md`（数字核对表）；审稿：`REVIEW-DOUYIN.md`（Eko 10-28）
-- 配音：用户本人的 MiniMax 音色（MashuaiDouyin01，brisk 档调到 1.12，按策划要求整体偏快）；配乐 `scripts/generate-score.py`（tension，高潮落在 agent 一个个叫他那一场，代码合成）。**发布时勾选「内容由AI生成」，不要勾「原创」**（文章整理解读）
-- 画面：作者原图（「@Orestis Ioannou｜原图」）+ 按原图 SVG 折线坐标重画的月度曲线（峰值 427 / 319 / 277、6 月 77 与原文一致）+ Parallel Code 官方演示录屏（静音，「@Parallel Code｜案例展示」）+ 会动的小人（props.tsx 新的 `Person`：打字、转头、伸手、趴下）；颜色全部取自作者原图和 Parallel Code 界面
+- 配音：用户本人的 MiniMax 音色（MashuaiDouyin01，brisk 档调到 1.12，按策划要求整体偏快）；配乐 `scripts/generate-score.py`（news，120 BPM，高潮落在 agent 一个个叫他那一场，冻结帧和结尾前各安静一次，代码合成）。**发布时勾选「内容由AI生成」，不要勾「原创」**（文章整理解读）
+- 画面：按作者原图 SVG 折线坐标重画的月度曲线（峰值 427 / 319 / 277、6 月 77 与原文一致）+ 原文句子重排成纸、荧光笔扫过 + Parallel Code 官方演示录屏（静音，裁掉片中烧录的英文说明，「录屏 @Parallel Code｜案例展示」）；颜色取自作者原图（底 #111827、VP 色带琥珀 #FBBF24）
 - 口径（审稿红线）：一律说“贡献”（GitHub contributions：commit + PR + review + issue，含私有），不说“提交”；不说“史上最忙的一年”（2020 同期 2,371 > 2026 的 2,102），只说 8 月 427 是 2019 年以来单月最高（此前最高 2020 年 4 月 319）；作者不反对 AI（"I am not complaining about the tools"）；只讲他一个人的数据，不泛化；不提知乎「约 58 万」
 - **不引流**：片中、封面和文案都没有链接、二维码、资料包、评论区关键词、主页
 

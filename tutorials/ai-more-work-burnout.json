@@ -17,10 +17,24 @@
  "credit": "据 Orestis Ioannou 2026-10-27",
  "source": "inputs/ai-more-work-burnout/materials.md",
  "score": {
-  "mood": "tension",
+  "mood": "news",
+  "bpm": 120,
   "climax": "why",
   "lifts": [
+   "vp",
    "burst"
+  ],
+  "silences": [
+   {
+    "scene": "why",
+    "at": 4.4,
+    "dur": 0.6
+   },
+   {
+    "scene": "end",
+    "at": 0,
+    "dur": 0.6
+   }
   ]
  },
  "steps": [],
@@ -38,6 +52,31 @@
    "small": [
     "cut"
    ]
+  },
+  "captions": "card",
+  "captionTop": 1180,
+  "grain": 2,
+  "pk": {
+   "bg": "#111827",
+   "panel": "#141B2B",
+   "ink": "#F7F5EF",
+   "accent": "#FBBF24",
+   "onAccent": "#111827",
+   "dim": "#9CA3AF",
+   "second": "#93C5FD"
+  },
+  "breaks": {
+   "他在GitHub上留下了427次贡献": "他在GitHub上|留下了427次贡献",
+   "这是他2019年以来最多的一个月": "这是他2019年以来|最多的一个月",
+   "更怪的是，他现在是技术副总裁": "更怪的是|他现在是技术副总裁",
+   "他说累的不是哪件事更难": "他说累的|不是哪件事更难",
+   "而是同时开着好几个agent": "而是同时开着|好几个agent",
+   "但每个都“有时”需要你": "但每个都|“有时”需要你",
+   "就要把另一个问题重新装进脑子": "就要把另一个问题|重新装进脑子",
+   "他就修以前懒得修的bug": "他就修|以前懒得修的bug",
+   "新模型一来，他就猛干几周": "新模型一来|他就猛干几周",
+   "然后累到不想再开一个agent": "然后累到|不想再开一个agent",
+   "只是发现：能做的更多": "只是发现|能做的更多"
   }
  },
  "highlights": [],
@@ -98,8 +137,8 @@
   "anchor": "burn.cover",
   "colors": {
    "bg": "#111827",
-   "text": "#FFFFFF",
-   "accent": "#F59E0B",
+   "text": "#F7F5EF",
+   "accent": "#FBBF24",
    "dim": "#9CA3AF"
   },
   "layouts": {
@@ -144,7 +183,30 @@
    }
   }
  },
+ "keywords": [
+  "少干活",
+  "今年8月",
+  "427次贡献",
+  "2019年以来",
+  "技术副总裁",
+  "写代码最少",
+  "哪件事更难",
+  "好几个agent",
+  "一直需要你",
+  "“有时”",
+  "每回一个",
+  "重新装进脑子",
+  "变便宜了",
+  "懒得修",
+  "不会接",
+  "猛干几周",
+  "不想再开",
+  "三轮",
+  "不反对AI",
+  "能做的更多",
+  "做得更多"
+ ],
  "musicSrc": "audio/tutorials/ai-more-work-burnout/score.mp3",
- "musicVolume": 0.123,
+ "musicVolume": 0.139,
  "musicDuckDb": 10
 }

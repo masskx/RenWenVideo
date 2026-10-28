@@ -1,11 +1,12 @@
 # “AGI三年就来”，说完他规划了读博、博后、教职——Anthropic 研究员的斯坦福演讲
 
-- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，约 40 秒）
-- 封面：`cover-9x16.jpg`（抖音 / 视频号全屏）、`cover.jpg`（3:4，小红书）、`cover-6x7.jpg`（6:7，信息流）；标题「“AGI三年就来” / 他却规划读博、博后、教职」，辅助句「Anthropic 研究员的斯坦福演讲」，锚点是年份尺、三块积木、小人和青色的 AGI 旗
+- 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，39.6 秒，−15.2 LUFS）
+- 模板：`lemo/news-package`（电视新闻包装，lemo-opuscar；分镜里写了照搬了它哪些：下三分之一条 + 分类标签、节目单、翻牌板、引语卡、规格卡、印章、竖条擦除、统一调色 + 颗粒）
+- 封面：`cover-9x16.jpg`（抖音 / 视频号全屏）、`cover.jpg`（3:4，小红书）、`cover-6x7.jpg`（6:7，信息流）；标题「“AGI三年就来” / 他却规划读博、博后、教职」，辅助句「Anthropic 研究员的斯坦福演讲」，锚点是 “AGI in 3 years.” 和他的规划节目单
 - 字幕：`subtitles.srt`；静帧 `still-XXs.jpg`，总览 `stills-sheet.jpg`
 - 分镜：`tutorials/anthropic-phd-career-reset.storyboard.md`；事实和出处：`inputs/anthropic-phd-career-reset/materials.md`、`sources.md`、`transcript/`；审稿：`REVIEW-DOUYIN.md`（Eko 10-27）
-- 配音：用户本人的 MiniMax 音色（MashuaiDouyin01，brisk 档调到 1.12，按策划要求整体偏快）；配乐 `scripts/generate-score.py`（wonder，高潮落在 AGI 旗落下那一拍，代码合成）。**发布时勾选「内容由AI生成」，不要勾「原创」**（演讲整理解读）
-- 画面：讲者授权复用的幻灯（算力图「讲者幻灯｜Our World in Data」、幻灯原文重排）+ 斯坦福 PAI26 录像（静音，「@Stanford HAI｜案例展示」）+ 代码画的年份尺、积木、会动的小人（props.tsx 新的 `Person`）、分成两色的头、岔路；颜色取自算力图（1950–2010 橙 = 老节奏 / 老规划，2010–2025 青 = AI 的新节奏）
+- 配音：用户本人的 MiniMax 音色（MashuaiDouyin01，brisk 档调到 1.12，按策划要求整体偏快）；配乐 `scripts/generate-score.py`（news，120 BPM，高潮落在“可能不存在”印章那一拍，印章前和问答引语前各安静一次，代码合成）。**发布时勾选「内容由AI生成」，不要勾「原创」**（演讲整理解读）
+- 画面：讲者授权复用的幻灯（算力图「SPEAKER'S SLIDE · OUR WORLD IN DATA」、幻灯原文重排）+ 斯坦福 PAI26 录像（静音、灰阶，「视频 @Stanford HAI｜案例展示」）+ 原话引语卡、规划节目单、翻牌板、示意规格卡（标 SCHEMATIC / 示意图）；颜色取自算力图（1950–2010 橙 = 老节奏 / 老规划，2010–2025 青 = AI 的新节奏）
 - 口径（审稿红线）：不说、不打「一夜清零」「读博无意义」（媒体标题，非原话）；讲者批评的是“信念和规划不一致”；“一千万倍”是演讲原话（约 04:43，“about 10 million fold … in the last decade”），说“约”；writing is thinking 标明是问答环节（约 40:45）；不用 2030×10000（Epoch 外推）
 - **不引流**：片中、封面和文案都没有链接、二维码、资料包、评论区关键词、主页
 

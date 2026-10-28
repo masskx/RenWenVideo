@@ -1,65 +1,70 @@
-# Anthropic 研究员给博士生的建议 · 分镜
+# Anthropic 研究员给博士生的建议 · 分镜（模板：lemo/news-package）
 
-> 用户 2026-10-28：用 `inputs/anthropic-phd-career-reset/`（PR #42，已在 main）做这支，先按情况优化脚本再做片，最后合并进 main。素材情况 B（讲者授权复用的幻灯 + 斯坦福 PAI26 录像的三段剪辑 + 视频帧）。事实来自 `materials.md` / `sources.md` / `transcript/key-segments-*.txt`。审稿（`REVIEW-DOUYIN.md`，Eko 10-27）照办：「一夜清零」「读博无意义」都不是原话，不出声、不上字幕；writing is thinking 在 Q&A；10 million fold 是演讲原话（约 04:43），说「约」；2030×10000 是 Epoch 外推，不用；结尾纯内容、不引流。策划建议 30–40 秒、整体偏快（1.2–1.25×）：全片用 brisk，片长约 38 秒。
-> 和素材建议的结构比，我改了开头：素材建议“前 2 秒算力冲击”，但算力是**理由**，那个研究生“信 AGI 三年就来、却按老路规划”才是**事**——一件具体到荒唐的事 + 一个数字（三年），是 hooks.md 的第 5 种开法（一句原话 + 反转）。算力数字放第二句，第 9 秒左右说出。
+> 用户 2026-10-28：用 `inputs/anthropic-phd-career-reset/`（PR #42，已在 main）做这支，先按情况优化脚本再做片，最后合并进 main；同日改要求：“以后先从模板库找最合适的模板，照它做”，并让这两支“题目不变，照这个做法重做”。第一版（白底年份尺 + 积木 + 小人）留在 git 历史里，这一版换成模板 `lemo/news-package`，口播和配音不变。
+> 素材情况 B（讲者授权复用的幻灯 + 斯坦福 PAI26 录像的三段剪辑 + 视频帧）。事实来自 `materials.md` / `sources.md` / `transcript/key-segments-*.txt` / `asr_base.txt`。审稿（`REVIEW-DOUYIN.md`，Eko 10-27）照办：「一夜清零」「读博无意义」都不是原话，不出声、不上屏；writing is thinking 在 Q&A；10 million fold 是演讲原话（约 04:43），说「约」；2030×10000 是 Epoch 外推，不用；结尾纯内容、不引流。策划建议 30–40 秒、整体偏快：片长约 39.5 秒。
+> 开头的调整（第一版就定了）：素材建议“前 2 秒算力冲击”，但算力是**理由**，那个研究生“信 AGI 三年就来、却按老路规划”才是**事**——hooks.md 第 5 种开法（一句原话 + 反转）；算力数字放第二场，第 10 秒左右说出。
 
 ## 简报
 
-- 钩子台词：“AGI三年内就来。”说完这句，这个博士生开始规划：读完博士、做博后、再申请教职。（hooks.md §一 第 5 种：一句原话 + 反转；原话来自讲者幻灯 "I think we're going to have AGI in 3 years. […] I'm planning to finish my PhD in 2 years, get a postdoc, and apply for faculty jobs after that."）
-- 钩子画面：第 0 帧——一把横放的年份尺，上面已经摆好三块橙色积木「博士 · 博后 · 教职」，一个小人站在尺子起点；头顶气泡里是原话「AGI 三年内就来」，大字「3 年」。说到“开始规划”时，小人一块块往前搬积木，积木一直排到尺子的远端。
-- 核心看点：讲这件事的 Anthropic 研究员 Jascha Sohl-Dickstein（斯坦福 PAI26 演讲）说，过去十年训练最大模型的算力涨了约 1000 万倍；如果你真信 AGI 要来，就别假设现在的职业路径是稳定的——“稳妥的选项其实并不稳妥”，去做有意思的事；但写作别外包，因为写作就是思考。（9 秒左右说出“一千万倍”）
+- 钩子台词：AGI 3年内就来。说完这句，这个博士生开始规划：读完博士、做博后、再申请教职。（hooks.md §一 第 5 种：一句原话 + 反转；原话来自讲者幻灯 "I think we're going to have AGI in 3 years. […] I'm planning to finish my PhD in 2 years, get a postdoc, and apply for faculty jobs after that."）
+- 钩子画面：第 0 帧——news-package 的“冷开场在最大的图形上”：讲者录像压暗做底，引语卡 “I think we're going to have AGI in 3 years.” 的引号先落下、三行推上来，“3 years” 下划线扫过；说到“开始规划”，引语卡缩到上方，他的规划变成一份“节目单”三行翻进来：01 读完博士 / 02 做博后 / 03 申请教职。
+- 核心看点：讲这件事的 Anthropic 研究员 Jascha Sohl-Dickstein（斯坦福 PAI26 演讲）说，过去十年训练最大模型的算力涨了约 1000 万倍；如果你真信 AGI 要来，就别假设现在的职业路径是稳定的——“稳妥的选项其实并不稳妥”，去做有意思的事；但写作别外包，因为写作就是思考。（“1000 万倍”在第 10 秒左右说出）
 - 收藏点：不需要（知识快讯）
-- 结尾台词：因为写作就是思考；把写作外包出去，你外包的是思考。（抖音技巧.md §三 第 3 种：一句翻转的判断——前面都在说“认真对待 AI”，最后一句说“有一件事别交给它”；Q&A 原话 "writing is thinking … if you outsource your writing … you've outsourced your thinking"）
+- 结尾台词：因为写作就是思考；把写作外包出去，你外包的是思考。（抖音技巧.md §三 第 3 种：一句翻转的判断；Q&A 原话上引语卡）
 - 标题·视频号：Anthropic 研究员：信 AGI 三年就来，就别再按老路规划职业
 - 标题·抖音：“AGI三年就来”，说完他规划了读博、博后、教职
 - 标题·小红书：Anthropic研究员给博士生的职业建议｜AGI、读博、写作即思考
 
 ## 导演
 
+- 模板：lemo/news-package（电视新闻包装）。为什么是它：这是一场演讲——一个人、他自己的话、一段录像、几张幻灯；news-package 的人物条、引语卡（官方原话 + 名字 / 场合 / 日期 + 关键词下划线）、节目单、翻牌板、规格卡、印章，正好把“谁说的、原话是什么、数字多大、判断是什么”分开放。照搬了：§1 一套包装贯穿（台标「AI 观点 · 斯坦福演讲」、下三分之一条整片不离场、换话题时竖向翻字 + 分类标签闪白：观点 / 人物 / 职业 / 风险 / 问答）；§3 部件（节目单三行翻入 + 扫光、引语卡、翻牌板“旧值 → 新值”、规格卡“同一把尺上的条”、印章 −6° 到 −10° 从 1.9 倍砸下 + 扩散圈，一个话题一个）；§3 转场（话题之间竖条擦除：强调色条 + 深色线 + 橙边；话题内部硬切）；§6 素材统一单色调（灰阶 + 淡暖）；§7 每张图都有日期眉题（等宽大写）、一屏一个事实；§8 声音（每行落下一声钟琴、翻牌咔哒、印章闷响、转折前一拍安静）；§12 开场变体“冷开场在最大的图形上”。不照搬：它的台标和片头动画、柠檬黄（换成讲者算力图的青）、片尾卡；它“不烧字幕”的规则——抖音静音看的人多，字幕保留成下三分之一条下面一条安静的字幕（`look.captions: "bar"`）。
 - 点子：观众以为“相信 AI 要改变一切”和“按部就班规划人生”可以同时成立；讲者说，那是脑子的两半在各说各的——你真信，就该让另一半也信：稳的路不一定稳，但有一件事别交给 AI：写作，因为那就是思考。
-- 对标：openai-eth-false（我们 7.5 分的片：一个道具 + 一张图讲清，结尾一句判断——学它的“一个物件贯穿”和“只讲一张图”）；Xian 梵高集（“具体代替抽象”：“职业规划”就是一排积木，“大脑的两半”就是一颗被分成两色的头）。不拿：eth 的深底 + 基石裂开（刚用过）。
-- 结构候选：① 讲座摘要：算力 → METR → 职业建议 → 写作（四个点，平，像 PPT）；② 素材建议的“算力冲击开场”（数字大，但没有“事”，观众不知道和自己有什么关系）；③ 一把年份尺：钩子里小人把“博士 · 博后 · 教职”排到尺子远端 → 算力曲线（为什么）→ 一颗分成两色的头（相信的那一半 vs 规划的那一半）→ 尺子上插下“AGI 3 年”的旗，后面的积木变成虚线 → 二次钩子“稳妥的选项并不稳妥”（岔路口，一朵风险的云罩住两条路）→ 小人走上有意思的那条 → 转折：别外包写作，笔在尺子上写字。选 ③：一件具体的事开场，一个物件（年份尺）把四段串成一条线。
-- 风格：讲者自己的幻灯世界（白底 Google Slides、黑字）+ 积木和小人道具（props.tsx 新加的 `Person`：会走、会搬、会坐下写字）+ v3 的 2D 纵深（地面线、投影、`camAt`、`Layer`）。颜色从素材取：幻灯纸白 #FFFFFF / 墨 #111928；算力图（Our World in Data）的两段线——1950–2010 的橙红 #D0705A = “老节奏 / 老规划”（积木）、2010–2025 的青 #3A9AAD = “AI 的新节奏”（旗、算力、有意思的路）；会场 HAI 横幅的紫 #9960A2 只用在录像标签。字：思源黑体 900 + 霞鹜文楷批注（讲者原话）。
-- 底色：钩子、头、尺子、岔路——幻灯纸白（讲事实，冷静）；算力一场翻深底 #111928，青线在黑里发光（“涨了一千万倍”的冲击）；写作一场翻成暖纸 #F6F1E7（笔和纸，慢下来）。
-- 贯穿物件：那把年份尺和尺上的积木。钩子里排到远端；算力一场尺子立起来变成纵轴（10 年）；头一场积木塞在“规划”那半边；尺子一场插上青旗、旗后的积木变虚线；岔路一场尺子分成两条路；写作一场笔沿着尺子的线写下“写作即思考”，最后一帧回到尺子（接回第 0 帧）。
-- 招牌镜头：第 15–20 秒，青色的「AGI · 3 年」旗从天而降插在尺子的第 3 年，旗后面的橙色积木一块块褪成虚线框，虚线框上浮出幻灯原文 "Your current career trajectory may not even exist."（Remotion）。
-- 第0帧：纸白底 + 年份尺 + 三块积木 + 小人 + 大字「3 年」+ 气泡原话。
-- 高潮停留：招牌镜头积木全部变虚线后停 1.5 秒（第 19–21 秒）；片尾最后一句说完 0.5 秒结束。
-- 配乐：wonder（讲未来、偏开阔），climax = path（旗落下那一拍），lifts = [safe, write]。
-- 和上一支不同：最近三支 openai-eth-false（基石 + 曲线图，深底开场）、anthropic-s1-ipo（招股书 + 揭描图纸）、claude-georgia-paywall（闸机 + 机器人）。结构（一把尺子串四段，带人物故事）、开场（一句原话 + 小人搬积木，白底）、招牌镜头（旗落下、积木变虚线）、镜头路线（沿着尺子横移，再升到岔路口俯看）、结尾（笔写字，一句翻转判断）——五项不同。
+- 对标：news-package 样片《本周 AI 四件事》（学：包装系统、引语卡、翻牌板、印章、竖条擦除；不拿：它的四条新闻结构、品牌板、柠檬黄）；caption-news 样片（学：数字先出；不拿：字幕卡——这支用安静的字幕条，两支片看起来不一样）。
+- 结构候选：① 节目单式：先列“他讲了三件事”，逐条展开，最后打勾（模板 §12 第一种，太像 PPT 目录）；② 一条主稿：一句原话冷开场 → 人物条 + 算力数字 → 讲者原话 → 回到那份规划，盖章 → 规格卡讲风险 → 判断章 → 问答的一句话收尾（模板 §12 第二种“一条主稿”）；③ 倒计时：1000 万倍 → 10–20 年 → 3 年 → 1 件事（数字好看，但“那个研究生”的事被挤掉）。选 ②：节目单不当目录用，而是把“他的规划”本身做成节目单——开头翻进来，中段被 AGI 的虚线拦腰截断、盖章“可能不存在”。
+- 风格：news-package 的系统 + 讲者幻灯的颜色。底 #121417（墨），卡片 #1B1E23，字 #F4F1E8（纸色）；强调色是算力图 2010–2025 那段线的青 #3A9AAD（AI 的新节奏：引语下划线、AGI 虚线、印章、标签）；第二色是 1950–2010 那段的橙 #D0705A（老节奏 = 他的规划：节目单的序号块、“稳妥”）。字：思源黑体 900、Barlow Condensed 800 / 600（引语、数字、英文）、IBM Plex Mono（眉题、日期）。录像统一灰阶 + 淡暖，压暗 55–72 % 垫引语卡；颗粒在合成时加。
+- 底色：全片同一个墨色底（包装节目的“演播室”）；情绪靠录像亮 / 暗、印章、规格卡的灰显和青色点亮表达。
+- 贯穿物件：那份“规划节目单”（01 读完博士 / 02 做博后 / 03 申请教职）——开头翻进来；中段回来，被「AGI · 3 YEARS」青色虚线拦在 01 和 02 之间，02、03 变灰、划掉、盖章；封面也是它。
+- 招牌镜头：第 19.1–21 秒：节目单回到画面，青色虚线「AGI · 3 YEARS」横穿 01 和 02 之间，配乐停一拍，印章「可能不存在 MAY NOT EVEN EXIST」砸下，02、03 两行褪灰、被划掉。
+- 第0帧：录像底 + 引语卡 “I think we're going to have AGI in 3 years.” + 台标。
+- 高潮停留：印章落下后节目单停约 1.5 秒；片尾最后一句说完 0.5 秒结束。
+- 配乐：news，120 BPM，climax = path（印章那一拍），lifts = safe、write；两次安静：path 场 3.15 秒（印章前一拍）、write 场 2.0 秒（“写作”之后、引语卡之前）。
+- 和上一支不同：最近三支 openai-eth-false、anthropic-s1-ipo、claude-georgia-paywall，同批 ai-more-work-burnout（caption-news）。结构（一条主稿）、开场（冷开场引语卡）、招牌镜头（节目单被虚线截断 + 盖章）、镜头路线（录像 → 节目单 → 幻灯 + 翻牌 → 引语 → 节目单 → 规格卡 → 引语）、字幕（安静的字幕条）——五项不同。
 
 ## 镜头表
 
-| 口播（一句） | 画面：具体道具 / 事件 | 景别 | 运镜 | reads（观众依次看懂什么） | 上屏字（只放要“看”的） |
+| 口播（一句） | 画面：具体东西 / 事件 | 景别 | 运镜 | reads | 上屏字（只放要“看”的） |
 |---|---|---|---|---|---|
-| “AGI三年内就来。” | 纸白底，年份尺横在地面上，小人站在起点，头顶气泡 | 全 | 慢推 | 1. 一个人 2. 他说 AGI 三年 | AGI 三年内就来、3 年 |
-| 说完这句，这个博士生开始规划：读完博士、做博后、再申请教职。 | 小人搬起橙色积木，「博士 2 年」「博后」「教职」一块块排出去，一直排到尺子远端 | 全 | 横移跟着积木 | 1. 他的规划很长 | 博士 · 博后 · 教职、2026 → 2033+ |
-| 讲这事的Anthropic研究员说： | 深底，一扇窗里是讲者在斯坦福讲台的录像（静音） | 中 | 推 | 1. 谁说的 | Jascha Sohl-Dickstein · Anthropic、@Stanford HAI｜案例展示 |
-| 十年里，最大模型的训练算力，涨了约一千万倍。 | 讲者幻灯的算力图，2010–2025 的青线亮起；数字从 1 滚到 10,000,000 | 近 | 升 | 1. 线陡了 2. 一千万倍 | ×10,000,000、讲者幻灯 |
-| 他的意思是：脑子里一半信AGI要来， | 纸白底，一颗头的剪影分成两半：左半青色（旗），右半橙色（积木日程） | 中 | 静 | 1. 两半各想各的 | 相信 / 规划 |
-| 另一半也该信。 | 青色从左半边漫过中线，把右半边的积木日程冲散 | 中 | 推 | 1. 统一 | — |
-| 十到二十年后，学者这份工作会很不一样； | 回到年份尺，镜头拉远，尺子远端 10–20 年处起雾 | 全 | 拉 | 1. 远处看不清 | 10–20 年后、very different（幻灯原文） |
-| 你现在走的路，可能根本不存在。 | 青旗「AGI · 3 年」从天而降插在第 3 年，旗后的积木褪成虚线框（招牌，停 1.5 秒） | 全 | 震 | 1. 规划的后半段是空的 | may not even exist（幻灯原文） |
-| 更反直觉的是：稳妥的选项，其实并不稳妥。 | 尺子分成两条路：橙色的直路「稳」、青色的弯路；小人站在岔口 | 全 | 升（俯看） | 1. 两条路 | 稳 / 有意思 |
-| 大变动来了，谁都躲不开那份风险；选稳的，只是放弃了上限。 | 一朵灰云同时罩住两条路；两条路尽头各竖一根杆子，稳的那根矮，青的那根高 | 全 | 静 | 1. 风险两边都有 2. 稳的上限低 | 躲不掉的基线风险、上限 |
-| 所以他说：去做有意思的事，别只挑看起来安全的。 | 小人转身走上青色的弯路 | 中 | 跟 | 1. 他的建议 | Do the interesting thing |
-| 但有一件事，他劝你自己做：写作。 | 暖纸底，问答环节录像一闪（静音），一支笔落在纸上 | 中 | 推 | 1. 问答里的话 | Q&A |
-| 因为写作就是思考； | 笔沿着尺子的线写出“写作即思考”（手写体） | 近 | 跟着笔 | 1. 原话 | writing is thinking |
-| 把写作外包出去，你外包的是思考。 | 一只机械手伸进来想接笔，笔尖的字跟着一起被拖走——留下空白；镜头拉回年份尺（接第 0 帧） | 全 | 拉 | 1. 外包写作 = 外包思考 | — |
+| AGI 3年内就来。 | 录像压暗，引语卡：引号先落、三行推上，“3 years.” 下划线 | 中 | 慢推 | 1. 一句原话 2. 3 年 | I think we're going to have AGI in 3 years.、A VERY CAPABLE GRAD STUDENT |
+| 说完这句，这个博士生开始规划： | 引语卡缩到上方，眉题 HIS PLAN · A FEW MINUTES LATER | 全 | 静 | 1. 几分钟后 | HIS PLAN |
+| 读完博士、做博后、再申请教职。 | 节目单三行依次翻进（各一声钟琴）+ 扫光 | 全 | 静 | 1. 规划很长 | 01 读完博士 IN 2 YEARS / 02 做博后 / 03 申请教职 |
+| 讲这事的Anthropic研究员说： | 录像（灰阶）推近讲者；下三分之一条翻成「人物 PROFILE · Jascha Sohl-Dickstein · Anthropic」 | 中 | 推 | 1. 谁 | RESEARCHER · STANFORD PAI26 · JUNE 2026 |
+| 十年里，最大模型的训练算力，涨了约1000万倍。 | 硬切：讲者幻灯的算力图；翻牌板从 1 一格格翻成 10,000,000 × | 全 | 慢推 | 1. 一千万倍 | 10,000,000 ×、SPEECH · 04:43、来源 讲者幻灯 |
+| 他的意思是：脑子里一半信AGI要来， | 录像压暗，引语卡 "If you believe in one part of your brain …"，“one part” 下划线 | 中 | 慢推 | 1. 原话 | 原话、25:47 |
+| 另一半也该信。 | 下划线扫过 "other parts of your brain." | 中 | 慢推 | 1. 另一半 | — |
+| 十到二十年后，学者这份工作会很不一样； | 竖条擦除进新话题（职业 CAREER）；幻灯原文 "The job of an academic will be very different in 10–20 years." | 全 | 静 | 1. 10–20 年 | 原文 |
+| 你现在走的路， | 节目单回来，青色虚线「AGI · 3 YEARS」横穿 01 和 02 之间 | 全 | 静 | 1. 3 年在这 | AGI · 3 YEARS |
+| 可能根本不存在。 | 安静一拍，印章「可能不存在」砸下，02、03 褪灰、划掉（招牌） | 全 | 震 | 1. 后半段没了 | 可能不存在 MAY NOT EVEN EXIST |
+| 更反直觉的是：稳妥的选项，其实并不稳妥。 | 竖条擦除（风险 RISK）；规格卡：稳妥（橙）/ 有意思（青）两组；「并不安全」印章落在稳妥的风险条上 | 全 | 静 | 1. 两条路 2. 稳的不稳 | 两条路、稳妥、有意思、并不安全、SCHEMATIC / 示意图 |
+| 大变动来了，谁都躲不开那份风险； | 两组的“风险”条同时长到一样长（斜纹） | 全 | 静 | 1. 风险一样 | THERE IS AN UNAVOIDABLE BASELINE OF AGI RISK |
+| 选稳的，只是放弃了上限。 | “上限”条：稳妥短、有意思长 | 全 | 静 | 1. 上限不一样 | 上限 UPSIDE |
+| 所以他说：去做有意思的事，别只挑看起来安全的。 | 录像压暗，引语卡 "Do the interesting thing instead of the safe thing."；印章「上限最大的那条 BIGGEST UPSIDE」 | 中 | 慢推 | 1. 原话 2. 判断 | 原话、27:08 |
+| 但有一件事，他劝你自己做：写作。 | 竖条擦除（问答 Q&A）；问答录像（灰阶），角标 Q&A · 40:45 | 中 | 推 | 1. 问答环节 | Q&A · 40:45 |
+| 因为写作就是思考；把写作外包出去，你外包的是思考。 | 安静一拍后引语卡砸下："It's because writing is thinking. If you outsource your writing, you've outsourced your thinking."，两处下划线随口播扫过 | 中 | 慢推 | 1. 原话 | 原话 |
 
 ## 封面卡
 
 - 模板：冲突型（conflict，封面.md）
 - 封面标题：“AGI三年就来” / 他却规划读博、博后、教职
 - 辅助句：Anthropic 研究员的斯坦福演讲
-- 锚点：`phd.cover`——年份尺 + 三块积木 + 小人 + 青旗
-- 颜色：字 #111928 / 底 #FFFFFF / 强调 #3A9AAD（算力图的青 = AI 的新节奏）
+- 锚点：`phd.cover`——“AGI in 3 years.” + 规划节目单
+- 颜色：字 #F4F1E8 / 底 #121417 / 强调 #3A9AAD（算力图的青）
 
 ## 素材和出处
 
-- `public/images/tutorials/anthropic-phd-career-reset/compute-plot.jpg`（讲者 X 线程原图 `slide-compute-plot.jpg`，讲者授权复用 "Feel free to reuse them however you like."）→ who，标「讲者幻灯｜Our World in Data」。
-- `public/video/anthropic-phd-career-reset/speaker.mp4`（`clip-writing-is-thinking.mp4` 约 30–55 秒：讲者在讲台上回答问题，静音）→ who、write，右下「@Stanford HAI｜案例展示」。
-- 幻灯原文（`slide-career-grad-student.jpg`、`frame-career-slide-speaker.jpg`）在代码里重排："Your current career trajectory may not even exist."、"The job of an academic will be very different in 10-20 years."、"There is an unavoidable baseline of AGI risk"。
-- 口播里的原话：研究生对话（幻灯 + 演讲 25:25）、"the safe option is not actually the safe option … Do the interesting thing instead of the safe thing"（演讲 ~26:50）、"writing is thinking … outsourced your thinking"（Q&A ~40:45）。
-- 不用：腾讯头图（AI 处理）、「一夜清零」「读博无意义」、2030×10000、METR 图（第二个数字，片子里放不下）。
+- `public/images/tutorials/anthropic-phd-career-reset/compute-plot.jpg`（讲者 X 线程原图 `slide-compute-plot.jpg`，讲者授权复用 "Feel free to reuse them however you like."）→ who，来源标签「SPEAKER'S SLIDE · OUR WORLD IN DATA」。
+- `public/video/anthropic-phd-career-reset/speaker.mp4`（`clip-writing-is-thinking.mp4` 约 30–55 秒：讲者在讲台上，静音）→ 全片录像底，角标「视频 @Stanford HAI｜案例展示」。
+- 幻灯原文在代码里重排："I think we're going to have AGI in 3 years. […] finish my PhD in 2 years, get a postdoc, and apply for faculty jobs after that."、"The job of an academic will be very different in 10-20 years."、"There is an unavoidable baseline of AGI risk"、"Your current career trajectory may not even exist."、"Risk-reward career tradeoffs just sacrifice reward"。
+- 演讲原话（ASR 时间）："about 10 million fold … in the last decade"（04:43）、"If you believe in like one part of your brain … you should also [believe it in other parts of your brain]"（25:47）、"the safe option is not actually the safe option"（26:40）、"Do the interesting thing instead of the safe thing"（27:08）、Q&A "writing is thinking … you've outsourced your thinking"（40:45）。
+- 规格卡是示意（标 SCHEMATIC / 示意图）：讲者没给数值，只给“风险两边都有、稳的只放弃了上限”的判断。
+- 不用：腾讯头图（AI 处理）、「一夜清零」「读博无意义」、2030×10000、METR 图。
 - YouTube 链接、X 线程、腾讯报道写进发布包 README。
