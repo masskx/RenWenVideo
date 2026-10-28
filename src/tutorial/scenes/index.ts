@@ -40,6 +40,7 @@ import {anthropicS1IpoScenes} from './anthropic-s1-ipo';
 import {openaiEthFalseScenes} from './openai-eth-false';
 import {anthropicPhdCareerResetScenes} from './anthropic-phd-career-reset';
 import {aiMoreWorkBurnoutScenes} from './ai-more-work-burnout';
+import {suanliHubUnderseaDcScenes} from './suanli-hub-undersea-dc';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -86,4 +87,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...openaiEthFalseScenes,
   ...anthropicPhdCareerResetScenes,
   ...aiMoreWorkBurnoutScenes,
+  ...suanliHubUnderseaDcScenes,
 };
