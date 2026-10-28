@@ -1,0 +1,203 @@
+{
+  "id": "suanli-hub-undersea-dc",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1015,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/suanli-hub-undersea-dc/01-hook.mp3",
+      "audioMs": 4284,
+      "startFrame": 0,
+      "durationFrames": 137,
+      "cues": {
+        "a": 1814
+      },
+      "captions": [
+        {
+          "text": "一条帖子被看了190万次",
+          "startMs": 138,
+          "endMs": 1814
+        },
+        {
+          "text": "AI这么怕热",
+          "startMs": 1814,
+          "endMs": 2654
+        },
+        {
+          "text": "为什么不把机房沉到海底？",
+          "startMs": 2654,
+          "endMs": 4403
+        }
+      ]
+    },
+    {
+      "id": "natick",
+      "audioSrc": "audio/tutorials/suanli-hub-undersea-dc/02-natick.mp3",
+      "audioMs": 4650,
+      "startFrame": 137,
+      "durationFrames": 147,
+      "cues": {
+        "a": 2043,
+        "b": 3080
+      },
+      "captions": [
+        {
+          "text": "微软2018年真沉过一个",
+          "startMs": 138,
+          "endMs": 2043
+        },
+        {
+          "text": "两年后捞上来",
+          "startMs": 2043,
+          "endMs": 3080
+        },
+        {
+          "text": "裹满了海藻和藤壶",
+          "startMs": 3080,
+          "endMs": 4912
+        }
+      ]
+    },
+    {
+      "id": "china",
+      "audioSrc": "audio/tutorials/suanli-hub-undersea-dc/03-china.mp3",
+      "audioMs": 6870,
+      "startFrame": 284,
+      "durationFrames": 214,
+      "cues": {
+        "a": 1281,
+        "b": 2916,
+        "c": 5742
+      },
+      "captions": [
+        {
+          "text": "中国已经在用了",
+          "startMs": 138,
+          "endMs": 1281
+        },
+        {
+          "text": "海南陵水有海底智算舱",
+          "startMs": 1281,
+          "endMs": 2916
+        },
+        {
+          "text": "上海临港的海底数据中心",
+          "startMs": 2916,
+          "endMs": 4698
+        },
+        {
+          "text": "今年2月投产",
+          "startMs": 4698,
+          "endMs": 5742
+        },
+        {
+          "text": "用海水冷却",
+          "startMs": 5742,
+          "endMs": 7158
+        }
+      ]
+    },
+    {
+      "id": "west",
+      "audioSrc": "audio/tutorials/suanli-hub-undersea-dc/04-west.mp3",
+      "audioMs": 6269,
+      "startFrame": 498,
+      "durationFrames": 196,
+      "cues": {
+        "a": 1555,
+        "b": 3251,
+        "c": 4360
+      },
+      "captions": [
+        {
+          "text": "不下海的，就往西搬",
+          "startMs": 138,
+          "endMs": 1555
+        },
+        {
+          "text": "宁夏中卫在沙漠边上",
+          "startMs": 1555,
+          "endMs": 3251
+        },
+        {
+          "text": "年均8.8度",
+          "startMs": 3251,
+          "endMs": 4360
+        },
+        {
+          "text": "干冷的风直接吹服务器",
+          "startMs": 4360,
+          "endMs": 6533
+        }
+      ]
+    },
+    {
+      "id": "net",
+      "audioSrc": "audio/tutorials/suanli-hub-undersea-dc/05-net.mp3",
+      "audioMs": 7105,
+      "startFrame": 694,
+      "durationFrames": 221,
+      "cues": {
+        "a": 1391,
+        "b": 4227
+      },
+      "captions": [
+        {
+          "text": "搬这么远，会不会卡？",
+          "startMs": 138,
+          "endMs": 1391
+        },
+        {
+          "text": "发改委说",
+          "startMs": 1391,
+          "endMs": 2268
+        },
+        {
+          "text": "已建成145条干线光缆",
+          "startMs": 2268,
+          "endMs": 4227
+        },
+        {
+          "text": "各省到八大枢纽",
+          "startMs": 4227,
+          "endMs": 5471
+        },
+        {
+          "text": "时延都在20毫秒以内",
+          "startMs": 5471,
+          "endMs": 7393
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/suanli-hub-undersea-dc/06-end.mp3",
+      "audioMs": 3082,
+      "startFrame": 915,
+      "durationFrames": 100,
+      "cues": {
+        "a": 1129
+      },
+      "captions": [
+        {
+          "text": "那个问题的答案",
+          "startMs": 138,
+          "endMs": 1129
+        },
+        {
+          "text": "已经沉下去了",
+          "startMs": 1129,
+          "endMs": 2053
+        },
+        {
+          "text": "也搬进了沙漠",
+          "startMs": 2053,
+          "endMs": 3374
+        }
+      ]
+    }
+  ]
+}

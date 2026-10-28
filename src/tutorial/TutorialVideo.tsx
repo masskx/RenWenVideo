@@ -3,7 +3,7 @@ import {AbsoluteFill, Sequence, interpolate, staticFile, useCurrentFrame, useVid
 import {Audio} from '@remotion/media';
 import {Layout, Palette, blueprint, cinema, color, font, layoutOf, mono, palette, paper} from './theme';
 import {sceneRegistry} from './scenes';
-import {CaptionBar, CaptionCard} from './package';
+import {CaptionBar, CaptionCard, CaptionStrip} from './package';
 import {DepthField, GridFloor} from './space';
 import {Dino} from './ui';
 import {CoverRatio, SceneTiming, TimedCaption, Tutorial, TutorialProps} from './types';
@@ -337,6 +337,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
           : (look.header ?? true) && <Header theme={theme} title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />}
         {look.captions === 'card' && look.pk ? <CaptionCard captions={s.captions} k={look.pk} keywords={tutorial.keywords} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'bar' && look.pk ? <CaptionBar captions={s.captions} k={look.pk} keywords={tutorial.keywords} breaks={look.breaks} y={look.captionTop} />
+          : look.captions === 'strip' && look.pk ? <CaptionStrip captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : <Caption captions={s.captions} highlights={tutorial.highlights} pal={pal} />}
         <Sequence from={leadFrames} name={`${s.id}-voice`}><Audio src={staticFile(s.audioSrc)} /></Sequence>
         {events.filter((e) => e.at >= 0 && e.at < s.durationFrames).map((e, i) => (

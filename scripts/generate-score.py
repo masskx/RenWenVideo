@@ -3,7 +3,7 @@
 Usage:
   python scripts/generate-score.py <id> [--mood=tension] [--climax=<scene id>] [--seed=1] [--preview] [--use]
 
-Settings come from tutorials/<id>.json → "score": {"mood": …, "climax": <scene id>, "lifts": [scene ids], "seed": n, "key": <midi root>, "bpm": n,
+Settings come from tutorials/<id>.json → "score": {"mood": …, "climax": <scene id>, "climaxAt": <s into that scene, default 0>, "lifts": [scene ids], "seed": n, "key": <midi root>, "bpm": n,
 "silences": [{"scene": <id>, "at": <s into the scene>, "dur": <s>}]}
 (flags override them). Writes public/audio/tutorials/<id>/score.mp3; sets musicSrc to it when the film has no music yet (or
 with --use), and musicVolume / musicDuckDb when missing. --preview also writes qa/<id>/mix-preview.mp3: the narration placed on the
@@ -156,7 +156,7 @@ def compose(cfg, tl, opts):
     end_t = min(total, last_word_time(tl))
     climax_id = opts.get('climax')
     sc_by = {s['id']: s for s in tl['scenes']}
-    climax_t = sc_by[climax_id]['startFrame'] / fps if climax_id in sc_by else total * 0.62
+    climax_t = sc_by[climax_id]['startFrame'] / fps + float(opts.get('climaxAt', 0)) if climax_id in sc_by else total * 0.62  # climaxAt: s into the scene
     # stretch the tempo (±8 %) so the climax lands on a downbeat
     bpm = opts.get('bpm', mood['bpm'])
     bar = 4 * 60 / bpm

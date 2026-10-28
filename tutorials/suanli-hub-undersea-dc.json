@@ -1,0 +1,197 @@
+{
+ "id": "suanli-hub-undersea-dc",
+ "title": "AI这么怕热",
+ "subtitle": "为什么不把机房沉到海底？",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "series": "AI 新闻 · 算力",
+ "credit": "据央视新闻、发改委、新华网、Microsoft",
+ "source": "inputs/suanli-hub-undersea-dc/materials.md",
+ "maxSeconds": 40,
+ "score": {
+  "mood": "tension",
+  "bpm": 100,
+  "climax": "net",
+  "lifts": [
+   "china",
+   "west"
+  ],
+  "silences": [
+   {
+    "scene": "natick",
+    "at": 0,
+    "dur": 0.4
+   },
+   {
+    "scene": "net",
+    "at": 5.7,
+    "dur": 0.4
+   }
+  ],
+  "climaxAt": 6.1
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "strip",
+  "captionTop": 1330,
+  "grain": 2,
+  "pk": {
+   "bg": "#0B1015",
+   "panel": "#121A21",
+   "ink": "#F2F5F6",
+   "accent": "#F2913D",
+   "onAccent": "#0B1015",
+   "dim": "#A1A7A9",
+   "second": "#1798D4"
+  },
+  "breaks": {}
+ },
+ "highlights": [],
+ "cover": "hook",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "AI这么怕热",
+   "为什么不把机房沉到海底？"
+  ],
+  "support": "中国已经在用了",
+  "tag": "AI 新闻 · 算力",
+  "anchor": "dc.cover",
+  "colors": {
+   "bg": "#0B1015",
+   "text": "#F2F5F6",
+   "accent": "#F2913D",
+   "dim": "#A1A7A9"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 72,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 70,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 74,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "keywords": [
+  "190万次",
+  "沉到海底",
+  "2018年",
+  "藤壶",
+  "已经在用了",
+  "海底智算舱",
+  "今年2月",
+  "海水冷却",
+  "往西搬",
+  "沙漠边上",
+  "8.8度",
+  "干冷的风",
+  "会不会卡",
+  "145条",
+  "20毫秒",
+  "沉下去了",
+  "沙漠"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "dc.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "一条帖子被看了190万次：{a}AI这么怕热，为什么不把机房沉到海底？"
+  },
+  {
+   "id": "natick",
+   "visual": "dc.natick",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "微软2018年真沉过一个，{a}两年后捞上来，{b}裹满了海藻和藤壶。"
+  },
+  {
+   "id": "china",
+   "visual": "dc.china",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "中国已经在用了：{a}海南陵水有海底智算舱，{b}上海临港的海底数据中心，今年2月投产，{c}用海水冷却。"
+  },
+  {
+   "id": "west",
+   "visual": "dc.west",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "不下海的，就往西搬：{a}宁夏中卫在沙漠边上，{b}年均8.8度，{c}干冷的风直接吹服务器。"
+  },
+  {
+   "id": "net",
+   "visual": "dc.net",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "搬这么远，会不会卡？{a}发改委说：已建成145条干线光缆，{b}各省到八大枢纽，时延都在20毫秒以内。"
+  },
+  {
+   "id": "end",
+   "visual": "dc.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "那个问题的答案：{a}已经沉下去了，也搬进了沙漠。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/suanli-hub-undersea-dc/score.mp3",
+ "musicVolume": 0.124,
+ "musicDuckDb": 10
+}

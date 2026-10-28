@@ -278,6 +278,29 @@ export const CaptionCard: React.FC<{captions: TimedCaption[]; k: Pk; keywords?: 
     })}
   </div>;
 };
+/**
+ * The transcript strip (satellite-briefing §4, in 9:16): bottom left, a 2 px white rule over a dark plate that fades to
+ * the right, left-aligned, two lines at most (the template's one line does not fit a vertical frame), no keyword block —
+ * the accent belongs to the one reading on screen. The plate grows with the rule in 0.15 s.
+ */
+export const CaptionStrip: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number}> = ({captions, k, breaks = {}, y = 1330}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  if (!c) return null;
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 11.5);
+  const sz = Math.max(60, Math.min(70, Math.floor(820 / Math.max(...lines.map(units)))));
+  const p = clamp((ms - c.startMs) / 150);
+  return <div style={{position: 'absolute', left: 0, top: y, width: 1000}}>
+    <div style={{position: 'absolute', left: 0, top: 0, width: 960, height: lines.length * sz * 1.22 + 44, background: 'linear-gradient(90deg, rgba(5,8,11,0.82) 0, rgba(5,8,11,0.62) 55%, rgba(5,8,11,0) 100%)',
+      clipPath: `inset(0 ${(1 - p) * 100}% 0 0)`}} />
+    <div style={{position: 'absolute', left: L, top: 0, width: 700 * ease.outCubic(p), height: 2, background: k.ink}} />
+    <div style={{position: 'relative', paddingLeft: L, paddingTop: 20}}>
+      {lines.map((line, i) => <div key={i} style={{fontFamily: font, fontWeight: 900, fontSize: sz, lineHeight: 1.22, color: k.ink, whiteSpace: 'nowrap', opacity: clamp(p * 2 - i * 0.3),
+        textShadow: '0 2px 10px rgba(0,0,0,0.7)'}}>{line}</div>)}
+    </div>
+  </div>;
+};
 /** The quieter caption for templates without burned-in subtitles (news-package): one ink band under the strap. */
 export const CaptionBar: React.FC<{captions: TimedCaption[]; k: Pk; keywords?: string[]; breaks?: Record<string, string>; y?: number}> = ({captions, k, keywords = [], breaks = {}, y = 1400}) => {
   const frame = useCurrentFrame();

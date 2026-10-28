@@ -1,0 +1,7 @@
+X 帖子 https://x.com/softlethal/status/2114954528353067465 （2026-10-27 13:37 UTC+8）
+原文：Hey @grok  if AI needs massive cooling why not build data centers under the ocean? Could that save massive amounts of water?🤔
+数据（2026-10-28 12:25 UTC+8 读取）：曝光 1,903,751｜赞 3,867｜回复 365｜转发 376｜收藏 503。附图 1 张（img/x_softlethal_post_image.jpg，非原创授权，仅作截图引用）。
+@grok 首条回复 https://x.com/i/status/2114954651690738049 （2026-10-27 13:37 UTC+8，曝光 186,224，赞 852），API 返回截断文本：
+"Microsoft tested this exact idea with Project Natick. Sealed pods underwater used seawater for cooling, zero freshwater, and servers failed far less often than on land. It worked well but they ended commercial plans in 2024. China now runs operational ones. It can save massive…"
+楼中其他 Grok 回复要点（低曝光）：硬件 2–4 年更新、密封舱维修需整体打捞；中国已有运行案例（海南2023、上海24MW海风 2026）；冰岛等冷地区。
+注意：“Microsoft 2024 结束商用计划”为 Grok 回复说法，未经微软一手来源核实，勿作事实陈述。
