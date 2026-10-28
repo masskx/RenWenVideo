@@ -1,0 +1,247 @@
+{
+  "id": "anthropic-phd-career-reset",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1184,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/anthropic-phd-career-reset/01-hook.mp3",
+      "audioMs": 5825,
+      "startFrame": 0,
+      "durationFrames": 183,
+      "cues": {
+        "a": 1357,
+        "b": 3433,
+        "c": 4124,
+        "d": 4756
+      },
+      "captions": [
+        {
+          "text": "AGI 3年内就来",
+          "startMs": 138,
+          "endMs": 1357
+        },
+        {
+          "text": "说完这句，这个博士生开始规划",
+          "startMs": 1357,
+          "endMs": 3433
+        },
+        {
+          "text": "读完博士、做博后",
+          "startMs": 3433,
+          "endMs": 4756
+        },
+        {
+          "text": "再申请教职",
+          "startMs": 4756,
+          "endMs": 6062
+        }
+      ]
+    },
+    {
+      "id": "who",
+      "audioSrc": "audio/tutorials/anthropic-phd-career-reset/02-who.mp3",
+      "audioMs": 5433,
+      "startFrame": 183,
+      "durationFrames": 171,
+      "cues": {
+        "a": 1890,
+        "b": 4104
+      },
+      "captions": [
+        {
+          "text": "讲这事的Anthropic研究员说",
+          "startMs": 138,
+          "endMs": 1890
+        },
+        {
+          "text": "十年里，最大模型的训练算力",
+          "startMs": 1890,
+          "endMs": 4104
+        },
+        {
+          "text": "涨了约1000万倍",
+          "startMs": 4104,
+          "endMs": 5695
+        }
+      ]
+    },
+    {
+      "id": "brain",
+      "audioSrc": "audio/tutorials/anthropic-phd-career-reset/03-brain.mp3",
+      "audioMs": 3866,
+      "startFrame": 354,
+      "durationFrames": 124,
+      "cues": {
+        "a": 900,
+        "b": 2528
+      },
+      "captions": [
+        {
+          "text": "他的意思是",
+          "startMs": 138,
+          "endMs": 900
+        },
+        {
+          "text": "脑子里一半信AGI要来",
+          "startMs": 900,
+          "endMs": 2528
+        },
+        {
+          "text": "另一半也该信",
+          "startMs": 2528,
+          "endMs": 4135
+        }
+      ]
+    },
+    {
+      "id": "path",
+      "audioSrc": "audio/tutorials/anthropic-phd-career-reset/04-path.mp3",
+      "audioMs": 4911,
+      "startFrame": 478,
+      "durationFrames": 155,
+      "cues": {
+        "a": 862,
+        "b": 2732,
+        "c": 3673
+      },
+      "captions": [
+        {
+          "text": "十到二十年后",
+          "startMs": 138,
+          "endMs": 862
+        },
+        {
+          "text": "学者这份工作会很不一样",
+          "startMs": 862,
+          "endMs": 2732
+        },
+        {
+          "text": "你现在走的路",
+          "startMs": 2732,
+          "endMs": 3673
+        },
+        {
+          "text": "可能根本不存在",
+          "startMs": 3673,
+          "endMs": 5186
+        }
+      ]
+    },
+    {
+      "id": "safe",
+      "audioSrc": "audio/tutorials/anthropic-phd-career-reset/05-safe.mp3",
+      "audioMs": 7471,
+      "startFrame": 633,
+      "durationFrames": 232,
+      "cues": {
+        "a": 1357,
+        "b": 3250,
+        "c": 5613
+      },
+      "captions": [
+        {
+          "text": "更反直觉的是",
+          "startMs": 138,
+          "endMs": 1357
+        },
+        {
+          "text": "稳妥的选项",
+          "startMs": 1357,
+          "endMs": 2107
+        },
+        {
+          "text": "其实并不稳妥",
+          "startMs": 2107,
+          "endMs": 3250
+        },
+        {
+          "text": "大变动来了",
+          "startMs": 3250,
+          "endMs": 4053
+        },
+        {
+          "text": "谁都躲不开那份风险",
+          "startMs": 4053,
+          "endMs": 5613
+        },
+        {
+          "text": "选稳的，只是放弃了上限",
+          "startMs": 5613,
+          "endMs": 7743
+        }
+      ]
+    },
+    {
+      "id": "do",
+      "audioSrc": "audio/tutorials/anthropic-phd-career-reset/06-do.mp3",
+      "audioMs": 3239,
+      "startFrame": 865,
+      "durationFrames": 105,
+      "cues": {
+        "a": 748,
+        "b": 1747
+      },
+      "captions": [
+        {
+          "text": "所以他说：去做有意思的事",
+          "startMs": 138,
+          "endMs": 1747
+        },
+        {
+          "text": "别只挑看起来安全的",
+          "startMs": 1747,
+          "endMs": 3500
+        }
+      ]
+    },
+    {
+      "id": "write",
+      "audioSrc": "audio/tutorials/anthropic-phd-career-reset/07-write.mp3",
+      "audioMs": 6531,
+      "startFrame": 970,
+      "durationFrames": 214,
+      "cues": {
+        "a": 1949,
+        "b": 2494,
+        "c": 4158,
+        "d": 5321
+      },
+      "captions": [
+        {
+          "text": "但有一件事",
+          "startMs": 138,
+          "endMs": 862
+        },
+        {
+          "text": "他劝你自己做",
+          "startMs": 862,
+          "endMs": 1949
+        },
+        {
+          "text": "写作",
+          "startMs": 1949,
+          "endMs": 2494
+        },
+        {
+          "text": "因为写作就是思考",
+          "startMs": 2494,
+          "endMs": 4158
+        },
+        {
+          "text": "把写作外包出去",
+          "startMs": 4158,
+          "endMs": 5321
+        },
+        {
+          "text": "你外包的是思考",
+          "startMs": 5321,
+          "endMs": 6817
+        }
+      ]
+    }
+  ]
+}

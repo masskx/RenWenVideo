@@ -1,0 +1,196 @@
+{
+  "id": "ai-more-work-burnout",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1038,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/ai-more-work-burnout/01-hook.mp3",
+      "audioMs": 7053,
+      "startFrame": 0,
+      "durationFrames": 220,
+      "cues": {
+        "a": 1281,
+        "b": 2263,
+        "c": 4767
+      },
+      "captions": [
+        {
+          "text": "AI说好让他少干活",
+          "startMs": 138,
+          "endMs": 1281
+        },
+        {
+          "text": "结果今年8月",
+          "startMs": 1281,
+          "endMs": 2263
+        },
+        {
+          "text": "他在GitHub上留下了427次贡献",
+          "startMs": 2263,
+          "endMs": 4767
+        },
+        {
+          "text": "这是他2019年以来最多的一个月",
+          "startMs": 4767,
+          "endMs": 7405
+        }
+      ]
+    },
+    {
+      "id": "vp",
+      "audioSrc": "audio/tutorials/ai-more-work-burnout/02-vp.mp3",
+      "audioMs": 3762,
+      "startFrame": 220,
+      "durationFrames": 121,
+      "cues": {
+        "a": 671,
+        "b": 2104
+      },
+      "captions": [
+        {
+          "text": "更怪的是，他现在是技术副总裁",
+          "startMs": 138,
+          "endMs": 2104
+        },
+        {
+          "text": "按理说写代码最少",
+          "startMs": 2104,
+          "endMs": 4080
+        }
+      ]
+    },
+    {
+      "id": "why",
+      "audioSrc": "audio/tutorials/ai-more-work-burnout/03-why.mp3",
+      "audioMs": 8829,
+      "startFrame": 341,
+      "durationFrames": 273,
+      "cues": {
+        "a": 1586,
+        "b": 3215,
+        "c": 4594,
+        "d": 6065
+      },
+      "captions": [
+        {
+          "text": "他说累的不是哪件事更难",
+          "startMs": 138,
+          "endMs": 1586
+        },
+        {
+          "text": "而是同时开着好几个agent",
+          "startMs": 1586,
+          "endMs": 3215
+        },
+        {
+          "text": "每个都不是一直需要你",
+          "startMs": 3215,
+          "endMs": 4594
+        },
+        {
+          "text": "但每个都“有时”需要你",
+          "startMs": 4594,
+          "endMs": 6065
+        },
+        {
+          "text": "每回一个",
+          "startMs": 6065,
+          "endMs": 6736
+        },
+        {
+          "text": "就要把另一个问题重新装进脑子",
+          "startMs": 6736,
+          "endMs": 9159
+        }
+      ]
+    },
+    {
+      "id": "cheap",
+      "audioSrc": "audio/tutorials/ai-more-work-burnout/04-cheap.mp3",
+      "audioMs": 4075,
+      "startFrame": 614,
+      "durationFrames": 130,
+      "cues": {
+        "a": 1167,
+        "b": 2719
+      },
+      "captions": [
+        {
+          "text": "写代码变便宜了",
+          "startMs": 138,
+          "endMs": 1167
+        },
+        {
+          "text": "他就修以前懒得修的bug",
+          "startMs": 1167,
+          "endMs": 2719
+        },
+        {
+          "text": "接以前不会接的项目",
+          "startMs": 2719,
+          "endMs": 4379
+        }
+      ]
+    },
+    {
+      "id": "burst",
+      "audioSrc": "audio/tutorials/ai-more-work-burnout/05-burst.mp3",
+      "audioMs": 4807,
+      "startFrame": 744,
+      "durationFrames": 152,
+      "cues": {
+        "a": 1931,
+        "b": 3627
+      },
+      "captions": [
+        {
+          "text": "新模型一来，他就猛干几周",
+          "startMs": 138,
+          "endMs": 1931
+        },
+        {
+          "text": "然后累到不想再开一个agent",
+          "startMs": 1931,
+          "endMs": 3627
+        },
+        {
+          "text": "今年已经三轮",
+          "startMs": 3627,
+          "endMs": 5025
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/ai-more-work-burnout/06-end.mp3",
+      "audioMs": 4127,
+      "startFrame": 896,
+      "durationFrames": 142,
+      "cues": {
+        "a": 1014,
+        "b": 2610
+      },
+      "captions": [
+        {
+          "text": "他不反对AI",
+          "startMs": 138,
+          "endMs": 1014
+        },
+        {
+          "text": "只是发现：能做的更多",
+          "startMs": 1014,
+          "endMs": 2610
+        },
+        {
+          "text": "总会变成做得更多",
+          "startMs": 2610,
+          "endMs": 4408
+        }
+      ]
+    }
+  ]
+}

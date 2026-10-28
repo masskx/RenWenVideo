@@ -1,0 +1,150 @@
+{
+ "id": "ai-more-work-burnout",
+ "title": "AI说好让他少干活",
+ "subtitle": "结果8月一个月427次贡献",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "series": "AI 新闻 · 工作",
+ "credit": "据 Orestis Ioannou 2026-10-27",
+ "source": "inputs/ai-more-work-burnout/materials.md",
+ "score": {
+  "mood": "tension",
+  "climax": "why",
+  "lifts": [
+   "burst"
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "burn.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "AI说好让他少干活，{a}结果今年8月，{b}他在GitHub上留下了427次贡献。{c}这是他2019年以来最多的一个月。"
+  },
+  {
+   "id": "vp",
+   "visual": "burn.vp",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "更怪的是，{a}他现在是技术副总裁，{b}按理说写代码最少。"
+  },
+  {
+   "id": "why",
+   "visual": "burn.why",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "他说累的不是哪件事更难，{a}而是同时开着好几个agent：{b}每个都不是一直需要你，{c}但每个都“有时”需要你。{d}每回一个，就要把另一个问题重新装进脑子。"
+  },
+  {
+   "id": "cheap",
+   "visual": "burn.cheap",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "写代码变便宜了，{a}他就修以前懒得修的bug，{b}接以前不会接的项目。"
+  },
+  {
+   "id": "burst",
+   "visual": "burn.burst",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "新模型一来，他就猛干几周，{a}然后累到不想再开一个agent。{b}今年已经三轮。"
+  },
+  {
+   "id": "end",
+   "visual": "burn.end",
+   "step": 0,
+   "pace": "brisk",
+   "tailMs": 500,
+   "narration": "他不反对AI，{a}只是发现：能做的更多，{b}总会变成做得更多。"
+  }
+ ],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "AI说好让他少干活",
+   "结果8月427次贡献"
+  ],
+  "support": "一位技术副总裁的 GitHub 数据",
+  "tag": "AI 新闻 · 工作",
+  "anchor": "burn.cover",
+  "colors": {
+   "bg": "#111827",
+   "text": "#FFFFFF",
+   "accent": "#F59E0B",
+   "dim": "#9CA3AF"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 92,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 84,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 92,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "musicSrc": "audio/tutorials/ai-more-work-burnout/score.mp3",
+ "musicVolume": 0.123,
+ "musicDuckDb": 10
+}

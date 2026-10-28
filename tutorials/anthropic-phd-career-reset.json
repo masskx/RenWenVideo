@@ -1,0 +1,158 @@
+{
+ "id": "anthropic-phd-career-reset",
+ "title": "信AGI三年就来，却按老路规划",
+ "subtitle": "Anthropic研究员给博士生的建议",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "series": "AI 新闻 · 观点",
+ "credit": "Jascha Sohl-Dickstein · 斯坦福 PAI26",
+ "source": "inputs/anthropic-phd-career-reset/materials.md",
+ "score": {
+  "mood": "wonder",
+  "climax": "path",
+  "lifts": [
+   "safe",
+   "write"
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "phd.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "AGI 3年内就来。{a}说完这句，这个博士生开始规划：{b}读完博士、{c}做博后、{d}再申请教职。"
+  },
+  {
+   "id": "who",
+   "visual": "phd.who",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "讲这事的Anthropic研究员说：{a}十年里，最大模型的训练算力，{b}涨了约1000万倍。"
+  },
+  {
+   "id": "brain",
+   "visual": "phd.brain",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "他的意思是：{a}脑子里一半信AGI要来，{b}另一半也该信。"
+  },
+  {
+   "id": "path",
+   "visual": "phd.path",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "十到二十年后，{a}学者这份工作会很不一样；{b}你现在走的路，{c}可能根本不存在。"
+  },
+  {
+   "id": "safe",
+   "visual": "phd.safe",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "更反直觉的是：{a}稳妥的选项，其实并不稳妥。{b}大变动来了，谁都躲不开那份风险；{c}选稳的，只是放弃了上限。"
+  },
+  {
+   "id": "do",
+   "visual": "phd.do",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "所以他说：{a}去做有意思的事，{b}别只挑看起来安全的。"
+  },
+  {
+   "id": "write",
+   "visual": "phd.write",
+   "step": 0,
+   "pace": "brisk",
+   "tailMs": 500,
+   "narration": "但有一件事，他劝你自己做：{a}写作。{b}因为写作就是思考；{c}把写作外包出去，{d}你外包的是思考。"
+  }
+ ],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "“AGI三年就来”",
+   "他却规划读博、博后、教职"
+  ],
+  "support": "Anthropic 研究员的斯坦福演讲",
+  "tag": "AI 新闻 · 观点",
+  "anchor": "phd.cover",
+  "colors": {
+   "bg": "#FFFFFF",
+   "text": "#111928",
+   "accent": "#2F9DAD",
+   "dim": "#6B7280"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 80,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "musicSrc": "audio/tutorials/anthropic-phd-career-reset/score.mp3",
+ "musicVolume": 0.124,
+ "musicDuckDb": 10
+}
