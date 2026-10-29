@@ -363,6 +363,13 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
   </AbsoluteFill></LayoutCtx.Provider>;
 };
 
+/** The cover card's spotlight: white on a light ground; on a dark ground white turns to grey haze, so use the accent, faint. */
+const coverGlow = (bg: string, accent: string) => {
+  const hex = (c: string, i: number) => parseInt(c.replace('#', '').slice(i, i + 2), 16);
+  const lum = (0.2126 * hex(bg, 0) + 0.7152 * hex(bg, 2) + 0.0722 * hex(bg, 4)) / 255;
+  return lum > 0.35 ? 'rgba(255,255,255,0.55)' : `rgba(${hex(accent, 0)},${hex(accent, 2)},${hex(accent, 4)},0.22)`;
+};
+
 /** Static Douyin cover (封面): the scene named by `tutorial.cover` (default: the first) at its settled state. */
 export const TutorialCover: React.FC<TutorialProps> = ({tutorial, timing}) => {
   const coverId = tutorial.cover ?? tutorial.scenes[0].id;
@@ -406,7 +413,7 @@ export const TutorialCoverCard: React.FC<TutorialProps & {ratio: CoverRatio}> = 
   const [ax, ay, as] = lay.anchor;
   const grid = themeOf(tutorial) === 'blueprint' ? blueprint.grid : pal.bg;
   return <AbsoluteFill style={{background: pal.bg, overflow: 'hidden'}}>
-    {card.colors ? <AbsoluteFill style={{background: `radial-gradient(ellipse 85% 55% at 50% 36%, rgba(255,255,255,0.55), transparent 72%), ${card.colors.bg}`}} />
+    {card.colors ? <AbsoluteFill style={{background: `radial-gradient(ellipse 85% 55% at 50% 36%, ${coverGlow(card.colors.bg, card.colors.accent)}, transparent 72%), ${card.colors.bg}`}} />
       : themeOf(tutorial) === 'cinema' ? <CinemaBackground t={0} /> : <svg width={width} height={height} style={{position: 'absolute', inset: 0}}>
       {Array.from({length: Math.ceil(width / 40) + 1}, (_, i) => <line key={`v${i}`} x1={i * 40} x2={i * 40} y1={0} y2={height} stroke={grid} strokeWidth={i % 5 === 0 ? 2 : 1} />)}
       {Array.from({length: Math.ceil(height / 40) + 1}, (_, i) => <line key={`h${i}`} x1={0} x2={width} y1={i * 40} y2={i * 40} stroke={grid} strokeWidth={i % 5 === 0 ? 2 : 1} />)}
