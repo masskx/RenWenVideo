@@ -13,6 +13,10 @@ export const hand = `"RW Hand", "LXGW WenKai", ${font}`;
 export const cond = `"RW Cond", ${font}`;
 /** Datelines, sources, axis labels (IBM Plex Mono 500, OFL). */
 export const plex = `"RW Plex", "DejaVu Sans Mono", monospace`;
+/** Keynote numerals and Latin names (Inter Display 600, OFL; lemo dark-keynote §4). CJK falls through to 思源黑体. */
+export const inter = `"RW Inter", ${font}`;
+/** Keynote labels, filenames and status text (JetBrains Mono 500; lemo dark-keynote §4). */
+export const jet = `"RW Jet", "RW Plex", monospace`;
 
 const FACES: [string, string, string][] = [
   ['RW Sans', 'fonts/NotoSansSC-VF.otf', '100 900'], // fallback for the system 思源黑体 (theme.ts `font`)
@@ -22,6 +26,8 @@ const FACES: [string, string, string][] = [
   ['RW Cond', 'fonts/BarlowCondensed-800.woff2', '800'],
   ['RW Cond', 'fonts/BarlowCondensed-600.woff2', '600'],
   ['RW Plex', 'fonts/IBMPlexMono-500.woff2', '500'],
+  ['RW Inter', 'fonts/InterDisplay-SemiBold.otf', '600'],
+  ['RW Jet', 'fonts/JetBrainsMono-Medium.ttf', '500'],
 ];
 
 if (typeof document !== 'undefined' && typeof FontFace !== 'undefined') {

@@ -1,0 +1,229 @@
+{
+  "id": "llm-same-prompt-diff-output",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1185,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/llm-same-prompt-diff-output/01-hook.mp3",
+      "audioMs": 4284,
+      "startFrame": 0,
+      "durationFrames": 137,
+      "cues": {
+        "a": 1624,
+        "b": 2718
+      },
+      "captions": [
+        {
+          "text": "同一句话问AI一千遍",
+          "startMs": 138,
+          "endMs": 1624
+        },
+        {
+          "text": "随机性关到0",
+          "startMs": 1624,
+          "endMs": 2718
+        },
+        {
+          "text": "还是出了80种答案",
+          "startMs": 2718,
+          "endMs": 4598
+        }
+      ]
+    },
+    {
+      "id": "fork",
+      "audioSrc": "audio/tutorials/llm-same-prompt-diff-output/02-fork.mp3",
+      "audioMs": 7105,
+      "startFrame": 137,
+      "durationFrames": 221,
+      "cues": {
+        "a": 1624,
+        "b": 2884,
+        "c": 5547
+      },
+      "captions": [
+        {
+          "text": "前102个词都一样",
+          "startMs": 138,
+          "endMs": 1624
+        },
+        {
+          "text": "第103个分岔",
+          "startMs": 1624,
+          "endMs": 2884
+        },
+        {
+          "text": "992次说费曼生在“皇后区”",
+          "startMs": 2884,
+          "endMs": 5547
+        },
+        {
+          "text": "8次说“纽约市”",
+          "startMs": 5547,
+          "endMs": 7418
+        }
+      ]
+    },
+    {
+      "id": "culprit",
+      "audioSrc": "audio/tutorials/llm-same-prompt-diff-output/03-culprit.mp3",
+      "audioMs": 6034,
+      "startFrame": 358,
+      "durationFrames": 189,
+      "cues": {
+        "p": 1890,
+        "a": 3228,
+        "b": 4416
+      },
+      "captions": [
+        {
+          "text": "常见的解释是GPU并行",
+          "startMs": 138,
+          "endMs": 1890
+        },
+        {
+          "text": "谁先算完说不准",
+          "startMs": 1890,
+          "endMs": 3228
+        },
+        {
+          "text": "但真正的主因是",
+          "startMs": 3228,
+          "endMs": 4416
+        },
+        {
+          "text": "同一时刻，别人也在问",
+          "startMs": 4416,
+          "endMs": 6310
+        }
+      ]
+    },
+    {
+      "id": "batch",
+      "audioSrc": "audio/tutorials/llm-same-prompt-diff-output/04-batch.mp3",
+      "audioMs": 6870,
+      "startFrame": 547,
+      "durationFrames": 214,
+      "cues": {
+        "a": 2957,
+        "b": 5041
+      },
+      "captions": [
+        {
+          "text": "服务器把很多人的请求拼成一批来算",
+          "startMs": 138,
+          "endMs": 2957
+        },
+        {
+          "text": "这一批有多大",
+          "startMs": 2957,
+          "endMs": 3939
+        },
+        {
+          "text": "每次都不一样",
+          "startMs": 3939,
+          "endMs": 5041
+        },
+        {
+          "text": "批一变，加法的顺序就变",
+          "startMs": 5041,
+          "endMs": 7101
+        }
+      ]
+    },
+    {
+      "id": "float",
+      "audioSrc": "audio/tutorials/llm-same-prompt-diff-output/05-float.mp3",
+      "audioMs": 5016,
+      "startFrame": 761,
+      "durationFrames": 158,
+      "cues": {
+        "a": 1129,
+        "c": 1964,
+        "b": 3158
+      },
+      "captions": [
+        {
+          "text": "而电脑里的小数",
+          "startMs": 138,
+          "endMs": 1129
+        },
+        {
+          "text": "换个顺序加",
+          "startMs": 1129,
+          "endMs": 1964
+        },
+        {
+          "text": "结果会差一点点",
+          "startMs": 1964,
+          "endMs": 3158
+        },
+        {
+          "text": "够把第103个词换掉",
+          "startMs": 3158,
+          "endMs": 5309
+        }
+      ]
+    },
+    {
+      "id": "fix",
+      "audioSrc": "audio/tutorials/llm-same-prompt-diff-output/06-fix.mp3",
+      "audioMs": 4676,
+      "startFrame": 919,
+      "durationFrames": 148,
+      "cues": {
+        "a": 2386,
+        "b": 3624
+      },
+      "captions": [
+        {
+          "text": "他们改成批多大都按同一个顺序算",
+          "startMs": 138,
+          "endMs": 2386
+        },
+        {
+          "text": "一千次，一模一样",
+          "startMs": 2386,
+          "endMs": 3624
+        },
+        {
+          "text": "只是慢了一截",
+          "startMs": 3624,
+          "endMs": 4898
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/llm-same-prompt-diff-output/07-end.mp3",
+      "audioMs": 3657,
+      "startFrame": 1067,
+      "durationFrames": 118,
+      "cues": {
+        "a": 1014,
+        "b": 1914
+      },
+      "captions": [
+        {
+          "text": "所以答案变了",
+          "startMs": 138,
+          "endMs": 1014
+        },
+        {
+          "text": "可能不怪你问的",
+          "startMs": 1014,
+          "endMs": 1914
+        },
+        {
+          "text": "怪那一秒，还有谁在问",
+          "startMs": 1914,
+          "endMs": 3889
+        }
+      ]
+    }
+  ]
+}

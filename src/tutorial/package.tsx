@@ -9,7 +9,7 @@ import React from 'react';
 import {Img, OffthreadVideo, staticFile, useCurrentFrame} from 'remotion';
 import {clamp, ease} from '../fx';
 import {font} from './theme';
-import {cond, plex} from './fonts';
+import {cond, hand, plex} from './fonts';
 import {TimedCaption} from './types';
 
 export type Pk = {bg: string; panel: string; ink: string; accent: string; onAccent: string; dim: string; second?: string};
@@ -317,5 +317,48 @@ export const CaptionBar: React.FC<{captions: TimedCaption[]; k: Pk; keywords?: s
         {parts ? <>{parts[0]}<span style={{color: k.accent}}>{kw}</span>{parts.slice(1).join(kw as string)}</> : line}
       </div>;
     })}
+  </div>;
+};
+
+/**
+ * The toast caption (dark-keynote §4, in 9:16): captions are a UI component — a dark translucent pill centred at the
+ * bottom, 1 px light border, soft shadow, a small accent "speaking" dot; it rises 14 px and fades in over 0.16 s. Two
+ * lines at most, 60 px (our phone floor; the template's 40 px is a 1080p size).
+ */
+export const CaptionToast: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number}> = ({captions, k, breaks = {}, y = 1360}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  if (!c) return null;
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 12.5);
+  const sz = Math.max(60, Math.min(64, Math.floor(820 / Math.max(...lines.map(units)))));
+  const p = ease.outCubic(clamp((ms - c.startMs) / 160));
+  const pulse = 0.55 + 0.45 * Math.abs(Math.sin((ms / 1000) * Math.PI * 2.2));
+  return <div style={{position: 'absolute', left: 0, width: W, top: y + (1 - p) * 14, display: 'flex', justifyContent: 'center', opacity: p}}>
+    <div style={{position: 'relative', maxWidth: 940, padding: '18px 40px 20px 64px', borderRadius: 999, background: 'rgba(10,18,36,0.78)', border: '1px solid rgba(255,255,255,0.14)',
+      boxShadow: '0 14px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08)', backdropFilter: 'blur(8px)'}}>
+      <div style={{position: 'absolute', left: 30, top: '50%', width: 14, height: 14, marginTop: -7, borderRadius: 7, background: k.accent, opacity: pulse, boxShadow: `0 0 12px ${k.accent}`}} />
+      {lines.map((line, i) => <div key={i} style={{fontFamily: font, fontWeight: 800, fontSize: sz, lineHeight: 1.2, color: k.ink, whiteSpace: 'nowrap', textAlign: 'center'}}>{line}</div>)}
+    </div>
+  </div>;
+};
+/**
+ * The board label caption (whiteboard §4, in 9:16): an off-white rounded label (~90 %), a handwriting face (霞鹜文楷),
+ * dark ink, a short accent marker dash before the line; clause by clause, ≤ 2 lines; enters with a 0.12 s settle.
+ */
+export const CaptionLabel: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number}> = ({captions, k, breaks = {}, y = 1400}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  if (!c) return null;
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 12.5);
+  const sz = Math.max(60, Math.min(66, Math.floor(840 / Math.max(...lines.map(units)))));
+  const p = ease.outBack(clamp((ms - c.startMs) / 120), 1.4);
+  return <div style={{position: 'absolute', left: 0, width: W, top: y, display: 'flex', justifyContent: 'center', opacity: clamp(p * 2)}}>
+    <div style={{position: 'relative', maxWidth: 960, padding: '14px 34px 18px 82px', borderRadius: 22, background: 'rgba(251,250,245,0.92)', boxShadow: '0 6px 18px rgba(30,30,25,0.18)',
+      transform: `scale(${0.96 + 0.04 * p}) rotate(-0.4deg)`}}>
+      <div style={{position: 'absolute', left: 28, top: 22 + sz * 0.42, width: 34, height: 9, borderRadius: 5, background: k.accent, transform: 'rotate(-4deg)'}} />
+      {lines.map((line, i) => <div key={i} style={{fontFamily: hand, fontWeight: 500, fontSize: sz, lineHeight: 1.22, color: k.ink, whiteSpace: 'nowrap'}}>{line}</div>)}
+    </div>
   </div>;
 };
