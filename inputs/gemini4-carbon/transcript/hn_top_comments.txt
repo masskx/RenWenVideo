@@ -1,0 +1,68 @@
+HN Gemini 4 Carbon | 760 points | 625 comments | fetched 2026-10-29 Asia/Taipei
+https://news.ycombinator.com/item?id=50276792
+
+--- 827a (2026-10-28T19:41:37 UTC) https://news.ycombinator.com/item?id=50279731
+At this point if a Google PM handed me $100 and said "go figure out how to issue a prompt to Gemini 4 Argon" I'm only ~30% sure I could figure out how. The Gemini app in my phone only has 3.8 Pro as the latest model; it does say "Ultra" in the bottom left, but I really don't think I'm on the Ultra plan. How I would sign up for that, on a Workspace account, is beyond our brightest minds.
+Its sad watching them try to keep up when they want nothing more than to crumble under the weight of their own bureaucracy, and at this point I'm not sure there's any hope for them.
+
+--- RajuChacha108 (2026-10-28T19:28:49 UTC) https://news.ycombinator.com/item?id=50279518
+It is pretty clear at this point that the frontier models need only handful of tiered models.
+1. Ultra - The best and the most expensive for showing off and government. 
+2. Pro - Almost best but substantially cheaper for most productive people. 
+3. Flash - Workhorse for everyone. 
+4. Lite - For the unwashed masses and peasants.
+There is no need to attach anything to these labels. In fact industry could simply standardize these namings like SEMVER.
+There could be an internal representation which could give specific number of the model but these companies should move on to be more like Chrome. No one knows or cares which version of chrome they are on.
+For a lot of systems the real underlying version would matter because of reliability. That can be provided to those power users.
+
+--- solarpunk_enthu (2026-10-28T17:37:21 UTC) https://news.ycombinator.com/item?id=50277575
+Given how quickly the field is moving, showing benchmarks without releasing the model is quite meaningless. If they decide to release it in one month, there will probably be a stronger competition out there. And the benchmarks won't look as good.
+
+--- gavinray (2026-10-28T17:19:44 UTC) https://news.ycombinator.com/item?id=50277130
+Benchmark scores recolored for readability:
+https://i.imgur.com/IDFGuJU.jpeg
+
+--- PreciousH (2026-10-28T17:21:54 UTC) https://news.ycombinator.com/item?id=50277193
+Just remembered i haven't tried argon yet, they announced argon then and delayed releasing it, didn't even know they've made it publically available. I don't understand why google thinks this is an awesome strategy in a market where there are other really good models.
+
+--- MrOrelliOReilly (2026-10-28T17:44:26 UTC) https://news.ycombinator.com/item?id=50277735
+In this age of constant change, I am grateful that at least I can still rely on Google for confusing, ever-changing product names.
+
+--- zarzavat (2026-10-28T17:28:47 UTC) https://news.ycombinator.com/item?id=50277362
+Perhaps someone should tell the Gemini team about these models. When I open gemini.google.com I see 3.6 Flash and 3.1 Pro.
+
+--- eldenring (2026-10-28T17:07:16 UTC) https://news.ycombinator.com/item?id=50276885
+> Reducing shortcuts and loophole exploitation: With Carbon, we further mitigated shortcut attempts in training while ensuring high-quality coding performance. Carbon reduced successful cheating on Terminal-Bench 4.0 to 0.0%, with attempts to cheat dropping to 0.4% — all while improving overall accuracy.
+This is probably the single most important thing to make frontier models usable right now, so I'm happy there seems to be some progress. This was the previous Gemini's biggest problem IMO
+
+--- cvladan (2026-10-28T17:53:08 UTC) https://news.ycombinator.com/item?id=50277952
+I'm really starting to get annoyed by the fact that all companies are timing all their decisions according to the stock market.
+Doing this two hours before today's earnings report.
+It's probably going to be a terrible earnings call in terms of capital expenditure, cash flow and new borrowing.
+
+--- orbital-decay (2026-10-28T18:16:45 UTC) https://news.ycombinator.com/item?id=50278417
+>Resisting prompt injection: While Argon previously led the Gray Swan’s Indirect Prompt Injection (IPI) Benchmark in prompt injection resistance with a very low 0.7% attack success rate, Carbon achieves 0.0% — resisting every evaluated attack attempt.
+"We patched every vulnerability we knew". Meanwhile, prompt-injecting Argon (or any other model) is still trivial, and Carbon won't be an exception. Because the attacker is not limited to things Google has evaluated.
+AI shops are blind to anything that's not a metric.
+
+--- mattlondon (2026-10-28T17:44:26 UTC) https://news.ycombinator.com/item?id=50277734
+Sooo... Is Carbon 4.1? Or is it different to Argon 4 somehow?  Different model? Or point update?
+Is Argon "pro" and Carbon "ultra"?
+Is Argon obsolete now? Does Carbon replace it or live alongside of it?
+Very confusing naming!
+
+--- javierhonduco (2026-10-28T17:39:19 UTC) https://news.ycombinator.com/item?id=50277623
+Would love to know from a Googler if this is the #1 model that Google engineers use for coding or if they rely on 3rd parties.
+
+--- dbgrman (2026-10-28T17:29:19 UTC) https://news.ycombinator.com/item?id=50277378
+> Building on Gemini 4 Argon, which was launched two weeks ago, Carbon illustrates the pace at which we’re pushing the frontier forward. Our researchers and models are working hand in hand to advance capabilities faster, while strengthening our safeguards in tandem.
+Is it a variant of Argon? A different model? The next version? It seems like this is a separate class (like Anthropic's Mythos).
+anyway, its needlessly confusing.
+
+--- LewisOrton (2026-10-28T17:25:33 UTC) https://news.ycombinator.com/item?id=50277268
+tbh i might be one of the few who actually likes gemini since 3. it wasnt as good at coding compared to other two but it always wrote the best, and talked the best, providing very good conversation experience. it works incredibly well in my customer service agent harness and my users have been very satisfied. Now Gemini 4 is incredible, but the same old issue: a powerful model, in the worst official harness
+deepmind should get rid of those antigravity ppl they're a joke and sabotaging the model's reputation.
+
+--- Ryan5453 (2026-10-28T17:11:11 UTC) https://news.ycombinator.com/item?id=50276952
+Of course the naming is confusing. With way OAI & Ant are naming models, I assumed that this would be a tier above Argon, but it's the same price?
+
