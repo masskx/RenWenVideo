@@ -1,0 +1,182 @@
+{
+ "id": "llm-same-prompt-diff-output",
+ "title": "同一句话问AI一千遍",
+ "subtitle": "还是80种答案",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "series": "AI 原理 · 大模型",
+ "credit": "据 Thinking Machines Lab（2025.09）",
+ "source": "inputs/llm-same-prompt-diff-output/materials.md",
+ "maxSeconds": 52,
+ "score": {
+  "mood": "playful",
+  "climax": "fix",
+  "lifts": [
+   "culprit"
+  ],
+  "silences": [
+   {
+    "scene": "culprit",
+    "at": 3.0,
+    "dur": 0.3
+   },
+   {
+    "scene": "fix",
+    "at": 0,
+    "dur": 0.3
+   }
+  ],
+  "climaxAt": 3.0
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "label",
+  "captionTop": 1400,
+  "pk": {
+   "bg": "#F7F6F1",
+   "panel": "#EFEDE6",
+   "ink": "#23262C",
+   "accent": "#F78427",
+   "onAccent": "#FFFFFF",
+   "dim": "#6B6E75",
+   "second": "#009DE4"
+  },
+  "breaks": {}
+ },
+ "highlights": [],
+ "cover": "hook",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "同一句话问AI一千遍",
+   "还是80种答案"
+  ],
+  "support": "温度关到 0 也没用",
+  "tag": "AI 原理 · 大模型",
+  "anchor": "ld.cover",
+  "colors": {
+   "bg": "#F7F6F1",
+   "text": "#23262C",
+   "accent": "#F78427",
+   "dim": "#6B6E75"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 72,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 70,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 74,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "keywords": [],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "ld.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "同一句话问AI一千遍，{a}随机性关到0，{b}还是出了80种答案。"
+  },
+  {
+   "id": "fork",
+   "visual": "ld.fork",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "前102个词都一样，{a}第103个分岔：{b}992次说费曼生在“皇后区”，{c}8次说“纽约市”。"
+  },
+  {
+   "id": "culprit",
+   "visual": "ld.culprit",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "常见的解释是GPU并行、{p}谁先算完说不准。{a}但真正的主因是：{b}同一时刻，别人也在问。"
+  },
+  {
+   "id": "batch",
+   "visual": "ld.batch",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "服务器把很多人的请求拼成一批来算，{a}这一批有多大，每次都不一样；{b}批一变，加法的顺序就变。"
+  },
+  {
+   "id": "float",
+   "visual": "ld.float",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "而电脑里的小数，{a}换个顺序加，{c}结果会差一点点，{b}够把第103个词换掉。"
+  },
+  {
+   "id": "fix",
+   "visual": "ld.fix",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "他们改成批多大都按同一个顺序算：{a}一千次，一模一样，{b}只是慢了一截。"
+  },
+  {
+   "id": "end",
+   "visual": "ld.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "所以答案变了，{a}可能不怪你问的，{b}怪那一秒，还有谁在问。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/llm-same-prompt-diff-output/score.mp3",
+ "musicVolume": 0.144,
+ "musicDuckDb": 10
+}

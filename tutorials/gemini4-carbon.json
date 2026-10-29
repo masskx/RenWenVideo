@@ -1,0 +1,182 @@
+{
+ "id": "gemini4-carbon",
+ "title": "AI智能榜新第一",
+ "subtitle": "可你现在用不了",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "series": "AI 新闻 · 新模型",
+ "credit": "据 Google、Artificial Analysis",
+ "source": "inputs/gemini4-carbon/materials.md",
+ "maxSeconds": 50,
+ "score": {
+  "mood": "wonder",
+  "climax": "access",
+  "lifts": [
+   "cyber",
+   "notall"
+  ],
+  "silences": [
+   {
+    "scene": "access",
+    "at": 0,
+    "dur": 0.4
+   },
+   {
+    "scene": "end",
+    "at": 0,
+    "dur": 0.3
+   }
+  ],
+  "climaxAt": 1.0
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "toast",
+  "captionTop": 1360,
+  "pk": {
+   "bg": "#050B1A",
+   "panel": "#13223F",
+   "ink": "#EEF3FA",
+   "accent": "#4EABEB",
+   "onAccent": "#050B1A",
+   "dim": "#A9B6CC"
+  },
+  "breaks": {}
+ },
+ "highlights": [],
+ "cover": "hook",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "AI智能榜新第一",
+   "可你现在用不了"
+  ],
+  "support": "Gemini 4 Carbon · 59 分",
+  "tag": "AI 新闻 · 新模型",
+  "anchor": "gc.cover",
+  "colors": {
+   "bg": "#050B1A",
+   "text": "#EEF3FA",
+   "accent": "#4EABEB",
+   "dim": "#A9B6CC"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 72,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 70,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 74,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "keywords": [],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "gc.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "Google新模型拿下AI智能榜第一，{n}59分，{a}可你现在用不了。"
+  },
+  {
+   "id": "rank",
+   "visual": "gc.rank",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "第二名Claude Opus 5.5，{x}58分；{a}GPT-6 Astra，{y}57分。"
+  },
+  {
+   "id": "cyber",
+   "visual": "gc.cyber",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "它最强的一项，是网络安全：{a}在真实软件里找漏洞，{n}88.2%；{b}写补丁修好，{m}71%。{c}这些都是Google自己公布的成绩。"
+  },
+  {
+   "id": "access",
+   "visual": "gc.access",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "Google说，{b}先只给一部分网安防御方，{g}护栏还在调；{a}开发者和普通用户：{d}尽快，没给日期。"
+  },
+  {
+   "id": "price",
+   "visual": "gc.price",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "首发价每百万token，{b}输入2美元、{o}输出10美元，{a}之后是4美元和20美元。"
+  },
+  {
+   "id": "notall",
+   "visual": "gc.notall",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "它也不是样样第一：{a}编程Agent榜，{b}Claude Opus 5.5 62分，{c}它59。"
+  },
+  {
+   "id": "end",
+   "visual": "gc.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "第一名的分数已经公开了，{a}第一名的模型，还没有。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/gemini4-carbon/score.mp3",
+ "musicVolume": 0.132,
+ "musicDuckDb": 10
+}

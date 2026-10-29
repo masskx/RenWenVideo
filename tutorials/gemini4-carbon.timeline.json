@@ -1,0 +1,248 @@
+{
+  "id": "gemini4-carbon",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1194,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/gemini4-carbon/01-hook.mp3",
+      "audioMs": 4023,
+      "startFrame": 0,
+      "durationFrames": 129,
+      "cues": {
+        "n": 2195,
+        "a": 2942
+      },
+      "captions": [
+        {
+          "text": "Google新模型拿下AI智能榜第一",
+          "startMs": 138,
+          "endMs": 2195
+        },
+        {
+          "text": "59分，可你现在用不了",
+          "startMs": 2195,
+          "endMs": 4330
+        }
+      ]
+    },
+    {
+      "id": "rank",
+      "audioSrc": "audio/tutorials/gemini4-carbon/02-rank.mp3",
+      "audioMs": 4833,
+      "startFrame": 129,
+      "durationFrames": 153,
+      "cues": {
+        "x": 1872,
+        "a": 2680,
+        "y": 3819
+      },
+      "captions": [
+        {
+          "text": "第二名Claude Opus 5.5",
+          "startMs": 138,
+          "endMs": 1872
+        },
+        {
+          "text": "58分",
+          "startMs": 1872,
+          "endMs": 2680
+        },
+        {
+          "text": "GPT-6 Astra",
+          "startMs": 2680,
+          "endMs": 3819
+        },
+        {
+          "text": "57分",
+          "startMs": 3819,
+          "endMs": 5056
+        }
+      ]
+    },
+    {
+      "id": "cyber",
+      "audioSrc": "audio/tutorials/gemini4-carbon/03-cyber.mp3",
+      "audioMs": 8986,
+      "startFrame": 282,
+      "durationFrames": 278,
+      "cues": {
+        "a": 2169,
+        "n": 3753,
+        "b": 5126,
+        "m": 5977,
+        "c": 6987
+      },
+      "captions": [
+        {
+          "text": "它最强的一项",
+          "startMs": 138,
+          "endMs": 938
+        },
+        {
+          "text": "是网络安全",
+          "startMs": 938,
+          "endMs": 2169
+        },
+        {
+          "text": "在真实软件里找漏洞",
+          "startMs": 2169,
+          "endMs": 3753
+        },
+        {
+          "text": "88.2%",
+          "startMs": 3753,
+          "endMs": 5126
+        },
+        {
+          "text": "写补丁修好",
+          "startMs": 5126,
+          "endMs": 5977
+        },
+        {
+          "text": "71%",
+          "startMs": 5977,
+          "endMs": 6987
+        },
+        {
+          "text": "这些都是Google自己公布的成绩",
+          "startMs": 6987,
+          "endMs": 9255
+        }
+      ]
+    },
+    {
+      "id": "access",
+      "audioSrc": "audio/tutorials/gemini4-carbon/04-access.mp3",
+      "audioMs": 5956,
+      "startFrame": 560,
+      "durationFrames": 187,
+      "cues": {
+        "b": 595,
+        "g": 2231,
+        "a": 3288,
+        "d": 4505
+      },
+      "captions": [
+        {
+          "text": "Google说",
+          "startMs": 138,
+          "endMs": 595
+        },
+        {
+          "text": "先只给一部分网安防御方",
+          "startMs": 595,
+          "endMs": 2231
+        },
+        {
+          "text": "护栏还在调",
+          "startMs": 2231,
+          "endMs": 3288
+        },
+        {
+          "text": "开发者和普通用户",
+          "startMs": 3288,
+          "endMs": 4505
+        },
+        {
+          "text": "尽快，没给日期",
+          "startMs": 4505,
+          "endMs": 6203
+        }
+      ]
+    },
+    {
+      "id": "price",
+      "audioSrc": "audio/tutorials/gemini4-carbon/05-price.mp3",
+      "audioMs": 5669,
+      "startFrame": 747,
+      "durationFrames": 178,
+      "cues": {
+        "b": 1624,
+        "o": 2644,
+        "a": 3575
+      },
+      "captions": [
+        {
+          "text": "首发价每百万token",
+          "startMs": 138,
+          "endMs": 1624
+        },
+        {
+          "text": "输入2美元、输出10美元",
+          "startMs": 1624,
+          "endMs": 3575
+        },
+        {
+          "text": "之后是4美元和20美元",
+          "startMs": 3575,
+          "endMs": 5994
+        }
+      ]
+    },
+    {
+      "id": "notall",
+      "audioSrc": "audio/tutorials/gemini4-carbon/06-notall.mp3",
+      "audioMs": 5433,
+      "startFrame": 925,
+      "durationFrames": 171,
+      "cues": {
+        "a": 1465,
+        "b": 2227,
+        "c": 4459
+      },
+      "captions": [
+        {
+          "text": "它也不是样样第一",
+          "startMs": 138,
+          "endMs": 1465
+        },
+        {
+          "text": "编程Agent榜",
+          "startMs": 1465,
+          "endMs": 2227
+        },
+        {
+          "text": "Claude Opus 5.5 62分",
+          "startMs": 2227,
+          "endMs": 4459
+        },
+        {
+          "text": "它59",
+          "startMs": 4459,
+          "endMs": 5677
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/gemini4-carbon/07-end.mp3",
+      "audioMs": 3004,
+      "startFrame": 1096,
+      "durationFrames": 98,
+      "cues": {
+        "a": 1433
+      },
+      "captions": [
+        {
+          "text": "第一名的分数已经公开了",
+          "startMs": 138,
+          "endMs": 1433
+        },
+        {
+          "text": "第一名的模型",
+          "startMs": 1433,
+          "endMs": 2222
+        },
+        {
+          "text": "还没有",
+          "startMs": 2222,
+          "endMs": 3255
+        }
+      ]
+    }
+  ]
+}
