@@ -408,8 +408,8 @@ const GHOSTS: {d: string; c: string}[] = Array.from({length: 26}, (_, i) => {
   const pts: P[] = kind === 0 ? loop(x, y, 60 + rnd(i) * 80, 40 + rnd(i + 1) * 50, i) : kind === 1 ? [[x, y], [x + 200 + rnd(i) * 200, y + (rnd(i + 2) - 0.5) * 120]] : [[x, y], [x + 60, y - 50], [x + 120, y + 10], [x + 180, y - 40]];
   return {d: dOf(wobble(pts, i + 50)), c: i % 4 === 0 ? '#9FB3C8' : '#A8A8A3'};
 });
-const Board: React.FC<{F: number}> = ({F}) => {
-  const cam = camOf(F);
+const Board: React.FC<{F: number; camera?: Cam}> = ({F, camera}) => {
+  const cam = camera ?? camOf(F);
   const vis = items.filter((it) => it.t0 <= F);
   const card = cardPos(PROMPT, F);
   const sheenX = ((-cam.x * 0.35 * cam.z) % 2400) + 600;
@@ -480,7 +480,7 @@ const boardScene = (id: string): Scene => {
 
 /** Cover anchor (880 × 800): the prompt card, the fan of answers and the ringed 80. */
 const Cover: Scene = () => <div style={{position: 'absolute', left: 0, top: 0, width: 880, height: 800, overflow: 'hidden', background: '#F7F6F1'}}>
-  <div style={{position: 'absolute', left: -100, top: -420, width: W, height: 1920}}><Board F={h.aB + 40} /></div>
+  <div style={{position: 'absolute', left: -100, top: -420, width: W, height: 1920}}><Board F={h.aB + 40} camera={{x: 540, y: 975, z: 0.8}} /></div>
 </div>;
 
 export const llmSamePromptScenes: Record<string, Scene> = {
