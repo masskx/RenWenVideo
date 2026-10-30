@@ -37,7 +37,7 @@ export type Tutorial = {
     space?: 'plain' | 'grid' | 'depth' | 'both'; frame?: 'full' | 'douyin' | 'channels'; header?: boolean | 'chapters' | 'label'; tour?: boolean; particles?: boolean; mascot?: boolean;
     cuts?: {big?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch' | 'cut')[]; small?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch' | 'cut')[]};
     /** Subtitle design: 'stroke' (default, centred outline), or a template's own — 'card' (caption-news caption card), 'bar' (news-package: one line under the strap). src/tutorial/package.tsx */
-    captions?: 'stroke' | 'card' | 'bar' | 'strip' | 'toast' | 'label';
+    captions?: 'stroke' | 'card' | 'bar' | 'strip' | 'toast' | 'label' | 'tele' | 'swiss';
     /** The film's package palette (one accent, from its material) for 'card' / 'bar' captions. */
     pk?: {bg: string; panel: string; ink: string; accent: string; onAccent: string; dim: string; second?: string};
     /** Caption card / bar position (top, px) when the film needs it elsewhere. */
