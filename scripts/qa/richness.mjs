@@ -5,6 +5,9 @@
 // Writes <outdir>/richness.png (one cell every 2.5 s) and richness.txt. Thresholds, from the reference
 // blind test: adjacent-cell mean diff >= 10 with no "almost unchanged" pair (< 4) passes; > 2 s without
 // motion (frame vs 0.1 s earlier, diff <= 0.3) gets a warning. See docs/video-craft/动效与画面变化.md.
+// Frozen time (motion-video-kit quality bar, docs/video-craft/学习/motion-video-kit.md): every still stretch > 0.6 s outside
+// the last second is listed with its start, and the total is reported per 30 s (target ≤ ~1 s). A rest the storyboard
+// planned (高潮停留, a held climax) is fine — onetake: rests make the bursts land; the list is for the ones nobody planned.
 import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
@@ -41,9 +44,13 @@ const diff = (p, q) => { let s = 0; for (let k = 0; k < FS; k += 1) if (!masked(
 const MOVE = 0.3, FLAT = 4, RICH = 10;
 let moving = 0, run = 0, longest = 0, longestAt = 0;
 const lag = Math.max(1, Math.round(fps / 10));
-for (let i = lag; i < n; i += 1) {
-  if (diff(frame(i), frame(i - lag)) > MOVE) { moving += 1; run = 0; }
-  else if ((run += 1) > longest) { longest = run; longestAt = (i - run) / fps; }
+const holds = []; // [start s, length s] of still stretches > 0.6 s
+for (let i = lag; i <= n; i += 1) {
+  const still = i < n && diff(frame(i), frame(i - lag)) <= MOVE;
+  if (still) { if ((run += 1) > longest) { longest = run; longestAt = (i - run) / fps; } continue; }
+  if (run / fps > 0.6) holds.push([(i - run) / fps, run / fps]);
+  if (i < n) moving += 1;
+  run = 0;
 }
 const cells = [];
 for (let t = 0; t < dur - 0.05; t += opt.every) cells.push(t);
@@ -64,6 +71,10 @@ out(`相邻格变化：平均 ${avg.toFixed(1)}（去掉开场第 1 对：${rest
 out(`在动的帧：${(moving / (n - lag) * 100).toFixed(0)}%；最长静止：${(longest / fps).toFixed(2)} 秒（从 ${longestAt.toFixed(2)} 秒起）`);
 out(flat === 0 && avg >= RICH ? `判定：过（平均 ≥ ${RICH}，没有几乎没变的格）` : `判定：不过——在标「几乎没变」的地方补变化（新东西进场、推近拉开、换色），平均要 ≥ ${RICH}`);
 if (longest / fps > 2) out('提醒：有超过 2 秒的静止——加次要动作（飘动、闪烁、粒子、慢推）');
+const body = holds.filter(([t]) => t < dur - 1);
+const frozen = body.reduce((sum, [, d]) => sum + d, 0);
+out(`冻结时间（静止 > 0.6 秒，最后 1 秒不算）：共 ${frozen.toFixed(1)} 秒，每 30 秒 ${(frozen / dur * 30).toFixed(1)} 秒（目标 ≤ 约 1 秒）${body.length ? '：' + body.map(([t, d]) => `${t.toFixed(1)} 秒起 ${d.toFixed(1)} 秒`).join('、') : ''}`);
+if (frozen / dur * 30 > 1.2) out('提醒：冻结时间偏多——对照分镜：写了“停”的（高潮停留）留着，其余的补动作或剪短');
 const cols = 8, rows = Math.ceil(cells.length / cols), png = path.join(outdir, 'richness.png');
 execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', opt.mp4, '-vf', `fps=1/${opt.every}:round=near,scale=216:-1,tile=${cols}x${rows}:padding=6:color=white`, '-frames:v', '1', png]);
 fs.writeFileSync(path.join(outdir, 'richness.txt'), `${lines.join('\n')}\n`);
