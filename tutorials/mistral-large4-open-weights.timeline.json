@@ -1,0 +1,253 @@
+{
+  "id": "mistral-large4-open-weights",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1205,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/mistral-large4-open-weights/01-hook.mp3",
+      "audioMs": 5329,
+      "startFrame": 0,
+      "durationFrames": 168,
+      "cues": {
+        "a": 3064,
+        "b": 3590,
+        "c": 4372
+      },
+      "captions": [
+        {
+          "text": "Mistral新模型",
+          "startMs": 138,
+          "endMs": 1205
+        },
+        {
+          "text": "自称开源编码第一",
+          "startMs": 1205,
+          "endMs": 3064
+        },
+        {
+          "text": "41分",
+          "startMs": 3064,
+          "endMs": 3590
+        },
+        {
+          "text": "第三方一测",
+          "startMs": 3590,
+          "endMs": 4372
+        },
+        {
+          "text": "只有25",
+          "startMs": 4372,
+          "endMs": 5610
+        }
+      ]
+    },
+    {
+      "id": "official",
+      "audioSrc": "audio/tutorials/mistral-large4-open-weights/02-official.mp3",
+      "audioMs": 5956,
+      "startFrame": 168,
+      "durationFrames": 187,
+      "cues": {
+        "a": 1205,
+        "b": 2286,
+        "c": 2966,
+        "d": 5076
+      },
+      "captions": [
+        {
+          "text": "这是它自己发的图",
+          "startMs": 138,
+          "endMs": 1205
+        },
+        {
+          "text": "Terminal-Bench",
+          "startMs": 1205,
+          "endMs": 2286
+        },
+        {
+          "text": "它41，GLM-5.3是40",
+          "startMs": 2286,
+          "endMs": 5076
+        },
+        {
+          "text": "多一分",
+          "startMs": 5076,
+          "endMs": 6129
+        }
+      ]
+    },
+    {
+      "id": "third",
+      "audioSrc": "audio/tutorials/mistral-large4-open-weights/03-third.mp3",
+      "audioMs": 6348,
+      "startFrame": 355,
+      "durationFrames": 198,
+      "cues": {
+        "a": 2438,
+        "b": 3243,
+        "c": 5599
+      },
+      "captions": [
+        {
+          "text": "换第三方Artificial Analysis来测",
+          "startMs": 138,
+          "endMs": 2438
+        },
+        {
+          "text": "它25",
+          "startMs": 2438,
+          "endMs": 3243
+        },
+        {
+          "text": "GLM-5.3开低档推理",
+          "startMs": 3243,
+          "endMs": 5599
+        },
+        {
+          "text": "35",
+          "startMs": 5599,
+          "endMs": 6612
+        }
+      ]
+    },
+    {
+      "id": "frontier",
+      "audioSrc": "audio/tutorials/mistral-large4-open-weights/04-frontier.mp3",
+      "audioMs": 6191,
+      "startFrame": 553,
+      "durationFrames": 194,
+      "cues": {
+        "a": 1395,
+        "b": 2519,
+        "c": 3656,
+        "d": 4453
+      },
+      "captions": [
+        {
+          "text": "另一项FrontierCode",
+          "startMs": 138,
+          "endMs": 1395
+        },
+        {
+          "text": "官方19.7，第三方15",
+          "startMs": 1395,
+          "endMs": 3656
+        },
+        {
+          "text": "差在哪没说",
+          "startMs": 3656,
+          "endMs": 4453
+        },
+        {
+          "text": "可能是设置或版本不同",
+          "startMs": 4453,
+          "endMs": 6457
+        }
+      ]
+    },
+    {
+      "id": "real",
+      "audioSrc": "audio/tutorials/mistral-large4-open-weights/05-real.mp3",
+      "audioMs": 6922,
+      "startFrame": 747,
+      "durationFrames": 216,
+      "cues": {
+        "a": 1281,
+        "b": 3469,
+        "c": 5620
+      },
+      "captions": [
+        {
+          "text": "但有两件事是实的",
+          "startMs": 138,
+          "endMs": 1281
+        },
+        {
+          "text": "权重放出来了",
+          "startMs": 1281,
+          "endMs": 2309
+        },
+        {
+          "text": "约一万亿参数",
+          "startMs": 2309,
+          "endMs": 3469
+        },
+        {
+          "text": "每百万token",
+          "startMs": 3469,
+          "endMs": 4225
+        },
+        {
+          "text": "输入0.7美元",
+          "startMs": 4225,
+          "endMs": 5620
+        },
+        {
+          "text": "输出2.1美元",
+          "startMs": 5620,
+          "endMs": 7241
+        }
+      ]
+    },
+    {
+      "id": "license",
+      "audioSrc": "audio/tutorials/mistral-large4-open-weights/06-license.mp3",
+      "audioMs": 5433,
+      "startFrame": 963,
+      "durationFrames": 171,
+      "cues": {
+        "a": 1510,
+        "b": 2297,
+        "c": 3643
+      },
+      "captions": [
+        {
+          "text": "只是别急着叫它开源",
+          "startMs": 138,
+          "endMs": 1510
+        },
+        {
+          "text": "按它的许可",
+          "startMs": 1510,
+          "endMs": 2297
+        },
+        {
+          "text": "做模型服务的公司",
+          "startMs": 2297,
+          "endMs": 3643
+        },
+        {
+          "text": "商用前要另签授权",
+          "startMs": 3643,
+          "endMs": 5669
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/mistral-large4-open-weights/07-end.mp3",
+      "audioMs": 2116,
+      "startFrame": 1134,
+      "durationFrames": 71,
+      "cues": {
+        "a": 862
+      },
+      "captions": [
+        {
+          "text": "下次看跑分",
+          "startMs": 138,
+          "endMs": 862
+        },
+        {
+          "text": "先看是谁测的",
+          "startMs": 862,
+          "endMs": 2371
+        }
+      ]
+    }
+  ]
+}

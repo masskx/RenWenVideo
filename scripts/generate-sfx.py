@@ -137,6 +137,37 @@ SOUNDS = {
 }
 
 
+def marker():
+    """Telestrator pen on glass (lemo telestrator §8): 2-5 kHz band-passed noise with a fast flutter, ~0.42 s."""
+    t = t_axis(0.42)
+    x = rng.standard_normal(len(t))
+    x = highpass(lowpass(x, 5000), 2000)
+    flutter = 0.6 + 0.4 * np.sin(2 * np.pi * 38 * t) ** 2
+    return x * flutter * env(len(t), 0.03, 0.12, 1.5)
+
+
+def shutter():
+    """Freeze-frame camera shutter: two short clicks 45 ms apart over a dry noise burst."""
+    n = int(SR * 0.16)
+    x = np.zeros(n)
+    for at, g in ((0.0, 1.0), (0.045, 0.75)):
+        i = int(at * SR)
+        k = int(SR * 0.012)
+        x[i:i + k] += g * highpass(rng.standard_normal(k), 1800) * np.exp(-np.arange(k) / (SR * 0.003))
+    return x
+
+
+def clack():
+    """Letterpress clack (lemo swiss-motion §7): a dry, close wooden knock — a low body plus a short bright transient."""
+    t = t_axis(0.12)
+    body = np.sin(2 * np.pi * 190 * t) * np.exp(-t / 0.025)
+    click = highpass(rng.standard_normal(len(t)), 2500) * np.exp(-t / 0.004)
+    return 0.8 * body + 0.6 * click
+
+
+SOUNDS.update({"marker": marker, "shutter": shutter, "clack": clack})
+
+
 def write(path, x):
     x = norm(x)
     fade = int(SR * 0.004)

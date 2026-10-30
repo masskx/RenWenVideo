@@ -1,0 +1,202 @@
+{
+  "id": "huashu-motion-1d95",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 960,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/huashu-motion-1d95/01-hook.mp3",
+      "audioMs": 4284,
+      "startFrame": 0,
+      "durationFrames": 137,
+      "cues": {
+        "a": 2005,
+        "b": 2698
+      },
+      "captions": [
+        {
+          "text": "一支带配乐的22秒宣传片",
+          "startMs": 138,
+          "endMs": 2005
+        },
+        {
+          "text": "作者说，只花了一块九毛五",
+          "startMs": 2005,
+          "endMs": 4579
+        }
+      ]
+    },
+    {
+      "id": "ledger",
+      "audioSrc": "audio/tutorials/huashu-motion-1d95/02-ledger.mp3",
+      "audioMs": 4885,
+      "startFrame": 137,
+      "durationFrames": 155,
+      "cues": {
+        "a": 2450,
+        "b": 3540
+      },
+      "captions": [
+        {
+          "text": "模型换成DeepSeek V4.1 Flash",
+          "startMs": 138,
+          "endMs": 2450
+        },
+        {
+          "text": "提了三轮意见",
+          "startMs": 2450,
+          "endMs": 3540
+        },
+        {
+          "text": "前后不到半小时",
+          "startMs": 3540,
+          "endMs": 5154
+        }
+      ]
+    },
+    {
+      "id": "cache",
+      "audioSrc": "audio/tutorials/huashu-motion-1d95/03-cache.mp3",
+      "audioMs": 5068,
+      "startFrame": 292,
+      "durationFrames": 160,
+      "cues": {
+        "a": 824,
+        "b": 2757,
+        "c": 3878
+      },
+      "captions": [
+        {
+          "text": "便宜在哪：缓存命中率99.4%",
+          "startMs": 138,
+          "endMs": 2757
+        },
+        {
+          "text": "配乐在本机生成",
+          "startMs": 2757,
+          "endMs": 3878
+        },
+        {
+          "text": "不调收费接口",
+          "startMs": 3878,
+          "endMs": 5346
+        }
+      ]
+    },
+    {
+      "id": "skill",
+      "audioSrc": "audio/tutorials/huashu-motion-1d95/04-skill.mp3",
+      "audioMs": 5982,
+      "startFrame": 452,
+      "durationFrames": 187,
+      "cues": {
+        "a": 2094,
+        "b": 3678,
+        "c": 4692
+      },
+      "captions": [
+        {
+          "text": "统一的配色",
+          "startMs": 138,
+          "endMs": 900
+        },
+        {
+          "text": "贯穿全片的圆点",
+          "startMs": 900,
+          "endMs": 2094
+        },
+        {
+          "text": "卡在124拍的配乐",
+          "startMs": 2094,
+          "endMs": 3678
+        },
+        {
+          "text": "作者一句没提",
+          "startMs": 3678,
+          "endMs": 4692
+        },
+        {
+          "text": "是skill带出来的",
+          "startMs": 4692,
+          "endMs": 6151
+        }
+      ]
+    },
+    {
+      "id": "edit",
+      "audioSrc": "audio/tutorials/huashu-motion-1d95/05-edit.mp3",
+      "audioMs": 3422,
+      "startFrame": 639,
+      "durationFrames": 111,
+      "cues": {
+        "a": 824,
+        "b": 2398
+      },
+      "captions": [
+        {
+          "text": "哪里不满意，点一下画面写意见",
+          "startMs": 138,
+          "endMs": 2398
+        },
+        {
+          "text": "只改那一处",
+          "startMs": 2398,
+          "endMs": 3670
+        }
+      ]
+    },
+    {
+      "id": "caveat",
+      "audioSrc": "audio/tutorials/huashu-motion-1d95/06-caveat.mp3",
+      "audioMs": 2900,
+      "startFrame": 750,
+      "durationFrames": 95,
+      "cues": {
+        "a": 1014,
+        "b": 1704
+      },
+      "captions": [
+        {
+          "text": "但作者也写明",
+          "startMs": 138,
+          "endMs": 1014
+        },
+        {
+          "text": "换个模型，品味真的不一样",
+          "startMs": 1014,
+          "endMs": 3204
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/huashu-motion-1d95/07-end.mp3",
+      "audioMs": 3553,
+      "startFrame": 845,
+      "durationFrames": 115,
+      "cues": {
+        "a": 2049
+      },
+      "captions": [
+        {
+          "text": "一块九毛五",
+          "startMs": 138,
+          "endMs": 900
+        },
+        {
+          "text": "买到的是方法",
+          "startMs": 900,
+          "endMs": 2049
+        },
+        {
+          "text": "品味，不在账单上",
+          "startMs": 2049,
+          "endMs": 3819
+        }
+      ]
+    }
+  ]
+}

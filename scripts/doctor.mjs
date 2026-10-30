@@ -24,7 +24,8 @@ check('必需', 'MiniMax 配音密钥 MINIMAX_API_KEY（默认音色 MashuaiDouy
 check('可选', '豆包配音密钥 DOUBAO_API_KEY / DOUBAO_VOICE_ZH（旧音色，重配旧片时用；只看有没有）', process.env.DOUBAO_API_KEY && process.env.DOUBAO_VOICE_ZH, '在环境的 secrets / .env 里设置（docs/video-craft/配音.md）；不要贴进对话或提交');
 check('可选', '生图 OPENAI_API_KEY（缺素材时的辅助）', process.env.OPENAI_API_KEY, '需要生图时再设');
 check('可选', '网页渲染用的 Chromium（scripts/page-render.mjs）', fs.existsSync(process.env.PAGE_CHROME || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'), 'PAGE_CHROME=<chrome 路径>');
-check('必需', '仓库字体 public/fonts（思源黑体 / 宋体 / 霞鹜文楷）', ['NotoSansSC-VF.otf', 'NotoSansSC-900.otf', 'NotoSerifSC-Black.otf', 'LXGWWenKai-Medium.ttf'].every((f) => exists(`public/fonts/${f}`)), 'git pull（字体随仓库提交）');
+check('必需', '仓库字体 public/fonts（思源黑体 / 宋体 / 霞鹜文楷 / Barlow / Plex / Inter Display / JetBrains Mono）', ['NotoSansSC-VF.otf', 'NotoSansSC-900.otf', 'NotoSerifSC-Black.otf', 'LXGWWenKai-Medium.ttf',
+  'BarlowCondensed-800.woff2', 'IBMPlexMono-500.woff2', 'InterDisplay-SemiBold.otf', 'JetBrainsMono-Medium.ttf'].every((f) => exists(`public/fonts/${f}`)), 'git pull（字体随仓库提交）');
 let sysFont = false;
 try { sysFont = /Noto Sans CJK SC|Source Han Sans/i.test(execFileSync('fc-list', {encoding: 'utf8'})); } catch { /* no fontconfig */ }
 check('可选', '系统思源黑体（没有也行：用仓库里的 RW Sans）', sysFont, '可不管；装上后字幕和仓库版本一致');

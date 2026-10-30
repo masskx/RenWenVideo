@@ -362,3 +362,48 @@ export const CaptionLabel: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: R
     </div>
   </div>;
 };
+
+/**
+ * The telestrator subtitle bar (telestrator §5, in 9:16): a black bar (0.72) with a 4 px accent edge on top, centred,
+ * Chinese only (the template's English line is dropped — our viewers read Chinese), ≤ 2 lines at 60–64 px; it cuts in
+ * (no fade) and the edge draws across in 0.12 s.
+ */
+export const CaptionTele: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number}> = ({captions, k, breaks = {}, y = 1390}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  if (!c) return null;
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 13);
+  const sz = Math.max(60, Math.min(64, Math.floor(860 / Math.max(...lines.map(units)))));
+  const p = ease.outCubic(clamp((ms - c.startMs) / 120));
+  return <div style={{position: 'absolute', left: 0, width: W, top: y, display: 'flex', justifyContent: 'center'}}>
+    <div style={{position: 'relative', maxWidth: 980, padding: '16px 36px 20px', background: 'rgba(6,9,10,0.78)'}}>
+      <div style={{position: 'absolute', left: 0, top: 0, height: 4, width: `${p * 100}%`, background: k.accent}} />
+      {lines.map((line, i) => <div key={i} style={{fontFamily: font, fontWeight: 800, fontSize: sz, lineHeight: 1.2, color: k.ink, whiteSpace: 'nowrap', textAlign: 'center'}}>{line}</div>)}
+    </div>
+  </div>;
+};
+/**
+ * The Swiss caption (swiss-motion §4, in 9:16): part of the layout, not a bar — flush left on the first column (x 64),
+ * a 1 px ink rule above that grows along its length, each line rising out of a clip rect from below its baseline
+ * (0.1 s apart, the precise ease), ≤ 2 lines at 60–66 px, ink on the page.
+ */
+export const CaptionSwiss: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number}> = ({captions, k, breaks = {}, y = 1420}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  if (!c) return null;
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 12.5);
+  const sz = Math.max(60, Math.min(66, Math.floor(860 / Math.max(...lines.map(units)))));
+  const t = (ms - c.startMs) / 1000;
+  const snap = (x: number) => { const u = clamp(x); return u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };
+  return <div style={{position: 'absolute', left: L, top: y}}>
+    <div style={{width: 860 * snap(t / 0.2), height: 2, background: k.ink, marginBottom: 18}} />
+    {lines.map((line, i) => {
+      const q = snap((t - 0.04 - i * 0.1) / 0.18);
+      return <div key={i} style={{overflow: 'hidden', height: sz * 1.2}}>
+        <div style={{fontFamily: font, fontWeight: 800, fontSize: sz, lineHeight: 1.2, color: k.ink, whiteSpace: 'nowrap', letterSpacing: -0.5, transform: `translateY(${(1 - q) * sz * 1.2}px)`}}>{line}</div>
+      </div>;
+    })}
+  </div>;
+};
