@@ -274,6 +274,28 @@
       ],
       "pinned": "52467f9",
       "codePinned": "52467f9"
+    },
+    {
+      "repo": "echris6/motion-video-kit",
+      "license": "MIT（© 2026 echris6）",
+      "include": [
+        "/LICENSE",
+        "/README.md",
+        "/business-motion-film/SKILL.md",
+        "/business-motion-film/references/*.md",
+        "/business-motion-film/scripts/*"
+      ],
+      "pinned": "e4b1c00"
+    },
+    {
+      "repo": "feitangyuan/onetake",
+      "license": "PolyForm Noncommercial 1.0.0（只许非商业使用）：只记录版本，不复制文件；方法用自己的话记在 学习/onetake.md，代码不搬",
+      "pinned": "013a61a"
+    },
+    {
+      "repo": "remotion-dev/skills",
+      "license": "仓库没有许可证文件（来自 remotion 单仓库 packages/skills，Remotion License）：只记录版本，不复制文件；要点记在 学习/remotion-skills.md",
+      "pinned": "30d4553"
     }
   ]
 }

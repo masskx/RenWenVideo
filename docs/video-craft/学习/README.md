@@ -13,6 +13,9 @@
 | [案例和提示词合集.md](案例和提示词合集.md) | yihui-dev/awesome-opus5-5-videos、athemeroy/awesome-claude-5-5-videos、joeseesun/opus-video-prompts | 703 条对标片索引、七类制作路径（按素材情况选）、写法经验 |
 | [../huashu-motion.md](../huashu-motion.md) | alchaincyf/huashu-motion | 第 0 帧即海报、节奏是对比、贯穿物件、**颜色是找来的不是编的**；文档和代码（引擎、12 个模板）都固定在库里 |
 | [xian-梵高做片法.md](xian-梵高做片法.md) | Xian 的长文 + xianxie6/landscape-explainer-video | 一句一画、具体代替抽象、底色就是情绪、一个画面一个主角、高潮多停 2 秒；道具招式库（仓库无许可，只记笔记、零件自己重写） |
+| [onetake.md](onetake.md) | feitangyuan/onetake（2026-10-30 补；非商业许可，只记笔记） | 像 PPT 有两半：镜头长度一样（节奏）和每一拍替换上一拍（承接）；承接分 < 0.5 的版本都被退了 |
+| [motion-video-kit.md](motion-video-kit.md) | echris6/motion-video-kit（2026-10-30 补；MIT） | 做的人不打分、每轮换新评审逐条核对；冻结时间 / 响度范围 / 转场中途字压字 |
+| [remotion-skills.md](remotion-skills.md) | remotion-dev/skills（2026-10-30 补；只记要点） | Remotion 官方最佳实践：快甩镜头的运动模糊、`fitText` 定字号、地图等瓦片 |
 
 参考图：[lemo-知识类风格.jpg](lemo-知识类风格.jpg)（18 种适合知识类的风格 poster，CC BY 4.0 LemoLab）、[mg15-成片抽帧.jpg](mg15-成片抽帧.jpg)（12 支样片各 4 帧，MIT）。
 
