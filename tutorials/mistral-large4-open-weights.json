@@ -1,0 +1,182 @@
+{
+ "id": "mistral-large4-open-weights",
+ "title": "自称开源编码第一",
+ "subtitle": "第三方一测只有25",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "series": "AI 新闻 · 新模型",
+ "credit": "据 Mistral 官网、Artificial Analysis",
+ "source": "inputs/mistral-large4-open-weights/materials.md",
+ "maxSeconds": 50,
+ "score": {
+  "mood": "tension",
+  "climax": "third",
+  "lifts": [
+   "real"
+  ],
+  "silences": [
+   {
+    "scene": "third",
+    "at": 0,
+    "dur": 0.35
+   },
+   {
+    "scene": "end",
+    "at": 0,
+    "dur": 0.3
+   }
+  ],
+  "climaxAt": 2.4
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "tele",
+  "captionTop": 1390,
+  "pk": {
+   "bg": "#0C1411",
+   "panel": "#F5F4EF",
+   "ink": "#F4F1E8",
+   "accent": "#FF5229",
+   "onAccent": "#0C1411",
+   "dim": "#9AA39E",
+   "second": "#3FD8FF"
+  },
+  "breaks": {}
+ },
+ "highlights": [],
+ "cover": "hook",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "自称开源编码第一",
+   "第三方一测只有25"
+  ],
+  "support": "Mistral Large 4 · 官方自报 41%",
+  "tag": "AI 新闻 · 新模型",
+  "anchor": "mi.cover",
+  "colors": {
+   "bg": "#0C1411",
+   "text": "#F4F1E8",
+   "accent": "#FF5229",
+   "dim": "#9AA39E"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 72,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 70,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 74,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "keywords": [],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "mi.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "Mistral新模型，自称开源编码第一：{a}41分。{b}第三方一测，{c}只有25。"
+  },
+  {
+   "id": "official",
+   "visual": "mi.official",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "这是它自己发的图，{a}Terminal-Bench：{b}它41，{c}GLM-5.3是40，{d}多一分。"
+  },
+  {
+   "id": "third",
+   "visual": "mi.third",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "换第三方Artificial Analysis来测：{a}它25；{b}GLM-5.3开低档推理，{c}35。"
+  },
+  {
+   "id": "frontier",
+   "visual": "mi.frontier",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "另一项FrontierCode，{a}官方19.7，{b}第三方15。{c}差在哪没说，{d}可能是设置或版本不同。"
+  },
+  {
+   "id": "real",
+   "visual": "mi.real",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "但有两件事是实的：{a}权重放出来了，约一万亿参数；{b}每百万token，输入0.7美元，{c}输出2.1美元。"
+  },
+  {
+   "id": "license",
+   "visual": "mi.license",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "只是别急着叫它开源：{a}按它的许可，{b}做模型服务的公司，{c}商用前要另签授权。"
+  },
+  {
+   "id": "end",
+   "visual": "mi.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "下次看跑分，{a}先看是谁测的。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/mistral-large4-open-weights/score.mp3",
+ "musicVolume": 0.129,
+ "musicDuckDb": 10
+}

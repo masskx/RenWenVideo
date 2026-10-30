@@ -1,0 +1,182 @@
+{
+ "id": "huashu-motion-1d95",
+ "title": "一支带配乐的宣传片",
+ "subtitle": "作者说只花了1块9毛5",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "series": "AI 工具 · 案例",
+ "credit": "据 @alchaincyf（huashu-motion README）",
+ "source": "inputs/huashu-motion-1d95/materials.md",
+ "maxSeconds": 45,
+ "score": {
+  "mood": "playful",
+  "bpm": 124,
+  "climax": "caveat",
+  "lifts": [
+   "cache"
+  ],
+  "silences": [
+   {
+    "scene": "caveat",
+    "at": 0,
+    "dur": 0.35
+   },
+   {
+    "scene": "end",
+    "at": 0,
+    "dur": 0.25
+   }
+  ],
+  "climaxAt": 1.2
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "swiss",
+  "captionTop": 1420,
+  "pk": {
+   "bg": "#F0EBE4",
+   "panel": "#FFFFFF",
+   "ink": "#111214",
+   "accent": "#4E6AF4",
+   "onAccent": "#FFFFFF",
+   "dim": "#8C8A86"
+  },
+  "breaks": {}
+ },
+ "highlights": [],
+ "cover": "hook",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "带配乐的宣传片",
+   "只花了1块9毛5"
+  ],
+  "support": "DeepSeek 做的 22 秒动效片",
+  "tag": "AI 工具 · 案例",
+  "anchor": "hb.cover",
+  "colors": {
+   "bg": "#F0EBE4",
+   "text": "#111214",
+   "accent": "#4E6AF4",
+   "dim": "#8C8A86"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 72,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 70,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 74,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "keywords": [],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "hb.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "一支带配乐的22秒宣传片，{a}作者说，{b}只花了一块九毛五。"
+  },
+  {
+   "id": "ledger",
+   "visual": "hb.ledger",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "模型换成DeepSeek V4.1 Flash，{a}提了三轮意见，{b}前后不到半小时。"
+  },
+  {
+   "id": "cache",
+   "visual": "hb.cache",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "便宜在哪：{a}缓存命中率99.4%；{b}配乐在本机生成，{c}不调收费接口。"
+  },
+  {
+   "id": "skill",
+   "visual": "hb.skill",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "统一的配色、贯穿全片的圆点，{a}卡在124拍的配乐，{b}作者一句没提，{c}是skill带出来的。"
+  },
+  {
+   "id": "edit",
+   "visual": "hb.edit",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "哪里不满意，{a}点一下画面写意见，{b}只改那一处。"
+  },
+  {
+   "id": "caveat",
+   "visual": "hb.caveat",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "但作者也写明：{a}换个模型，{b}品味真的不一样。"
+  },
+  {
+   "id": "end",
+   "visual": "hb.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "一块九毛五，买到的是方法；{a}品味，不在账单上。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/huashu-motion-1d95/score.mp3",
+ "musicVolume": 0.132,
+ "musicDuckDb": 10
+}
