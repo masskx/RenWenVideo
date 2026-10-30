@@ -44,6 +44,7 @@ import {suanliHubUnderseaDcScenes} from './suanli-hub-undersea-dc';
 import {gemini4CarbonScenes} from './gemini4-carbon';
 import {llmSamePromptScenes} from './llm-same-prompt-diff-output';
 import {mistralLarge4Scenes} from './mistral-large4-open-weights';
+import {photocraftScenes} from './photocraft-ai-photoshop';
 import {huashuBudgetScenes} from './huashu-motion-1d95';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
@@ -96,4 +97,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...llmSamePromptScenes,
   ...mistralLarge4Scenes,
   ...huashuBudgetScenes,
+  ...photocraftScenes,
 };

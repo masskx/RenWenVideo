@@ -1,0 +1,137 @@
+{
+ "id": "photocraft-ai-photoshop",
+ "title": "AI写的免费Photoshop",
+ "subtitle": "能干活的只有45%",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.1
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 150,
+ "series": "AI 新闻 · 开源",
+ "credit": "据 PhotoCraft 仓库 README / ROADMAP、GitHub 页面；“用 Claude Opus 5.5 写”为媒体报道",
+ "source": "inputs/photocraft-ai-photoshop/sources.md",
+ "maxSeconds": 45,
+ "score": {
+  "mood": "wonder",
+  "climax": "turn",
+  "lifts": [
+   "hidden",
+   "hours"
+  ],
+  "silences": [
+   {
+    "scene": "turn",
+    "at": 0,
+    "dur": 0.4
+   },
+   {
+    "scene": "end",
+    "at": 0,
+    "dur": 0.3
+   }
+  ],
+  "climaxAt": 1.6
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "note",
+  "captionTop": 1310,
+  "pk": {
+   "bg": "#14233B",
+   "panel": "#1C3762",
+   "ink": "#EEE8D1",
+   "accent": "#D69E2E",
+   "onAccent": "#14233B",
+   "dim": "rgba(238,232,209,0.62)"
+  },
+  "breaks": {}
+ },
+ "keywords": [
+  "45%",
+  "628"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "pc.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "有人用AI写了个免费的Photoshop：{a}628个菜单，{b}一个不少。"
+  },
+  {
+   "id": "stars",
+   "visual": "pc.stars",
+   "step": 0,
+   "narration": "据报道，写它的是{a}Claude Opus 5.5；上线一个月，GitHub{b}七万五千颗星。",
+   "pace": "normal"
+  },
+  {
+   "id": "turn",
+   "visual": "pc.turn",
+   "step": 0,
+   "narration": "但它自己的路线图写着：{a}真能干活，{b}只有45%。",
+   "pace": "normal"
+  },
+  {
+   "id": "parts",
+   "visual": "pc.parts",
+   "step": 0,
+   "narration": "拆开看：{a}菜单628个全有，{b}工具68个做了56个，{c}面板35个做了30个。",
+   "pace": "normal"
+  },
+  {
+   "id": "hidden",
+   "visual": "pc.hidden",
+   "step": 0,
+   "narration": "差的在看不见的地方：{a}性能指标25项，{b}只达标3项；",
+   "pace": "normal"
+  },
+  {
+   "id": "psd",
+   "visual": "pc.psd",
+   "step": 0,
+   "narration": "它存的PSD，Photoshop还不能稳稳打开；",
+   "pace": "normal"
+  },
+  {
+   "id": "issues",
+   "visual": "pc.issues",
+   "step": 0,
+   "narration": "没关的问题，953个。",
+   "pace": "normal"
+  },
+  {
+   "id": "hours",
+   "visual": "pc.hours",
+   "step": 0,
+   "narration": "剩下的活，它按AI工时算。{a}到测试版，还要一千一到一千八百小时。",
+   "pace": "normal"
+  },
+  {
+   "id": "end",
+   "visual": "pc.end",
+   "step": 0,
+   "narration": "想试，可以装来玩；{a}干活的文件，先别换过去。",
+   "pace": "normal"
+  }
+ ]
+}

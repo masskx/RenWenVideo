@@ -407,3 +407,27 @@ export const CaptionSwiss: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: R
     })}
   </div>;
 };
+
+/**
+ * The drawing-note caption (lemo blueprint §4, in 9:16): a translucent box with a double rule, a "NOTE / n" cell on the
+ * left, the line lettered on left to right in ~0.35 s (霞鹜文楷), ≤ 2 lines at 58–64 px, lines in the sheet's ink.
+ */
+export const CaptionNote: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number}> = ({captions, k, breaks = {}, y = 1310}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const i = captions.findIndex((x) => ms >= x.startMs && ms < x.endMs);
+  if (i < 0) return null;
+  const c = captions[i];
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 11.5);
+  const sz = Math.max(58, Math.min(64, Math.floor(700 / Math.max(...lines.map(units)))));
+  const t = (ms - c.startMs) / 1000;
+  return <div style={{position: 'absolute', left: L - 4, top: y, width: 866, boxSizing: 'border-box', padding: '18px 22px 20px 150px', background: 'rgba(20,35,59,0.62)',
+    border: `3px solid ${k.ink}`, outline: `1px solid ${k.dim}`, outlineOffset: 5}}>
+    <div style={{position: 'absolute', left: 0, top: 0, bottom: 0, width: 124, borderRight: `2px solid ${k.ink}`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      fontFamily: plex, fontSize: 22, color: k.dim, letterSpacing: 2, lineHeight: 1.3}}><span>NOTE</span><span style={{fontSize: 34, color: k.ink}}>{i + 1}</span></div>
+    {lines.map((line, j) => {
+      const q = clamp((t - j * 0.12) / 0.35);
+      return <div key={j} style={{fontFamily: hand, fontWeight: 500, fontSize: sz, lineHeight: 1.22, color: k.ink, whiteSpace: 'nowrap', clipPath: `inset(-20% ${100 - q * 100}% -20% -2%)`}}>{line}</div>;
+    })}
+  </div>;
+};
