@@ -1,0 +1,240 @@
+{
+  "id": "photocraft-ai-photoshop",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1303,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/photocraft-ai-photoshop/01-hook.mp3",
+      "audioMs": 3971,
+      "startFrame": 0,
+      "durationFrames": 127,
+      "cues": {
+        "a": 2233,
+        "b": 3248
+      },
+      "captions": [
+        {
+          "text": "有人用AI写了个免费的Photoshop",
+          "startMs": 139,
+          "endMs": 2233
+        },
+        {
+          "text": "628个菜单，一个不少",
+          "startMs": 2233,
+          "endMs": 4274
+        }
+      ]
+    },
+    {
+      "id": "stars",
+      "audioSrc": "audio/tutorials/photocraft-ai-photoshop/02-stars.mp3",
+      "audioMs": 6557,
+      "startFrame": 127,
+      "durationFrames": 205,
+      "cues": {
+        "a": 1374,
+        "b": 4908
+      },
+      "captions": [
+        {
+          "text": "据报道",
+          "startMs": 144,
+          "endMs": 678
+        },
+        {
+          "text": "写它的是Claude Opus 5.5",
+          "startMs": 678,
+          "endMs": 3592
+        },
+        {
+          "text": "上线一个月",
+          "startMs": 3592,
+          "endMs": 4325
+        },
+        {
+          "text": "GitHub七万五千颗星",
+          "startMs": 4325,
+          "endMs": 6782
+        }
+      ]
+    },
+    {
+      "id": "turn",
+      "audioSrc": "audio/tutorials/photocraft-ai-photoshop/03-turn.mp3",
+      "audioMs": 4258,
+      "startFrame": 332,
+      "durationFrames": 136,
+      "cues": {
+        "a": 1789,
+        "b": 2651
+      },
+      "captions": [
+        {
+          "text": "但它自己的路线图写着",
+          "startMs": 144,
+          "endMs": 1789
+        },
+        {
+          "text": "真能干活，只有45%",
+          "startMs": 1789,
+          "endMs": 4601
+        }
+      ]
+    },
+    {
+      "id": "parts",
+      "audioSrc": "audio/tutorials/photocraft-ai-photoshop/04-parts.mp3",
+      "audioMs": 6922,
+      "startFrame": 468,
+      "durationFrames": 216,
+      "cues": {
+        "a": 811,
+        "b": 2408,
+        "c": 4667
+      },
+      "captions": [
+        {
+          "text": "拆开看：菜单628个全有",
+          "startMs": 144,
+          "endMs": 2408
+        },
+        {
+          "text": "工具68个做了56个",
+          "startMs": 2408,
+          "endMs": 4667
+        },
+        {
+          "text": "面板35个做了30个",
+          "startMs": 4667,
+          "endMs": 7219
+        }
+      ]
+    },
+    {
+      "id": "hidden",
+      "audioSrc": "audio/tutorials/photocraft-ai-photoshop/05-hidden.mp3",
+      "audioMs": 4362,
+      "startFrame": 684,
+      "durationFrames": 139,
+      "cues": {
+        "a": 1833,
+        "b": 3096
+      },
+      "captions": [
+        {
+          "text": "差的在看不见的地方",
+          "startMs": 144,
+          "endMs": 1833
+        },
+        {
+          "text": "性能指标25项",
+          "startMs": 1833,
+          "endMs": 3096
+        },
+        {
+          "text": "只达标3项",
+          "startMs": 3096,
+          "endMs": 4611
+        }
+      ]
+    },
+    {
+      "id": "psd",
+      "audioSrc": "audio/tutorials/photocraft-ai-photoshop/06-psd.mp3",
+      "audioMs": 3344,
+      "startFrame": 823,
+      "durationFrames": 108,
+      "cues": {},
+      "captions": [
+        {
+          "text": "它存的PSD",
+          "startMs": 144,
+          "endMs": 1167
+        },
+        {
+          "text": "Photoshop还不能稳稳打开",
+          "startMs": 1167,
+          "endMs": 3615
+        }
+      ]
+    },
+    {
+      "id": "issues",
+      "audioSrc": "audio/tutorials/photocraft-ai-photoshop/07-issues.mp3",
+      "audioMs": 2273,
+      "startFrame": 931,
+      "durationFrames": 76,
+      "cues": {},
+      "captions": [
+        {
+          "text": "没关的问题",
+          "startMs": 144,
+          "endMs": 900
+        },
+        {
+          "text": "953个",
+          "startMs": 900,
+          "endMs": 2532
+        }
+      ]
+    },
+    {
+      "id": "hours",
+      "audioSrc": "audio/tutorials/photocraft-ai-photoshop/08-hours.mp3",
+      "audioMs": 5564,
+      "startFrame": 1007,
+      "durationFrames": 175,
+      "cues": {
+        "a": 2369
+      },
+      "captions": [
+        {
+          "text": "剩下的活，它按AI工时算",
+          "startMs": 144,
+          "endMs": 2369
+        },
+        {
+          "text": "到测试版",
+          "startMs": 2369,
+          "endMs": 3141
+        },
+        {
+          "text": "还要一千一到一千八百小时",
+          "startMs": 3141,
+          "endMs": 5865
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/photocraft-ai-photoshop/09-end.mp3",
+      "audioMs": 3762,
+      "startFrame": 1182,
+      "durationFrames": 121,
+      "cues": {
+        "a": 1695
+      },
+      "captions": [
+        {
+          "text": "想试，可以装来玩",
+          "startMs": 144,
+          "endMs": 1695
+        },
+        {
+          "text": "干活的文件",
+          "startMs": 1695,
+          "endMs": 2515
+        },
+        {
+          "text": "先别换过去",
+          "startMs": 2515,
+          "endMs": 4082
+        }
+      ]
+    }
+  ]
+}

@@ -36,7 +36,7 @@
     "dur": 0.3
    }
   ],
-  "climaxAt": 1.6
+  "climaxAt": 2.7
  },
  "steps": [],
  "look": {
@@ -133,5 +133,66 @@
    "narration": "想试，可以装来玩；{a}干活的文件，先别换过去。",
    "pace": "normal"
   }
- ]
+ ],
+ "cover": "turn",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "AI写的免费Photoshop",
+   "能干活的只有45%"
+  ],
+  "support": "PhotoCraft · 路线图自评",
+  "tag": "AI 新闻 · 开源",
+  "anchor": "pc.cover",
+  "colors": {
+   "bg": "#14233B",
+   "text": "#EEE8D1",
+   "accent": "#D69E2E",
+   "dim": "#9AA7B8"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 72,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 70,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 74,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "musicSrc": "audio/tutorials/photocraft-ai-photoshop/score.mp3",
+ "musicVolume": 0.147,
+ "musicDuckDb": 10
 }
