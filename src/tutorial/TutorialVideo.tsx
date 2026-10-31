@@ -3,7 +3,7 @@ import {AbsoluteFill, Sequence, interpolate, staticFile, useCurrentFrame, useVid
 import {Audio} from '@remotion/media';
 import {Layout, Palette, blueprint, cinema, color, font, layoutOf, mono, palette, paper} from './theme';
 import {sceneRegistry} from './scenes';
-import {CaptionBar, CaptionCard, CaptionLabel, CaptionStrip, CaptionSwiss, CaptionTele, CaptionToast} from './package';
+import {CaptionBar, CaptionCard, CaptionLabel, CaptionStrip, CaptionSwiss, CaptionMap, CaptionTele, CaptionToast} from './package';
 import {DepthField, GridFloor} from './space';
 import {Dino} from './ui';
 import {CoverRatio, SceneTiming, TimedCaption, Tutorial, TutorialProps} from './types';
@@ -342,6 +342,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
           : look.captions === 'label' && look.pk ? <CaptionLabel captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'tele' && look.pk ? <CaptionTele captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'swiss' && look.pk ? <CaptionSwiss captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
+          : look.captions === 'map' && look.pk ? <CaptionMap captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} chip={look.chips?.[s.id]} />
           : <Caption captions={s.captions} highlights={tutorial.highlights} pal={pal} />}
         <Sequence from={leadFrames} name={`${s.id}-voice`}><Audio src={staticFile(s.audioSrc)} /></Sequence>
         {events.filter((e) => e.at >= 0 && e.at < s.durationFrames).map((e, i) => (

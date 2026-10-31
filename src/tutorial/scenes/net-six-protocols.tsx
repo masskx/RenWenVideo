@@ -114,6 +114,7 @@ const IsoCanvas: React.FC<{draw: (g: CanvasRenderingContext2D, iso: Iso) => void
 
 /* ---------- infographic parts (screen space, our fonts, ≥ 34 px) ---------- */
 const HALO = 'rgba(236,240,235,0.94)';
+const HALO_CSS = '0 0 6px #ECF0EB, 0 0 6px #ECF0EB, 0 0 10px #ECF0EB';
 const txt = (g: CanvasRenderingContext2D, s: string, x: number, y: number, o: {size?: number; weight?: number; fam?: string; color?: string; align?: CanvasTextAlign; halo?: boolean; track?: number} = {}) =>
   haloText(g, s, x, y, {font: `${o.weight ?? 800} ${o.size ?? 36}px ${o.fam ?? CN}`, color: o.color ?? K.ink, align: o.align ?? 'left', haloColor: HALO, hw: 10, halo: o.halo, track: o.track});
 
@@ -278,8 +279,8 @@ const packet = (iso: Iso, x: number, y: number, z: number, t3: Tri, s = 0.9, kee
 
 /* ---------- HTML overlays ---------- */
 const Corner: React.FC<{left: string; right?: string}> = ({left, right = '示意'}) => <>
-  <div style={{position: 'absolute', left: 64, top: 96, fontFamily: jet, fontWeight: 500, fontSize: 28, color: K.dim, letterSpacing: 1}}>{left}</div>
-  <div style={{position: 'absolute', right: 160, top: 96, fontFamily: CN, fontWeight: 700, fontSize: 28, color: K.dim}}>{right}</div>
+  <div style={{position: 'absolute', left: 64, top: 96, fontFamily: jet, fontWeight: 500, fontSize: 28, color: K.dim, letterSpacing: 1, textShadow: HALO_CSS}}>{left}</div>
+  <div style={{position: 'absolute', right: 160, top: 96, fontFamily: CN, fontWeight: 700, fontSize: 28, color: K.dim, textShadow: HALO_CSS}}>{right}</div>
 </>;
 const Chip: React.FC<{c: Tri; size?: number}> = ({c, size = 44}) => <svg width={size} height={size * 1.1} viewBox="-23 -25 46 50">
   <polygon points="0,-21 20,-10 0,1 -20,-10" fill={c[0]} />
@@ -341,10 +342,12 @@ const Tcp = make(({f, cue}) => {
       iso.cam = camAt(tcpCam(p), f);
       world(g, iso, {keep: ['phone', 'cloud'], desat: 0.85, leds: f / 30, route: 1});
       // receiver tray: four slots beside the cloud server
-      for (let i = 0; i < 4; i++) {
+      iso.keep = true;
+      for (let i = 0; i < 4 && f >= p.c - 22; i++) {
         const [sx, sy] = SLOT(i);
-        iso.flat([[sx - 0.55, sy - 0.55], [sx + 0.55, sy - 0.55], [sx + 0.55, sy + 0.55], [sx - 0.55, sy + 0.55]], 0.03, '#C9C4F5', {a: 0.9});
+        iso.flat([[sx - 0.55, sy - 0.55], [sx + 0.55, sy - 0.55], [sx + 0.55, sy + 0.55], [sx - 0.55, sy + 0.55]], 0.03, '#C9C4F5', {a: 0.9 * eo(clamp((f - p.c + 22) / 8))});
       }
+      iso.keep = false;
       // the lost IP box (before 「所以要TCP」): falls through the route and is gone
       if (f < p.a) {
         const t = clamp((f - 2) / 16);
@@ -412,7 +415,7 @@ const Tcp = make(({f, cue}) => {
 }, (cue) => {
   const p = tcpPlan(cue);
   return [{at: 6, kind: 'thud', gain: 0.1}, {at: p.b - 18, kind: 'tick', gain: 0.08}, {at: p.b - 6, kind: 'tick', gain: 0.08}, {at: p.b + 6, kind: 'tick', gain: 0.08},
-    {at: p.c - 4, kind: 'error', gain: 0.07}, {at: p.d + 26, kind: 'pop', gain: 0.1}];
+    {at: p.c - 4, kind: 'block', gain: 0.07}, {at: p.d + 26, kind: 'pop', gain: 0.1}];
 });
 
 /* ---------- 8 stack (signature): the packet cut open — IP ⊃ TCP ⊃ HTTP ⊃ 「开灯」 ---------- */
@@ -441,7 +444,7 @@ const shell = (iso: Iso, x: number, y: number, z: number, s: Shell, inside: () =
     iso.flush();
   }
 };
-const STACK_CAM: CK[] = [{at: 0, u: -2, v: 0, z: -3, k: 36}, {at: 22, u: 0, v: 0.8, z: 7.2, k: 62, d: 22}];
+const STACK_CAM: CK[] = [{at: 0, u: -2, v: 0, z: -3, k: 36}, {at: 22, u: 0, v: 0.8, z: 7.2, k: 62, d: 22}, {at: 170, u: 0, v: 0.8, z: 7.0, k: 70, d: 148}];
 const stackPlan = (cue: Cue) => ({a: cue('a', 54), b: cue('b', 84)});
 const Stack = make(({f, cue}) => {
   const p = stackPlan(cue);
@@ -479,7 +482,7 @@ const Stack = make(({f, cue}) => {
       }
       // the sentence, innermost
       const [bx, by] = [cx, cy];
-      bubble(iso, bx, by, baseZ + 1.4 * S, back(clamp((f - p.b) / 9), 2.2), '开灯', 1.15);
+      bubble(iso, bx, by, baseZ + (1.4 + 0.25 * Math.sin(f / 9)) * S, back(clamp((f - p.b) / 9), 2.2), '开灯', 1.15);
       // pins: IP · 地址, TCP · 编号 补发, HTTP · 真正的话
       npin(iso, cx - 3.2 * S, cy - 3.2 * S, baseZ + 4.4 * S, {title: 'IP', value: '地址', dir: -1, up: 90, len: 60, a: clamp((f - p.a + 2) / 18), ts: 46, vs: 44, vfam: CN, dot: PROTO.IP[2]});
       npin(iso, cx + 2.3 * S, cy - 2.3 * S, baseZ + 3.3 * S, {title: 'TCP', value: '编号 · 补发', dir: 1, up: 150, len: 30, a: clamp((f - p.a - 8) / 18), ts: 46, vs: 44, vfam: CN, dot: PROTO.TCP[2]});
@@ -498,6 +501,276 @@ const Stack = make(({f, cue}) => {
   return [{at: 16, kind: 'tick', gain: 0.08}, {at: p.a - 10, kind: 'whoosh-short', gain: 0.07}, {at: p.a - 2, kind: 'whoosh-short', gain: 0.07}, {at: p.b, kind: 'pop', gain: 0.1}];
 });
 
+/* ---------- shared: a paper card billboard (a name or an address), a flying arc between two stations ---------- */
+const card = (iso: Iso, x: number, y: number, z: number, text: string, s = 1, o: {bg?: string; size?: number; sub?: string} = {}) => {
+  if (s <= 0) return;
+  const g = iso.g, [sx, sy] = iso.P(x, y, z), size = o.size ?? 44;
+  g.save(); g.translate(sx, sy); g.scale(s, s);
+  g.font = `500 ${size}px ${jet}`;
+  const w = g.measureText(text).width + 44, h = size + (o.sub ? 72 : 34);
+  g.beginPath(); g.roundRect(-w / 2, -h, w, h, 12);
+  g.fillStyle = o.bg ?? K.paper; g.fill(); g.lineWidth = 4; g.strokeStyle = K.ink; g.stroke();
+  g.fillStyle = K.ink; g.textAlign = 'center'; g.textBaseline = 'middle';
+  if (o.sub) { g.font = `800 30px ${CN}`; g.fillStyle = K.dim; g.fillText(o.sub, 0, -h + 30); g.font = `500 ${size}px ${jet}`; g.fillStyle = K.ink; g.fillText(text, 0, -h / 2 + 18); }
+  else g.fillText(text, 0, -h / 2);
+  g.restore();
+};
+const arcBetween = (a: [number, number], b: [number, number], t: number, h = 4, z0 = 0.5): [number, number, number] =>
+  [lerp(a[0], b[0], t), lerp(a[1], b[1], t), z0 + Math.sin(clamp(t) * Math.PI) * h];
+
+/* ---------- 2 dns: the phone only knows a name; the cabinet trades it for a number ---------- */
+const DNS_CAM: CK[] = [{at: 0, u: -4, v: 0, z: 2.6, k: 31}, {at: 18, u: 14.2, v: 1, z: -0.4, k: 66, d: 18}, {at: 160, u: 13.4, v: 0.4, z: -0.8, k: 76, d: 140}];
+const dnsPlan = (cue: Cue) => ({a: cue('a', 26), b: cue('b', 67)});
+const Dns = make(({f, cue}) => {
+  const p = dnsPlan(cue);
+  const fly = clamp((f - p.b) / 14), drawer = eo(clamp((f - p.b - 8) / 10)) * (1 - eo(clamp((f - p.b - 40) / 10))), back2 = clamp((f - p.b - 24) / 16);
+  return <>
+    <IsoCanvas draw={(g, iso) => {
+      iso.cam = camAt(DNS_CAM, f);
+      world(g, iso, {keep: ['phone', 'dns'], desat: eo(clamp(f / 14)) * 0.85, drawer, leds: f / 30});
+      iso.flush();
+      const D = ST.dns, P: [number, number] = [lerp(ST.phone[0], D[0], 0.3), lerp(ST.phone[1], D[1], 0.3)];
+      if (f < p.b) card(iso, P[0], P[1], 4.2, 'api.example.com', back(clamp((f - p.a + 6) / 9), 2), {sub: '名字'});
+      else if (fly < 1) { const [x, y, z] = arcBetween(P, D, eio(fly), 3, 4.2); card(iso, x, y, z, 'api.example.com', 1 - 0.4 * fly, {sub: '名字'}); }
+      if (back2 > 0) { const [x, y, z] = back2 < 1 ? arcBetween(D, P, eio(back2), 3, 4.2) : [P[0], P[1], 4.2]; card(iso, x, y, z, '203.0.113.8', back2 < 1 ? 0.7 + 0.3 * back2 : 1 + 0.08 * Math.sin(clamp((f - p.b - 40) / 8) * Math.PI), {bg: PROTO.DNS[0], sub: '门牌号'}); }
+      npin(iso, D[0] - 1.1, D[1] - 1.1, 3.2, {title: 'DNS', value: '端口 53', dir: -1, up: 300, len: 40, a: clamp((f - p.b) / 18), ts: 48, vs: 40, vfam: CN, dot: PROTO.DNS[2]});
+    }} />
+    <Corner left="DNS · 名字 → 地址" />
+  </>;
+}, (cue) => {
+  const p = dnsPlan(cue);
+  return [{at: 2, kind: 'whoosh-short', gain: 0.06}, {at: p.a - 4, kind: 'pop', gain: 0.1}, {at: p.b, kind: 'fs-paper-slide', gain: 0.08}, {at: p.b + 8, kind: 'clack', gain: 0.09}, {at: p.b + 40, kind: 'pop', gain: 0.1}];
+});
+
+/* ---------- 3 udp: thrown, never signed for; one lost, asked again ---------- */
+const UDP_CAM: CK[] = [{at: 0, u: 14.2, v: 1, z: -0.4, k: 66}, {at: 30, u: 13.6, v: 1, z: -1.8, k: 58, d: 30}];
+const udpPlan = (cue: Cue) => ({a: cue('a', 37), b: cue('b', 71), c: cue('c', 105)});
+const Udp = make(({f, cue}) => {
+  const p = udpPlan(cue);
+  return <>
+    <IsoCanvas draw={(g, iso) => {
+      iso.cam = camAt(UDP_CAM, f);
+      world(g, iso, {keep: ['phone', 'dns'], desat: 0.85, leds: f / 30});
+      const P = ST.phone, D = ST.dns;
+      const throwAt = (at: number, lostAt?: number) => {
+        const t = clamp((f - at) / 20);
+        if (f < at) return;
+        if (lostAt !== undefined && t >= lostAt) {
+          const q = clamp((f - at - lostAt * 20) / 8);
+          if (q < 1) { const [x, y, z] = arcBetween(P, D, lostAt, 4.5, 3.6); packet(iso, x, y, z - q * 2, ['#F78787', '#C43A3A', K.red], 1.1 * (1 - q)); }
+          return;
+        }
+        if (t < 1) { const [x, y, z] = arcBetween(P, D, eio(t), 4.5, 3.6); iso.push(x, y, z, t * 4, 1); packet(iso, 0, 0, 0, PROTO.UDP, 1.1); iso.pop(); }
+      };
+      throwAt(p.a - 4);
+      throwAt(p.c - 6, 0.45);
+      throwAt(p.c + 14);
+      iso.flush();
+      // the throw's path: a dashed arc, drawn ahead (template: nothing moves without a line leading it)
+      const lead = clamp((f - p.a + 10) / 10);
+      if (lead > 0) { const pts: number[][] = []; for (let i = 0; i <= 24 * lead; i++) pts.push(arcBetween(P, D, i / 24, 4.5, 3.6)); iso.line3(pts, PROTO.UDP[2], 4, {now: true, dash: [14, 12]}); }
+      const [lx, ly] = iso.P(...arcBetween(P, D, 0.5, 4.5, 3.6));
+      if (f >= p.a - 2) txt(g, 'UDP', lx, ly - 70, {size: 64, fam: jet, weight: 500, align: 'center', color: PROTO.UDP[2]});
+      if (f >= p.b) { txt(g, '不握手', lx - 150, ly + 230, {size: 50, align: 'center'}); txt(g, '不确认', lx + 150, ly + 230, {size: 50, align: 'center'}); }
+      // no receipt: a crossed-out tick next to the phone
+      if (f >= p.b + 6) {
+        const [px, py] = iso.P(P[0], P[1], 4.6), a = eo(clamp((f - p.b - 6) / 8));
+        g.save(); g.globalAlpha = a; g.strokeStyle = K.dim; g.lineWidth = 8; g.lineCap = 'round';
+        g.beginPath(); g.moveTo(px + 60, py - 10); g.lineTo(px + 80, py + 12); g.lineTo(px + 116, py - 30); g.stroke();
+        g.strokeStyle = K.ink; g.lineWidth = 5; g.beginPath(); g.moveTo(px + 48, py + 20); g.lineTo(px + 128, py - 40); g.stroke();
+        g.restore();
+      }
+      if (f >= p.c + 3 && f < p.c + 30) { const [x, y, z] = arcBetween(P, D, 0.45, 4.5, 3.6), [rx, ry] = iso.P(x, y, z); ring(g, rx, ry, 70, clamp((f - p.c - 3) / 5) * (1 - clamp((f - p.c - 20) / 10)), f / 30, null, {color: K.red, lw: 5}); }
+      if (f >= p.c + 16) { const [x, y, z] = arcBetween(P, D, 0.7, 4.5, 3.6), [rx, ry] = iso.P(x, y, z); txt(g, '再问一次', rx + 40, ry - 60, {size: 48}); }
+    }} />
+    <Corner left="UDP · 扔出去就不管" />
+  </>;
+}, (cue) => {
+  const p = udpPlan(cue);
+  return [{at: p.a - 4, kind: 'whoosh-short', gain: 0.08}, {at: p.a + 16, kind: 'tap', gain: 0.08}, {at: p.c - 6, kind: 'whoosh-short', gain: 0.07}, {at: p.c + 3, kind: 'block', gain: 0.08}, {at: p.c + 14, kind: 'whoosh-short', gain: 0.08}, {at: p.c + 34, kind: 'tap', gain: 0.08}];
+});
+
+/* ---------- 4 ip: the sentence goes into a box with an address label; routers pass it hop by hop, TTL counting down ---------- */
+const IP_ROUTE: [number, number][] = [ST.phone, ST.r1, ST.r2, ST.r3];
+const ipPlan = (cue: Cue) => ({a: cue('a', 49), b: cue('b', 89)});
+const ipT = (f: number, p: {b: number}, dur: number) => clamp((f - p.b + 16) / (dur - p.b + 6));
+const Ip = make(({f, dur, cue}) => {
+  const p = ipPlan(cue);
+  const t = ipT(f, p, dur);
+  const [px, py] = along(IP_ROUTE, eio(t));
+  const cam: CK[] = [{at: 0, u: 13.6, v: 1, z: -1.8, k: 58}, {at: 20, u: 15, v: -4, z: 0.5, k: 64, d: 20}];
+  const c0 = camAt(cam, f), follow = eo(clamp((f - p.b + 20) / 14));
+  return <>
+    <IsoCanvas draw={(g, iso) => {
+      iso.cam = {x: lerp(c0.x, px, follow), y: lerp(c0.y, py, follow), z: lerp(c0.z, 1.6, follow), k: lerp(c0.k, 46, follow)};
+      world(g, iso, {keep: ['phone', 'r1', 'r2', 'r3'], desat: 0.85, leds: f / 30});
+      // which routers has it passed? each pass: a hop (squash), TTL − 1
+      const segs = [0, 1, 2].map((i) => { const d = (a: [number, number], b: [number, number]) => Math.hypot(a[0] - b[0], a[1] - b[1]); return d(IP_ROUTE[i], IP_ROUTE[i + 1]); });
+      const tot = segs[0] + segs[1] + segs[2], marks = [segs[0] / tot, (segs[0] + segs[1]) / tot, 1];
+      const passed = marks.filter((m) => eio(t) >= m - 0.001).length;
+      const near = Math.min(...marks.map((m) => Math.abs(eio(t) - m)));
+      const hop = Math.max(0, 1 - near * 14) * 1.6;
+      const boxIn = back(clamp((f - 8) / 12), 1.8);
+      if (boxIn > 0) {
+        iso.keep = true;
+        iso.push(px, py, 0.1 + hop, 0, Math.max(0.01, boxIn));
+        iso.box(-0.9, -0.9, 0, 1.8, 1.8, 1.5, PROTO.IP, {bias: 2});
+        iso.pop(); iso.keep = false;
+      }
+      iso.flush();
+      // the bubble drops into the box
+      const drop = eio(clamp((f - 2) / 12));
+      if (drop < 1) bubble(iso, ST.phone[0], ST.phone[1], lerp(3.9, 1.2, drop), 1 - drop * 0.8);
+      const [bx, by] = iso.P(px, py, 1.6 + hop + 0.1);
+      if (f >= p.a - 4) card(iso, px, py, 2.0 + hop, '→ 203.0.113.8', back(clamp((f - p.a + 4) / 9), 2), {bg: PROTO.IP[0], size: 40});
+      if (f >= p.b - 10) {
+        const ttl = 64 - passed;
+        txt(g, `TTL ${ttl}`, bx + 120, by + 90, {size: 54, fam: jet, weight: 500, color: passed ? K.ink : K.dim});
+      }
+      // a small ring on each router as it is passed
+      marks.forEach((m, i) => {
+        if (eio(t) < m - 0.001) return;
+        const r = IP_ROUTE[i + 1], [rx, ry] = iso.P(r[0], r[1], 0.4);
+        const since = Math.max(0, eio(t) - m) * 40;
+        ring(g, rx, ry, 64, clamp(1 - since / 6), f / 30, null, {color: PROTO.IP[2], lw: 4});
+      });
+    }} />
+    <Corner left="IP · 地址 · 一跳一跳" />
+  </>;
+}, (cue, dur) => {
+  const p = ipPlan(cue);
+  return [{at: 8, kind: 'thud', gain: 0.09}, {at: p.a - 4, kind: 'stamp', gain: 0.08}, ...[0.36, 0.7, 0.98].map((m) => ({at: Math.round(p.b - 16 + m * (dur - p.b + 6)), kind: 'tick', gain: 0.08}))];
+});
+
+/* ---------- 6 http: a green letter, POST /light {"on": true}; the server answers 200 OK ---------- */
+const HTTP_CAM: CK[] = [{at: 0, u: -3.5, v: -1, z: 0.5, k: 60}, {at: 18, u: -8.5, v: -3.4, z: 2.4, k: 72, d: 18}];
+const httpPlan = (cue: Cue) => ({a: cue('a', 78), b: cue('b', 126)});
+const BODY = '{"on": true}';
+const Http = make(({f, cue}) => {
+  const p = httpPlan(cue);
+  const typed = Math.floor(clamp((f - p.a) / 18) * BODY.length);
+  const into = eio(clamp((f - p.a - 26) / 12));
+  return <>
+    <IsoCanvas draw={(g, iso) => {
+      iso.cam = camAt(HTTP_CAM, f);
+      world(g, iso, {keep: ['cloud'], desat: 0.85, leds: f / 30});
+      iso.flush();
+      const [cx, cy] = ST.cloud;
+      // the letter: a billboard sheet, unfolds (scaleY) then slides into the server
+      const open = back(clamp((f - 10) / 12), 1.6);
+      if (open > 0 && into < 1) {
+        const [sx0, sy0] = [640, 1010], [sx1, sy1] = iso.P(cx, cy, 2.2);
+        const sx = lerp(sx0, sx1, into), sy = lerp(sy0, sy1, into), sc = 1 - 0.85 * into;
+        g.save(); g.translate(sx, sy); g.scale(sc, sc * open);
+        g.beginPath(); g.roundRect(-250, -150, 500, 300, 16); g.fillStyle = PROTO.HTTP[0]; g.fill(); g.lineWidth = 5; g.strokeStyle = K.ink; g.stroke();
+        g.fillStyle = PROTO.HTTP[2]; g.fillRect(-250 + 2.5, -150 + 2.5, 495, 70);
+        g.fillStyle = K.ink; g.font = `500 52px ${jet}`; g.textBaseline = 'middle'; g.textAlign = 'left';
+        g.fillText('POST /light', -220, -112);
+        g.font = `500 56px ${jet}`; g.fillText(BODY.slice(0, typed) + (typed < BODY.length && f >= p.a && Math.floor(f / 8) % 2 ? '▍' : ''), -220, 10);
+        g.font = `800 30px ${CN}`; g.fillStyle = K.dim; g.fillText('HTTP 请求', -220, 100);
+        g.restore();
+      }
+      // 200 OK: a plaque that lands on the server top, squash on landing
+      if (f >= p.b - 2) {
+        const land = clamp((f - p.b + 2) / 8), sq = f < p.b + 6 ? 1 : 1 + 0.18 * Math.sin(clamp((f - p.b - 6) / 6) * Math.PI);
+        const [sx, sy] = iso.P(cx, cy, 3.4 + (1 - eo(land)) * 3);
+        g.save(); g.translate(sx, sy - 40); g.scale(1 / sq * 1 + (sq - 1) * 0.5, 2 - sq);
+        g.beginPath(); g.roundRect(-190, -120, 380, 120, 16); g.fillStyle = PROTO.HTTP[1]; g.fill(); g.lineWidth = 5; g.strokeStyle = K.ink; g.stroke();
+        g.fillStyle = K.ink; g.font = `600 84px ${inter}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('200 OK', 0, -58);
+        g.restore();
+      }
+      if (f >= p.b + 30) txt(g, '实际多是 HTTPS（再加一层加密）', 540, 1340, {size: 40, weight: 700, color: K.dim, align: 'center'});
+    }} />
+    <Corner left="HTTP · 请求 · 200 OK" />
+  </>;
+}, (cue) => {
+  const p = httpPlan(cue);
+  return [{at: 10, kind: 'paper', gain: 0.1}, {at: p.a, kind: 'marker', gain: 0.06}, {at: p.a + 26, kind: 'fs-paper-slide', gain: 0.08}, {at: p.b + 6, kind: 'stamp', gain: 0.1}];
+});
+
+/* ---------- 7 mqtt: the lamp's subscription is always open; the broker pushes; the lamp lights (climax) ---------- */
+const mqttPlan = (cue: Cue) => ({a: cue('a', 49), b: cue('b', 93), c: cue('c', 120)});
+const Mqtt = make(({f, cue}) => {
+  const p = mqttPlan(cue);
+  const on = clamp((f - p.c - 8) / 6), color = eo(clamp((f - p.c - 8) / 14));
+  const cam: CK[] = [{at: 0, u: -8.5, v: -3.4, z: 2.4, k: 72}, {at: 18, u: -14.5, v: 0, z: 1.8, k: 50, d: 18}, {at: p.c + 10, u: -6, v: 0, z: 2.2, k: 34, d: 24}];
+  return <>
+    <IsoCanvas draw={(g, iso) => {
+      iso.cam = camAt(cam, f);
+      world(g, iso, {keep: on > 0 ? 'all' : ['broker', 'lamp', 'cloud'], desat: 0.85 * (1 - color), lamp: on, leds: f / 30});
+      iso.flush();
+      const B = ST.broker, L = ST.lamp, C = ST.cloud;
+      // the subscription: an always-open plum link broker ↔ lamp, dashes flowing
+      iso.keep = true;
+      iso.line3([[B[0], B[1], 3.6], [lerp(B[0], L[0], 0.5), lerp(B[1], L[1], 0.5), 6.4], [L[0], L[1], 5.4]], PROTO.MQTT[1], 7, {now: true, dash: [18, 12], off: -f * 2});
+      // publish: cloud → broker (b), push: broker → lamp (c)
+      const pub = clamp((f - p.b) / 14), push = clamp((f - p.c + 2) / 10);
+      if (pub > 0 && pub < 1) { const [x, y, z] = arcBetween(C, B, eio(pub), 3, 3.4); packet(iso, x, y, z, PROTO.MQTT, 0.8); }
+      if (push > 0 && push < 1) { const q = eio(push); const pt = q < 0.5 ? [lerp(B[0], (B[0] + L[0]) / 2, q * 2), lerp(B[1], (B[1] + L[1]) / 2, q * 2), lerp(3.6, 6.4, q * 2)] : [lerp((B[0] + L[0]) / 2, L[0], q * 2 - 1), lerp((B[1] + L[1]) / 2, L[1], q * 2 - 1), lerp(6.4, 5.4, q * 2 - 1)]; packet(iso, pt[0], pt[1], pt[2], PROTO.MQTT, 0.8); }
+      iso.keep = false;
+      iso.flush();
+      // glow around the bulb once on
+      const [lx, ly] = iso.P(L[0], L[1], 3.9);
+      if (on > 0) {
+        const r = iso.cam.k * 9 * eo(on);
+        const gr = g.createRadialGradient(lx, ly, 0, lx, ly, r);
+        gr.addColorStop(0, 'rgba(255,252,156,0.75)'); gr.addColorStop(1, 'rgba(255,252,156,0)');
+        g.fillStyle = gr; g.beginPath(); g.arc(lx, ly, r, 0, Math.PI * 2); g.fill();
+        ring(g, lx, ly + iso.cam.k * 1.2, iso.cam.k * 4.2, clamp((f - p.c - 10) / 10), f / 30, '灯亮了', {lw: 4, ts: 44, ang: -0.6});
+      }
+      // flag over the lamp: its topic
+      if (f >= p.a - 4 && on <= 0) card(iso, L[0], L[1], 6.8, 'home/light', back(clamp((f - p.a + 4) / 9), 2), {bg: PROTO.MQTT[0], size: 40, sub: '订阅'});
+      npin(iso, B[0] + 1.2, B[1] - 1.2, 2.2, {title: 'MQTT Broker', value: '中转站', dir: 1, up: 120, len: 40, a: clamp((f - 8) / 18) * (1 - clamp((f - p.c - 6) / 6)), ts: 44, vs: 40, vfam: CN, dot: PROTO.MQTT[2]});
+      if (f >= p.b + 8 && f < p.c + 6) { const [sx, sy] = iso.P(B[0], B[1], 3.6); txt(g, '包头最小 2 字节', sx - 30, sy + 150, {size: 46, align: 'center'}); }
+    }} />
+    <Corner left="MQTT · 订阅 · 推送" />
+  </>;
+}, (cue) => {
+  const p = mqttPlan(cue);
+  return [{at: p.a - 4, kind: 'pop', gain: 0.09}, {at: p.b, kind: 'whoosh-short', gain: 0.07}, {at: p.c - 2, kind: 'whoosh-short', gain: 0.07}, {at: p.c + 8, kind: 'clack', gain: 0.12}, {at: p.c + 9, kind: 'chime', gain: 0.12}];
+});
+
+/* ---------- 9 end: back out to the whole island (frame 0's framing), the lamp lit, the 6 returns ---------- */
+const endPlan = (cue: Cue) => ({a: cue('a', 25)});
+const End = make(({f, cue}) => {
+  const p = endPlan(cue);
+  const cam: CK[] = [{at: 0, u: 0, v: 0.8, z: 7.2, k: 62}, {at: 24, u: -4, v: 0, z: 2.6, k: 30, d: 24}];
+  const back3 = eo(clamp((f - p.a) / 10));
+  return <>
+    <IsoCanvas draw={(g, iso) => {
+      iso.cam = camAt(cam, f);
+      world(g, iso, {lamp: 1, leds: f / 30});
+      iso.flush();
+      const [lx, ly] = iso.P(ST.lamp[0], ST.lamp[1], 3.9), r = iso.cam.k * 9;
+      const gr = g.createRadialGradient(lx, ly, 0, lx, ly, r);
+      gr.addColorStop(0, 'rgba(255,252,156,0.75)'); gr.addColorStop(1, 'rgba(255,252,156,0)');
+      g.fillStyle = gr; g.beginPath(); g.arc(lx, ly, r, 0, Math.PI * 2); g.fill();
+      bubble(iso, ST.phone[0], ST.phone[1], 3.9, back(clamp((f - p.a - 6) / 9), 2.2));
+    }} />
+    <div style={{position: 'absolute', left: 52, top: 140, display: 'flex', alignItems: 'baseline', gap: 18, transform: `translateY(${(1 - back3) * -30}px)`, opacity: back3}}>
+      <span style={{fontFamily: inter, fontWeight: 600, fontSize: 220, lineHeight: 0.9, color: K.ink, letterSpacing: -6}}>6</span>
+      <span style={{fontFamily: CN, fontWeight: 900, fontSize: 96, color: K.ink}}>种协议</span>
+    </div>
+    {f >= p.a ? <Legend f={f} hop={p.a + 4} top={352} /> : null}
+    <Corner left="ONE SENTENCE · 6 PROTOCOLS" />
+  </>;
+}, (cue) => {
+  const p = endPlan(cue);
+  return [{at: 0, kind: 'whoosh', gain: 0.07}, {at: p.a, kind: 'tick', gain: 0.07}];
+});
+
+/** Cover anchor (880 × 800, f = 0): the whole island with the 「开灯」 bubble and the dark lamp. */
+const Cover: Scene = () => <div style={{position: 'absolute', left: 0, top: 0, width: 880, height: 800, overflow: 'hidden', background: K.ground}}>
+  <div style={{position: 'absolute', left: -100 * 0.86, top: -540 * 0.86, width: W, height: 1920, transform: 'scale(0.86)', transformOrigin: '0 0'}}>
+    <IsoCanvas draw={(g, iso) => {
+      iso.cam = camAt(HOOK_CAM, 0);
+      world(g, iso, {route: 1});
+      iso.flush();
+      bubble(iso, ST.phone[0], ST.phone[1], 3.9, 1.1);
+    }} />
+  </div>
+</div>;
+
 export const netSixProtocolsScenes: Record<string, Scene> = {
-  'ns.hook': Hook, 'ns.tcp': Tcp, 'ns.stack': Stack,
+  'ns.hook': Hook, 'ns.dns': Dns, 'ns.udp': Udp, 'ns.ip': Ip, 'ns.tcp': Tcp, 'ns.http': Http, 'ns.mqtt': Mqtt, 'ns.stack': Stack, 'ns.end': End, 'ns.cover': Cover,
 };

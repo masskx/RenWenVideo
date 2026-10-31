@@ -20,6 +20,7 @@
  "score": {
   "mood": "playful",
   "climax": "mqtt",
+  "climaxAt": 4.27,
   "lifts": [
    "tcp"
   ],
@@ -28,9 +29,13 @@
     "scene": "tcp",
     "at": 0,
     "dur": 0.3
+   },
+   {
+    "scene": "mqtt",
+    "at": 3.93,
+    "dur": 0.3
    }
-  ],
-  "climaxAt": 4.2
+  ]
  },
  "steps": [],
  "look": {
@@ -57,7 +62,20 @@
    "onAccent": "#12272E",
    "dim": "#6B7A7E"
   },
-  "breaks": {}
+  "breaks": {
+   "路通了，真正的话用HTTP写": "路通了，|真正的话用HTTP写"
+  },
+  "chips": {
+   "hook": "#FFFC9C",
+   "dns": "#EAA6F0",
+   "udp": "#8FC4F0",
+   "ip": "#EBCF95",
+   "tcp": "#A9A5F0",
+   "http": "#A9DC78",
+   "mqtt": "#A0559A",
+   "stack": "#EBCF95",
+   "end": "#FFFC9C"
+  }
  },
  "highlights": [],
  "cover": "hook",
@@ -82,7 +100,7 @@
      80,
      110
     ],
-    "size": 72,
+    "size": 96,
     "anchor": [
      540,
      980,
@@ -95,7 +113,7 @@
      80,
      90
     ],
-    "size": 70,
+    "size": 92,
     "anchor": [
      540,
      860,
@@ -108,7 +126,7 @@
      80,
      300
     ],
-    "size": 74,
+    "size": 104,
     "anchor": [
      540,
      1180,
@@ -183,5 +201,8 @@
    "pace": "brisk",
    "narration": "下次灯没亮，{a}你就知道该问是哪一层了。"
   }
- ]
+ ],
+ "musicSrc": "audio/tutorials/net-six-protocols/score.mp3",
+ "musicVolume": 0.147,
+ "musicDuckDb": 10
 }

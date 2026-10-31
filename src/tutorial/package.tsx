@@ -419,7 +419,7 @@ export const CaptionMap: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Rec
   const ms = (frame / 30) * 1000;
   const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
   if (!c) return null;
-  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 12.5);
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 11.5);
   const sz = Math.max(60, Math.min(64, Math.floor(800 / Math.max(...lines.map(units)))));
   const b = ease.outCubic(clamp((ms - c.startMs) / 120));
   const t = ease.outCubic(clamp((ms - c.startMs - 60) / 180));

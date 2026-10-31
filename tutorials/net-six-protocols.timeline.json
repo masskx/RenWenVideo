@@ -1,0 +1,280 @@
+{
+  "id": "net-six-protocols",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1441,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/net-six-protocols/01-hook.mp3",
+      "audioMs": 3997,
+      "startFrame": 0,
+      "durationFrames": 132,
+      "cues": {
+        "a": 1455,
+        "b": 2135
+      },
+      "captions": [
+        {
+          "text": "你对手机说“开灯”",
+          "startMs": 138,
+          "endMs": 1455
+        },
+        {
+          "text": "灯亮之前，这句话至少要过6种协议",
+          "startMs": 1455,
+          "endMs": 4305
+        }
+      ]
+    },
+    {
+      "id": "dns",
+      "audioSrc": "audio/tutorials/net-six-protocols/02-dns.mp3",
+      "audioMs": 4702,
+      "startFrame": 132,
+      "durationFrames": 154,
+      "cues": {
+        "a": 862,
+        "b": 2226
+      },
+      "captions": [
+        {
+          "text": "第一步问路",
+          "startMs": 138,
+          "endMs": 862
+        },
+        {
+          "text": "手机只认得名字",
+          "startMs": 862,
+          "endMs": 2226
+        },
+        {
+          "text": "DNS把名字换成一串数字地址",
+          "startMs": 2226,
+          "endMs": 5055
+        }
+      ]
+    },
+    {
+      "id": "udp",
+      "audioSrc": "audio/tutorials/net-six-protocols/03-udp.mp3",
+      "audioMs": 4728,
+      "startFrame": 286,
+      "durationFrames": 154,
+      "cues": {
+        "a": 1243,
+        "b": 2373,
+        "c": 3502
+      },
+      "captions": [
+        {
+          "text": "问路用的是UDP",
+          "startMs": 138,
+          "endMs": 1243
+        },
+        {
+          "text": "包扔出去就不管",
+          "startMs": 1243,
+          "endMs": 2373
+        },
+        {
+          "text": "不握手、不确认",
+          "startMs": 2373,
+          "endMs": 3502
+        },
+        {
+          "text": "丢了就再问一次",
+          "startMs": 3502,
+          "endMs": 5044
+        }
+      ]
+    },
+    {
+      "id": "ip",
+      "audioSrc": "audio/tutorials/net-six-protocols/04-ip.mp3",
+      "audioMs": 4885,
+      "startFrame": 440,
+      "durationFrames": 159,
+      "cues": {
+        "a": 1624,
+        "b": 2974
+      },
+      "captions": [
+        {
+          "text": "地址有了，就轮到IP",
+          "startMs": 138,
+          "endMs": 1624
+        },
+        {
+          "text": "每个包都贴上地址",
+          "startMs": 1624,
+          "endMs": 2974
+        },
+        {
+          "text": "路由器一跳一跳往下传",
+          "startMs": 2974,
+          "endMs": 5057
+        }
+      ]
+    },
+    {
+      "id": "tcp",
+      "audioSrc": "audio/tutorials/net-six-protocols/05-tcp.mp3",
+      "audioMs": 6792,
+      "startFrame": 599,
+      "durationFrames": 216,
+      "cues": {
+        "a": 2245,
+        "b": 3451,
+        "c": 4450,
+        "d": 5380
+      },
+      "captions": [
+        {
+          "text": "但IP只管送",
+          "startMs": 138,
+          "endMs": 1281
+        },
+        {
+          "text": "不管丢没丢",
+          "startMs": 1281,
+          "endMs": 2245
+        },
+        {
+          "text": "所以要TCP：先握三次手",
+          "startMs": 2245,
+          "endMs": 4450
+        },
+        {
+          "text": "每个包编号",
+          "startMs": 4450,
+          "endMs": 5380
+        },
+        {
+          "text": "丢了哪个补哪个",
+          "startMs": 5380,
+          "endMs": 7040
+        }
+      ]
+    },
+    {
+      "id": "http",
+      "audioSrc": "audio/tutorials/net-six-protocols/06-http.mp3",
+      "audioMs": 6191,
+      "startFrame": 815,
+      "durationFrames": 198,
+      "cues": {
+        "a": 2594,
+        "b": 4189
+      },
+      "captions": [
+        {
+          "text": "路通了，真正的话用HTTP写",
+          "startMs": 138,
+          "endMs": 2594
+        },
+        {
+          "text": "一个请求，把灯打开",
+          "startMs": 2594,
+          "endMs": 4189
+        },
+        {
+          "text": "服务器回一个200",
+          "startMs": 4189,
+          "endMs": 5559
+        },
+        {
+          "text": "办成了",
+          "startMs": 5559,
+          "endMs": 6476
+        }
+      ]
+    },
+    {
+      "id": "mqtt",
+      "audioSrc": "audio/tutorials/net-six-protocols/07-mqtt.mp3",
+      "audioMs": 5381,
+      "startFrame": 1013,
+      "durationFrames": 174,
+      "cues": {
+        "a": 1624,
+        "b": 3091,
+        "c": 3983
+      },
+      "captions": [
+        {
+          "text": "最后一段换MQTT",
+          "startMs": 138,
+          "endMs": 1624
+        },
+        {
+          "text": "灯早就订阅了自己的频道",
+          "startMs": 1624,
+          "endMs": 3091
+        },
+        {
+          "text": "服务器一发布",
+          "startMs": 3091,
+          "endMs": 3983
+        },
+        {
+          "text": "消息马上推到灯上",
+          "startMs": 3983,
+          "endMs": 5627
+        }
+      ]
+    },
+    {
+      "id": "stack",
+      "audioSrc": "audio/tutorials/net-six-protocols/08-stack.mp3",
+      "audioMs": 5042,
+      "startFrame": 1187,
+      "durationFrames": 164,
+      "cues": {
+        "a": 2193,
+        "b": 3698
+      },
+      "captions": [
+        {
+          "text": "回头看，这句话是一层套一层",
+          "startMs": 138,
+          "endMs": 2193
+        },
+        {
+          "text": "HTTP装进TCP",
+          "startMs": 2193,
+          "endMs": 3698
+        },
+        {
+          "text": "TCP装进IP",
+          "startMs": 3698,
+          "endMs": 5308
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/net-six-protocols/09-end.mp3",
+      "audioMs": 2586,
+      "startFrame": 1351,
+      "durationFrames": 90,
+      "cues": {
+        "a": 824
+      },
+      "captions": [
+        {
+          "text": "下次灯没亮",
+          "startMs": 138,
+          "endMs": 824
+        },
+        {
+          "text": "你就知道该问是哪一层了",
+          "startMs": 824,
+          "endMs": 2870
+        }
+      ]
+    }
+  ]
+}
