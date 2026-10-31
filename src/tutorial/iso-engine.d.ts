@@ -1,0 +1,54 @@
+// Types for the ported lemo-opuscar iso-infographic engine (src/tutorial/iso-engine.js, MIT). Loose on purpose.
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export type Tri = [string, string, string];
+export const C30: number, S30: number, TAU: number;
+export function clamp(x: number, a?: number, b?: number): number;
+export function lerp(a: number, b: number, t: number): number;
+export function seg(t: number, a: number, b: number): number;
+export function ss(t: number): number;
+export function eo(t: number): number;
+export function eio(t: number): number;
+export function back(t: number, s?: number): number;
+export function hash(n: number): number;
+export function rgb(c: string | number[]): number[];
+export function css(r: number[], a?: number): string;
+export function mix(a: string | number[], b: string | number[], t: number): number[];
+export function hex(r: number[]): string;
+export function tri(c: string, lift?: number, drop?: number): Tri;
+export const PAL: any;
+export class Iso {
+  constructor(g: CanvasRenderingContext2D, W?: number, H?: number);
+  g: CanvasRenderingContext2D; W: number; H: number;
+  cam: {x: number; y: number; z: number; k: number};
+  desat: number; keep: boolean; alpha: number;
+  push(ox?: number, oy?: number, oz?: number, rot?: number, s?: number): void;
+  pop(): void;
+  P(x: number, y: number, z: number): [number, number];
+  L(x: number, y: number, z: number): [number, number];
+  unP(sx: number, sy: number, z?: number): [number, number];
+  col(c: string | number[], a?: number): string;
+  add(depth: number, fn: () => void, layer?: number): void;
+  flush(): void;
+  sub(fn: () => void): void;
+  poly(pts: number[][], fill: any, a?: number): void;
+  face3(pts3: number[][], t3: any, opt?: any): boolean;
+  box(x: number, y: number, z: number, w: number, d: number, h: number, t3: any, o?: any): void;
+  prism(pts: number[][], z: number, h: number, t3: any, o?: any): void;
+  cyl(x: number, y: number, z: number, r: number, h: number, t3: any, o?: any): void;
+  cone(x: number, y: number, z: number, r: number, h: number, t3: any, o?: any): void;
+  roof(x: number, y: number, z: number, w: number, d: number, h: number, t3: any, o?: any): void;
+  sphere(x: number, y: number, z: number, r: number, t3: any, o?: any): void;
+  flat(pts: number[][], z: number, c: any, o?: any): void;
+  line3(pts: number[][], c: any, lw?: number, o?: any): void;
+  bill(x: number, y: number, z: number, fn: (g: CanvasRenderingContext2D, iso: Iso, k: number) => void, o?: any): void;
+  text3(str: string, x: number, y: number, z: number, o?: any): void;
+  text3Now(str: string, x: number, y: number, z: number, o?: any): void;
+}
+export function normal(W: number[][]): number[];
+export function haloText(g: CanvasRenderingContext2D, s: string, x: number, y: number, o?: any): number;
+export function pin(iso: Iso, x: number, y: number, z: number, o?: any): void;
+export function inset(iso: Iso, ax: number, ay: number, cx: number, cy: number, r: number, a: number, drawIn: (g: CanvasRenderingContext2D, cx: number, cy: number, r: number, c: number) => void, o?: any): void;
+export function ring(g: CanvasRenderingContext2D, x: number, y: number, r: number, a?: number, t?: number, tag?: string | null, o?: any): void;
+export function cutLine(g: CanvasRenderingContext2D, pts: number[][], a: number, o?: any): void;
+export function hatch(g: CanvasRenderingContext2D, pts: number[][], o?: any): void;
+export function shape(iso: Iso, pts: number[][], at: number[], o?: any): void;

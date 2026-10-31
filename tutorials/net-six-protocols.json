@@ -1,0 +1,208 @@
+{
+ "id": "net-six-protocols",
+ "title": "一句开灯，6 种协议",
+ "subtitle": "IP TCP UDP DNS HTTP MQTT",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 300,
+ "series": "AI 原理 · 网络",
+ "credit": "示意 · 依据 RFC 768 / 791 / 1035 / 9110 / 9293、OASIS MQTT 5.0",
+ "source": "inputs/net-six-protocols/idea.md",
+ "maxSeconds": 60,
+ "score": {
+  "mood": "playful",
+  "climax": "mqtt",
+  "climaxAt": 4.27,
+  "lifts": [
+   "tcp"
+  ],
+  "silences": [
+   {
+    "scene": "tcp",
+    "at": 0,
+    "dur": 0.3
+   },
+   {
+    "scene": "mqtt",
+    "at": 3.93,
+    "dur": 0.3
+   }
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "map",
+  "captionTop": 1440,
+  "pk": {
+   "bg": "#ECF0EB",
+   "panel": "#FAFBF8",
+   "ink": "#12272E",
+   "accent": "#FFFC9C",
+   "onAccent": "#12272E",
+   "dim": "#6B7A7E"
+  },
+  "breaks": {
+   "路通了，真正的话用HTTP写": "路通了，|真正的话用HTTP写"
+  },
+  "chips": {
+   "hook": "#FFFC9C",
+   "dns": "#EAA6F0",
+   "udp": "#8FC4F0",
+   "ip": "#EBCF95",
+   "tcp": "#A9A5F0",
+   "http": "#A9DC78",
+   "mqtt": "#A0559A",
+   "stack": "#EBCF95",
+   "end": "#FFFC9C"
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "一句“开灯”",
+   "要过6种协议"
+  ],
+  "support": "IP · TCP · UDP · DNS · HTTP · MQTT",
+  "tag": "AI 原理 · 网络",
+  "anchor": "ns.cover",
+  "colors": {
+   "bg": "#ECF0EB",
+   "text": "#12272E",
+   "accent": "#7C77D8",
+   "dim": "#6B7A7E"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 96,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 92,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 104,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "keywords": [],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "ns.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "你对手机说“开灯”，{a}灯亮之前，{b}这句话至少要过6种协议。"
+  },
+  {
+   "id": "dns",
+   "visual": "ns.dns",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "第一步问路：{a}手机只认得名字，{b}DNS把名字换成一串数字地址。"
+  },
+  {
+   "id": "udp",
+   "visual": "ns.udp",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "问路用的是UDP：{a}包扔出去就不管，{b}不握手、不确认，{c}丢了就再问一次。"
+  },
+  {
+   "id": "ip",
+   "visual": "ns.ip",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "地址有了，就轮到IP：{a}每个包都贴上地址，{b}路由器一跳一跳往下传。"
+  },
+  {
+   "id": "tcp",
+   "visual": "ns.tcp",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "但IP只管送，不管丢没丢。{a}所以要TCP：{b}先握三次手，{c}每个包编号，{d}丢了哪个补哪个。"
+  },
+  {
+   "id": "http",
+   "visual": "ns.http",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "路通了，真正的话用HTTP写：{a}一个请求，把灯打开；{b}服务器回一个200，办成了。"
+  },
+  {
+   "id": "mqtt",
+   "visual": "ns.mqtt",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "最后一段换MQTT：{a}灯早就订阅了自己的频道，{b}服务器一发布，{c}消息马上推到灯上。"
+  },
+  {
+   "id": "stack",
+   "visual": "ns.stack",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "回头看，这句话是一层套一层：{a}HTTP装进TCP，{b}TCP装进IP。"
+  },
+  {
+   "id": "end",
+   "visual": "ns.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "下次灯没亮，{a}你就知道该问是哪一层了。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/net-six-protocols/score.mp3",
+ "musicVolume": 0.147,
+ "musicDuckDb": 10
+}

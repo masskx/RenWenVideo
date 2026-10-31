@@ -407,3 +407,34 @@ export const CaptionSwiss: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: R
     })}
   </div>;
 };
+
+/**
+ * The map-label subtitle (lemo iso-infographic §4, in 9:16): a pale card with a small radius and an ink border, a tiny
+ * isometric cube as the legend chip, centred above the bottom band. The border draws first (0.12 s), then the text wipes
+ * in left → right (0.18 s). `chip` is the colour of the protocol on stage (net-six-protocols: the subtitle is the legend),
+ * three tones derived like the engine's faces. ≤ 2 lines at 60–64 px.
+ */
+export const CaptionMap: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number; chip?: string}> = ({captions, k, breaks = {}, y = 1440, chip}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  if (!c) return null;
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 11.5);
+  const sz = Math.max(60, Math.min(64, Math.floor(800 / Math.max(...lines.map(units)))));
+  const b = ease.outCubic(clamp((ms - c.startMs) / 120));
+  const t = ease.outCubic(clamp((ms - c.startMs - 60) / 180));
+  const cc = chip ?? k.accent;
+  return <div style={{position: 'absolute', left: 0, width: W, top: y, display: 'flex', justifyContent: 'center'}}>
+    <div style={{position: 'relative', maxWidth: 900, padding: '14px 34px 18px 96px', borderRadius: 14, background: k.panel,
+      boxShadow: `0 0 0 ${3 * b}px ${k.ink}`, clipPath: `inset(0 ${(1 - b) * 100}% 0 0 round 14px)`}}>
+      <svg width={46} height={50} viewBox="-23 -25 46 50" style={{position: 'absolute', left: 30, top: 18 + (lines.length - 1) * sz * 0.6}}>
+        <polygon points="0,-20 19,-10 0,0 -19,-10" fill={cc} style={{filter: 'brightness(1.08)'}} />
+        <polygon points="-19,-10 0,0 0,22 -19,12" fill={cc} style={{filter: 'brightness(0.86)'}} />
+        <polygon points="19,-10 0,0 0,22 19,12" fill={cc} style={{filter: 'brightness(0.66)'}} />
+      </svg>
+      <div style={{clipPath: `inset(0 ${(1 - t) * 100}% 0 0)`}}>
+        {lines.map((line, i) => <div key={i} style={{fontFamily: font, fontWeight: 800, fontSize: sz, lineHeight: 1.22, color: k.ink, whiteSpace: 'nowrap'}}>{line}</div>)}
+      </div>
+    </div>
+  </div>;
+};
