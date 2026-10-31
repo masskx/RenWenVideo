@@ -6,6 +6,7 @@ import {TutorialCover, TutorialCoverCard, TutorialVideo} from './tutorial/Tutori
 import {Tutorial, TutorialTiming} from './tutorial/types';
 import {LAB_FRAMES, PropsLab} from './lab/PropsLab';
 import {PackageLab, PackageShot} from './lab/PackageLab';
+import {SceneLab, SCENE_LAB_FRAMES} from './lab/SceneLab';
 import aiEra11Rules from '../explainers/ai-era-11-rules.timeline.json';
 import marketingEngineer from '../explainers/marketing-engineer.timeline.json';
 // Studio preview defaults; render-tutorial.mjs passes any tutorials/<id>.json as inputProps.
@@ -34,4 +35,6 @@ export const RemotionRoot = () => <>
   <Composition id="PropsLab" component={PropsLab} width={1080} height={1920} fps={30} durationInFrames={LAB_FRAMES} defaultProps={{shot: 'hook' as const}} />
   {/* Proof frames for the news-package finish learned from lemo-opuscar (src/lab/PackageLab.tsx) */}
   <Still id="PackageLab" component={PackageLab} width={1080} height={1920} defaultProps={{shot: 'burnHook' as PackageShot}} />
+  {/* Any scene's layer at a frame, before voicing (src/lab/SceneLab.tsx) */}
+  <Composition id="SceneLab" component={SceneLab} width={1080} height={1920} fps={30} durationInFrames={SCENE_LAB_FRAMES} defaultProps={{visual: 'ns.hook'}} />
 </>;
