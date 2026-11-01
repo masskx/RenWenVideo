@@ -7,7 +7,11 @@ export type TutorialScene = {
   plates?: {id: string; prompt: string}[];
 };
 
+import type {HostConfig} from './host';
+
 export type Tutorial = {
+  /** The account's host IP: scenes it appears in (src/tutorial/host.tsx, docs/video-craft/IP形象.md). */
+  host?: HostConfig;
   id: string;
   title: string;
   subtitle: string;

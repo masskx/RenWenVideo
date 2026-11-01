@@ -3,6 +3,7 @@ import {AbsoluteFill, Sequence, interpolate, staticFile, useCurrentFrame, useVid
 import {Audio} from '@remotion/media';
 import {Layout, Palette, blueprint, cinema, color, font, layoutOf, mono, palette, paper} from './theme';
 import {sceneRegistry} from './scenes';
+import {HostLayer} from './host';
 import {CaptionBar, CaptionCard, CaptionLabel, CaptionStrip, CaptionSwiss, CaptionMap, CaptionTele, CaptionToast} from './package';
 import {DepthField, GridFloor} from './space';
 import {Dino} from './ui';
@@ -335,6 +336,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
           : look.header === 'chapters'
           ? <ChapterBar step={scene?.step ?? 0} prev={i ? stepOf(timing.scenes[i - 1].id) : (scene?.step ?? 0)} steps={tutorial.steps ?? []} />
           : (look.header ?? true) && <Header theme={theme} title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />}
+        {tutorial.host && <HostLayer cfg={tutorial.host} sceneId={s.id} prevId={timing.scenes[i - 1]?.id} nextId={timing.scenes[i + 1]?.id} audioSrc={s.audioSrc} leadMs={timing.leadMs ?? 0} dur={s.durationFrames} />}
         {look.captions === 'card' && look.pk ? <CaptionCard captions={s.captions} k={look.pk} keywords={tutorial.keywords} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'bar' && look.pk ? <CaptionBar captions={s.captions} k={look.pk} keywords={tutorial.keywords} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'strip' && look.pk ? <CaptionStrip captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />

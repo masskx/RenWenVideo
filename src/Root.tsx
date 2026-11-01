@@ -7,6 +7,7 @@ import {Tutorial, TutorialTiming} from './tutorial/types';
 import {LAB_FRAMES, PropsLab} from './lab/PropsLab';
 import {PackageLab, PackageShot} from './lab/PackageLab';
 import {SceneLab, SCENE_LAB_FRAMES} from './lab/SceneLab';
+import {HostLab} from './lab/HostLab';
 import aiEra11Rules from '../explainers/ai-era-11-rules.timeline.json';
 import marketingEngineer from '../explainers/marketing-engineer.timeline.json';
 // Studio preview defaults; render-tutorial.mjs passes any tutorials/<id>.json as inputProps.
@@ -37,4 +38,6 @@ export const RemotionRoot = () => <>
   <Still id="PackageLab" component={PackageLab} width={1080} height={1920} defaultProps={{shot: 'burnHook' as PackageShot}} />
   {/* Any scene's layer at a frame, before voicing (src/lab/SceneLab.tsx) */}
   <Composition id="SceneLab" component={SceneLab} width={1080} height={1920} fps={30} durationInFrames={SCENE_LAB_FRAMES} defaultProps={{visual: 'ns.hook'}} />
+  {/* The host IP's model sheet and talking test (src/lab/HostLab.tsx) */}
+  <Composition id="HostLab" component={HostLab} width={1920} height={1080} fps={30} durationInFrames={240} defaultProps={{sheet: 'model' as const}} />
 </>;
