@@ -204,5 +204,64 @@
  ],
  "musicSrc": "audio/tutorials/net-six-protocols/score.mp3",
  "musicVolume": 0.147,
- "musicDuckDb": 10
+ "musicDuckDb": 10,
+ "host": {
+  "x": 28,
+  "y": 1118,
+  "size": 265,
+  "scenes": {
+   "hook": {
+    "expr": "calm",
+    "pose": "wave",
+    "beats": [
+     {
+      "at": 1.6,
+      "pose": "idle",
+      "expr": "calm"
+     }
+    ]
+   },
+   "tcp": {
+    "expr": "surprise",
+    "pose": "shrug",
+    "beats": [
+     {
+      "at": 2.2,
+      "expr": "calm",
+      "pose": "idle"
+     },
+     {
+      "at": 4.4,
+      "expr": "think",
+      "pose": "think"
+     }
+    ]
+   },
+   "mqtt": {
+    "expr": "calm",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 3.9,
+      "expr": "surprise"
+     },
+     {
+      "at": 4.3,
+      "expr": "smile",
+      "pose": "point"
+     }
+    ]
+   },
+   "end": {
+    "expr": "smile",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 0.8,
+      "pose": "thumbs"
+     }
+    ]
+   }
+  }
+ }
 }

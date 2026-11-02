@@ -1,6 +1,6 @@
 # IP 形象：账号主持人（用户本人的卡通形象）
 
-> 用户 2026-11-01：“I need a character-based IP image. This is my profile picture. I want the IP to be animated, and I want it to be incorporated into each video to enhance my content.” 参考图：`inputs/host-ip/avatar.webp`（用户头像）。**形象定稿待用户确认**（model sheet：`inputs/host-ip/model-sheet.jpg`，样片：`inputs/host-ip/demo-net-six-protocols.mp4`）。
+> 用户 2026-11-01：“I need a character-based IP image. This is my profile picture. I want the IP to be animated, and I want it to be incorporated into each video to enhance my content.” 参考图：`inputs/host-ip/avatar.webp`（用户头像）。**形象已定稿**（用户 2026-11-02 看完 model sheet、样片和 claude-teardown-3d-sim 后：“OK, continue”）（model sheet：`inputs/host-ip/model-sheet.jpg`，样片：`inputs/host-ip/demo-net-six-protocols.mp4`）。
 
 ## 一、是什么
 
