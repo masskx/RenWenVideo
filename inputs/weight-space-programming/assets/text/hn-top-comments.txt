@@ -1,0 +1,137 @@
+HN item 50341174 | score=1595 | comments=511 | captured 2026-11-03 07:16 Asia/Taipei
+
+### Comment 1 (id 50342896)
+[user]
+LLMs have been used to investigate and improve LLMs for a long time. Drawing parallels to human brains and neurons isn't all that interesting other than as a philosophical abstraction.
+
+The work done in this experiment could have also been done by a sufficiently motivated human with enough time to explore, though obviously we would need more tools to visualize and track things. There have been a lot of interesting LLM introspection tools that allow you to peek into the model and see what's being activated and run experiments to trigger it.
+
+Are you familiar with abliterated or "uncensored" models where weights have been modified to avoid triggering refusal patterns? You take an LLM, create test cases that trigger the refusal pattern, observe weights involved in that response, then tweak those weights until the response is reduced. This is the same type of work, applied to a specific type of error that was impeding math within Qwen. That work can also be done with an LLM in a harness running the experiments. The amazing part here is that Astra was large enough to walk through the problem without other tooling doing it experimentally.
+
+So I don't think your analogy of a human modifying a neuron is quite applicable. LLM weights are not neurons and they've been inspectable, by humans or LLMs in a harness, for a long time.
+
+### Comment 2 (id 50344881)
+[user]
+I feel like this is conflating 2 separate results in a slightly misleading way.
+
+> We find that frontier LLMs are surprisingly good at natively reading and writing neural network weights
+
+This claim is backed up by the ability of Astra, given a text representation of the weights of tiny (20k) special-purpose models, to figure out what those models do and in some cases improve them beyond what RL could do just by reading the weights with no tool calls. They call this "weight-space programming".
+
+> Likewise, asked to make Qwen3.5-0.8B better at math without gradients, Astra identifies an issue in its weights causing reasoning loops that Qwen’s own model card warns about, and fixes this by natively editing 0.016% of the weights
+
+Here it did use tool calls, and seemingly used standard steering vector techniques to identify and fix reasoning loops in this small Qwen model. This doesn't seem that related to the previous results.
+
+### Comment 3 (id 50342593)
+[user]
+I think the "taught qwen math" part is not exactly correct though, even if the post makes it sound like that. Qwen already knew math, but it was bugging out and getting into an infinite loop when it tried to solve the problems (85 of its first 96 answers hit the token limit). With numpy and pytorch, Astra found where the loop was happening and fixed it.
+
+They also tried the same with Gemma 3 270M, which doesn't loop and is just bad at math, and Astra couldn't improve it. Still impressive, but it's more in the realm of what I'd expect, given labs are probably training their models on ML research and interpretability work.
+
+### Comment 4 (id 50344366)
+[user]
+This is exciting. I've been training a Qwen3.5-2B model for the past few weeks, trying to teach it certain skills that it lacks.
+
+In the course of testing, one of the things which has been consistent is that when setting a thinking token budget for relatively small prompts that require a limited response, a pretty healthy token budget needs to be set because the model spends the first few hundred tokens just repeating the question/prompt back with some boilerplate "Analyze & Report" type language. I was also running into some loop problems sporadically.
+
+After reading this article I asked Astra to edit the backbone so that it started actual reasoning faster and applied a similar looping fix. It was able to reduce the token waste before reasoning by about 20%. I haven't been able to get it to loop yet, so hopefully it fixed that too.
+
+My message is admittedly low on info. But it's a pretty promising start!
+
+### Comment 5 (id 50342153)
+[user]
+> As a result, Astra spots and fixes a common failure of tiny reasoning models: they loop [13]. When the base model loops, it repeats the same text and rarely reaches an answer (85 of its first 96 practice answers ran to the 32,768-token limit). Astra traced the looping to one direction written by the MLPs of layers 15 and 19, and subtracted that direction from 64 output columns in each (131,072 weights), much like removing a behavior by deleting a single direction from a model’s weights
+
+HA! Now that's cool. Not necessarily the improvements, those are ancient and probably overtrained benchmarks, but it's so cool that the model found a singular direction for this "loop bug". I imagine it could possibly do much the same thing in finding other "single directions" on a variety of topics (if allowed by guardrails). This is really really cool, especially for the mechinterp folks.
+
+### Comment 6 (id 50345325)
+[user]
+Let's analyze the premises
+
+1/ The internal users at labs and external users are completely different.
+
+2/ The lab people use the models to create recursive systems, systems to create prompts or synthetic data sets etc etc etc. Way different mentality than "fix the bug, make no mistakes"
+
+Is it really so farfetched to think they've been having models fuck with the weights of models? I think it's entirely possible, probably even likely as a way of generating permutations of synthetic datasets that will then be included or excluded
+
+If you subscribe to this, then it would be entirely possible for this to have become a major part of post-training and be practically impossible to exclude from public facing models, which are famously hard to govern. The models barely know their own version numbers.
+
+### Comment 7 (id 50344996)
+[user]
+For the tiny models with a few thousand weights, it seems plausible Astra can actually understand what the network detects and figure out it's e.g. a triangle detector. This is possibly helped by the existence of many breakout playing networks on the web.
+
+For Qwen, even the smallest versions like 3.5-0.8B it's becoming less plausible that it could be interpreted in a forward pass, even with reasoning. I'm wondering if the result here is recalled from many examples of instruction tuned versions of this model.
+
+A smaller Gemma model doesn't fare as well but unclear whether this is due to fewer users and less weight examples or because it's already very well trained.
+
+### Comment 8 (id 50343443)
+[user]
+> This is simultaneously very cool but also a bit exaggerated. Reading the prompt you gave, the prompt veeery much hints that looping is the issue and to find neurons that fix this. And as you say (screenshot below), it couldn't otherwise improve math.
+
+https://x.com/giffmana/status/2117346161866514524
+
+### Comment 9 (id 50343529)
+[user]
+And here we go...
+
+As others have said, while still absolutely insane, I don't find it completely out-of-the-blue surprising. One of the recurring abilities of (current-generation) LLMs seem to be to rapidly grasp very complex systems, where humans would need months or years to reach the same level of expertise.
+
+You can see this in the way a coding agent can "understand" and explain sprawling legacy codebases in seconds.
+
+You can also see it in the projects that are using them to reverse-engineer proprietary IoT protocols or computer games.
+
+But those were all systems where we had detailed knowledge about what structures are there to be reverse-enginered.
+
+If the models can transfer this ability to some other systems where we don't know the underlying structure then I think we will be in for a lot more craziness in the future. (Protein interaction networks? DNA sequences? Ecosystem interactions? Animal languages?)
+
+As for weights, if the models really can analyze the semantics behind specific weights or directions, I have my hopes that they could also give a textual explanation or help designing tools to make "handcrafting" weights more practical in general.
+
+### Comment 10 (id 50343394)
+[user]
+This was shocking to me; but on reading it makes far more sense.
+
+- the primary experiments are on  small policy networks - they are compressed dynamic system models. The observation and action space can be read off. It’s not surprising to me that these types of networks can be used to identify the env they were trained on
+
+- the exps on actual llms remove looping behaviour and that’s it - from article “but it could not add an ability the model lacked”
+
+I’d say this is fortunate because if llms could do the latter, rsi would be immediate. It may be possible we simply need bigger and better edit models, but at least from the experiments there doesn’t seem to be any indication that is imminently about to work.
+
+Conceptually incredibly interesting non the less.
+
+### Comment 11 (id 50341841)
+[user]
+This is insane.
+
+Astra can, without tooling, determine what games small networks are trained on, can edit the weights of networks directly to improve outcomes, and can hand edit a small qwen model to improve its math skills by like 5x.
+
+I'm shook. If you'd asked me this morning whether LLMs have native understanding of their weights that is less than human <-> neuron understanding, the same as human or more than human, I would have said "same to less" depending on definitions.
+
+No human can go edit a brain to become better at math. This is just very, very surprising to me and extremely interesting. I would guess this upsets quite a number of interp theories and philosophical takes on what's going on with these networks.
+
+### Comment 12 (id 50342516)
+[user]
+The math example on Qwen was based on 50 batched iterations, so the model was able to evaluate it's changes on downstream tasks. And the fix was essentially to remove a direction in activation space that causes looping instead of an exit, this was already known to be a thing(all of the jailbreak/unleashed models do this) following Arditi et al. (Refusal in language models is mediated by a single direction, 2024)
+
+So it's not able to insert new knowledge, but it's able to adjust the routing/looping/weighing of existing one.
+
+As I understand, it can replace post-training like LoRA/GRPO, but if it'd cheaper the authors don't go into
+
+### Comment 13 (id 50342074)
+[user]
+On balance I'm not that surprised that it can guess games by looking at the weights of a tiny neural net. A human can do the same by looking at the weights of an MLP trained on mnist, for example. With that simple structure, it's easy to look at the input layer and see that features correspond to the spatial location of objects of interest.
+
+I'm much more surprised that it can do this on larger models, although the details seem to suggest that it's given a lot more freedom to run forward passes and do limited experiments, not just eyeball the weights.
+
+### Comment 14 (id 50343034)
+[user]
+As insane as this result is, next steps are even crazier:
+
+> We are currently building a benchmark and a harness for LLMs’ capability on Weight-Space Programming. We believe this will provide a standardized evaluation to measure and accelerate progress in Weight-Space Programming, turning what currently seems like black magic into a rigorous, reproducible engineering discipline.
+
+Imagine this benchmark lasting as long as Arc-AGI-3 has. This could be the first foothold on hill-climbing mech-interp.
+
+### Comment 15 (id 50342282)
+[user]
+One consideration is that Qwen3.5 has bigger/later versions that are already better at math. If it was indeed training on ML research, it's possible that what it is actually doing is applying lessons learned from the Qwen3.8 27B weights (which independently solved the problem) to Qwen3.5 0.8B.
+
+I doubt it's that simple, but I could totally see an LLM being able to make that association and apply a fix from an improved LLM to a smaller one with the same architecture.
