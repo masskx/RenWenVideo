@@ -1,0 +1,209 @@
+{
+ "id": "patrol-robot-5-guards",
+ "title": "巡逻机器人顶几个保安",
+ "subtitle": "三个说法，一个做法",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.04
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 300,
+ "series": "AI 新闻 · 落地",
+ "credit": "据澎湃号（转述台州晚报）、万为官网、江苏省委新闻网、扬州网",
+ "source": "inputs/patrol-robot-5-guards/materials.md",
+ "maxSeconds": 45,
+ "score": {
+  "mood": "news",
+  "climax": "quote",
+  "lifts": [
+   "vendor"
+  ],
+  "silences": [
+   {
+    "scene": "source",
+    "at": 0,
+    "dur": 0.3
+   }
+  ],
+  "climaxAt": 3.6
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "tear",
+  "captionTop": 1450,
+  "pk": {
+   "bg": "#0B0C0E",
+   "panel": "#141619",
+   "ink": "#ECEAE4",
+   "accent": "#D85A31",
+   "onAccent": "#FFFFFF",
+   "dim": "#8B9097"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "x": 24,
+  "y": 1110,
+  "size": 245,
+  "scenes": {
+   "hook": {
+    "expr": "think",
+    "pose": "idle"
+   },
+   "vendor": {
+    "expr": "surprise",
+    "pose": "shrug",
+    "beats": [
+     {
+      "at": 1.6,
+      "expr": "serious",
+      "pose": "idle"
+     }
+    ]
+   },
+   "end": {
+    "expr": "calm",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 0.9,
+      "pose": "point",
+      "expr": "smile"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "顶5个保安？",
+   "厂家自己说3个"
+  ],
+  "support": "巡逻机器人：机器发现，人去处理",
+  "tag": "AI 新闻 · 落地",
+  "anchor": "pr.cover",
+  "colors": {
+   "bg": "#0B0C0E",
+   "text": "#ECEAE4",
+   "accent": "#D85A31",
+   "dim": "#8B9097"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 96,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 92,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 104,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "keywords": [],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "pr.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "有媒体报道：一台巡逻机器人顶5个保安，{a}一个月只耗电约200度。"
+  },
+  {
+   "id": "vendor",
+   "visual": "pr.vendor",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "可做机器人的厂家自己算的，{a}是3个，{b}或者4到5个。"
+  },
+  {
+   "id": "source",
+   "visual": "pr.source",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "最早那篇报道的原文，{a}我们也没找到。"
+  },
+  {
+   "id": "work",
+   "visual": "pr.work",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "它真正干的活是：{a}24小时绕着小区走，{b}夜里用热成像看。"
+  },
+  {
+   "id": "park",
+   "visual": "pr.park",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "看到车停在禁停区，{a}拍下来推给物业后台。"
+  },
+  {
+   "id": "quote",
+   "visual": "pr.quote",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "扬州那个小区的负责人说：{a}以前晚班要两个人，{b}现在一个人盯屏幕，{c}有异常再出去。"
+  },
+  {
+   "id": "end",
+   "visual": "pr.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "机器负责发现，{a}出门处理的，还是人。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/patrol-robot-5-guards/score.mp3",
+ "musicVolume": 0.134,
+ "musicDuckDb": 10
+}

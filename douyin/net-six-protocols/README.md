@@ -1,6 +1,7 @@
 # 一句“开灯”，灯亮之前要过 6 种协议——IP、TCP、UDP、DNS、HTTP、MQTT 一条路讲完
 
 - 成片：`video.mp4`（1080×1920，30 fps，H.264 + AAC，48.1 秒，约 −15 LUFS）
+- 2026-11-02 重渲：加上账号主持人（IP 形象，`src/tutorial/host.tsx`）——钩子挥手、「但 IP 只管送」惊讶摊手再托下巴、灯亮时指向灯、结尾点赞；其余不变
 - 模板：`lemo/iso-infographic`（等距信息图，lemo-opuscar；它 MIT 的 Canvas 引擎原样移植在 `src/tutorial/iso-engine.js`）。照搬：真等距、每面三色调、浮在浅底上的小岛和剖面边、标签针、虚线路线、线先走物后到、focus + context（讲哪站别的褪灰）、剖开 + 斜线剖面、追踪环、字幕是地图标签。模板改造：每个协议用 Wireshark 默认着色规则里它本来的颜色（TCP #E7E6FF、UDP #DAEEFF、HTTP #E4FFC7、Routing #FFF3D6 给 IP、SYN/FIN 灰给握手、RST 红只给丢包；DNS / MQTT 没有默认规则，DNS 用同文件闲置的 ICMP 粉、MQTT 用 mqtt.org 的梅紫）；贯穿物件是那句「开灯」本身（黄色气泡，最后变成灯光）；字幕卡里的图例小方块跟着当前协议换色；字 Inter Display + 思源黑体 + JetBrains Mono；合成 playful 配乐 + 每个协议一种拟音
 - 结构：一条路——手机 → DNS 问路（走 UDP，丢了再问）→ IP 贴地址一跳一跳（TTL 64 → 63 → 62）→「但 IP 只管送」→ TCP 三次握手、编号、3 号重发 → HTTP 请求 POST /light，回 200 OK → MQTT 订阅 home/light，Broker 推送，灯亮（配乐高潮）→ 剖开那个包：IP ⊃ TCP ⊃ HTTP ⊃「开灯」→ 回到第 0 帧的小岛（灯亮着）
 - 封面：`cover-9x16.jpg`（抖音 / 视频号）、`cover.jpg`（3:4，小红书）、`cover-6x7.jpg`（6:7）；标题「一句“开灯” / 要过6种协议」，辅助句「IP · TCP · UDP · DNS · HTTP · MQTT」

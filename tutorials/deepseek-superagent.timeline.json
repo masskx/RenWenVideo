@@ -1,0 +1,235 @@
+{
+  "id": "deepseek-superagent",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1125,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/deepseek-superagent/01-hook.mp3",
+      "audioMs": 3605,
+      "startFrame": 0,
+      "durationFrames": 121,
+      "cues": {
+        "a": 1090,
+        "b": 2483
+      },
+      "captions": [
+        {
+          "text": "群里没人@它",
+          "startMs": 138,
+          "endMs": 1090
+        },
+        {
+          "text": "它自己发现了一个bug",
+          "startMs": 1090,
+          "endMs": 2483
+        },
+        {
+          "text": "还提了修复PR",
+          "startMs": 2483,
+          "endMs": 3914
+        }
+      ]
+    },
+    {
+      "id": "what",
+      "audioSrc": "audio/tutorials/deepseek-superagent/02-what.mp3",
+      "audioMs": 5956,
+      "startFrame": 121,
+      "durationFrames": 191,
+      "cues": {
+        "a": 3376
+      },
+      "captions": [
+        {
+          "text": "这是DeepSeek Harness",
+          "startMs": 138,
+          "endMs": 1281
+        },
+        {
+          "text": "团队的Super-agent设计探索",
+          "startMs": 1281,
+          "endMs": 3376
+        },
+        {
+          "text": "官方说：是架构思路",
+          "startMs": 3376,
+          "endMs": 5070
+        },
+        {
+          "text": "不是新产品",
+          "startMs": 5070,
+          "endMs": 6267
+        }
+      ]
+    },
+    {
+      "id": "limit",
+      "audioSrc": "audio/tutorials/deepseek-superagent/03-limit.mp3",
+      "audioMs": 3109,
+      "startFrame": 312,
+      "durationFrames": 106,
+      "cues": {
+        "a": 824
+      },
+      "captions": [
+        {
+          "text": "他们观察到",
+          "startMs": 138,
+          "endMs": 824
+        },
+        {
+          "text": "一个人同时只能盯3到5个会话",
+          "startMs": 824,
+          "endMs": 3424
+        }
+      ]
+    },
+    {
+      "id": "router",
+      "audioSrc": "audio/tutorials/deepseek-superagent/04-router.mp3",
+      "audioMs": 3997,
+      "startFrame": 418,
+      "durationFrames": 132,
+      "cues": {
+        "a": 1090,
+        "b": 2917
+      },
+      "captions": [
+        {
+          "text": "办法是分两层",
+          "startMs": 138,
+          "endMs": 1090
+        },
+        {
+          "text": "总管Router只管沟通和派活",
+          "startMs": 1090,
+          "endMs": 2917
+        },
+        {
+          "text": "自己不干活",
+          "startMs": 2917,
+          "endMs": 4289
+        }
+      ]
+    },
+    {
+      "id": "worker",
+      "audioSrc": "audio/tutorials/deepseek-superagent/05-worker.mp3",
+      "audioMs": 3396,
+      "startFrame": 550,
+      "durationFrames": 114,
+      "cues": {
+        "a": 2081
+      },
+      "captions": [
+        {
+          "text": "Worker各开一个隔离的会话去干",
+          "startMs": 138,
+          "endMs": 2081
+        },
+        {
+          "text": "干完向总管汇报",
+          "startMs": 2081,
+          "endMs": 3738
+        }
+      ]
+    },
+    {
+      "id": "speed",
+      "audioSrc": "audio/tutorials/deepseek-superagent/06-speed.mp3",
+      "audioMs": 4389,
+      "startFrame": 664,
+      "durationFrames": 144,
+      "cues": {
+        "a": 2271
+      },
+      "captions": [
+        {
+          "text": "官方自测，中位数12.4分钟做完",
+          "startMs": 138,
+          "endMs": 2271
+        },
+        {
+          "text": "单会话方案要20.4分钟",
+          "startMs": 2271,
+          "endMs": 4729
+        }
+      ]
+    },
+    {
+      "id": "cost",
+      "audioSrc": "audio/tutorials/deepseek-superagent/07-cost.mp3",
+      "audioMs": 3631,
+      "startFrame": 808,
+      "durationFrames": 121,
+      "cues": {
+        "a": 2310
+      },
+      "captions": [
+        {
+          "text": "但缓存token用了2323万",
+          "startMs": 138,
+          "endMs": 2310
+        },
+        {
+          "text": "差不多是3.8倍",
+          "startMs": 2310,
+          "endMs": 3876
+        }
+      ]
+    },
+    {
+      "id": "proto",
+      "audioSrc": "audio/tutorials/deepseek-superagent/08-proto.mp3",
+      "audioMs": 2952,
+      "startFrame": 929,
+      "durationFrames": 101,
+      "cues": {
+        "a": 1014
+      },
+      "captions": [
+        {
+          "text": "原型开源了",
+          "startMs": 138,
+          "endMs": 1014
+        },
+        {
+          "text": "但官方写着",
+          "startMs": 1014,
+          "endMs": 1922
+        },
+        {
+          "text": "不是正式产品",
+          "startMs": 1922,
+          "endMs": 3276
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/deepseek-superagent/09-end.mp3",
+      "audioMs": 2743,
+      "startFrame": 1030,
+      "durationFrames": 95,
+      "cues": {
+        "a": 1471
+      },
+      "captions": [
+        {
+          "text": "它省的是你的注意力",
+          "startMs": 138,
+          "endMs": 1471
+        },
+        {
+          "text": "花的是更多token",
+          "startMs": 1471,
+          "endMs": 3029
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+ "id": "deepseek-superagent",
+ "title": "群里没人@它，它自己修了 bug",
+ "subtitle": "DeepSeek Super-agent 设计探索",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 300,
+ "series": "AI 新闻 · Agent",
+ "credit": "据 DeepSeek Harness 团队《Super-agent 设计探索》",
+ "source": "inputs/deepseek-superagent/materials.md",
+ "maxSeconds": 50,
+ "score": {
+  "mood": "playful",
+  "climax": "cost",
+  "lifts": [
+   "router"
+  ],
+  "silences": [
+   {
+    "scene": "cost",
+    "at": 0,
+    "dur": 0.3
+   }
+  ],
+  "climaxAt": 1.6
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "toast",
+  "captionTop": 1440,
+  "pk": {
+   "bg": "#E9ECF3",
+   "panel": "rgba(255,255,255,0.86)",
+   "ink": "#FFFFFF",
+   "accent": "#2460EA",
+   "onAccent": "#FFFFFF",
+   "dim": "#6B7385"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "x": 20,
+  "y": 1196,
+  "size": 205,
+  "scenes": {
+   "hook": {
+    "expr": "surprise",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 2.4,
+      "expr": "smile",
+      "pose": "point"
+     }
+    ]
+   },
+   "what": {
+    "expr": "serious",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 3.0,
+      "pose": "shrug",
+      "expr": "calm"
+     }
+    ]
+   },
+   "end": {
+    "expr": "think",
+    "pose": "think",
+    "beats": [
+     {
+      "at": 1.6,
+      "expr": "smile",
+      "pose": "idle"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "群里没人@它",
+   "它自己修了bug"
+  ],
+  "support": "DeepSeek Super-agent 设计探索（非正式产品）",
+  "tag": "AI 新闻 · Agent",
+  "anchor": "ds.cover",
+  "colors": {
+   "bg": "#E9ECF3",
+   "text": "#1C2333",
+   "accent": "#2460EA",
+   "dim": "#6B7385"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 96,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 92,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 104,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "keywords": [],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "ds.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "群里没人@它，{a}它自己发现了一个bug，{b}还提了修复PR。"
+  },
+  {
+   "id": "what",
+   "visual": "ds.what",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "这是DeepSeek Harness团队的Super-agent设计探索，{a}官方说：是架构思路，不是新产品。"
+  },
+  {
+   "id": "limit",
+   "visual": "ds.limit",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "他们观察到，{a}一个人同时只能盯3到5个会话。"
+  },
+  {
+   "id": "router",
+   "visual": "ds.router",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "办法是分两层：{a}总管Router只管沟通和派活，{b}自己不干活；"
+  },
+  {
+   "id": "worker",
+   "visual": "ds.worker",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "Worker各开一个隔离的会话去干，{a}干完向总管汇报。"
+  },
+  {
+   "id": "speed",
+   "visual": "ds.speed",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "官方自测，中位数12.4分钟做完，{a}单会话方案要20.4分钟；"
+  },
+  {
+   "id": "cost",
+   "visual": "ds.cost",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "但缓存token用了2323万，{a}差不多是3.8倍。"
+  },
+  {
+   "id": "proto",
+   "visual": "ds.proto",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "原型开源了，{a}但官方写着：不是正式产品。"
+  },
+  {
+   "id": "end",
+   "visual": "ds.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "它省的是你的注意力，{a}花的是更多token。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/deepseek-superagent/score.mp3",
+ "musicVolume": 0.145,
+ "musicDuckDb": 10
+}
