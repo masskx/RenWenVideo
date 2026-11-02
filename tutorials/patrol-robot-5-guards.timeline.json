@@ -1,0 +1,193 @@
+{
+  "id": "patrol-robot-5-guards",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 930,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/patrol-robot-5-guards/01-hook.mp3",
+      "audioMs": 5042,
+      "startFrame": 0,
+      "durationFrames": 164,
+      "cues": {
+        "a": 3019
+      },
+      "captions": [
+        {
+          "text": "有媒体报道",
+          "startMs": 141,
+          "endMs": 962
+        },
+        {
+          "text": "一台巡逻机器人顶5个保安",
+          "startMs": 962,
+          "endMs": 3019
+        },
+        {
+          "text": "一个月只耗电约200度",
+          "startMs": 3019,
+          "endMs": 5306
+        }
+      ]
+    },
+    {
+      "id": "vendor",
+      "audioSrc": "audio/tutorials/patrol-robot-5-guards/02-vendor.mp3",
+      "audioMs": 3918,
+      "startFrame": 164,
+      "durationFrames": 130,
+      "cues": {
+        "a": 1864,
+        "b": 2682
+      },
+      "captions": [
+        {
+          "text": "可做机器人的厂家自己算的",
+          "startMs": 141,
+          "endMs": 1864
+        },
+        {
+          "text": "是3个，或者4到5个",
+          "startMs": 1864,
+          "endMs": 4216
+        }
+      ]
+    },
+    {
+      "id": "source",
+      "audioSrc": "audio/tutorials/patrol-robot-5-guards/03-source.mp3",
+      "audioMs": 2482,
+      "startFrame": 294,
+      "durationFrames": 87,
+      "cues": {
+        "a": 1413
+      },
+      "captions": [
+        {
+          "text": "最早那篇报道的原文",
+          "startMs": 141,
+          "endMs": 1413
+        },
+        {
+          "text": "我们也没找到",
+          "startMs": 1413,
+          "endMs": 2793
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "audioSrc": "audio/tutorials/patrol-robot-5-guards/04-work.mp3",
+      "audioMs": 4754,
+      "startFrame": 381,
+      "durationFrames": 155,
+      "cues": {
+        "a": 1536,
+        "b": 3220
+      },
+      "captions": [
+        {
+          "text": "它真正干的活是",
+          "startMs": 141,
+          "endMs": 1536
+        },
+        {
+          "text": "24小时绕着小区走",
+          "startMs": 1536,
+          "endMs": 3220
+        },
+        {
+          "text": "夜里用热成像看",
+          "startMs": 3220,
+          "endMs": 5018
+        }
+      ]
+    },
+    {
+      "id": "park",
+      "audioSrc": "audio/tutorials/patrol-robot-5-guards/05-park.mp3",
+      "audioMs": 3291,
+      "startFrame": 536,
+      "durationFrames": 111,
+      "cues": {
+        "a": 1372
+      },
+      "captions": [
+        {
+          "text": "看到车停在禁停区",
+          "startMs": 141,
+          "endMs": 1372
+        },
+        {
+          "text": "拍下来推给物业后台",
+          "startMs": 1372,
+          "endMs": 3564
+        }
+      ]
+    },
+    {
+      "id": "quote",
+      "audioSrc": "audio/tutorials/patrol-robot-5-guards/06-quote.mp3",
+      "audioMs": 5721,
+      "startFrame": 647,
+      "durationFrames": 184,
+      "cues": {
+        "a": 1782,
+        "b": 3193,
+        "c": 4468
+      },
+      "captions": [
+        {
+          "text": "扬州那个小区的负责人说",
+          "startMs": 141,
+          "endMs": 1782
+        },
+        {
+          "text": "以前晚班要两个人",
+          "startMs": 1782,
+          "endMs": 3193
+        },
+        {
+          "text": "现在一个人盯屏幕",
+          "startMs": 3193,
+          "endMs": 4468
+        },
+        {
+          "text": "有异常再出去",
+          "startMs": 4468,
+          "endMs": 6001
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/patrol-robot-5-guards/07-end.mp3",
+      "audioMs": 2873,
+      "startFrame": 831,
+      "durationFrames": 99,
+      "cues": {
+        "a": 1208
+      },
+      "captions": [
+        {
+          "text": "机器负责发现",
+          "startMs": 141,
+          "endMs": 1208
+        },
+        {
+          "text": "出门处理的",
+          "startMs": 1208,
+          "endMs": 1998
+        },
+        {
+          "text": "还是人",
+          "startMs": 1998,
+          "endMs": 3091
+        }
+      ]
+    }
+  ]
+}
