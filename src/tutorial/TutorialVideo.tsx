@@ -3,7 +3,8 @@ import {AbsoluteFill, Sequence, interpolate, staticFile, useCurrentFrame, useVid
 import {Audio} from '@remotion/media';
 import {Layout, Palette, blueprint, cinema, color, font, layoutOf, mono, palette, paper} from './theme';
 import {sceneRegistry} from './scenes';
-import {CaptionBar, CaptionCard, CaptionLabel, CaptionStrip, CaptionSwiss, CaptionMap, CaptionTele, CaptionToast} from './package';
+import {HostLayer} from './host';
+import {CaptionBar, CaptionCard, CaptionLabel, CaptionStrip, CaptionSwiss, CaptionMap, CaptionTear, CaptionTele, CaptionToast} from './package';
 import {DepthField, GridFloor} from './space';
 import {Dino} from './ui';
 import {CoverRatio, SceneTiming, TimedCaption, Tutorial, TutorialProps} from './types';
@@ -335,6 +336,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
           : look.header === 'chapters'
           ? <ChapterBar step={scene?.step ?? 0} prev={i ? stepOf(timing.scenes[i - 1].id) : (scene?.step ?? 0)} steps={tutorial.steps ?? []} />
           : (look.header ?? true) && <Header theme={theme} title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />}
+        {tutorial.host && <HostLayer cfg={tutorial.host} sceneId={s.id} prevId={timing.scenes[i - 1]?.id} nextId={timing.scenes[i + 1]?.id} audioSrc={s.audioSrc} leadMs={timing.leadMs ?? 0} dur={s.durationFrames} />}
         {look.captions === 'card' && look.pk ? <CaptionCard captions={s.captions} k={look.pk} keywords={tutorial.keywords} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'bar' && look.pk ? <CaptionBar captions={s.captions} k={look.pk} keywords={tutorial.keywords} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'strip' && look.pk ? <CaptionStrip captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
@@ -342,6 +344,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
           : look.captions === 'label' && look.pk ? <CaptionLabel captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'tele' && look.pk ? <CaptionTele captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'swiss' && look.pk ? <CaptionSwiss captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
+          : look.captions === 'tear' && look.pk ? <CaptionTear captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'map' && look.pk ? <CaptionMap captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} chip={look.chips?.[s.id]} />
           : <Caption captions={s.captions} highlights={tutorial.highlights} pal={pal} />}
         <Sequence from={leadFrames} name={`${s.id}-voice`}><Audio src={staticFile(s.audioSrc)} /></Sequence>

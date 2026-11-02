@@ -1,0 +1,93 @@
+One free Claude skill builds a working 3D model of any machine, with live gauges and a button for every part. Below: the setup and all 9 prompts.
+[atomic]  
+There's a free Claude skill that builds any machine as a 3D simulator. You orbit it, cut it open and watch the part doing the work.
+On the V8 the cylinder you track turns to glass and you watch the charge burn inside it while the pressure chart draws its loop.
+A V8 simulator like this pulled 3,790,000 views on X. A wildfire tool built with Opus 5.5 pulled 1,640,000. People watch a machine run a lot longer than they read about one.
+It works on anything with moving parts, even machines nobody has built. A sandworm 1,300 m long and 190 m across:
+[atomic]  
+The panels read the worm's real pose. The head section turns with the drill, the depth profile follows the buried body and the map draws its track.
+A robotic jellyfish:
+[atomic]  
+Every subsystem is a button. Press one and that part comes apart while the rest of the body steps aside.
+I built 7 of these in 2 days. 3 ship inside the skill: the V8, a Cessna landing gear and a Strandbeest.
+The skill is called teardown. It's free and runs inside Claude Code.
+[atomic]  
+[header-two] What You're Building
+A simulator is one HTML page, 800 KB, that works offline. Every one I built has the same 6 parts. Here they are on a walking robot:
+[atomic]  
+[unordered-list-item] The machine. Built from code: a hexagonal chassis on 6 legs, 18 joints, red servo housings, slotted femurs, shins ending in a cone tip.
+[unordered-list-item] The model. One solver for every leg. It plans each step a second ahead. The legs, the panels and the floor all read from it.
+[unordered-list-item] The panels. Joint torque, the height of every foot, the load on each of the 6 legs, solver time, servo temperature.
+[unordered-list-item] The buttons. Tripod, ripple and wave gaits, a direction pad, WASD keys, sliders for speed, stride and body height.
+[unordered-list-item] The window. The floor shows the solver at work: lines to every planted foot, a marker where each foot will land, swing trails.
+[unordered-list-item] The tour. Left alone, a cursor drives the page by itself. Click anything and it hands you control. 25 seconds of quiet and the tour comes back.
+[atomic]  
+[header-two] What You Need
+[unordered-list-item] Claude Code on any plan that includes it. I ran everything on Opus 5.5.
+[unordered-list-item] Node.js 20 or newer.
+[unordered-list-item] ffmpeg and Python 3, only for the video and the sound. Claude Code installs both if you ask.
+The skill is teardown: MIT licence, free, 3 machines inside. It's built on whaleyxbt's claude-motion, which gave it frame capture and the sound engine.
+[atomic]  
+[header-two] Step 1. Install the Skill
+[atomic]  
+Then, once, in the installed folder:
+[atomic]  
+Open Claude Code and type /teardown.
+[atomic]  
+[header-two] Step 2. Pick the Machine and Find a Reference
+This step decides everything. I learned it the hard way.
+I asked for a pangolin, an armadillo and a scorpion with nothing to work from. All 3 came out as generic toys. Then I gave the same model one clip of a real V8 simulator and it rebuilt the engine panel by panel.
+So pick a machine with one moving input and real numbers, then find one picture of it: a cutaway from a manual, a photo, a clip. 5 I haven't built yet:
+[ordered-list-item] A bicycle derailleur shifting across 11 sprockets
+[ordered-list-item] A mechanical watch escapement ticking at 4 Hz
+[ordered-list-item] A car differential on a turn
+[ordered-list-item] A sewing machine making a lockstitch
+[ordered-list-item] An excavator arm digging one bucket
+[header-two] Step 3. Build the Machine
+Paste this into Claude Code. Swap everything in [brackets].
+[atomic]  
+Why it holds:
+[unordered-list-item] The model comes first. The gear, the gauges and the timeline read one function, so they can't drift apart.
+[unordered-list-item] One input. A whole mechanism posed from one number is a mechanism. 12 parts animated by hand are 12 animations.
+Here's what that prompt built:
+[atomic]  
+One cylinder pushes a rack 201 mm. The rack turns a 32-tooth gear exactly half a turn. The legs swing back through 180° into the airframe.
+The numbers check out on paper. 32 teeth at a 4 mm module is a 128 mm gear. Half its circumference is 201 mm.
+The V8 and the Strandbeest came out of this same prompt with new brackets. The Strandbeest's model is Theo Jansen's 11 link lengths from 1990: turn the crank and every joint follows by circle intersection.
+[atomic]  
+[header-two] Step 4. Build the Console
+[atomic]  
+A chart that moves with the part is the reason people stay. The pressure loop on the V8 closes once every 720° of crank. You watch it close.
+[atomic]  
+[header-two] Step 5. Give It the Look
+[atomic]  
+Every line is a fix. The Strandbeest's white tubes vanished into a cream background until I moved it onto sand and gave it an ink outline. Seen face-on its 20 legs turned into a fence, so the camera sits at 3/4 along the spine. The dark version of my rabbit scene lost the feed's first second.
+[atomic]  
+[atomic]  
+[header-two] Step 6. Check It Like a Critic
+[atomic]  
+The stills caught 2 bugs I would have shipped. A rabbit's face pushed through the wall of its hat until one number, 0.222 m, put it back inside. The hexapod's leg flew off on every gait change until its feet aimed at the next real foothold.
+[atomic]  
+[header-two] Step 7. Make It a Page You Drive
+[atomic]  
+The integrated GPU is the test most people skip. The hexapod ran at 15 fps on an integrated GPU. After the quality steps it ran at 75. On a sand dune page the slow part was one shader computing the same displacement 5 times per vertex.
+[atomic]  
+[header-two] Step 8. Turn It Into a Video
+Record it:
+[atomic]  
+Score it:
+[atomic]  
+A screen recorder drops frames when the GPU works hard. A seeked tour can't. The V8 film comes out at 26 seconds with 189 sounds. Every thump lands on its power stroke.
+[atomic]  
+[header-two] Step 9. Put It Online
+[atomic]  
+The 1 MB line comes from a miss. My rabbit page weighed 15.9 MB with its models inside and X never showed the link card. With the models moved out it weighed 967 KB and the card showed up.
+[atomic]  
+[header-two] Bonus. Let Them Break It
+[atomic]  
+Whoever can push the machine past its limit learns what every number does.
+[atomic]  
+All 6 run in your browser, free: visual-learning.app. Press the buttons yourself.
+On a phone or a laptop's built-in graphics the first load takes a few seconds while the shaders compile. After that the page lowers its own quality to keep the frame rate up.
+The 3 in the skill are open source: github.com/elvarofficial/teardown
+

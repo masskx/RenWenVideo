@@ -1,0 +1,206 @@
+{
+  "id": "claude-teardown-3d-sim",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 937,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/claude-teardown-3d-sim/01-hook.mp3",
+      "audioMs": 3239,
+      "startFrame": 0,
+      "durationFrames": 110,
+      "cues": {
+        "a": 1009
+      },
+      "captions": [
+        {
+          "text": "你对AI说一句话",
+          "startMs": 135,
+          "endMs": 1009
+        },
+        {
+          "text": "它就造出一台能一层层拆开的V8",
+          "startMs": 1009,
+          "endMs": 3500
+        }
+      ]
+    },
+    {
+      "id": "who",
+      "audioSrc": "audio/tutorials/claude-teardown-3d-sim/02-who.mp3",
+      "audioMs": 3971,
+      "startFrame": 110,
+      "durationFrames": 132,
+      "cues": {
+        "a": 2373
+      },
+      "captions": [
+        {
+          "text": "这是国外开发者Elvar",
+          "startMs": 135,
+          "endMs": 1289
+        },
+        {
+          "text": "做的免费Claude技能",
+          "startMs": 1289,
+          "endMs": 2373
+        },
+        {
+          "text": "原帖浏览超过120万",
+          "startMs": 2373,
+          "endMs": 4268
+        }
+      ]
+    },
+    {
+      "id": "say",
+      "audioSrc": "audio/tutorials/claude-teardown-3d-sim/03-say.mp3",
+      "audioMs": 4232,
+      "startFrame": 242,
+      "durationFrames": 139,
+      "cues": {
+        "a": 520,
+        "b": 2212
+      },
+      "captions": [
+        {
+          "text": "他说：我用大白话描述一台机器",
+          "startMs": 135,
+          "endMs": 2212
+        },
+        {
+          "text": "它就做成能拆开的3D模拟器",
+          "startMs": 2212,
+          "endMs": 4551
+        }
+      ]
+    },
+    {
+      "id": "buttons",
+      "audioSrc": "audio/tutorials/claude-teardown-3d-sim/04-buttons.mp3",
+      "audioMs": 3030,
+      "startFrame": 381,
+      "durationFrames": 103,
+      "cues": {
+        "a": 974,
+        "b": 1816,
+        "c": 2424
+      },
+      "captions": [
+        {
+          "text": "每个部件一个按钮",
+          "startMs": 135,
+          "endMs": 974
+        },
+        {
+          "text": "一按就拆开",
+          "startMs": 974,
+          "endMs": 1816
+        },
+        {
+          "text": "剖开、透视",
+          "startMs": 1816,
+          "endMs": 3291
+        }
+      ]
+    },
+    {
+      "id": "model",
+      "audioSrc": "audio/tutorials/claude-teardown-3d-sim/05-model.mp3",
+      "audioMs": 3344,
+      "startFrame": 484,
+      "durationFrames": 113,
+      "cues": {
+        "a": 1709,
+        "b": 2291
+      },
+      "captions": [
+        {
+          "text": "秘诀是先写模型再画图",
+          "startMs": 135,
+          "endMs": 1709
+        },
+        {
+          "text": "整台机器，只听一个数字",
+          "startMs": 1709,
+          "endMs": 3628
+        }
+      ]
+    },
+    {
+      "id": "gear",
+      "audioSrc": "audio/tutorials/claude-teardown-3d-sim/06-gear.mp3",
+      "audioMs": 4389,
+      "startFrame": 597,
+      "durationFrames": 144,
+      "cues": {
+        "a": 1429,
+        "b": 2601
+      },
+      "captions": [
+        {
+          "text": "起落架用的是真数字",
+          "startMs": 135,
+          "endMs": 1429
+        },
+        {
+          "text": "201毫米齿条",
+          "startMs": 1429,
+          "endMs": 2601
+        },
+        {
+          "text": "32齿转180度",
+          "startMs": 2601,
+          "endMs": 4679
+        }
+      ]
+    },
+    {
+      "id": "seven",
+      "audioSrc": "audio/tutorials/claude-teardown-3d-sim/07-seven.mp3",
+      "audioMs": 2664,
+      "startFrame": 741,
+      "durationFrames": 92,
+      "cues": {
+        "a": 1149
+      },
+      "captions": [
+        {
+          "text": "他说两天做了7个",
+          "startMs": 135,
+          "endMs": 1149
+        },
+        {
+          "text": "连不存在的沙虫都能造",
+          "startMs": 1149,
+          "endMs": 2986
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/claude-teardown-3d-sim/08-end.mp3",
+      "audioMs": 3056,
+      "startFrame": 833,
+      "durationFrames": 104,
+      "cues": {
+        "a": 1429
+      },
+      "captions": [
+        {
+          "text": "以后想看懂一台机器",
+          "startMs": 135,
+          "endMs": 1429
+        },
+        {
+          "text": "也许不用真把它拆开",
+          "startMs": 1429,
+          "endMs": 3382
+        }
+      ]
+    }
+  ]
+}

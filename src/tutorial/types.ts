@@ -7,7 +7,11 @@ export type TutorialScene = {
   plates?: {id: string; prompt: string}[];
 };
 
+import type {HostConfig} from './host';
+
 export type Tutorial = {
+  /** The account's host IP: scenes it appears in (src/tutorial/host.tsx, docs/video-craft/IP形象.md). */
+  host?: HostConfig;
   id: string;
   title: string;
   subtitle: string;
@@ -37,7 +41,7 @@ export type Tutorial = {
     space?: 'plain' | 'grid' | 'depth' | 'both'; frame?: 'full' | 'douyin' | 'channels'; header?: boolean | 'chapters' | 'label'; tour?: boolean; particles?: boolean; mascot?: boolean;
     cuts?: {big?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch' | 'cut')[]; small?: ('sweep' | 'iris' | 'pageTurn' | 'push' | 'pushUp' | 'glitch' | 'cut')[]};
     /** Subtitle design: 'stroke' (default, centred outline), or a template's own — 'card' (caption-news caption card), 'bar' (news-package: one line under the strap). src/tutorial/package.tsx */
-    captions?: 'stroke' | 'card' | 'bar' | 'strip' | 'toast' | 'label' | 'tele' | 'swiss' | 'map';
+    captions?: 'stroke' | 'card' | 'bar' | 'strip' | 'toast' | 'label' | 'tele' | 'swiss' | 'map' | 'tear';
     /** Per-scene legend-chip colour for the map caption (scene id → hex). */
     chips?: Record<string, string>;
     /** The film's package palette (one accent, from its material) for 'card' / 'bar' captions. */

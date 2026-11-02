@@ -438,3 +438,20 @@ export const CaptionMap: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Rec
     </div>
   </div>;
 };
+
+/**
+ * The teardown subtitle (lemo teardown §4, in 9:16): a centred strip with a soft shadow and no box, warm white on the
+ * graphite stage, ≤ 2 lines at 60–64 px; it fades up 0.1 s.
+ */
+export const CaptionTear: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number}> = ({captions, k, breaks = {}, y = 1450}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  if (!c) return null;
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 13);
+  const sz = Math.max(60, Math.min(64, Math.floor(880 / Math.max(...lines.map(units)))));
+  const p = ease.outCubic(clamp((ms - c.startMs) / 100));
+  return <div style={{position: 'absolute', left: 0, width: W, top: y, display: 'flex', flexDirection: 'column', alignItems: 'center', opacity: p, transform: `translateY(${(1 - p) * 8}px)`}}>
+    {lines.map((line, i) => <div key={i} style={{fontFamily: font, fontWeight: 800, fontSize: sz, lineHeight: 1.22, color: k.ink, whiteSpace: 'nowrap', textShadow: '0 3px 14px rgba(0,0,0,0.75), 0 0 3px rgba(0,0,0,0.6)'}}>{line}</div>)}
+  </div>;
+};

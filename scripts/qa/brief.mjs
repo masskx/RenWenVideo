@@ -17,6 +17,9 @@ const storyboard = [`tutorials/${id}.storyboard.md`, `explainers/${id}.storyboar
 const fail = [], warn = [];
 const cfg0 = fs.existsSync(`tutorials/${id}.json`) ? JSON.parse(fs.readFileSync(`tutorials/${id}.json`, 'utf8')) : null;
 
+// The host IP (user, 2026-11-01: incorporate the animated character into each video; docs/video-craft/IP形象.md).
+if (cfg0 && !cfg0.host && !fs.existsSync(`douyin/${id}/video.mp4`)) warn.push('配置里没有 "host"：每支片都带账号主持人（钩子 / 转折 / 高潮 / 结尾；docs/video-craft/IP形象.md）');
+
 const REQUIRED = ['钩子台词', '钩子画面', '核心看点', '结尾台词', '标题·视频号', '标题·抖音', '标题·小红书'];
 // Directing decisions (导演方法.md §三): each is one line in "## 导演"; where it comes from is in 分镜模板.md.
 const DIRECTING = ['点子', '对标', '结构候选', '风格', '底色', '贯穿物件', '招牌镜头', '第0帧', '高潮停留', '和上一支不同'];

@@ -46,6 +46,7 @@ import {llmSamePromptScenes} from './llm-same-prompt-diff-output';
 import {mistralLarge4Scenes} from './mistral-large4-open-weights';
 import {huashuBudgetScenes} from './huashu-motion-1d95';
 import {netSixProtocolsScenes} from './net-six-protocols';
+import {claudeTeardownScenes} from './claude-teardown-3d-sim';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -98,4 +99,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...mistralLarge4Scenes,
   ...huashuBudgetScenes,
   ...netSixProtocolsScenes,
+  ...claudeTeardownScenes,
 };
