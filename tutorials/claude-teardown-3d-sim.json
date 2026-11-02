@@ -1,0 +1,221 @@
+{
+ "id": "claude-teardown-3d-sim",
+ "title": "一台能拆开的 V8",
+ "subtitle": "AI 做的 3D 拆解模拟器",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.22
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 300,
+ "series": "AI 工具 · 案例",
+ "credit": "据 @elvar_official（原帖 / 开源仓库）",
+ "source": "inputs/claude-teardown-3d-sim/materials.md",
+ "maxSeconds": 45,
+ "score": {
+  "mood": "wonder",
+  "climax": "gear",
+  "lifts": [
+   "model"
+  ],
+  "silences": [
+   {
+    "scene": "model",
+    "at": 0,
+    "dur": 0.3
+   }
+  ],
+  "climaxAt": 1.8
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "tear",
+  "captionTop": 1450,
+  "pk": {
+   "bg": "#141518",
+   "panel": "#1E2024",
+   "ink": "#F1EFE9",
+   "accent": "#D2142A",
+   "onAccent": "#FFFFFF",
+   "dim": "#9A9893"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "x": 24,
+  "y": 1100,
+  "size": 250,
+  "scenes": {
+   "hook": {
+    "expr": "calm",
+    "pose": "wave",
+    "beats": [
+     {
+      "at": 1.4,
+      "pose": "idle"
+     }
+    ]
+   },
+   "who": {
+    "expr": "smile",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 1.2,
+      "pose": "point",
+      "expr": "calm"
+     }
+    ]
+   },
+   "end": {
+    "expr": "smile",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 1.0,
+      "pose": "thumbs"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "一句话",
+   "造出能拆开的V8"
+  ],
+  "support": "国外开发者的免费 Claude 技能",
+  "tag": "AI 工具 · 案例",
+  "anchor": "td.cover",
+  "colors": {
+   "bg": "#141518",
+   "text": "#F1EFE9",
+   "accent": "#D2142A",
+   "dim": "#9A9893"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 96,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 92,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 104,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "keywords": [],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "td.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "你对AI说一句话，{a}它就造出一台能一层层拆开的V8。"
+  },
+  {
+   "id": "who",
+   "visual": "td.who",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "这是国外开发者Elvar做的免费Claude技能，{a}原帖浏览超过120万。"
+  },
+  {
+   "id": "say",
+   "visual": "td.say",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "他说：{a}我用大白话描述一台机器，{b}它就做成能拆开的3D模拟器。"
+  },
+  {
+   "id": "buttons",
+   "visual": "td.buttons",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "每个部件一个按钮，{a}一按就拆开、{b}剖开、{c}透视。"
+  },
+  {
+   "id": "model",
+   "visual": "td.model",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "秘诀是先写模型再画图：{a}整台机器，{b}只听一个数字。"
+  },
+  {
+   "id": "gear",
+   "visual": "td.gear",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "起落架用的是真数字：{a}201毫米齿条，{b}32齿转180度。"
+  },
+  {
+   "id": "seven",
+   "visual": "td.seven",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "他说两天做了7个，{a}连不存在的沙虫都能造。"
+  },
+  {
+   "id": "end",
+   "visual": "td.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "以后想看懂一台机器，{a}也许不用真把它拆开。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/claude-teardown-3d-sim/score.mp3",
+ "musicVolume": 0.142,
+ "musicDuckDb": 10
+}
