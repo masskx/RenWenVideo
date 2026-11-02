@@ -1,0 +1,383 @@
+
+<!doctype html>
+<html lang="zh-cn" >
+<head>
+    <meta charset="utf-8" />
+    <title>DeepSeek 提出 Super-agent 架构设计：Router 与 Worker 双层架构，探索更自主的 Agent 系统 - IT之家</title>
+    <meta name="description" content="DeepSeek 提出 Router+Worker 双层 Super-agent 架构，具备连续、高效、主动、持久特征，初步实验显示任务完成效率优于单 Session 方案，目前内部实例已投入运行。#DeepSeek#" />
+    <meta name="keywords" content="DeepSeek" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="https://www.ithome.com/rss/" />
+            <link href="//www.ithome.com/css/site.min.css?v=2.26.23021315" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="//www.ithome.com/favicon.ico" mce_href="//www.ithome.com/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="//www.ithome.com/favicon.ico" />
+    <link rel="apple-touch-icon" href="/img/t.png" />
+    
+    <link rel="canonical" href="https://www.ithome.com/1/020/615.htm" />
+        <link href="//img.ithome.com/file/css/card/1.css?v=2.3.25021801" rel="stylesheet" type="text/css" />
+        <link href="//www.ithome.com/css/detail.min.css?v=2.3.202512201503" rel="stylesheet" type="text/css" />
+
+    <link href="//dat.ruanmei.com/lib/login.min.css" type="text/css" rel="stylesheet">
+        <script src="//img.ithome.com/file/js/ua.min.js?v=2.2.26091001" type="text/javascript"></script>
+    <script src="https://s4.zstatic.net/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script>(window.jQuery || document.write("<script src='https:\/\/img.ruanmei.com\/btd\/cdn\/expire-1-w\/jquery\/3.4.0\/jquery.min.js'><\/script>"));</script>
+
+</head>
+<body class="next ">
+    <div id="top">
+        <div class="bb">
+            <a href="https://www.ithome.com" id="logo"></a>
+            <a href="https://img.ithome.com/app/songs/index.html" id="music" target="_blank"></a>
+            <div class="m-menu"><span></span></div>
+            <div class="fl">
+                <div class="mt sel">
+                    <a href="https://www.ithome.com" class="l">首页</a>
+                </div>
+                <div class="mt"><a href="https://quan.ithome.com" class="l">IT圈</a></div>
+                <div class="mt"><a href="https://www.zuihuimai.com" class="l">最会买</a></div>
+           
+            </div>
+            <div class="fr">
+
+                
+                <div class="mt" id="settings">
+                    <a href="###" class="s">设置</a>
+                    <ul class="mu">
+                        <li>
+                            <span>日夜间</span> <div id="dark-switcher">
+                                <div data-dark="2">随系统</div>
+                                <div data-dark="0">浅色</div>
+                                <div data-dark="1">深色</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span>主题色</span> <div id="nav-color"><div>黑色</div></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt" id="menu-con"><a href="https://dyn.ithome.com/tougao/">投稿</a></div>
+                <div class="mt" id="menu-sub">
+                    <a href="###" class="s">订阅</a>
+                    <ul class="mu">
+                        <li><a href="//www.ithome.com/rss/">RSS订阅</a></li>
+                        <li><a href="#" title="IT之家" rel="sidebar" onclick="addFav();">收藏IT之家</a></li>
+                    </ul>
+                </div>
+                <div class="mt so" id="menu-app">
+                    <a href="https://www.ruanmei.com" class="s">软媒应用</a>
+                    <ul class="mu">
+                        <li><a href="//m.ruanmei.com/" target="_blank">App客户端</a></li>
+                        <li><a href="//yaozhi.ruanmei.com/" target="_blank">要知App</a></li>
+                        <li><a href="//mofang.ruanmei.com/" target="_blank">软媒魔方</a></li>
+                    </ul>
+                </div>
+                <div id="toplogin" class="mt">
+                    <div class="init"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        nightModeHelper.init();
+        var nightMode = nightModeHelper.isNight();
+        var navColor = "";
+        if (document.cookie.indexOf("navColor=red") >= 0) {
+            document.body.className += " red";
+            navColor = "red";
+        }
+    </script>
+
+        <div id="nav" class="bb">
+            <div class="fl">
+                    <div>
+                        <a href="//it.ithome.com" target="_blank">业界</a>
+                        <a href="//mobile.ithome.com/" target="_blank">手机</a>
+                        <a href="//www.ithome.com/pc/" target="_blank">电脑</a>
+                        <a href="//www.ithome.com/labs/" target="_blank">测评</a>
+                        <a href="//www.ithome.com/video/" target="_blank">视频</a>
+                        <a href="//next.ithome.com/" target="_blank">AI</a>
+                        <a href="//www.ithome.com/apple/" target="_blank">苹果</a>
+                        <a href="//iphone.ithome.com/" target="_blank">iPhone</a>
+                        <a href="//hmos.ithome.com/" target="_blank">鸿蒙</a>
+                        <a href="//soft.ithome.com/" target="_blank">软件</a>
+                    </div>
+                    <div>
+                        <a href="//auto.ithome.com" target="_blank">智车</a>
+                        <a href="//digi.ithome.com/" target="_blank">数码</a>
+                        <a href="//www.ithome.com/college/" target="_blank">学院</a>
+                        <a href="//game.ithome.com/" target="_blank">游戏</a>
+                        <a href="//www.ithome.com/live/" target="_blank">直播</a>
+                        <a href="//www.ithome.com/5g/" target="_blank">5G</a>
+                        <a href="//www.ithome.com/microsoft/" target="_blank">微软</a>
+                        <a href="//win10.ithome.com/" target="_blank">Win10</a>
+                        <a href="//win11.ithome.com/" target="_blank">Win11</a>
+                        <a href="//www.ithome.com/zt/" target="_blank">专题</a>
+                    </div>
+            </div>
+            <div class="fr">
+                <div class="search"><input type="search" placeholder="请输入关键词" name="q" autocomplete="off" style="box-sizing: content-box;"><button name="sa">搜索</button></div>
+                <div class="hotkeyword">
+                </div>
+            </div>
+        </div>
+            <div id="tt" class="bb">
+                
+            </div>
+
+
+    
+
+
+
+
+
+<div id="dt" class="bb clearfix">
+    <div class="fl content">
+        <div class="cv">
+            <a href="//www.ithome.com">首页</a> <span class="sub">&gt;</span> <a href="https://next.ithome.com/">智能时代</a><span class="sub">&gt;</span><a href="https://next.ithome.com/ai">人工智能</a>
+        </div>
+
+        <h1>DeepSeek 提出 Super-agent 架构设计：Router 与 Worker 双层架构，探索更自主的 Agent 系统</h1>
+
+        <div class="info clearfix">
+            <div class="l">
+
+                    <span id="pubtime_baidu">2026/10/31 21:36:35</span>
+                    <span id="source_baidu">来源：<a href="https://www.ithome.com/1/020/615.htm" target="_blank">IT之家</a></span>
+                    <span id="author_baidu">作者：<strong>问舟</strong></span>
+
+                    <span id="editor_baidu">责编：<strong>问舟</strong></span>
+            </div>
+
+            <div class="r">
+
+                <span id="hitcount"></span>
+                    <a href="#post_comm" class="pti_comm">评论：<span id="commentcount"></span></a>
+            </div>
+        </div>
+
+
+
+        <div class="post_content " id="paragraph">
+            <div class='tougao-user' >感谢IT之家网友 <a href='https://m.ithome.com/html/app/open.html?url=ithome%3A%2F%2Fuserpage%3Fid%3D911187' rel='nofollow'>xxy171070</a>、<a href='https://m.ithome.com/html/app/open.html?url=ithome%3A%2F%2Fuserpage%3Fid%3D2547452' rel='nofollow'>软媒新友2547452</a>、<a href='https://m.ithome.com/html/app/open.html?url=ithome%3A%2F%2Fuserpage%3Fid%3D1311775' rel='nofollow'>Wllen</a>、<a href='https://m.ithome.com/html/app/open.html?url=ithome%3A%2F%2Fuserpage%3Fid%3D1684738' rel='nofollow'>Tokishio</a>、<a href='https://m.ithome.com/html/app/open.html?url=ithome%3A%2F%2Fuserpage%3Fid%3D1787058' rel='nofollow'>阿狗</a> 的线索投递！</div>
+            <p data-vmark="3f7b"><a class="s_tag" href="https://www.ithome.com/" target="_blank">IT之家</a> 10 月 31 日消息，DeepSeek Harness 官方团队今日发布《Super-agent 设计探索：迈向更自主的 Agent 系统》一文，介绍了其面向工程实践的 Super-agent 架构设计思路。</p><p data-vmark="f324" style="text-align: center;"><img src="//img.ithome.com/images/v2/t.png" w="1241" h="528" data-vmark="8e00" class="lazy" title="DeepSeek 提出 Super-agent 架构设计：Router 与 Worker 双层架构，探索更自主的 Agent 系统" srcset="https://img.ithome.com/newsuploadfiles/2026/10/0a2e0db3-13b7-4ee2-a54c-3ac7e6ce3d2b.jpg 2x" data-original="https://img.ithome.com/newsuploadfiles/2026/10/0a2e0db3-13b7-4ee2-a54c-3ac7e6ce3d2b.jpg" width="1241" height="349"></p><p data-vmark="165a">随着大模型执行单个任务时越来越不需要人的干预，限制生产力进一步提升的因素正逐渐转向人的注意力，Agent 系统需要从被动响应指令的单任务工具，向持续在线、能够并行处理多项任务的自主协作者演进。</p><p data-vmark="a9cd">DeepSeek 表示，现有主流 Agent 设计仍以单一 Session（会话）为基本单位，不同 Session 之间相互独立。用户并行推进多项工作时，需要手动切换并维护各个 Session 的上下文。</p><p data-vmark="d21c">根据 DeepSeek 团队观察，一个人通常只能同时跟进 3 至 5 个活跃 Session。即使通过 CLI、MCP 或外部连接器扩展本地 Agent，也仍可能面临单会话同步阻塞、多任务上下文混乱，以及本地设备离线后任务停止等问题。</p><p data-vmark="654a">他们将这种新型 Agent 形态及其系统架构称为 Super-agent，并归纳出四项基础特征：连续、高效、主动和持久。</p><p data-vmark="848f">首先，连续意味着用户可以在即时通讯、GitHub 评论等不同渠道与同一个 Agent 交互；高效意味着能够并行处理多个复杂任务；主动意味着系统可以持续观察环境事件并自行推进值得处理的事项；持久则要求 Agent 始终在线，并能在长期运行中从异常状态恢复。</p><p data-vmark="191c" style="text-align: center;"><img src="//img.ithome.com/images/v2/t.png" w="1009" h="762" data-vmark="8506" class="lazy" title="DeepSeek 提出 Super-agent 架构设计：Router 与 Worker 双层架构，探索更自主的 Agent 系统" srcset="https://img.ithome.com/newsuploadfiles/2026/10/65c20720-3877-4377-b042-c97a464a4458.jpg 2x" data-original="https://img.ithome.com/newsuploadfiles/2026/10/65c20720-3877-4377-b042-c97a464a4458.jpg" width="1009" height="619"></p><figcaption>▲ 同一个任务在 IM 群聊与 GitHub Pull Request 评审之间连续推进</figcaption><p data-vmark="d5d1" style="text-align: center;"><img src="//img.ithome.com/images/v2/t.png" w="1013" h="404" data-vmark="7bf4" class="lazy" title="DeepSeek 提出 Super-agent 架构设计：Router 与 Worker 双层架构，探索更自主的 Agent 系统" srcset="https://img.ithome.com/newsuploadfiles/2026/10/a9b0cf37-f417-40ac-a7de-514437c51ac3.jpg 2x" data-original="https://img.ithome.com/newsuploadfiles/2026/10/a9b0cf37-f417-40ac-a7de-514437c51ac3.jpg" width="1013" height="327"></p><figcaption>▲ 持续关注公共群聊，在无人 @ 的情况下主动识别缺陷并提交修复 Pull Request</figcaption><p data-vmark="175b">DeepSeek 提出的整体架构主要由双层架构、事件驱动、面向人的交互、计算与状态及环境分离、Watchdog 五部分组成。</p><p data-vmark="f179">其中，双层架构将系统划分为 Router 层和 Worker 层：Router 负责承接人类交互、维护全局上下文并分派任务，Worker 则在相互隔离的会话中并发执行具体工作。Worker 不直接向用户回复，而是将状态和结果汇报给 Router，由后者统一对外沟通。</p><p data-vmark="e087" style="text-align: center;"><img src="//img.ithome.com/images/v2/t.png" w="935" h="303" data-vmark="c5e0" class="lazy" title="DeepSeek 提出 Super-agent 架构设计：Router 与 Worker 双层架构，探索更自主的 Agent 系统" srcset="https://img.ithome.com/newsuploadfiles/2026/10/53aab9d3-b916-4398-8301-d63d91457fd1.jpg 2x" data-original="https://img.ithome.com/newsuploadfiles/2026/10/53aab9d3-b916-4398-8301-d63d91457fd1.jpg" width="935" height="266"></p><figcaption>▲ 双层架构：Router 层统一负责路由与对外交互，多个 Worker Session 隔离并发执行任务</figcaption><p data-vmark="75fe">在事件驱动机制中，群聊消息、邮件与日程提醒、代码审查评论、CI 运行结果等外部信息被称为 Trigger。系统先通过程序规则过滤事件，再交由大模型判断是否需要采取行动。对于已经分配任务的事件流，Worker 可以订阅对应 Thread，后续相关事件由程序直接发送给 Worker，无需每次都经过 Router，从而降低路由负载。</p><p data-vmark="e816">DeepSeek 团队还介绍了 Inline &amp; Spill 和链式召回（Chain of Recall）机制。前者将近期可能用到的信息直接放入模型上下文窗口，将超出预算或低频使用的内容保留在窗口之外，供模型按需读取；后者则通过 Trigger、Thread 和 Worker Session 等对象之间的引用关系，让模型沿关联 ID 逐步找回历史任务信息。</p><p data-vmark="cf57" style="text-align: center;"><img src="//img.ithome.com/images/v2/t.png" w="1043" h="405" data-vmark="7911" class="lazy" title="DeepSeek 提出 Super-agent 架构设计：Router 与 Worker 双层架构，探索更自主的 Agent 系统" srcset="https://img.ithome.com/newsuploadfiles/2026/10/3730fb80-50de-42b5-aa71-ac3a348d0145.jpg 2x" data-original="https://img.ithome.com/newsuploadfiles/2026/10/3730fb80-50de-42b5-aa71-ac3a348d0145.jpg" width="1043" height="318"></p><figcaption>▲ Super-agent 整体系统架构</figcaption><p data-vmark="442d">为减少人类等待时间，Super-agent 还引入投机执行机制，可以根据环境信号在后台提前开展工作。例如，收到会议邀约后先检查日程冲突、搜集背景资料并准备回复草稿；在研发协作场景中，则可以在群聊讨论问题时尝试复现故障、寻找修复方案，只有确认问题并找到简单修复方式后才向用户交付结果。</p><p data-vmark="27c7">在人机交互方面，文章提出异步 ReAct Loop，将耗时工具调用改为异步的 start () 和 stop ()。Agent 启动后台任务后即可返回 Started 状态，不必等待任务完成，后台结果随后作为新事件进入会话。</p><p data-vmark="7297">这样，前台对话可以继续接收用户的新消息。不过，DS 团队特别说明，这项异步任务机制已经在 DeepSeek Harness 中实现，但尚未默认开启。</p><p data-vmark="978e" style="text-align: center;"><img src="//img.ithome.com/images/v2/t.png" w="1045" h="311" data-vmark="9273" class="lazy" title="DeepSeek 提出 Super-agent 架构设计：Router 与 Worker 双层架构，探索更自主的 Agent 系统" srcset="https://img.ithome.com/newsuploadfiles/2026/10/56dd9812-9ef4-4bbd-9f96-69352d0fa9c2.jpg 2x" data-original="https://img.ithome.com/newsuploadfiles/2026/10/56dd9812-9ef4-4bbd-9f96-69352d0fa9c2.jpg" width="1045" height="244"></p><figcaption>▲ 两级过滤：先由程序层策略筛除大部分无关消息，再交由语义层策略判断</figcaption><p data-vmark="0a70">针对长期在线运行，DeepSeek 将 Agent Loop 的计算、会话状态和执行环境进行解耦：计算与持久化状态放在云端，执行环境则可以保留在用户本地设备，仅部署负责执行命令和返回结果的轻量 daemon。该设计支持 BYOM（Bring Your Own Machine），即将用户日常使用的开发机或个人电脑接入云端 Agent，也支持连接云端托管机器或按需创建的计算环境。</p><p data-vmark="ab8f">此外，系统在主架构之外设置独立的 Watchdog Session，形成外部控制回路。Watchdog 不仅监控接口报错、状态恢复失败等基础设施问题，还会通过模型判断 Worker 是否取得实质进展、执行方向是否偏离目标，并在发现异常时介入修复。</p><p data-vmark="608c" style="text-align: center;"><img src="//img.ithome.com/images/v2/t.png" w="917" h="350" data-vmark="17c4" class="lazy" title="DeepSeek 提出 Super-agent 架构设计：Router 与 Worker 双层架构，探索更自主的 Agent 系统" srcset="https://img.ithome.com/newsuploadfiles/2026/10/423825c4-c7b6-4039-b270-b7d77abfac15.jpg 2x" data-original="https://img.ithome.com/newsuploadfiles/2026/10/423825c4-c7b6-4039-b270-b7d77abfac15.jpg" width="917" height="313"></p><figcaption>▲ Thread 示例：同一个 IM 话题或同一个 GitHub Pull Request 下的连续 Trigger 构成一条 Thread</figcaption><p data-vmark="5baa">DeepSeek 团队还进行了初步实验，对比 Super-agent、去掉事件直通机制的 Super-agent，以及两种提示词配置下的单 Session 加 Subagent 方案。</p><p data-vmark="a575">实验每次包含约 300 条消息，其中约 20 条为工作请求，每种方案重复运行 5 次。结果显示，Super-agent 的任务完成时间 p50 和 p95 分别为 12.4 分钟和 15.7 分钟；中性提示下的单 Session 方案 p95 为 29.5 分钟。</p><p data-vmark="2b73">DeepSeek 团队指出，这些实验基于合成负载和简化环境，主要评估系统调度与协作能力，并不衡量单个任务的实际执行能力。</p><p data-vmark="d330" style="text-align: center;"><img src="//img.ithome.com/images/v2/t.png" w="1009" h="822" data-vmark="5700" class="lazy" title="DeepSeek 提出 Super-agent 架构设计：Router 与 Worker 双层架构，探索更自主的 Agent 系统" srcset="https://img.ithome.com/newsuploadfiles/2026/10/fdeda3a3-5579-4528-bcc1-43f81b638622.jpg 2x" data-original="https://img.ithome.com/newsuploadfiles/2026/10/fdeda3a3-5579-4528-bcc1-43f81b638622.jpg" width="1009" height="668"></p><figcaption>▲ 工作请求的累计到达曲线与四种方案的累计完成曲线（5 次实验运行均值；消息间隔与工作时长按 1/4 缩放，模型调用耗时为真实值）</figcaption><p data-vmark="205a">在 Router 层压力测试中，Trigger 到达速率从每分钟约 1 条提升至约 40 条时，平均批处理大小从 1.0 增至 2.8，单次请求耗时从 2.5 秒增至 3.9 秒，而单个决定分摊的推理时间从 6.4 秒降至 1.6 秒。团队据此认为，事件突发时，Router 可以通过合并积压事件提高有效吞吐。</p><p data-vmark="45a7" style="text-align: center;"><img src="//img.ithome.com/images/v2/t.png" w="1080" h="494" data-vmark="f709" class="lazy" title="DeepSeek 提出 Super-agent 架构设计：Router 与 Worker 双层架构，探索更自主的 Agent 系统" srcset="https://img.ithome.com/newsuploadfiles/2026/10/a7fa3cac-da7a-4fe8-b24a-2051c91aca97.jpg 2x" data-original="https://img.ithome.com/newsuploadfiles/2026/10/a7fa3cac-da7a-4fe8-b24a-2051c91aca97.jpg" width="1080" height="375"></p><figcaption>▲ 每种方案重复运行 5 次；任务完成时间指从工作请求到结果消息的耗时。</figcaption><p data-vmark="3d3d">文章同时指出，这套架构仍存在待解决的问题，包括 Router 层如何随任务规模扩展、跨月乃至更长时间跨度的长程记忆、脱离 Session 后的人机协作方式、不同 Agent 实例之间的 A2A 通信，以及安全与隐私保护。尤其是云端 Agent 接入本地设备后，提示词注入、端侧凭据泄露和跨设备权限风险都需要进一步解决。</p><p data-vmark="802d" style="text-align: center;"><img src="//img.ithome.com/images/v2/t.png" w="1080" h="370" data-vmark="055f" class="lazy" title="DeepSeek 提出 Super-agent 架构设计：Router 与 Worker 双层架构，探索更自主的 Agent 系统" srcset="https://img.ithome.com/newsuploadfiles/2026/10/3e249be5-0a18-451d-8553-46c4ec7fef11.jpg 2x" data-original="https://img.ithome.com/newsuploadfiles/2026/10/3e249be5-0a18-451d-8553-46c4ec7fef11.jpg" width="1080" height="281"></p><figcaption>▲ 不同 Trigger 到达速率下 Router Session 的 batch 大小、单次请求耗时与单个决定的分摊推理时间</figcaption><p data-vmark="6366">DeepSeek 团队表示，基于上述思路和 DeepSeek Harness 构建的内部 Super-agent 实例已经持续运行，参与问题复现与修复、代码审查响应以及 DeepSeek Harness 自身迭代。</p><p data-vmark="3f5e">此外，他们在文章中还提供了名为 dsh-superagent-prototype 的原型实现，但明确指出，该插件用于验证技术路线，并非 DeepSeek 正式产品。</p><p data-vmark="ccf7"><span class="referenceTitle">参考资料：</span></p><ul class="custom_reference list-paddingleft-1"><li class="list-undefined list-reference-paddingleft"><p data-vmark="9e4d" style="text-align: left;">dsh-superagent 的 GitHub 仓库：<span class="link-text-start-with-http">https://github.com/deepseek-ai/dsh-superagent-prototype</span></p></li></ul>
+        </div>
+
+        
+        
+
+        
+
+
+            <div class="newserror">
+                <button class="water" data-nid="1020615">投诉水文</button>
+                <button class="error" data-nid="1020615">我要纠错</button>
+            </div>
+
+            <div class="newsgrade"></div>
+        <div class="shareto">
+            
+            <div class="bdsharebuttonbox">
+                <a href="https://connect.qq.com/widget/shareqq/index.html?url=https%3a%2f%2fwww.ithome.com%2f1%2f020%2f615.htm&title=DeepSeek+%e6%8f%90%e5%87%ba+Super-agent+%e6%9e%b6%e6%9e%84%e8%ae%be%e8%ae%a1%ef%bc%9aRouter+%e4%b8%8e+Worker+%e5%8f%8c%e5%b1%82%e6%9e%b6%e6%9e%84%ef%bc%8c%e6%8e%a2%e7%b4%a2%e6%9b%b4%e8%87%aa%e4%b8%bb%e7%9a%84+Agent+%e7%b3%bb%e7%bb%9f&summary=" class="bds_qzone" target="_blank" title="分享到QQ"></a>
+                <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                <a href="https://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.ithome.com%2f1%2f020%2f615.htm&title=DeepSeek+%e6%8f%90%e5%87%ba+Super-agent+%e6%9e%b6%e6%9e%84%e8%ae%be%e8%ae%a1%ef%bc%9aRouter+%e4%b8%8e+Worker+%e5%8f%8c%e5%b1%82%e6%9e%b6%e6%9e%84%ef%bc%8c%e6%8e%a2%e7%b4%a2%e6%9b%b4%e8%87%aa%e4%b8%bb%e7%9a%84+Agent+%e7%b3%bb%e7%bb%9f" target="_blank" class="bds_tsina" title="分享到新浪微博"></a>
+            </div>
+            <a class="down_app collapse" href="https://m.ithome.com/ithome/download/?popqr" target="_blank">
+                <span class="d-p">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+                <span class="d-t">下载IT之家APP，签到赚金币兑豪礼</span>
+            </a>
+        </div>
+
+        <!-- 相关文章 -->
+        <div class="related_post"><div class="title"><h2>相关文章</h2><div class="hot_tags"><span>关键词：<a href='/tags/DeepSeek/' target='_blank'>DeepSeek</a></span></div></div><ul class="list_3"><li><a target="_blank" href="https://www.ithome.com/1/016/875.htm">DeepSeek 完成千亿元人民币新一轮融资，消息称“联想系”投资者入局</a></span></li><li><a target="_blank" href="https://www.ithome.com/1/016/263.htm">向硅谷巨头发起挑战，消息称 DeepSeek 最新一轮融资筹集近千亿元</a></span></li><li><a target="_blank" href="https://www.ithome.com/1/015/429.htm">DeepSeek 宣布将内部推理框架 DeepInfer 全面开源，目标实现大模型普惠</a></span></li><li><a target="_blank" href="https://www.ithome.com/1/014/587.htm">DeepSeek API 已支持网页搜索和抓取，单价为每 1000 次成功请求 5 元</a></span></li><li><a target="_blank" href="https://www.ithome.com/1/014/291.htm">DeepSeek 上线网页搜索与抓取 API、API 短暂出现 V4.1 Flash-1017 快照、Harness v0.2.1-rc1 发布</a></span></li><li><a target="_blank" href="https://www.ithome.com/1/013/970.htm">消息称 DeepSeek 将 Harness、Web、App、Platform 团队整合成立“产品部”</a></span></li></ul></div>
+
+        <script>
+            if (nightMode) {
+                document.write('<iframe align="middle" src="//www.ithome.com/block/dajia.html?night=1" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" class="dajia"></iframe>');
+            } else {
+                document.write('<iframe align="middle" src="//www.ithome.com/block/dajia.html" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" class="dajia"></iframe>');
+            }
+        </script>
+
+        <!-- 评论 -->
+            <div id="post_comm" data-id="172df8ac306402f3" data-nid="1020615"></div>
+    </div>
+    <div class="fr fx no-bottom">
+        <div id="rank" class="tab-list">
+            
+        </div>
+
+        <div class="cat-list" id="cat-hot" style="display:none">
+        </div>
+
+    </div>
+</div>
+
+
+
+    <div id="fls" class="bb">
+
+
+    <p>
+        <strong>软媒旗下网站：</strong>
+        <a href="//www.ithome.com/" target="_blank">IT之家</a>
+        <a href="//www.zuihuimai.com/" target="_blank">最会买 - 返利返现优惠券</a>
+        <a href="https://iphone.ithome.com/" target="_blank">iPhone之家</a>
+        <a href="//www.win7china.com/" target="_blank">Win7之家</a>
+        <a href="//win10.ithome.com/" target="_blank">Win10之家</a>
+        <a href="https://win11.ithome.com/" target="_blank">Win11之家</a>
+    </p>
+
+    <p>
+        <strong>软媒旗下软件：</strong>
+        <a href="//m.ruanmei.com/" target="_blank">软媒手机APP应用</a>
+        <a href="//mofang.ruanmei.com/" target="_blank">魔方</a>
+        <a href="https://www.zuihuimai.com" target="_blank">最会买</a>
+        <a href="https://yaozhi.ruanmei.com/" target="_blank">要知</a>
+    </p>
+
+
+        
+    </div>
+
+
+    <footer>
+        <div id="lns">
+            <a href="//www.ithome.com/about.htm" target="_blank">关于IT之家</a>
+            |<a href="//www.ruanmei.com/#contact" target="_blank">联系我们</a>
+            |<a href="//www.ruanmei.com/joinus/" target="_blank">加入软媒</a>
+            |<a href="//m.ithome.com/" target="_blank">WAP版</a>
+            |<a href="//www.ithome.com/sitemap/" target="_blank">网站地图</a>
+            |<a href="//www.ithome.com/archiver/" target="_blank">Archiver</a>
+        </div>
+        <div id="fi">
+            <p>IT之家，软媒旗下科技门户网站 - 爱科技，爱这里。</p>
+            <p>Copyright &copy; <a href="//www.ruanmei.com" target="_blank">RuanMei.com</a>, All Rights Reserved.</p>
+            <p>
+                <a href="//www.ruanmei.com/" target="_blank">青岛软媒网络科技有限公司</a>版权所有
+                
+        </div>
+    </footer>
+
+    <script src="//dat.ruanmei.com/lib/login.min.js"></script>
+    <script src="https://s4.zstatic.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script>(window.jQuery && window.jQuery.fn && window.jQuery.fn.cookie || document.write("\u003Cscript src=\u0022https:\/\/img.ithome.com\/file\/js\/jquery\/jquery.cookie.js\u0022\u003E\u003C\/script\u003E"));</script>
+    <script src="https://s4.zstatic.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+    <script>(window.jQuery && window.jQuery.fn && window.jQuery.fn.lazyload || document.write("\u003Cscript src=\u0022https:\/\/img.ithome.com\/file\/js\/jquery\/jquery.lazyload.js\u0022\u003E\u003C\/script\u003E"));</script>
+    <script src="//img.ithome.com/file/js/jquery/popwin.js?v=2.22.200813"></script>
+        <script src="//img.ithome.com/file/js/v2.3/common.js?t=20240112"></script>
+    <script src="//api.ithome.com/ovs/ovs.js"></script>
+    
+        <script src="//img.ithome.com/file/js/site.min.js?v=2.25.231124"></script>
+
+    
+    
+    <script type="text/javascript" id="bdshare_js" data="type=tools&uid=192225"></script>
+    <script>
+        var thumb = $('.post_content img').eq(0).attr("src"), title = $("h1").text(), desc = $("meta[name=description]").attr("content");
+        if (desc.length > 85 - title.length) {
+            desc = desc.substring(0, 85 - title.length)
+        }
+        window._bd_share_is_recently_loaded = !1;
+        window._bd_share_main = {
+            version: "2.0",
+            jscfg: {
+                domain: {
+                    staticUrl: "https://img.ithome.com/"
+                }
+            }
+        }
+
+        window._bd_share_config = { "common": { "bdSnsKey": { "tsina": "1369706960", "tqq": "801077952" }, "bdText": "【" + title + "】" + desc + " - 分享自 @IT之家 下载APP立得金币换豪礼！下载：https://m.ithome.com/ithome/download/ 详情：", "bdMini": "2", "bdMiniList": false, "bdPic": thumb, "bdStyle": "1", "bdSize": "32" }, "share": {} };
+        with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = '//img.ithome.com/static/api/js/share.js?v=86835285.js?cdnversion=' + ~(-new Date() / 36e5)];
+    </script>
+
+    
+        <script type="text/javascript" src="//dyn.ithome.com/grade/1020615"></script>
+        <script>
+            $(".newsgrade").html(gradestr);
+        </script>
+            <script src="//cmt.ithome.com/api/comment/count?newsid=1020615"></script>
+            <script type="text/javascript" src="//dyn.ithome.com/api/hitcount/1020615/pc"></script>
+            <script src="//img.ithome.com/file/js/detail.es5.min.js?v=202512201503"></script>
+
+    
+    <script>
+        var commentCssFile = "https://img.ithome.com/file/css/comment/comment.min.css?v=1.1.202608201000";
+        var commentJsFile = "https://img.ithome.com/file/js/comment/comment.es5.min.js?v=1.1.202608201000";
+    </script>
+<script>
+    $(document).ready(function () {
+        var commentDiv = document.getElementById("post_comm");
+        function loadComm() {
+            if (!window._commLoaded && commentDiv) {
+                window._commLoaded = true;
+                commentDiv.innerHTML = '<span class="comm_status" style=" width:100%;text-align:center;display:block;margin-top:20px;font-size:13px; ">评论加载中...</span>';
+                loadFile(commentCssFile, null, true);
+                loadFile(commentJsFile);
+            }
+        }
+        var commentAnchor = document.querySelector(".pti_comm");
+        commentAnchor && commentAnchor.addEventListener("click", function () { window._jumpToComm = true; })
+        var scrollListener = function () { var doc = document.documentElement; var body = document.body; var scrollTop = doc.scrollTop || body.scrollTop; var windowHeight = doc.clientHeight || body.clientHeight; var scrollHeight = doc.scrollHeight || body.scrollHeight; if (scrollHeight - scrollTop - windowHeight <= 150) { loadComm() } };
+        window.addEventListener("scroll", scrollListener);
+        scrollListener();
+    })
+</script>
+
+    <script>
+        
+        $("#tt").load('https://www.ithome.com/block/tt.html?' + new Date().getTime());
+        
+        $("#rank").load('//www.ithome.com/block/rank.html');
+        
+        $("#cat-hot").load('//www.ithome.com/block/cat/158.html');
+        if ($("#cat-hot").find("*").length > 0) {
+            $("#cat-hot").show();
+        }
+
+        
+        $(function () {
+            if (imageSupportChecker) {
+                imageSupportChecker.ready(function () {
+                    lazyLoad()
+                })
+            } else {
+                lazyLoad()
+            }
+            function lazyLoad() {
+                $("img.lazy").lazyload();
+            }
+        });
+        
+        if ($(".post_content pre").length > 0 && loadFile) {
+            loadFile("//img.ithome.com/file/js/prettify/prettify.js", function () {
+                $("pre").addClass("prettyprint"); prettyPrint();
+            })
+        }
+    </script>
+
+    <div style="display:none">
+        <script>
+            var _hmt = _hmt || [];
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?cfebe79b2c367c4b89b285f412bf9867";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    </div>
+</body>
+</html>
