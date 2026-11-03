@@ -1,0 +1,22 @@
+網友爆料 OpenAI 推出「記憶體大赦」計畫，讓民眾把閒置的 32GB 記憶體交給資料中心，換取每月 200 美元的訂閱用量。但 OpenAI 並沒有這個計畫，存粹是在惡搞 Sam Altman 日前「個人電腦放 RAM 很糟」的發言。
+（前情提要：Sam Altman：個人電腦裡面的 RAM 都放著沒用，真的很糟）
+（背景補充：記憶體漲價潮下，DDR4 主機板逆勢回歸：舊電腦還能再戰幾年）
+重點摘要
+- X 網友 31 日惡搞 OpenAI「RAM 大赦」，觀看逾 38 萬次
+- OpenAI 官網與官方帳號都沒有回收記憶體的計畫
+- 惡搞對象是 Altman 稱電腦 RAM 只用 5% 時間的發言
+X 帳號 Sudo su（@sudoingX）發文宣稱 OpenAI 推出「RAM 大赦」（ram amnesty）計畫。說民眾可以把沒在用的 32GB 記憶體拿到 OpenAI 任何一座資料中心繳交，不會被問任何問題。交出去之後，可以拿到每月 200 美元的訂閱，用來使用自己的 RAM。
+BREAKING: openai launches "ram amnesty" program citizens can drop off unused 32gb sticks at any data center, no questions asked in return, you get a $200/month subscription to use your own ram
+— Sudo su (@sudoingX) October 31, 2026
+這是一則惡搞貼文，OpenAI 沒有任何回收記憶體的計畫。
+惡搞 Altman 的 5% 說法
+貼文針對的是 Altman 幾天前的發言，他在 Podcast 節目《Cheeky Pint》中表示，每個人電腦裡都放著一堆 DRAM，平時只有 5% 的時間在用，從全球分配來看「相當糟糕」。Altman 主張在供應吃緊時，記憶體應該集中到雲端，把使用率拉到最高。
+Altman 在節目中也提到，記憶體廠過去投入 200 億美元資本支出，大概只賺回 190 億美元，所以現在擴產態度保守。AI 資料中心大量採購記憶體，推高 DRAM 與顯卡價格，消費者買電腦、升級記憶體的成本跟著墊高。站內先前報導，記憶體漲價拖累全球第三季電腦出貨，少了 1,580 萬台。
+Altman 這番話在記憶體漲價、缺貨時傳開，引來電腦玩家砲轟。貼文裡的 200 美元，正好是 ChatGPT Pro 其中一個等級的價格。OpenAI 官方帳號 10 月 29 日轉發的說明提到，Pro 目前分成 100、200、500 美元三個等級。把自己的記憶體交出去，再按月付費租回來用，就是這則貼文挖苦的地方。
+常見問題
+OpenAI 真的有 RAM 大赦計畫嗎
+沒有。這是 X 帳號 Sudo su 在 10 月 31 日發的惡搞貼文，OpenAI 官網 10 月 22 日以來的新聞稿與官方帳號貼文，都沒有提到任何回收民眾記憶體的計畫。
+RAM 大赦貼文在諷刺什麼
+諷刺 Sam Altman 在 Podcast《Cheeky Pint》說個人電腦的 DRAM 只有 5% 時間在用、應集中到雲端。貼文把它誇大成交出記憶體，再每月付 200 美元租回來。
+📍相關報導📍
+SK 海力士保固條款已死：用戶 SSD 壞了不換只退費，漲價全由消費者扛

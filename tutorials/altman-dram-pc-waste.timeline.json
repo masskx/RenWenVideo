@@ -1,0 +1,287 @@
+{
+  "id": "altman-dram-pc-waste",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1485,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/altman-dram-pc-waste/01-hook.mp3",
+      "audioMs": 4519,
+      "startFrame": 0,
+      "durationFrames": 147,
+      "cues": {
+        "a": 1800,
+        "b": 3516
+      },
+      "captions": [
+        {
+          "text": "奥特曼说，你电脑里的内存",
+          "startMs": 137,
+          "endMs": 1800
+        },
+        {
+          "text": "只有5%的时间在用",
+          "startMs": 1800,
+          "endMs": 3516
+        },
+        {
+          "text": "相当糟糕",
+          "startMs": 3516,
+          "endMs": 4774
+        }
+      ]
+    },
+    {
+      "id": "mean",
+      "audioSrc": "audio/tutorials/altman-dram-pc-waste/02-mean.mp3",
+      "audioMs": 4780,
+      "startFrame": 147,
+      "durationFrames": 154,
+      "cues": {
+        "a": 2133,
+        "b": 3036
+      },
+      "captions": [
+        {
+          "text": "他的意思是",
+          "startMs": 137,
+          "endMs": 923
+        },
+        {
+          "text": "内存全球都不够",
+          "startMs": 923,
+          "endMs": 2133
+        },
+        {
+          "text": "放云端用满",
+          "startMs": 2133,
+          "endMs": 3036
+        },
+        {
+          "text": "比放在每个人电脑里划算",
+          "startMs": 3036,
+          "endMs": 5054
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "audioSrc": "audio/tutorials/altman-dram-pc-waste/03-check.mp3",
+      "audioMs": 4467,
+      "startFrame": 301,
+      "durationFrames": 145,
+      "cues": {
+        "a": 1672,
+        "b": 2848
+      },
+      "captions": [
+        {
+          "text": "但5%是他随口一估",
+          "startMs": 137,
+          "endMs": 1672
+        },
+        {
+          "text": "没给任何依据",
+          "startMs": 1672,
+          "endMs": 2848
+        },
+        {
+          "text": "他也没说要收走你的内存",
+          "startMs": 2848,
+          "endMs": 4716
+        }
+      ]
+    },
+    {
+      "id": "rumor",
+      "audioSrc": "audio/tutorials/altman-dram-pc-waste/04-rumor.mp3",
+      "audioMs": 3448,
+      "startFrame": 446,
+      "durationFrames": 114,
+      "cues": {
+        "a": 1709,
+        "b": 2491
+      },
+      "captions": [
+        {
+          "text": "网上的「交内存换订阅」",
+          "startMs": 137,
+          "endMs": 1709
+        },
+        {
+          "text": "是网友恶搞",
+          "startMs": 1709,
+          "endMs": 2491
+        },
+        {
+          "text": "已经被辟谣",
+          "startMs": 2491,
+          "endMs": 3736
+        }
+      ]
+    },
+    {
+      "id": "wafer",
+      "audioSrc": "audio/tutorials/altman-dram-pc-waste/05-wafer.mp3",
+      "audioMs": 4885,
+      "startFrame": 560,
+      "durationFrames": 158,
+      "cues": {
+        "a": 998,
+        "b": 3269
+      },
+      "captions": [
+        {
+          "text": "为什么他会这么说？",
+          "startMs": 137,
+          "endMs": 998
+        },
+        {
+          "text": "AI卡上的HBM和你的内存条",
+          "startMs": 998,
+          "endMs": 3269
+        },
+        {
+          "text": "抢的是同一批晶圆",
+          "startMs": 3269,
+          "endMs": 5150
+        }
+      ]
+    },
+    {
+      "id": "triple",
+      "audioSrc": "audio/tutorials/altman-dram-pc-waste/06-triple.mp3",
+      "audioMs": 3944,
+      "startFrame": 718,
+      "durationFrames": 129,
+      "cues": {
+        "a": 1430
+      },
+      "captions": [
+        {
+          "text": "据美光，同样容量",
+          "startMs": 137,
+          "endMs": 1430
+        },
+        {
+          "text": "HBM要吃掉约3倍的晶圆",
+          "startMs": 1430,
+          "endMs": 4171
+        }
+      ]
+    },
+    {
+      "id": "share",
+      "audioSrc": "audio/tutorials/altman-dram-pc-waste/07-share.mp3",
+      "audioMs": 5172,
+      "startFrame": 847,
+      "durationFrames": 166,
+      "cues": {
+        "a": 3555
+      },
+      "captions": [
+        {
+          "text": "TrendForce估计",
+          "startMs": 137,
+          "endMs": 998
+        },
+        {
+          "text": "今年底HBM吃掉22%的晶圆",
+          "startMs": 998,
+          "endMs": 3555
+        },
+        {
+          "text": "只产出9%的容量",
+          "startMs": 3555,
+          "endMs": 5463
+        }
+      ]
+    },
+    {
+      "id": "price",
+      "audioSrc": "audio/tutorials/altman-dram-pc-waste/08-price.mp3",
+      "audioMs": 5669,
+      "startFrame": 1013,
+      "durationFrames": 181,
+      "cues": {
+        "a": 1522,
+        "b": 3441
+      },
+      "captions": [
+        {
+          "text": "于是内存条涨价",
+          "startMs": 137,
+          "endMs": 1522
+        },
+        {
+          "text": "英国亚马逊一款32G内存",
+          "startMs": 1522,
+          "endMs": 3441
+        },
+        {
+          "text": "13个月涨了434%",
+          "startMs": 3441,
+          "endMs": 5961
+        }
+      ]
+    },
+    {
+      "id": "ease",
+      "audioSrc": "audio/tutorials/altman-dram-pc-waste/09-ease.mp3",
+      "audioMs": 4545,
+      "startFrame": 1194,
+      "durationFrames": 147,
+      "cues": {
+        "a": 1223,
+        "b": 2158
+      },
+      "captions": [
+        {
+          "text": "不过涨幅在收敛",
+          "startMs": 137,
+          "endMs": 1223
+        },
+        {
+          "text": "四季度合约价",
+          "startMs": 1223,
+          "endMs": 2158
+        },
+        {
+          "text": "预计再涨10%到15%",
+          "startMs": 2158,
+          "endMs": 4888
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/altman-dram-pc-waste/10-end.mp3",
+      "audioMs": 4441,
+      "startFrame": 1341,
+      "durationFrames": 144,
+      "cues": {
+        "a": 2043
+      },
+      "captions": [
+        {
+          "text": "所以，没人要收走你的内存",
+          "startMs": 137,
+          "endMs": 2043
+        },
+        {
+          "text": "但你的内存条",
+          "startMs": 2043,
+          "endMs": 2757
+        },
+        {
+          "text": "确实在和AI抢晶圆",
+          "startMs": 2757,
+          "endMs": 4703
+        }
+      ]
+    }
+  ]
+}

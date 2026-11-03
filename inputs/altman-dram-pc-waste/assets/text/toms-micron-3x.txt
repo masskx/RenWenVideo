@@ -1,0 +1,39 @@
+Hot Chips 2026: Micron warns HBM wafer penalty is widening with every generation — AI memory uses 3x more silicon than DDR5, company says memory wall is 'getting worse' as prices rise
+HBM's silicon penalty over DDR5 increases with each generation.
+Raghu Sreeramaneni, Micron HBM Design Architecture Fellow, told the Hot Chips 2026 conference on August 23 that the silicon penalty HBM carries against DDR5 is growing with every generation, and that it can’t be closed without giving up performance, something that Micron won’t do. Pressed on whether newer parts narrow the gap, he said it’s "definitely not getting better," putting the current overhead at roughly three times the wafer area of DDR5 for the same capacity. That trajectory is the reason why PC memory hit record prices this year, with conventional DRAM contract prices up 90% to 95% quarter over quarter in the first quarter of 2026.
+Wafer mathematics
+An HBM4 die fits 256 banks against 32 on a DDR5 die, and it reaches its bandwidth by running those banks in parallel, which requires far more die area for data paths, power delivery, and the through-silicon vias (TSVs) that link each layer to the base die. A single HBM3E die can feed 256 GB/s, while one DDR5 die supplies about 8 GB/s, so matching a given bit count makes the HBM die much larger.
+Micron has publicly put that overhead at about three times the wafer area of DDR5, and Sreeramaneni said it traces to an HBM3E-against-DDR5 comparison that grows with each generation as pin speeds, bank counts, stack heights, and die sizes climb higher. He called HBM "probably the most cross-functionally complex solution that we make," and noted that in a two-GPU package, memory accounts for around 90% of the silicon, roughly eight times the area of the GPU dies. HBM already sells for about five times the price of DDR5 per bit, so each wafer a maker moves to it removes a disproportionate share of commodity memory from the market, pushing consumer product prices higher as a consequence.
+Conventional DRAM contract prices rose 90% to 95% quarter over quarter in the first quarter of 2026 and a further 58% to 63% in the second. To put that into perspective, a mainstream 32GB DDR5-6000 kit sold for around $392 this month, up from $110 to $140 a year earlier, and 128GB of DDR5 passed $3,399, a 500% rise over 12 months, with European prices up 345% since September last year. Back in February, HP told investors that DRAM now makes up 35% of its PC build cost, up from 15% to 18% a quarter earlier, and Gartner expects PC shipments to fall more than 10% in 2026. While it’s true that the surge eased to 13% to 18% in the third quarter, that happened because consumer electronics makers reached the ceiling of what they could pass on, not because supply improved.
+Bandwidth, stacking, and heat
+Micron's presentation put compute performance scaling at roughly three times every two years and HBM bandwidth at under two times, a divergence Sreeramaneni summarized by saying "the memory wall is still present, and, in fact, maybe getting worse." HBM4 doubles the host interface to 2,048 I/Os, and Micron's parts run above 11 Gb/s per pin for more than 2.8 TB/s per stack, beyond the 8 Gb/s and 2 TB/s baseline in JEDEC's HBM4 standard.
+Each of those gains comes from more parallelism, which enlarges the die again and widens the silicon ratio. Sreeramaneni said there is "a good path to 16 layers of DRAM," but "after 16, there's still a lot of work to be done." Meanwhile, SK hynix used its own Hot Chips talk to describe a 775-micron total-thickness ceiling that caps stacking until the industry adopts hybrid bonding, which SK hynix doesn't expect before HBM5. Micron's HBM4E, due around 2027, moves the logic base die to a TSMC foundry process, part of a wider shift toward customization as AI workloads fragment, which Sreeramaneni described by saying "disaggregation is the buzzword now."
+The base die runs hottest because it sits at the bottom of the stack, doing the highest-speed interface work while the heatsink sits at the top. Every layer added between the base and the heatsink then raises thermal resistance. Sreeramaneni said Micron is now "architecting solutions around thermals rather than the other way around," a reversal from a few years ago. Micron highlighted how Meta's Llama 3 paper attributed 17.2% of unexpected interruptions during a 54-day run across 16,384 H100 GPUs to HBM3 memory, the second-largest cause behind failed GPUs, a reliability burden that scales with the amount of HBM in each package.
+Share and supply outlook
+SK hynix leads the HBM market with a share that Counterpoint Research places at around 58%, down from a high of around 69%, and Micron overtook Samsung for second place last year. Micron began volume shipments of 36GB 12-high HBM4 earlier this year for Nvidia's Vera Rubin platform, with Nvidia CEO Jensen Huang saying in June that all three suppliers are qualified and in production.
+Analysts expect DDR5 per-wafer profitability to overtake HBM3E by the end of this year, leaving the three makers little reason to add commodity capacity when server DRAM pays nearly as well per wafer. SK hynix said last October that it had already sold its entire 2026 output, while Apacer's chief executive told investors that supply to independent module makers could fall to 30% of 2026 volumes next year. SK hynix CEO Kwak Noh-jung has called 2027 the worst year for memory supply in the industry's history, with demand outrunning production into 2030.
+In response, Nvidia has raised its DGX Spark desktop from $3,999 to $4,699 and warned large customers of AI server price rises above 15%, both tied to memory. Realistically, the squeeze will loosen only under three conditions, none of them likely before new fab capacity comes online and scales up: China's CXMT ramping competitive DDR5 in volume, hybrid bonding arriving before HBM5, which SK hynix has already all but ruled out, or DDR5 profitability slipping back below HBM.
+Full Micron Hot Chips 2026 presentation
+View Original
+View Original
+View Original
+View Original
+View Original
+View Original
+View Original
+View Original
+View Original
+View Original
+View Original
+View Original
+View Original
+View Original
+View Original
+View Original
+View Original
+View Original
+Luke James is a freelance writer and journalist. Although his background is in legal, he has a personal interest in all things tech, especially hardware and microelectronics, and anything regulatory.
+- truerock I'll rewrite the article concisely and correctly:
+Analysts expect premium DRAM (e.g. server DDR5 DRAM) per-wafer profitability to overtake HBM3E by the end of this year, leaving the three makers little reason to add commodity DRAM (e.g. PC DDR5 DRAM) capacity when premium DRAM pays nearly as well per HBM3E wafer.
+Actually, that still isn't good enough. Just trash the lame attempt at writing and completely re-write it.
+You can pay extra and get bad writing like that all the time. Reply
