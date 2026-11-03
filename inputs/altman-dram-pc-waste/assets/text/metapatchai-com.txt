@@ -1,0 +1,21 @@
+AI
+Sam Altman Says Local AI Is a "Quite Terrible" Use of DRAM: The Full Quote and Context
+By MetaPatchAI News Team · Published Oct. 31, 2026
+OpenAI CEO Sam Altman has upset PC builders and local-AI fans. On the Cheeky Pint podcast with Stripe's John Collison, he argued that putting memory in personal computers to run AI locally is a poor use of the world's limited DRAM supply. Here is exactly what he said, from the official transcript.
+The exact quote
+From Cheeky Pint's official transcript of the episode "Why Sam Altman is against a single superintelligence" (video: youtube.com/watch?v=iMsUcCYNKqY, on the official Cheeky Pint channel). The interjection from Collison is kept as it appears:
+Sam Altman: "Oh, I think there are all of these ways where the supply chain—it's just super non-obvious. An example of this is people... A lot of people want local inference. And somehow, they assume that the problem is solved now. Because, we are going to have open-source models. We're going to be able to run them on our computers. And so we're not going to need all the stuff in the data center. But from a global allocation perspective, actually, it's quite terrible to have everybody have a bunch of the world's limited supply of DRAM sitting in their own computer. And, being used—" John Collison: "Mm-hmm." Sam Altman: "5% of the time. You want maximum utilization in the cloud if you're trying to deal with this very supply constrained environment. And somehow everyone's... Many people's intuition is the opposite of that."
+The context: a memory-supply conversation
+Altman wasn't talking about PC gaming. The comment came in a discussion about memory makers and supply-chain shortages. Just before it, Altman says DRAM makers spent decades in boom-and-bust cycles ("invest $20 billion of CapEx to make $19 billion") and are now set to make huge profits, but "they all remember their history," so they're careful about building new fabs. Collison then raises new suppliers entering the market, such as Intel returning to memory. Altman responds with local inference as an example of a "super non-obvious" supply-chain effect.
+Right after the quote, Collison asks where else the market is reacting to high prices. Altman lists "Turbines. Batteries. Concrete... Steel."
+So his argument is about utilization. A data-center GPU or memory module runs almost all the time. RAM in a home PC, by his estimate, is used "5% of the time." In a shortage, he says, putting memory where it's busiest makes more sense.
+Why people are angry
+The pushback is mostly about who pays for the shortage. As The Verge notes, memory makers such as Samsung and SK Hynix have long-term deals with cloud operators and projects like OpenAI's Stargate. Those deals take up much of their output, and that is pushing up prices for consumer devices. Engadget points out that people buy RAM for gaming, streaming and video editing, not just for AI. The privacy, cost and control arguments for running models locally don't go away because of a supply argument.
+To be fair to Altman, he said "from a global allocation perspective." That is a claim about efficiency, not a call to ban or restrict home PCs. Nothing in the transcript describes an OpenAI policy or product change.
+What it means for local-AI users
+Nothing changes in practice. Open-weight models still run on your hardware, and Altman didn't announce anything. What matters is the price of RAM and VRAM, which The Verge and Engadget report is being pushed up by AI demand for memory. If you're planning a local-AI build, see our guides to running models locally and Ollama.
+What's confirmed / not confirmed
+Confirmed (official Cheeky Pint transcript, fetched Oct. 31, 2026): - The full quote above, including "quite terrible," "the world's limited supply of DRAM" and "being used... 5% of the time." - It was said in a conversation about memory supply chains, with John Collison. - The episode is titled "Why Sam Altman is against a single superintelligence" and is on the official Cheeky Pint YouTube channel (video ID iMsUcCYNKqY, confirmed via YouTube's oEmbed).
+Not confirmed by us: - The "5%" utilization figure. Altman states it but gives no source. - Claims about how much of the world's RAM output OpenAI has reserved. Those are outlets' reporting, not part of the quote.
+Related
+Up: AI

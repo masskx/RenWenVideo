@@ -1,0 +1,27 @@
+Samsung hosted OpenAI chief executive Sam Altman for talks with about 50 of its presidents on Saturday. Two days earlier, a podcast went out in which Sam Altman said it is “quite terrible” for the world’s limited DRAM to sit in people’s own computers. DRAM is the memory chip Samsung makes.
+Samsung set out the details in a statement on its Korean newsroom. The presidents came from its electronics, finance and biotech affiliates, and met Altman at Samsung’s training centre in Yongin, south of Seoul.
+Inside the Samsung session
+The talk ran under the theme of how AI will change the next ten years, and what companies should choose to do. Samsung’s presidents and Altman looked at where AI technology is heading and how it can be used, Samsung said. They also traded views on the new markets and business opportunities it could create.
+They discussed how AI will change decision-making and the way organisations run, and what skills managers will need, the statement said. Samsung did not publish anything Altman said, and it did not name the Samsung executives in the room.
+Samsung said the session was part of its training for presidents. Its view is that a company’s strength in the AI era comes from its managers’ judgement and execution, so the presidents are meant to lead by learning AI themselves.
+Before meeting Altman, the presidents took a hands-on generative AI course, their second after one in June. They used AI to sort scattered management documents into their own “knowledge repository”, and practised using AI in decisions, Samsung said.
+Bloomberg’s Yoolim Lee reported that Altman is the latest American tech leader to visit South Korea. Nvidia’s Jensen Huang and AMD’s Lisa Su have each visited twice since last year to strengthen supply ties, Bloomberg reported.
+Samsung’s ties to OpenAI
+Samsung Electronics and OpenAI signed a letter of intent on AI infrastructure in October 2025, Samsung said. Since then, Samsung has worked to supply memory chips for OpenAI’s Stargate data centre project.
+Under the same agreement, Samsung SDS is to work with OpenAI on AI data centres and AI services for businesses. Samsung C&T and Samsung Heavy Industries are developing floating data centres together. Samsung Electronics chairman Lee Jae-yong visited OpenAI’s San Francisco headquarters in July, the statement added.
+In June, OpenAI said Samsung Electronics would roll out ChatGPT Enterprise and Codex to its employees in South Korea and in its global Device eXperience division.
+Samsung has been bringing AI into research, production, marketing and support work since June, it said. Each affiliate has its own AI team. About 2,300 executives have been trained so far, and all employees are due to finish AI training by February 2027.
+What Altman said about DRAM
+Altman made the remark to Stripe co-founder John Collison on Collison’s podcast, Cheeky Pint, released on Thursday. TNW covered the episode when it came out, leading on his plan to point OpenAI’s robots at building data centres.
+Collison asked why high prices for memory and chips had not yet brought more supply. Altman said memory makers were now “each going to make like $100 billion of free cash flow in a year”. Their history of near-bankruptcy from building too many factories keeps them careful with spending, he said.
+He then turned to people who want to run AI models on their own machines.
+“A lot of people want local inference. And somehow, they assume that the problem is solved now,” Altman said.
+Those people expect open-source models to run on their own computers. They think data centres will then need less, he said.
+“From a global allocation perspective, actually, it’s quite terrible to have everybody have a bunch of the world’s limited supply of DRAM sitting in their own computer and being used 5% of the time,” Altman said.
+“You want maximum utilization in the cloud if you’re trying to deal with this very supply constrained environment,” he said.
+Many people’s intuition is the opposite of that, he added.
+A market short of memory
+SK Hynix said this week that memory shortages will last to 2030. Samsung posted a record quarterly profit on AI memory demand on Thursday. Apple chief executive John Ternus has called the shortage a crisis, TIME reported.
+Later in the episode, Altman said the cost of chips and energy should fall. For that to happen, he said, supply has “got to go way up”.
+Get the TNW newsletter
+Get the most important tech news in your inbox each week.
