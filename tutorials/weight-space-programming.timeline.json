@@ -1,0 +1,231 @@
+{
+  "id": "weight-space-programming",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1173,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/weight-space-programming/01-hook.mp3",
+      "audioMs": 6087,
+      "startFrame": 0,
+      "durationFrames": 195,
+      "cues": {
+        "a": 1779,
+        "b": 3512
+      },
+      "captions": [
+        {
+          "text": "只改0.016%的权重",
+          "startMs": 135,
+          "endMs": 1779
+        },
+        {
+          "text": "小模型做数学题的正确率",
+          "startMs": 1779,
+          "endMs": 3512
+        },
+        {
+          "text": "从7.9%跳到48.1%",
+          "startMs": 3512,
+          "endMs": 6374
+        }
+      ]
+    },
+    {
+      "id": "who",
+      "audioSrc": "audio/tutorials/weight-space-programming/02-who.mp3",
+      "audioMs": 5904,
+      "startFrame": 195,
+      "durationFrames": 190,
+      "cues": {
+        "a": 2277,
+        "b": 5234
+      },
+      "captions": [
+        {
+          "text": "MIT CSAIL的博客",
+          "startMs": 135,
+          "endMs": 2277
+        },
+        {
+          "text": "让GPT-6 Astra",
+          "startMs": 2277,
+          "endMs": 3500
+        },
+        {
+          "text": "直接改另一个网络的权重",
+          "startMs": 3500,
+          "endMs": 5234
+        },
+        {
+          "text": "不训练",
+          "startMs": 5234,
+          "endMs": 6194
+        }
+      ]
+    },
+    {
+      "id": "loop",
+      "audioSrc": "audio/tutorials/weight-space-programming/03-loop.mp3",
+      "audioMs": 5224,
+      "startFrame": 385,
+      "durationFrames": 169,
+      "cues": {
+        "a": 1114,
+        "b": 4015
+      },
+      "captions": [
+        {
+          "text": "但它没教会数学",
+          "startMs": 135,
+          "endMs": 1114
+        },
+        {
+          "text": "原来的Qwen",
+          "startMs": 1114,
+          "endMs": 1848
+        },
+        {
+          "text": "96道练习里85道停不下来",
+          "startMs": 1848,
+          "endMs": 4015
+        },
+        {
+          "text": "撞上token上限",
+          "startMs": 4015,
+          "endMs": 5492
+        }
+      ]
+    },
+    {
+      "id": "fix",
+      "audioSrc": "audio/tutorials/weight-space-programming/04-fix.mp3",
+      "audioMs": 5172,
+      "startFrame": 554,
+      "durationFrames": 168,
+      "cues": {
+        "a": 2727
+      },
+      "captions": [
+        {
+          "text": "Astra减掉第15",
+          "startMs": 135,
+          "endMs": 1254
+        },
+        {
+          "text": "19层里让它打转的方向",
+          "startMs": 1254,
+          "endMs": 2727
+        },
+        {
+          "text": "撞上限从93%降到33%",
+          "startMs": 2727,
+          "endMs": 5444
+        }
+      ]
+    },
+    {
+      "id": "gemma",
+      "audioSrc": "audio/tutorials/weight-space-programming/05-gemma.mp3",
+      "audioMs": 3213,
+      "startFrame": 722,
+      "durationFrames": 109,
+      "cues": {
+        "a": 1289,
+        "b": 2079
+      },
+      "captions": [
+        {
+          "text": "换到不怎么打转的Gemma",
+          "startMs": 135,
+          "endMs": 1289
+        },
+        {
+          "text": "几乎没涨：6.8到7.7",
+          "startMs": 1289,
+          "endMs": 3471
+        }
+      ]
+    },
+    {
+      "id": "read",
+      "audioSrc": "audio/tutorials/weight-space-programming/06-read.mp3",
+      "audioMs": 2508,
+      "startFrame": 831,
+      "durationFrames": 88,
+      "cues": {
+        "a": 1289
+      },
+      "captions": [
+        {
+          "text": "它还能只看权重",
+          "startMs": 135,
+          "endMs": 1289
+        },
+        {
+          "text": "认出这是打砖块",
+          "startMs": 1289,
+          "endMs": 2786
+        }
+      ]
+    },
+    {
+      "id": "car",
+      "audioSrc": "audio/tutorials/weight-space-programming/07-car.mp3",
+      "audioMs": 3579,
+      "startFrame": 919,
+      "durationFrames": 120,
+      "cues": {
+        "a": 799,
+        "b": 2179
+      },
+      "captions": [
+        {
+          "text": "让小车翻坡，改3.5%的权重",
+          "startMs": 135,
+          "endMs": 2179
+        },
+        {
+          "text": "1024局全过",
+          "startMs": 2179,
+          "endMs": 3895
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/weight-space-programming/08-end.mp3",
+      "audioMs": 4049,
+      "startFrame": 1039,
+      "durationFrames": 134,
+      "cues": {
+        "a": 2390
+      },
+      "captions": [
+        {
+          "text": "数字是作者自报",
+          "startMs": 135,
+          "endMs": 1149
+        },
+        {
+          "text": "博客没经过评审",
+          "startMs": 1149,
+          "endMs": 2390
+        },
+        {
+          "text": "它修的是循环",
+          "startMs": 2390,
+          "endMs": 3266
+        },
+        {
+          "text": "不是数学",
+          "startMs": 3266,
+          "endMs": 4337
+        }
+      ]
+    }
+  ]
+}
