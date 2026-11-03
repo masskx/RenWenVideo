@@ -1,0 +1,257 @@
+{
+ "id": "altman-dram-pc-waste",
+ "title": "奥特曼：你电脑里的内存只有5%的时间在用",
+ "subtitle": "Sam Altman · Cheeky Pint",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.14
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 250,
+ "series": "AI 新闻 · 观点",
+ "credit": "Sam Altman · Cheeky Pint 播客（10-29）",
+ "source": "inputs/altman-dram-pc-waste/materials.md",
+ "maxSeconds": 55,
+ "score": {
+  "mood": "news",
+  "bpm": 120,
+  "climax": "share",
+  "lifts": [
+   "wafer"
+  ],
+  "silences": [
+   {
+    "scene": "rumor",
+    "at": 0,
+    "dur": 0.4
+   }
+  ],
+  "climaxAt": 3.9
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "bar",
+  "captionTop": 1365,
+  "grain": 2,
+  "pk": {
+   "bg": "#1E0D06",
+   "panel": "#3A1D10",
+   "ink": "#F2E6DA",
+   "accent": "#E0B84D",
+   "onAccent": "#1E0D06",
+   "dim": "#B9A89A",
+   "second": "#267F91"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "x": 20,
+  "y": 950,
+  "size": 190,
+  "scenes": {
+   "hook": {
+    "expr": "surprise",
+    "pose": "wave",
+    "beats": [
+     {
+      "at": 1.8,
+      "pose": "idle",
+      "expr": "think"
+     }
+    ]
+   },
+   "rumor": {
+    "expr": "serious",
+    "pose": "shrug",
+    "beats": [
+     {
+      "at": 1.8,
+      "pose": "idle",
+      "expr": "calm"
+     }
+    ]
+   },
+   "end": {
+    "expr": "think",
+    "pose": "think",
+    "beats": [
+     {
+      "at": 1.8,
+      "pose": "idle",
+      "expr": "calm"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "奥特曼：你电脑的内存",
+   "只有5%时间在用"
+  ],
+  "support": "他随口一估；真相是内存条在和 AI 抢晶圆",
+  "tag": "AI 新闻 · 观点",
+  "anchor": "adr.cover",
+  "colors": {
+   "bg": "#1E0D06",
+   "text": "#F2E6DA",
+   "accent": "#E0B84D",
+   "dim": "#B9A89A"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 80,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "keywords": [
+  "5%",
+  "相当糟糕",
+  "云端用满",
+  "随口一估",
+  "没给任何依据",
+  "网友恶搞",
+  "辟谣",
+  "同一批晶圆",
+  "3倍",
+  "22%",
+  "9%",
+  "434%",
+  "在收敛",
+  "10%到15%",
+  "抢晶圆"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "adr.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "奥特曼说，你电脑里的内存，{a}只有5%的时间在用，{b}相当糟糕。"
+  },
+  {
+   "id": "mean",
+   "visual": "adr.mean",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "他的意思是：内存全球都不够，{a}放云端用满，{b}比放在每个人电脑里划算。"
+  },
+  {
+   "id": "check",
+   "visual": "adr.check",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "但5%是他随口一估，{a}没给任何依据；{b}他也没说要收走你的内存。"
+  },
+  {
+   "id": "rumor",
+   "visual": "adr.rumor",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "网上的「交内存换订阅」，{a}是网友恶搞，{b}已经被辟谣。"
+  },
+  {
+   "id": "wafer",
+   "visual": "adr.wafer",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "为什么他会这么说？{a}AI卡上的HBM和你的内存条，{b}抢的是同一批晶圆。"
+  },
+  {
+   "id": "triple",
+   "visual": "adr.triple",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "据美光，同样容量，{a}HBM要吃掉约3倍的晶圆。"
+  },
+  {
+   "id": "share",
+   "visual": "adr.share",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "TrendForce估计，今年底HBM吃掉22%的晶圆，{a}只产出9%的容量。"
+  },
+  {
+   "id": "price",
+   "visual": "adr.price",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "于是内存条涨价：{a}英国亚马逊一款32G内存，{b}13个月涨了434%。"
+  },
+  {
+   "id": "ease",
+   "visual": "adr.ease",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "不过涨幅在收敛：{a}四季度合约价，{b}预计再涨10%到15%。"
+  },
+  {
+   "id": "end",
+   "visual": "adr.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "所以，没人要收走你的内存；{a}但你的内存条，确实在和AI抢晶圆。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/altman-dram-pc-waste/score.mp3",
+ "musicVolume": 0.148,
+ "musicDuckDb": 10
+}
