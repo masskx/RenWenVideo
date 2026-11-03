@@ -1,0 +1,223 @@
+{
+ "id": "weight-space-programming",
+ "title": "只改 0.016% 的权重",
+ "subtitle": "Weight-Space Programming",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.22
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 300,
+ "series": "AI 新闻 · 研究",
+ "credit": "据 MIT CSAIL 博客《Sparks of Weight-Space Programming》（作者自报，未同行评审）",
+ "source": "inputs/weight-space-programming/materials.md",
+ "maxSeconds": 45,
+ "score": {
+  "mood": "news",
+  "climax": "fix",
+  "lifts": [
+   "loop"
+  ],
+  "silences": [
+   {
+    "scene": "loop",
+    "at": 0,
+    "dur": 0.3
+   }
+  ],
+  "climaxAt": 2.6
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "tele",
+  "captionTop": 1430,
+  "pk": {
+   "bg": "#F4F3EE",
+   "panel": "#FFFFFF",
+   "ink": "#FFFFFF",
+   "accent": "#0C8454",
+   "onAccent": "#FFFFFF",
+   "dim": "#8A8A8A"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "x": 20,
+  "y": 1180,
+  "size": 215,
+  "scenes": {
+   "hook": {
+    "expr": "surprise",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 2.2,
+      "pose": "point",
+      "expr": "calm"
+     }
+    ]
+   },
+   "loop": {
+    "expr": "serious",
+    "pose": "shrug",
+    "beats": [
+     {
+      "at": 1.6,
+      "pose": "idle",
+      "expr": "think"
+     }
+    ]
+   },
+   "end": {
+    "expr": "think",
+    "pose": "think",
+    "beats": [
+     {
+      "at": 2.4,
+      "expr": "calm",
+      "pose": "idle"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "只改0.016%权重",
+   "正确率7.9%→48.1%"
+  ],
+  "support": "修的是思考循环，不是教会数学（作者自报）",
+  "tag": "AI 新闻 · 研究",
+  "anchor": "wp.cover",
+  "colors": {
+   "bg": "#F4F3EE",
+   "text": "#141414",
+   "accent": "#0C8454",
+   "dim": "#8A8A8A"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 96,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 92,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 104,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "keywords": [],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "wp.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "只改0.016%的权重，{a}小模型做数学题的正确率，{b}从7.9%跳到48.1%。"
+  },
+  {
+   "id": "who",
+   "visual": "wp.who",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "MIT CSAIL的博客：{a}让GPT-6 Astra直接改另一个网络的权重，{b}不训练。"
+  },
+  {
+   "id": "loop",
+   "visual": "wp.loop",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "但它没教会数学：{a}原来的Qwen，96道练习里85道停不下来，{b}撞上token上限。"
+  },
+  {
+   "id": "fix",
+   "visual": "wp.fix",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "Astra减掉第15、19层里让它打转的方向，{a}撞上限从93%降到33%。"
+  },
+  {
+   "id": "gemma",
+   "visual": "wp.gemma",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "换到不怎么打转的Gemma，{a}几乎没涨：{b}6.8到7.7。"
+  },
+  {
+   "id": "read",
+   "visual": "wp.read",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "它还能只看权重，{a}认出这是打砖块。"
+  },
+  {
+   "id": "car",
+   "visual": "wp.car",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "让小车翻坡，{a}改3.5%的权重，{b}1024局全过。"
+  },
+  {
+   "id": "end",
+   "visual": "wp.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "数字是作者自报，博客没经过评审；{a}它修的是循环，不是数学。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/weight-space-programming/score.mp3",
+ "musicVolume": 0.131,
+ "musicDuckDb": 10
+}
