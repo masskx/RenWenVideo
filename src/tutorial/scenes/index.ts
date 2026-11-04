@@ -51,6 +51,7 @@ import {patrolRobotScenes} from './patrol-robot-5-guards';
 import {deepseekSuperagentScenes} from './deepseek-superagent';
 import {weightSpaceScenes} from './weight-space-programming';
 import {altmanDramScenes} from './altman-dram-pc-waste';
+import {chipsScenes} from './chips-cpu-gpu-npu-tpu';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -108,4 +109,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...deepseekSuperagentScenes,
   ...weightSpaceScenes,
   ...altmanDramScenes,
+  ...chipsScenes,
 };

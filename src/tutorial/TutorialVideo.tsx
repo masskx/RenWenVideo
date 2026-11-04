@@ -4,7 +4,7 @@ import {Audio} from '@remotion/media';
 import {Layout, Palette, blueprint, cinema, color, font, layoutOf, mono, palette, paper} from './theme';
 import {sceneRegistry} from './scenes';
 import {HostLayer} from './host';
-import {CaptionBar, CaptionCard, CaptionLabel, CaptionStrip, CaptionSwiss, CaptionMap, CaptionTear, CaptionTele, CaptionToast} from './package';
+import {CaptionBar, CaptionCard, CaptionLabel, CaptionStrip, CaptionSwiss, CaptionMap, CaptionTear, CaptionTele, CaptionNote, CaptionToast} from './package';
 import {DepthField, GridFloor} from './space';
 import {Dino} from './ui';
 import {CoverRatio, SceneTiming, TimedCaption, Tutorial, TutorialProps} from './types';
@@ -342,6 +342,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
           : look.captions === 'strip' && look.pk ? <CaptionStrip captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'toast' && look.pk ? <CaptionToast captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'label' && look.pk ? <CaptionLabel captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
+          : look.captions === 'note' && look.pk ? <CaptionNote captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'tele' && look.pk ? <CaptionTele captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'swiss' && look.pk ? <CaptionSwiss captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'tear' && look.pk ? <CaptionTear captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />

@@ -7,6 +7,7 @@ import {Tutorial, TutorialTiming} from './tutorial/types';
 import {LAB_FRAMES, PropsLab} from './lab/PropsLab';
 import {PackageLab, PackageShot} from './lab/PackageLab';
 import {SceneLab, SCENE_LAB_FRAMES} from './lab/SceneLab';
+import {ThreeLab} from './lab/ThreeLab';
 import {HostLab} from './lab/HostLab';
 import aiEra11Rules from '../explainers/ai-era-11-rules.timeline.json';
 import marketingEngineer from '../explainers/marketing-engineer.timeline.json';
@@ -36,6 +37,8 @@ export const RemotionRoot = () => <>
   <Composition id="PropsLab" component={PropsLab} width={1080} height={1920} fps={30} durationInFrames={LAB_FRAMES} defaultProps={{shot: 'hook' as const}} />
   {/* Proof frames for the news-package finish learned from lemo-opuscar (src/lab/PackageLab.tsx) */}
   <Still id="PackageLab" component={PackageLab} width={1080} height={1920} defaultProps={{shot: 'burnHook' as PackageShot}} />
+  {/* 3D kit smoke test (src/lab/ThreeLab.tsx) */}
+  <Composition id="ThreeLab" component={ThreeLab} width={1080} height={1080} fps={30} durationInFrames={90} />
   {/* Any scene's layer at a frame, before voicing (src/lab/SceneLab.tsx) */}
   <Composition id="SceneLab" component={SceneLab} width={1080} height={1920} fps={30} durationInFrames={SCENE_LAB_FRAMES} defaultProps={{visual: 'ns.hook'}} />
   {/* The host IP's model sheet and talking test (src/lab/HostLab.tsx) */}
