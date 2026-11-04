@@ -16,6 +16,7 @@ const exists = (p) => fs.existsSync(path.isAbsolute(p) ? p : path.join(REPO, p))
 check('必需', 'node_modules（remotion、puppeteer-core）', exists('node_modules/remotion') && exists('node_modules/puppeteer-core'), 'npm ci');
 check('必需', 'ffmpeg / ffprobe', has('ffmpeg') && has('ffprobe'), '装 ffmpeg（环境的 setup script）');
 check('必需', 'python3（配音脚本）', has('python3', ['--version']), '装 python3');
+check('可选', 'pypinyin（主持人对口型的口形：scripts/host/mouth.py）', has('python3', ['-c', 'import pypinyin']), 'pip install pypinyin（没有也能渲：口形一律中性，开合仍按配音）');
 // Cloud containers have shipped different headless-shell builds; accept whichever is installed.
 const shells = ['/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell', '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell'];
 const shell = process.env.REMOTION_BROWSER_EXECUTABLE || shells.find((s) => fs.existsSync(s)) || shells[0];

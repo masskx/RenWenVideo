@@ -1,27 +1,35 @@
 import React from 'react';
 import {continueRender, delayRender, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../fx';
+import {font} from './theme';
+import {cond} from './fonts';
+import {HOST_ART} from './host-art';
 
 // The account's host IP (user, 2026-11-01: "I need a character-based IP image. This is my profile picture. I want the IP to
-// be animated, and I want it to be incorporated into each video"). Drawn in code from the profile picture
-// (inputs/host-ip/avatar.webp): flat illustration with a dark ink outline, messy black hair with a few spikes on top,
-// thin dark rectangular glasses, straight thick brows, calm small mouth, black hoodie with two drawstrings, on a cream
-// disc. Colours sampled from the picture (scripts/qa/palette.mjs): skin #F9CBA3, neck shadow #E2A981, ear / lip #DC9775 /
-// #D08364, hair #201C1B, hoodie #1B1918 / fold #2C2729, disc #F7E8D2 on #FCF9EF.
-// Rig: every part is a function of (frame, inputs) only. Head bob + mouth from the narration's per-syllable timings
-// (words.json: {text, ms, dur}), blinks on a fixed pseudo-random schedule, hair lagging the head, breathing, a glint across
-// the glasses, five expressions and six arm poses that blend over ~8 frames. Docs: docs/video-craft/IP形象.md.
+// be animated, and I want it to be incorporated into each video"). v2 (user, 2026-11-04: the first version "felt rushed and
+// disjointed, appearing strange in the video"; "refine the individual branding IP to make it more sophisticated and
+// versatile"). What changed and why: docs/video-craft/IP形象.md §〇.
+// - The drawing is the avatar itself: scripts/host/trace-avatar.py traces inputs/host-ip/avatar.webp colour by colour into
+//   vector layers (src/tutorial/host-art.ts) — the same proportions, hair texture, shading and line work as the picture,
+//   instead of a hand-drawn approximation. The parts that act (eyes, brows, mouth) are traced separately and rigged.
+// - No arms: the stick arms and mitten hands were the crudest part. He acts with the head (nod, tilt, lean, turn toward
+//   what he talks about), eyes (blink, glance), brows, mouth (lip-sync) and shoulders (shrug, breath).
+// - He belongs to the film's frame: `mode` "window" (a picture-in-picture card in the film's own panel colour and accent,
+//   the bust cropped by its bottom edge, like a correspondent's box), "edge" (rises from behind a line — the strap, a
+//   card, the caption band — so the frame cuts him off instead of floating), or "badge" (the avatar's cream disc, for
+//   covers and end cards only). A rim light in the film's accent ties him to its palette; the hoodie and face stay his.
 
-export const HOST = {skin: '#F9CBA3', skinShade: '#EDB58D', neck: '#E2A981', ear: '#DC9775', lip: '#D08364', mouth: '#5E2620', tongue: '#C9665A',
-  hair: '#201C1B', hairHi: '#3A3332', hoodie: '#1B1918', fold: '#2C2729', ink: '#141010', glass: '#34363A', disc: '#F7E8D2', bg: '#FCF9EF', tip: '#4A4544'};
+export const HOST = {skin: '#F8CAA2', ink: '#100D0C', mouth: '#5A221C', tongue: '#C0645A', disc: '#F7E8D3', bg: '#FEF8F0'};
 
 export type HostExpr = 'calm' | 'smile' | 'surprise' | 'think' | 'serious';
-export type HostPose = 'idle' | 'point' | 'wave' | 'think' | 'thumbs' | 'shrug';
+export type HostPose = 'idle' | 'point' | 'wave' | 'think' | 'thumbs' | 'shrug' | 'nod';
 export type HostWord = {ms: number; dur: number; text: string};
 
+const A = HOST_ART;
 const hash = (n: number) => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const eo = (t: number) => 1 - Math.pow(1 - clamp(t), 3);
+const eio = (t: number) => { const x = clamp(t); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
 
 /** Mouth openness 0..1 and a vowel-ish shape for time `ms`, from per-syllable timings (attack 40 ms, release 70 ms). */
 export const speech = (words: HostWord[], ms: number): {open: number; round: number; talking: number} => {
@@ -30,209 +38,226 @@ export const speech = (words: HostWord[], ms: number): {open: number; round: num
     const w = words[i];
     if (ms < w.ms - 60 || ms > w.ms + w.dur + 120) continue;
     const a = clamp((ms - w.ms + 20) / 60), r = 1 - clamp((ms - (w.ms + w.dur - 30)) / 90);
-    const amp = 0.55 + 0.45 * hash(i * 3.7 + w.text.charCodeAt(0));
+    const amp = 0.5 + 0.5 * hash(i * 3.7 + w.text.charCodeAt(0));
     const v = Math.min(a, r) * amp;
-    if (v > open) { open = v; round = hash(w.text.charCodeAt(0) * 0.37) > 0.68 ? 1 : 0; }
+    if (v > open) { open = v; round = hash(w.text.charCodeAt(0) * 0.37) > 0.7 ? 1 : 0; }
   }
-  // "talking" stays high across short gaps so the head keeps moving between syllables
   for (const w of words) if (ms >= w.ms - 150 && ms <= w.ms + w.dur + 350) { talking = 1; break; }
   return {open, round, talking};
 };
 
-/* ---------- arm poses: elbow and hand points in the 600 × 720 box (right arm; the left arm mirrors), hand shape ---------- */
-type Pt = [number, number];
-type Arm = {e: Pt; h: Pt; hand: 'fist' | 'point' | 'open' | 'thumb'; rot: number; show: number};
-const DOWN: Arm = {e: [500, 800], h: [500, 900], hand: 'open', rot: 0, show: 0};
-const POSES: Record<HostPose, {l: Arm; r: Arm}> = {
-  idle: {l: DOWN, r: DOWN},
-  point: {l: DOWN, r: {e: [560, 540], h: [585, 420], hand: 'point', rot: 28, show: 1}},
-  wave: {l: DOWN, r: {e: [555, 545], h: [560, 420], hand: 'open', rot: 8, show: 1}},
-  think: {l: DOWN, r: {e: [430, 700], h: [345, 492], hand: 'fist', rot: -30, show: 1}},
-  thumbs: {l: DOWN, r: {e: [515, 690], h: [470, 575], hand: 'thumb', rot: -10, show: 1}},
-  shrug: {l: {e: [560, 660], h: [590, 560], hand: 'open', rot: 30, show: 1}, r: {e: [560, 660], h: [590, 560], hand: 'open', rot: 30, show: 1}},
+/** The lip-sync track from scripts/host/mouth.py: opening measured from the voice's vowel band, shape per syllable from pinyin. */
+export type MouthTrack = {rate: number; lead: number; env: number[]; syl: {ms: number; end: number; v: Viseme; close: boolean}[]};
+type Viseme = 'A' | 'O' | 'E' | 'I' | 'U';
+/** Width (× the lips' half-width), height (× the max opening), teeth showing, lip rounding — per viseme. */
+const VIS: Record<Viseme, {w: number; h: number; teeth: number; round: number}> = {
+  A: {w: 0.92, h: 1, teeth: 0.35, round: 0.1},
+  O: {w: 0.6, h: 0.82, teeth: 0.12, round: 0.9},
+  E: {w: 0.9, h: 0.58, teeth: 0.5, round: 0.15},
+  I: {w: 1.02, h: 0.36, teeth: 0.9, round: 0},
+  U: {w: 0.48, h: 0.42, teeth: 0.05, round: 1},
+};
+/** The mouth at `ms` (scene time, the voice starts at `leadMs`): opening 0..1 and a shape blended toward the next syllable. */
+export const mouthAt = (m: MouthTrack, ms: number, leadMs: number) => {
+  const t = ms - leadMs, x = (t / 1000) * m.rate, i = Math.floor(x);
+  const env = i < 0 || i >= m.env.length - 1 ? 0 : lerp(m.env[i], m.env[i + 1], x - i);
+  let k = m.syl.findIndex((s) => t < s.end);
+  if (k < 0) k = m.syl.length - 1;
+  const cur = m.syl[Math.max(0, k)], nxt = m.syl[k + 1];
+  let shape = VIS[cur?.v ?? 'E'], close = 1;
+  if (cur && t >= cur.ms) {
+    const u = (t - cur.ms) / Math.max(40, cur.end - cur.ms);
+    if (nxt && u > 0.6) { const b = eio((u - 0.6) / 0.4) * 0.6, q = VIS[nxt.v]; shape = {w: lerp(shape.w, q.w, b), h: lerp(shape.h, q.h, b), teeth: lerp(shape.teeth, q.teeth, b), round: lerp(shape.round, q.round, b)}; }
+    if (cur.close) close = 0.15 + 0.85 * clamp((t - cur.ms) / 55);   // b/p/m/f: the lips meet, then part
+  } else if (cur && cur.close && t > cur.ms - 60) close = 0.15;
+  return {open: env * close, talking: env > 0.04 ? 1 : 0, ...shape};
 };
 
-const Hand: React.FC<{kind: Arm['hand']}> = ({kind}) => {
-  const s = {fill: HOST.skin, stroke: HOST.ink, strokeWidth: 4.5, strokeLinejoin: 'round' as const};
-  return kind === 'point' ? <g>
-      <rect x={-22} y={-14} width={44} height={44} rx={17} {...s} />
-      <rect x={-9} y={-66} width={18} height={62} rx={9} {...s} />
-    </g> : kind === 'thumb' ? <g>
-      <rect x={-24} y={-10} width={48} height={42} rx={17} {...s} />
-      <rect x={-12} y={-56} width={18} height={52} rx={9} {...s} />
-    </g> : kind === 'fist' ? <rect x={-24} y={-22} width={48} height={44} rx={19} {...s} />
-    : <path d="M-26,14 C-30,-24 -20,-44 -13,-44 C-6,-44 -6,-30 -4,-52 C-2,-64 12,-62 12,-48 C14,-60 28,-56 26,-40 C33,-42 37,-30 32,-12 C30,14 22,34 0,36 C-17,36 -24,26 -26,14 Z" {...s} />;
+/** What a pose does to the head and shoulders (no arms): tilt (deg), lean (px, + toward `look`), shoulders up (px), nods. */
+const POSE: Record<HostPose, {tilt: number; lean: number; up: number; nod: number}> = {
+  idle: {tilt: 0, lean: 0, up: 0, nod: 0},
+  point: {tilt: -3, lean: 26, up: 0, nod: 0},     // leans and turns toward what he's showing
+  wave: {tilt: 3, lean: 0, up: 0, nod: 2},        // hello: two quick nods
+  think: {tilt: -7, lean: -8, up: 0, nod: 0},
+  thumbs: {tilt: 2, lean: 0, up: 0, nod: 1},      // approval: one firm nod
+  shrug: {tilt: 5, lean: 0, up: 26, nod: 0},
+  nod: {tilt: 0, lean: 0, up: 0, nod: 1},
 };
-
-const ArmShape: React.FC<{side: 1 | -1; arm: Arm; f: number}> = ({side, arm, f}) => {
-  if (arm.show <= 0.01) return null;
-  const sx = 470, sy = 600;
-  const dy = (1 - arm.show) * 300;
-  const wig = arm.hand === 'open' && arm.show > 0.95 && arm.rot === 8 ? Math.sin(f / 3) * 14 : 0;
-  const pts = `M${sx},${sy} L${arm.e[0]},${arm.e[1]} L${arm.h[0]},${arm.h[1]}`;
-  return <g transform={`translate(${side === 1 ? 0 : 600},${dy}) scale(${side},1)`}>
-    <path d={pts} stroke={HOST.ink} strokeWidth={70} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    <path d={pts} stroke={HOST.hoodie} strokeWidth={61} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    <path d={`M${lerp(sx, arm.e[0], 0.35)},${lerp(sy, arm.e[1], 0.35)} L${lerp(sx, arm.e[0], 0.8)},${lerp(sy, arm.e[1], 0.8)}`} stroke={HOST.fold} strokeWidth={10} fill="none" strokeLinecap="round" />
-    <g transform={`translate(${arm.h[0]},${arm.h[1]}) rotate(${arm.rot + wig})`}><Hand kind={arm.hand} /></g>
-  </g>;
+/** Brow offset (y, px; − is up) and tilt (deg, inner end), eye scale, per expression. */
+const EXPR: Record<HostExpr, {by: number; bt: number; eye: number; lid: number}> = {
+  calm: {by: 0, bt: 0, eye: 1, lid: 0},
+  smile: {by: -6, bt: -2, eye: 1, lid: 0.32},
+  surprise: {by: -24, bt: -4, eye: 1.18, lid: 0},
+  think: {by: -10, bt: 6, eye: 1, lid: 0.12},
+  serious: {by: 7, bt: 8, eye: 1, lid: 0.2},
 };
-
-const mixPt = (a: Pt, b: Pt, t: number): Pt => [lerp(a[0], b[0], t), lerp(a[1], b[1], t)];
-const mixArm = (a: Arm, b: Arm, t: number): Arm => ({e: mixPt(a.e, b.e, t), h: mixPt(a.h, b.h, t), hand: t < 0.5 ? a.hand : b.hand, rot: lerp(a.rot, b.rot, t), show: lerp(a.show, b.show, t)});
+const mixE = (a: HostExpr, b: HostExpr, t: number) => {
+  const p = EXPR[a], q = EXPR[b];
+  return {by: lerp(p.by, q.by, t), bt: lerp(p.bt, q.bt, t), eye: lerp(p.eye, q.eye, t), lid: lerp(p.lid, q.lid, t)};
+};
 
 export type HostProps = {
   /** Frame inside the current scene. */ f: number;
-  /** Narration syllables for lip-sync, ms from scene start (already offset by the voice lead). */ words?: HostWord[];
+  /** Narration syllables for lip-sync, ms from scene start (already offset by the voice lead) — fallback when there is no `mouth` track. */ words?: HostWord[];
+  /** Lip-sync track measured from the voice (preferred), and the voice's start in the scene. */ mouth?: MouthTrack; leadMs?: number;
   expr?: HostExpr; pose?: HostPose;
-  /** Previous pose and the frame the change started, for blending. */ fromPose?: HostPose; poseAt?: number;
-  /** Where the eyes look: -1 left … 1 right, -1 up … 1 down. */ look?: [number, number];
-  /** Size of the square box in px. */ size?: number;
-  /** Draw the cream disc behind (the avatar's own badge). */ disc?: boolean;
-  /** 0..1 entrance (scale + rise). */ enter?: number;
+  /** Previous expression / pose and the frame the change started, for blending. */ fromExpr?: HostExpr; fromPose?: HostPose; poseAt?: number;
+  /** Where he looks: −1 left … 1 right, −1 up … 1 down. A pointing lean goes the same way horizontally. */ look?: [number, number];
+  /** Width in px of the square art box (the avatar's 1254 px square). */ size?: number;
+  /** Rim light colour (the film's accent); none when omitted. */ rim?: string;
   seed?: number;
 };
 
-/** The host, bust, in a 600 × 720 box scaled to `size` wide. */
-export const Host: React.FC<HostProps> = ({f, words = [], expr = 'calm', pose = 'idle', fromPose, poseAt = -99, look = [0, 0], size = 300, disc = true, enter = 1, seed = 1}) => {
+/** The host as drawn in the avatar, rigged. 1254 × 1254 art box scaled to `size`. */
+export const Host: React.FC<HostProps> = ({f, words = [], mouth: track, leadMs = 0, expr = 'calm', pose = 'idle', fromExpr, fromPose, poseAt = -99, look = [0.25, 0.1], size = 300, rim, seed = 1}) => {
   const ms = (f / 30) * 1000;
-  const sp = speech(words, ms);
-  const open = sp.open;
-  // head motion: a slow sway, a syllable bob while talking, a nod on each phrase start
-  const sway = Math.sin(f / 23 + seed) * 1.6;
-  const bob = sp.talking * (Math.sin(f / 3.1) * 0.8 + open * 2.2);
-  const headRot = sway + (expr === 'think' ? -5 : 0) + (expr === 'surprise' ? 2 : 0) + bob * 0.5;
-  const headY = -bob * 1.4 + (expr === 'surprise' ? -6 : 0);
-  const hairLag = Math.sin((f - 3) / 23 + seed) * 1.2 + (sp.talking ? Math.sin((f - 2) / 3.1) * 0.6 : 0);
-  const breathe = Math.sin(f / 26 + seed) * 3;
-  // blink: every 2.4–4.4 s, 4 frames; double-blink sometimes
+  const mo = track ? mouthAt(track, ms, leadMs) : null;
+  const sp0 = speech(words, ms);
+  const sp = mo ? {open: mo.open, round: mo.round > 0.5 ? 1 : 0, talking: mo.talking} : sp0;
+  const tp = eio((f - poseAt) / 10);
+  const P0 = POSE[fromPose ?? pose], P1 = POSE[pose];
+  const E = mixE(fromExpr ?? expr, expr, tp);
+  const tilt = lerp(P0.tilt, P1.tilt, tp), lean = lerp(P0.lean, P1.lean, tp), up = lerp(P0.up, P1.up, tp);
+  // nods: a short dip after the pose change (one or two)
+  const nods = pose === fromPose ? 0 : P1.nod, nt = (f - poseAt) / 7;
+  const nod = nods && nt > 0 && nt < nods * 2 ? Math.sin(nt * Math.PI) ** 2 * 14 : 0;
+  // idle life: slow sway, syllable bob, breath
+  const sway = Math.sin(f / 29 + seed) * 1.1;
+  const bob = sp.talking * (Math.sin(f / 3.3) * 0.6 + sp.open * 1.6);
+  const breathe = Math.sin(f / 31 + seed) * 4;
+  const lx = clamp(look[0], -1, 1), ly = clamp(look[1], -1, 1);
+  const turn = lx * 4;     // features slide a hair toward the look (a hint of a turn; more breaks the avatar's 3/4 drawing)
+  const headRot = tilt + sway + bob * 0.35 + (lx * lean) / 26 * 2;
+  const headY = nod + bob * 2.2 - up * 0.35;
+  const hairLag = Math.sin((f - 4) / 29 + seed) * 0.6 + (nod ? -nod * 0.03 : 0);
+  // blink: every 2.5–4.5 s, 5 frames; sometimes double
   let blink = 0;
-  for (let k = 0; k < 40; k++) {
-    const t0 = Math.round(k * 100 + hash(k + seed * 13) * 60);
+  for (let k = 0; k < 60; k++) {
+    const t0 = Math.round(k * 105 + hash(k + seed * 13) * 60);
     if (f >= t0 && f < t0 + 5) blink = Math.max(blink, 1 - Math.abs(f - t0 - 2) / 2.5);
-    if (hash(k * 1.3 + seed) > 0.75 && f >= t0 + 8 && f < t0 + 13) blink = Math.max(blink, 1 - Math.abs(f - t0 - 10) / 2.5);
+    if (hash(k * 1.3 + seed) > 0.78 && f >= t0 + 8 && f < t0 + 13) blink = Math.max(blink, 1 - Math.abs(f - t0 - 10) / 2.5);
   }
-  if (expr === 'smile') blink = Math.max(blink, 0.35);
-  const eyeS = expr === 'surprise' ? 1.25 : 1;
-  const [lx, ly] = expr === 'think' ? [0.7, -0.8] : look;
-  // brows
-  const browUp = expr === 'surprise' ? -16 : expr === 'think' ? -6 : expr === 'serious' ? 4 : expr === 'smile' ? -3 : 0;
-  const browTilt = expr === 'serious' ? 7 : expr === 'think' ? -8 : 0;
-  // poses blend
-  const tp = eo((f - poseAt) / 9);
-  const P0 = POSES[fromPose ?? pose], P1 = POSES[pose];
-  const rArm = mixArm(P0.r, P1.r, tp);
-  const lArm = mixArm(P0.l, P1.l, tp);
-  if (pose === 'point' && tp > 0.9) rArm.h = [rArm.h[0] + Math.sin(f / 9) * 4, rArm.h[1] + Math.sin(f / 9) * 3];
-  // glint across the glasses every ~5 s
-  const gl = ((f + seed * 40) % 150) / 14;
-  // entrance
-  const sc = 0.6 + 0.4 * enter, ty = (1 - enter) * 120;
+  if (pose !== fromPose && f >= poseAt && f < poseAt + 5) blink = Math.max(blink, 1 - Math.abs(f - poseAt - 2) / 2.5); // blink on a turn
+  const lid = Math.max(blink, E.lid);
+  const glint = ((f + seed * 40) % 180) / 16;
+  const pv = A.pivot;
 
-  const ink = {stroke: HOST.ink, strokeWidth: 4.5, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const};
+  const eye = (e: (typeof A.eyes)[number], i: number) => {
+    const [x0, y0, x1, y1] = e.box, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+    const sy = Math.max(0.1, 1 - lid) * E.eye, sx = E.eye;
+    return <g key={i} transform={`translate(${lx * 9},${ly * 6})`}>
+      <g transform={`translate(${cx},${cy}) scale(${sx},${sy}) translate(${-cx},${-cy})`}>
+        <path d={e.d} fill={HOST.ink} fillRule="evenodd" />
+        <circle cx={cx - (x1 - x0) * 0.18} cy={cy - (y1 - y0) * 0.2} r={(x1 - x0) * 0.13} fill="#fff" opacity={lid > 0.6 ? 0 : 0.95} />
+      </g>
+      {lid > 0.25 && <path d={`M${x0 - 6},${cy - (y1 - y0) * 0.5 * sy} Q${cx},${cy - (y1 - y0) * 0.62 * sy - 4} ${x1 + 6},${cy - (y1 - y0) * 0.45 * sy}`} stroke={HOST.ink} strokeWidth={6} fill="none" strokeLinecap="round" />}
+    </g>;
+  };
+  const brow = (b: (typeof A.brows)[number], i: number) => {
+    const [x0, y0, x1, y1] = b.box, inner = i === 0 ? x1 : x0, cy = (y0 + y1) / 2, side = i === 0 ? 1 : -1;
+    const ex = expr === 'think' && i === 1 ? -10 : 0;   // one brow up when thinking
+    return <path key={i} d={b.d} fill={HOST.ink} fillRule="evenodd" transform={`translate(${lx * 5},${E.by + ex}) rotate(${E.bt * side} ${inner} ${cy})`} />;
+  };
+  const [mx0, my0, mx1, my1] = A.mouth, mcx = (mx0 + mx1) / 2 + 4, mcy = (my0 + my1) / 2 - 6, mw = (mx1 - mx0) / 2;
   const mouth = () => {
-    if (expr === 'surprise' && open < 0.2) return <ellipse cx={300} cy={410} rx={13} ry={16} fill={HOST.mouth} {...ink} />;
-    if (open > 0.08) {
-      const w = sp.round ? 20 + open * 6 : 26 + open * 12, h = 6 + open * (sp.round ? 22 : 18);
+    const lipsClosed = <g><path d={A.head.lips.d} fill={A.head.lips.fill} /><path d={A.head.mouthLine.d} fill={HOST.ink} /></g>;
+    // talking: a measured opening and a per-syllable shape (or the old syllable pulses when no track exists)
+    const v = mo ?? {open: sp.open, w: sp.round ? 0.6 : 0.9, h: sp.round ? 0.8 : 0.6, teeth: sp.round ? 0.1 : 0.5, round: sp.round};
+    const surpriseHold = expr === 'surprise' && tp > 0.5 && v.open < 0.25;
+    const o = surpriseHold ? 0.42 : v.open;
+    if (o > 0.04) {
+      const shape = surpriseHold ? VIS.O : v;
+      const W = mw * (0.55 + 0.38 * shape.w) * (expr === 'smile' ? 1.08 : 1), Hh = 6 + 64 * o * shape.h, r = shape.round;
+      const cx = mcx, cy = mcy - 2;
+      const up = Hh * (0.28 + 0.22 * r), dn = Hh * (0.95 + 0.25 * r);
+      const cav = `M${cx - W},${cy} C${cx - W * 0.62},${cy - up} ${cx + W * 0.62},${cy - up} ${cx + W},${cy} C${cx + W * 0.72},${cy + dn} ${cx - W * 0.72},${cy + dn} ${cx - W},${cy} Z`;
+      const fade = clamp((o - 0.04) / 0.12);
       return <g>
-        <ellipse cx={300} cy={406 + h * 0.3} rx={w} ry={h} fill={HOST.mouth} {...ink} />
-        <ellipse cx={300} cy={406 + h * 0.85} rx={w * 0.55} ry={h * 0.35} fill={HOST.tongue} />
+        <g opacity={1 - fade}>{lipsClosed}</g>
+        <g opacity={fade}>
+          <defs><clipPath id={`mc${seed}`}><path d={cav} /></clipPath></defs>
+          <path d={cav} fill={HOST.mouth} />
+          <g clipPath={`url(#mc${seed})`}>
+            <rect x={cx - W} y={cy - up} width={W * 2} height={Math.min(Hh * 0.42, 15) * shape.teeth + up * 0.6} fill="#F7F1EA" />
+            <ellipse cx={cx} cy={cy + dn * 0.95} rx={W * 0.6} ry={Math.max(0, Hh * 0.38)} fill={HOST.tongue} opacity={Hh > 14 ? 0.95 : 0} />
+          </g>
+          {/* lips: upper lip line, lower lip as a soft pink crescent */}
+          <path d={`M${cx - W - 4},${cy + 1} C${cx - W * 0.62},${cy - up - 2} ${cx + W * 0.62},${cy - up - 2} ${cx + W + 4},${cy + 1}`} fill="none" stroke={HOST.ink} strokeWidth={5.5} strokeLinecap="round" />
+          <path d={`M${cx - W * 0.7},${cy + dn * 0.78 + 7} C${cx - W * 0.35},${cy + dn + 13} ${cx + W * 0.35},${cy + dn + 13} ${cx + W * 0.7},${cy + dn * 0.78 + 7}`} fill="none" stroke="#C98A74" strokeWidth={10} strokeLinecap="round" opacity={0.75} />
+          <path d={`M${cx - W * 0.72},${cy + dn * 0.74} C${cx - W * 0.35},${cy + dn} ${cx + W * 0.35},${cy + dn} ${cx + W * 0.72},${cy + dn * 0.74}`} fill="none" stroke={HOST.ink} strokeWidth={3} strokeLinecap="round" opacity={0.55} />
+        </g>
       </g>;
     }
-    if (expr === 'smile') return <path d="M270,400 Q300,428 330,400" fill="none" {...ink} strokeWidth={5} />;
-    if (expr === 'serious') return <path d="M276,408 L324,408" fill="none" {...ink} />;
-    return <g>
-      <path d="M278,412 Q300,421 322,412 Q300,428 278,412 Z" fill={HOST.lip} opacity={0.9} />
-      <path d="M272,405 Q286,401 300,404 Q314,401 328,405" fill="none" {...ink} strokeWidth={4} />
+    if (expr === 'smile') return <g>
+      <path d={`M${mcx - mw * 0.8},${mcy - 4} Q${mcx},${mcy + 26} ${mcx + mw * 0.8},${mcy - 6}`} stroke={HOST.ink} strokeWidth={6} fill="none" strokeLinecap="round" />
+      <path d={`M${mcx - mw * 0.35},${mcy + 30} Q${mcx},${mcy + 38} ${mcx + mw * 0.35},${mcy + 30}`} stroke="#BD8D75" strokeWidth={9} fill="none" strokeLinecap="round" opacity={0.7} />
     </g>;
+    if (expr === 'think') return <path d={`M${mcx - mw * 0.55},${mcy + 4} Q${mcx},${mcy + 2} ${mcx + mw * 0.6},${mcy - 8}`} stroke={HOST.ink} strokeWidth={6} fill="none" strokeLinecap="round" />;
+    return lipsClosed;
   };
-  const eye = (cx: number) => {
-    const sy = Math.max(0.08, 1 - blink) * eyeS;
-    return <g>
-      <g transform={`translate(${cx + lx * 5},${305 + ly * 4}) scale(1,${sy})`}>
-        <ellipse cx={0} cy={0} rx={11 * eyeS} ry={13.5} fill={HOST.ink} />
-        <circle cx={-3.5} cy={-4.5} r={3.8} fill="#fff" />
+  // rim light: a soft, thin glow of the film's accent on the upper-left edge (not an offset copy of the outline)
+  const rimF = rim ? `drop-shadow(${-size / 400}px ${-size / 500}px ${size / 260}px ${rim}aa) drop-shadow(0 ${size / 60}px ${size / 30}px rgba(0,0,0,0.3))` : undefined;
+  return <svg width={size} height={size} viewBox={`0 0 ${A.size[0]} ${A.size[1]}`} style={{overflow: 'visible', display: 'block', filter: rimF}}>
+    <g transform={`translate(${lean * Math.sign(lx || 1)},0)`}>
+      {/* body: shoulders breathe and shrug */}
+      <g transform={`translate(0,${breathe - up})`}>
+        <path d={A.body.neck.d} fill={A.body.neck.fill} fillRule="evenodd" />
+        <path d={A.body.neckShade.d} fill={A.body.neckShade.fill} fillRule="evenodd" />
       </g>
-      {/* upper lid */}
-      <path d={`M${cx - 17},${296 - (1 - sy) * 0} Q${cx},${286 + (1 - Math.max(0.08, 1 - blink)) * 18} ${cx + 17},${296}`} fill="none" {...ink} strokeWidth={4} />
-    </g>;
-  };
-  const brow = (cx: number, side: number) => <path d={`M${cx - 27},${268 + browUp + browTilt * side * 0.4} Q${cx},${258 + browUp} ${cx + 27},${266 + browUp - browTilt * side * 0.4}`}
-    fill="none" stroke={HOST.hair} strokeWidth={13} strokeLinecap="round" />;
-
-  return <svg width={size} height={(size * 720) / 600} viewBox="0 0 600 720" style={{overflow: 'visible', display: 'block'}}>
-    <g transform={`translate(300,${420 + ty}) scale(${sc}) translate(-300,-420)`}>
-      {disc && <circle cx={300} cy={360} r={290} fill={HOST.disc} />}
-      {/* body: hoodie with hood around the neck, drawstrings; breathes */}
-      <g transform={`translate(0,${breathe * 0.5})`}>
-        <ArmShape side={-1} arm={lArm} f={f} />
-        <path d="M20,720 C30,630 70,585 150,560 C190,548 215,530 240,512 L360,512 C385,530 410,548 450,560 C530,585 570,630 580,720 Z" fill={HOST.hoodie} {...ink} />
-        <path d="M80,640 C110,610 140,600 165,596 M520,640 C490,610 460,600 435,596" fill="none" stroke={HOST.fold} strokeWidth={10} strokeLinecap="round" />
-        {/* neck */}
-        <path d="M256,440 L256,520 Q300,556 344,520 L344,440 Z" fill={HOST.neck} {...ink} />
-        <path d="M256,470 Q300,505 344,470 L344,440 L256,440 Z" fill={HOST.skinShade} opacity={0.6} />
-        {/* hood collar: thick ring around the neck dipping to a V */}
-        <path d="M185,520 C205,488 240,498 262,520 Q300,580 338,520 C360,498 395,488 415,520 C440,560 420,620 395,640 Q340,600 300,640 Q260,600 205,640 C180,620 160,560 185,520 Z" fill={HOST.hoodie} {...ink} />
-        <path d="M225,560 Q260,590 290,628 M375,560 Q340,590 310,628" fill="none" stroke={HOST.fold} strokeWidth={9} strokeLinecap="round" />
-        {/* drawstrings */}
-        <path d={`M268,600 Q264,${650 + breathe} 266,700`} fill="none" stroke={HOST.ink} strokeWidth={9} strokeLinecap="round" />
-        <path d={`M332,600 Q336,${650 + breathe} 334,700`} fill="none" stroke={HOST.ink} strokeWidth={9} strokeLinecap="round" />
-        <circle cx={268} cy={603} r={9} fill={HOST.tip} {...ink} strokeWidth={3} />
-        <circle cx={332} cy={603} r={9} fill={HOST.tip} {...ink} strokeWidth={3} />
+      <g transform={`translate(0,${breathe * 0.6 - up}) translate(627,1254) scale(1,${1 + up / 900}) translate(-627,-1254)`}>
+        <path d={A.body.hood.d} fill={A.body.hood.fill} fillRule="evenodd" />
+        <path d={A.body.hoodLo.d} fill={A.body.hoodLo.fill} fillRule="evenodd" />
+        <path d={A.body.hoodHi.d} fill={A.body.hoodHi.fill} fillRule="evenodd" />
+        <path d={A.body.lines.d} fill={A.body.lines.fill} fillRule="evenodd" />
       </g>
       {/* head */}
-      <g transform={`translate(0,${headY + 26}) rotate(${headRot} 300 440) translate(300,440) scale(1.16) translate(-300,-440)`}>
-        {/* ears */}
-        <g>
-          <path d="M200,290 C172,282 162,320 172,345 C180,365 196,372 210,366 Z" fill={HOST.skin} {...ink} />
-          <path d="M196,305 C184,310 182,330 190,345" fill="none" stroke={HOST.ear} strokeWidth={7} strokeLinecap="round" />
-          <path d="M400,290 C428,282 438,320 428,345 C420,365 404,372 390,366 Z" fill={HOST.skin} {...ink} />
-          <path d="M404,305 C416,310 418,330 410,345" fill="none" stroke={HOST.ear} strokeWidth={7} strokeLinecap="round" />
+      <g transform={`translate(0,${headY + breathe * 0.4}) rotate(${headRot} ${pv[0]} ${pv[1]})`}>
+        <path d={A.head.face.d} fill={A.head.face.fill} fillRule="evenodd" />
+        <g transform={`translate(${turn * 0.5},0)`}>
+          <path d={A.head.shade.d} fill={A.head.shade.fill} fillRule="evenodd" />
+          <path d={A.head.deep.d} fill={A.head.deep.fill} fillRule="evenodd" />
         </g>
-        {/* face */}
-        <path d="M194,220 C190,300 196,362 218,404 C238,442 268,462 300,464 C332,462 362,442 382,404 C404,362 410,300 406,220 Z" fill={HOST.skin} {...ink} />
-        <path d="M218,404 C238,442 268,462 300,464 C285,450 250,430 230,392 Z" fill={HOST.skinShade} opacity={0.35} />
-        {/* blush */}
-        <ellipse cx={236} cy={372} rx={20} ry={9} fill="#F2A88A" opacity={0.28} />
-        <ellipse cx={364} cy={372} rx={20} ry={9} fill="#F2A88A" opacity={0.28} />
-        {brow(252, -1)}{brow(348, 1)}
-        {eye(253)}{eye(347)}
-        {/* nose */}
-        <path d="M296,330 Q292,352 286,362 Q296,372 312,364" fill="none" {...ink} strokeWidth={4} />
-        {mouth()}
-        {/* glasses */}
-        <g fill="rgba(255,255,255,0.05)" stroke={HOST.glass} strokeWidth={6.5} strokeLinejoin="round">
-          <rect x={202} y={280} width={95} height={58} rx={9} />
-          <rect x={303} y={280} width={95} height={58} rx={9} />
-          <path d="M297,298 Q300,292 303,298" fill="none" />
-          <path d="M202,292 L188,288 M398,292 L412,288" fill="none" />
+        <path d={A.head.lines.d} fill={A.head.lines.fill} fillRule="evenodd" />
+        <g transform={`translate(${turn},0)`}>
+          {A.brows.map(brow)}
+          {A.eyes.map(eye)}
+          {mouth()}
+          <path d={A.head.glasses.d} fill={A.head.glasses.fill} fillRule="evenodd" />
+          {glint < 1 && <g opacity={Math.sin(glint * Math.PI) * 0.5}>
+            <path d={`M${470 + glint * 230},640 L${530 + glint * 230},480`} stroke="#fff" strokeWidth={22} />
+            <path d={`M${760 + glint * 140},650 L${810 + glint * 140},500`} stroke="#fff" strokeWidth={14} />
+          </g>}
         </g>
-        {gl < 1 && <g opacity={Math.sin(gl * Math.PI) * 0.65}>
-          <path d={`M${215 + gl * 70},336 L${235 + gl * 70},282`} stroke="#fff" strokeWidth={9} />
-          <path d={`M${303 + gl * 70},336 L${323 + gl * 70},282`} stroke="#fff" strokeWidth={9} />
-        </g>}
-        {/* hair: lags the head a little */}
-        <g transform={`rotate(${hairLag} 300 300) translate(300,300) scale(1.05,0.84) translate(-300,-300)`}>
-          <path d="M196,300 C186,268 182,232 188,204 C176,196 170,184 172,170 C184,176 192,174 198,170 C202,150 214,134 232,124 C228,112 230,100 236,92 C246,104 256,108 266,108 C278,96 296,90 314,90 C320,82 330,78 340,78 C340,86 342,92 346,96 C368,100 390,112 404,130 C414,126 424,126 432,130 C426,138 422,146 420,152 C430,176 432,206 426,232 C422,256 416,280 410,302 C404,282 398,262 388,248 C376,240 364,236 352,236 C344,226 334,218 322,212 C300,218 276,224 256,230 C238,236 222,246 212,262 C206,274 200,288 196,300 Z"
-            fill={HOST.hair} {...ink} />
-          {/* a swept lock falling onto the forehead, right of the parting */}
-          <path d="M300,212 C314,232 332,244 356,246 C346,236 340,226 338,212 Z" fill={HOST.hair} {...ink} />
-          <path d="M230,170 C250,150 280,140 310,140 M322,128 C352,130 380,146 398,170 M214,212 C230,198 252,190 274,188 M366,196 C384,204 400,220 408,240" fill="none" stroke={HOST.hairHi} strokeWidth={8} strokeLinecap="round" />
-          {/* sideburns */}
-          <path d="M196,290 L194,336 L206,336 L210,286 Z M404,290 L406,336 L394,336 L390,286 Z" fill={HOST.hair} />
+        <g transform={`rotate(${hairLag} ${pv[0]} ${pv[1]})`}>
+          <path d={A.head.hair.d} fill={A.head.hair.fill} fillRule="evenodd" />
+          <path d={A.head.hairHi.d} fill={A.head.hairHi.fill} fillRule="evenodd" />
         </g>
       </g>
-      <ArmShape side={1} arm={rArm} f={f} />
     </g>
   </svg>;
 };
 
 /* ---------- the host inside a film: config + a per-scene layer ---------- */
 export type HostBeat = {at: number; expr?: HostExpr; pose?: HostPose; look?: [number, number]};
-export type HostScene = {expr?: HostExpr; pose?: HostPose; beats?: HostBeat[]; x?: number; y?: number; size?: number; mute?: boolean};
-/** tutorial.host: where the host sits by default, and the scenes it appears in (docs/video-craft/IP形象.md). */
-export type HostConfig = {x?: number; y?: number; size?: number; scenes: Record<string, HostScene>};
+export type HostMode = 'window' | 'edge' | 'badge';
+export type HostScene = {expr?: HostExpr; pose?: HostPose; beats?: HostBeat[]; x?: number; y?: number; size?: number; mute?: boolean; mode?: HostMode; look?: [number, number]};
+/**
+ * tutorial.host (docs/video-craft/IP形象.md). `x`, `y`: the window's / the edge line's top-left; `size`: the window's width
+ * (edge: the art's width). `colors` come from the film (look.pk): `panel` the window's ground, `accent` its frame and the
+ * rim light, `ink` the name tag. `name` is the tag on the window (omit for none).
+ */
+export type HostConfig = {x?: number; y?: number; size?: number; mode?: HostMode; name?: string; scenes: Record<string, HostScene>;
+  colors?: {panel?: string; accent?: string; ink?: string; bg?: string}};
 
+const useMouth = (src?: string): MouthTrack | null | undefined => {
+  const [m, setM] = React.useState<MouthTrack | null | undefined>(undefined);
+  const [handle] = React.useState(() => (src ? delayRender(`host mouth ${src}`) : null));
+  React.useEffect(() => {
+    if (!src || handle === null) return;
+    fetch(staticFile(src)).then((r) => (r.ok ? r.json() : null)).then((j) => setM(j && Array.isArray(j.env) ? j : null)).catch(() => setM(null)).finally(() => continueRender(handle));
+  }, [src, handle]);
+  return m;
+};
 const useWords = (src?: string): HostWord[] => {
   const [words, setWords] = React.useState<HostWord[]>([]);
   const [handle] = React.useState(() => (src ? delayRender(`host words ${src}`) : null));
@@ -243,29 +268,67 @@ const useWords = (src?: string): HostWord[] => {
   return words;
 };
 
-/** One scene's host: pops in when the previous scene had none, sinks out when the next has none; lip-syncs to the scene's narration. */
+/** The framed host (no timeline): used by HostLayer and the lab. `enter` 0..1 reveals it (the window wipes open / he rises from the edge). */
+export const HostFrame: React.FC<HostProps & {mode?: HostMode; enter?: number; name?: string; colors?: HostConfig['colors']}> = ({mode = 'window', enter = 1, name, colors = {}, size = 300, ...p}) => {
+  const panel = colors.panel ?? '#2A2420', accent = colors.accent ?? '#E0B84D', ink = colors.ink ?? '#F2E6DA';
+  if (mode === 'badge') {
+    const s = 0.85 + 0.15 * eo(enter);
+    return <div style={{width: size, height: size, borderRadius: '50%', overflow: 'hidden', background: HOST.disc, opacity: clamp(enter * 2), transform: `scale(${s})`,
+      boxShadow: `0 0 0 ${size / 50}px ${accent}, 0 ${size / 25}px ${size / 12}px rgba(0,0,0,0.35)`}}>
+      <div style={{marginTop: size * 0.04}}><Host {...p} size={size} /></div>
+    </div>;
+  }
+  if (mode === 'edge') {
+    // the art rises from behind a line at the bottom of this box; the line itself is the film's (strap, card, band)
+    const h = size * 0.82, rise = (1 - eo(enter)) * h;
+    return <div style={{position: 'relative', width: size, height: h, overflow: 'hidden'}}>
+      <div style={{position: 'absolute', left: 0, top: -size * 0.06 + rise}}><Host {...p} size={size} rim={p.rim ?? accent} /></div>
+    </div>;
+  }
+  // window: a picture-in-picture card in the film's panel colour, accent frame, the bust cropped by its bottom edge
+  const w = size, h = size * 1.06, open = eio(enter), art = w * 1.04;
+  return <div style={{position: 'relative', width: w, height: h + (name ? 56 : 0)}}>
+    <div style={{position: 'absolute', left: 0, top: 0, width: w, height: h, overflow: 'hidden', clipPath: `inset(${(1 - open) * 100}% 0 0 0)`,
+      background: `radial-gradient(120% 90% at 50% 30%, ${colors.bg ?? panel} 0%, ${panel} 55%, rgba(0,0,0,0.55) 100%)`, boxShadow: `inset 0 0 0 ${Math.max(3, w / 90)}px ${accent}, 0 18px 40px rgba(0,0,0,0.45)`}}>
+      <div style={{position: 'absolute', left: (w - art) / 2, top: h - art * 0.97 + (1 - open) * h * 0.3}}><Host {...p} size={art} rim={p.rim ?? accent} /></div>
+      <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: h * 0.18, background: `linear-gradient(180deg, rgba(0,0,0,0), ${panel})`}} />
+      <div style={{position: 'absolute', inset: 0, boxShadow: `inset 0 0 0 ${Math.max(3, w / 90)}px ${accent}`}} />
+    </div>
+    {name && <div style={{position: 'absolute', left: 0, top: h, display: 'flex', height: 52, opacity: clamp((enter - 0.5) * 3), clipPath: `inset(0 ${(1 - eo((enter - 0.4) / 0.6)) * 100}% 0 0)`}}>
+      <div style={{width: 10, background: accent}} />
+      <div style={{background: 'rgba(0,0,0,0.78)', padding: '0 16px', display: 'flex', alignItems: 'center', gap: 10, fontFamily: font, fontWeight: 900, fontSize: 30, color: ink, whiteSpace: 'nowrap'}}>
+        {name}<span style={{fontFamily: cond, fontWeight: 700, fontSize: 22, color: accent, letterSpacing: 1}}>HOST</span>
+      </div>
+    </div>}
+  </div>;
+};
+
+/** One scene's host: opens when the previous scene had none, closes when the next has none; lip-syncs to the scene's narration. */
 export const HostLayer: React.FC<{cfg: HostConfig; sceneId: string; prevId?: string; nextId?: string; audioSrc: string; leadMs: number; dur: number}> = ({cfg, sceneId, prevId, nextId, audioSrc, leadMs, dur}) => {
   const f = useCurrentFrame();
   const sc = cfg.scenes[sceneId];
   const words = useWords(sc && !sc.mute ? audioSrc.replace(/\.mp3$/, '.words.json') : undefined);
+  const track = useMouth(sc && !sc.mute ? audioSrc.replace(/\.mp3$/, '.mouth.json') : undefined) ?? undefined;
   if (!sc) return null;
   const shifted = words.map((w) => ({...w, ms: w.ms + leadMs}));
   const t = f / 30;
-  let expr = sc.expr ?? 'calm', pose = sc.pose ?? 'idle', look: [number, number] = [0.3, 0.2];
-  let fromPose: HostPose = prevId && cfg.scenes[prevId] ? (cfg.scenes[prevId].beats?.slice(-1)[0]?.pose ?? cfg.scenes[prevId].pose ?? 'idle') : 'idle', poseAt = 6;
+  const prev = prevId ? cfg.scenes[prevId] : undefined;
+  let expr: HostExpr = sc.expr ?? 'calm', pose: HostPose = sc.pose ?? 'idle', look: [number, number] = sc.look ?? [0.25, 0.1];
+  let fromExpr: HostExpr = prev ? (prev.beats?.slice(-1)[0]?.expr ?? prev.expr ?? 'calm') : 'calm';
+  let fromPose: HostPose = prev ? (prev.beats?.slice(-1)[0]?.pose ?? prev.pose ?? 'idle') : 'idle', poseAt = 4;
   for (const b of sc.beats ?? []) if (t >= b.at) {
-    if (b.pose && b.pose !== pose) { fromPose = pose; pose = b.pose; poseAt = Math.round(b.at * 30); }
-    if (b.expr) expr = b.expr;
+    const at = Math.round(b.at * 30);
+    if (b.pose && b.pose !== pose) { fromPose = pose; pose = b.pose; poseAt = at; }
+    if (b.expr && b.expr !== expr) { fromExpr = expr; expr = b.expr; poseAt = at; }
     if (b.look) look = b.look;
   }
-  const popIn = prevId && cfg.scenes[prevId] ? 1 : spring1(f / 9);
-  const out = nextId && cfg.scenes[nextId] ? 0 : clamp((f - (dur - 8)) / 8);
-  const enter = Math.max(0, popIn * (1 - out));
+  const inA = prev ? 1 : clamp(f / 10), out = nextId && cfg.scenes[nextId] ? 0 : clamp((f - (dur - 9)) / 9);
+  const enter = Math.max(0, inA * (1 - out));
   if (enter <= 0) return null;
-  const x = sc.x ?? cfg.x ?? 36, y = sc.y ?? cfg.y ?? 1110, size = sc.size ?? cfg.size ?? 270;
-  return <div style={{position: 'absolute', left: x, top: y, width: size, height: (size * 720) / 600, opacity: clamp(enter * 3), filter: 'drop-shadow(0 8px 14px rgba(20,16,16,0.18))'}}>
-    <Host f={f} words={shifted} expr={expr} pose={pose} fromPose={fromPose} poseAt={poseAt} look={look} size={size} enter={enter} seed={sceneId.length} />
+  const mode = sc.mode ?? cfg.mode ?? 'window';
+  const x = sc.x ?? cfg.x ?? 40, y = sc.y ?? cfg.y ?? 900, size = sc.size ?? cfg.size ?? 230;
+  return <div style={{position: 'absolute', left: x, top: y}}>
+    <HostFrame f={f} words={shifted} mouth={track} leadMs={leadMs} expr={expr} pose={pose} fromExpr={fromExpr} fromPose={fromPose} poseAt={poseAt} look={look} size={size} seed={sceneId.length}
+      mode={mode} enter={enter} name={cfg.name} colors={cfg.colors} />
   </div>;
 };
-/** 0 → 1 with a little overshoot (back-ease). */
-const spring1 = (t: number) => { const x = clamp(t) - 1; return 1 + x * x * (2.7 * x + 1.7); };
