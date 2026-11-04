@@ -326,11 +326,11 @@ const MOVE_KEYS: CamKey3[] = [
 const Move = make(({f, cue}) => {
   const a = cue('a', 63), b = cue('b', 86);
   const m = React.useMemo(() => ({sub: MAT.substrate(), slab: new THREE.MeshPhysicalMaterial({color: GOLD, metalness: 0.9, roughness: 0.3, emissive: GOLD, emissiveIntensity: 0.25})}), []);
-  const trip = 38, t = f < a ? 0 : ((f - a) % trip) / trip, z = 3.2 - ease3(t / 0.8) * 6.4;
-  const vis = f >= a && t < 0.85 ? 1 : 0;
-  const reads = f < a ? 0 : Math.floor((f - a) / trip) + 1;
+  const s0 = 12, trip = 38, t = f < s0 ? 0 : ((f - s0) % trip) / trip, z = 3.2 - ease3(t / 0.8) * 6.4;
+  const vis = f >= s0 && t < 0.85 ? 1 : 0;
+  const reads = f < s0 ? 0 : Math.floor((f - s0) / trip) + 1;
   return <Stage3D f={f} keys={MOVE_KEYS} ground={['#25272D', '#08090B']} overlay={(cam) => <>
-    <Label3 cam={cam} at={[1.1, 0.1, 3.4]} p={ramp(f, 8, 18)} colX={1010} dy={160} idx="01" name="内存" spec="放着整个模型" accent={GOLD} size={42} />
+    <Label3 cam={cam} at={[1.1, 0.1, 3.4]} p={ramp(f, 8, 18)} colX={1010} dy={-150} idx="01" name="内存" spec="放着整个模型" accent={GOLD} size={42} />
     <Label3 cam={cam} at={[0.6, 0.25, -3.4]} p={ramp(f, 16, 18)} colX={1010} dy={-160} idx="02" name="芯片" spec="算完就要下一份" accent={GOLD} size={42} />
     {f >= a && <div style={{position: 'absolute', left: 300, top: 820, whiteSpace: 'nowrap', opacity: ramp(f, a, 8), textShadow: '0 3px 16px rgba(0,0,0,0.8)'}}>
       <span style={{fontFamily: cond, fontWeight: 800, fontSize: 120, color: GOLD}}>16 GB</span>
@@ -345,7 +345,7 @@ const Move = make(({f, cue}) => {
     {vis > 0 && <mesh material={m.slab} position={[0, 0.25 + Math.sin(t * Math.PI) * 0.4, z]}><boxGeometry args={[1.6, 0.16, 0.9]} /></mesh>}
     <ContactShadow3 r={5} a={0.5} />
   </Stage3D>;
-}, (cue) => [{at: cue('a', 63), kind: 'whoosh', gain: 0.08}, {at: cue('a', 63) + 38, kind: 'whoosh', gain: 0.06}, {at: cue('a', 63) + 76, kind: 'whoosh', gain: 0.06}]);
+}, () => [12, 50, 88, 126].map((at, i) => ({at, kind: 'whoosh', gain: i ? 0.06 : 0.08})));
 
 /* ---------- 8 bus (climax): 128 lanes vs 5,120 lanes at the same scale; bandwidth ≈35× ---------- */
 
@@ -385,7 +385,7 @@ const Bus = make(({f, cue}) => {
   const busMats = React.useMemo(() => ({die: MAT.silicon(), ddr: MAT.substrate()}), []);
   return <Stage3D f={f} keys={BUS_KEYS} shiftY={-40} overlay={(cam) => <>
     <Tag text="同一比例 · 双通道 DDR5-6000 vs H100" y={250} />
-    <Label3 cam={cam} at={[-2.25, 0.05, 2]} p={ramp(f, 4, 18)} colX={70} dy={200} idx="01" name="电脑内存 · 128 根线" spec="≈96 GB/s" accent={GOLD} size={42} />
+    <Label3 cam={cam} at={[-2.25, 0.05, 0.5]} p={ramp(f, 4, 18)} colX={70} dy={-60} idx="01" name="电脑内存 · 128 根线" spec="≈96 GB/s" accent={GOLD} size={42} />
     <Label3 cam={cam} at={[1.6, 0.05, 0.6]} p={ramp(f, a, 18)} colX={1010} dy={-200} idx="02" name="HBM · 5,120 根线" spec="3,350 GB/s" accent={GOLD} size={42} />
     <Dim3 cam={cam} a={[-1.2, 0.05, -2.2]} b={[2.8, 0.05, -2.2]} p={ramp(f, b, 16)} off={0} text="带宽 ≈35×" accent={GOLD} size={56} />
     {f >= b && <div style={{position: 'absolute', left: 64, top: 320, opacity: ramp(f, b + 6, 10), transformOrigin: '0 50%', transform: `scale(${1 + 0.15 * Math.max(0, 1 - (f - b - 6) / 8)})`,
@@ -484,9 +484,9 @@ const END_KEYS: CamKey3[] = [
 const End = make(({f}) => {
   const items: [string, string, number, number][] = [['CPU', '几个大核', -1.3, -3.6], ['GPU', '16,896 个小核', 1.3, -3.6], ['NPU', '≥ 40 TOPS · 省电', -1.3, 0.2], ['TPU', '128 × 128 方阵', 1.3, 0.2]];
   const m = React.useMemo(() => ({sub: MAT.substrate(), npu: new THREE.MeshStandardMaterial({color: '#2B3040', emissive: GOLD, emissiveIntensity: 0.5})}), []);
-  return <Stage3D f={f} keys={END_KEYS} shiftY={-200} overlay={(cam) => <>
+  return <Stage3D f={f} keys={END_KEYS} shiftY={-300} overlay={(cam) => <>
     {items.map(([n, spec, x, z], i) => <Label3 key={n} cam={cam} at={[x, 0.3, z]} p={ramp(f, 2 + i * 3, 12)} colX={i % 2 ? 1010 : 70} dy={i < 2 ? 170 : -120} idx={`0${i + 1}`} name={n} spec={spec} accent={GOLD} size={42} />)}
-    <div style={{position: 'absolute', left: 300, top: 1180, fontFamily: font, fontWeight: 700, fontSize: 44, color: INK, opacity: ramp(f, 30, 12), whiteSpace: 'nowrap'}}>
+    <div style={{position: 'absolute', left: 300, top: 1150, fontFamily: font, fontWeight: 700, fontSize: 44, color: INK, opacity: ramp(f, 30, 12), whiteSpace: 'nowrap'}}>
       数据通道：<span style={{color: INK}}>128 根</span> <span style={{opacity: 0.6}}>vs</span> <span style={{color: GOLD}}>5,120 根</span></div>
   </>}>
     <group position={[-1.3, 0, -3.6]} scale={0.6}><CPUPackage /></group>

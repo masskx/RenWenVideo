@@ -116,8 +116,8 @@ export const ContactShadow3: React.FC<{y?: number; r?: number; a?: number; at?: 
  * A 3D stage filling the frame: graphite sweep behind (or `ground`), the canvas with the camera pose and rig, then the
  * screen-space `overlay` (labels, dimension lines) drawn with the same camera, so anchors stay on the parts.
  */
-export const Stage3D: React.FC<{f: number; keys: CamKey3[]; shiftY?: number; ground?: [string, string]; rim?: string; children: React.ReactNode;
-  overlay?: (cam: THREE.PerspectiveCamera) => React.ReactNode}> = ({f, keys, shiftY = 0, ground = ['#3A3D44', '#0C0D10'], rim, children, overlay}) => {
+export const Stage3D: React.FC<{f: number; keys: CamKey3[]; shiftY?: number; ground?: [string, string]; rim?: string; veil?: boolean; children: React.ReactNode;
+  overlay?: (cam: THREE.PerspectiveCamera) => React.ReactNode}> = ({f, keys, shiftY = 0, ground = ['#3A3D44', '#0C0D10'], rim, veil = true, children, overlay}) => {
   const pose = camAt3(keys, f);
   const cam = makeCam(pose, shiftY);
   return <div style={{position: 'absolute', inset: 0, background: `radial-gradient(ellipse 90% 60% at 50% 42%, ${ground[0]} 0%, ${ground[1]} 78%)`}}>
@@ -126,6 +126,8 @@ export const Stage3D: React.FC<{f: number; keys: CamKey3[]; shiftY?: number; gro
       <Rig pose={pose} rim={rim} />
       {children}
     </ThreeCanvas>
+    {/* a soft dark band behind the captions, so white subtitles read on bright parts (copper, lit dies) */}
+    {veil && <div style={{position: 'absolute', left: 0, right: 0, top: 1330, height: 340, background: 'linear-gradient(180deg, rgba(8,9,11,0) 0%, rgba(8,9,11,0.78) 35%, rgba(8,9,11,0.78) 72%, rgba(8,9,11,0) 100%)'}} />}
     {overlay?.(cam)}
   </div>;
 };
