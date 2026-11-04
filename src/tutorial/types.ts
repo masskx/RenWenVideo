@@ -12,6 +12,8 @@ import type {HostConfig} from './host';
 export type Tutorial = {
   /** The account's host IP: scenes it appears in (src/tutorial/host.tsx, docs/video-craft/IP形象.md). */
   host?: HostConfig;
+  /** The film has three.js scenes (src/tutorial/three-kit.tsx): render with WebGL (SwiftShader in the cloud). */
+  render3d?: boolean;
   id: string;
   title: string;
   subtitle: string;

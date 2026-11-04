@@ -1,0 +1,312 @@
+{
+  "id": "chips-cpu-gpu-npu-tpu",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1725,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/chips-cpu-gpu-npu-tpu/01-hook.mp3",
+      "audioMs": 4728,
+      "startFrame": 0,
+      "durationFrames": 153,
+      "cues": {
+        "a": 1586,
+        "b": 3290
+      },
+      "captions": [
+        {
+          "text": "同一个80亿参数的模型",
+          "startMs": 138,
+          "endMs": 1586
+        },
+        {
+          "text": "CPU每秒约吐6个字",
+          "startMs": 1586,
+          "endMs": 3290
+        },
+        {
+          "text": "GPU能到200个",
+          "startMs": 3290,
+          "endMs": 5027
+        }
+      ]
+    },
+    {
+      "id": "cpu",
+      "audioSrc": "audio/tutorials/chips-cpu-gpu-npu-tpu/02-cpu.mp3",
+      "audioMs": 4049,
+      "startFrame": 153,
+      "durationFrames": 132,
+      "cues": {
+        "a": 1014,
+        "b": 2172
+      },
+      "captions": [
+        {
+          "text": "差别在结构",
+          "startMs": 138,
+          "endMs": 1014
+        },
+        {
+          "text": "CPU是几个大核",
+          "startMs": 1014,
+          "endMs": 2172
+        },
+        {
+          "text": "擅长一步步算复杂逻辑",
+          "startMs": 2172,
+          "endMs": 4352
+        }
+      ]
+    },
+    {
+      "id": "gpu",
+      "audioSrc": "audio/tutorials/chips-cpu-gpu-npu-tpu/03-gpu.mp3",
+      "audioMs": 5512,
+      "startFrame": 285,
+      "durationFrames": 176,
+      "cues": {
+        "a": 1548,
+        "b": 3553
+      },
+      "captions": [
+        {
+          "text": "GPU是上万个小核",
+          "startMs": 138,
+          "endMs": 1548
+        },
+        {
+          "text": "H100有16896个",
+          "startMs": 1548,
+          "endMs": 3553
+        },
+        {
+          "text": "一条指令同时算一大片数",
+          "startMs": 3553,
+          "endMs": 5820
+        }
+      ]
+    },
+    {
+      "id": "npu",
+      "audioSrc": "audio/tutorials/chips-cpu-gpu-npu-tpu/04-npu.mp3",
+      "audioMs": 5616,
+      "startFrame": 461,
+      "durationFrames": 179,
+      "cues": {
+        "a": 1814,
+        "b": 2918
+      },
+      "captions": [
+        {
+          "text": "NPU塞在手机和电脑里",
+          "startMs": 138,
+          "endMs": 1814
+        },
+        {
+          "text": "只做AI的乘加",
+          "startMs": 1814,
+          "endMs": 2918
+        },
+        {
+          "text": "微软AI电脑要求每秒40万亿次",
+          "startMs": 2918,
+          "endMs": 5927
+        }
+      ]
+    },
+    {
+      "id": "tpu",
+      "audioSrc": "audio/tutorials/chips-cpu-gpu-npu-tpu/05-tpu.mp3",
+      "audioMs": 6269,
+      "startFrame": 640,
+      "durationFrames": 199,
+      "cues": {
+        "a": 1967,
+        "b": 4749
+      },
+      "captions": [
+        {
+          "text": "TPU是谷歌的AI芯片",
+          "startMs": 138,
+          "endMs": 1967
+        },
+        {
+          "text": "乘加器排成128乘128的方阵",
+          "startMs": 1967,
+          "endMs": 4749
+        },
+        {
+          "text": "数据一拍走一格",
+          "startMs": 4749,
+          "endMs": 6509
+        }
+      ]
+    },
+    {
+      "id": "math",
+      "audioSrc": "audio/tutorials/chips-cpu-gpu-npu-tpu/06-math.mp3",
+      "audioMs": 4598,
+      "startFrame": 839,
+      "durationFrames": 149,
+      "cues": {
+        "a": 2043,
+        "b": 2815
+      },
+      "captions": [
+        {
+          "text": "大模型几乎全是矩阵乘法",
+          "startMs": 138,
+          "endMs": 2043
+        },
+        {
+          "text": "每吐一个字",
+          "startMs": 2043,
+          "endMs": 2815
+        },
+        {
+          "text": "80亿个参数都要算一遍",
+          "startMs": 2815,
+          "endMs": 4907
+        }
+      ]
+    },
+    {
+      "id": "move",
+      "audioSrc": "audio/tutorials/chips-cpu-gpu-npu-tpu/07-move.mp3",
+      "audioMs": 5120,
+      "startFrame": 988,
+      "durationFrames": 165,
+      "cues": {
+        "a": 2115,
+        "b": 2859
+      },
+      "captions": [
+        {
+          "text": "可真正卡住它的是搬数据",
+          "startMs": 138,
+          "endMs": 2115
+        },
+        {
+          "text": "每吐一个字",
+          "startMs": 2115,
+          "endMs": 2859
+        },
+        {
+          "text": "16GB权重都要读一遍",
+          "startMs": 2859,
+          "endMs": 5386
+        }
+      ]
+    },
+    {
+      "id": "bus",
+      "audioSrc": "audio/tutorials/chips-cpu-gpu-npu-tpu/08-bus.mp3",
+      "audioMs": 4624,
+      "startFrame": 1153,
+      "durationFrames": 150,
+      "cues": {
+        "a": 1586,
+        "b": 3228
+      },
+      "captions": [
+        {
+          "text": "电脑内存128根线",
+          "startMs": 138,
+          "endMs": 1586
+        },
+        {
+          "text": "HBM有5120根",
+          "startMs": 1586,
+          "endMs": 3228
+        },
+        {
+          "text": "带宽差35倍",
+          "startMs": 3228,
+          "endMs": 4838
+        }
+      ]
+    },
+    {
+      "id": "hbm",
+      "audioSrc": "audio/tutorials/chips-cpu-gpu-npu-tpu/09-hbm.mp3",
+      "audioMs": 5695,
+      "startFrame": 1303,
+      "durationFrames": 182,
+      "cues": {
+        "a": 2350,
+        "b": 3615
+      },
+      "captions": [
+        {
+          "text": "线太多，只能叠起来贴着GPU放",
+          "startMs": 138,
+          "endMs": 2350
+        },
+        {
+          "text": "据美光，同样容量",
+          "startMs": 2350,
+          "endMs": 3615
+        },
+        {
+          "text": "HBM吃约3倍晶圆",
+          "startMs": 3615,
+          "endMs": 5901
+        }
+      ]
+    },
+    {
+      "id": "price",
+      "audioSrc": "audio/tutorials/chips-cpu-gpu-npu-tpu/10-price.mp3",
+      "audioMs": 4336,
+      "startFrame": 1485,
+      "durationFrames": 141,
+      "cues": {
+        "a": 1319,
+        "b": 2336
+      },
+      "captions": [
+        {
+          "text": "AI把内存抢光",
+          "startMs": 138,
+          "endMs": 1319
+        },
+        {
+          "text": "据TrendForce",
+          "startMs": 1319,
+          "endMs": 2336
+        },
+        {
+          "text": "显存现货价涨了约3倍",
+          "startMs": 2336,
+          "endMs": 4631
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/chips-cpu-gpu-npu-tpu/11-end.mp3",
+      "audioMs": 2926,
+      "startFrame": 1626,
+      "durationFrames": 99,
+      "cues": {
+        "a": 1890
+      },
+      "captions": [
+        {
+          "text": "所以大模型缺的不只是算力",
+          "startMs": 138,
+          "endMs": 1890
+        },
+        {
+          "text": "是搬数据的路",
+          "startMs": 1890,
+          "endMs": 3225
+        }
+      ]
+    }
+  ]
+}

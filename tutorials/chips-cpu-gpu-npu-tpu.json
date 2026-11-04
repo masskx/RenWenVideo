@@ -32,7 +32,8 @@
     "at": 0,
     "dur": 0.4
    }
-  ]
+  ],
+  "climaxAt": 3.6
  },
  "steps": [],
  "look": {
@@ -65,7 +66,7 @@
  "host": {
   "mode": "window",
   "x": 64,
-  "y": 1150,
+  "y": 590,
   "size": 190,
   "scenes": {
    "hook": {
@@ -82,12 +83,13 @@
       "expr": "calm",
       "look": [
        1,
-       -0.6
+       0.6
       ]
      }
     ]
    },
    "move": {
+    "y": 560,
     "expr": "serious",
     "pose": "idle",
     "beats": [
@@ -99,6 +101,7 @@
     ]
    },
    "end": {
+    "y": 1130,
     "expr": "think",
     "pose": "think",
     "beats": [
@@ -192,5 +195,65 @@
    "pace": "brisk",
    "narration": "所以大模型缺的不只是算力，{a}是搬数据的路。"
   }
- ]
+ ],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "同一个模型",
+   "CPU 6字 · GPU 200字"
+  ],
+  "support": "3D 拆开 CPU、GPU、NPU、TPU",
+  "tag": "AI 科普 · 芯片",
+  "anchor": "chip.cover",
+  "colors": {
+   "bg": "#0C0D10",
+   "text": "#F1EFE9",
+   "accent": "#E0B84D",
+   "dim": "#A7A49C"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 80,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "musicSrc": "audio/tutorials/chips-cpu-gpu-npu-tpu/score.mp3",
+ "musicVolume": 0.14,
+ "musicDuckDb": 10
 }
