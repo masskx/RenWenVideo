@@ -18,7 +18,7 @@ v2 怎么改：
 | 和片子的关系 | 米色圆贴纸，浮在画面上 | **三种取景，颜色跟片子走**（默认取 `look.pk`）：`window` 画中画小窗（片子的卡面色做底、强调色做边框、胸像被下边裁掉，像新闻里的连线小窗；可加名牌 `name`）；`edge` 从一条线后面升起（下三分之一条、卡片、字幕带——画面切掉他的下半身，而不是飘着）；`badge` 头像原样的圆（只给封面、片尾卡）。强调色的细轮廓光把他放进片子的光里；脸和卫衣是他自己的，不变色 |
 | 进出 | 回弹弹出 | 小窗从下往上擦开 / 从线后升起，离场反过来 |
 
-model sheet：`inputs/host-ip/model-sheet-v2.jpg`（第一行头像原样 + 五种表情，第二行五种动作，第三行三种取景放在三支片的配色上）；说话测试 `inputs/host-ip/demo-v2-talk.mp4`；在片子里的样子 `inputs/host-ip/demo-v2-in-film.mp4`（altman-dram-pc-waste 开头 10 秒）。v1 的图和样片留着对照（`model-sheet.jpg`、`demo-net-six-protocols.mp4`）。
+model sheet：`inputs/host-ip/model-sheet-v2.jpg`（第一行头像原样 + 五种表情，第二行五种动作，第三行三种取景放在三支片的配色上）；对口型特写（带声音）`inputs/host-ip/demo-v2-lipsync-closeup.mp4`；在片子里的样子 `inputs/host-ip/demo-v2-in-film.mp4`（altman-dram-pc-waste 开头 10 秒）。v1 的图和样片留着对照（`model-sheet.jpg`、`demo-net-six-protocols.mp4`）。
 
 ## 一、是什么
 
@@ -30,7 +30,7 @@ model sheet：`inputs/host-ip/model-sheet-v2.jpg`（第一行头像原样 + 五�
 
 | 部件 | 怎么动 |
 |---|---|
-| 嘴 | 按配音的逐字时间戳（`*.words.json` 的 `ms` / `dur`）开合，每个字一次起落，部分字是圆口；不说话时是头像原样的唇 |
+| 嘴 | **按配音本身对口型**（用户 2026-11-04：“The way the mouth is moving seems very unnatural… better if the mouth movements were synchronized with speech”）：`scripts/host/mouth.py` 从每场配音量出口型轨 `NN-<scene>.mouth.json`——张多大来自声音的元音频段（250–1200 Hz，元音响、辅音和字与字之间会掉下去，所以每个字都有开合，停顿时闭上；嘴比声音早约 35 ms），口形来自每个字的拼音韵母（A 张大 / O 圆 / E 半开 / I 扁、露牙 / U 嘟起），b/p/m/f 开头先合唇；字与字之间口形渐变。画法：口腔、上牙、舌头、上唇线、下唇。不说话时是头像原样的唇。渲染时口型轨缺了或比配音旧会自动重做；没装 pypinyin 时口形一律中性、开合仍按声音。v1 的做法（按 TTS 的逐字时间戳每个字随机张一次）时间粗、和声音对不上，已不用 |
 | 头 | 说话时随音节轻点、平时慢慢晃；换动作时点头 / 歪头 / 侧倾；头发比头慢半拍 |
 | 眼 | 每 2.5–4.5 秒眨一次，偶尔连眨，换动作时眨一下；`look` 控制看向哪（−1 左 … 1 右，−1 上 … 1 下） |
 | 眼镜 | 每 6 秒左右一道反光扫过 |

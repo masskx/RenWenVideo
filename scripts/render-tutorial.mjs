@@ -42,6 +42,20 @@ if (!stillsArg && !args.includes('--no-score')) {
 
 const tutorial = await readJson(path.join('tutorials', `${id}.json`));
 const timing = await readJson(path.join('tutorials', `${id}.timeline.json`));
+
+// The host's lip-sync tracks (docs/video-craft/IP形象.md): measured from each scene's voice by scripts/host/mouth.py;
+// (re)made when a track is missing or older than its voice.
+if (tutorial.host) {
+  const needs = timing.scenes.some((s) => {
+    if (!tutorial.host.scenes?.[s.id]) return false;
+    const mp3 = path.join(root, 'public', s.audioSrc), mj = mp3.replace(/\.mp3$/, '.mouth.json');
+    return existsSync(mp3) && (!existsSync(mj) || statSync(mj).mtimeMs < statSync(mp3).mtimeMs);
+  });
+  if (needs) {
+    const py = ['python3', 'python'].find((p) => { try { execFileSync(p, ['--version'], {stdio: 'ignore'}); return true; } catch { return false; } });
+    execFileSync(py, ['scripts/host/mouth.py', id], {stdio: 'inherit'});
+  }
+}
 if (tutorial.id !== id || timing.id !== id) throw Error(`tutorials/${id}.json and its timeline must both have id "${id}"`);
 const missing = tutorial.scenes.filter((s) => !timing.scenes.some((t) => t.id === s.id)).map((s) => s.id);
 if (missing.length) throw Error(`Scenes without voice timing: ${missing.join(', ')} — run generate-tutorial-voice.py`);

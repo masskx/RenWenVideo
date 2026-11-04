@@ -87,7 +87,7 @@ scripts/run.ps1                  Windows 辅助脚本（项目放在 FAT32/移�
 
 ## 环境准备
 
-- Node.js 22+ 和 ffmpeg/ffprobe（需要在 PATH 里）；配音、底乐还需要 Python 3 和 `pip install numpy`（MiniMax / 豆包配音只用标准库；备用的 edge-tts 另装 `pip install edge-tts`）
+- Node.js 22+ 和 ffmpeg/ffprobe（需要在 PATH 里）；配音、底乐还需要 Python 3 和 `pip install numpy`（主持人对口型的口形另需 `pip install pypinyin`）（MiniMax / 豆包配音只用标准库；备用的 edge-tts 另装 `pip install edge-tts`）
 - 中文字体：组件按顺序使用 Noto Sans CJK SC、Source Han Sans SC、PingFang SC、Microsoft YaHei，系统里装有其中一个就行
 - 密钥：把 `.env.example` 复制为 `.env` 再填写（`.env` 不会被提交）
 

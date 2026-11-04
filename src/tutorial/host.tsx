@@ -46,6 +46,33 @@ export const speech = (words: HostWord[], ms: number): {open: number; round: num
   return {open, round, talking};
 };
 
+/** The lip-sync track from scripts/host/mouth.py: opening measured from the voice's vowel band, shape per syllable from pinyin. */
+export type MouthTrack = {rate: number; lead: number; env: number[]; syl: {ms: number; end: number; v: Viseme; close: boolean}[]};
+type Viseme = 'A' | 'O' | 'E' | 'I' | 'U';
+/** Width (× the lips' half-width), height (× the max opening), teeth showing, lip rounding — per viseme. */
+const VIS: Record<Viseme, {w: number; h: number; teeth: number; round: number}> = {
+  A: {w: 0.92, h: 1, teeth: 0.35, round: 0.1},
+  O: {w: 0.6, h: 0.82, teeth: 0.12, round: 0.9},
+  E: {w: 0.9, h: 0.58, teeth: 0.5, round: 0.15},
+  I: {w: 1.02, h: 0.36, teeth: 0.9, round: 0},
+  U: {w: 0.48, h: 0.42, teeth: 0.05, round: 1},
+};
+/** The mouth at `ms` (scene time, the voice starts at `leadMs`): opening 0..1 and a shape blended toward the next syllable. */
+export const mouthAt = (m: MouthTrack, ms: number, leadMs: number) => {
+  const t = ms - leadMs, x = (t / 1000) * m.rate, i = Math.floor(x);
+  const env = i < 0 || i >= m.env.length - 1 ? 0 : lerp(m.env[i], m.env[i + 1], x - i);
+  let k = m.syl.findIndex((s) => t < s.end);
+  if (k < 0) k = m.syl.length - 1;
+  const cur = m.syl[Math.max(0, k)], nxt = m.syl[k + 1];
+  let shape = VIS[cur?.v ?? 'E'], close = 1;
+  if (cur && t >= cur.ms) {
+    const u = (t - cur.ms) / Math.max(40, cur.end - cur.ms);
+    if (nxt && u > 0.6) { const b = eio((u - 0.6) / 0.4) * 0.6, q = VIS[nxt.v]; shape = {w: lerp(shape.w, q.w, b), h: lerp(shape.h, q.h, b), teeth: lerp(shape.teeth, q.teeth, b), round: lerp(shape.round, q.round, b)}; }
+    if (cur.close) close = 0.15 + 0.85 * clamp((t - cur.ms) / 55);   // b/p/m/f: the lips meet, then part
+  } else if (cur && cur.close && t > cur.ms - 60) close = 0.15;
+  return {open: env * close, talking: env > 0.04 ? 1 : 0, ...shape};
+};
+
 /** What a pose does to the head and shoulders (no arms): tilt (deg), lean (px, + toward `look`), shoulders up (px), nods. */
 const POSE: Record<HostPose, {tilt: number; lean: number; up: number; nod: number}> = {
   idle: {tilt: 0, lean: 0, up: 0, nod: 0},
@@ -71,7 +98,8 @@ const mixE = (a: HostExpr, b: HostExpr, t: number) => {
 
 export type HostProps = {
   /** Frame inside the current scene. */ f: number;
-  /** Narration syllables for lip-sync, ms from scene start (already offset by the voice lead). */ words?: HostWord[];
+  /** Narration syllables for lip-sync, ms from scene start (already offset by the voice lead) — fallback when there is no `mouth` track. */ words?: HostWord[];
+  /** Lip-sync track measured from the voice (preferred), and the voice's start in the scene. */ mouth?: MouthTrack; leadMs?: number;
   expr?: HostExpr; pose?: HostPose;
   /** Previous expression / pose and the frame the change started, for blending. */ fromExpr?: HostExpr; fromPose?: HostPose; poseAt?: number;
   /** Where he looks: −1 left … 1 right, −1 up … 1 down. A pointing lean goes the same way horizontally. */ look?: [number, number];
@@ -81,9 +109,11 @@ export type HostProps = {
 };
 
 /** The host as drawn in the avatar, rigged. 1254 × 1254 art box scaled to `size`. */
-export const Host: React.FC<HostProps> = ({f, words = [], expr = 'calm', pose = 'idle', fromExpr, fromPose, poseAt = -99, look = [0.25, 0.1], size = 300, rim, seed = 1}) => {
+export const Host: React.FC<HostProps> = ({f, words = [], mouth: track, leadMs = 0, expr = 'calm', pose = 'idle', fromExpr, fromPose, poseAt = -99, look = [0.25, 0.1], size = 300, rim, seed = 1}) => {
   const ms = (f / 30) * 1000;
-  const sp = speech(words, ms);
+  const mo = track ? mouthAt(track, ms, leadMs) : null;
+  const sp0 = speech(words, ms);
+  const sp = mo ? {open: mo.open, round: mo.round > 0.5 ? 1 : 0, talking: mo.talking} : sp0;
   const tp = eio((f - poseAt) / 10);
   const P0 = POSE[fromPose ?? pose], P1 = POSE[pose];
   const E = mixE(fromExpr ?? expr, expr, tp);
@@ -130,14 +160,32 @@ export const Host: React.FC<HostProps> = ({f, words = [], expr = 'calm', pose = 
   };
   const [mx0, my0, mx1, my1] = A.mouth, mcx = (mx0 + mx1) / 2 + 4, mcy = (my0 + my1) / 2 - 6, mw = (mx1 - mx0) / 2;
   const mouth = () => {
-    const open = sp.open;
-    if (open > 0.06 || (expr === 'surprise' && tp > 0.5)) {
-      const o = Math.max(open, expr === 'surprise' ? 0.45 : 0), w = sp.round || expr === 'surprise' ? mw * (0.42 + o * 0.1) : mw * (0.62 + o * 0.18), h = 8 + o * 38;
+    const lipsClosed = <g><path d={A.head.lips.d} fill={A.head.lips.fill} /><path d={A.head.mouthLine.d} fill={HOST.ink} /></g>;
+    // talking: a measured opening and a per-syllable shape (or the old syllable pulses when no track exists)
+    const v = mo ?? {open: sp.open, w: sp.round ? 0.6 : 0.9, h: sp.round ? 0.8 : 0.6, teeth: sp.round ? 0.1 : 0.5, round: sp.round};
+    const surpriseHold = expr === 'surprise' && tp > 0.5 && v.open < 0.25;
+    const o = surpriseHold ? 0.42 : v.open;
+    if (o > 0.04) {
+      const shape = surpriseHold ? VIS.O : v;
+      const W = mw * (0.55 + 0.38 * shape.w) * (expr === 'smile' ? 1.08 : 1), Hh = 6 + 64 * o * shape.h, r = shape.round;
+      const cx = mcx, cy = mcy - 2;
+      const up = Hh * (0.28 + 0.22 * r), dn = Hh * (0.95 + 0.25 * r);
+      const cav = `M${cx - W},${cy} C${cx - W * 0.62},${cy - up} ${cx + W * 0.62},${cy - up} ${cx + W},${cy} C${cx + W * 0.72},${cy + dn} ${cx - W * 0.72},${cy + dn} ${cx - W},${cy} Z`;
+      const fade = clamp((o - 0.04) / 0.12);
       return <g>
-        <path d={`M${mcx - w},${mcy} Q${mcx},${mcy - 6} ${mcx + w},${mcy} Q${mcx + w * 0.9},${mcy + h} ${mcx},${mcy + h * 1.15} Q${mcx - w * 0.9},${mcy + h} ${mcx - w},${mcy} Z`}
-          fill={HOST.mouth} stroke={HOST.ink} strokeWidth={5} strokeLinejoin="round" />
-        <path d={`M${mcx - w * 0.55},${mcy + h * 0.95} Q${mcx},${mcy + h * 0.55} ${mcx + w * 0.55},${mcy + h * 0.95}`} fill={HOST.tongue} opacity={o > 0.3 ? 0.9 : 0} />
-        <path d={`M${mcx - w * 0.5},${mcy + h * 1.15 + 14} Q${mcx},${mcy + h * 1.15 + 22} ${mcx + w * 0.5},${mcy + h * 1.15 + 14}`} stroke="#BD8D75" strokeWidth={9} fill="none" strokeLinecap="round" opacity={0.6} />
+        <g opacity={1 - fade}>{lipsClosed}</g>
+        <g opacity={fade}>
+          <defs><clipPath id={`mc${seed}`}><path d={cav} /></clipPath></defs>
+          <path d={cav} fill={HOST.mouth} />
+          <g clipPath={`url(#mc${seed})`}>
+            <rect x={cx - W} y={cy - up} width={W * 2} height={Math.min(Hh * 0.42, 15) * shape.teeth + up * 0.6} fill="#F7F1EA" />
+            <ellipse cx={cx} cy={cy + dn * 0.95} rx={W * 0.6} ry={Math.max(0, Hh * 0.38)} fill={HOST.tongue} opacity={Hh > 14 ? 0.95 : 0} />
+          </g>
+          {/* lips: upper lip line, lower lip as a soft pink crescent */}
+          <path d={`M${cx - W - 4},${cy + 1} C${cx - W * 0.62},${cy - up - 2} ${cx + W * 0.62},${cy - up - 2} ${cx + W + 4},${cy + 1}`} fill="none" stroke={HOST.ink} strokeWidth={5.5} strokeLinecap="round" />
+          <path d={`M${cx - W * 0.7},${cy + dn * 0.78 + 7} C${cx - W * 0.35},${cy + dn + 13} ${cx + W * 0.35},${cy + dn + 13} ${cx + W * 0.7},${cy + dn * 0.78 + 7}`} fill="none" stroke="#C98A74" strokeWidth={10} strokeLinecap="round" opacity={0.75} />
+          <path d={`M${cx - W * 0.72},${cy + dn * 0.74} C${cx - W * 0.35},${cy + dn} ${cx + W * 0.35},${cy + dn} ${cx + W * 0.72},${cy + dn * 0.74}`} fill="none" stroke={HOST.ink} strokeWidth={3} strokeLinecap="round" opacity={0.55} />
+        </g>
       </g>;
     }
     if (expr === 'smile') return <g>
@@ -145,7 +193,7 @@ export const Host: React.FC<HostProps> = ({f, words = [], expr = 'calm', pose = 
       <path d={`M${mcx - mw * 0.35},${mcy + 30} Q${mcx},${mcy + 38} ${mcx + mw * 0.35},${mcy + 30}`} stroke="#BD8D75" strokeWidth={9} fill="none" strokeLinecap="round" opacity={0.7} />
     </g>;
     if (expr === 'think') return <path d={`M${mcx - mw * 0.55},${mcy + 4} Q${mcx},${mcy + 2} ${mcx + mw * 0.6},${mcy - 8}`} stroke={HOST.ink} strokeWidth={6} fill="none" strokeLinecap="round" />;
-    return <g><path d={A.head.lips.d} fill={A.head.lips.fill} /><path d={A.head.mouthLine.d} fill={HOST.ink} /></g>;
+    return lipsClosed;
   };
   // rim light: a soft, thin glow of the film's accent on the upper-left edge (not an offset copy of the outline)
   const rimF = rim ? `drop-shadow(${-size / 400}px ${-size / 500}px ${size / 260}px ${rim}aa) drop-shadow(0 ${size / 60}px ${size / 30}px rgba(0,0,0,0.3))` : undefined;
@@ -201,6 +249,15 @@ export type HostScene = {expr?: HostExpr; pose?: HostPose; beats?: HostBeat[]; x
 export type HostConfig = {x?: number; y?: number; size?: number; mode?: HostMode; name?: string; scenes: Record<string, HostScene>;
   colors?: {panel?: string; accent?: string; ink?: string; bg?: string}};
 
+const useMouth = (src?: string): MouthTrack | null | undefined => {
+  const [m, setM] = React.useState<MouthTrack | null | undefined>(undefined);
+  const [handle] = React.useState(() => (src ? delayRender(`host mouth ${src}`) : null));
+  React.useEffect(() => {
+    if (!src || handle === null) return;
+    fetch(staticFile(src)).then((r) => (r.ok ? r.json() : null)).then((j) => setM(j && Array.isArray(j.env) ? j : null)).catch(() => setM(null)).finally(() => continueRender(handle));
+  }, [src, handle]);
+  return m;
+};
 const useWords = (src?: string): HostWord[] => {
   const [words, setWords] = React.useState<HostWord[]>([]);
   const [handle] = React.useState(() => (src ? delayRender(`host words ${src}`) : null));
@@ -251,6 +308,7 @@ export const HostLayer: React.FC<{cfg: HostConfig; sceneId: string; prevId?: str
   const f = useCurrentFrame();
   const sc = cfg.scenes[sceneId];
   const words = useWords(sc && !sc.mute ? audioSrc.replace(/\.mp3$/, '.words.json') : undefined);
+  const track = useMouth(sc && !sc.mute ? audioSrc.replace(/\.mp3$/, '.mouth.json') : undefined) ?? undefined;
   if (!sc) return null;
   const shifted = words.map((w) => ({...w, ms: w.ms + leadMs}));
   const t = f / 30;
@@ -270,7 +328,7 @@ export const HostLayer: React.FC<{cfg: HostConfig; sceneId: string; prevId?: str
   const mode = sc.mode ?? cfg.mode ?? 'window';
   const x = sc.x ?? cfg.x ?? 40, y = sc.y ?? cfg.y ?? 900, size = sc.size ?? cfg.size ?? 230;
   return <div style={{position: 'absolute', left: x, top: y}}>
-    <HostFrame f={f} words={shifted} expr={expr} pose={pose} fromExpr={fromExpr} fromPose={fromPose} poseAt={poseAt} look={look} size={size} seed={sceneId.length}
+    <HostFrame f={f} words={shifted} mouth={track} leadMs={leadMs} expr={expr} pose={pose} fromExpr={fromExpr} fromPose={fromPose} poseAt={poseAt} look={look} size={size} seed={sceneId.length}
       mode={mode} enter={enter} name={cfg.name} colors={cfg.colors} />
   </div>;
 };
