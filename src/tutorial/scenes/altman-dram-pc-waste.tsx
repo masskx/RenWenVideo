@@ -407,7 +407,7 @@ const End = make(({f, cue, dur}) => {
     </div>
     <Chip f={f} at={8} x={64} y={420} zh="收走个人内存：没有" en="NOT AN OPENAI POLICY" c={k.ink} size={44} />
     <div style={{position: 'absolute', left: 440, top: 640, opacity: eo(f, p.a - 2, p.a + 4)}}><Wafer x={0} y={0} d={240} gold={0.22} glow={1} /></div>
-    <Stamp f={f} at={p.a + 6} x={170} y={860} zh="在抢同一批晶圆" en="SAME WAFERS" rot={-6} size={62} />
+    <Stamp f={f} at={p.a + 6} x={300} y={880} zh="在抢同一批晶圆" en="SAME WAFERS" rot={-6} size={52} />
   </Frame>;
 }, (cue) => {
   const p = endPlan(cue);

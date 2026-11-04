@@ -64,29 +64,27 @@
   "breaks": {}
  },
  "host": {
-  "x": 20,
-  "y": 950,
-  "size": 190,
+  "mode": "window",
+  "x": 64,
+  "y": 866,
+  "size": 220,
   "scenes": {
    "hook": {
     "expr": "surprise",
     "pose": "wave",
+    "look": [
+     0.6,
+     -0.3
+    ],
     "beats": [
      {
       "at": 1.8,
-      "pose": "idle",
-      "expr": "think"
-     }
-    ]
-   },
-   "rumor": {
-    "expr": "serious",
-    "pose": "shrug",
-    "beats": [
-     {
-      "at": 1.8,
-      "pose": "idle",
-      "expr": "calm"
+      "pose": "point",
+      "expr": "calm",
+      "look": [
+       1,
+       -0.4
+      ]
      }
     ]
    },
@@ -96,8 +94,12 @@
     "beats": [
      {
       "at": 1.8,
-      "pose": "idle",
-      "expr": "calm"
+      "pose": "nod",
+      "expr": "smile",
+      "look": [
+       0.5,
+       -0.2
+      ]
      }
     ]
    }
