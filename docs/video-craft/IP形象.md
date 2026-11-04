@@ -4,6 +4,8 @@
 
 ## 〇、v2（2026-11-04）：为什么重做、改了什么
 
+> **v2 定稿**（用户 2026-11-04 看完 model sheet、片中样子和对口型特写：“approved, merge it — use the window as default”）。默认取景 `window`；名牌 `name` 暂不加（用户没定写什么）。
+
 用户 2026-11-04 看完 altman-dram-pc-waste：“the design of your personal brand … felt rushed and disjointed, appearing strange in the video”；随后：“First, focus on refining the individual branding IP to make it more sophisticated and versatile for future video use.”
 
 v1 的毛病（对照 altman-dram-pc-waste 的静帧看出来的）：奶油色圆形贴纸压在真人原片上（画面里两个“人”，一个是贴纸）；圆底的米色和片子的配色无关；手画的近似——Q 版大头、块状头发、粗眼镜、腮红——和头像的画法对不上；棍子手臂 + 连指手套手是最粗糙的部分，手还伸出圆外；和画面内容没有任何互动，按时间表弹进弹出。
@@ -47,7 +49,7 @@ model sheet：`inputs/host-ip/model-sheet-v2.jpg`（第一行头像原样 + 五�
 }}
 ```
 
-- `mode`：`window`（默认）/ `edge` / `badge`，每场可单独改；`x`、`y` 是小窗（或 edge 那个框）的左上角，`size` 是小窗宽度（高约 1.06 倍；有名牌再加 52）。`edge` 的框高约 0.82 × size，**框的下边要正好压在片子里的一条线上**（条、卡片上沿、字幕带），否则会像飘着。
+- `mode`：`window`（**默认**，用户 2026-11-04 定）/ `edge` / `badge`，每场可单独改；`x`、`y` 是小窗（或 edge 那个框）的左上角，`size` 是小窗宽度（高约 1.06 倍；有名牌再加 52）。`edge` 的框高约 0.82 × size，**框的下边要正好压在片子里的一条线上**（条、卡片上沿、字幕带），否则会像飘着。
 - 颜色：不写 `colors` 就用片子的 `look.pk`（`panel` 做小窗底、`accent` 做边框和轮廓光、`ink` 做名牌字）；没有 `pk` 的片子写 `"colors": {"panel", "accent", "ink", "bg"}`。
 - `name`：小窗下的名牌（不写就没有；**写什么由用户定**，不要自己起名字）。
 - `look`：他看向哪边——指向画面里的主角时，`point` + `look` 朝主角那一侧。
