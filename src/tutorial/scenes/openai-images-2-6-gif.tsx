@@ -104,8 +104,9 @@ const CELL = 296, GAP = 14, SX = (1080 - (3 * CELL + 2 * GAP)) / 2, SY = 320;
 const cellXY = (i: number) => ({x: SX + (i % 3) * (CELL + GAP), y: SY + Math.floor(i / 3) * (CELL + GAP)});
 /** Which frame of the 6 is showing at `f` when played from `from` (the official GIF runs about 4.3 frames per 30 fps... ≈ 0.23 s each). */
 const playIdx = (f: number, from: number) => Math.floor(Math.max(0, f - from) / 7) % 6;
-const Sheet: React.FC<{f: number; drop?: number; nums?: number; play?: number; arc?: number; ring?: number; pair?: number}> = ({f, drop = -99, nums = -99, play = 1e9, arc = 0, ring = 0, pair = 0}) => {
-  const cur = f >= play ? playIdx(f, play) : -1;
+const Sheet: React.FC<{f: number; drop?: number; nums?: number; play?: number; arc?: number; ring?: number; pair?: number; walk?: number}> = ({f, drop = -99, nums = -99, play = 1e9, arc = 0, ring = 0, pair = 0, walk}) => {
+  // before playback, an optional highlight walks 1 → 6 with the numbers, then keeps sweeping slowly
+  const cur = f >= play ? playIdx(f, play) : walk !== undefined && f >= walk ? Math.floor((f - walk) / 6) % 6 : -1;
   const a = cellXY(5), b = cellXY(0);
   // the loop arc: from the right edge of cell 6 round the right side and over the top back into cell 1
   const x6 = a.x + CELL, y6 = a.y + CELL / 2, x1 = b.x + CELL / 2, y1 = b.y;
@@ -182,12 +183,12 @@ const What = make(({f, cue}) => {
 
 /* ---------- 3 sheet: one image with 6 frames (3 × 2), played in order ---------- */
 
-const SheetScene = make(({f, cue}) => {
+const SheetScene = make(({f, cue, dur}) => {
   const a = cue('a', 42), b = cue('b', 90);
   const big = f >= b - 2;
-  return <Stage>
+  return <Stage push={1 + 0.06 * ease.inOutCubic(clamp(f / dur))} origin="50% 30%">
     <Src text="官方示例 · 6 帧 · 3 列 × 2 行" y={210} />
-    <Sheet f={f} drop={2} nums={a} play={b} />
+    <Sheet f={f} drop={2} nums={a} play={b} walk={a} />
     {big && <div style={{position: 'absolute', left: 340, top: 960, width: 400, opacity: eo(f, b - 2, 6)}}>
       <Win f={f} at={b - 2} x={0} y={0} w={400} h={300} title="market.gif" lit={1} status={<LoopBadge f={f} at={b + 6} size={24} />}>
         <Img src={I(`sheet-${playIdx(f, b) + 1}.png`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
@@ -243,9 +244,9 @@ const Uses = make(({f, cue}) => {
 
 /* ---------- 6 speed: the official comparison; 50 % (official); Flare ≈6 s at quality=low (API) ---------- */
 
-const Speed = make(({f, cue}) => {
+const Speed = make(({f, cue, dur}) => {
   const a = cue('a', 32), b = cue('b', 77);
-  return <Stage>
+  return <Stage push={1 + 0.07 * ease.inOutCubic(clamp(f / dur))} origin="50% 60%">
     <Win f={f} at={0} x={64} y={270} w={952} h={536} title="官方演示 · 单次对比">
       <Clip src="latency-comparison.mp4" frames={172} />
     </Win>
