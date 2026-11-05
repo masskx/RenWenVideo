@@ -1,0 +1,221 @@
+{
+  "id": "openai-images-2-6-gif",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1081,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/openai-images-2-6-gif/01-hook.mp3",
+      "audioMs": 5433,
+      "startFrame": 0,
+      "durationFrames": 174,
+      "cues": {
+        "a": 1597,
+        "b": 3671
+      },
+      "captions": [
+        {
+          "text": "这只猫头鹰只是几笔草图",
+          "startMs": 137,
+          "endMs": 1597
+        },
+        {
+          "text": "OpenAI新的Images 2.6",
+          "startMs": 1597,
+          "endMs": 3671
+        },
+        {
+          "text": "把它变成了会动的GIF",
+          "startMs": 3671,
+          "endMs": 5800
+        }
+      ]
+    },
+    {
+      "id": "what",
+      "audioSrc": "audio/tutorials/openai-images-2-6-gif/02-what.mp3",
+      "audioMs": 3944,
+      "startFrame": 174,
+      "durationFrames": 129,
+      "cues": {
+        "a": 2233,
+        "b": 3205
+      },
+      "captions": [
+        {
+          "text": "现在ChatGPT一句话就能出GIF",
+          "startMs": 137,
+          "endMs": 2233
+        },
+        {
+          "text": "还能调速度",
+          "startMs": 2233,
+          "endMs": 3205
+        },
+        {
+          "text": "一帧一帧改",
+          "startMs": 3205,
+          "endMs": 4268
+        }
+      ]
+    },
+    {
+      "id": "sheet",
+      "audioSrc": "audio/tutorials/openai-images-2-6-gif/03-sheet.mp3",
+      "audioMs": 4206,
+      "startFrame": 303,
+      "durationFrames": 137,
+      "cues": {
+        "a": 1410,
+        "b": 2999
+      },
+      "captions": [
+        {
+          "text": "官方示例是这样做的",
+          "startMs": 137,
+          "endMs": 1410
+        },
+        {
+          "text": "先在一张图里画出6格",
+          "startMs": 1410,
+          "endMs": 2999
+        },
+        {
+          "text": "再按顺序播放",
+          "startMs": 2999,
+          "endMs": 4461
+        }
+      ]
+    },
+    {
+      "id": "loop",
+      "audioSrc": "audio/tutorials/openai-images-2-6-gif/04-loop.mp3",
+      "audioMs": 3082,
+      "startFrame": 440,
+      "durationFrames": 103,
+      "cues": {
+        "a": 1747
+      },
+      "captions": [
+        {
+          "text": "第6格画得能接回第1格",
+          "startMs": 137,
+          "endMs": 1747
+        },
+        {
+          "text": "所以能无缝循环",
+          "startMs": 1747,
+          "endMs": 3382
+        }
+      ]
+    },
+    {
+      "id": "uses",
+      "audioSrc": "audio/tutorials/openai-images-2-6-gif/05-uses.mp3",
+      "audioMs": 4650,
+      "startFrame": 543,
+      "durationFrames": 150,
+      "cues": {
+        "a": 998,
+        "b": 2682
+      },
+      "captions": [
+        {
+          "text": "官方列的用法",
+          "startMs": 137,
+          "endMs": 998
+        },
+        {
+          "text": "品牌吉祥物",
+          "startMs": 998,
+          "endMs": 1886
+        },
+        {
+          "text": "产品循环",
+          "startMs": 1886,
+          "endMs": 2682
+        },
+        {
+          "text": "还有社交媒体上的反应图",
+          "startMs": 2682,
+          "endMs": 4868
+        }
+      ]
+    },
+    {
+      "id": "speed",
+      "audioSrc": "audio/tutorials/openai-images-2-6-gif/06-speed.mp3",
+      "audioMs": 5590,
+      "startFrame": 693,
+      "durationFrames": 179,
+      "cues": {
+        "a": 1073,
+        "b": 2572
+      },
+      "captions": [
+        {
+          "text": "出图也更快",
+          "startMs": 137,
+          "endMs": 1073
+        },
+        {
+          "text": "官方说快了50%",
+          "startMs": 1073,
+          "endMs": 2572
+        },
+        {
+          "text": "API里的Flare低质量下最快约6秒",
+          "startMs": 2572,
+          "endMs": 5973
+        }
+      ]
+    },
+    {
+      "id": "scale",
+      "audioSrc": "audio/tutorials/openai-images-2-6-gif/07-scale.mp3",
+      "audioMs": 3109,
+      "startFrame": 872,
+      "durationFrames": 104,
+      "cues": {
+        "a": 774
+      },
+      "captions": [
+        {
+          "text": "OpenAI说",
+          "startMs": 137,
+          "endMs": 774
+        },
+        {
+          "text": "全世界每周用它画约40亿张图",
+          "startMs": 774,
+          "endMs": 3452
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/openai-images-2-6-gif/08-end.mp3",
+      "audioMs": 3135,
+      "startFrame": 976,
+      "durationFrames": 105,
+      "cues": {
+        "a": 1298
+      },
+      "captions": [
+        {
+          "text": "所以一张会动的图",
+          "startMs": 137,
+          "endMs": 1298
+        },
+        {
+          "text": "其实是6格连起来的画",
+          "startMs": 1298,
+          "endMs": 3393
+        }
+      ]
+    }
+  ]
+}
