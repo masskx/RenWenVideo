@@ -1,0 +1,49 @@
+来源 https://man7.org/linux/man-pages/man5/sshd_config.5.html
+       PasswordAuthentication will be validated through the
+               Kerberos KDC.  To use this option, the server needs a
+               Kerberos servtab which allows the verification of the
+               KDC's identity.  The default is no.
+
+       KerberosGetAFSToken
+               If AFS is active and the user has a Kerberos 5 TGT,
+               attempt to acquire an AFS token before accessing the
+               user's home directory.  The default is no.
+
+       KerberosOrLocalPasswd
+               If password authentication through Kerberos fails then the
+               password will be validated via any additional local
+               mechanism such as /etc/passwd.  The default is yes.
+
+       KerberosTicketCleanup
+               Specifies whether to automatically destroy the user's
+               ticket cache file on logout.  The default is yes.
+
+       KexAlgorithms
+      
+====
+       UsePAM  Enables the Pluggable Authentication Module interface.  If
+               set to yes this will enable PAM authentication using
+               KbdInteractiveAuthentication and PasswordAuthentication in
+               addition to PAM account and session module processing for
+               all authentication types.
+
+               Because PAM keyboard-interactive authentication usually
+               serves an equivalent role to password authentication, you
+               should disable either PasswordAuthentication or
+               KbdInteractiveAuthentication.
+
+               If UsePAM is enabled, you will not be able to run sshd(8)
+               as a non-root user.  The default is no.
+
+       VersionAddendum
+               Optionally specifies additional text to append to the SSH
+               protocol banner sent by the server upon connection.  The
+               defa
+====
+       PasswordAuthentication
+               Specifies whether password authentication is allowed.  The
+               default is yes.
+
+       PermitEmptyPasswords
+               When password authentication is allowed, it specifies
+               whether the server allows login to accounts with emp

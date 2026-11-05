@@ -1,0 +1,51 @@
+
+OpenSSH 10.6p2 řeší kritickou zranitelnost systémů s musl libc - Root.cz
+Články
+Zprávičky
+Fórum
+Podpořte Root
+Školení
+Galerie
+Blogy
+Knihy
+Jak na Linux
+Zdroják
+Hledat
+Root.cz
+ » 
+Bezpečnost
+OpenSSH 10.6p2 řeší kritickou zranitelnost systémů s musl libc
+Petr Krčmář
+Dnes
+přidejte názor
+Sdílet
+Sdílejte na Facebooku
+Sdílejte na síti X
+Autor: Root.cz s využitím Duck.ai
+Přidat mezi oblíbené zdroje na Googlu
+Projekt OpenSSH vydalo
+verzi 10.6p2
+, která obsahuje dočasné řešení kritické zranitelnosti. Podle oznámení se problém týká linuxových systémů používajících knihovnu musl libc, které pro ověřování heslem nepoužívají PAM. Příkladem takové distribuce je Alpine Linux.
+Provozovatelé těchto systémů by měli okamžitě nastavit
+PasswordAuthentication
+na hodnotu
+no
+. Zranitelnost se podle vývojářů netýká nelinuxových systémů, linuxových distribucí s glibc ani linuxových systémů, které pro ověřování heslem používají PAM. Příčina podle OpenSSH leží mimo samotný projekt, ten však rychle připravil dočasné opatření.
+Vývojáři uvedli, že o problému věděli teprve den před vydáním aktualizace. K rychlému zveřejnění je vedou i nedávné případy, kdy AI agenti znovu objevili chyby během několika hodin. Dlouhá embarga proto považují za riziko, které může více prospívat útočníkům.
+(Upozornil Ondřej Caletka.)
+Vstoupit do diskuse
+Zasílat nově přidané názory e-mailem
+Našli jste v článku chybu?
+Autor zprávičky
+Petr Krčmář
+X
+Mastodon
+Petr Krčmář pracuje jako šéfredaktor serveru Root.cz. Studoval počítače a média, takže je rozpolcen mezi dva obory. Snaží se dělat obojí, jak nejlépe umí.
+Témata:
+Alpine Linux
+OpenSSH
+SSH
+!nové školení! WAZUH: základy bezpečnostního monitoringu
+VÍCE INFO
+ČLÁNKY DO MAILU
+
