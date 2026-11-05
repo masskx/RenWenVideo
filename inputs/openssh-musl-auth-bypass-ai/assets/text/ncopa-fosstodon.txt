@@ -1,0 +1,23 @@
+2026-11-05T10:23:49.407Z UTC https://fosstodon.org/@ncopa/117563341498491523
+
+RE: 
+
+https://
+
+mastodon.gamedev.place/@Doomed
+
+_Daniel/117563240933933510
+
+
+
+dropbear is not affected. I have verified the dropbear sources.
+
+
+
+https://
+
+github.com/mkj/dropbear/blob/m
+
+ain/src/svr-authpasswd.c#L70-L108
+
+
