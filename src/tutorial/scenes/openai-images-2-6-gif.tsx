@@ -255,12 +255,12 @@ const Speed = make(({f, cue, dur}) => {
       <div style={{fontFamily: font, fontWeight: 700, fontSize: 40, color: K.ink, marginTop: -10, opacity: eo(f, a + 8)}}>出图更快</div>
       <div style={{fontFamily: jet, fontSize: 30, color: K.ink2, marginTop: 6, opacity: eo(f, a + 10)}}>OpenAI 官方口径</div>
     </div>}
-    {f >= b - 4 && <div style={{position: 'absolute', left: 560, top: 870, opacity: eo(f, b - 4), transform: `translateY(${(1 - back((f - b + 4) / 9)) * 40}px)`}}>
+    {f >= b - 4 && <div style={{position: 'absolute', left: 520, top: 870, opacity: eo(f, b - 4), transform: `translateY(${(1 - back((f - b + 4) / 9)) * 40}px)`}}>
       <div style={{width: 260, height: 290, borderRadius: 18, overflow: 'hidden', border: `1px solid ${K.accent}`, boxShadow: GLOW(0.4)}}>
         <Img src={I('flare-card.jpg')} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
       </div>
       <div style={{marginTop: 14, whiteSpace: 'nowrap'}}><Scramble f={f} text="≈6" at={b + 4} size={110} /><span style={{fontFamily: font, fontWeight: 700, fontSize: 44, color: K.ink, marginLeft: 8}}>秒</span></div>
-      <div style={{fontFamily: jet, fontSize: 28, color: K.ink2, whiteSpace: 'nowrap'}}>Flare · API 模型 · quality=low</div>
+      <div style={{fontFamily: jet, fontSize: 28, color: K.ink2, whiteSpace: 'nowrap'}}>Flare（API）· quality=low</div>
     </div>}
   </Stage>;
 }, (cue) => [{at: 0, kind: 'whoosh-short', gain: 0.07}, ...[0, 1, 2].map((i) => ({at: cue('a', 32) - 2 + i * 4, kind: 'tick', gain: 0.07})), {at: cue('b', 77) - 4, kind: 'tap', gain: 0.08}]);
