@@ -170,7 +170,7 @@ const Circuit: React.FC<{f: number; on: boolean[]; out: 'none' | 'q' | 'hit'; y:
   const sz = 44;
   return <div style={{position: 'absolute', left: 64, top: y, fontFamily: `${jet}, ${font}`, fontSize: sz, lineHeight: 1.45, whiteSpace: 'pre'}}>
     {ROWS.map((r, i) => <div key={i}>
-      <span style={{color: on[i] ? HI : DIM, textShadow: glow(on[i] ? HI : DIM)}}>{r}</span>
+      <span style={on[i] ? {background: AMB, color: GLASS, boxShadow: glow()} : {color: DIM, textShadow: glow(DIM)}}>{r}</span>
       <span style={{color: on[i] ? HI : DIM, textShadow: glow(on[i] ? HI : DIM)}}>{on[i] ? '[■]' : '[ ]'}</span>
       <span style={{color: AMB, textShadow: glow()}}>{tees[i]}</span>
       {i === 2 && (out === 'hit' ? <span style={{background: RED, color: GLASS, padding: '0 10px', boxShadow: `${glow(RED)}, 0 0 ${40 * Math.max(0, 1 - (f - hitAt) / 20)}px ${RED}`}}>命中</span>
@@ -185,7 +185,7 @@ const Gate = make(({f, cue, dur}) => {
   return <CRT f={f} dur={dur}>
     <Status text="影响范围 · release notes + 维护者" />
     <Term f={f} y={320} size={46} cursor={false} lines={[{t: '# 四个开关，同时成立才是风险组合', at: 2, cps: 3, st: 'dim'}]} />
-    <Circuit f={f} y={560} on={on} out="q" />
+    <div style={{position: 'absolute', inset: 0, transformOrigin: '64px 700px', transform: `scale(${1 + 0.12 * ease.inOutCubic(clamp((f - a) / (dur - a)))})`}}><Circuit f={f} y={560} on={on} out="q" /></div>
     <Term f={f} y={1000} size={38} cursor={false} lines={[{t: '# 编译带 PAM、但运行时 UsePAM no，也算', at: b + 10, cps: 3, st: 'dim'}]} />
   </CRT>;
 }, (cue) => [{at: 0, kind: 'tick', gain: 0.05}, ...[0, 9, 18].map((d) => ({at: cue('a', 38) + d, kind: 'tick', gain: 0.08})), {at: cue('b', 103), kind: 'tick', gain: 0.09}]);
