@@ -233,5 +233,8 @@
    "pace": "brisk",
    "narration": "命中就先关密码登录或暂停SSH，{a}留好密钥通道，{b}再按发行版渠道升级。"
   }
- ]
+ ],
+ "musicSrc": "audio/tutorials/openssh-musl-auth-bypass-ai/score.mp3",
+ "musicVolume": 0.116,
+ "musicDuckDb": 10
 }
