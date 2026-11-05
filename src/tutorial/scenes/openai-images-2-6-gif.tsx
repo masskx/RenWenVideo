@@ -157,7 +157,7 @@ const What = make(({f, cue}) => {
   return <Stage>
     <Src text="官方介绍片 · @OpenAI" y={210} />
     <Win f={f} at={0} x={60} y={270} w={960} h={540} title="ChatGPT">
-      <Clip src="x-intro.mp4" frames={240} />
+      <Clip src="x-intro.mp4" frames={195} startFrom={45} />
     </Win>
     <Win f={f} at={a - 8} x={60} y={880} w={420} h={420} title="dance.gif" lit={1} status={<span style={{fontFamily: inter, fontWeight: 600, fontSize: 30, color: K.accent}}>{fast ? '2×' : '1×'}</span>}>
       <Clip src="openai-x-gif-demo.mp4" frames={63} rate={fast ? 2 : 1} />
@@ -232,7 +232,7 @@ const Uses = make(({f, cue}) => {
   return <Stage>
     <Src text="官方页面里的客户示例" y={210} />
     <Tile f={f} at={4} x={64} y={270} w={952} h={238} from={[0, -260]}><Clip src="gif-montage.mp4" frames={210} /></Tile>
-    <Tile f={f} at={4} x={64} y={524} w={952} h={400} from={[-400, 0]} label="品牌吉祥物 · Town" labelAt={a}><Clip src="town-monty.mp4" frames={219} pos="50% 70%" /></Tile>
+    <Tile f={f} at={4} x={64} y={524} w={952} h={400} from={[-400, 0]} label="品牌吉祥物 · Town" labelAt={a}><Clip src="town-monty.mp4" frames={129} startFrom={90} pos="50% 60%" /></Tile>
     <div style={{position: 'absolute', inset: 0, transformOrigin: '540px 1100px', transform: `scale(${1 + 0.08 * zoom})`}}>
       <Tile f={f} at={4} x={64} y={940} w={304} h={304} from={[0, 400]} lit={zoom > 0.5} label="反应图" labelAt={b}><Clip src="openart-market-down.mp4" frames={41} /></Tile>
       <Tile f={f} at={4} x={388} y={940} w={304} h={304} from={[0, 400]} lit={zoom > 0.5} label="反应图" labelAt={b + 3}><Clip src="openart-market-up.mp4" frames={36} /></Tile>
