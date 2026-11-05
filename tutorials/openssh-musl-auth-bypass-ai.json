@@ -1,0 +1,237 @@
+{
+ "id": "openssh-musl-auth-bypass-ai",
+ "title": "OpenSSH紧急修复：musl系统可绕过密码验证",
+ "subtitle": "OpenSSH 10.6p2",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 250,
+ "series": "AI 新闻 · 安全",
+ "credit": "OpenSSH 10.6p2 release notes · Damien Miller · sshd_config(5)",
+ "source": "inputs/openssh-musl-auth-bypass-ai/materials.md",
+ "maxSeconds": 58,
+ "score": {
+  "mood": "tension",
+  "bpm": 96,
+  "climax": "defaults",
+  "lifts": [
+   "check"
+  ],
+  "silences": [
+   {
+    "scene": "gate",
+    "at": 0,
+    "dur": 0.4
+   }
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "log",
+  "captionTop": 1400,
+  "pk": {
+   "bg": "#0D0905",
+   "panel": "#1A120A",
+   "ink": "#FFB547",
+   "accent": "#FF5A4E",
+   "onAccent": "#0D0905",
+   "dim": "#8A5A1E"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "mode": "window",
+  "x": 64,
+  "y": 1110,
+  "size": 180,
+  "filter": "grayscale(1) sepia(1) saturate(2.6) hue-rotate(-12deg) brightness(0.95)",
+  "colors": {
+   "panel": "#1A120A",
+   "accent": "#FFB547",
+   "ink": "#FFB547",
+   "bg": "#2A1C0E"
+  },
+  "scenes": {
+   "hook": {
+    "expr": "serious",
+    "pose": "idle",
+    "look": [
+     0.8,
+     -0.8
+    ]
+   },
+   "defaults": {
+    "expr": "surprise",
+    "pose": "idle",
+    "look": [
+     0.8,
+     -0.6
+    ],
+    "beats": [
+     {
+      "at": 2.2,
+      "pose": "nod",
+      "expr": "serious"
+     }
+    ]
+   },
+   "act": {
+    "expr": "serious",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 2.0,
+      "pose": "nod",
+      "expr": "calm"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "keywords": [],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "OpenSSH紧急修复",
+   "别往下读了，先关密码登录"
+  ],
+  "support": "musl + 没开 PAM 的 Linux（如 Alpine）",
+  "tag": "AI 新闻 · 安全",
+  "anchor": "ssh.cover",
+  "colors": {
+   "bg": "#0D0905",
+   "text": "#FFB547",
+   "accent": "#FF5A4E",
+   "dim": "#8A5A1E"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 80,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "ssh.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "OpenSSH维护者原话：用musl、没开PAM的Linux，{a}比如Alpine，{b}别往下读了，立刻关掉密码登录。"
+  },
+  {
+   "id": "what",
+   "visual": "ssh.what",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "这个漏洞能绕过密码验证，{a}他们前一天才知道，{b}当天就发了修复版。"
+  },
+  {
+   "id": "ai",
+   "visual": "ssh.ai",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "为什么这么急？{a}他说AI有时几小时就能把漏洞重挖出来，{b}拖着保密只对攻击者有利。"
+  },
+  {
+   "id": "notes",
+   "visual": "ssh.notes",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "官方也说：最近的漏洞报告很多，{a}不少是AI找出来的。"
+  },
+  {
+   "id": "gate",
+   "visual": "ssh.gate",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "要同时看四个开关：{a}Linux、musl、没开PAM，{b}密码登录也开着。"
+  },
+  {
+   "id": "defaults",
+   "visual": "ssh.defaults",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "麻烦在默认值：{a}UsePAM默认关，{b}密码登录默认开。"
+  },
+  {
+   "id": "safe",
+   "visual": "ssh.safe",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "glibc的Linux、非Linux、用PAM验密码的，{a}都不受影响。"
+  },
+  {
+   "id": "check",
+   "visual": "ssh.check",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "自查：{a}确认跑sshd的系统是不是musl，{b}再用sshd -T看这两项实际值。"
+  },
+  {
+   "id": "act",
+   "visual": "ssh.act",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "命中就先关密码登录或暂停SSH，{a}留好密钥通道，{b}再按发行版渠道升级。"
+  }
+ ]
+}

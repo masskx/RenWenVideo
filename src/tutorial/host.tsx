@@ -247,6 +247,7 @@ export type HostScene = {expr?: HostExpr; pose?: HostPose; beats?: HostBeat[]; x
  * rim light, `ink` the name tag. `name` is the tag on the window (omit for none).
  */
 export type HostConfig = {x?: number; y?: number; size?: number; mode?: HostMode; name?: string; scenes: Record<string, HostScene>;
+  /** A CSS filter over the framed host, e.g. to tint him into a monochrome world (a phosphor terminal). */ filter?: string;
   colors?: {panel?: string; accent?: string; ink?: string; bg?: string}};
 
 const useMouth = (src?: string): MouthTrack | null | undefined => {
@@ -327,7 +328,7 @@ export const HostLayer: React.FC<{cfg: HostConfig; sceneId: string; prevId?: str
   if (enter <= 0) return null;
   const mode = sc.mode ?? cfg.mode ?? 'window';
   const x = sc.x ?? cfg.x ?? 40, y = sc.y ?? cfg.y ?? 900, size = sc.size ?? cfg.size ?? 230;
-  return <div style={{position: 'absolute', left: x, top: y}}>
+  return <div style={{position: 'absolute', left: x, top: y, filter: cfg.filter}}>
     <HostFrame f={f} words={shifted} mouth={track} leadMs={leadMs} expr={expr} pose={pose} fromExpr={fromExpr} fromPose={fromPose} poseAt={poseAt} look={look} size={size} seed={sceneId.length}
       mode={mode} enter={enter} name={cfg.name} colors={cfg.colors} />
   </div>;
