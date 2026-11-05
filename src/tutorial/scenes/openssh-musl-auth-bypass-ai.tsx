@@ -29,14 +29,19 @@ const make = (draw: NonNullable<Scene['backdrop']>, sfx?: Scene['sfx']): Scene =
 };
 
 /** The tube: warm-black glass, scanlines, vignette, faint flicker; children are the screen's characters. */
-const CRT: React.FC<{f: number; children: React.ReactNode}> = ({f, children}) => (
-  <div style={{position: 'absolute', inset: 0, background: GLASS, overflow: 'hidden'}}>
-    <div style={{position: 'absolute', inset: 0, opacity: 0.985 + 0.015 * Math.sin(f * 1.7)}}>{children}</div>
+const CRT: React.FC<{f: number; dur?: number; children: React.ReactNode}> = ({f, dur = 0, children}) => {
+  // the template's only camera is the grid scale: every screen's type grows slowly (a push-in) over the scene
+  const zoom = dur ? 1 + 0.07 * ease.inOutCubic(clamp(f / dur)) : 1;
+  // the tube's rolling refresh band (CRT physics): a soft brighter band travelling down every ~3 s
+  const band = ((f % 96) / 96) * 2400 - 300;
+  return <div style={{position: 'absolute', inset: 0, background: GLASS, overflow: 'hidden'}}>
+    <div style={{position: 'absolute', inset: 0, opacity: 0.985 + 0.015 * Math.sin(f * 1.7), transformOrigin: '50% 16%', transform: `scale(${zoom})`}}>{children}</div>
+    <div style={{position: 'absolute', left: 0, right: 0, top: band, height: 260, background: 'linear-gradient(180deg, rgba(255,181,71,0) 0%, rgba(255,181,71,0.06) 50%, rgba(255,181,71,0) 100%)', pointerEvents: 'none'}} />
     <div style={{position: 'absolute', inset: 0, background: 'repeating-linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 3px, rgba(0,0,0,0.28) 3px, rgba(0,0,0,0.28) 5px)', pointerEvents: 'none'}} />
     <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 75% 62% at 50% 45%, rgba(255,181,71,0.05) 0%, transparent 60%, rgba(0,0,0,0.75) 100%)', pointerEvents: 'none'}} />
     <div style={{position: 'absolute', inset: 14, borderRadius: 46, boxShadow: 'inset 0 0 0 2px rgba(255,181,71,0.06), inset 0 0 80px rgba(0,0,0,0.8)', pointerEvents: 'none'}} />
-  </div>
-);
+  </div>;
+};
 
 type Style = 'dim' | 'norm' | 'bold' | 'inv' | 'red' | 'hi';
 /** One terminal line: typed from `at` at `cps` characters per frame; `marks` light words inside it. */
@@ -84,10 +89,10 @@ const push = (f: number, at: number, d = 18) => ease.inOutCubic(clamp((f - at) /
 
 /* ---------- 1 hook: the maintainer's words, typed ---------- */
 
-const Hook = make(({f, cue}) => {
+const Hook = make(({f, cue, dur}) => {
   const a = cue('a', 118), b = cue('b', 146);
   const zoom = 1 + 0.05 * push(f, b + 20, 24);
-  return <CRT f={f}>
+  return <CRT f={f} dur={dur}>
     <Status text="hachyderm.io/@damienmiller · 11-05 09:03 UTC" />
     <Term f={f} y={300} cursor={false} lines={[
       {t: ' CRITICAL  OpenSSH 10.6p2 ', at: -99, st: 'inv', size: 50, gap: 0.5},
@@ -107,9 +112,9 @@ const Hook = make(({f, cue}) => {
 
 /* ---------- 2 what: the release note, and one day ---------- */
 
-const What = make(({f, cue}) => {
+const What = make(({f, cue, dur}) => {
   const a = cue('a', 50), b = cue('b', 87);
-  return <CRT f={f}>
+  return <CRT f={f} dur={dur}>
     <Status text="openssh.com/releasenotes.html#10.6p2" />
     <Term f={f} y={300} lines={[
       {t: 'Security', at: 0, cps: 3, st: 'bold', gap: 0.2},
@@ -126,9 +131,9 @@ const What = make(({f, cue}) => {
 
 /* ---------- 3 ai: why so fast — AI agents, within hours ---------- */
 
-const Ai = make(({f, cue}) => {
+const Ai = make(({f, cue, dur}) => {
   const a = cue('a', 24), b = cue('b', 110);
-  return <CRT f={f}>
+  return <CRT f={f} dur={dur}>
     <Status text="hachyderm.io/@damienmiller" right="OpenSSH 维护者" />
     <Term f={f} y={320} size={72} cursor={f < a} lines={[{t: '为什么这么急？', at: -6, cps: 1.2, st: 'bold'}]} />
     <Term f={f} y={500} lines={[
@@ -143,9 +148,9 @@ const Ai = make(({f, cue}) => {
 
 /* ---------- 4 notes: many reports come from AI; more frequent releases ---------- */
 
-const Notes = make(({f, cue}) => {
+const Notes = make(({f, cue, dur}) => {
   const a = cue('a', 66);
-  return <CRT f={f}>
+  return <CRT f={f} dur={dur}>
     <Status text="openssh.com/releasenotes.html#10.6p2" />
     <Term f={f} y={300} lines={[
       {t: 'Recently the OpenSSH team have received a large number of security bug reports, many of which are findings from AI models or made with AI assistance.', at: -4, cps: 3.4,
@@ -174,10 +179,10 @@ const Circuit: React.FC<{f: number; on: boolean[]; out: 'none' | 'q' | 'hit'; y:
     </div>)}
   </div>;
 };
-const Gate = make(({f, cue}) => {
+const Gate = make(({f, cue, dur}) => {
   const a = cue('a', 38), b = cue('b', 103);
   const on = [f >= a, f >= a + 9, f >= a + 18, f >= b];
-  return <CRT f={f}>
+  return <CRT f={f} dur={dur}>
     <Status text="影响范围 · release notes + 维护者" />
     <Term f={f} y={320} size={46} cursor={false} lines={[{t: '# 四个开关，同时成立才是风险组合', at: 2, cps: 3, st: 'dim'}]} />
     <Circuit f={f} y={560} on={on} out="q" />
@@ -185,10 +190,10 @@ const Gate = make(({f, cue}) => {
   </CRT>;
 }, (cue) => [{at: 0, kind: 'tick', gain: 0.05}, ...[0, 9, 18].map((d) => ({at: cue('a', 38) + d, kind: 'tick', gain: 0.08})), {at: cue('b', 103), kind: 'tick', gain: 0.09}]);
 
-const Defaults = make(({f, cue}) => {
+const Defaults = make(({f, cue, dur}) => {
   const a = cue('a', 35), b = cue('b', 69);
   const hitAt = b + 12;
-  return <CRT f={f}>
+  return <CRT f={f} dur={dur}>
     <Status text="man7.org · sshd_config(5)" />
     <Term f={f} y={300} size={46} cursor={f < hitAt} lines={[
       {t: 'UsePAM … The default is no.', at: a - 12, cps: 2.6, marks: [{w: 'The default is no.', st: 'inv', at: a}]},
@@ -201,11 +206,11 @@ const Defaults = make(({f, cue}) => {
 
 /* ---------- 7 safe: who is not affected ---------- */
 
-const Safe = make(({f, cue}) => {
+const Safe = make(({f, cue, dur}) => {
   const a = cue('a', 88);
   const ok = (i: number) => f >= a + i * 5;
   const row = (t: string, i: number) => ({t: `${ok(i) ? '✓' : ' '} ${t}`, at: 4 + i * 22, cps: 2.4, st: (ok(i) ? 'hi' : 'norm') as Style});
-  return <CRT f={f}>
+  return <CRT f={f} dur={dur}>
     <Status text="hachyderm.io/@damienmiller · 不受影响" />
     <Term f={f} y={360} size={60} lines={[row('Linux + glibc', 0), row('非 Linux 系统', 1), row('用 PAM 验证密码的 Linux', 2)]} />
     <Term f={f} y={860} size={72} cursor={false} lines={[{t: '都不受影响', at: a, cps: 1.5, st: 'bold'}]} />
@@ -221,17 +226,17 @@ const CHECK = (a: number, b: number): Ln[] => [
   {t: "$ sshd -T | grep -Ei 'usepam|passwordauthentication'", at: b + 4, cps: 2.6, gap: 0.1, marks: [{w: 'sshd -T', st: 'inv', at: b + 30}]},
   {t: '# usepam no + passwordauthentication yes → 命中组合', at: b + 40, cps: 3, st: 'hi', size: 40},
 ];
-const Check = make(({f, cue}) => {
+const Check = make(({f, cue, dur}) => {
   const a = cue('a', 20), b = cue('b', 88);
-  return <CRT f={f}>
+  return <CRT f={f} dur={dur}>
     <Status text="自查 · 不需要任何外部工具" right="$" />
     <Term f={f} y={320} size={46} lines={CHECK(a, b)} />
   </CRT>;
 }, (cue) => [{at: cue('a', 20) + 6, kind: 'tick', gain: 0.07}, {at: cue('b', 88) + 4, kind: 'tick', gain: 0.07}]);
 
-const Act = make(({f, cue}) => {
+const Act = make(({f, cue, dur}) => {
   const a = cue('a', 81), b = cue('b', 113);
-  return <CRT f={f}>
+  return <CRT f={f} dur={dur}>
     <Status text="自查 · ③ 处置" right="$" />
     <Term f={f} y={300} size={34} cursor={false} lines={CHECK(-999, -999).map((l) => ({...l, st: 'dim' as Style, marks: []}))} />
     <Term f={f} y={720} size={40} lines={[

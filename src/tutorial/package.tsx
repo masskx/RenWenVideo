@@ -500,7 +500,7 @@ export const CaptionLog: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Rec
     {c && (() => {
       const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 13);
       const sz = Math.max(60, Math.min(64, Math.floor(820 / Math.max(...lines.map(units)))));
-      const total = lines.join('').length, typed = Math.ceil(total * clamp((ms - c.startMs) / Math.max(200, (c.endMs - c.startMs) * 0.7)));
+      const total = lines.join('').length, typed = Math.ceil(total * clamp((ms - c.startMs) / Math.max(150, Math.min(600, (c.endMs - c.startMs) * 0.3))));
       let left = typed;
       return lines.map((line, i) => {
         const n = Math.max(0, Math.min(line.length, left)); left -= line.length;
