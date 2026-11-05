@@ -455,3 +455,33 @@ export const CaptionTear: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Re
     {lines.map((line, i) => <div key={i} style={{fontFamily: font, fontWeight: 800, fontSize: sz, lineHeight: 1.22, color: k.ink, whiteSpace: 'nowrap', textShadow: '0 3px 14px rgba(0,0,0,0.75), 0 0 3px rgba(0,0,0,0.6)'}}>{line}</div>)}
   </div>;
 };
+
+/**
+ * The blueprint subtitle (lemo blueprint §4, in 9:16): a drawing note — a translucent pale box with double white rules,
+ * a "NOTE / n" cell on the left, the text lettered on left to right in ~0.35 s with a glowing nib at its edge. The
+ * template places notes per shot in empty sky; on a phone they sit at one height above the platform's text zone, ≥ 60 px.
+ */
+export const CaptionNote: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number}> = ({captions, k, breaks = {}, y = 1390}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const i = captions.findIndex((x) => ms >= x.startMs && ms < x.endMs);
+  if (i < 0) return null;
+  const c = captions[i];
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 12.5);
+  const sz = Math.max(60, Math.min(64, Math.floor(800 / Math.max(...lines.map(units)))));
+  const p = clamp((ms - c.startMs) / 350), box = ease.outCubic(clamp((ms - c.startMs) / 120));
+  const w = Math.max(...lines.map(units)) * sz + 60;
+  return <div style={{position: 'absolute', left: L - 10, top: y, display: 'flex', opacity: box}}>
+    <div style={{width: 96, border: `3px double ${k.ink}`, borderRight: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      fontFamily: plex, fontSize: 22, color: k.ink, letterSpacing: 2, background: 'rgba(231,240,249,0.06)'}}>
+      <div>NOTE</div><div style={{fontSize: 30}}>{i + 1}</div>
+    </div>
+    <div style={{position: 'relative', width: w, padding: '10px 26px 14px', border: `3px double ${k.ink}`, background: 'rgba(231,240,249,0.10)', boxShadow: '0 0 0 1px rgba(231,240,249,0.18) inset'}}>
+      <div style={{clipPath: `inset(-10px ${(1 - p) * 100}% -10px -10px)`}}>
+        {lines.map((line, j) => <div key={j} style={{fontFamily: hand, fontWeight: 500, fontSize: sz, lineHeight: 1.2, color: k.ink, whiteSpace: 'nowrap', textShadow: `0 0 8px ${k.ink}55`}}>{line}</div>)}
+      </div>
+      {p < 1 && <div style={{position: 'absolute', left: 26 + (w - 52) * p - 6, top: 14 + (lines.length - 1) * sz * 1.2 * (p > 0.5 ? 1 : 0), width: 12, height: 12, borderRadius: 6,
+        background: '#fff', boxShadow: `0 0 18px 6px ${k.ink}`}} />}
+    </div>
+  </div>;
+};

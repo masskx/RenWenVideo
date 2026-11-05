@@ -62,6 +62,8 @@ if (missing.length) throw Error(`Scenes without voice timing: ${missing.join(', 
 for (const src of [...timing.scenes.map((s) => s.audioSrc), tutorial.musicSrc].filter(Boolean)) await access(path.join(root, 'public', src));
 
 const inputProps = {tutorial, timing};
+// 3D films (three.js scenes, src/tutorial/three-kit.tsx) need WebGL: SwiftShader in the cloud container (docs/video-craft/3D.md).
+const chromiumOptions = tutorial.render3d ? {gl: process.env.REMOTION_GL ?? 'swangle'} : {};
 const serveUrl = await bundle({entryPoint: path.join(root, 'src/index.ts')});
 // Cloud containers: fall back to whichever headless-shell build is installed (the path has changed between images).
 const browserExecutable = process.env.REMOTION_BROWSER_EXECUTABLE
@@ -74,7 +76,7 @@ if (stillsArg) {
   const composition = await selectComposition({serveUrl, id: 'Tutorial', inputProps, browserExecutable});
   for (const frame of stillsArg.slice(9).split(',').map(Number)) {
     const output = path.join(qaDir, `frame-${frame}.png`);
-    await renderStill({serveUrl, composition, inputProps, browserExecutable, frame, output});
+    await renderStill({serveUrl, composition, inputProps, browserExecutable, chromiumOptions, frame, output});
     console.log(`Saved ${path.relative(root, output)}`);
   }
   process.exit(0);
@@ -89,13 +91,13 @@ if (coverCard) {
   for (const [ratio, comp, file] of [['3:4', 'TutorialCover34', 'cover.jpg'], ['6:7', 'TutorialCover67', 'cover-6x7.jpg'], ['9:16', 'TutorialCover916', 'cover-9x16.jpg']]) {
     const props = {...inputProps, ratio};
     const composition = await selectComposition({serveUrl, id: comp, inputProps: props, browserExecutable});
-    await renderStill({serveUrl, composition, inputProps: props, browserExecutable, output: path.join(outDir, file), imageFormat: 'jpeg', jpegQuality: 92});
+    await renderStill({serveUrl, composition, inputProps: props, browserExecutable, chromiumOptions, output: path.join(outDir, file), imageFormat: 'jpeg', jpegQuality: 92});
     console.log(`Saved ${path.relative(root, path.join(outDir, file))}`);
   }
   if (args.includes('--cover-only')) process.exit(0);
 } else {
   const cover = await selectComposition({serveUrl, id: 'TutorialCover', inputProps, browserExecutable});
-  await renderStill({serveUrl, composition: cover, inputProps, browserExecutable, output: coverOutput, imageFormat: 'jpeg', jpegQuality: 92});
+  await renderStill({serveUrl, composition: cover, inputProps, browserExecutable, chromiumOptions, output: coverOutput, imageFormat: 'jpeg', jpegQuality: 92});
   console.log(`Saved ${path.relative(root, coverOutput)}`);
 }
 
@@ -106,7 +108,7 @@ try { await access(outputLocation); exists = true; } catch {}
 if (exists && !args.includes('--overwrite')) { console.log(`Skipped existing ${path.relative(root, outputLocation)}`); process.exit(0); }
 const pending = outputLocation.replace(/\.mp4$/, '.raw.mp4');
 let last = -1;
-await renderMedia({serveUrl, composition, inputProps, browserExecutable, outputLocation: pending, codec: 'h264', crf,
+await renderMedia({serveUrl, composition, inputProps, browserExecutable, chromiumOptions, outputLocation: pending, codec: 'h264', crf,
   audioBitrate: '192k', scale: draft ? 2 / 3 : 1, concurrency: Number(process.env.RENDER_CONCURRENCY ?? 4), overwrite: true,
   onProgress: ({progress}) => { const n = Math.floor(progress * 20); if (n !== last) { last = n; console.log(`${id}: ${n * 5}%`); } }});
 // Short-video platforms play back around -14…-16 LUFS; normalize the mix without touching the video stream.

@@ -1,0 +1,231 @@
+{
+ "id": "openai-images-2-6-gif",
+ "title": "几笔草图变成会动的GIF",
+ "subtitle": "OpenAI Images 2.6",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.14
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 250,
+ "series": "AI 新闻 · 工具",
+ "credit": "OpenAI《Introducing Images 2.6》（官方口径）· The Verge",
+ "source": "inputs/openai-images-2-6-gif/materials.md",
+ "maxSeconds": 50,
+ "score": {
+  "mood": "playful",
+  "bpm": 110,
+  "climax": "loop",
+  "lifts": [
+   "speed"
+  ],
+  "climaxAt": 1.6
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "toast",
+  "captionTop": 1380,
+  "pk": {
+   "bg": "#07090F",
+   "panel": "#121A2B",
+   "ink": "#EEF3FA",
+   "accent": "#52BDF7",
+   "onAccent": "#07090F",
+   "dim": "#A9B6CC"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "mode": "window",
+  "x": 64,
+  "y": 1110,
+  "size": 190,
+  "scenes": {
+   "hook": {
+    "expr": "surprise",
+    "pose": "wave",
+    "look": [
+     0.8,
+     -0.6
+    ],
+    "beats": [
+     {
+      "at": 2.6,
+      "pose": "point",
+      "expr": "smile",
+      "look": [
+       1,
+       -0.6
+      ]
+     }
+    ]
+   },
+   "loop": {
+    "expr": "surprise",
+    "pose": "idle",
+    "look": [
+     0.6,
+     -0.6
+    ],
+    "beats": [
+     {
+      "at": 1.4,
+      "pose": "nod",
+      "expr": "smile"
+     }
+    ]
+   },
+   "end": {
+    "expr": "think",
+    "pose": "think",
+    "beats": [
+     {
+      "at": 1.4,
+      "pose": "nod",
+      "expr": "smile"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "keywords": [],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "几笔草图",
+   "变成会动的GIF"
+  ],
+  "support": "OpenAI Images 2.6：动图其实是 6 格画连起来",
+  "tag": "AI 新闻 · 工具",
+  "anchor": "oig.cover",
+  "colors": {
+   "bg": "#07090F",
+   "text": "#EEF3FA",
+   "accent": "#52BDF7",
+   "dim": "#A9B6CC"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 80,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "oig.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "这只猫头鹰只是几笔草图，{a}OpenAI新的Images 2.6，{b}把它变成了会动的GIF。"
+  },
+  {
+   "id": "what",
+   "visual": "oig.what",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "现在ChatGPT一句话就能出GIF，{a}还能调速度、{b}一帧一帧改。"
+  },
+  {
+   "id": "sheet",
+   "visual": "oig.sheet",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "官方示例是这样做的：{a}先在一张图里画出6格，{b}再按顺序播放。"
+  },
+  {
+   "id": "loop",
+   "visual": "oig.loop",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "第6格画得能接回第1格，{a}所以能无缝循环。"
+  },
+  {
+   "id": "uses",
+   "visual": "oig.uses",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "官方列的用法：{a}品牌吉祥物、产品循环，{b}还有社交媒体上的反应图。"
+  },
+  {
+   "id": "speed",
+   "visual": "oig.speed",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "出图也更快：{a}官方说快了50%，{b}API里的Flare低质量下最快约6秒。"
+  },
+  {
+   "id": "scale",
+   "visual": "oig.scale",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "OpenAI说，{a}全世界每周用它画约40亿张图。"
+  },
+  {
+   "id": "end",
+   "visual": "oig.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "所以一张会动的图，{a}其实是6格连起来的画。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/openai-images-2-6-gif/score.mp3",
+ "musicVolume": 0.138,
+ "musicDuckDb": 10
+}

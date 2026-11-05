@@ -1,0 +1,259 @@
+{
+ "id": "chips-cpu-gpu-npu-tpu",
+ "title": "CPU、GPU、NPU、TPU 到底差在哪",
+ "subtitle": "为什么大模型要 GPU，为什么它越来越贵",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 250,
+ "series": "AI 科普 · 芯片",
+ "credit": "数字：NVIDIA、Google Cloud、微软、美光（Tom's Hardware）、TrendForce；模型为示意",
+ "source": "inputs/chips-cpu-gpu-npu-tpu/sources.md",
+ "maxSeconds": 64,
+ "render3d": true,
+ "score": {
+  "mood": "wonder",
+  "bpm": 112,
+  "climax": "bus",
+  "lifts": [
+   "move",
+   "hbm"
+  ],
+  "silences": [
+   {
+    "scene": "move",
+    "at": 0,
+    "dur": 0.4
+   }
+  ],
+  "climaxAt": 3.6
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "tear",
+  "captionTop": 1440,
+  "pk": {
+   "bg": "#0C0D10",
+   "panel": "#24262C",
+   "ink": "#F1EFE9",
+   "accent": "#E0B84D",
+   "onAccent": "#0C0D10",
+   "dim": "#A7A49C"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "mode": "window",
+  "x": 64,
+  "y": 590,
+  "size": 190,
+  "scenes": {
+   "hook": {
+    "expr": "surprise",
+    "pose": "wave",
+    "look": [
+     0.6,
+     -0.6
+    ],
+    "beats": [
+     {
+      "at": 2.4,
+      "pose": "point",
+      "expr": "calm",
+      "look": [
+       1,
+       0.6
+      ]
+     }
+    ]
+   },
+   "move": {
+    "y": 560,
+    "expr": "serious",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 1.6,
+      "pose": "nod",
+      "expr": "think"
+     }
+    ]
+   },
+   "end": {
+    "y": 1130,
+    "expr": "think",
+    "pose": "think",
+    "beats": [
+     {
+      "at": 1.6,
+      "pose": "nod",
+      "expr": "smile"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "keywords": [],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "chip.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "同一个80亿参数的模型，{a}CPU每秒约吐6个字，{b}GPU能到200个。"
+  },
+  {
+   "id": "cpu",
+   "visual": "chip.cpu",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "差别在结构：{a}CPU是几个大核，{b}擅长一步步算复杂逻辑。"
+  },
+  {
+   "id": "gpu",
+   "visual": "chip.gpu",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "GPU是上万个小核，{a}H100有16896个，{b}一条指令同时算一大片数。"
+  },
+  {
+   "id": "npu",
+   "visual": "chip.npu",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "NPU塞在手机和电脑里，{a}只做AI的乘加，{b}微软AI电脑要求每秒40万亿次。"
+  },
+  {
+   "id": "tpu",
+   "visual": "chip.tpu",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "TPU是谷歌的AI芯片：{a}乘加器排成128乘128的方阵，{b}数据一拍走一格。"
+  },
+  {
+   "id": "math",
+   "visual": "chip.math",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "大模型几乎全是矩阵乘法：{a}每吐一个字，{b}80亿个参数都要算一遍。"
+  },
+  {
+   "id": "move",
+   "visual": "chip.move",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "可真正卡住它的是搬数据：{a}每吐一个字，{b}16GB权重都要读一遍。"
+  },
+  {
+   "id": "bus",
+   "visual": "chip.bus",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "电脑内存128根线，{a}HBM有5120根，{b}带宽差35倍。"
+  },
+  {
+   "id": "hbm",
+   "visual": "chip.hbm",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "线太多，只能叠起来贴着GPU放：{a}据美光，同样容量，{b}HBM吃约3倍晶圆。"
+  },
+  {
+   "id": "price",
+   "visual": "chip.price",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "AI把内存抢光，{a}据TrendForce，{b}显存现货价涨了约3倍。"
+  },
+  {
+   "id": "end",
+   "visual": "chip.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "所以大模型缺的不只是算力，{a}是搬数据的路。"
+  }
+ ],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "同一个模型",
+   "CPU 6字 · GPU 200字"
+  ],
+  "support": "3D 拆开 CPU、GPU、NPU、TPU",
+  "tag": "AI 科普 · 芯片",
+  "anchor": "chip.cover",
+  "colors": {
+   "bg": "#0C0D10",
+   "text": "#F1EFE9",
+   "accent": "#E0B84D",
+   "dim": "#A7A49C"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 80,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "musicSrc": "audio/tutorials/chips-cpu-gpu-npu-tpu/score.mp3",
+ "musicVolume": 0.14,
+ "musicDuckDb": 10
+}
