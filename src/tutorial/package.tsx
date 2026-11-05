@@ -485,3 +485,31 @@ export const CaptionNote: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Re
     </div>
   </div>;
 };
+
+/**
+ * The terminal LOG line (lemo ascii-crt §4, in 9:16): a dim separator, an inverse "LOG" tag and a prompt, then the line
+ * typed character by character across its spoken time, in the phosphor colour with a glow. ≥ 60 px for phones.
+ */
+export const CaptionLog: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number}> = ({captions, k, breaks = {}, y = 1400}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  const glow = `0 0 6px ${k.ink}AA, 0 0 18px ${k.ink}55`;
+  return <div style={{position: 'absolute', left: L - 10, right: L - 10, top: y}}>
+    <div style={{height: 2, background: `${k.dim}`, opacity: 0.6, marginBottom: 14}} />
+    {c && (() => {
+      const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 13);
+      const sz = Math.max(60, Math.min(64, Math.floor(820 / Math.max(...lines.map(units)))));
+      const total = lines.join('').length, typed = Math.ceil(total * clamp((ms - c.startMs) / Math.max(150, Math.min(600, (c.endMs - c.startMs) * 0.3))));
+      let left = typed;
+      return lines.map((line, i) => {
+        const n = Math.max(0, Math.min(line.length, left)); left -= line.length;
+        return <div key={i} style={{display: 'flex', alignItems: 'baseline', gap: 16, whiteSpace: 'nowrap'}}>
+          <span style={{fontFamily: plex, fontSize: 30, padding: '0 8px', background: i === 0 ? k.ink : 'transparent', color: i === 0 ? k.bg : 'transparent', letterSpacing: 2}}>LOG</span>
+          <span style={{fontFamily: font, fontWeight: 700, fontSize: sz, lineHeight: 1.22, color: k.ink, textShadow: glow}}>{[...line].slice(0, n).join('')}
+            {i === lines.length - 1 && n >= line.length ? '' : n > 0 && n < line.length ? <span style={{display: 'inline-block', width: sz * 0.5, height: sz * 0.9, background: k.ink, verticalAlign: '-0.1em', marginLeft: 4}} /> : null}</span>
+        </div>;
+      });
+    })()}
+  </div>;
+};

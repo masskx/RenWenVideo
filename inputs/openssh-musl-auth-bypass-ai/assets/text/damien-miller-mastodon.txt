@@ -1,0 +1,25 @@
+2026-11-05T09:03:46.866Z UTC
+https://hachyderm.io/@damienmiller/117563026759098135
+
+
+OpenSSH 10.6p2 has been released with a workaround for a critical vulnerability.
+
+
+
+https://
+
+openssh.com/releasenotes.html#
+
+10.6p2
+
+
+
+If you operate a Linux system that uses musl libc without PAM (Alpine Linux is one example) then stop reading and set PasswordAuthentication=no or disable SSH for these systems IMMEDIATELY.
+
+This vulnerability does not exist on non-Linux systems, Linux/glibc systems and Linux systems that use PAM for password authentication.
+
+We consider the root cause of this bug to be outside OpenSSH itself, but we're in a good position to deliver a mitigation quickly.
+
+We are making this release as fast as possible (we learned of the problem yesterday) because we have recently observed multiple cases of rapid bug rediscovery by AI agents, sometimes within hours, and so now consider long embargo periods to be a dangerous practice that primarily benefits attackers.
+
+Thanks for Özgün Kültekin of Wakefield (wakefield.co) for reporting this problem to us and for the Alpine Linux developers for making an updated release available at very short notice.

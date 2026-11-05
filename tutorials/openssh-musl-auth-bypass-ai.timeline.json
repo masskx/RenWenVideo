@@ -1,0 +1,275 @@
+{
+  "id": "openssh-musl-auth-bypass-ai",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1442,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/openssh-musl-auth-bypass-ai/01-hook.mp3",
+      "audioMs": 7131,
+      "startFrame": 0,
+      "durationFrames": 225,
+      "cues": {
+        "a": 3931,
+        "b": 4851
+      },
+      "captions": [
+        {
+          "text": "OpenSSH维护者原话",
+          "startMs": 138,
+          "endMs": 1967
+        },
+        {
+          "text": "用musl、没开PAM的Linux",
+          "startMs": 1967,
+          "endMs": 3931
+        },
+        {
+          "text": "比如Alpine",
+          "startMs": 3931,
+          "endMs": 4851
+        },
+        {
+          "text": "别往下读了",
+          "startMs": 4851,
+          "endMs": 5762
+        },
+        {
+          "text": "立刻关掉密码登录",
+          "startMs": 5762,
+          "endMs": 7442
+        }
+      ]
+    },
+    {
+      "id": "what",
+      "audioSrc": "audio/tutorials/openssh-musl-auth-bypass-ai/02-what.mp3",
+      "audioMs": 4153,
+      "startFrame": 225,
+      "durationFrames": 136,
+      "cues": {
+        "a": 1662,
+        "b": 2889
+      },
+      "captions": [
+        {
+          "text": "这个漏洞能绕过密码验证",
+          "startMs": 138,
+          "endMs": 1662
+        },
+        {
+          "text": "他们前一天才知道",
+          "startMs": 1662,
+          "endMs": 2889
+        },
+        {
+          "text": "当天就发了修复版",
+          "startMs": 2889,
+          "endMs": 4468
+        }
+      ]
+    },
+    {
+      "id": "ai",
+      "audioSrc": "audio/tutorials/openssh-musl-auth-bypass-ai/03-ai.mp3",
+      "audioMs": 5590,
+      "startFrame": 361,
+      "durationFrames": 179,
+      "cues": {
+        "a": 786,
+        "b": 3664
+      },
+      "captions": [
+        {
+          "text": "为什么这么急？",
+          "startMs": 138,
+          "endMs": 786
+        },
+        {
+          "text": "他说AI有时几小时",
+          "startMs": 786,
+          "endMs": 2483
+        },
+        {
+          "text": "就能把漏洞重挖出来",
+          "startMs": 2483,
+          "endMs": 3664
+        },
+        {
+          "text": "拖着保密只对攻击者有利",
+          "startMs": 3664,
+          "endMs": 5841
+        }
+      ]
+    },
+    {
+      "id": "notes",
+      "audioSrc": "audio/tutorials/openssh-musl-auth-bypass-ai/04-notes.mp3",
+      "audioMs": 3709,
+      "startFrame": 540,
+      "durationFrames": 122,
+      "cues": {
+        "a": 2206
+      },
+      "captions": [
+        {
+          "text": "官方也说",
+          "startMs": 138,
+          "endMs": 862
+        },
+        {
+          "text": "最近的漏洞报告很多",
+          "startMs": 862,
+          "endMs": 2206
+        },
+        {
+          "text": "不少是AI找出来的",
+          "startMs": 2206,
+          "endMs": 3934
+        }
+      ]
+    },
+    {
+      "id": "gate",
+      "audioSrc": "audio/tutorials/openssh-musl-auth-bypass-ai/05-gate.mp3",
+      "audioMs": 4989,
+      "startFrame": 662,
+      "durationFrames": 161,
+      "cues": {
+        "a": 1281,
+        "b": 3427
+      },
+      "captions": [
+        {
+          "text": "要同时看四个开关",
+          "startMs": 138,
+          "endMs": 1281
+        },
+        {
+          "text": "Linux、musl",
+          "startMs": 1281,
+          "endMs": 2532
+        },
+        {
+          "text": "没开PAM，密码登录也开着",
+          "startMs": 2532,
+          "endMs": 5256
+        }
+      ]
+    },
+    {
+      "id": "defaults",
+      "audioSrc": "audio/tutorials/openssh-musl-auth-bypass-ai/06-defaults.mp3",
+      "audioMs": 3892,
+      "startFrame": 823,
+      "durationFrames": 128,
+      "cues": {
+        "a": 1167,
+        "b": 2291
+      },
+      "captions": [
+        {
+          "text": "麻烦在默认值",
+          "startMs": 138,
+          "endMs": 1167
+        },
+        {
+          "text": "UsePAM默认关",
+          "startMs": 1167,
+          "endMs": 2291
+        },
+        {
+          "text": "密码登录默认开",
+          "startMs": 2291,
+          "endMs": 4140
+        }
+      ]
+    },
+    {
+      "id": "safe",
+      "audioSrc": "audio/tutorials/openssh-musl-auth-bypass-ai/07-safe.mp3",
+      "audioMs": 4023,
+      "startFrame": 951,
+      "durationFrames": 132,
+      "cues": {
+        "a": 2939
+      },
+      "captions": [
+        {
+          "text": "glibc的Linux",
+          "startMs": 138,
+          "endMs": 1090
+        },
+        {
+          "text": "非Linux、用PAM验密码的",
+          "startMs": 1090,
+          "endMs": 2939
+        },
+        {
+          "text": "都不受影响",
+          "startMs": 2939,
+          "endMs": 4313
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "audioSrc": "audio/tutorials/openssh-musl-auth-bypass-ai/08-check.mp3",
+      "audioMs": 5851,
+      "startFrame": 1083,
+      "durationFrames": 187,
+      "cues": {
+        "a": 671,
+        "b": 2949
+      },
+      "captions": [
+        {
+          "text": "自查",
+          "startMs": 138,
+          "endMs": 671
+        },
+        {
+          "text": "确认跑sshd的系统是不是musl",
+          "startMs": 671,
+          "endMs": 2949
+        },
+        {
+          "text": "再用sshd -T看这两项实际值",
+          "startMs": 2949,
+          "endMs": 6064
+        }
+      ]
+    },
+    {
+      "id": "act",
+      "audioSrc": "audio/tutorials/openssh-musl-auth-bypass-ai/09-act.mp3",
+      "audioMs": 5381,
+      "startFrame": 1270,
+      "durationFrames": 172,
+      "cues": {
+        "a": 2709,
+        "b": 3760
+      },
+      "captions": [
+        {
+          "text": "命中就先关密码登录或暂停SSH",
+          "startMs": 138,
+          "endMs": 2709
+        },
+        {
+          "text": "留好密钥通道",
+          "startMs": 2709,
+          "endMs": 3760
+        },
+        {
+          "text": "再按发行版渠道升级",
+          "startMs": 3760,
+          "endMs": 5628
+        }
+      ]
+    }
+  ]
+}
