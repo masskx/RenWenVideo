@@ -9,7 +9,7 @@ import React from 'react';
 import {Img, OffthreadVideo, staticFile, useCurrentFrame} from 'remotion';
 import {clamp, ease} from '../fx';
 import {font} from './theme';
-import {cond, hand, plex} from './fonts';
+import {cond, hand, plex, serif} from './fonts';
 import {TimedCaption} from './types';
 
 export type Pk = {bg: string; panel: string; ink: string; accent: string; onAccent: string; dim: string; second?: string};
@@ -510,6 +510,29 @@ export const CaptionLog: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Rec
             {i === lines.length - 1 && n >= line.length ? '' : n > 0 && n < line.length ? <span style={{display: 'inline-block', width: sz * 0.5, height: sz * 0.9, background: k.ink, verticalAlign: '-0.1em', marginLeft: 4}} /> : null}</span>
         </div>;
       });
+    })()}
+  </div>;
+};
+
+/**
+ * The figure caption (lemo dataviz §4, in 9:16): the subtitle is the chart's caption — a hairline rule, a small mono
+ * kicker, then the line in a text serif (思源宋体) in ink on a paper band, left-aligned with the chart; ≥ 60 px for phones.
+ */
+export const CaptionFigure: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number; kicker?: string}> = ({captions, k, breaks = {}, y = 1400, kicker = 'FIG.'}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const i = captions.findIndex((x) => ms >= x.startMs && ms < x.endMs);
+  return <div style={{position: 'absolute', left: L, right: L, top: y}}>
+    <div style={{height: 2, background: k.ink, opacity: 0.55}} />
+    {i >= 0 && (() => {
+      const c = captions[i];
+      const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 13);
+      const sz = Math.max(60, Math.min(64, Math.floor(860 / Math.max(...lines.map(units)))));
+      const p = ease.outCubic(clamp((ms - c.startMs) / 140));
+      return <div style={{opacity: p, transform: `translateY(${(1 - p) * 8}px)`, background: `${k.bg}E6`, padding: '6px 0 10px'}}>
+        <div style={{fontFamily: plex, fontSize: 26, color: k.dim, letterSpacing: 2, margin: '4px 0 6px'}}>{kicker} {String(i + 1).padStart(2, '0')}</div>
+        {lines.map((line, j) => <div key={j} style={{fontFamily: serif, fontWeight: 700, fontSize: sz, lineHeight: 1.22, color: k.ink, whiteSpace: 'nowrap'}}>{line}</div>)}
+      </div>;
     })()}
   </div>;
 };

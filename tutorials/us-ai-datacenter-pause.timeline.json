@@ -1,0 +1,249 @@
+{
+  "id": "us-ai-datacenter-pause",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1466,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/us-ai-datacenter-pause/01-hook.mp3",
+      "audioMs": 6504,
+      "startFrame": 0,
+      "durationFrames": 206,
+      "cues": {
+        "a": 3511,
+        "b": 5212
+      },
+      "captions": [
+        {
+          "text": "据媒体统计",
+          "startMs": 138,
+          "endMs": 976
+        },
+        {
+          "text": "美国已有500多个地方在限制数据中心",
+          "startMs": 976,
+          "endMs": 3511
+        },
+        {
+          "text": "现在三个州也踩了刹车",
+          "startMs": 3511,
+          "endMs": 5212
+        },
+        {
+          "text": "但踩的位置不一样",
+          "startMs": 5212,
+          "endMs": 6845
+        }
+      ]
+    },
+    {
+      "id": "eia",
+      "audioSrc": "audio/tutorials/us-ai-datacenter-pause/02-eia.mp3",
+      "audioMs": 6740,
+      "startFrame": 206,
+      "durationFrames": 213,
+      "cues": {
+        "a": 2253,
+        "b": 4676
+      },
+      "captions": [
+        {
+          "text": "先看电：美国用电需求的年增速",
+          "startMs": 138,
+          "endMs": 2253
+        },
+        {
+          "text": "从0.1%跳到了1.7%",
+          "startMs": 2253,
+          "endMs": 4676
+        },
+        {
+          "text": "数据中心是主因之一",
+          "startMs": 4676,
+          "endMs": 7051
+        }
+      ]
+    },
+    {
+      "id": "ny",
+      "audioSrc": "audio/tutorials/us-ai-datacenter-pause/03-ny.mp3",
+      "audioMs": 6008,
+      "startFrame": 419,
+      "durationFrames": 191,
+      "cues": {
+        "a": 1052,
+        "b": 2449
+      },
+      "captions": [
+        {
+          "text": "纽约卡许可",
+          "startMs": 138,
+          "endMs": 1052
+        },
+        {
+          "text": "50兆瓦以上的新项目",
+          "startMs": 1052,
+          "endMs": 2449
+        },
+        {
+          "text": "州环保部门暂停酌情许可",
+          "startMs": 2449,
+          "endMs": 4774
+        },
+        {
+          "text": "直到评估做完",
+          "startMs": 4774,
+          "endMs": 6248
+        }
+      ]
+    },
+    {
+      "id": "mw",
+      "audioSrc": "audio/tutorials/us-ai-datacenter-pause/04-mw.mp3",
+      "audioMs": 3892,
+      "startFrame": 610,
+      "durationFrames": 128,
+      "cues": {
+        "a": 1129,
+        "b": 2790
+      },
+      "captions": [
+        {
+          "text": "50兆瓦有多大？",
+          "startMs": 138,
+          "endMs": 1129
+        },
+        {
+          "text": "按美国家庭平均用电算",
+          "startMs": 1129,
+          "endMs": 2790
+        },
+        {
+          "text": "大约4万户",
+          "startMs": 2790,
+          "endMs": 4197
+        }
+      ]
+    },
+    {
+      "id": "tx",
+      "audioSrc": "audio/tutorials/us-ai-datacenter-pause/05-tx.mp3",
+      "audioMs": 6113,
+      "startFrame": 738,
+      "durationFrames": 194,
+      "cues": {
+        "a": 1281,
+        "b": 3601
+      },
+      "captions": [
+        {
+          "text": "得州先卡电网",
+          "startMs": 138,
+          "endMs": 1281
+        },
+        {
+          "text": "75兆瓦以上的并网申请暂停审计",
+          "startMs": 1281,
+          "endMs": 3601
+        },
+        {
+          "text": "9月又停了空气和水的环境许可",
+          "startMs": 3601,
+          "endMs": 6410
+        }
+      ]
+    },
+    {
+      "id": "or",
+      "audioSrc": "audio/tutorials/us-ai-datacenter-pause/06-or.mp3",
+      "audioMs": 6217,
+      "startFrame": 932,
+      "durationFrames": 198,
+      "cues": {
+        "a": 1814,
+        "b": 4079
+      },
+      "captions": [
+        {
+          "text": "俄勒冈只卡州有土地",
+          "startMs": 138,
+          "endMs": 1814
+        },
+        {
+          "text": "相关交易停到2027年7月",
+          "startMs": 1814,
+          "endMs": 4079
+        },
+        {
+          "text": "州长说她无权全州禁建",
+          "startMs": 4079,
+          "endMs": 6484
+        }
+      ]
+    },
+    {
+      "id": "pew",
+      "audioSrc": "audio/tutorials/us-ai-datacenter-pause/07-pew.mp3",
+      "audioMs": 6844,
+      "startFrame": 1130,
+      "durationFrames": 216,
+      "cues": {
+        "a": 1014,
+        "b": 4285
+      },
+      "captions": [
+        {
+          "text": "居民也变了",
+          "startMs": 138,
+          "endMs": 1014
+        },
+        {
+          "text": "觉得对电费不利的",
+          "startMs": 1014,
+          "endMs": 2046
+        },
+        {
+          "text": "从38%升到50%",
+          "startMs": 2046,
+          "endMs": 4285
+        },
+        {
+          "text": "六成对家门口新建感到不舒服",
+          "startMs": 4285,
+          "endMs": 7164
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/us-ai-datacenter-pause/08-end.mp3",
+      "audioMs": 3631,
+      "startFrame": 1346,
+      "durationFrames": 120,
+      "cues": {
+        "a": 1357,
+        "b": 2452
+      },
+      "captions": [
+        {
+          "text": "AI缺的不只是芯片",
+          "startMs": 138,
+          "endMs": 1357
+        },
+        {
+          "text": "还有电网、水",
+          "startMs": 1357,
+          "endMs": 2452
+        },
+        {
+          "text": "和邻居的同意",
+          "startMs": 2452,
+          "endMs": 3936
+        }
+      ]
+    }
+  ]
+}

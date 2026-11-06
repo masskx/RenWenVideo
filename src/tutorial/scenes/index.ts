@@ -54,6 +54,7 @@ import {altmanDramScenes} from './altman-dram-pc-waste';
 import {chipsScenes} from './chips-cpu-gpu-npu-tpu';
 import {openaiImages26Scenes} from './openai-images-2-6-gif';
 import {opensshMuslScenes} from './openssh-musl-auth-bypass-ai';
+import {usDatacenterPauseScenes} from './us-ai-datacenter-pause';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -114,4 +115,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...chipsScenes,
   ...openaiImages26Scenes,
   ...opensshMuslScenes,
+  ...usDatacenterPauseScenes,
 };
