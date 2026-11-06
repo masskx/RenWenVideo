@@ -1,0 +1,9 @@
+来源：https://www.eia.gov/TODAYINENERGY/detail.php?id=67344
+标题：Fossil generation could rise with faster-than-expected growth in data center power demand
+日期：March 12, 2026（EIA Today in Energy）
+
+要点：
+- Electricity use by data centers is driving the electricity demand growth.
+- Between 2020 and 2025, U.S. electricity demand (net energy for load) grew about 1.7% annually vs 0.1% annually 2005–2019.
+- 分析结合 February STEO；并提及 ERCOT、PJM 等区域负荷预测。
+注意：此文是电力需求增长情景，不是「多州暂停」事件本身；用于说明「电」这条物理约束有官方统计背景。文中未给出全美数据中心用水量官方数。

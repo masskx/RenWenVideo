@@ -1,0 +1,93 @@
+            Summary of Executive Order 62 on Data Centers
+Governor Hochul signed Executive Order 62 on July 14, 2026, imposing a moratorium on
+data centers that consume 50 megawatts or more, pending completion of a statewide
+environmental review. Note: this is separate from S10642/A11560, the legislation passed
+by the Senate and Assembly in June that would impose its own data center moratorium.
+The Governor has until the end of December to act on that bill. Below is a detailed summary
+of the Executive Order, and towns should pay special attention to the Community
+Investment Framework and state permit pause.
+Overview:
+   •   The Executive Order pauses DEC from issuing any permits related to data centers
+       while DPS conducts an environmental review and issues a Generic Environmental
+       Impact Statement under SEQRA. Towns may still issue their own permits.
+   •   ESD will create guidelines for host community benefits
+   •   DPS must explore creating a fund to make sure that any grid improvements needed
+       because of datacenters are paid by datacenters, not overall ratepayers.
+   •   DPS must convene a working group on things like who pays for the cost of
+       improvements, if costs can accurately be estimated, and how data centers and large
+       users connect to the grid.
+   •   DEC must look at regulations currently in place for large-use water consumers to
+       see if they need updating.
+Definition of "Data Center"
+Under this Executive Order, a facility qualifies as a "data center" if it meets all three of the
+following conditions:
+   •   It contains infrastructure such as backup power systems, specialized cooling for
+       high-density computing equipment, and/or dedicated cybersecurity systems.
+   •   It provides data storage, cloud computing, or content delivery services—whether to
+       outside customers, internal operations, or affiliated businesses—often on a
+       continuous basis.
+   •   It consumes, or has the capacity to consume, 50 megawatts of electricity or more.
+Facilities primarily used for manufacturing, research, education, or medical care are
+exempt from this definition, even if they meet the criteria above.
+
+Updated July 14, 2026
+DEC Permit Pause Pending Environmental Review by DPS
+The Department of Public Service (DPS) must produce a Generic Environmental Impact
+Statement (GEIS) as part of a formal SEQRA process examining data center construction
+and operation impacts, including energy demand, water use and quality, air quality, noise,
+and disproportionate impacts on disadvantaged communities. DEC must assist, and the
+process must include a public comment period and public hearing. There is no fixed
+deadline for completing the GEIS.
+Until DPS finishes and submits the GEIS and findings statement, DEC must pause any
+discretionary permit application associated with data center construction or expansion
+that:
+   •   is pending before DEC or may come in later, and
+   •   had not already been deemed complete by DEC as of July 14, 2026.
+The freeze applies only to DEC discretionary permits; it does not affect local governments'
+ability to act on permits data centers require at the local level. Note that DEC does not
+permit data centers themselves; however, data center projects may require certain DEC
+permits, such as water or air permits, in connection with construction.
+Community Investment Framework (guidelines for host community benefits)
+Empire State Development (ESD) must solicit feedback on and publish a Community
+Investment Framework on its website within 60 days, providing guidance to local
+governments and entities like IDAs on negotiating community benefits with data center
+developers. The guidance must address:
+   1. Community investment funds capitalized by data center developers/operators,
+      usable for energy affordability efforts and public service enhancements such as child
+      care, K-12 programming, or infrastructure.
+   2. Investment in local infrastructure such as energy distribution systems, broadband,
+      irrigation systems, or wastewater treatment plants.
+   3. Labor frameworks that give organized labor a seat at the table and prioritize
+      prevailing wage standards, project labor agreements, local hiring, and
+      apprenticeship/workforce development.
+   4. Transparency measures so communities understand key economic metrics
+      associated with data center development.
+New York Grid Acceleration Fund
+DPS must explore creating a fund that would shift the cost of grid upgrades needed to serve
+data centers onto the data centers themselves, rather than other ratepayers. This could
+include requiring data centers to pay upfront for grid improvements, participate in demand
+
+
+Updated July 14, 2026
+response programs, help fund new clean energy supply, and contribute to an insurance
+pool protecting ratepayers if a project is delayed, scaled back, or cancelled after
+infrastructure investments have already been made.
+Interconnection, Reliability, and Cost Allocation
+DPS must form a working group within 60 days to address how data centers and other
+large power users connect to the grid, ensuring those customers (not other ratepayers) pay
+for the network upgrades their projects require. DPS must also convene the state's utilities
+within 90 days to review whether current methods for studying grid impacts are adequate
+to accurately estimate and manage these costs. DPS and the Public Service Commission
+may also create new rate classifications specific to data centers.
+Data Center Water Withdrawal Review and Report
+DEC must assess whether new or amended regulations, policies, reporting, or guidance are
+needed to ensure its water withdrawal program requirements (6 NYCRR Parts 601 and
+602) reflect the water demands of large-use customers, including data centers. No later
+than 12 months after July 14, 2026, DEC must deliver a report on the results of this
+assessment and identify potential regulatory, policy, and guidance actions.
+
+
+
+
+Updated July 14, 2026
+
