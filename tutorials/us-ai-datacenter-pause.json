@@ -227,5 +227,8 @@
    "pace": "brisk",
    "narration": "AI缺的不只是芯片，{a}还有电网、水，{b}和邻居的同意。"
   }
- ]
+ ],
+ "musicSrc": "audio/tutorials/us-ai-datacenter-pause/score.mp3",
+ "musicVolume": 0.133,
+ "musicDuckDb": 10
 }
