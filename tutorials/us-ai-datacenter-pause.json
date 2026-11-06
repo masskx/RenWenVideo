@@ -58,8 +58,8 @@
  "host": {
   "mode": "window",
   "x": 64,
-  "y": 1150,
-  "size": 180,
+  "y": 1225,
+  "size": 160,
   "colors": {
    "panel": "#E9DFCC",
    "accent": "#2B2420",

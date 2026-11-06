@@ -115,10 +115,10 @@ const Hook = make(({f, cue}) => {
 
 const EX0 = 230, EX1 = 850, EY0 = 1110, EPX = 300;           // y for 0 %, px per 1 %
 const ey = (v: number) => EY0 - v * EPX;
-const Eia = make(({f, cue}) => {
+const Eia = make(({f, cue, dur}) => {
   const a = cue('a', 68), b = cue('b', 140);
   const line = eio((f - a) / 22);
-  return <Paper>
+  return <Paper push={1 + 0.1 * eio(f / dur)} origin='50% 55%'>
     <Hand text="美国用电需求 · 年增速" x={64} y={236} f={f} at={-99} size={54} />
     {/* axes grow with the narration */}
     <Stroke pts={[[EX0, EY0 + 20], [EX0, ey(2) - 10]]} p={eio(f / 16)} color={INK} w={4} />
@@ -167,9 +167,9 @@ const Note: React.FC<{f: number; at: number; x: number; y: number; title: string
     <div style={{fontFamily: font, fontWeight: 900, fontSize: 46, color: INK}}>{title}</div>
     {lines.map((l, i) => <div key={i} style={{fontFamily: font, fontWeight: 600, fontSize: 40, color: INK, opacity: 0.85, marginTop: 6}}>{l}</div>)}
   </div>);
-const Ny = make(({f, cue}) => {
+const Ny = make(({f, cue, dur}) => {
   const a = cue('a', 32), b = cue('b', 73);
-  return <Paper>
+  return <Paper push={1 + 0.1 * eio(f / dur)} origin='45% 35%'>
     <Hand text="纽约 · 卡许可" x={64} y={236} f={f} at={-99} size={58} />
     <MwAxis f={f} grow={2} />
     <Threshold f={f} at={a} v={50} label="≥ 50 MW" />
@@ -187,11 +187,11 @@ const House: React.FC<{x: number; y: number; s?: number; color?: string}> = ({x,
     <rect x={24} y={36} width={12} height={18} fill={CARD} />
   </svg>
 );
-const Mw = make(({f, cue}) => {
+const Mw = make(({f, cue, dur}) => {
   const a = cue('a', 34), b = cue('b', 84);
   const bar = eo(f, 0, 10), shatter = eio((f - a) / 26);
   const BY = 720, BH = 64;
-  return <Paper>
+  return <Paper push={1 + 0.1 * eio(f / dur)} origin='55% 55%'>
     <Hand text="50 MW 有多大？" x={64} y={236} f={f} at={-99} size={58} />
     <MwAxis f={f} />
     <Threshold f={f} at={-99} v={50} label="≥ 50 MW" dim />
@@ -211,9 +211,9 @@ const Mw = make(({f, cue}) => {
   </Paper>;
 }, (cue) => [{at: 0, kind: 'tap', gain: 0.08}, {at: cue('a', 34), kind: 'whoosh', gain: 0.08}, ...Array.from({length: 8}, (_, i) => ({at: cue('a', 34) + 8 + i * 2, kind: 'tick', gain: 0.04})), {at: cue('b', 84), kind: 'chime', gain: 0.1}]);
 
-const Tx = make(({f, cue}) => {
+const Tx = make(({f, cue, dur}) => {
   const a = cue('a', 38), b = cue('b', 108);
-  return <Paper>
+  return <Paper push={1 + 0.1 * eio(f / dur)} origin='60% 35%'>
     <Hand text="得州 · 先卡电网" x={64} y={236} f={f} at={-99} size={58} />
     <MwAxis f={f} />
     <Threshold f={f} at={-99} v={50} label="纽约 ≥ 50" dim y0={460} />
@@ -229,11 +229,11 @@ const Tx = make(({f, cue}) => {
 const TX0 = 110, TX1 = 990, TY = 640;
 const MONTHS = ['26-09', '10', '11', '12', '27-01', '02', '03', '04', '05', '06', '07', '08'];
 const tx = (m: number) => TX0 + (m / (MONTHS.length - 1)) * (TX1 - TX0);   // m = months since 2026-09-01
-const Or = make(({f, cue}) => {
+const Or = make(({f, cue, dur}) => {
   const a = cue('a', 54), b = cue('b', 122);
   const g = eio((f - 2) / 18), now = tx(7 / 30), end = tx(10);
   const dash = eio((f - a) / 24);
-  return <Paper>
+  return <Paper push={1 + 0.1 * eio(f / dur)} origin='80% 35%'>
     <Hand text="俄勒冈 · 只卡州有土地" x={64} y={236} f={f} at={-99} size={58} />
     <Stroke pts={[[TX0, TY], [TX0 + (TX1 - TX0) * g, TY]]} p={g > 0 ? 1 : 0} color={INK} w={4} />
     {MONTHS.map((m, i) => (tx(i) - TX0) / (TX1 - TX0) <= g + 0.001 && <div key={m}>
@@ -259,9 +259,9 @@ const Or = make(({f, cue}) => {
 
 const PX0 = 380, PX1 = 980, px = (v: number) => PX0 + (v / 100) * (PX1 - PX0);
 const ROWS: [string, number, number][] = [['家庭电费', 38, 50], ['环境', 39, 54], ['附近生活质量', 30, 49]];
-const Pew = make(({f, cue}) => {
+const Pew = make(({f, cue, dur}) => {
   const a = cue('a', 30), b = cue('b', 129);
-  return <Paper>
+  return <Paper push={1 + 0.1 * eio(f / dur)} origin='40% 40%'>
     <Hand text="居民的看法 · 认为“基本是坏事”" x={64} y={236} f={f} at={-99} size={50} color={BLUE} />
     <div style={{position: 'absolute', left: px(0) - 20, top: 340, fontFamily: plex, fontSize: 28, color: GREY}}>0</div>
     <div style={{position: 'absolute', left: px(100) - 50, top: 340, fontFamily: plex, fontSize: 28, color: GREY}}>100%</div>
