@@ -1,0 +1,14 @@
+来源：https://gov.texas.gov/news/post/governor-abbott-directs-tceq-to-halt-data-center-permits
+日期：September 21, 2026
+标题：Governor Abbott Directs TCEQ To Halt Data Center Permits
+
+摘录（官网新闻稿正文要点）：
+Governor Greg Abbott today directed the Texas Commission on Environmental Quality (TCEQ) to halt all permits sought by data centers until the Electric Reliability Council of Texas (ERCOT) completes its audit. Because the Public Utility Commission of Texas (PUCT), ERCOT, and the Texas Water Development Board (TWDB) require that information to make informed decisions, no state agency shall move forward with regulatory approvals related to data center development until it is acquired.
+
+“Simply put, Texans must come first,” said Governor Abbott. “Data centers must pay their own way, protect our grid and water, and complete the ERCOT and TWDB audits. Until they do, TCEQ will issue no permits sought by data center projects.”
+
+Governor Abbott directed the PUCT and ERCOT to audit all data centers undergoing ERCOT’s interconnection process so their development does not compromise the reliability of the Texas electric grid and does not put Texans’ natural resources at risk. On September 14, he directed TWDB to compel data centers to comply with water-use reporting requirements...
+
+Data center projects must cover all electrical infrastructure costs, result in lower residential electrical bills, and complete the ERCOT audit. Data centers must not use water needed by local communities, must report electricity and water usage...
+
+TCEQ shall provide an update to the Office of the Governor on its compliance with this directive by Monday, October 19, 2026.
