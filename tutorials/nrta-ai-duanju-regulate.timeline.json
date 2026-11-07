@@ -1,0 +1,351 @@
+{
+  "id": "nrta-ai-duanju-regulate",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1724,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/nrta-ai-duanju-regulate/01-hook.mp3",
+      "audioMs": 5616,
+      "startFrame": 0,
+      "durationFrames": 179,
+      "cues": {
+        "a": 3190,
+        "b": 4099
+      },
+      "captions": [
+        {
+          "text": "广电总局一句「扶持真人剧",
+          "startMs": 138,
+          "endMs": 2081
+        },
+        {
+          "text": "规范AI剧」",
+          "startMs": 2081,
+          "endMs": 3190
+        },
+        {
+          "text": "被不少人读成",
+          "startMs": 3190,
+          "endMs": 4099
+        },
+        {
+          "text": "AI短剧要被禁了",
+          "startMs": 4099,
+          "endMs": 5935
+        }
+      ]
+    },
+    {
+      "id": "quote",
+      "audioSrc": "audio/tutorials/nrta-ai-duanju-regulate/02-quote.mp3",
+      "audioMs": 4650,
+      "startFrame": 179,
+      "durationFrames": 150,
+      "cues": {
+        "a": 1319,
+        "b": 3054
+      },
+      "captions": [
+        {
+          "text": "原话后半句是",
+          "startMs": 138,
+          "endMs": 1319
+        },
+        {
+          "text": "规范AI剧，不是不发展",
+          "startMs": 1319,
+          "endMs": 3054
+        },
+        {
+          "text": "而是要稳量提质",
+          "startMs": 3054,
+          "endMs": 4958
+        }
+      ]
+    },
+    {
+      "id": "table",
+      "audioSrc": "audio/tutorials/nrta-ai-duanju-regulate/03-table.mp3",
+      "audioMs": 2116,
+      "startFrame": 329,
+      "durationFrames": 74,
+      "cues": {
+        "a": 938
+      },
+      "captions": [
+        {
+          "text": "我把五份原文",
+          "startMs": 138,
+          "endMs": 938
+        },
+        {
+          "text": "按日期摊开",
+          "startMs": 938,
+          "endMs": 2377
+        }
+      ]
+    },
+    {
+      "id": "sep",
+      "audioSrc": "audio/tutorials/nrta-ai-duanju-regulate/04-sep.mp3",
+      "audioMs": 5172,
+      "startFrame": 403,
+      "durationFrames": 166,
+      "cues": {
+        "a": 1662,
+        "b": 3819
+      },
+      "captions": [
+        {
+          "text": "九月四日的管理提示",
+          "startMs": 138,
+          "endMs": 1662
+        },
+        {
+          "text": "用户上传的剧",
+          "startMs": 1662,
+          "endMs": 2589
+        },
+        {
+          "text": "平台凡播必审",
+          "startMs": 2589,
+          "endMs": 3819
+        },
+        {
+          "text": "还鼓励边播边审",
+          "startMs": 3819,
+          "endMs": 5438
+        }
+      ]
+    },
+    {
+      "id": "sept",
+      "audioSrc": "audio/tutorials/nrta-ai-duanju-regulate/05-sept.mp3",
+      "audioMs": 5460,
+      "startFrame": 569,
+      "durationFrames": 175,
+      "cues": {
+        "a": 1510,
+        "b": 4056
+      },
+      "captions": [
+        {
+          "text": "九月底的会上就说过",
+          "startMs": 138,
+          "endMs": 1510
+        },
+        {
+          "text": "支持真人剧",
+          "startMs": 1510,
+          "endMs": 2361
+        },
+        {
+          "text": "引导AI剧规范发展",
+          "startMs": 2361,
+          "endMs": 4056
+        },
+        {
+          "text": "十一月是重申",
+          "startMs": 4056,
+          "endMs": 5709
+        }
+      ]
+    },
+    {
+      "id": "nov5",
+      "audioSrc": "audio/tutorials/nrta-ai-duanju-regulate/06-nov5.mp3",
+      "audioMs": 5616,
+      "startFrame": 744,
+      "durationFrames": 179,
+      "cues": {
+        "a": 1167,
+        "b": 3757
+      },
+      "captions": [
+        {
+          "text": "十一月五日的讲话",
+          "startMs": 138,
+          "endMs": 1167
+        },
+        {
+          "text": "要平台落实凡播必审",
+          "startMs": 1167,
+          "endMs": 3091
+        },
+        {
+          "text": "全量人审，是讲话要求",
+          "startMs": 3091,
+          "endMs": 4679
+        },
+        {
+          "text": "不是新文件",
+          "startMs": 4679,
+          "endMs": 5910
+        }
+      ]
+    },
+    {
+      "id": "nov6",
+      "audioSrc": "audio/tutorials/nrta-ai-duanju-regulate/07-nov6.mp3",
+      "audioMs": 5277,
+      "startFrame": 923,
+      "durationFrames": 169,
+      "cues": {
+        "a": 1890,
+        "b": 3528
+      },
+      "captions": [
+        {
+          "text": "第二天官网公布专项治理",
+          "startMs": 138,
+          "endMs": 1890
+        },
+        {
+          "text": "11月1日到12月底",
+          "startMs": 1890,
+          "endMs": 3528
+        },
+        {
+          "text": "主攻低俗化",
+          "startMs": 3528,
+          "endMs": 4532
+        },
+        {
+          "text": "同质化",
+          "startMs": 4532,
+          "endMs": 5576
+        }
+      ]
+    },
+    {
+      "id": "targets",
+      "audioSrc": "audio/tutorials/nrta-ai-duanju-regulate/08-targets.mp3",
+      "audioMs": 4885,
+      "startFrame": 1092,
+      "durationFrames": 158,
+      "cues": {
+        "a": 1014,
+        "b": 3133
+      },
+      "captions": [
+        {
+          "text": "治盗脸偷声",
+          "startMs": 138,
+          "endMs": 1014
+        },
+        {
+          "text": "软色情擦边",
+          "startMs": 1014,
+          "endMs": 2251
+        },
+        {
+          "text": "儿童类不良",
+          "startMs": 2251,
+          "endMs": 3133
+        },
+        {
+          "text": "还有换个片名反复播",
+          "startMs": 3133,
+          "endMs": 5081
+        }
+      ]
+    },
+    {
+      "id": "number",
+      "audioSrc": "audio/tutorials/nrta-ai-duanju-regulate/09-number.mp3",
+      "audioMs": 4519,
+      "startFrame": 1250,
+      "durationFrames": 147,
+      "cues": {
+        "a": 2614,
+        "b": 3678
+      },
+      "captions": [
+        {
+          "text": "今年以来已下架违规微短剧7.5万部",
+          "startMs": 138,
+          "endMs": 2614
+        },
+        {
+          "text": "但这是前期累计",
+          "startMs": 2614,
+          "endMs": 3678
+        },
+        {
+          "text": "不是这一轮",
+          "startMs": 3678,
+          "endMs": 4818
+        }
+      ]
+    },
+    {
+      "id": "index",
+      "audioSrc": "audio/tutorials/nrta-ai-duanju-regulate/10-index.mp3",
+      "audioMs": 5407,
+      "startFrame": 1397,
+      "durationFrames": 173,
+      "cues": {
+        "a": 1129,
+        "b": 3499
+      },
+      "captions": [
+        {
+          "text": "五份拼起来看",
+          "startMs": 138,
+          "endMs": 1129
+        },
+        {
+          "text": "凡播必审、全量人审都有出处",
+          "startMs": 1129,
+          "endMs": 3499
+        },
+        {
+          "text": "“禁止AI剧”",
+          "startMs": 3499,
+          "endMs": 4569
+        },
+        {
+          "text": "一份都没写",
+          "startMs": 4569,
+          "endMs": 5721
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/nrta-ai-duanju-regulate/11-end.mp3",
+      "audioMs": 4754,
+      "startFrame": 1570,
+      "durationFrames": 154,
+      "cues": {
+        "a": 2357
+      },
+      "captions": [
+        {
+          "text": "做AI短剧",
+          "startMs": 138,
+          "endMs": 900
+        },
+        {
+          "text": "现在就能做的一件事",
+          "startMs": 900,
+          "endMs": 2357
+        },
+        {
+          "text": "用真人的脸和声音",
+          "startMs": 2357,
+          "endMs": 3711
+        },
+        {
+          "text": "先拿授权",
+          "startMs": 3711,
+          "endMs": 5007
+        }
+      ]
+    }
+  ]
+}

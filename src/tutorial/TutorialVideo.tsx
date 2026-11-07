@@ -4,7 +4,7 @@ import {Audio} from '@remotion/media';
 import {Layout, Palette, blueprint, cinema, color, font, layoutOf, mono, palette, paper} from './theme';
 import {sceneRegistry} from './scenes';
 import {HostLayer} from './host';
-import {CaptionBar, CaptionCard, CaptionLabel, CaptionStrip, CaptionSwiss, CaptionMap, CaptionTear, CaptionTele, CaptionNote, CaptionLog, CaptionFigure, CaptionToast} from './package';
+import {CaptionBar, CaptionCard, CaptionLabel, CaptionStrip, CaptionSwiss, CaptionMap, CaptionTear, CaptionTele, CaptionNote, CaptionLog, CaptionFigure, CaptionPlate, CaptionToast} from './package';
 import {DepthField, GridFloor} from './space';
 import {Dino} from './ui';
 import {CoverRatio, SceneTiming, TimedCaption, Tutorial, TutorialProps} from './types';
@@ -343,6 +343,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
           : look.captions === 'toast' && look.pk ? <CaptionToast captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'label' && look.pk ? <CaptionLabel captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'figure' && look.pk ? <CaptionFigure captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
+          : look.captions === 'plate' && look.pk ? <CaptionPlate captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'log' && look.pk ? <CaptionLog captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'note' && look.pk ? <CaptionNote captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'tele' && look.pk ? <CaptionTele captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />

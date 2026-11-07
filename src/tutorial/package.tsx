@@ -536,3 +536,18 @@ export const CaptionFigure: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: 
     })()}
   </div>;
 };
+/** The archive-lighttable caption: a dark plate at the bottom centre with a 3 px signal edge on top (lemo/archive-lighttable §4). */
+export const CaptionPlate: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number}> = ({captions, k, breaks = {}, y = 1420}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  if (!c) return null;
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 13);
+  const sz = Math.max(58, Math.min(64, Math.floor(820 / Math.max(...lines.map(units)))));
+  const p = ease.outCubic(clamp((ms - c.startMs) / 140));
+  return <div style={{position: 'absolute', left: 0, right: 0, top: y, display: 'flex', justifyContent: 'center'}}>
+    <div style={{background: 'rgba(14,15,17,0.78)', borderTop: `3px solid ${k.accent}`, padding: '14px 34px 18px', opacity: p, transform: `translateY(${(1 - p) * 8}px)`, maxWidth: 900}}>
+      {lines.map((line, j) => <div key={j} style={{fontFamily: font, fontWeight: 800, fontSize: sz, lineHeight: 1.22, color: '#F4F6F8', whiteSpace: 'nowrap', textAlign: 'center'}}>{line}</div>)}
+    </div>
+  </div>;
+};
