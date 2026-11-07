@@ -1,0 +1,138 @@
+即梦短剧工作室保姆级教程分享，双十一每秒低至0.16元值得入手！ | 人人都是产品经理
+
+从剧本、角色资产到分镜、生成、后期，即梦把短剧这条链路收进了一个工作台。本文按四大创作助手逐个走一遍：剧本医生怎么改主线，3D 导演台怎么摆位，多轨剪辑如何处理配音与字幕，末尾附了双十一各档位的单秒价差。
+AI视频这一路的发展咱们也可以说是有目共睹了，从吃个面都吃不明白，再到稳定片段，现在电影感也上来了。
+视频模型越来越稳，单条片段生成得挺好看，但想要真正通过AI影响去讲好一个完整的故事，去做一个连续剧，还是有很多问题需要解决的。
+而最近，即梦正式上线了“短剧工作室”，把剧本创作、角色场景资产、分镜、视频生成和后期调整等等卡点全都安排得清清楚楚了。
+我也第一时间去尝试了一番，现在来和朋友们梳理梳理值得关注的亮点。
+之前有听说即梦和小云雀合并了，实际情况是即梦整合了小云雀的短剧 Agent 能力，两个产品都是剪映旗下的 AI 内容创作平台，这次也是让即梦在短剧场景里多了一套工具能力，在即梦一个平台就能完成自己的项目。
+最近双十一，即梦有双十一的限定优惠，个人和企业团队都有优惠，后面我一起整理分享。
+四大创作助手
+首先简单给大家介绍即梦短剧工作室，它们现在自带四大创作助手。
+剧本助手（DreamScript）
+写剧本，基于爆剧数据从生成到诊断优化剧本；
+分镜助手（DreamShot）
+辅助分镜制作，批量修改、出海翻译，还有大量运镜库直接调用参考；
+选角导演
+，有自研的AnyCook，有7000+演员库辅助，还可以个性化捏脸捏表情；
+还有
+后期导演
+，从故事板即拍即改，到片段重拍、智能切分镜、配音处理、音频分离等都一应俱全了。
+而这些，都直接展现在一个画布中，全局的资产都可以互通，方便大家按照自己的习惯完成项目。
+1.故事开发
+从灵感到剧本
+创作链路从剧本创作开始，剧本创作调用的即梦自研的 DreamScript 模型，体验下来还是很专业的。
+剧本创作三条路可选，简单来说就是，你有的是灵感、IP、小说、还是有剧本定稿？
+如果手头已有拍好的短剧成片想换画风或做出海版本，可以用【重制转绘】。它可以会复刻原片机位与运镜，支持 18 个目标地区的本土化适配，最长 5 分钟，单项目总时长最高 250 分钟。
+我走的剧本创作，我的灵感是【老头说我命里有三次大劫会影响我发财】，和女频修仙言情。
+剧本助手用的 DreamScript 模型，把一句话灵感直接转化为了人物立得住、冲突推得动、集尾有钩子的优质分集剧本。
+风格库也是发狠了忘情了，100多种常用风格都能直接调用，我们可以在一开始就定好风格。我这次的案例全程都用的【精品古装偶像剧】风格，感觉一下子质感都提升了。
+用剧本医生检查主线与台词
+比如让它检查前 3 集的主角身份、核心冲突、台词是不是符合角色设定等等。它会先出诊断和修改建议，确认采纳后再改回正文，支持历史版本回退，改定后的剧本直接进入下一步资产解析。
+2.资产管理
+从剧本解析角色和场景
+【角色资产】可以包含同一个角色在不同镜头、不同集数的外貌与气质，针对不同阶段的妆造，也可以分开创建；【场景资产】包含的是办公室、街道、建筑等故事情节高频发生地。
+这些一次生成后，能在以后的场景里反复调用，仔细确认需要的设定再出图后续会更高效。
+上传参考或选角定形象
+我们可以选择在画布中生成或使用自己的定稿人物参考图，在角色卡里锁定。
+资产引用、更新与回溯
+资产建好后，画布和故事板共享同一套资产库，左边可以快速切换。
+即梦画布的使用感也很好。堆到了上千个素材，节点拖曳、框选、连续缩放等等依然非常丝滑。如果是工作室协作，这次还同步上了团队版管理，支持多账号共享资产库与积分管理。
+3.镜头设计
+智能预演检查节奏与衔接
+进入分集视频生成脚本时，可以先选 15 秒或 30 秒的片段时长上限，30 秒主要配合 Seedance 2.5 的长镜头规划。
+正式生成视频前，强烈建议先跑一遍【智能预演】。
+它会像导演带演员走戏一样，把同一场戏的多个分镜串联起来预演一遍，提前检查整场戏的节奏、镜头衔接和动作逻辑。
+一集视频可能总长原本一分多钟，智能预演只用大约使用 8 秒视频的算力成本，不用反复全段抽卡浪费积分，相当于花十分之一的成本先看细节。
+预设运镜库
+3D导演台
+遇到双人对手戏、多人场面或复杂运镜，或者光靠文字提示词很难讲清空间关系，我建议可以尝试 3D 导演台。
+在 3D 空间里可以直接摆角色站位、朝向和动作姿势，多人场景一个个摆，再设好机位和时间轴关键帧；支持用参考图或文字 AI 搭景。
+≡
+提示词
+none
+16:9横构图，简洁的山谷双人相逢场景。使用成年男性和成年女性两个人体模特，均自然站立、双手下垂。男模特在左侧中景，面向右侧女模特；女模特在右侧近景，面向男模特，两人相距3米。场地为浅绿色草地，两侧少量灰色岩石形成山谷，远处留出开阔谷口。镜头位于女模特左后方，略高于肩膀，看见女模特背部和男模特正面，两人轮廓互不遮挡。浅蓝灰背景，柔和暖光，环境简洁，画面清爽。
+在 3D 导演台里手动摆机位和预演的过程完全不消耗视频生成算力，把构图和动态参考锁定后再生成，成片稳定性会高得多。
+接入白模与3D资产
+如果手头有现成的 3D 资产，可以用即梦官方的 Blender 渲染插件，从即梦首页的【3D 渲染插件】卡片进入下载页，按系统下载安装包；在 Blender 里依次点“编辑 → 偏好设置 → 插件 → 从磁盘安装”，选中 ZIP 启用就行。
+用白模视频锁定人物的运动路线、起跳落点和摄像机运镜，再连上角色和场景参考图一起参考生成视频，哪怕是飞檐走壁这种高难度的连续跑酷长镜头，也能稳稳控住动作和空间关系。
+4.成片与后期
+样片、正片与重制转绘
+分镜和预演都确认后，可以先挑主角出场、冲突爆发等几个关键镜头跑样片。
+可以先用 Draft 档验证构图动作，这个便宜很多。
+觉得效果稳了以后再生成 Seedance 2.5 正片。
+用片段重拍修改指定细节段
+视频跑出来如果只有某几秒构图不对或衣服颜色想换，也不用整段推翻重抽。
+镜头剪辑与音字幕制作
+剪辑与后期阶段交给后期导演。
+多轨编辑器支持智能切割分镜、音频分离、角色独立配音、字幕识别与双语翻译，还能直接调配乐的时长和淡入淡出。
+全部搞定后可以直接导出成片，或者一键导出到剪映继续精剪。
+5.参考学习
+从大师画布参考学习
+想拆解成熟作品，可以去即梦首页→点击左边栏【探索】，打开《反相之地》《丧尸清道夫》这类官方的“大师画布”。
+6.费用与福利
+各平台套餐、赠送积分和视频消耗不同，可以统一换算：
+单秒价格＝套餐月均费用÷当月总积分（含赠送）×每秒消耗积分。
+其中，连续包年的月均费用按年费÷12 计算，连续包季按季费÷3 计算。赠送积分分阶段变化时，应分别计算对应阶段的单秒价格。
+即梦双十一全模型、各档位都有优惠，详情如下：
+日常创作：连续包年高级会员折算约 0.54 元/秒。
+以 12.3 K积分档为例，每月加赠 3700 通用积分，连送 3 个月。Seedance 2.5 无参考生成 10 秒消耗 200 积分，即 20 积分/秒；每月可生成约 13 分钟视频，相当于 26 条 30 秒视频。
+高频创作者可以关注超级会员，连续包年和连续包季各有优惠。
+超级会员连续包年：单秒低至 0.16 元，会员折扣 4.5 折。
+会员赠送：购买多得 3 个月会员。
+积分加赠：首 3 个月每月加赠 49000 积分，加上订阅积分，首 3 个月每月共得 103600 积分；从第 4 个月起，每月加赠 5800 积分，加赠积分一共送满 12 个月。
+积分消耗：超级会员享 Seedance 2.5 积分消耗 5 折。
+超级会员连续包季：单秒低至 0.24 元，会员折扣 4.3 折。
+适用人群：从未订阅过会员的用户、包月在期会员，以及历史订阅过包年或包季的当前非会员。
+加赠福利：购买超级会员连续包季，即可获得 60 条 Seedance 2.5，即买即得。
+积分消耗：成为超级会员，享受 Seedance 2.5 积分消耗 5 折。
+本文由人人都是产品经理作者【阿真Irene】，微信公众号：【阿真Irene】，原创/授权 发布于人人都是产品经理，未经许可，禁止转载。
+题图来自作者提供
+收藏
+已收藏
+{{ postmeta.bookmark }}
+点赞
+已赞
+{{ postmeta.postlike }}
+
+IMGS:
+https://image.woshipm.com/wp-files/sha256/62/a1/62a1e7691de6019fd13c9f0742e8e20a45f9361adb57f27190d3e9e18c1fcec2.png
+https://image.woshipm.com/wp-files/sha256/1e/8c/1e8ce7186f57d6ef5c27ed69b612a323ddba531e213ae6bdb1efa85511614738.png
+https://image.woshipm.com/wp-files/sha256/31/a9/31a9e6b2b982739cded7bbceeaf55f0ecfb14234e665306a771e19feba7f46bc.png
+https://image.woshipm.com/wp-files/sha256/05/19/05195e02844253afc21c11b8ba6551b720a322f2e210cb9991165c0403ef4a13.png
+https://image.woshipm.com/wp-files/sha256/33/d6/33d655c8d3011b468db67bbb61666b58666aab6bd227851b252f2a4d037f1991.gif
+https://image.woshipm.com/wp-files/sha256/1a/da/1ada2621c034944f804c167b027463271aa2fffe59bdd58a99a90138a6e6a4de.gif
+https://image.woshipm.com/wp-files/sha256/4a/d6/4ad6a59613bbf40ddd4b81cb6ec1f1fa97092e677b607dd877ebbfa55caa2b5e.gif
+https://image.woshipm.com/wp-files/sha256/a4/4b/a44bafa10bf087b7a39cb52036b15e143f42614272a64b469b7577e823d66f03.gif
+https://image.woshipm.com/wp-files/sha256/67/9e/679ef749fd69e02897407dbf58601a2f581fa405c22699b807d97b0234812368.png
+https://image.woshipm.com/wp-files/sha256/28/f3/28f3bb4e62070f0d4f42466fd6c85144f3513e7c5ab581d6d571c150a9886b33.gif
+https://image.woshipm.com/wp-files/sha256/c4/be/c4be5cf4f318095d7d7a11978e201acbdf578511c210556556b9cc3ed8fe0b64.gif
+https://image.woshipm.com/wp-files/sha256/f5/70/f570d057d2aa2465f90d4a1a00c6775c8a1c57491e8e54577ff0f0e361059797.png
+https://image.woshipm.com/wp-files/sha256/66/41/6641f6f81cbcb704cb3f90b90d9f3b53fa73987f9810e3cd864be06aed309cf8.gif
+https://image.woshipm.com/wp-files/sha256/8a/af/8aaf0a0c58ee6d2d1c62f4f2436771b6381c20a11398177ab5f8ba9195f5d984.png
+https://image.woshipm.com/wp-files/sha256/39/81/39818fda982ef9a3c0a90575e9e3fca4b06163cdccde39c77662081132931dd1.gif
+https://image.woshipm.com/wp-files/sha256/49/b8/49b8b8eab57ef7ee50ba2383a69f24cff3ddb9f08cb1cf1be65f073169083a60.png
+https://image.woshipm.com/wp-files/sha256/67/4c/674cd63c05c9649e2e3806cc7c091d80da668bf48026cc64b19d6d38d648a73c.gif
+https://image.woshipm.com/wp-files/sha256/60/98/6098e344dc77436674316e53aa877dda3feb80dc00fefa225583e47794c495b9.gif
+https://image.woshipm.com/wp-files/sha256/e5/60/e5604445539c81b5547de096aef5588600fba8562d724ef6b592418c3913b43c.gif
+https://image.woshipm.com/wp-files/sha256/41/bb/41bb20f00f3b264d79ac1610a2d239a5e324742e4361877d5237335ce6a9bf1e.png
+https://image.woshipm.com/wp-files/sha256/14/7e/147e1815954fa41927e339f5f99af9db8438668aa6ab63431c8b990084513d15.gif
+https://image.woshipm.com/wp-files/sha256/06/51/065125e84374b916a152a228f1cccab25397b658c4b9f7ac4617204f2e83077d.png
+https://image.woshipm.com/wp-files/sha256/e0/20/e020f24d749f278195630efdccb227b6fa201f402f069d15a3d649269f9b4de8.gif
+https://image.woshipm.com/wp-files/sha256/1e/98/1e98056c4583fa669e9f517c67411d94405e37df404a72583447bd02b4ae0315.png
+https://image.woshipm.com/wp-files/sha256/98/86/9886245ca29efcb623f453fe24bc6036144d8f85f2f61896371fd86cd7544068.png
+https://image.woshipm.com/wp-files/sha256/35/52/3552df130502378870a3a42e8e9a2f4c32086d067d859864047d2d07eb71ada6.jpg
+https://image.woshipm.com/wp-files/sha256/89/d9/89d9f386d82daa97fc80d4d039ca75ee1848112e00e02c7ae816806464b4e942.png
+https://image.woshipm.com/wp-files/sha256/28/2c/282c37598bf9f8c17a17a6f2c9a123404739572ed457dc6f1a8d248ee82bb55c.png
+https://image.woshipm.com/wp-files/sha256/8f/86/8f86aac3d13af4d02a99b902e7d0c95510b7771494a450ea10b5d904f466b1f6.png
+https://image.woshipm.com/wp-files/sha256/3d/79/3d790e5e312191fdd3949b3e829ef9bff1de37383da44f05247dda9b8ce53cbe.gif
+https://image.woshipm.com/wp-files/sha256/dc/43/dc4329b4061dcd0237af022d4a10c3b465e5a04f3e27d4bdf2d3ed2c59f8dbfa.jpg
+https://image.woshipm.com/wp-files/sha256/19/7f/197f0e6f15092171aae2216ef159625ac2b0997099a6e424fa0fbc2afc8b2d6d.png
+https://image.woshipm.com/wp-files/sha256/28/00/280049b04f7baf112ee19d06252f71d769c9aedf19a317418b6bc92bb41b0867.png
+https://image.woshipm.com/wp-files/sha256/18/c4/18c446851e30243f3b2a25153361afae5ef99ec529965f1943c2759d3b83b522.jpg
+https://image.woshipm.com/wp-files/sha256/89/18/8918cf8a2b0f34ddd2768a8ba9212e7ddd25d8d362d07529c8c3a976415556ea.gif
+https://image.woshipm.com/wp-files/sha256/48/68/48681385b48c623b6ac2fdddca7c4533dc554b911d21449ca0dd93e68f41e36a.png
+https://image.woshipm.com/wp-files/sha256/7f/54/7f540a5369eb32bb6280f2d56f18e4697daebecbc25c375440df6ed9aed0c7ae.gif
+https://image.woshipm.com/wp-files/sha256/60/f1/60f162e2d3d2abf348a58439b2bebf950b914080feb29fec3e49e401c3d57289.jpg
+https://image.woshipm.com/wp-files/sha256/54/cd/54cd8d44f8128fa30f62ff845765afa81acf560b295a90fb971f8e9281e1a606.gif
+https://image.woshipm.com/wp-files/sha256/01/c0/01c0c6ef03ddbc035b82464f762c13390dc7fbe23a9bb0664197321b877cb543.gif
