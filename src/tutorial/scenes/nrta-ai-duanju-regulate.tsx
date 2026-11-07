@@ -327,7 +327,7 @@ const Number_ = make(({f, cue}) => {
   const cam = track([[0, C_C2], [16, C_C3], [a - 2, C_C3], [a + 22, C_ALL]], f);
   const L = dp('C', 430, 498);
   const lit: Lit = {C: {rows: ROWS.c5, p: eo(f, 10, 14)}};
-  const n = Math.min(7.5, 7.5 * ease.outCubic(clamp((f - 14) / 34)));
+  const n = Math.min(7.5, 7.5 * ease.outCubic(clamp((f - 4) / 26)));
   const br = eo(f, a + 6, 16), br2 = eo(f, b + 2, 14);
   const brackets = (z: number) => <svg width={TW} height={TH} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
     {br > 0 && <rect x={RX + 30 / z} y={250} width={24 / z} height={(1800 - 250) * br} fill={INK} opacity={0.55} />}
@@ -381,7 +381,7 @@ const Index = make(({f, cue}) => {
         </div>
       </div>;
     })}
-    <Chip f={f} at={b + 34} text="五份原文里，没有一处写“禁止”" x={110} y={1180} size={50} strong />
+    <Chip f={f} at={b + 34} text="五份原文里，没有一处写“禁止”" x={110} y={1070} size={50} strong />
   </Stage>;
 }, (cue) => [{at: cue('a', 34) + 14, kind: 'tick', gain: 0.1}, {at: cue('a', 34) + 20, kind: 'tick', gain: 0.1}, {at: cue('b', 105), kind: 'whoosh-short', gain: 0.07}, {at: cue('b', 105) + 24, kind: 'tap', gain: 0.12}]);
 
@@ -398,7 +398,7 @@ const End = make(({f, cue}) => {
     <Dark p={dark} />
     <Loupe cam={cam} wx={L.x} wy={L.y} land={eo(f, 20, 12)} lit={lit} />
     <Reading f={f} at={a} label="A · 新华社 · 2026-11-05" text="「未经授权使用肖像声音等侵权行为」将持续加大打击力度" size={52} />
-    <Chip f={f} at={a + 30} text="用到真人的脸和声音 → 先拿授权" x={64} y={1150} size={50} strong />
+    <Chip f={f} at={a + 30} text="用到真人的脸和声音 → 先拿授权" x={64} y={1070} size={50} strong />
   </Stage>;
 }, (cue) => [{at: 0, kind: 'whoosh-short', gain: 0.05}, {at: 24, kind: 'tap', gain: 0.09}, {at: cue('a', 70), kind: 'fs-paper-slide', gain: 0.06}]);
 
