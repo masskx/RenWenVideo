@@ -176,10 +176,10 @@ const Elements: React.FC<{w: Wall; f: number}> = ({w}) => {
     </>}
     {/* agents */}
     <Ink text="导演：四个 agent" x={160} y={2980} f={ag} at={0} size={84} />
-    <Tag x={160} y={3130} f={ag} at={4} text="主做" sub="负责所有制作" size={66} />
-    <Tag x={160} y={3300} f={ag} at={10} text="审核" sub="只挑错，不改文件" size={66} red />
-    <Tag x={160} y={3470} f={ag} at={16} text="监督" sub="把我说过的话列成清单" size={66} />
-    <Tag x={160} y={3640} f={ag} at={22} text="代理" sub="预算内替我批准" size={66} />
+    <Tag x={160} y={3130} f={ag} at={4} text="主做" sub="负责所有制作" size={80} />
+    <Tag x={160} y={3300} f={ag} at={10} text="审核" sub="只挑错，不改文件" size={80} red />
+    <Tag x={160} y={3470} f={ag} at={16} text="监督" sub="把我说过的话列成清单" size={80} />
+    <Tag x={160} y={3640} f={ag} at={22} text="代理" sub="预算内替我批准" size={80} />
     {/* check */}
     <Check f={ck} />
   </>;
@@ -191,7 +191,7 @@ const Check: React.FC<{f: number}> = ({f}) => {
   if (f < 0) return null;
   const shots: [number, number][] = [[TX0, CUTS[0]], [CUTS[0], CUTS[1]], [CUTS[1], TX1]];
   return <>
-    <Ink text="全片复核" x={160} y={3850} f={f} at={0} size={80} />
+    <Ink text="全片复核" x={160} y={3800} f={f} at={0} size={80} />
     <svg width={BW} height={BH} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
       {shots.map(([a, b], i) => <rect key={i} x={a + 6} y={TY} width={(b - a - 12) * eo(f, 2 + i * 3, 10)} height={110} fill="#E9EBEE" stroke={GRAPH} strokeWidth={6} />)}
       {CUTS.map((c, i) => <line key={i} x1={c} y1={TY - 30} x2={c} y2={TY + 140} stroke={GRAPH} strokeWidth={8} opacity={eo(f, 10, 6)} />)}
@@ -204,8 +204,8 @@ const Check: React.FC<{f: number}> = ({f}) => {
         return <line key={`${i}${k}`} x1={x} y1={TY + 8} x2={x} y2={TY + 102} stroke={RED} strokeWidth={8} strokeLinecap="round" opacity={eo(f, 70 + i * 6 + Math.abs(k), 4)} />;
       }))}
     </svg>
-    <Ink text="每镜多张全分辨率帧" x={TX0} y={TY + 150} f={f} at={18} size={56} color={BLUE} />
-    <Ink text="切点前后各 3 帧" x={CUTS[0] + 160} y={TY - 110} f={f} at={72} size={56} color={RED} />
+    <Ink text="每镜多张全分辨率帧" x={TX0} y={TY + 150} f={f} at={18} size={84} color={BLUE} />
+    <Ink text="切点前后各 3 帧" x={CUTS[0] + 120} y={TY - 130} f={f} at={72} size={84} color={RED} />
   </>;
 };
 
@@ -291,7 +291,7 @@ const Review = make(({f, cue}) => {
   const cam = track([[0, C_OV], [24, C_AG]], f);
   return <Board cam={cam} f={f}>
     <Elements w={{...ALL, agents: f - 6, check: -1}} f={f} />
-    <Stroke d={`M150,3290 L1180,3290 L1180,3430 L150,3430 Z`} p={eo(f, a, 12)} color={RED} w={8} />
+    <Stroke d={`M150,3290 L1300,3290 L1300,3460 L150,3460 Z`} p={eo(f, a, 12)} color={RED} w={8} />
     <Stamp x={880} y={3190} f={f} at={b + 4} text="通过" size={170} />
     <Stroke d={arrow(1180, 3460, 1000, 3830, 60)} p={eo(f, b + 16, 10)} color={GRAPH} />
     <Ink text="才提交 Seedance" x={480} y={3840} f={f} at={b + 22} size={72} />
@@ -305,10 +305,10 @@ const CheckScene = make(({f, cue}) => {
   const cam = track([[0, C_AG], [24, C_CK]], f);
   return <Board cam={cam} f={f}>
     <Elements w={{...ALL, check: f < a ? Math.min(f - 4, 66) : 70 + (f - a)}} f={f} />
-    <Tag x={260} y={4300} f={f} at={b} text="动态手感" size={60} />
-    <Tag x={820} y={4300} f={f} at={b + 5} text="声音" size={60} />
+    <Tag x={260} y={4300} f={f} at={b} text="动态手感" size={76} />
+    <Tag x={820} y={4300} f={f} at={b + 5} text="声音" size={76} />
     <Stroke d={arrow(1110, 4350, 1360, 4350)} p={eo(f, b + 14, 8)} color={RED} />
-    <Tag x={1400} y={4300} f={f} at={b + 20} text="交给人" size={60} red />
+    <Tag x={1400} y={4300} f={f} at={b + 20} text="交给人" size={76} red />
   </Board>;
 }, (cue) => [{at: 6, kind: 'marker', gain: 0.06}, ...Array.from({length: 6}, (_, i) => ({at: 20 + i * 3, kind: 'tick', gain: 0.05})), {at: cue('a', 70), kind: 'tick', gain: 0.08}, {at: cue('b', 125), kind: 'clack', gain: 0.07}, {at: cue('b', 125) + 20, kind: 'clack', gain: 0.08}]);
 
