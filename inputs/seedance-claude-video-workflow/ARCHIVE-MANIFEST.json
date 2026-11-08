@@ -1,0 +1,50 @@
+{
+  "ARCHIVE-README.md": {
+    "bytes": 1176,
+    "sha256": "c817c0cf599661daf7f09527148069ab0ee349646fca9c0258cf09e3da7d64d6"
+  },
+  "brief.md": {
+    "bytes": 3386,
+    "sha256": "689712b3365905393cb7ae0653289564563ef88452a39a90e90c68f10dad1821"
+  },
+  "materials.md": {
+    "bytes": 15644,
+    "sha256": "dfba0a4ddfc240dfe6eaf00c0e1d917d31a3803be671cf86f8010eb7622fb750"
+  },
+  "sources.md": {
+    "bytes": 24699,
+    "sha256": "6028336778dec8ec22dae148ded69bc730a24223914d413880db3640e8575e43"
+  },
+  "REVIEW-DOUYIN.md": {
+    "bytes": 8086,
+    "sha256": "a5abaae0716cf9037e913feb029d77807f14fc7077d138a28f4f278a98371a6e"
+  },
+  "STATUS.txt": {
+    "bytes": 1096,
+    "sha256": "c40b891dfb1e76308b6cbe33430f40d436bc15b3666c586edd874beb49a99eba"
+  },
+  "evidence/review-x-independent-response.json": {
+    "bytes": 46438,
+    "sha256": "fbba5958a9cbefe9804ff49ac378c2af2df8addaecd44c5607ef9ac4773f3332"
+  },
+  "evidence/x-candidate-details.json": {
+    "bytes": 56827,
+    "sha256": "354940642c21a22748fe56287a214e785f2610b18ce94f4f152a4dd259875807"
+  },
+  "evidence/video-candidates-manifest.json": {
+    "bytes": 11330,
+    "sha256": "4aa09d45775f543e10ddb6ab739152853d4764197f1a4bab0100581776f6e9be"
+  },
+  "evidence/jimeng-terms-review-decoded.txt": {
+    "bytes": 42379,
+    "sha256": "21b856ef7c8367d237ee9cf07ed4882894d1e86db23d65950a35705765b0ddc0"
+  },
+  "media/kuibenge-2119040381215985674-NO-AUDIO.mp4": {
+    "bytes": 217727,
+    "sha256": "1850aee4e803be10a6a6cbf3e9169d2978c2d833d3fe6291c78b8434f38a1a9b"
+  },
+  "media/jimeng-jellyfish.mp4": {
+    "bytes": 868385,
+    "sha256": "a13cae21460dd898f6e496ba10507983a9a80dc7b0b7278f5b9ba073828c4fb9"
+  }
+}
