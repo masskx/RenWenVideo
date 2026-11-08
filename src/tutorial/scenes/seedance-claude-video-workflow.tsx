@@ -143,7 +143,7 @@ const F1 = {x: 150, y: 1360}, F2 = {x: 1150, y: 1360}, PV = {x: 650, y: 2170};
 type Wall = {roles?: number; coffee?: 'video' | 'still' | false; pair?: number; preview?: number; previewT?: number; overlay?: number; agents?: number; check?: number; circle?: number};
 const ALL: Wall = {roles: 999, coffee: 'still', pair: 999, preview: 999, previewT: 1, agents: 999, check: 999};
 /** Everything on the board. Values are local frames since each part started (999 = already there). */
-const Elements: React.FC<{w: Wall; f: number}> = ({w, f}) => {
+const Elements: React.FC<{w: Wall; f: number}> = ({w}) => {
   const r = w.roles ?? -1, pr = w.pair ?? -1, pv = w.preview ?? -1, ag = w.agents ?? -1, ck = w.check ?? -1, ov = w.overlay ?? 0;
   const tShot = w.previewT ?? 0;
   return <>
