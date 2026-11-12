@@ -1,0 +1,35 @@
+Source: https://www.wiz.io/blog/cve-2026-119618-rce-apache-http-server-vulnerability
+Author (page byline): Merav Bar
+Date on page: November 11, 2026
+Captured: 2026-11-12 (Taipei time) from the live page.
+
+Title: Critical RCE Vulnerability in Apache HTTP Server: Everything You Need To Know
+
+Dek/standfirst:
+Detect and mitigate CVE-2026-119618, a critical RCE vulnerability in Apache HTTP Server. According to Wiz data, 64% of cloud environments have resources vulnerable to CVE-2026-119618. Immediate patching is advised.
+
+Body excerpts (verbatim from the live page / fetch):
+
+"A critical synchronization vulnerability (CVE-2026-119618) has been identified in Apache HTTP Server’s HTTP/2 module (mod_http2). The flaw stems from a concurrent execution race condition within the `assign_headers()` function when handling shared resources. If successfully exploited, a remote, unauthenticated attacker can corrupt heap memory to achieve arbitrary code execution (RCE)."
+
+"As of the time of this blog’s publication, no exploit is available and there are no reports of exploitation in the wild."
+
+Section heading on the live page (verbatim typo): "What is CVE-2026-111497?"
+The paragraph immediately under that heading begins: "CVE-2026-119618 is a critical, high-severity vulnerability..."
+
+"According to Wiz data 64% of cloud environments have resources vulnerable to CVE-2026-119618, and 51% of cloud environments have publicly exposed instances. Note that this does not take configuration into account."
+
+Affected / patched table on the live page:
+- Apache HTTP Server: From 2.4.55 through 2.4.70 / 2.4.71 and newer
+- GitHub (Open Source) mod_h2 module: From 2.0.8 through 2.0.42 / Patched Versions listed as "2.0.24 and newer"
+
+Body text under "Update Standalone Modules" says: "If managing standalone mod_h2 builds from GitHub, upgrade the module to a version newer than 2.0.42."
+The table’s "2.0.24 and newer" conflicts with both this sentence and the Apache official affected range (2.0.8 through 2.0.42). Use Apache official + the Wiz body sentence, not the table cell.
+
+Temporary mitigation (verbatim):
+"If immediate patching is not possible due to operational constraints, temporarily disable HTTP/2 support to eliminate the attack vector."
+"- Edit the configuration file (such as `httpd.conf`) to restrict active protocols to HTTP/1.1 by removing h2 and h2c references:"
+"# Restrict protocols to HTTP/1.1"
+"Protocols http/1.1"
+
+These 64% / 51% figures are Wiz’s own data (厂商自报). The page does not define the sample, time window, or how a "cloud environment" is counted, and it explicitly says configuration is not taken into account.

@@ -1,0 +1,5 @@
+2026-11-12 13:30（台北时间） | 马飞龙 | 批准Apache漏洞，只做抖音
+2026-11-12 13:31（台北时间） | Eko | 建 episode，派赛博小晚找抖音素材
+2026-11-12 13:52（台北时间） | 小晚 | 抖音素材完成待Eko审
+2026-11-12 13:57（台北时间） | Eko | 审稿结论：有条件通过。核心事实已对照官方公告/文档、Wiz、红帽、NVD、CISA KEV 当场重核；无代码图、无引流。条件见 REVIEW-DOUYIN.md（64%/51%须标Wiz自报且未计入配置；利用情况不说绝对；不照抄Wiz笔误与Daily_CyberSec并列措辞；SANS只用短镜头或定格并标注出处；关HTTP/2用官方文档截图代替实操录屏，禁止代码绘图）。已小修CWE-362出处与Daily_CyberSec表述。已打包，未推库未渲染。
+2026-11-12 14:00（台北时间） | Eko | 审稿有条件通过已确认；推库包剔除 assets/_excluded/，准备 CloudAgent 推 RenWenVideo inputs/apache-http2-rce-ai-found/

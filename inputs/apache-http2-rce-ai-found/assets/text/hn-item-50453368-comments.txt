@@ -1,0 +1,20 @@
+Source: https://news.ycombinator.com/item?id=50453368
+Captured: 2026-11-12 (Taipei time), live HTML + higher-resolution screenshot.
+Title: CVE-2026-119618 (critical): mod_HTTP2: heap corruption and RCE in assign_headers
+Site: apache.org
+Posted by klaas- at 2026-11-11T13:47:26 (HN timestamps are UTC) = 2026-11-11 21:47:26 台北时间
+At capture: 28 points, 9 comments.
+
+Comments as shown on the live page / screenshot (not official guidance):
+
+- Sohcahtoa82: "I'm tired, boss."
+- klaas-: "Red Hat has released updates https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2026-119618"
+- rustyhancock: "BRB Setting a calender reminder for the new year to install patches canonical puts out."
+- pixl97: "Seems kind of gnarly. How hard is this to trigger?"
+- rustyhancock: "Time for StealMyBitcoinAgain.com ? Remember to make it unexploitable for the first 16 hours."
+- Sohcahtoa82: "Until that's answered, I'm going to consider this a Nothingburger."
+- pixl97: "Eh, header issues are a really risky place to have a problem. Pre-auth RCE is bad news, if that's the case."
+- nubinetwork: "> from 2.4.55 through 2.4.70. Looks at ubuntu... 2.4.52. Well then."
+- linsomniac: "26.04 has 2.4.66-2ubuntu2.7"
+
+These are forum comments, not official affected-version guidance. Do not treat the Ubuntu 2.4.52 / 2.4.66 remarks or the "Nothingburger" joke as facts for the video. HTML ages (UTC) present on the page included 2026-11-11T19:12:29, 15:02:21, 19:39:55, 17:43:02, 19:39:00, 20:21:20, 21:12:19, 18:52:44, 20:13:39; see the screenshot for visual threading rather than relying on a reconstructed timestamp-to-user map.
