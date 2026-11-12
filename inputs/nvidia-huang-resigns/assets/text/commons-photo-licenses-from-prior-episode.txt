@@ -1,0 +1,173 @@
+File:Jensen Huang (cropped) (2024).jpg	DL_ERROR	HTTP Error 403: Forbidden
+FILE: File:Jensen Huang Nvidia Keynote CES 2025.jpg
+LOCAL: commons-Jensen_Huang_Nvidia_Keynote_CES_2025.jpg
+BYTES: 1693296
+SOURCE_URL: https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Jensen_Huang_Nvidia_Keynote_CES_2025.jpg/3840px-Jensen_Huang_Nvidia_Keynote_CES_2025.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+DESCRIPTION_URL: https://commons.wikimedia.org/wiki/File:Jensen_Huang_Nvidia_Keynote_CES_2025.jpg
+LICENSE: CC BY-SA 4.0
+USAGE: Creative Commons Attribution-Share Alike 4.0
+ARTIST: Joseph Zadeh
+CREDIT: Own work
+DATE: 2025-01-06 19:10:28
+DESC: A photo of the Nvidia Keynote at the 2025 CES, which occurred in the Michelob Ultra Arena.
+SIZE: 2000x1126
+
+FILE: File:Jensen huang stanford 2026-04-30 008.jpg
+LOCAL: commons-Jensen_huang_stanford_2026-04-30_008.jpg
+BYTES: 3115999
+SOURCE_URL: https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Jensen_huang_stanford_2026-04-30_008.jpg/3840px-Jensen_huang_stanford_2026-04-30_008.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+DESCRIPTION_URL: https://commons.wikimedia.org/wiki/File:Jensen_huang_stanford_2026-04-30_008.jpg
+LICENSE: CC BY-SA 4.0
+USAGE: Creative Commons Attribution-Share Alike 4.0
+ARTIST: Anderseidesvik
+CREDIT: Own work
+DATE: 2026-04-30
+DESC: Jensen Huang, founder and CEO of Nvidia, speaks in Stanford University's CS 153 course on April 30, 2026.
+SIZE: 2000x2667
+
+File:Jensen huang stanford 2026-04-30 010.jpg	DL_ERROR	HTTP Error 403: Forbidden
+File:Jensen Huang 20231109 (cropped2).jpg	DL_ERROR	HTTP Error 403: Forbidden
+File:Jensen Huang (cropped).jpg	DL_ERROR	HTTP Error 403: Forbidden
+FILE: File:Nvidia CEO Jensen Huang gestikuliert.jpg
+LOCAL: commons-Nvidia_CEO_Jensen_Huang_gestikuliert.jpg
+BYTES: 1168555
+SOURCE_URL: https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Nvidia_CEO_Jensen_Huang_gestikuliert.jpg/3840px-Nvidia_CEO_Jensen_Huang_gestikuliert.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+DESCRIPTION_URL: https://commons.wikimedia.org/wiki/File:Nvidia_CEO_Jensen_Huang_gestikuliert.jpg
+LICENSE: CC BY 2.0
+USAGE: Creative Commons Attribution 2.0
+ARTIST: Maurizio Pesce
+CREDIT: https://www.flickr.com/photos/pestoverde/34072594183/
+DATE: 2017-01-05 17:24:25
+DESC: A gesticulating Nvidia CEO Jensen Huang
+SIZE: 2000x1333
+
+FILE: File:NVIDIA Headquarters.jpg
+LOCAL: commons-NVIDIA_Headquarters.jpg
+BYTES: 1757409
+SOURCE_URL: https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/NVIDIA_Headquarters.jpg/3840px-NVIDIA_Headquarters.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+DESCRIPTION_URL: https://commons.wikimedia.org/wiki/File:NVIDIA_Headquarters.jpg
+LICENSE: CC BY-SA 4.0
+USAGE: Creative Commons Attribution-Share Alike 4.0
+ARTIST: Coolcaesar
+CREDIT: Own work
+DATE: 2018-08-04 10:22:12
+DESC: Nvidia headquarters in Santa Clara, California. Photographed by user Coolcaesar on August 4, 2018.
+SIZE: 2000x1224
+
+File:Nvidia campus aerial.jpg	DL_ERROR	HTTP Error 403: Forbidden
+FILE: File:San Tomas Expressway at Nvidia.jpg
+LOCAL: commons-San_Tomas_Expressway_at_Nvidia.jpg
+BYTES: 970233
+SOURCE_URL: https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/San_Tomas_Expressway_at_Nvidia.jpg/3840px-San_Tomas_Expressway_at_Nvidia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+DESCRIPTION_URL: https://commons.wikimedia.org/wiki/File:San_Tomas_Expressway_at_Nvidia.jpg
+LICENSE: CC BY-SA 4.0
+USAGE: Creative Commons Attribution-Share Alike 4.0
+ARTIST: Dicklyon
+CREDIT: Own work
+DATE: 2022-05-29 13:25:13
+DESC: San Tomas Expressway at Nvidia campus in Santa Clara, California, looking from east side to west, with pedestrian bridge overhead and the inevitable vehicle motion artifacts
+SIZE: 2000x744
+
+FILE: File:Nvdia Endeavor Grand Opening entry.jpg
+LOCAL: commons-Nvdia_Endeavor_Grand_Opening_entry.jpg
+BYTES: 1470790
+SOURCE_URL: https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/Nvdia_Endeavor_Grand_Opening_entry.jpg/3840px-Nvdia_Endeavor_Grand_Opening_entry.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+DESCRIPTION_URL: https://commons.wikimedia.org/wiki/File:Nvdia_Endeavor_Grand_Opening_entry.jpg
+LICENSE: CC BY-SA 4.0
+USAGE: Creative Commons Attribution-Share Alike 4.0
+ARTIST: Daniel J. Prostak; Crocodiletiger~commonswiki  Crocodiletiger~commonswiki used courtesy of Daniel Prostak
+CREDIT: Own work
+DATE: 2017-11-12 08:23:10
+DESC: Landscaped approach to Nvidia's Endeavor at the headquarters in Santa Clara. Daniel Prostak
+SIZE: 2000x1500
+
+File:Nvidia sign.jpg	DL_ERROR	HTTP Error 403: Forbidden
+FILE: File:2788-2888 San Tomas Expwy.jpg
+LOCAL: commons-2788-2888_San_Tomas_Expwy.jpg
+BYTES: 1911941
+SOURCE_URL: https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/2788-2888_San_Tomas_Expwy.jpg/3840px-2788-2888_San_Tomas_Expwy.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+DESCRIPTION_URL: https://commons.wikimedia.org/wiki/File:2788-2888_San_Tomas_Expwy.jpg
+LICENSE: CC BY-SA 4.0
+USAGE: Creative Commons Attribution-Share Alike 4.0
+ARTIST: Coolcaesar
+CREDIT: Own work
+DATE: 2023-07-23 09:38:29
+DESC: NVIDIA headquarters at 2788-2888 San Tomas Expressway in Santa Clara, California.
+SIZE: 2000x1346
+
+FILE: File:2788-2888 San Tomas Expressway.jpg
+LOCAL: commons-2788-2888_San_Tomas_Expressway.jpg
+BYTES: 2026304
+SOURCE_URL: https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/2788-2888_San_Tomas_Expressway.jpg/3840px-2788-2888_San_Tomas_Expressway.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+DESCRIPTION_URL: https://commons.wikimedia.org/wiki/File:2788-2888_San_Tomas_Expressway.jpg
+LICENSE: CC BY-SA 4.0
+USAGE: Creative Commons Attribution-Share Alike 4.0
+ARTIST: Coolcaesar
+CREDIT: Own work
+DATE: 2022-09-04 10:55:11
+DESC: The main entrance to the headquarters of Nvidia Corporation at 2788-2888 San Tomas Expressway in Santa Clara, California. Photographed by user Coolcaesar on September 4, 2022.
+SIZE: 2000x1235
+
+
+======= EKO REVIEW SUPPLEMENT 2026-11-12 Asia/Taipei =======
+采集日志中下列条目当时 Commons 元数据请求返回 HTTP 403，仅记了 DL_ERROR。审稿当场用
+https://commons.wikimedia.org/w/api.php ?action=query&prop=imageinfo&iiprop=extmetadata
+复核，许可与 materials.md 已写口径一致。本地文件已存在，未重新下载。
+
+FILE: File:Jensen Huang (cropped) (2024).jpg
+LOCAL: commons-Jensen_Huang_cropped_2024_.jpg
+LICENSE: CC BY 4.0
+USAGE: Creative Commons Attribution 4.0
+ARTIST: Photographer: Peter Dasilva
+CREDIT: Visit of Josep Borrell Fontelles, Vice-President of the European Commission, to the United States
+ATTRIBUTION: European Union (Commons 页显示 © European Union, 2026)
+DATE: 2024-06-03
+DESC: Jensen Huang at a meeting with Josep Borrell Fontelles.
+SIZE: 1129x1678
+NOTE: 成片须按 CC BY 4.0 署名摄影师与权利人。
+
+FILE: File:Jensen Huang 20231109 (cropped2).jpg
+LOCAL: commons-Jensen_Huang_20231109_cropped2_.jpg
+LICENSE: CC BY 2.0
+USAGE: Creative Commons Attribution 2.0
+ARTIST: 总统府
+CREDIT: https://www.flickr.com/photos/presidentialoffice/53319959776/
+DATE: 2023-11-09 (Commons DateTime 记录 2024-10-08 20:37:27 为上传/改图时间)
+DESC: 黄仁勋出席第一届李国鼎奖颁奖典礼
+SIZE: 1080x1464
+
+FILE: File:Jensen huang stanford 2026-04-30 010.jpg
+LOCAL: commons-Jensen_huang_stanford_2026-04-30_010.jpg
+LICENSE: CC BY-SA 4.0
+USAGE: Creative Commons Attribution-Share Alike 4.0
+ARTIST: Anderseidesvik
+CREDIT: Own work
+DATE: 2026-04-30 (Commons DateTime 2026-07-17 14:11:06 为上传时间)
+DESC: Jensen Huang during a fireside chat in Stanford University CS 153, April 30, 2026.
+SIZE: 2375x3166
+
+FILE: File:Nvidia sign.jpg
+LOCAL: commons-Nvidia_sign.jpg
+LICENSE: CC BY 2.0
+USAGE: Creative Commons Attribution 2.0
+ARTIST: Will Buckner
+CREDIT: https://www.flickr.com/photos/willbuckner/50591924966/
+DATE: Commons DateTime 2023-06-04
+DESC: NVIDIA sign outside headquarters campus on Scott Boulevard, Santa Clara.
+SIZE: 3711x3020
+BYTES: 13444085
+NOTE: 体积偏大，建议压缩后再进成片；因超过仓库单包 25MB 预算，推库包未收入原图。
+
+FILE: File:Nvidia campus aerial.jpg
+LOCAL: commons-Nvidia_campus_aerial.jpg
+LICENSE: CC BY-SA 4.0
+USAGE: Creative Commons Attribution-Share Alike 4.0
+ARTIST: Dicklyon
+CREDIT: Own work
+DATE: 2017-10-10
+DESC: Aerial view of the then-new Nvidia headquarters campus in Santa Clara; Apple Park is visible in the distance.
+SIZE: 825x1025
+NOTE: 勿把远处其他园区说成英伟达。
+
+FILE: File:Jensen Huang (cropped).jpg
+NOTE: 采集日志有 DL_ERROR，本包未收录对应本地文件，无需补许可。CES 2025 全景已在 assets/_excluded/。
