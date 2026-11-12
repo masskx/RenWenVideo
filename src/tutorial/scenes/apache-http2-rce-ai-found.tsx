@@ -144,7 +144,15 @@ const Gate = make(({f, cue, dur}) => {
   const a = cue('a', 43), b = cue('b', 147);
   const br = eo(f, a + 4, 16);
   return <Desk f={f} dur={dur}>
-    <Cut f={f} at={0} style={{left: 64, top: 150}}><H size={66}>两条<span style={{color: RED}}>同时</span>满足才中招</H></Cut>
+    {(() => {
+      // heading → a big version readout while the playhead scans the ruler → heading again for condition 2
+      const t = clamp((f - a - 18) / Math.max(1, b - a - 26)), v = Math.round(V0 + t * (V1 - V0)), hit = v >= 55 && v <= 70;
+      if (f >= a + 18 && f < b - 4) return <div style={{position: 'absolute', left: 64, top: 130, display: 'flex', alignItems: 'baseline', gap: 26}}>
+        <span style={{fontFamily: plex, fontWeight: 600, fontSize: 120, color: hit ? RED : TXT, lineHeight: 1}}>{`2.4.${v}`}</span>
+        <span style={{fontFamily: font, fontWeight: 700, fontSize: 48, color: hit ? RED : DIM}}>{hit ? '在范围内' : v > 70 ? '已修复' : '不在范围'}</span>
+      </div>;
+      return <Cut f={f} at={0} style={{left: 64, top: 150}}><H size={66}>两条<span style={{color: RED}}>同时</span>满足才中招</H></Cut>;
+    })()}
     {/* condition 1: the version ruler */}
     <Cut f={f} at={a} style={{left: 0, top: 290, width: 1080, height: 230}}>
       <div style={{position: 'absolute', left: 64, top: 0}}><Tag text="条件 1 · 版本（官方公告）" /></div>

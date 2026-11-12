@@ -60,7 +60,7 @@
   "mode": "window",
   "x": 64,
   "y": 880,
-  "size": 200,
+  "size": 150,
   "colors": {
    "panel": "#1A1E17",
    "accent": "#76B900",
@@ -81,7 +81,9 @@
       "pose": "nod",
       "expr": "serious"
      }
-    ]
+    ],
+    "x": 64,
+    "y": 1030
    },
    "seats": {
     "expr": "think",
@@ -96,7 +98,9 @@
       "pose": "nod",
       "expr": "calm"
      }
-    ]
+    ],
+    "x": 64,
+    "y": 1035
    },
    "end": {
     "expr": "serious",
@@ -107,7 +111,9 @@
       "pose": "nod",
       "expr": "calm"
      }
-    ]
+    ],
+    "x": 64,
+    "y": 900
    }
   }
  },

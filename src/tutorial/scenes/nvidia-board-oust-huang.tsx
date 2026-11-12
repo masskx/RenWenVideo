@@ -62,11 +62,12 @@ const Hook = make(({f, cue, dur}) => {
     <div style={{position: 'absolute', left: 64, top: 290 + (1 - eo(f, 0, 8)) * 40, width: 952, opacity: eo(f, 0, 8), background: '#FFFFFF', padding: '14px 0 10px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)'}}>
       <Img src={IMG('wsj.png')} style={{width: 952, display: 'block'}} />
     </div>
-    {f >= a && <div style={{position: 'absolute', left: 64, top: 560 + (1 - eo(f, a, a + 8)) * 120, width: 952, opacity: eo(f, a, a + 6), boxShadow: '0 30px 60px rgba(0,0,0,0.6)'}}>
+    {f >= a && <div style={{position: 'absolute', left: 64, top: 510 + (1 - eo(f, a, a + 8)) * 120, width: 952, opacity: eo(f, a, a + 6), boxShadow: '0 30px 60px rgba(0,0,0,0.6)'}}>
       <Img src={IMG('gf.png')} style={{width: 952, display: 'block'}} />
       <Brackets k={{...k, accent: RED}} f={f} at={a + 10} x={410} y={50} w={240} h={76} s={34} />
       <div style={{position: 'absolute', left: 0, top: 476, background: RED, color: '#fff', fontFamily: plex, fontSize: 28, padding: '6px 14px', opacity: eo(f, a + 14, a + 20)}}>美东 11-11 19:59 盘后报价 · Google Finance</div>
     </div>}
+    {f >= a + 16 && <div style={{position: 'absolute', left: 520, top: 1046, fontFamily: cond, fontWeight: 800, fontSize: 116, color: RED, lineHeight: 1, transformOrigin: '0 50%', transform: `scale(${slam(f, a + 16) ?? 1})`}}>−8.61%</div>}
   </Frame>;
 }, (cue) => [{at: 0, kind: 'whoosh-short', gain: 0.06}, {at: cue('a', 98), kind: 'fs-paper-slide', gain: 0.08}, {at: cue('a', 98) + 10, kind: 'tick', gain: 0.1}], false);
 
@@ -111,24 +112,24 @@ const Seat: React.FC<{x: number; y: number; on: number; ceo?: boolean; f: number
 };
 const Seats = make(({f, cue, dur}) => {
   const a = cue('a', 65), b = cue('b', 93);
-  const pos = Array.from({length: 11}, (_, i) => i < 6 ? {x: 70 + i * 160, y: 360} : {x: 150 + (i - 6) * 160, y: 560});
+  const pos = Array.from({length: 11}, (_, i) => i < 6 ? {x: 70 + i * 160, y: 420} : {x: 150 + (i - 6) * 160, y: 610});
   const lit = (i: number): number => (i < 6 && f >= a + i * 4 ? 1 : 0);
   const n: number = Array.from({length: 6}, (_, i) => lit(i)).reduce((s: number, v) => s + v, 0);
   return <Frame f={f} strap={[S_RULE, {...S_MATH, at: 4}]} src={['董事名单 · NVIDIA 投资者关系页', 0]}>
     <Push f={f} dur={dur}>
-      <div style={{position: 'absolute', left: 64, top: 250, fontFamily: font, fontWeight: 900, fontSize: 56, color: k.ink}}>董事会 <span style={{fontFamily: cond, fontSize: 80}}>11</span> 人 · <span style={{color: k.dim}}>10 人独立</span></div>
+      <div style={{position: 'absolute', left: 64, top: 300, fontFamily: font, fontWeight: 900, fontSize: 56, color: k.ink}}>董事会 <span style={{fontFamily: cond, fontSize: 80}}>11</span> 人 · <span style={{color: k.dim}}>10 人独立</span></div>
       {pos.map((p, i) => <Seat key={i} x={p.x} y={p.y} on={lit(i)} f={f} at={6 + i * 3} ceo={i === 10} />)}
       {f >= 40 && <div style={{position: 'absolute', left: pos[10].x - 30, top: pos[10].y + 160, width: 190, textAlign: 'center', fontFamily: font, fontWeight: 900, fontSize: 32, color: k.ink}}>黄仁勋</div>}
-      <div style={{position: 'absolute', left: 64, top: 820, display: 'flex', alignItems: 'baseline', gap: 24, opacity: f >= a ? 1 : 0}}>
+      <div style={{position: 'absolute', left: 64, top: 850, display: 'flex', alignItems: 'baseline', gap: 24, opacity: f >= a ? 1 : 0}}>
         <span style={{fontFamily: cond, fontWeight: 800, fontSize: 210, color: GREEN, lineHeight: 1, transform: `scale(${n === 6 ? slam(f, a + 20) ?? 1 : 1})`, display: 'inline-block'}}>{n}</span>
         <span style={{fontFamily: cond, fontWeight: 800, fontSize: 90, color: k.dim}}>/ 11</span>
         <span style={{fontFamily: font, fontWeight: 900, fontSize: 52, color: k.ink}}>{n === 6 ? '> 半数' : ''}</span>
       </div>
-      <div style={{position: 'absolute', left: 64, top: 1050, fontFamily: plex, fontSize: 26, color: k.dim, opacity: f >= a + 20 ? 1 : 0}}>任意 6 人 · 按章程推算，不代表任何人的投票</div>
-      {f >= b && <div style={{position: 'absolute', left: 560, top: 820, width: 460, background: k.panel, borderLeft: `8px solid ${k.ink}`, padding: '18px 24px', opacity: eo(f, b, b + 6)}}>
+      <div style={{position: 'absolute', left: 64, top: 800, fontFamily: plex, fontSize: 26, color: k.dim, opacity: f >= a + 20 ? 1 : 0}}>任意 6 人 · 按章程推算，不代表任何人的投票</div>
+      {f >= b && <div style={{position: 'absolute', left: 540, top: 850, width: 476, background: k.panel, borderLeft: `8px solid ${k.ink}`, padding: '18px 24px', opacity: eo(f, b, b + 6)}}>
         <div style={{fontFamily: font, fontWeight: 900, fontSize: 44, color: k.ink}}>持股 3.58%</div>
         <div style={{fontFamily: plex, fontSize: 24, color: k.dim, marginTop: 6}}>代理声明 · 截至 2026-03-23</div>
-        <div style={{fontFamily: font, fontWeight: 700, fontSize: 32, color: k.ink, marginTop: 10}}>免高管由董事投票，他是 1 席</div>
+        <div style={{fontFamily: font, fontWeight: 700, fontSize: 30, color: k.ink, marginTop: 10, whiteSpace: 'nowrap'}}>免高管由董事投票，他是 1 席</div>
       </div>}
     </Push>
   </Frame>;
