@@ -1,0 +1,220 @@
+{
+ "id": "apache-http2-rce-ai-found",
+ "title": "Apache HTTP/2 远程代码执行漏洞",
+ "subtitle": "AI 扫描器最早报告 · 2.4.71 已修",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "fast": 1.22
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 250,
+ "series": "AI 新闻 · 安全",
+ "credit": "Apache 官方公告 · Wiz · 红帽",
+ "source": "inputs/apache-http2-rce-ai-found/materials.md",
+ "maxSeconds": 40,
+ "score": {
+  "mood": "tension",
+  "bpm": 100,
+  "climax": "gate",
+  "lifts": [
+   "clock",
+   "known"
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "plate",
+  "captionTop": 1460,
+  "pk": {
+   "bg": "#0B0C0E",
+   "panel": "#141619",
+   "ink": "#ECEAE4",
+   "accent": "#FF4A2E",
+   "onAccent": "#0B0C0E",
+   "dim": "#8B9097",
+   "second": "#4A4F57"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "mode": "window",
+  "x": 64,
+  "y": 1235,
+  "size": 160,
+  "colors": {
+   "panel": "#2E3238",
+   "accent": "#FF4A2E",
+   "ink": "#ECEAE4",
+   "bg": "#141619"
+  },
+  "scenes": {
+   "hook": {
+    "expr": "serious",
+    "pose": "idle",
+    "look": [
+     0.8,
+     -0.6
+    ],
+    "beats": [
+     {
+      "at": 2.6,
+      "pose": "nod",
+      "expr": "surprise"
+     }
+    ]
+   },
+   "gate": {
+    "expr": "think",
+    "pose": "think",
+    "look": [
+     0.8,
+     -0.5
+    ],
+    "beats": [
+     {
+      "at": 2.0,
+      "pose": "nod",
+      "expr": "calm"
+     }
+    ]
+   },
+   "act": {
+    "expr": "calm",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 1.2,
+      "pose": "nod",
+      "expr": "serious"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "keywords": [],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "Apache 严重漏洞",
+   "AI扫描器最早报告"
+  ],
+  "support": "2.4.55–2.4.70 + 开了 HTTP/2 → 升到 2.4.71",
+  "tag": "AI 新闻 · 安全",
+  "anchor": "ahr.cover",
+  "colors": {
+   "bg": "#0B0C0E",
+   "text": "#ECEAE4",
+   "accent": "#FF4A2E",
+   "dim": "#8B9097"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 80,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "ahr.hook",
+   "step": 0,
+   "pace": "fast",
+   "narration": "Apache刚修了一个能远程执行代码的严重漏洞，{a}最早报告它的，{b}是Anthropic的AI扫描器。"
+  },
+  {
+   "id": "clock",
+   "visual": "ahr.clock",
+   "step": 0,
+   "pace": "fast",
+   "narration": "10月26日它报给Apache，{a}11月3日谷歌团队也报了，{b}11月11日发布修复版2.4.71。"
+  },
+  {
+   "id": "gate",
+   "visual": "ahr.gate",
+   "step": 0,
+   "pace": "fast",
+   "narration": "中招要同时满足两条：{a}版本在2.4.55到2.4.70，{b}而且开了HTTP/2，它默认是关的。"
+  },
+  {
+   "id": "wiz",
+   "visual": "ahr.wiz",
+   "step": 0,
+   "pace": "fast",
+   "narration": "安全公司Wiz自称，{a}64%的云环境里有受影响的资源，{b}但没算配置。"
+  },
+  {
+   "id": "known",
+   "visual": "ahr.known",
+   "step": 0,
+   "pace": "fast",
+   "narration": "官方和Wiz发布时都没报告在野攻击；{a}红帽说有研究演示过可靠利用，{b}但没公开。"
+  },
+  {
+   "id": "act",
+   "visual": "ahr.act",
+   "step": 0,
+   "pace": "fast",
+   "narration": "所以现在：{a}httpd -v 查版本，{b}升到2.4.71；暂时升不了，先关掉HTTP/2。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/apache-http2-rce-ai-found/score.mp3",
+ "musicVolume": 0.13,
+ "musicDuckDb": 10
+}

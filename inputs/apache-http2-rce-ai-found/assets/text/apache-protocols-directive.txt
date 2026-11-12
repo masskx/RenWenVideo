@@ -1,0 +1,41 @@
+Source: https://httpd.apache.org/docs/2.4/mod/core.html#protocols
+Apache HTTP Server Version 2.4, Core Features, Protocols Directive.
+
+Description: Protocols available for a server/virtual host
+Syntax: Protocols protocol ...
+Default: Protocols http/1.1
+Context: server config, virtual host
+Status: Core
+Module: core
+Compatibility: Only available from Apache 2.4.17 and later.
+
+This directive specifies the list of protocols supported for a server/virtual host. The list determines the allowed protocols a client may negotiate for this server/host.
+
+You need to set protocols if you want to extend the available protocols for a server/host. By default, only the http/1.1 protocol (which includes the compatibility with 1.0 and 0.9 clients) is allowed.
+
+For example, if you want to support HTTP/2 for a server with TLS, specify:
+
+Protocols h2 http/1.1
+
+Valid protocols are http/1.1 for http and https connections, h2 on https connections and h2c for http connections. Modules may enable more protocols.
+
+It is safe to specify protocols that are unavailable/disabled. Such protocol names will simply be ignored.
+
+Note
+The http/1.1 protocol is always available and cannot be excluded by omitting it from this directive. This directive controls which additional protocols are available for negotiation, and, when used with ProtocolsHonorOrder, their preference order.
+
+Protocols specified in base servers are inherited for virtual hosts only if the virtual host has no own Protocols directive. Or, the other way around, Protocols directives in virtual hosts replace any such directive in the base server.
+
+Also from https://httpd.apache.org/docs/2.4/mod/mod_http2.html :
+"You must enable HTTP/2 via Protocols in order to use the functionality described in this document."
+Example (TLS VirtualHost): Protocols h2 http/1.1
+Example (server context): Protocols h2 h2c http/1.1
+
+Version check (https://httpd.apache.org/docs/2.4/programs/httpd.html):
+-v  Print the version of httpd, and then exit.
+-V  Print the version and build parameters of httpd, and then exit.
+-M  Dump a list of loaded Static and Shared Modules.
+
+apachectl (https://httpd.apache.org/docs/2.4/programs/apachectl.html):
+"When acting in pass-through mode, apachectl can take all the arguments available for the httpd binary."
+Therefore apachectl -v is an officially supported way to print the version.

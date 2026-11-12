@@ -9,7 +9,7 @@ import React from 'react';
 import {Img, OffthreadVideo, staticFile, useCurrentFrame} from 'remotion';
 import {clamp, ease} from '../fx';
 import {font} from './theme';
-import {cond, hand, plex} from './fonts';
+import {cond, hand, plex, serif} from './fonts';
 import {TimedCaption} from './types';
 
 export type Pk = {bg: string; panel: string; ink: string; accent: string; onAccent: string; dim: string; second?: string};
@@ -511,5 +511,60 @@ export const CaptionLog: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Rec
         </div>;
       });
     })()}
+  </div>;
+};
+
+/**
+ * The figure caption (lemo dataviz §4, in 9:16): the subtitle is the chart's caption — a hairline rule, a small mono
+ * kicker, then the line in a text serif (思源宋体) in ink on a paper band, left-aligned with the chart; ≥ 60 px for phones.
+ */
+export const CaptionFigure: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number; kicker?: string}> = ({captions, k, breaks = {}, y = 1400, kicker = 'FIG.'}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const i = captions.findIndex((x) => ms >= x.startMs && ms < x.endMs);
+  return <div style={{position: 'absolute', left: L, right: L, top: y}}>
+    <div style={{height: 2, background: k.ink, opacity: 0.55}} />
+    {i >= 0 && (() => {
+      const c = captions[i];
+      const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 13);
+      const sz = Math.max(60, Math.min(64, Math.floor(860 / Math.max(...lines.map(units)))));
+      const p = ease.outCubic(clamp((ms - c.startMs) / 140));
+      return <div style={{opacity: p, transform: `translateY(${(1 - p) * 8}px)`, background: `${k.bg}E6`, padding: '6px 0 10px'}}>
+        <div style={{fontFamily: plex, fontSize: 26, color: k.dim, letterSpacing: 2, margin: '4px 0 6px'}}>{kicker} {String(i + 1).padStart(2, '0')}</div>
+        {lines.map((line, j) => <div key={j} style={{fontFamily: serif, fontWeight: 700, fontSize: sz, lineHeight: 1.22, color: k.ink, whiteSpace: 'nowrap'}}>{line}</div>)}
+      </div>;
+    })()}
+  </div>;
+};
+/** The archive-lighttable caption: a dark plate at the bottom centre with a 3 px signal edge on top (lemo/archive-lighttable §4). */
+export const CaptionPlate: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number}> = ({captions, k, breaks = {}, y = 1420}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  if (!c) return null;
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 13);
+  const sz = Math.max(58, Math.min(64, Math.floor(820 / Math.max(...lines.map(units)))));
+  const p = ease.outCubic(clamp((ms - c.startMs) / 140));
+  return <div style={{position: 'absolute', left: 0, right: 0, top: y, display: 'flex', justifyContent: 'center'}}>
+    <div style={{background: 'rgba(14,15,17,0.78)', borderTop: `3px solid ${k.accent}`, padding: '14px 34px 18px', opacity: p, transform: `translateY(${(1 - p) * 8}px)`, maxWidth: 900}}>
+      {lines.map((line, j) => <div key={j} style={{fontFamily: font, fontWeight: 800, fontSize: sz, lineHeight: 1.22, color: '#F4F6F8', whiteSpace: 'nowrap', textAlign: 'center'}}>{line}</div>)}
+    </div>
+  </div>;
+};
+/** The briefing-board caption: a frosted acrylic strip at the bottom centre with a blue marker tick (lemo/briefing-board §4). */
+export const CaptionAcrylic: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number}> = ({captions, k, breaks = {}, y = 1450}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  if (!c) return null;
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 13);
+  const sz = Math.max(58, Math.min(64, Math.floor(820 / Math.max(...lines.map(units)))));
+  const p = ease.outCubic(clamp((ms - c.startMs) / 140));
+  return <div style={{position: 'absolute', left: 0, right: 0, top: y, display: 'flex', justifyContent: 'center'}}>
+    <div style={{position: 'relative', background: 'rgba(250,250,248,0.84)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.9)', borderRadius: 10,
+      boxShadow: '0 10px 26px rgba(30,32,36,0.22)', padding: '14px 36px 18px 56px', opacity: p, transform: `translateY(${(1 - p) * 8}px)`, maxWidth: 940}}>
+      <div style={{position: 'absolute', left: 24, top: 22, width: 10, height: sz * 0.9, borderRadius: 5, background: k.second ?? k.accent}} />
+      {lines.map((line, j) => <div key={j} style={{fontFamily: font, fontWeight: 800, fontSize: sz, lineHeight: 1.22, color: k.ink, whiteSpace: 'nowrap'}}>{line}</div>)}
+    </div>
   </div>;
 };

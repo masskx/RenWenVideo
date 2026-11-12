@@ -1,0 +1,12 @@
+来源：https://www.pewresearch.org/short-reads/2026/09/22/americans-views-of-data-centers-have-turned-more-negative/
+发布：September 22, 2026；调查：July 20–Aug. 9, 2026；样本：10,548 U.S. adults
+作者：Brian Kennedy
+
+关键数字（原文）：
+- 60% of Americans say they would be not too or at all comfortable with a new data center operating in their area.
+- Somewhat comfortable 19%; extremely or very comfortable 7%.
+- Mostly bad for the environment: 54% (Jan 39%)
+- Mostly bad for home energy costs: 50% (Jan 38%)
+- Mostly bad for people’s quality of life nearby: 49% (Jan 30%)
+- Local jobs mostly bad 24% / mostly good 22%；local tax revenue mostly bad 21% / mostly good 22%（就业与税收看法更分裂）
+- Just 4% think data centers have a mostly good impact in each of environment / energy costs / quality of life nearby.

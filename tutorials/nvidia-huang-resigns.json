@@ -1,0 +1,243 @@
+{
+ "id": "nvidia-huang-resigns",
+ "title": "英伟达董事会宣布：黄仁勋辞去 CEO",
+ "subtitle": "临时 CEO 克雷斯 · 首位主席琼斯",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "fast": 1.22
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 250,
+ "series": "AI 新闻 · 公司",
+ "credit": "NVIDIA 官方声明 · SEC 8-K · BBC · 联合早报 · Google Finance",
+ "source": "inputs/nvidia-huang-resigns/materials.md",
+ "maxSeconds": 40,
+ "score": {
+  "mood": "tension",
+  "bpm": 120,
+  "climax": "turn",
+  "lifts": [
+   "price",
+   "chair"
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "card",
+  "captionTop": 1180,
+  "pk": {
+   "bg": "#0F1110",
+   "panel": "#171A17",
+   "ink": "#F7F5EF",
+   "accent": "#76B900",
+   "onAccent": "#0F1110",
+   "dim": "#9A9E95",
+   "second": "#FF4A3D"
+  },
+  "breaks": {},
+  "grain": 2
+ },
+ "host": {
+  "mode": "window",
+  "x": 866,
+  "y": 150,
+  "size": 150,
+  "colors": {
+   "panel": "#171A17",
+   "accent": "#76B900",
+   "ink": "#F7F5EF",
+   "bg": "#0F1110"
+  },
+  "scenes": {
+   "hook": {
+    "expr": "surprise",
+    "pose": "idle",
+    "look": [
+     -0.6,
+     0.3
+    ],
+    "beats": [
+     {
+      "at": 2.4,
+      "pose": "nod",
+      "expr": "serious"
+     }
+    ]
+   },
+   "turn": {
+    "expr": "think",
+    "pose": "think",
+    "look": [
+     -0.6,
+     0.3
+    ],
+    "beats": [
+     {
+      "at": 2.2,
+      "pose": "nod",
+      "expr": "serious"
+     }
+    ]
+   },
+   "end": {
+    "expr": "calm",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 1.0,
+      "pose": "nod",
+      "expr": "calm"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "keywords": [
+  "即刻生效",
+  "跌超13%",
+  "8-K",
+  "11月11日",
+  "临时接任",
+  "继续当CFO",
+  "内外部",
+  "第一次设主席",
+  "1993年",
+  "没给",
+  "据外媒报道",
+  "11%",
+  "约6%",
+  "11月17日"
+ ],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "英伟达董事会宣布",
+   "黄仁勋辞去CEO"
+  ],
+  "support": "临时CEO：克雷斯（兼CFO）· 首位董事会主席：琼斯",
+  "tag": "AI 新闻 · 公司",
+  "anchor": "nhr.cover",
+  "colors": {
+   "bg": "#0F1110",
+   "text": "#F7F5EF",
+   "accent": "#76B900",
+   "dim": "#9A9E95"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 80,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "nhr.hook",
+   "step": 0,
+   "pace": "fast",
+   "narration": "英伟达董事会宣布，黄仁勋辞去CEO，{a}即刻生效；{b}美股开盘跌超13%。"
+  },
+  {
+   "id": "turn",
+   "visual": "nhr.turn",
+   "step": 0,
+   "pace": "fast",
+   "narration": "昨天还是报道说准备罢免，{a}今天的8-K写的是：{b}董事会11月11日接受了他的辞职。"
+  },
+  {
+   "id": "kress",
+   "visual": "nhr.kress",
+   "step": 0,
+   "pace": "fast",
+   "narration": "CFO克雷斯临时接任CEO，{a}同时继续当CFO，{b}正式人选内外部一起找。"
+  },
+  {
+   "id": "chair",
+   "visual": "nhr.chair",
+   "step": 0,
+   "pace": "fast",
+   "narration": "董事会第一次设主席：{a}1993年就进董事会的哈维·琼斯。"
+  },
+  {
+   "id": "reason",
+   "visual": "nhr.reason",
+   "step": 0,
+   "pace": "fast",
+   "narration": "官方没给辞职原因，{a}据外媒报道，与他的私人事务有关。"
+  },
+  {
+   "id": "price",
+   "visual": "nhr.price",
+   "step": 0,
+   "pace": "fast",
+   "narration": "股价：盘前跌11%，{a}开盘跌超13%，{b}美东10点17分，收窄到跌约6%。"
+  },
+  {
+   "id": "end",
+   "visual": "nhr.end",
+   "step": 0,
+   "pace": "fast",
+   "narration": "接下来看11月17日：{a}财报照常发布。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/nvidia-huang-resigns/score.mp3",
+ "musicVolume": 0.114,
+ "musicDuckDb": 10
+}

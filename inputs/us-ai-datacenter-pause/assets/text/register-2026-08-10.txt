@@ -1,0 +1,9 @@
+来源：https://www.theregister.com/on-prem/2026/08/10/as-datacenters-expand-so-does-public-opposition-to-them/5285449
+日期：2026-08-10（The Register）
+
+摘录：
+More than 200 datacenter bans and moratoriums took effect in the US over the past 30 days, bringing the number of active restrictions nationwide to more than 550, according to The Information.
+
+New York became the first state to enact a moratorium last month ... its ban specifically targets large hyperscale facilities capable of consuming at least 50 MW.
+
+More recently, Texas governor Greg Abbott paused approvals for datacenter projects seeking access to the Electric Reliability Council of Texas (ERCOT) grid until state regulators have audited their connection requests.

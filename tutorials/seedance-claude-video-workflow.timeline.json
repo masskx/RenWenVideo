@@ -1,0 +1,209 @@
+{
+  "id": "seedance-claude-video-workflow",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1079,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/seedance-claude-video-workflow/01-hook.mp3",
+      "audioMs": 4101,
+      "startFrame": 0,
+      "durationFrames": 134,
+      "cues": {
+        "a": 2180
+      },
+      "captions": [
+        {
+          "text": "AI视频里",
+          "startMs": 138,
+          "endMs": 862
+        },
+        {
+          "text": "杯子会自己慢慢变大",
+          "startMs": 862,
+          "endMs": 2180
+        },
+        {
+          "text": "问题常常出在生成之前",
+          "startMs": 2180,
+          "endMs": 4336
+        }
+      ]
+    },
+    {
+      "id": "roles",
+      "audioSrc": "audio/tutorials/seedance-claude-video-workflow/02-roles.mp3",
+      "audioMs": 6008,
+      "startFrame": 134,
+      "durationFrames": 191,
+      "cues": {
+        "a": 1624,
+        "b": 3760
+      },
+      "captions": [
+        {
+          "text": "原作者让三个AI分工",
+          "startMs": 138,
+          "endMs": 1624
+        },
+        {
+          "text": "Claude当导演",
+          "startMs": 1624,
+          "endMs": 2478
+        },
+        {
+          "text": "Codex画首尾帧",
+          "startMs": 2478,
+          "endMs": 3760
+        },
+        {
+          "text": "Seedance把两张图变成视频",
+          "startMs": 3760,
+          "endMs": 6219
+        }
+      ]
+    },
+    {
+      "id": "mech",
+      "audioSrc": "audio/tutorials/seedance-claude-video-workflow/03-mech.mp3",
+      "audioMs": 4493,
+      "startFrame": 325,
+      "durationFrames": 146,
+      "cues": {
+        "a": 1471,
+        "b": 2979
+      },
+      "captions": [
+        {
+          "text": "中间的画面由模型补",
+          "startMs": 138,
+          "endMs": 1471
+        },
+        {
+          "text": "首尾帧里不一样的东西",
+          "startMs": 1471,
+          "endMs": 2979
+        },
+        {
+          "text": "视频里就会慢慢变",
+          "startMs": 2979,
+          "endMs": 4787
+        }
+      ]
+    },
+    {
+      "id": "overlay",
+      "audioSrc": "audio/tutorials/seedance-claude-video-workflow/04-overlay.mp3",
+      "audioMs": 5721,
+      "startFrame": 471,
+      "durationFrames": 183,
+      "cues": {
+        "a": 2157,
+        "b": 4147
+      },
+      "captions": [
+        {
+          "text": "所以提交前把两张叠起来",
+          "startMs": 138,
+          "endMs": 2157
+        },
+        {
+          "text": "杯子大小、墙的颜色",
+          "startMs": 2157,
+          "endMs": 3688
+        },
+        {
+          "text": "左右，不该变的必须一样",
+          "startMs": 3688,
+          "endMs": 6008
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "audioSrc": "audio/tutorials/seedance-claude-video-workflow/05-review.mp3",
+      "audioMs": 4441,
+      "startFrame": 654,
+      "durationFrames": 144,
+      "cues": {
+        "a": 1471,
+        "b": 2571
+      },
+      "captions": [
+        {
+          "text": "导演这边开四个agent",
+          "startMs": 138,
+          "endMs": 1471
+        },
+        {
+          "text": "审核只挑错",
+          "startMs": 1471,
+          "endMs": 2571
+        },
+        {
+          "text": "写下“通过”才准提交",
+          "startMs": 2571,
+          "endMs": 4652
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "audioSrc": "audio/tutorials/seedance-claude-video-workflow/06-check.mp3",
+      "audioMs": 5799,
+      "startFrame": 798,
+      "durationFrames": 185,
+      "cues": {
+        "a": 2343,
+        "b": 4171
+      },
+      "captions": [
+        {
+          "text": "生成后，每镜取多张全分辨率帧",
+          "startMs": 138,
+          "endMs": 2343
+        },
+        {
+          "text": "切点前后各取3帧",
+          "startMs": 2343,
+          "endMs": 4171
+        },
+        {
+          "text": "动态和声音",
+          "startMs": 4171,
+          "endMs": 4969
+        },
+        {
+          "text": "交给人",
+          "startMs": 4969,
+          "endMs": 6070
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/seedance-claude-video-workflow/07-end.mp3",
+      "audioMs": 2821,
+      "startFrame": 983,
+      "durationFrames": 96,
+      "cues": {
+        "a": 900
+      },
+      "captions": [
+        {
+          "text": "下次抽卡前",
+          "startMs": 138,
+          "endMs": 900
+        },
+        {
+          "text": "先把首尾帧叠起来看一遍",
+          "startMs": 900,
+          "endMs": 3102
+        }
+      ]
+    }
+  ]
+}

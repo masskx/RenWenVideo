@@ -1,0 +1,8 @@
+来源：https://www.tpr.org/news/2026-09-21/gov-abbott-orders-tceq-to-pause-environmental-permits-for-data-centers-until-audit-is-complete
+媒体：Texas Public Radio 2026-09-21
+
+要点：
+- Abbott 下令 TCEQ 暂停新数据中心相关许可，直到监管机构完成审计。
+- 早先 8 月：ERCOT 暂停 ≥75 MW 数据中心/加密矿场并网通电审批；更小项目、自建电源不并网的不在该暂停内。
+- 9-21 扩大到 TCEQ 空气与水相关许可/授权。
+- TCEQ 发言人 Ryan Vise：已暂停与直接支撑数据中心的基建相关的空气与水许可和授权，等待 ERCOT 完成电网与社区影响审计。

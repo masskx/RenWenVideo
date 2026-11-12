@@ -1,0 +1,234 @@
+{
+ "id": "us-ai-datacenter-pause",
+ "title": "美国三个州给AI数据中心踩刹车",
+ "subtitle": "纽约 · 得州 · 俄勒冈",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 250,
+ "series": "AI 新闻 · 算力",
+ "credit": "NY EO 62 · 得州州长 / TCEQ · 俄勒冈州长 · EIA · Pew",
+ "source": "inputs/us-ai-datacenter-pause/materials.md",
+ "maxSeconds": 55,
+ "score": {
+  "mood": "news",
+  "bpm": 100,
+  "climax": "mw",
+  "lifts": [
+   "tx",
+   "pew"
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "figure",
+  "captionTop": 1400,
+  "pk": {
+   "bg": "#F3EBDD",
+   "panel": "#FBF6EC",
+   "ink": "#2B2420",
+   "accent": "#C8372D",
+   "onAccent": "#FBF6EC",
+   "dim": "#8C8073",
+   "second": "#0F6BA0"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "mode": "window",
+  "x": 64,
+  "y": 1225,
+  "size": 160,
+  "colors": {
+   "panel": "#E9DFCC",
+   "accent": "#2B2420",
+   "ink": "#2B2420",
+   "bg": "#FBF6EC"
+  },
+  "scenes": {
+   "hook": {
+    "expr": "serious",
+    "pose": "idle",
+    "look": [
+     0.8,
+     -0.6
+    ],
+    "beats": [
+     {
+      "at": 3.0,
+      "pose": "nod",
+      "expr": "think"
+     }
+    ]
+   },
+   "mw": {
+    "expr": "surprise",
+    "pose": "idle",
+    "look": [
+     0.8,
+     -0.5
+    ],
+    "beats": [
+     {
+      "at": 2.0,
+      "pose": "nod",
+      "expr": "calm"
+     }
+    ]
+   },
+   "end": {
+    "expr": "think",
+    "pose": "think",
+    "beats": [
+     {
+      "at": 1.6,
+      "pose": "nod",
+      "expr": "calm"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "keywords": [],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "美国三个州",
+   "给AI数据中心踩刹车"
+  ],
+  "support": "纽约卡许可 · 得州卡电网 · 俄勒冈卡土地",
+  "tag": "AI 新闻 · 算力",
+  "anchor": "dcp.cover",
+  "colors": {
+   "bg": "#F3EBDD",
+   "text": "#2B2420",
+   "accent": "#C8372D",
+   "dim": "#8C8073"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 80,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "dcp.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "据媒体统计，美国已有500多个地方在限制数据中心，{a}现在三个州也踩了刹车，{b}但踩的位置不一样。"
+  },
+  {
+   "id": "eia",
+   "visual": "dcp.eia",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "先看电：美国用电需求的年增速，{a}从0.1%跳到了1.7%，{b}数据中心是主因之一。"
+  },
+  {
+   "id": "ny",
+   "visual": "dcp.ny",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "纽约卡许可：{a}50兆瓦以上的新项目，{b}州环保部门暂停酌情许可，直到评估做完。"
+  },
+  {
+   "id": "mw",
+   "visual": "dcp.mw",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "50兆瓦有多大？{a}按美国家庭平均用电算，{b}大约4万户。"
+  },
+  {
+   "id": "tx",
+   "visual": "dcp.tx",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "得州先卡电网：{a}75兆瓦以上的并网申请暂停审计，{b}9月又停了空气和水的环境许可。"
+  },
+  {
+   "id": "or",
+   "visual": "dcp.or",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "俄勒冈只卡州有土地：{a}相关交易停到2027年7月，{b}州长说她无权全州禁建。"
+  },
+  {
+   "id": "pew",
+   "visual": "dcp.pew",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "居民也变了：{a}觉得对电费不利的，从38%升到50%，{b}六成对家门口新建感到不舒服。"
+  },
+  {
+   "id": "end",
+   "visual": "dcp.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "AI缺的不只是芯片，{a}还有电网、水，{b}和邻居的同意。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/us-ai-datacenter-pause/score.mp3",
+ "musicVolume": 0.133,
+ "musicDuckDb": 10
+}

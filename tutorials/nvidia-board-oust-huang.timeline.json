@@ -1,0 +1,219 @@
+{
+  "id": "nvidia-board-oust-huang",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1030,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/nvidia-board-oust-huang/01-hook.mp3",
+      "audioMs": 6139,
+      "startFrame": 0,
+      "durationFrames": 195,
+      "cues": {
+        "a": 3428
+      },
+      "captions": [
+        {
+          "text": "据《华尔街日报》独家报道",
+          "startMs": 135,
+          "endMs": 1534
+        },
+        {
+          "text": "英伟达董事会准备罢免黄仁勋",
+          "startMs": 1534,
+          "endMs": 3428
+        },
+        {
+          "text": "消息一出",
+          "startMs": 3428,
+          "endMs": 4183
+        },
+        {
+          "text": "盘后报价跌了8.61%",
+          "startMs": 4183,
+          "endMs": 6384
+        }
+      ]
+    },
+    {
+      "id": "status",
+      "audioSrc": "audio/tutorials/nvidia-board-oust-huang/02-status.mp3",
+      "audioMs": 2299,
+      "startFrame": 195,
+      "durationFrames": 80,
+      "cues": {
+        "a": 939
+      },
+      "captions": [
+        {
+          "text": "这还只是报道",
+          "startMs": 135,
+          "endMs": 939
+        },
+        {
+          "text": "公司还没宣布任何决定",
+          "startMs": 939,
+          "endMs": 2583
+        }
+      ]
+    },
+    {
+      "id": "rule",
+      "audioSrc": "audio/tutorials/nvidia-board-oust-huang/03-rule.mp3",
+      "audioMs": 4180,
+      "startFrame": 275,
+      "durationFrames": 136,
+      "cues": {
+        "a": 939,
+        "b": 2561
+      },
+      "captions": [
+        {
+          "text": "按英伟达章程",
+          "startMs": 135,
+          "endMs": 939
+        },
+        {
+          "text": "在任董事过半数同意",
+          "startMs": 939,
+          "endMs": 2561
+        },
+        {
+          "text": "有没有理由都能免掉高管",
+          "startMs": 2561,
+          "endMs": 4396
+        }
+      ]
+    },
+    {
+      "id": "seats",
+      "audioSrc": "audio/tutorials/nvidia-board-oust-huang/04-seats.mp3",
+      "audioMs": 5198,
+      "startFrame": 411,
+      "durationFrames": 167,
+      "cues": {
+        "a": 1618,
+        "b": 2382
+      },
+      "captions": [
+        {
+          "text": "董事会11人",
+          "startMs": 135,
+          "endMs": 904
+        },
+        {
+          "text": "10人独立，6票就够",
+          "startMs": 904,
+          "endMs": 2382
+        },
+        {
+          "text": "黄仁勋持股3.58%",
+          "startMs": 2382,
+          "endMs": 3904
+        },
+        {
+          "text": "在这里也只占一票",
+          "startMs": 3904,
+          "endMs": 5474
+        }
+      ]
+    },
+    {
+      "id": "who",
+      "audioSrc": "audio/tutorials/nvidia-board-oust-huang/05-who.mp3",
+      "audioMs": 5747,
+      "startFrame": 578,
+      "durationFrames": 183,
+      "cues": {
+        "a": 2146,
+        "b": 4424
+      },
+      "captions": [
+        {
+          "text": "据Semafor报道",
+          "startMs": 135,
+          "endMs": 1079
+        },
+        {
+          "text": "部分董事倾向",
+          "startMs": 1079,
+          "endMs": 2146
+        },
+        {
+          "text": "如果罢免，由CFO克雷斯临时接任",
+          "startMs": 2146,
+          "endMs": 4424
+        },
+        {
+          "text": "全体董事还没决定",
+          "startMs": 4424,
+          "endMs": 6064
+        }
+      ]
+    },
+    {
+      "id": "risk",
+      "audioSrc": "audio/tutorials/nvidia-board-oust-huang/06-risk.mp3",
+      "audioMs": 4467,
+      "startFrame": 761,
+      "durationFrames": 145,
+      "cues": {
+        "a": 1009,
+        "b": 2400
+      },
+      "captions": [
+        {
+          "text": "年报自己写着",
+          "startMs": 135,
+          "endMs": 1009
+        },
+        {
+          "text": "高度依赖长期经营团队",
+          "startMs": 1009,
+          "endMs": 2400
+        },
+        {
+          "text": "继任规划做不好",
+          "startMs": 2400,
+          "endMs": 3401
+        },
+        {
+          "text": "会伤到长期发展",
+          "startMs": 3401,
+          "endMs": 4811
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/nvidia-board-oust-huang/07-end.mp3",
+      "audioMs": 3762,
+      "startFrame": 906,
+      "durationFrames": 124,
+      "cues": {
+        "a": 1114,
+        "b": 2151
+      },
+      "captions": [
+        {
+          "text": "接下来看两件事",
+          "startMs": 135,
+          "endMs": 1114
+        },
+        {
+          "text": "董事会的正式决定",
+          "startMs": 1114,
+          "endMs": 2151
+        },
+        {
+          "text": "和11月17日的财报会",
+          "startMs": 2151,
+          "endMs": 4069
+        }
+      ]
+    }
+  ]
+}

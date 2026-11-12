@@ -1,0 +1,227 @@
+{
+ "id": "seedance-claude-video-workflow",
+ "title": "AI拍片：先查首尾帧，再生成",
+ "subtitle": "Claude导演 · Codex画师 · Seedance动画师",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 250,
+ "series": "AI 工具 · 视频",
+ "credit": "据原作者长文（X）· 网友案例展示",
+ "source": "inputs/seedance-claude-video-workflow/materials.md",
+ "maxSeconds": 40,
+ "score": {
+  "mood": "news",
+  "bpm": 104,
+  "climax": "overlay",
+  "lifts": [
+   "roles",
+   "review"
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "acrylic",
+  "captionTop": 1450,
+  "pk": {
+   "bg": "#F2F3F0",
+   "panel": "#FAFAF8",
+   "ink": "#24262A",
+   "accent": "#D2342B",
+   "onAccent": "#FAFAF8",
+   "dim": "#7D8086",
+   "second": "#1F6FD0"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "mode": "window",
+  "x": 64,
+  "y": 1225,
+  "size": 160,
+  "colors": {
+   "panel": "#DCDDD8",
+   "accent": "#24262A",
+   "ink": "#24262A",
+   "bg": "#FAFAF8"
+  },
+  "scenes": {
+   "hook": {
+    "expr": "surprise",
+    "pose": "idle",
+    "look": [
+     0.8,
+     -0.6
+    ],
+    "beats": [
+     {
+      "at": 2.4,
+      "pose": "nod",
+      "expr": "think"
+     }
+    ]
+   },
+   "overlay": {
+    "expr": "think",
+    "pose": "think",
+    "look": [
+     0.8,
+     -0.5
+    ],
+    "beats": [
+     {
+      "at": 2.0,
+      "pose": "nod",
+      "expr": "calm"
+     }
+    ]
+   },
+   "end": {
+    "expr": "calm",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 1.0,
+      "pose": "nod",
+      "expr": "calm"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "keywords": [],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "AI拍片别急着抽卡",
+   "先叠首尾帧"
+  ],
+  "support": "Claude导演 · Codex画首尾帧 · Seedance出视频",
+  "tag": "AI 工具 · 视频",
+  "anchor": "swf.cover",
+  "colors": {
+   "bg": "#F2F3F0",
+   "text": "#24262A",
+   "accent": "#D2342B",
+   "dim": "#7D8086"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 80,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "swf.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "AI视频里，杯子会自己慢慢变大，{a}问题常常出在生成之前。"
+  },
+  {
+   "id": "roles",
+   "visual": "swf.roles",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "原作者让三个AI分工：{a}Claude当导演，Codex画首尾帧，{b}Seedance把两张图变成视频。"
+  },
+  {
+   "id": "mech",
+   "visual": "swf.mech",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "中间的画面由模型补，{a}首尾帧里不一样的东西，{b}视频里就会慢慢变。"
+  },
+  {
+   "id": "overlay",
+   "visual": "swf.overlay",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "所以提交前把两张叠起来：{a}杯子大小、墙的颜色、左右，{b}不该变的必须一样。"
+  },
+  {
+   "id": "review",
+   "visual": "swf.review",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "导演这边开四个agent，{a}审核只挑错，{b}写下“通过”才准提交。"
+  },
+  {
+   "id": "check",
+   "visual": "swf.check",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "生成后，每镜取多张全分辨率帧，{a}切点前后各取3帧；{b}动态和声音，交给人。"
+  },
+  {
+   "id": "end",
+   "visual": "swf.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "下次抽卡前，{a}先把首尾帧叠起来看一遍。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/seedance-claude-video-workflow/score.mp3",
+ "musicVolume": 0.128,
+ "musicDuckDb": 10
+}

@@ -1,0 +1,272 @@
+{
+ "id": "nrta-ai-duanju-regulate",
+ "title": "广电总局：扶持真人剧，规范AI剧",
+ "subtitle": "五份材料，一句句对出处",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "brisk": 1.12
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 250,
+ "series": "AI 新闻 · 监管",
+ "credit": "新华社 · 国家广播电视总局官网 · 澎湃新闻",
+ "source": "inputs/nrta-ai-duanju-regulate/materials.md",
+ "maxSeconds": 60,
+ "score": {
+  "mood": "warm",
+  "climax": "index",
+  "lifts": [
+   "nov5",
+   "nov6"
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "plate",
+  "captionTop": 1440,
+  "pk": {
+   "bg": "#E4EAEF",
+   "panel": "#F7F9FB",
+   "ink": "#15171A",
+   "accent": "#CB2026",
+   "onAccent": "#F7F9FB",
+   "dim": "#6B737C",
+   "second": "#024AC2"
+  },
+  "breaks": {
+   "今年以来已下架违规微短剧7.5万部": "今年以来已下架|违规微短剧7.5万部",
+   "凡播必审、全量人审都有出处": "凡播必审、全量人审|都有出处"
+  }
+ },
+ "host": {
+  "mode": "window",
+  "x": 64,
+  "y": 1215,
+  "size": 160,
+  "colors": {
+   "panel": "#D3DBE2",
+   "accent": "#15171A",
+   "ink": "#15171A",
+   "bg": "#F7F9FB"
+  },
+  "scenes": {
+   "hook": {
+    "expr": "serious",
+    "pose": "idle",
+    "look": [
+     0.8,
+     -0.6
+    ],
+    "beats": [
+     {
+      "at": 2.6,
+      "pose": "nod",
+      "expr": "think"
+     }
+    ]
+   },
+   "quote": {
+    "expr": "surprise",
+    "pose": "idle",
+    "look": [
+     0.8,
+     -0.6
+    ],
+    "beats": [
+     {
+      "at": 1.4,
+      "pose": "nod",
+      "expr": "calm"
+     }
+    ]
+   },
+   "index": {
+    "expr": "think",
+    "pose": "think",
+    "look": [
+     0.8,
+     -0.5
+    ],
+    "beats": [
+     {
+      "at": 2.2,
+      "pose": "nod",
+      "expr": "serious"
+     }
+    ]
+   },
+   "end": {
+    "expr": "calm",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 1.2,
+      "pose": "nod",
+      "expr": "calm"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "keywords": [],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "扶持真人剧",
+   "规范≠禁止AI剧"
+  ],
+  "support": "五份官方材料，一句句对出处",
+  "tag": "AI 新闻 · 监管",
+  "anchor": "nrta.cover",
+  "colors": {
+   "bg": "#E4EAEF",
+   "text": "#15171A",
+   "accent": "#CB2026",
+   "dim": "#6B737C"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 80,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "nrta.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "广电总局一句「扶持真人剧，规范AI剧」，{a}被不少人读成：{b}AI短剧要被禁了。"
+  },
+  {
+   "id": "quote",
+   "visual": "nrta.quote",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "原话后半句是：{a}规范AI剧，不是不发展，{b}而是要稳量提质。"
+  },
+  {
+   "id": "table",
+   "visual": "nrta.table",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "我把五份原文，{a}按日期摊开。"
+  },
+  {
+   "id": "sep",
+   "visual": "nrta.sep",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "九月四日的管理提示：{a}用户上传的剧，平台凡播必审，{b}还鼓励边播边审。"
+  },
+  {
+   "id": "sept",
+   "visual": "nrta.sept",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "九月底的会上就说过：{a}支持真人剧，引导AI剧规范发展，{b}十一月是重申。"
+  },
+  {
+   "id": "nov5",
+   "visual": "nrta.nov5",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "十一月五日的讲话，{a}要平台落实凡播必审、全量人审，{b}是讲话要求，不是新文件。"
+  },
+  {
+   "id": "nov6",
+   "visual": "nrta.nov6",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "第二天官网公布专项治理：{a}11月1日到12月底，{b}主攻低俗化、同质化。"
+  },
+  {
+   "id": "targets",
+   "visual": "nrta.targets",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "治盗脸偷声，{a}软色情擦边、儿童类不良，{b}还有换个片名反复播。"
+  },
+  {
+   "id": "number",
+   "visual": "nrta.number",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "今年以来已下架违规微短剧7.5万部，{a}但这是前期累计，{b}不是这一轮。"
+  },
+  {
+   "id": "index",
+   "visual": "nrta.index",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "五份拼起来看：{a}凡播必审、全量人审都有出处，{b}“禁止AI剧”，一份都没写。"
+  },
+  {
+   "id": "end",
+   "visual": "nrta.end",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "做AI短剧，现在就能做的一件事：{a}用真人的脸和声音，先拿授权。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/nrta-ai-duanju-regulate/score.mp3",
+ "musicVolume": 0.126,
+ "musicDuckDb": 10
+}

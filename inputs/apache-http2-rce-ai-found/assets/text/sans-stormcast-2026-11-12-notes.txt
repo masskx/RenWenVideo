@@ -1,0 +1,24 @@
+SANS Internet Storm Center Stormcast, Thursday 12 November 2026
+YouTube: https://www.youtube.com/watch?v=NWoM9JdTQ3I
+Uploader: SANS Internet Storm Center
+upload_date (yt-dlp): 20261112
+Source duration: 369.24 s (6:09)
+Source resolution: 1280x720, h264 + aac
+Downloaded (720p+aac merge) size: 26,031,449 bytes (<30MB)
+Downloaded to scratch then copied.
+
+Authorization: 公开可见，商用授权未知. No watermark was removed. No YouTube watermark was visible on the official-advisory-on-screen frames. Do not treat this as our footage. Do not 整条搬运 the 6-minute episode (it also covers other, unrelated advisories).
+
+Visual review (frames extracted locally):
+- 00:00–00:08: Internet Storm Center logo bumper, no face.
+- 00:10 onward talking-head presenter with a clearly visible face and burned-in English captions, until the Apache advisory slide.
+- 00:38–01:21: full-screen capture of the official Apache vulnerabilities_24.html entry for CVE-2026-119618 (credits, dates, 2.4.55 through 2.4.70, 2.4.71). Burned-in captions overlay the lower part of the official page. No presenter face in this window.
+- 01:22 onward: returns to talking-head; captions move on to other topics (a later frame around 01:30 mentions "89 different advisories").
+
+Usable clip for this episode:
+  assets/video/sans-stormcast-2026-11-12-apache-segment-0038-0121.mp4
+  00:38–01:21 of the source (43s, 2,412,034 bytes, 1280x720). No host face.
+  Captions visible in the clip are auto-style English overlays, not official Apache wording; do not quote them as the advisory text.
+  A still from 00:45 is saved as assets/img/sans-stormcast-frame-0045-official-advisory.jpg
+
+Full episode (faces + other CVEs) is only in assets/_excluded/sans-stormcast-2026-11-12-full-369s-has-faces.mp4, for review, 不可整条使用.
