@@ -153,6 +153,14 @@ const Gate = make(({f, cue, dur}) => {
         {Array.from({length: V1 - V0 + 1}, (_, i) => <line key={i} x1={vx(V0 + i)} y1={(V0 + i) % 5 === 0 ? 108 : 118} x2={vx(V0 + i)} y2={142} stroke={TICK} strokeWidth={2} />)}
         <rect x={vx(55) - 6} y={100} width={(vx(70) - vx(55) + 12) * br} height={60} fill={RED} opacity={0.25} />
         <line x1={vx(55)} y1={100} x2={vx(55) + (vx(70) - vx(55)) * br} y2={100} stroke={RED} strokeWidth={4} />
+        {(() => {
+          // a playhead walks the versions: inside 2.4.55–2.4.70 it reads red
+          const t = clamp((f - a - 18) / Math.max(1, b - a - 26)), v = Math.round(V0 + t * (V1 - V0)), hit = v >= 55 && v <= 70;
+          return t <= 0 || f >= b ? null : <g>
+            <line x1={vx(v)} y1={86} x2={vx(v)} y2={160} stroke={hit ? RED : TXT} strokeWidth={4} />
+            <text x={vx(v)} y={78} textAnchor="middle" fontFamily={plex} fontSize={34} fill={hit ? RED : TXT}>{`2.4.${v}`}</text>
+          </g>;
+        })()}
       </svg>
       {[[55, '2.4.55'], [70, '2.4.70']].map(([v, l]) => <div key={l} style={{position: 'absolute', left: vx(v as number) - 60, top: 172, fontFamily: plex, fontSize: 32, color: TXT, opacity: br}}>{l}</div>)}
       <div style={{position: 'absolute', left: vx(71) - 150, top: 52, fontFamily: plex, fontSize: 30, color: DIM, opacity: br, whiteSpace: 'nowrap'}}>2.4.71 已修 ↓</div>
