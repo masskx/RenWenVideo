@@ -1,0 +1,1205 @@
+TITLE: NVIDIA Corp (NVDA) Stock Price & News - Google Finance
+URL-FILE: google-finance-nvda.html
+
+NVIDIA Corp (NVDA) Stock Price & News - Google Finance
+Finance
+search_spark
+mic
+Voice Search
+settings
+Settings
+Theme
+Device default
+Dark theme
+Light theme
+feedback
+Send feedback
+Sign in
+Lists
+arrow_drop_down
+Select list
+Equity sectors
+playlist_add
+New list
+playlist_add
+New list
+expand_content
+Expand
+Portfolios
+add
+Create a portfolio
+keyboard_arrow_up
+Collapse
+add
+Create a portfolio
+Equity sectors
+keyboard_arrow_up
+Collapse
+arrow_upward
+Symbols
+arrow_upward
+Symbols
+Trend
+Change
+arrow_upward
+Price
+arrow_upward
+Change
+arrow_upward
+% Change
+arrow_upward
+Prev Close
+arrow_upward
+Open
+arrow_upward
+High
+arrow_upward
+Low
+arrow_upward
+Volume
+arrow_upward
+Mkt Cap
+SIXB
+Materials
+SIXB
+Materials
+SIXB
++0.31%
+arrow_upward
+—
+1,126.18
++0.31%
+arrow_upward
+1,126.18
++3.53
+arrow_upward
++0.31%
+arrow_upward
+1,122.65
+1,122.47
+1,128.18
+1,118.31
+—
+—
+SIXC
+Communications
+SIXC
+Communications
+SIXC
++0.82%
+arrow_upward
+—
+567.54
++0.82%
+arrow_upward
+567.54
++4.59
+arrow_upward
++0.82%
+arrow_upward
+562.95
+562.95
+569.36
+562.95
+—
+—
+SIXE
+Energy
+SIXE
+Energy
+SIXE
++1.86%
+arrow_upward
+—
+1,333.23
++1.86%
+arrow_upward
+1,333.23
++24.38
+arrow_upward
++1.86%
+arrow_upward
+1,308.85
+1,317.85
+1,333.51
+1,311.94
+—
+—
+SIXI
+Industrials
+SIXI
+Industrials
+SIXI
++1.32%
+arrow_upward
+—
+1,723.50
++1.32%
+arrow_upward
+1,723.50
++22.41
+arrow_upward
++1.32%
+arrow_upward
+1,701.09
+1,705.46
+1,727.91
+1,705.46
+—
+—
+SIXM
+Financials
+SIXM
+Financials
+SIXM
++0.59%
+arrow_upward
+—
+722.01
++0.59%
+arrow_upward
+722.01
++4.26
+arrow_upward
++0.59%
+arrow_upward
+717.75
+715.02
+722.24
+714.77
+—
+—
+SIXR
+Staples
+SIXR
+Staples
+SIXR
++0.44%
+arrow_upward
+—
+923.46
++0.44%
+arrow_upward
+923.46
++4.09
+arrow_upward
++0.44%
+arrow_upward
+919.37
+916.86
+923.53
+911.54
+—
+—
+SIXRE
+Real estate
+SIXRE
+Real estate
+SIXRE
+-0.02%
+arrow_downward
+—
+218.91
+-0.02%
+arrow_downward
+218.91
+-0.050
+arrow_downward
+-0.02%
+arrow_downward
+218.96
+218.96
+219.13
+217.79
+—
+—
+SIXT
+Technology
+SIXT
+Technology
+SIXT
++3.19%
+arrow_upward
+—
+3,510.98
++3.19%
+arrow_upward
+3,510.98
++108.70
+arrow_upward
++3.19%
+arrow_upward
+3,402.28
+3,493.61
+3,554.34
+3,475.28
+—
+—
+SIXU
+Utilities
+SIXU
+Utilities
+SIXU
++0.26%
+arrow_upward
+—
+886.94
++0.26%
+arrow_upward
+886.94
++2.33
+arrow_upward
++0.26%
+arrow_upward
+884.61
+883.81
+887.87
+881.58
+—
+—
+SIXV
+Health care
+SIXV
+Health care
+SIXV
++0.06%
+arrow_upward
+—
+1,909.30
++0.06%
+arrow_upward
+1,909.30
++1.07
+arrow_upward
++0.06%
+arrow_upward
+1,908.23
+1,900.03
+1,912.42
+1,888.19
+—
+—
+SIXY
+Discretionary
+SIXY
+Discretionary
+SIXY
+-0.08%
+arrow_downward
+—
+2,444.62
+-0.08%
+arrow_downward
+2,444.62
+-1.90
+arrow_downward
+-0.08%
+arrow_downward
+2,446.52
+2,453.50
+2,455.30
+2,432.73
+—
+—
+NVDA
+Research
+insights_auto
+Why is NVDA up
+2.92%
+?
+Dive Deeper
+chevron_right
+NVDA:NASDAQ
+check_indeterminate_small
+Add to list
+NVIDIA Corp
+$173.73
+arrow_upward
++2.92%
+(
++4.93
+) Today
+Closed: Nov 11, 4:00:00 PM GMT-5  ·   USD
+$158.78
+arrow_downward
+-8.61%
+(
+-14.95
+)
+bedtime
+After hours  ·  7:59 PM
+area_chart
+Area
+show_chart
+Line
+area_chart
+Area
+candlestick_chart
+Candle
+bar_chart
+Bar
+stacked_line_chart
+Compare
+search
+close
+All symbols
+monitoring
+Indicators
+Moving average
+Moving average convergence divergence
+Moving average envelope
+No data
+1D
+5D
+1M
+6M
+YTD
+1Y
+5Y
+MAX
+Symbol
+Price
+Change
+% Change
+Prev Close
+Overview
+Analysis
+Earnings
+Financials
+Holdings
+Events
+insights_auto
+Generating top insights for NVDA...
+Open
+$172.80
+High
+$177.54
+Low
+$170.77
+Mkt. cap
+4.19T
+Avg. vol.
+137.18M
+Volume
+0.00
+Dividend
+0.58%
+Quarterly dividend
+$0.25
+Ex-dividend date
+Sep 10, 2026
+P/E ratio
+21.96
+52-wk high
+$243.37
+52-wk low
+$164.27
+EPS
+$7.91
+Beta
+2.21
+Shares outstanding
+24.10B
+No. of employees
+42K
+Open
+$172.80
+High
+$177.54
+Low
+$170.77
+Mkt. cap
+4.19T
+Avg. vol.
+137.18M
+Volume
+0.00
+Dividend
+0.58%
+Quarterly dividend
+$0.25
+Ex-dividend date
+Sep 10, 2026
+P/E ratio
+21.96
+52-wk high
+$243.37
+52-wk low
+$164.27
+EPS
+$7.91
+Beta
+2.21
+Shares outstanding
+24.10B
+No. of employees
+42K
+Related stocks
+AAPL
+Apple Inc
+$355.63
++2.04%
+arrow_upward
+TSLA
+Tesla Inc
+$390.84
++2.91%
+arrow_upward
+PLTR
+Palantir Technologies Inc
+$172.40
++2.12%
+arrow_upward
+MU
+Micron Technology Inc
+$811.30
++11.89%
+arrow_upward
+News stories
+From web sources and news partners
+Benzinga
+·
+18 minutes ago
+Nvidia Executive Kimberly Powell Suddenly Drops Out of Major Health Summit After Bombshell Jensen Huang Affair Report
+Forbes
+·
+37 minutes ago
+Nvidia Shares Plunge As Board Reportedly Prepares To Oust CEO Jensen Huang
+Yahoo Finance
+·
+45 minutes ago
+Nvidia's Jensen Huang Is on the Hot Seat. Here's What I'm Doing With My Nvidia Stock
+CNBC
+·
+45 minutes ago
+Nvidia is uninvestable at these levels: Investor
+Benzinga
+·
+1 hour ago
+Elon Musk Says It Would Be an 'Honor' to Hire Nvidia CEO Jensen Huang Amid Chinese Spy Row, as Dan Ives Flags 'Black Eye Moment'
+News Corp
+·
+1 hour ago
+Nasdaq futures fall as Nvidia sinks 8% after hours on report board may oust Huang
+Benzinga
+·
+1 hour ago
+Tim Cook as Nvidia CEO? Kalshi Bettors See These Names as Top Replacement Bets for Scandal-Embroiled Jensen Huang
+Investor's Business Daily
+·
+1 hour ago
+Tech Futures Fall; Nvidia Dives, Mulls Ousting CEO Huang
+Benzinga
+·
+2 hours ago
+Jim Cramer Wants to ‘Throw Up’ Over Nvidia CEO Jensen Huang’s Ouster News, But Elon Musk Says There’s a Better Way
+News Corp
+·
+3 hours ago
+Nvidia’s stock drops as the board reportedly prepares to remove CEO Jensen Huang
+News Corp
+·
+4 hours ago
+Nvidia Stock Tumbles. Jensen Huang Could Be Out Soon.
+News Corp
+·
+4 hours ago
+Nvidia’s Disappearing Singapore Sales Deepen Mystery Around Megaspeed
+WSJ
+·
+5 hours ago
+Exclusive | Nvidia Is Preparing to Oust CEO Jensen Huang
+Nikkei Asia
+·
+5 hours ago
+Nvidia shares plunge almost 10% on report board may oust Jensen Huang
+Sky News
+·
+5 hours ago
+Nvidia preparing to oust CEO amid reports of a second affair
+The Motley Fool
+·
+7 hours ago
+Nvidia and Alphabet Just Agreed to Buy $10 Billion Each of Anthropic Stock at Its IPO Price
+Bloomberg.com
+·
+7 hours ago
+Asian Stocks Set to Gain on Renewed US Tech Rally: Markets Wrap
+CNBC
+·
+7 hours ago
+Nvidia board meeting to decide CEO Jensen Huang’s fate stretches into evening
+The New York Times
+·
+7 hours ago
+Jensen Huang Said to Have Had Relationship With Nvidia Executive Who Reports to Him
+Financial Times
+·
+1 day ago
+Nvidia spy scandal exposes Singapore’s role in China’s AI chip trade
+Show more
+keyboard_arrow_down
+Profile
+Nvidia Corporation is an American multinational technology company headquartered in Santa Clara, California. The company develops graphics processing units, systems on chips, and application programming interfaces for data science, high-performance computing, artificial intelligence hardware, and mobile and automotive applications. Founded in 1993 by Jensen Huang, Chris Malachowsky, and Curtis Priem, Nvidia has been described as a Big Tech company and is among the largest companies by market capitalization.
+Originally focused on GPUs for video games, Nvidia broadened their usage into other markets, including AI, professional visualization, and supercomputing. The company's product lines include GeForce GPUs for gaming and creative workloads, and professional GPUs for edge computing, scientific research, and industrial applications. In 2025, Nvidia became the first company to surpass US$4 trillion and US$5 trillion in market capitalization, largely driven by the AI boom and soaring demand for its AI data center hardware.
+Wikipedia
+About NVIDIA Corp
+CEO
+Jensen Huang
+Employees
+42K
+Founded
+Apr 5, 1993
+Headquarters
+Santa Clara, California, United States
+Sector
+Information Technology
+Industry
+Semiconductor
+Website
+nvidia.com
+Analyst ratings
+Based on 35 analysts giving stock ratings to NVDA in the past 3 months
+Strong buy
+Buy
+32
+Hold
+3
+Sell
+0
+search_spark
+Dive deeper on analyst ratings
+12-month forecast
+Based on 35 Wall Street analysts offering 12 month price targets for NVDA in the last 3 months.
+Highest
+Current
+$173.73
+$465.00
+(
++167.66%
+)
+Average
+$311.17
+(
++79.11%
+)
+Lowest
+$200.00
+(
++15.12%
+)
+search_spark
+Dive deeper on price targets
+Analyst
+Recommendation
+Action
+Price target
+Projected
+Date
+Stacy Rasgon
+Bernstein
+Hold
+Downgraded
+$200.00
++15.1%
+11/11/2026
+Tristan Gerra
+Robert W. Baird
+Hold
+Downgraded
+$200.00
++15.1%
+11/11/2026
+Joseph Moore
+Morgan Stanley
+Buy
+Maintained
+$300.00
++72.7%
+11/11/2026
+Aaron Rakers
+Wells Fargo
+Buy
+Reiterated
+$300.00
++72.7%
+11/10/2026
+Joseph Quatrochi
+Wells Fargo
+Buy
+Maintained
+$300.00
++72.7%
+11/10/2026
+James Schneider
+Goldman Sachs
+Buy
+Reiterated
+$300.00
++72.7%
+11/09/2026
+Atif Malik
+Citi
+Buy
+Maintained
+$285.00
++64%
+11/11/2026
+Stefan Chang
+Aletheia Capital
+Hold
+Downgraded
+-
+-
+11/09/2026
+Srini Pajjuri
+RBC Capital
+Buy
+Reiterated
+$330.00
++89.9%
+11/09/2026
+Vivek Arya
+Bank of America Securities
+Buy
+Maintained
+$350.00
++101.5%
+11/09/2026
+Thomas O'Malley
+Barclays
+Buy
+Maintained
+$275.00
++58.3%
+10/26/2026
+Daniel Zhu‏
+Bernstein
+Buy
+Maintained
+$400.00
++130.2%
+10/25/2026
+Quinn Bolton
+Needham
+Buy
+Maintained
+$300.00
++72.7%
+10/21/2026
+William Stein
+Truist Financial
+Buy
+Reiterated
+-
+-
+10/20/2026
+Timothy Arcuri
+UBS
+Buy
+Maintained
+$300.00
++72.7%
+10/09/2026
+Daniel Ives
+Yorkville Ives & Co
+Buy
+Initiated
+$300.00
++72.7%
+10/06/2026
+Karl Ackerman
+Exane BNP Paribas
+Buy
+Maintained
+$345.00
++98.6%
+10/05/2026
+C J Muse
+Cantor Fitzgerald
+Buy
+Maintained
+$350.00
++101.5%
+10/01/2026
+Sebastien Naji
+William Blair
+Buy
+Maintained
+-
+-
+09/28/2026
+Kevin Cassidy
+Rosenblatt Securities
+Buy
+Maintained
+$390.00
++124.5%
+09/28/2026
+Timm Schulze-Melander
+Rothschild & Co Redburn
+Buy
+Maintained
+$325.00
++87.1%
+09/21/2026
+David O'Connor
+Piper Sandler
+Buy
+Initiated
+$300.00
++72.7%
+09/10/2026
+Unknown Analyst
+Piper Sandler
+Buy
+Initiated
+$300.00
++72.7%
+09/09/2026
+Simon Leopold
+Raymond James
+Buy
+Maintained
+-
+-
+09/03/2026
+Harlan Sur
+J.P. Morgan
+Buy
+Maintained
+$320.00
++84.2%
+09/02/2026
+Raimo Lenschow
+Barclays
+Buy
+Maintained
+$275.00
++58.3%
+09/01/2026
+Yik Ban Chong
+Phillip Securities
+Buy
+Maintained
+$300.00
++72.7%
+08/31/2026
+Ruben Roy
+Stifel Nicolaus
+Buy
+Maintained
+$315.00
++81.3%
+08/30/2026
+Ingo Wermann
+DZ BANK AG
+Buy
+Maintained
+-
+-
+08/27/2026
+Joshua Buchalter
+TD Cowen
+Buy
+Maintained
+$275.00
++58.3%
+08/26/2026
+Mark Lipacis
+Evercore ISI
+Buy
+Maintained
+$465.00
++167.7%
+08/27/2026
+Gil Luria
+D.A. Davidson
+Buy
+Reiterated
+$300.00
++72.7%
+08/27/2026
+Christopher Rolland
+Susquehanna
+Buy
+Reiterated
+$275.00
++58.3%
+08/27/2026
+Harsh Kumar
+BMO Capital
+Buy
+Reiterated
+$340.00
++95.7%
+08/27/2026
+Vijay Rakesh
+Mizuho Securities
+Buy
+Reiterated
+$315.00
++81.3%
+08/26/2026
+Rick Schafer
+Oppenheimer
+Buy
+Reiterated
+$315.00
++81.3%
+08/27/2026
+Cody Acree
+StoneX
+Buy
+Reiterated
+$335.00
++92.8%
+08/27/2026
+John Vinh
+KeyBanc
+Buy
+Maintained
+$330.00
++89.9%
+08/27/2026
+Blayne Curtis
+Jefferies
+Buy
+Maintained
+$300.00
++72.7%
+08/27/2026
+Unknown Analyst
+BMO Capital
+Buy
+Initiated
+$340.00
++95.7%
+08/20/2026
+Varun Govindaraj
+Bernstein
+Buy
+Maintained
+$315.00
++81.3%
+08/03/2026
+Dien Wang
+Bernstein
+Buy
+Maintained
+$315.00
++81.3%
+06/29/2026
+Fang Boon Foo
+DBS
+Buy
+Maintained
+$250.00
++43.9%
+06/05/2026
+Chris Caso
+Wolfe Research
+Buy
+Maintained
+$275.00
++58.3%
+06/02/2026
+Ivan Feinseth
+Tigress Financial
+Buy
+Reiterated
+$425.00
++144.6%
+05/27/2026
+Richard Shannon
+Craig-Hallum
+Buy
+Maintained
+$275.00
++58.3%
+05/21/2026
+Matt Bryson
+Wedbush
+Buy
+Reiterated
+$330.00
++89.9%
+05/21/2026
+Ross Seymore
+Deutsche Bank
+Hold
+Maintained
+$255.00
++46.8%
+05/21/2026
+Jim Kelleher
+Argus Research
+Buy
+Reiterated
+$270.00
++55.4%
+05/20/2026
+Frank Lee CFA
+HSBC
+Buy
+Maintained
+$325.00
++87.1%
+05/19/2026
+David Siffringer
+Cantor Fitzgerald
+Buy
+Reiterated
+$350.00
++101.5%
+05/14/2026
+David Dai CFA
+Bernstein
+Buy
+Maintained
+$300.00
++72.7%
+05/08/2026
+Ben Reitzes
+Melius Research
+Buy
+Reiterated
+$380.00
++118.7%
+03/16/2026
+Jay Goldberg
+Seaport Global
+Sell
+Reiterated
+-
+-
+03/16/2026
+Bhavtosh Vajpayee
+CLSA
+Buy
+Maintained
+$300.00
++72.7%
+03/04/2026
+Next call in 6 days
+Wed, Nov 18, 7:00 AM
+Fiscal period
+Q3 2027
+Normalized EPS / Est. (USD)
+Normalized EPS / Est. (USD)
+GAAP EPS / Est. (USD)
+-
+/
+$2.47
+Revenue / Est. (USD)
+-
+/ 109.03B
+Fiscal Q3 2027 earnings call
+youtube_live
+Waiting for the earnings call
+At a glance: upcoming earnings
+Insights from the latest news and reports
+Previous reports
+All values in USD
+Loading Previous Earnings...
+Income statement
+Balance sheet
+Cash flow
+Income statement
+Revenue
+Net income
+calendar_month
+Quarterly
+Quarterly
+Annual
+All values in USD
+Oct 2025
+Jan 2026
+Apr 2026
+Jul 2026
+Revenue
+57.01B
+68.13B
+81.62B
+96.22B
+Cost of goods sold
+15.16B
+17.03B
+20.46B
+24.08B
+Cost of revenue
+15.16B
+17.03B
+20.46B
+24.08B
+Research and development expenses
+4.70B
+5.51B
+6.32B
+7.05B
+Total research and development expenses
+-
+-
+-
+-
+Selling, general, and admin expenses
+1.13B
+1.28B
+1.30B
+1.35B
+Operating expense
+5.84B
+6.79B
+7.62B
+8.41B
+Total operating expenses
+21.00B
+23.83B
+28.08B
+32.49B
+Operating income
+36.01B
+44.30B
+53.54B
+63.73B
+Other non operating income
+9.00M
+112.00M
+-7.00M
+-267.00M
+EBT including unusual items
+37.94B
+50.40B
+69.90B
+71.51B
+EBT excluding unusual items
+36.58B
+44.91B
+53.97B
+63.74B
+Income tax expense
+6.03B
+7.44B
+11.58B
+11.82B
+Effective tax rate
+15.88%
+14.76%
+16.57%
+16.53%
+Other operating expenses
+-
+-
+-
+-
+Net income
+31.91B
+42.96B
+58.32B
+59.69B
+Net profit margin
+55.98%
+63.06%
+71.46%
+62.03%
+Earnings per share
+1.30
+1.62
+1.87
+2.22
+Interest and investment income
+624.00M
+568.00M
+540.00M
+496.00M
+Interest expense
+-61.00M
+-73.00M
+-102.00M
+-227.00M
+Net interest expenses
+563.00M
+495.00M
+438.00M
+269.00M
+Depreciation and amortization charges
+-
+-
+-
+-
+EBITDA
+36.76B
+45.11B
+54.53B
+64.86B
+Gain or loss from assets sale
+-
+-
+-
+-
+Insiders
+Politicians
+Insider transactions
+Insider transactions data is drawn from third-party sources.
+Learn more
+Insider
+Position
+Type
+Date
+Shares
+Amount
+first_page
+keyboard_arrow_left
+Page 1
+keyboard_arrow_right
+Upcoming events
+All events
+Dividends & splits
+Corporate & legal
+Conferences
+AI content may include mistakes.
+Learn more
+Help
+Send feedback
+Privacy
+Terms
+Disclaimer
+Research
+edit_square
+New thread
+notes_spark
+Thread history
+close
+Collapse
+expand_content
+Expand
+What's on your mind?
+What's going on with the markets today?
+search_spark
+Explore what’s possible
+add
+Create a portfolio
+task_spark
+Create a task
+travel_explore
+Deep Search
+mic
+Voice Search
+add
+Add Tool
+upload_file
+Upload File
+bar_chart
+Create portfolio
+travel_explore
+Deep Search
+arrow_upward
+Ask AI
+AI content may include mistakes.
+Learn more
+Help
+Send feedback
+Privacy
+Terms
+Disclaimer
+Google apps

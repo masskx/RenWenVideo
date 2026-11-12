@@ -1,0 +1,516 @@
+TITLE: 93% of paint splatters are valid Perl programs (2019) | Hacker News
+URL-FILE: hn-50459745.html
+
+93% of paint splatters are valid Perl programs (2019) | Hacker News
+Hacker News
+new
+|
+past
+|
+comments
+|
+ask
+|
+show
+|
+jobs
+|
+submit
+login
+93% of paint splatters are valid Perl programs (2019)
+(
+mcmillen.dev
+)
+305 points
+by
+zenincognito
+7 hours ago
+|
+hide
+|
+past
+|
+favorite
+|
+42 comments
+help
+snitty
+6 hours ago
+|
+next
+[–]
+SIGBOVIK papers are almost always a delight
+EDIT: From their 2026 publication
+>Permission to make digital or hard copies of portions of this work for personal use is granted;
+permission to make digital or hard copies of portions of this work for classroom use is also granted,
+but seems ill-advised
+reply
+gnabgib
+6 hours ago
+|
+prev
+|
+next
+[–]
+Popular in:
+2024 (515 points, 125 comments)
+https://news.ycombinator.com/item?id=40197013
+2021 (431 points, 165 comments)
+https://news.ycombinator.com/item?id=27929730
+reply
+tomhow
+5 hours ago
+|
+parent
+|
+next
+[–]
+And others! Here's the full list:
+93% of paint splatters are valid Perl programs (2019)
+-
+https://news.ycombinator.com/item?id=40197013
+- April 2024 (124 comments)
+93% of Paint Splatters Are Valid Perl Programs (2019)
+-
+https://news.ycombinator.com/item?id=27929730
+- July 2021 (163 comments)
+93% of Paint Splatters Are Valid Perl Programs
+-
+https://news.ycombinator.com/item?id=20834351
+- Aug 2019 (7 comments)
+93% of Paint Splatters Are Valid Perl Programs
+-
+https://news.ycombinator.com/item?id=19576425
+- April 2019 (132 comments)
+reply
+adamrezich
+6 hours ago
+|
+parent
+|
+prev
+|
+next
+[–]
+The reply near the top of the 2021 link with the Master Foo koan hits quite a bit differently in the age of vibecoding.
+reply
+layer8
+6 hours ago
+|
+prev
+|
+next
+[–]
+Tangentially related, the only way for a Java properties file to be invalid is if it contains an invalid Unicode escape sequence (“\u” not followed by four digits, and not preceded by an odd number of “\”). After resolving Unicode escapes, any character sequence is a valid properties file.
+reply
+zenincognito
+7 hours ago
+|
+prev
+|
+next
+[–]
+The actual paper is also highly entertaining -
+https://www.mcmillen.dev/sigbovik/2019.pdf
+reply
+heresie-dabord
+3 hours ago
+|
+parent
+|
+next
+[–]
+From the paper:
+"An interesting thing about these images is that they’re not particularly
+Perl-specific; for example, the program shown in Figure −3 also evaluates as the
+number −3 in Python (and presumably several other programming languages.)"
+We live in the age of Python, which I use every day. But I still also use Perl when it's the better tool for the job. And it often is!
+reply
+Amorymeltzer
+6 hours ago
+|
+parent
+|
+prev
+|
+next
+[–]
+In particular, I like "Figure − 3. − 3 ." as a good little easter egg.
+reply
+0xbadcafebee
+5 hours ago
+|
+parent
+|
+prev
+|
+next
+[–]
+The remainder of the valid Perl programs are mostly valid due to a Perl
+  language feature that is not commonly present in most programming languages.
+  Namely, Perl has a feature called “unquoted strings”, in which a sequence
+  of alphanumeric characters by itself is parsed as though it were a quoted string.
+  As an example, Figure 5 is read by OCR as the text ME, which evaluates to the
+  string “ME” even though the ME isn’t quoted. This would result in a syntax
+  error in most other programming languages.
+
+  (To be fair to Perl, when perl is run with the -w flag to enable warnings, it does
+  helpfully inform the user that at some point in the future, the Perl developers
+  will most likely pick gggijgziifiiffif as a new reserved word:
+      Unquoted string "gggijgziifiiffif" may clash
+      with future reserved word at - line 1.)
+reply
+xhrpost
+4 hours ago
+|
+root
+|
+parent
+|
+next
+[–]
+So they might be valid older(<v5?) PHP scripts as well?
+reply
+notorandit
+5 minutes ago
+|
+prev
+|
+next
+[–]
+The problem is the ocr, then.
+reply
+ideasphere
+2 hours ago
+|
+prev
+|
+next
+[–]
+I’m more interested in how the OCR missed that ‘Stitch & Shutter’ watermark in the third one.
+reply
+bozdemir
+1 hour ago
+|
+parent
+|
+next
+[–]
+Hahahhahah good catch.
+reply
+baron3dl
+5 hours ago
+|
+prev
+|
+next
+[–]
+i loved programming perl.  both the act, and the book.  i long since gave it up, but i am still awed by how it could both be completely unceremonious and absurdly ceremonious.  my $self = shift; for instance.
+reply
+jacquesm
+5 hours ago
+|
+prev
+|
+next
+[–]
+Someone should reverse that and see how many paintings can be made to execute as Perl and what those programs do when invoked.
+reply
+kmoser
+3 hours ago
+|
+parent
+|
+next
+[–]
+You could kill two birds with one stone by entering them in the Obfuscated Perl Contest, were it still being held.
+reply
+mlmonkey
+2 hours ago
+|
+root
+|
+parent
+|
+next
+[–]
+Every single day there's an Obfuscated Perl Contest being held somewhere on this planet....
+reply
+idlewords
+4 hours ago
+|
+prev
+|
+next
+[–]
+A whole new twist on "Hackers and Painters"
+reply
+SoraTakai
+2 hours ago
+|
+prev
+|
+next
+[–]
+It all depends on which OCR to use and therefore meaningless.
+It is especially more meaningless since they do not establish the baseline (OCR "pass" % on random input).
+reply
+ashton314
+2 hours ago
+|
+parent
+|
+next
+[–]
+I think you’ve missed the point…
+reply
+ckdot
+1 hour ago
+|
+root
+|
+parent
+|
+next
+[–]
+Honest question, and I’m not the person you answered to: what is the point? I sincerely don’t get it.
+reply
+asgraham
+22 minutes ago
+|
+root
+|
+parent
+|
+next
+[–]
+Well a) it’s mostly a joke, b) to the extent it’s not a joke, it’s about how Perl accepts absurd inputs as valid programs, c) OCR paint splatters are just a funny way to get to weird arbitrary strings, of which a strangely high percentage (say, 93%) are valid Perl programs, d) so the choice of OCR doesn’t really affect the “validity” of the result, and e) the author did actually try multiple OCR settings and, when multiple OCRs produced valid Perl programs, chose “the most “interesting.””
+reply
+odo1242
+27 minutes ago
+|
+root
+|
+parent
+|
+prev
+|
+next
+[–]
+It's a joke about Perl. It's not meant to be taken seriously as a study about OCR.
+reply
+TMWNN
+6 hours ago
+|
+prev
+|
+next
+[–]
+https://www.tiktok.com/@evakozy/video/7693620372213730592
+reply
+fractorial
+2 hours ago
+|
+parent
+|
+next
+[–]
+I think this is the first time I’ve seen a TikTok link on HN.
+reply
+xenic
+12 minutes ago
+|
+prev
+|
+next
+[–]
+Perl is such a ride. I wrote and maintained a nms/statistics/alerting stack around 2003-2004, ended up being around 200k LoC iirc. Just heard it is still in use at that company. My condolences to whoever has had to maintain that monster.
+I was somewhat pleasantly surprised a few days ago when an LLM out of the blue decided to use perl, not python, for some simple scripting. There is hope in the world yet…
+reply
+brisket_bronson
+6 hours ago
+|
+prev
+|
+next
+[–]
+Figure 6 represents the string
+“gggijgziifiiffif”, which by pure
+coincidence happens to accurately
+represent the authors’ verbal reaction
+upon learning that “unquoted strings”
+were a feature intentionally included in
+the Perl language
+reply
+omoikane
+2 hours ago
+|
+parent
+|
+next
+[–]
+There is a gem in the footnote right below gggijgziifiiffif, where it says it's possible to make a perl error quine by writing this line to the right location:
+Illegal division by zero at /tmp/quine.pl line 1.
+I just tried this perl 5.42.0, and any file name starting with a '/' will work.
+See also:
+https://news.ycombinator.com/item?id=40202182
+https://news.ycombinator.com/item?id=19576872
+https://codegolf.stackexchange.com/a/48394
+reply
+lta
+5 hours ago
+|
+parent
+|
+prev
+|
+next
+[–]
+I'm afraid I have to tell you you lack the soul of a poet to truly appreciate the brilliant design .
+Perl is magic (like litteraly). I'm fairly sure it's one of the untold inspiration of the Harry Potter books
+reply
+hluska
+5 hours ago
+|
+root
+|
+parent
+|
+next
+[–]
+I really dig your whimsy.
+reply
+tomaskafka
+5 hours ago
+|
+root
+|
+parent
+|
+prev
+|
+next
+[–]
+This is also a valid Perl program (I bet)
+reply
+bitwize
+5 hours ago
+|
+root
+|
+parent
+|
+prev
+|
+next
+[–]
+necronomicon, maybe
+reply
+polarsanel
+4 hours ago
+|
+prev
+|
+next
+[–]
+93% of Perl Programs are valid Paint Spatters too.
+reply
+sadboi_fandango
+6 hours ago
+|
+prev
+|
+next
+[–]
+Jackson Pollock was writing perl code all along
+reply
+HeckFeck
+6 hours ago
+|
+parent
+|
+next
+[–]
+My Stone Roses album cover is actually a bonus Perl program?
+reply
+don-code
+4 hours ago
+|
+root
+|
+parent
+|
+next
+[–]
+Full Fathom Five is my brain on Perl.
+reply
+kmoser
+3 hours ago
+|
+parent
+|
+prev
+|
+next
+[–]
+No, when Pollock spattered paint on a canvas, it was generally on the floor, not the Wall.
+reply
+criemen
+5 hours ago
+|
+prev
+|
+next
+[–]
+> Apparently in the brave new world of neural nets, Anything Goes™
+Quite some foresight indeed!
+reply
+NoMoreNicksLeft
+2 hours ago
+|
+prev
+|
+next
+[–]
+I thought perl was finally dead enough people would stop mocking it. I'll wait til next decade.
+reply
+theonemind
+13 minutes ago
+|
+parent
+|
+next
+[–]
+History in reverse: first you win, then they mock you, then they ignore you
+reply
+_doctor_love
+2 hours ago
+|
+prev
+[–]
+I don't need to read the article because the headline is true.
+A mentor taught me that you can also roll your face on the keyboard to produce a valid Perl program. It's easy and fun to try!
+reply
+lisper
+1 hour ago
+|
+parent
+[–]
+A cat walking across the keyboard works too.
+reply
+Guidelines
+|
+FAQ
+|
+Lists
+|
+API
+|
+Security
+|
+Legal
+|
+Apply to YC
+|
+Contact
+Search:

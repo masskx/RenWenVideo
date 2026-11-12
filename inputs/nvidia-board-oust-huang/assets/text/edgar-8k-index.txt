@@ -1,0 +1,237 @@
+TITLE: EDGAR Search Results
+URL-FILE: edgar-8k-index.html
+
+EDGAR Search Results
+SEC.gov
+EDGAR
+Latest Filings
+Filings search tools
+EDGAR Company Search Results
+SEC Home
+»
+Company Search
+»
+Current Page
+Mailing Address
+2788 SAN TOMAS EXPRESSWAY
+SANTA CLARA CA 95051
+Business Address
+2788 SAN TOMAS EXPRESSWAY
+SANTA CLARA CA 95051
+408-486-2000
+NVIDIA CORP
+CIK
+#:
+0001045810 (see all company filings)
+SIC
+:
+3674
+- SEMICONDUCTORS & RELATED DEVICES
+State location:
+CA
+| State of Inc.:
+DE
+| Fiscal Year End: 0131
+formerly: NVIDIA CORP/CA (filings through 2002-06-04)
+(CF Office: 04 Manufacturing)
+Get
+insider transactions
+for this
+issuer
+.
+Get
+insider transactions
+for this
+reporting owner
+.
+Filter Results
+Search Within Files
+Filing Type:
+Prior to:
+(YYYYMMDD)
+Ownership?
+include
+exclude
+only
+Limit Results Per Page
+10 Entries
+20 Entries
+40 Entries
+80 Entries
+100 Entries
+Enter keywords
+Search
+Items 1 - 20
+RSS Feed
+Filings
+Format
+Description
+Filing Date
+File/Film Number
+8-K
+Documents
+Interactive Data
+Current report, item 8.01
+Acc-no: 0001045810-26-000078 (34 Act)  Size: 146 KB
+2026-09-03
+000-23985
+261356746
+8-K
+Documents
+Interactive Data
+Current report, items 2.02 and 9.01
+Acc-no: 0001045810-26-000073 (34 Act)  Size: 802 KB
+2026-08-26
+000-23985
+261323290
+8-K
+Documents
+Interactive Data
+Current report, items 1.01, 2.03, and 7.01
+Acc-no: 0001045810-26-000069 (34 Act)  Size: 178 KB
+2026-08-17
+000-23985
+261284957
+8-K
+Documents
+Interactive Data
+Current report, item 5.02
+Acc-no: 0001045810-26-000060 (34 Act)  Size: 138 KB
+2026-07-02
+000-23985
+261148237
+8-K
+Documents
+Interactive Data
+Current report, item 5.07
+Acc-no: 0001045810-26-000056 (34 Act)  Size: 178 KB
+2026-06-30
+000-23985
+261140846
+8-K
+Documents
+Interactive Data
+Current report, items 8.01 and 9.01
+Acc-no: 0001193125-26-275783 (34 Act)  Size: 1 MB
+2026-06-18
+000-23985
+261102367
+8-K
+Documents
+Interactive Data
+Current report, items 2.02 and 9.01
+Acc-no: 0001045810-26-000051 (34 Act)  Size: 637 KB
+2026-05-20
+000-23985
+261004320
+8-K
+Documents
+Interactive Data
+Current report, item 5.02
+Acc-no: 0001045810-26-000028 (34 Act)  Size: 135 KB
+2026-05-08
+000-23985
+26959034
+8-K
+Documents
+Interactive Data
+Current report, item 5.02
+Acc-no: 0001045810-26-000026 (34 Act)  Size: 137 KB
+2026-04-27
+000-23985
+26900997
+8-K
+Documents
+Interactive Data
+Current report, items 5.02 and 9.01
+Acc-no: 0001045810-26-000024 (34 Act)  Size: 165 KB
+2026-03-06
+000-23985
+26731070
+8-K
+Documents
+Interactive Data
+Current report, items 2.02 and 9.01
+Acc-no: 0001045810-26-000019 (34 Act)  Size: 859 KB
+2026-02-25
+000-23985
+26679278
+8-K
+Documents
+Interactive Data
+Current report, item 5.02
+Acc-no: 0001045810-26-000003 (34 Act)  Size: 133 KB
+2026-01-23
+000-23985
+26557477
+8-K
+Documents
+Interactive Data
+Current report, items 2.02 and 9.01
+Acc-no: 0001045810-25-000228 (34 Act)  Size: 794 KB
+2025-11-19
+000-23985
+251499607
+8-K
+Documents
+Interactive Data
+Current report, items 2.02 and 9.01
+Acc-no: 0001045810-25-000207 (34 Act)  Size: 824 KB
+2025-08-27
+000-23985
+251265524
+8-K
+Documents
+Interactive Data
+Current report, item 5.02
+Acc-no: 0001045810-25-000197 (34 Act)  Size: 137 KB
+2025-08-05
+000-23985
+251185471
+8-K
+Documents
+Interactive Data
+Current report, item 5.07
+Acc-no: 0001045810-25-000179 (34 Act)  Size: 191 KB
+2025-07-01
+000-23985
+251093663
+8-K
+Documents
+Interactive Data
+Current report, items 2.02 and 9.01
+Acc-no: 0001045810-25-000115 (34 Act)  Size: 697 KB
+2025-05-28
+000-23985
+25995670
+8-K
+Documents
+Interactive Data
+Current report, item 8.01
+Acc-no: 0001045810-25-000082 (34 Act)  Size: 148 KB
+2025-04-15
+000-23985
+25840619
+8-K
+Documents
+Interactive Data
+Current report, item 5.02
+Acc-no: 0001045810-25-000039 (34 Act)  Size: 177 KB
+2025-03-07
+000-23985
+25721175
+8-K
+Documents
+Interactive Data
+Current report, items 2.02 and 9.01
+Acc-no: 0001045810-25-000021 (34 Act)  Size: 820 KB
+2025-02-26
+000-23985
+25670415
+https://www.sec.gov/cgi-bin/browse-edgar
+Home
+|
+Search the Next-Generation EDGAR System
+|
+Previous Page
+Modified 07/18/2014
