@@ -1,0 +1,7 @@
+{"batchcomplete":"","query":{"searchinfo":{"totalhits":2,"suggestion":"colette kreis","suggestionsnippet":"colette
+kreis
+"},"search":[{"ns":6,"title":"File:Colette Kress.png","pageid":196061738,"size":298,"wordcount":97,"snippet":"you or your use. https://creativecommons.org/licenses/by/3.0CC BY 3.0 Creative Commons Attribution 3.0 truetrue English
+Kress
+in 2017 operator: YouTube","timestamp":"2026-11-12T11:21:30Z"},{"ns":6,"title":"File:RIT NandE Vol16Num22 1985 Apr18 Complete.pdf","pageid":115289938,"size":1002,"wordcount":7,"snippet":"addition to the NEH grant, he was\nrecently awarded $7,500 from the Samuel\n
+Kress
+Foundation to buy equipment for\nthis research project. His goal for the","timestamp":"2026-08-31T10:14:49Z"}]}}

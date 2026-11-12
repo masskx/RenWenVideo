@@ -1,0 +1,55 @@
+start 2026-11-12 23:16:18.536005+08:00
+OK shot-nvidia-ceo-transition bytes=465668 title='NVIDIA Announces CEO Transition | NVIDIA Newsroom' attempt=0 cookie=clicked:Accept all url=https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition t_taipei=2026-11-12 23:16:31 CST t_et=2026-11-12 10:16:31 EST
+OK shot-nvidia-ir-ceo-transition bytes=101464 title='Just a moment...' attempt=0 cookie=none url=https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-CEO-Transition/ t_taipei=2026-11-12 23:16:59 CST t_et=2026-11-12 10:16:59 EST
+OK shot-xinhua-huang-resigns bytes=1445131 title='英伟达首席执行官黄仁勋辞职-新华网' attempt=0 cookie=none url=https://www.news.cn/20261112/f5d8cdfb75304adaae2e2cebe9d6d68f/c.html t_taipei=2026-11-12 23:17:16 CST t_et=2026-11-12 10:17:16 EST
+OK shot-cls-2533121 bytes=795346 title='英伟达宣布CEO黄仁勋辞职 CFO科莱特·克雷斯出任临时CEO' attempt=0 cookie=none url=https://www.cls.cn/detail/2533121 t_taipei=2026-11-12 23:17:29 CST t_et=2026-11-12 10:17:29 EST
+OK shot-chinanews-10731222 bytes=2504121 title='英伟达宣布黄仁勋辞职-中新网' attempt=0 cookie=none url=https://www.chinanews.com.cn/gj/2026/11-12/10731222.shtml t_taipei=2026-11-12 23:17:44 CST t_et=2026-11-12 10:17:44 EST
+OK shot-chinanews-10731212 bytes=1361481 title='黄仁勋辞去英伟达公司总裁、首席执行官及董事会成员职务-中新网' attempt=0 cookie=none url=https://www.chinanews.com.cn/gj/2026/11-12/10731212.shtml t_taipei=2026-11-12 23:18:03 CST t_et=2026-11-12 10:18:03 EST
+OK shot-zaobao-9989479 bytes=1641373 title='黄仁勋辞职 英伟达股价盘前暴跌逾10% 首席财务官克雷斯出任临时CEO | 联合早报' attempt=0 cookie=none url=https://www.zaobao.com.sg/finance/world/story20261112-9989479 t_taipei=2026-11-12 23:18:37 CST t_et=2026-11-12 10:18:37 EST
+OK shot-google-finance-nvda bytes=420031 title='NVIDIA Corp (NVDA) Stock Price & News - Google Finance' attempt=0 cookie=none url=https://www.google.com/finance/quote/NVDA:NASDAQ t_taipei=2026-11-12 23:18:50 CST t_et=2026-11-12 10:18:50 EST
+OK shot-yahoo-finance-nvda bytes=331540 title='NVIDIA Corporation (NVDA) Stock Price, News, Quote & History - Yahoo Finance' attempt=0 cookie=none url=https://finance.yahoo.com/quote/NVDA/ t_taipei=2026-11-12 23:19:18 CST t_et=2026-11-12 10:19:18 EST
+OK shot-ap-huang-resigns bytes=101169 title='Just a moment...' attempt=0 cookie=none url=https://apnews.com/article/nvidia-megaspeed-china-singapore-huang-5403f152a601cf82ce939f1d24fffa0f t_taipei=2026-11-12 23:19:45 CST t_et=2026-11-12 10:19:45 EST
+OK shot-guardian-resigns bytes=286663 title='Jensen Huang resigns as Nvidia CEO after alleged affairs | Jensen Huang | The Guardian' attempt=0 cookie=none url=https://www.theguardian.com/technology/2026/nov/12/nvidia-ceo-jensen-huang-resigns t_taipei=2026-11-12 23:19:53 CST t_et=2026-11-12 10:19:53 EST
+OK shot-bbc-live bytes=1074821 title="Nvidia CEO Jensen Huang quits in wake of affair with suspected Chinese spy, as firm's stocks plunge - BBC News" attempt=0 cookie=none url=https://www.bbc.com/news/live/c6zjry11v8w1t t_taipei=2026-11-12 23:20:09 CST t_et=2026-11-12 10:20:09 EST
+OK shot-axios-huang-out bytes=103886 title='Just a moment...' attempt=0 cookie=none url=https://www.axios.com/2026/11/12/nvidia-jensen-huang-out t_taipei=2026-11-12 23:20:52 CST t_et=2026-11-12 10:20:52 EST
+OK shot-reuters-search bytes=123085 title='reuters.com' attempt=0 cookie=none url=https://www.reuters.com/site-search/?query=Nvidia%20Huang%20resigns t_taipei=2026-11-12 23:21:08 CST t_et=2026-11-12 10:21:08 EST
+OK shot-reuters-home-search bytes=124171 title='reuters.com' attempt=0 cookie=none url=https://www.reuters.com/business/nvidia-ceo-jensen-huang-resigns-2026-11-12/ t_taipei=2026-11-12 23:21:22 CST t_et=2026-11-12 10:21:22 EST
+OK shot-edgar-8k-index bytes=379536 title='SEC.gov | Your Request Originates from an Undeclared Automated Tool' attempt=0 cookie=none url=https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001045810&type=8-K&dateb=&owner=include&count=20 t_taipei=2026-11-12 23:21:29 CST t_et=2026-11-12 10:21:29 EST
+OK shot-edgar-8k-filing bytes=380146 title='SEC.gov | Your Request Originates from an Undeclared Automated Tool' attempt=0 cookie=none url=https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/0001045810-26-000082-index.htm t_taipei=2026-11-12 23:21:45 CST t_et=2026-11-12 10:21:45 EST
+OK shot-edgar-8k-item502 bytes=96228 title='SEC.gov | Request Rate Threshold Exceeded' attempt=0 cookie=none url=https://www.sec.gov/ix?doc=/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm t_taipei=2026-11-12 23:21:52 CST t_et=2026-11-12 10:21:52 EST
+ERR shot-nvidia-kress-bio attempt=0 TimeoutError: Page.screenshot: Timeout 30000ms exceeded.
+Call log:
+  - taking page screenshot
+  - waiting for fonts to load...
+  - fonts loaded
+
+OK shot-nvidia-kress-bio bytes=402266 title='Colette Kress | NVIDIA' attempt=1 cookie=clicked:Accept all url=https://www.nvidia.com/en-us/about-nvidia/governance/management-team/colette-kress/ t_taipei=2026-11-12 23:22:49 CST t_et=2026-11-12 10:22:49 EST
+OK shot-nvidia-jones-bio bytes=278675 title='Harvey C. Jones' attempt=0 cookie=clicked:Accept all url=https://www.nvidia.com/en-us/about-nvidia/board-of-directors/harvey-jones/ t_taipei=2026-11-12 23:23:02 CST t_et=2026-11-12 10:23:02 EST
+OK shot-nvidia-executives bytes=789668 title='Executives | NVIDIA Newsroom' attempt=0 cookie=clicked:Accept all url=https://nvidianews.nvidia.com/multimedia/corporate/corporate-executives t_taipei=2026-11-12 23:23:14 CST t_et=2026-11-12 10:23:14 EST
+OK shot-nvidia-news-latest bytes=1749788 title='Home | NVIDIA Newsroom' attempt=0 cookie=clicked:Accept all url=https://nvidianews.nvidia.com/ t_taipei=2026-11-12 23:23:26 CST t_et=2026-11-12 10:23:26 EST
+end 2026-11-12 23:23:27.272631+08:00
+retry start 2026-11-12 23:23:53.651214+08:00
+RETRY OK shot-edgar-8k-item502-local bytes=346601 title='nvda-20261111' attempt=0 cookie=none url=file:///workspace/pipeline/episodes/nvidia-huang-resigns/assets/text/nvda-8k-20261111.htm t_taipei=2026-11-12 23:24:03 CST t_et=2026-11-12 10:24:03 EST
+RETRY OK shot-edgar-8k-ex99-local bytes=413674 title='Document' attempt=0 cookie=none url=file:///workspace/pipeline/episodes/nvidia-huang-resigns/assets/text/nvda-8k-ex99-1-press.htm t_taipei=2026-11-12 23:24:13 CST t_et=2026-11-12 10:24:13 EST
+RETRY OK shot-edgar-8k-index-local bytes=485189 title='EDGAR Search Results' attempt=0 cookie=none url=file:///workspace/pipeline/episodes/nvidia-huang-resigns/assets/text/edgar-8k-index.html t_taipei=2026-11-12 23:24:19 CST t_et=2026-11-12 10:24:19 EST
+RETRY OK shot-edgar-8k-filing-local bytes=316946 title='EDGAR Filing Documents for 0001045810-26-000082' attempt=0 cookie=none url=file:///workspace/pipeline/episodes/nvidia-huang-resigns/assets/text/edgar-8k-20261112-index.html t_taipei=2026-11-12 23:24:26 CST t_et=2026-11-12 10:24:26 EST
+RETRY OK shot-hindu-reuters bytes=663997 title='Nvidia CEO Jensen Huang resigns in big blow to AI boom - The HinduBusinessLine' attempt=0 cookie=none url=https://www.thehindubusinessline.com/info-tech/nvidia-ceo-jensen-huang-to-step-down-in-big-blow-to-ai-boom/article71694311.ece t_taipei=2026-11-12 23:24:49 CST t_et=2026-11-12 10:24:49 EST
+RETRY OK shot-investing-reuters-5021980 bytes=20810 title='' attempt=0 cookie=none url=https://www.investing.com/news/stock-market-news/nvidia-ceo-jensen-huang-to-step-down-in-big-blow-to-ai-boom-5021980 t_taipei=2026-11-12 23:25:02 CST t_et=2026-11-12 10:25:02 EST
+RETRY OK shot-ap-huang-resigns bytes=102174 title='Just a moment...' attempt=0 cookie=none url=https://apnews.com/article/nvidia-megaspeed-china-singapore-huang-5403f152a601cf82ce939f1d24fffa0f t_taipei=2026-11-12 23:25:46 CST t_et=2026-11-12 10:25:46 EST
+RETRY OK shot-ap-huang-resigns bytes=101406 title='Just a moment...' attempt=1 cookie=none url=https://apnews.com/article/nvidia-megaspeed-china-singapore-huang-5403f152a601cf82ce939f1d24fffa0f t_taipei=2026-11-12 23:26:30 CST t_et=2026-11-12 10:26:30 EST
+RETRY OK shot-ap-huang-resigns bytes=101001 title='Just a moment...' attempt=2 cookie=none url=https://apnews.com/article/nvidia-megaspeed-china-singapore-huang-5403f152a601cf82ce939f1d24fffa0f t_taipei=2026-11-12 23:27:14 CST t_et=2026-11-12 10:27:14 EST
+RETRY FAIL shot-ap-huang-resigns still-challenge:Just a moment...
+RETRY OK shot-axios-huang-out bytes=104361 title='Just a moment...' attempt=0 cookie=none url=https://www.axios.com/2026/11/12/nvidia-jensen-huang-out t_taipei=2026-11-12 23:28:00 CST t_et=2026-11-12 10:28:00 EST
+RETRY OK shot-axios-huang-out bytes=104546 title='Just a moment...' attempt=1 cookie=none url=https://www.axios.com/2026/11/12/nvidia-jensen-huang-out t_taipei=2026-11-12 23:28:43 CST t_et=2026-11-12 10:28:43 EST
+RETRY OK shot-axios-huang-out bytes=104121 title='Just a moment...' attempt=2 cookie=none url=https://www.axios.com/2026/11/12/nvidia-jensen-huang-out t_taipei=2026-11-12 23:29:27 CST t_et=2026-11-12 10:29:27 EST
+RETRY FAIL shot-axios-huang-out still-challenge:Just a moment...
+RETRY OK shot-reuters-article-guess bytes=124222 title='reuters.com' attempt=0 cookie=none url=https://www.reuters.com/technology/nvidia-ceo-jensen-huang-resigns-2026-11-12/ t_taipei=2026-11-12 23:29:57 CST t_et=2026-11-12 10:29:57 EST
+RETRY OK shot-reuters-article-guess bytes=122032 title='reuters.com' attempt=1 cookie=none url=https://www.reuters.com/technology/nvidia-ceo-jensen-huang-resigns-2026-11-12/ t_taipei=2026-11-12 23:30:27 CST t_et=2026-11-12 10:30:27 EST
+RETRY OK shot-reuters-article-guess bytes=123067 title='reuters.com' attempt=2 cookie=none url=https://www.reuters.com/technology/nvidia-ceo-jensen-huang-resigns-2026-11-12/ t_taipei=2026-11-12 23:30:59 CST t_et=2026-11-12 10:30:59 EST
+RETRY FAIL shot-reuters-article-guess still-challenge:reuters.com
+RETRY OK shot-nvidia-ir-ceo-transition bytes=101985 title='Just a moment...' attempt=0 cookie=none url=https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-CEO-Transition/ t_taipei=2026-11-12 23:31:36 CST t_et=2026-11-12 10:31:36 EST
+RETRY OK shot-nvidia-ir-ceo-transition bytes=102113 title='Just a moment...' attempt=1 cookie=none url=https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-CEO-Transition/ t_taipei=2026-11-12 23:32:14 CST t_et=2026-11-12 10:32:14 EST
+RETRY OK shot-nvidia-ir-ceo-transition bytes=101677 title='Just a moment...' attempt=2 cookie=none url=https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-CEO-Transition/ t_taipei=2026-11-12 23:32:51 CST t_et=2026-11-12 10:32:51 EST
+RETRY FAIL shot-nvidia-ir-ceo-transition still-challenge:Just a moment...
+RETRY OK shot-nvidia-ceo-transition bytes=465668 title='NVIDIA Announces CEO Transition | NVIDIA Newsroom' attempt=0 cookie=Accept all url=https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition t_taipei=2026-11-12 23:33:02 CST t_et=2026-11-12 10:33:02 EST
+retry end 2026-11-12 23:33:04.215715+08:00

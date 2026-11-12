@@ -1,0 +1,586 @@
+NVIDIA Corporation (NVDA) Stock Price, News, Quote & History - Yahoo Finance
+Oops, something went wrong
+Skip to navigation
+Skip to main content
+Skip to right column
+Home
+News
+Finance
+Sports
+More
+News
+US
+Politics
+World
+Tech
+Science
+Originals
+2026 Elections
+Weather
+Newsletters
+Finance
+My portfolio
+News
+Markets
+Research
+Community
+Personal finance
+Videos
+Sports
+Fantasy Football 2026
+NFL
+College football
+NBA
+MLB
+NHL
+College basketball
+Soccer
+Fantasy
+Sports Betting
+NFL Odds
+Yahoo Sports AM
+Shopping
+The best Black Friday deals
+Walmart Black Friday deals
+Amazon Black Friday deals
+Style
+Beauty
+Health
+Home and garden
+Tech
+Gift ideas
+Stores
+Shopping guides
+Deals
+Toys and games
+General
+Pets
+Games
+Mini crossword
+Solitaire roadtrip
+Ribbit
+Word games
+Card games
+Puzzle games
+Entertainment
+Celebrity
+TV
+Movies
+Music
+How to Watch
+Videos
+Nonfiction Hotlist
+Games
+Selected edition
+US
+English
+Sign in
+My Portfolio
+Watchlists
+Portfolios
+Markets
+Stocks
+Most Active
+Day Gainers
+Day Losers
+Trending
+Highest Dividend
+Large Cap
+Small Cap
+Most Expensive
+Highest Beta
+Pink Sheet
+Unusual Volume
+Crypto
+Most Active
+Day Gainers
+Day Losers
+Private Companies
+52 Week Gainers
+Recently Funded
+Most Funded
+Options
+Day Gainers
+Day Losers
+Highest Open Interest
+Highest Implied Volatility
+Sectors
+Technology
+Financial Services
+Consumer Cyclical
+Consumer Defensive
+Communication Services
+Healthcare
+Industrials
+Treasury Bonds
+Currencies
+World Indices
+Commodities
+ETFs
+Mutual Funds
+Nvidia CEO Resigns
+News
+Anthropic IPO
+Markets
+Stock Market News
+Real Estate
+Magnificent 7
+Private Markets
+Futures & Derivatives
+Originals
+Newsletters
+Economy & Policy
+Earnings
+Oil & Gas
+Strait of Hormuz
+Tariffs
+Clean Energy
+Tech
+Aerospace & Defense
+Enterprise Cloud
+Exchange-Traded Funds
+Research & Tools
+Calendars
+Earnings Calendar
+IPO Calendar
+Stock Splits
+Economic Events
+Screeners
+Equities
+Most Shorted
+Most Active Penny Stocks
+Analyst Strong Buy
+Stock Comparison
+Currency Converter
+Advanced Charts
+Community
+Personal Finance
+My Money
+BETA
+Credit Cards
+Compare Credit Cards
+Best 0% APR Cards
+Best Balance Transfer
+Best Cash Back Cards
+Best Travel Cards
+Banking
+CD Rates
+Best High-Yield Savings
+Best Money Market
+Best Free Checking
+Best Online Banks
+Mortgage
+Best Mortgage Lenders
+Best Mortgage Rates
+Mortgage Refinance
+Mortgage Calculator
+Mortgage Affordability Calculator
+Student Loans
+Federal vs. Private
+FAFSA Guide
+Student Loan Assistance
+Student Loan Forgiveness
+Paying Off Student Loans
+Personal Loans
+Best Personal Loans
+Get Approved
+Best Lenders
+Insurance
+Find Car Insurance
+Types of Car Insurance
+Car Insurance Discounts
+Find Life Insurance
+Taxes
+How to File
+Refund Status
+Tax Extension
+Child Tax Credit
+Investing
+Investing Basics
+Real Estate Investing
+Retirement Basics
+Calculators
+Watch
+Daily Shows
+The 8:30
+Sozzi Unleashed
+The Daily Wolf
+Market Hang
+In the Loop
+Deirdre Bosa Live
+Weekly Shows
+Built Different
+How They Run
+Power Players
+The Big Idea
+Trader Talk
+ETF Report
+FA Corner
+More to Watch
+Must-watch Interviews
+Mag 7
+Fed Watch
+Invest 2026
+AI
+Network
+U.S. markets close in 5h 47m
+US Markets
+US Markets
+Europe Markets
+Asia Markets
+Cryptocurrencies
+Rates
+Commodities
+Currencies
+U.S. markets close in 5h 47m
+S&P 500
+7,589.54
+-29.84
+-0.39%
+Dow 30
+52,453.02
+-33.47
+-0.06%
+Nasdaq
+25,299.49
+-166.70
+-0.65%
+Russell 2000
+2,818.75
+-27.51
+-0.97%
+10-Yr Bond
+5.07
++0.07
++1.36%
+VIX
+18.22
++0.73
++4.17%
+Gold
+3,872.10
+-128.40
+-3.21%
+Bitcoin USD
+71,305.61
+-2,606.98
+-3.53%
+Crude Oil Dec 26
+86.81
++0.28
++0.32%
+US Private Equity
+10,847.84
++23.31
++0.22%
+ADVERTISEMENT
+NVDA
+NVIDIA Corporation
+161.66
+-6.95%
+Summary
+News
+Chart
+Conversations
+Statistics
+Historical Data
+Profile
+Financials
+Analysis
+Seasonality
+Options
+Holders
+BREAKING
+Jensen Huang resigns as Nvidia CEO
+NasdaqGS - Nasdaq Real Time Price
+•
+USD
+NVIDIA Corporation (NVDA)
+161.66
+-12.07
+(-6.95%)
+As of 10:13:45 AM EST. Market Open.
+Chart Range Bar
+1D
+5D
+-10.98%
+1M
+-28.57%
+6M
+-26.78%
+YTD
+-13.32%
+1Y
+-16.59%
+5Y
+431.95%
+All
+369,404.47%
+Baseline
+Advanced Chart
+AlphaSpace Chart
+Loading chart for NVDA
+Previous Close
+173.73
+Open
+150.99
+Bid
+156.00 x 400
+Ask
+159.85 x 3000
+Day's Range
+148.80 - 163.10
+52 Week Range
+148.80 - 243.37
+Volume
+331,063,462
+Avg. Volume
+131,091,271
+Market Cap (intraday)
+3.904T
+Beta (5Y Monthly)
+2.25
+PE Ratio (TTM)
+20.44
+EPS (TTM)
+7.91
+Earnings Date
+Nov 17, 2026
+Forward Dividend & Yield
+1.00 (0.58%)
+1y Target Est
+309.72
+Morningstar Rating
+Rating available with Stock Picks access
+NVIDIA Corporation Overview
+Semiconductors / Technology
+NVIDIA Corporation operates as a data center scale AI infrastructure company in the United States, Taiwan, China, Hong Kong, Europe, and internationally. It operates through Compute & Networking, and Graphics segments. The Compute & Networking segment provides data center accelerated computing and networking platforms and artificial intelligence solutions and software, and automotive platforms and autonomous and electric vehicle solutions, including software. The Graphics segment offers GeForce GPUs for gaming and PCs; Quadro/NVIDIA RTX GPUs for enterprise workstation graphics. The company's products are used in gaming, professional visualization, data center, and automotive markets. It sells its products to original equipment manufacturers, original device manufacturers, system integrators and distributors, independent software vendors, cloud service providers, add-in board manufacturers, distributors, automotive manufacturers and tier-1 automotive suppliers, and other ecosystem participants. It has a collaboration with Cisco to develop Ultra-Dense Small Form Factor Pluggable (USFP), a high-density optical module pluggable transceiver. It has a collaboration with ChipAgents to develop Build-A-Chip-Bench, a benchmark for AI agents carrying chip design tasks and The Company has a strategic alliance with MediaTek to build the next generations of AI computing platforms. NVIDIA Corporation was incorporated in 1993 and is headquartered in Santa Clara, California.
+www.nvidia.com
+42,000
+Full Time Employees
+January 25
+Fiscal Year Ends
+Technology
+Sector
+Semiconductors
+Industry
+More about NVIDIA Corporation
+Yahoo Finance Invest
+Yahoo Finance Invest: AMD’s Dr. Lisa Su
+Brian Sozzi and Su discuss powering the AI boom, and her winning Yahoo Finance’s CEO of the Year award.
+AMD
++1.30%
+01:10
+Decagon CEO ‘extremely bullish’ on open-weight AI even after Huang's exit
+Yahoo Finance Video
+•
+11m ago
+03:04
+Jensen Huang vs. Steve Jobs: Can Nvidia also thrive without its visionary?
+Yahoo Finance Video
+•
+27m ago
+02:36
+Anthropic named Yahoo Finance 2026 Company of the Year
+Yahoo Finance Video
+•
+27m ago
+Recent News
+View More
+All
+News
+Earnings Calls
+Press Releases
+SEC Filings
+View More
+Performance Overview
+Trailing total returns as of 11/12/2026, which may include dividends or other distributions.
+Benchmark is
+S&P 500 (^GSPC)
+.
+YTD Return
+NVDA
+13.12%
+S&P 500 (^GSPC)
+10.89%
+1-Year Return
+NVDA
+16.39%
+S&P 500 (^GSPC)
+10.80%
+3-Year Return
+NVDA
+235.45%
+S&P 500 (^GSPC)
+71.93%
+5-Year Return
+NVDA
+434.29%
+S&P 500 (^GSPC)
+62.10%
+Earnings Trends
+View More
+Earnings Per Share
+gaap
+GAAP
+nongaap
+Normalized
+gaap
+GAAP
+nongaap
+Normalized
+Revenue vs. Earnings
+yearly
+Annual
+quarterly
+Quarterly
+yearly
+Annual
+quarterly
+Quarterly
+Q2 FY27
+Revenue
+96.22B
+Earnings
+59.69B
+Profit Margin
+62.03%
+Q3
+FY26
+Q4
+FY26
+Q1
+FY27
+Q2
+FY27
+0
+20B
+40B
+60B
+80B
+60.0%
+65.0%
+70.0%
+View More
+Analyst Insights
+View More
+Analyst Price Targets
+180.00
+309.72
+Average
+161.66
+Current
+515.00
+High
+Analyst Recommendations
+Strong Buy
+Buy
+Hold
+Underperform
+Sell
+Latest Rating
+Date
+11/12/2026
+Analyst
+Stifel
+Rating Action
+Maintains
+Rating
+Buy
+Price Action
+Lowers
+Price Target
+315 -> 205
+View More
+Statistics
+View More
+Valuation Measures
+Market Cap
+Enterprise Value
+Trailing P/E
+Forward P/E
+PEG Ratio (current)
+Price/Sales (ttm)
+Price/Book (mrq)
+Enterprise Value/Revenue
+Enterprise Value/EBITDA
+Financial Highlights
+Profitability and Income Statement
+Profit Margin
+63.66%
+Return on Assets (ttm)
+53.57%
+Return on Equity (ttm)
+117.21%
+Revenue (ttm)
+302.97B
+Net Income Avi to Common (ttm)
+192.88B
+Diluted EPS (ttm)
+7.91
+Balance Sheet and Cash Flow
+Total Cash (mrq)
+62.47B
+Total Debt/Equity (mrq)
+16.97%
+Levered Free Cash Flow (ttm)
+41.81B
+View More
+People Also Watch
+TSLA
+Tesla, Inc.
+391.67
++0.22%
+AMZN
+Amazon.com, Inc.
+271.63
++2.05%
+AAPL
+Apple Inc.
+357.74
++0.67%
+AMD
+Advanced Micro Devices, Inc.
+560.12
++1.30%
+META
+Meta Platforms, Inc.
+621.68
+-1.13%
+Copyright © 2026 Yahoo. All rights reserved.
+Trending Topics
+Dow Jones
+S&P 500
+DAX Index
+Nvidia
+Tesla
+DJT
+Tariffs
+Explore Further
+Mortgages
+Credit Cards
+Sectors
+Crypto Heatmap
+Financial News
+About
+Data Disclaimer
+Help
+Feedback
+Sitemap
+Licensing
+What's New
+About Our Ads
+Terms
+and
+Privacy Policy
+Privacy Dashboard
+More Info
+ADVERTISEMENT
+Edit your Dock
+Terms
+and
+Privacy Policy
+Privacy Dashboard
+Ad Terms
+Feedback
+More Info
