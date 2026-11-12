@@ -24,11 +24,13 @@ const make = (draw: NonNullable<Scene['backdrop']>, sfx?: Scene['sfx']): Scene =
   return S;
 };
 
-const Desk: React.FC<{f: number; children: React.ReactNode}> = ({f, children}) => <div style={{position: 'absolute', inset: 0, background: BG, overflow: 'hidden'}}>
+const Desk: React.FC<{f: number; dur?: number; children: React.ReactNode}> = ({f, dur = 150, children}) => <div style={{position: 'absolute', inset: 0, background: BG, overflow: 'hidden'}}>
   <svg width={1080} height={1920} style={{position: 'absolute', left: 0, top: 0, opacity: 0.5}}>
     {Array.from({length: 13}, (_, i) => <line key={i} x1={60 + i * 80} y1={0} x2={60 + i * 80} y2={1920} stroke={LINE} strokeWidth={1} opacity={0.35} />)}
   </svg>
-  {children}
+  {/* the camera never moves; the layout itself pushes in slowly (≤ 1.06, §5) and a hairline scans down the desk */}
+  <div style={{position: 'absolute', inset: 0, transformOrigin: '50% 38%', transform: `scale(${1 + 0.06 * ease.inOutCubic(clamp(f / dur))})`}}>{children}</div>
+  <div style={{position: 'absolute', left: 0, right: 0, top: 120 + ((f * 9) % 1100), height: 2, background: 'rgba(255,74,46,0.18)'}} />
   <svg width={1080} height={1920} style={{position: 'absolute', left: 0, top: 0, pointerEvents: 'none', mixBlendMode: 'overlay'}}>
     <filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={1} seed={f % 20} /><feColorMatrix values="0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0.12 0" /></filter>
     <rect width={1080} height={1920} filter="url(#g)" />
@@ -64,9 +66,9 @@ const Tick: React.FC<{on: boolean; dashed?: boolean}> = ({on, dashed}) => <div s
 
 /* ---------- 1 hook: the advisory, and who found it ---------- */
 
-const Hook = make(({f, cue}) => {
+const Hook = make(({f, cue, dur}) => {
   const a = cue('a', 80), b = cue('b', 104);
-  return <Desk f={f}>
+  return <Desk f={f} dur={dur}>
     <Cut f={f} at={0} style={{left: 64, top: 170}}>
       <div style={{display: 'flex', alignItems: 'center', gap: 20}}>
         <span style={{fontFamily: plex, fontWeight: 600, fontSize: 64, color: TXT}}>CVE-2026-119618</span>
@@ -97,11 +99,11 @@ const DATES: {d: string; day: number; who: string; row: number}[] = [
 ];
 const AX0 = 120, AX1 = 960, AY = 760;
 const dx = (day: number) => AX0 + (AX1 - AX0) * day / 16;
-const Clock = make(({f, cue}) => {
+const Clock = make(({f, cue, dur}) => {
   const a = cue('a', 46), b = cue('b', 95);
   const T = [4, a, b], k = f < a ? 0 : f < b ? 1 : 2;
   const play = k === 0 ? 0 : k === 1 ? 8 * eio((f - a) / 14) : 8 + 8 * eio((f - b) / 14);
-  return <Desk f={f}>
+  return <Desk f={f} dur={dur}>
     <div style={{position: 'absolute', left: 64, top: 180}}>
       <div style={{fontFamily: plex, fontSize: 28, color: DIM}}>2026</div>
       <div style={{fontFamily: plex, fontWeight: 600, fontSize: 190, color: TXT, lineHeight: 1}}>{DATES[k].d}</div>
@@ -138,10 +140,10 @@ const SERVERS: {v: string; h2: boolean; out: string; hit: boolean}[] = [
   {v: '2.4.71', h2: true, out: '已修复', hit: false},
   {v: '2.4.52', h2: true, out: '不在范围', hit: false},
 ];
-const Gate = make(({f, cue}) => {
+const Gate = make(({f, cue, dur}) => {
   const a = cue('a', 43), b = cue('b', 147);
   const br = eo(f, a + 4, 16);
-  return <Desk f={f}>
+  return <Desk f={f} dur={dur}>
     <Cut f={f} at={0} style={{left: 64, top: 150}}><H size={66}>两条<span style={{color: RED}}>同时</span>满足才中招</H></Cut>
     {/* condition 1: the version ruler */}
     <Cut f={f} at={a} style={{left: 0, top: 290, width: 1080, height: 230}}>
@@ -186,10 +188,10 @@ const Gate = make(({f, cue}) => {
 
 /* ---------- 4 wiz: 64 %, as Wiz states it ---------- */
 
-const Wiz = make(({f, cue}) => {
+const Wiz = make(({f, cue, dur}) => {
   const a = cue('a', 34), b = cue('b', 111);
   const n = Math.round(64 * ease.outCubic(clamp((f - a) / 18)));
-  return <Desk f={f}>
+  return <Desk f={f} dur={dur}>
     <Cut f={f} at={0} style={{left: 64, top: 170}}>
       <div style={{fontFamily: plex, fontSize: 30, color: RED}}>Wiz 自报</div>
       <div style={{fontFamily: cond, fontWeight: 800, fontSize: 300, color: TXT, lineHeight: 1}}>{f < a ? '—' : `${n}%`}</div>
@@ -210,9 +212,9 @@ const Wiz = make(({f, cue}) => {
 
 /* ---------- 5 known / unresolved ---------- */
 
-const Known = make(({f, cue}) => {
+const Known = make(({f, cue, dur}) => {
   const a = cue('a', 76), b = cue('b', 130);
-  return <Desk f={f}>
+  return <Desk f={f} dur={dur}>
     <Cut f={f} at={0} style={{left: 64, top: 150, width: 952}}>
       <div style={{fontFamily: plex, fontSize: 30, color: TXT, borderBottom: `2px solid ${RED}`, paddingBottom: 8, marginBottom: 20}}>已知</div>
       <div style={{display: 'flex', gap: 18, alignItems: 'center', marginBottom: 16}}><Tick on={f >= 6} /><H size={42}>Apache 公告：没写利用情况</H></div>
@@ -235,10 +237,10 @@ const STEPS: {n: string; cmd: string; note: string}[] = [
   {n: '2', cmd: '升级到 2.4.71', note: '独立 mod_h2：高于 2.0.42'},
   {n: '3', cmd: 'Protocols http/1.1', note: '暂时升不了：去掉 h2 / h2c（Wiz 建议的临时缓解）'},
 ];
-const Act = make(({f, cue}) => {
+const Act = make(({f, cue, dur}) => {
   const a = cue('a', 22), b = cue('b', 78);
   const T = [4, b, 138];
-  return <Desk f={f}>
+  return <Desk f={f} dur={dur}>
     <Cut f={f} at={0} style={{left: 64, top: 150}}><H size={66}>现在就做</H></Cut>
     {STEPS.map((s, i) => <Cut key={i} f={f} at={T[i]} style={{left: 64, top: 290 + i * 230, width: 952}}>
       <div style={{display: 'flex', gap: 22, alignItems: 'flex-start', background: PANEL, border: `1px solid ${LINE}`, borderLeft: `6px solid ${i === 2 ? TICK : RED}`, padding: '18px 24px'}}>

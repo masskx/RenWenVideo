@@ -1,0 +1,228 @@
+{
+ "id": "nvidia-board-oust-huang",
+ "title": "据报道：英伟达董事会准备罢免黄仁勋",
+ "subtitle": "章程 · 6 票 · 关键人风险",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax",
+  "paces": {
+   "fast": 1.22
+  }
+ },
+ "leadMs": 100,
+ "tailMs": 250,
+ "series": "AI 新闻 · 公司",
+ "credit": "WSJ（据报道）· NVIDIA 公司文件 · Google Finance",
+ "source": "inputs/nvidia-board-oust-huang/materials.md",
+ "maxSeconds": 40,
+ "score": {
+  "mood": "tension",
+  "bpm": 100,
+  "climax": "seats",
+  "lifts": [
+   "rule",
+   "risk"
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "bar",
+  "captionTop": 1365,
+  "pk": {
+   "bg": "#0D0F0C",
+   "panel": "#1A1E17",
+   "ink": "#F1F3EC",
+   "accent": "#76B900",
+   "onAccent": "#0D0F0C",
+   "dim": "#A3A99B",
+   "second": "#E5463A"
+  },
+  "breaks": {},
+  "grain": 2
+ },
+ "host": {
+  "mode": "window",
+  "x": 64,
+  "y": 880,
+  "size": 200,
+  "colors": {
+   "panel": "#1A1E17",
+   "accent": "#76B900",
+   "ink": "#F1F3EC",
+   "bg": "#0D0F0C"
+  },
+  "scenes": {
+   "hook": {
+    "expr": "surprise",
+    "pose": "idle",
+    "look": [
+     0.6,
+     -0.3
+    ],
+    "beats": [
+     {
+      "at": 2.6,
+      "pose": "nod",
+      "expr": "serious"
+     }
+    ]
+   },
+   "seats": {
+    "expr": "think",
+    "pose": "think",
+    "look": [
+     0.8,
+     -0.5
+    ],
+    "beats": [
+     {
+      "at": 2.0,
+      "pose": "nod",
+      "expr": "calm"
+     }
+    ]
+   },
+   "end": {
+    "expr": "serious",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 1.2,
+      "pose": "nod",
+      "expr": "calm"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "keywords": [],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "据报道：英伟达",
+   "准备罢免黄仁勋"
+  ],
+  "support": "章程：在任董事过半数即可免职 · 11 人 6 票",
+  "tag": "AI 新闻 · 公司",
+  "anchor": "nvb.cover",
+  "colors": {
+   "bg": "#0D0F0C",
+   "text": "#F1F3EC",
+   "accent": "#76B900",
+   "dim": "#A3A99B"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 80,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "nvb.hook",
+   "step": 0,
+   "pace": "fast",
+   "narration": "据《华尔街日报》独家报道，英伟达董事会准备罢免黄仁勋，{a}消息出来后，盘后报价跌了8.61%。"
+  },
+  {
+   "id": "status",
+   "visual": "nvb.status",
+   "step": 0,
+   "pace": "fast",
+   "narration": "这还只是报道：{a}截至发稿，公司没宣布任何决定。"
+  },
+  {
+   "id": "rule",
+   "visual": "nvb.rule",
+   "step": 0,
+   "pace": "fast",
+   "narration": "按英伟达章程，{a}在任董事过半数同意，{b}有没有理由都能免掉高管。"
+  },
+  {
+   "id": "seats",
+   "visual": "nvb.seats",
+   "step": 0,
+   "pace": "fast",
+   "narration": "董事会11人，10人是独立董事，{a}6票就够；{b}黄仁勋持股3.58%，在这里也只占一票。"
+  },
+  {
+   "id": "who",
+   "visual": "nvb.who",
+   "step": 0,
+   "pace": "fast",
+   "narration": "据Semafor报道，部分董事倾向：{a}如果罢免，由CFO克雷斯临时接任，{b}全体董事还没决定。"
+  },
+  {
+   "id": "risk",
+   "visual": "nvb.risk",
+   "step": 0,
+   "pace": "fast",
+   "narration": "英伟达年报自己写着：{a}高度依赖长期经营团队，{b}继任规划做不好，会伤到长期发展。"
+  },
+  {
+   "id": "end",
+   "visual": "nvb.end",
+   "step": 0,
+   "pace": "fast",
+   "narration": "接下来看两件事：{a}董事会的正式决定，{b}和11月17日的财报会。"
+  }
+ ],
+ "musicSrc": "audio/tutorials/nvidia-board-oust-huang/score.mp3",
+ "musicVolume": 0.13,
+ "musicDuckDb": 10
+}
