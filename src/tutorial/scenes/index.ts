@@ -59,6 +59,7 @@ import {NRTA_SCENES} from './nrta-ai-duanju-regulate';
 import {SEEDANCE_WORKFLOW_SCENES} from './seedance-claude-video-workflow';
 import {APACHE_H2_SCENES} from './apache-http2-rce-ai-found';
 import {NVIDIA_BOARD_SCENES} from './nvidia-board-oust-huang';
+import {NVIDIA_RESIGNS_SCENES} from './nvidia-huang-resigns';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -124,4 +125,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...SEEDANCE_WORKFLOW_SCENES,
   ...APACHE_H2_SCENES,
   ...NVIDIA_BOARD_SCENES,
+  ...NVIDIA_RESIGNS_SCENES,
 };

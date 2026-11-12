@@ -1,0 +1,203 @@
+{
+  "id": "nvidia-huang-resigns",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 998,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/nvidia-huang-resigns/01-hook.mp3",
+      "audioMs": 4780,
+      "startFrame": 0,
+      "durationFrames": 154,
+      "cues": {
+        "a": 2378,
+        "b": 3147
+      },
+      "captions": [
+        {
+          "text": "英伟达董事会宣布",
+          "startMs": 135,
+          "endMs": 1184
+        },
+        {
+          "text": "黄仁勋辞去CEO",
+          "startMs": 1184,
+          "endMs": 2378
+        },
+        {
+          "text": "即刻生效",
+          "startMs": 2378,
+          "endMs": 3147
+        },
+        {
+          "text": "美股开盘跌超13%",
+          "startMs": 3147,
+          "endMs": 5020
+        }
+      ]
+    },
+    {
+      "id": "turn",
+      "audioSrc": "audio/tutorials/nvidia-huang-resigns/02-turn.mp3",
+      "audioMs": 5407,
+      "startFrame": 154,
+      "durationFrames": 173,
+      "cues": {
+        "a": 1499,
+        "b": 2966
+      },
+      "captions": [
+        {
+          "text": "昨天还是报道说准备罢免",
+          "startMs": 135,
+          "endMs": 1499
+        },
+        {
+          "text": "今天的8-K写的是",
+          "startMs": 1499,
+          "endMs": 2966
+        },
+        {
+          "text": "董事会11月11日接受了他的辞职",
+          "startMs": 2966,
+          "endMs": 5648
+        }
+      ]
+    },
+    {
+      "id": "kress",
+      "audioSrc": "audio/tutorials/nvidia-huang-resigns/03-kress.mp3",
+      "audioMs": 4807,
+      "startFrame": 327,
+      "durationFrames": 155,
+      "cues": {
+        "a": 1954,
+        "b": 3259
+      },
+      "captions": [
+        {
+          "text": "CFO克雷斯临时接任CEO",
+          "startMs": 135,
+          "endMs": 1954
+        },
+        {
+          "text": "同时继续当CFO",
+          "startMs": 1954,
+          "endMs": 3259
+        },
+        {
+          "text": "正式人选内外部一起找",
+          "startMs": 3259,
+          "endMs": 5161
+        }
+      ]
+    },
+    {
+      "id": "chair",
+      "audioSrc": "audio/tutorials/nvidia-huang-resigns/04-chair.mp3",
+      "audioMs": 3762,
+      "startFrame": 482,
+      "durationFrames": 124,
+      "cues": {
+        "a": 1464
+      },
+      "captions": [
+        {
+          "text": "董事会第一次设主席",
+          "startMs": 135,
+          "endMs": 1464
+        },
+        {
+          "text": "1993年就进董事会的哈维·琼斯",
+          "startMs": 1464,
+          "endMs": 4068
+        }
+      ]
+    },
+    {
+      "id": "reason",
+      "audioSrc": "audio/tutorials/nvidia-huang-resigns/05-reason.mp3",
+      "audioMs": 3579,
+      "startFrame": 606,
+      "durationFrames": 118,
+      "cues": {
+        "a": 1254
+      },
+      "captions": [
+        {
+          "text": "官方没给辞职原因",
+          "startMs": 135,
+          "endMs": 1254
+        },
+        {
+          "text": "据外媒报道",
+          "startMs": 1254,
+          "endMs": 2146
+        },
+        {
+          "text": "与他的私人事务有关",
+          "startMs": 2146,
+          "endMs": 3797
+        }
+      ]
+    },
+    {
+      "id": "price",
+      "audioSrc": "audio/tutorials/nvidia-huang-resigns/06-price.mp3",
+      "audioMs": 5799,
+      "startFrame": 724,
+      "durationFrames": 185,
+      "cues": {
+        "a": 1735,
+        "b": 3051
+      },
+      "captions": [
+        {
+          "text": "股价：盘前跌11%",
+          "startMs": 135,
+          "endMs": 1735
+        },
+        {
+          "text": "开盘跌超13%",
+          "startMs": 1735,
+          "endMs": 3051
+        },
+        {
+          "text": "美东10点17分",
+          "startMs": 3051,
+          "endMs": 4260
+        },
+        {
+          "text": "收窄到跌约6%",
+          "startMs": 4260,
+          "endMs": 6117
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/nvidia-huang-resigns/07-end.mp3",
+      "audioMs": 2612,
+      "startFrame": 909,
+      "durationFrames": 89,
+      "cues": {
+        "a": 1569
+      },
+      "captions": [
+        {
+          "text": "接下来看11月17日",
+          "startMs": 135,
+          "endMs": 1569
+        },
+        {
+          "text": "财报照常发布",
+          "startMs": 1569,
+          "endMs": 2892
+        }
+      ]
+    }
+  ]
+}
