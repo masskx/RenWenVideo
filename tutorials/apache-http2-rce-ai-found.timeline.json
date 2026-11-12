@@ -1,0 +1,193 @@
+{
+  "id": "apache-http2-rce-ai-found",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1118,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/apache-http2-rce-ai-found/01-hook.mp3",
+      "audioMs": 5329,
+      "startFrame": 0,
+      "durationFrames": 171,
+      "cues": {
+        "a": 2688,
+        "b": 3482
+      },
+      "captions": [
+        {
+          "text": "Apache刚修了一个能",
+          "startMs": 135,
+          "endMs": 1114
+        },
+        {
+          "text": "远程执行代码的严重漏洞",
+          "startMs": 1114,
+          "endMs": 2688
+        },
+        {
+          "text": "最早报告它的",
+          "startMs": 2688,
+          "endMs": 3482
+        },
+        {
+          "text": "是Anthropic的AI扫描器",
+          "startMs": 3482,
+          "endMs": 5600
+        }
+      ]
+    },
+    {
+      "id": "clock",
+      "audioSrc": "audio/tutorials/apache-http2-rce-ai-found/02-clock.mp3",
+      "audioMs": 5956,
+      "startFrame": 171,
+      "durationFrames": 190,
+      "cues": {
+        "a": 1534,
+        "b": 3171
+      },
+      "captions": [
+        {
+          "text": "10月26日它报给Apache",
+          "startMs": 135,
+          "endMs": 1534
+        },
+        {
+          "text": "11月3日谷歌团队也报了",
+          "startMs": 1534,
+          "endMs": 3171
+        },
+        {
+          "text": "11月11日发布修复版2.4.71",
+          "startMs": 3171,
+          "endMs": 6273
+        }
+      ]
+    },
+    {
+      "id": "gate",
+      "audioSrc": "audio/tutorials/apache-http2-rce-ai-found/03-gate.mp3",
+      "audioMs": 7262,
+      "startFrame": 361,
+      "durationFrames": 229,
+      "cues": {
+        "a": 1429,
+        "b": 4906
+      },
+      "captions": [
+        {
+          "text": "中招要同时满足两条",
+          "startMs": 135,
+          "endMs": 1429
+        },
+        {
+          "text": "版本在2.4.55到2.4.70",
+          "startMs": 1429,
+          "endMs": 4906
+        },
+        {
+          "text": "而且开了HTTP/2",
+          "startMs": 4906,
+          "endMs": 6138
+        },
+        {
+          "text": "它默认是关的",
+          "startMs": 6138,
+          "endMs": 7450
+        }
+      ]
+    },
+    {
+      "id": "wiz",
+      "audioSrc": "audio/tutorials/apache-http2-rce-ai-found/04-wiz.mp3",
+      "audioMs": 4571,
+      "startFrame": 590,
+      "durationFrames": 148,
+      "cues": {
+        "a": 1149,
+        "b": 3691
+      },
+      "captions": [
+        {
+          "text": "安全公司Wiz自称",
+          "startMs": 135,
+          "endMs": 1149
+        },
+        {
+          "text": "64%的云环境里有受影响的资源",
+          "startMs": 1149,
+          "endMs": 3691
+        },
+        {
+          "text": "但没算配置",
+          "startMs": 3691,
+          "endMs": 4875
+        }
+      ]
+    },
+    {
+      "id": "known",
+      "audioSrc": "audio/tutorials/apache-http2-rce-ai-found/05-known.mp3",
+      "audioMs": 5120,
+      "startFrame": 738,
+      "durationFrames": 165,
+      "cues": {
+        "a": 2548,
+        "b": 4328
+      },
+      "captions": [
+        {
+          "text": "官方和Wiz发布时都没报告在野攻击",
+          "startMs": 135,
+          "endMs": 2548
+        },
+        {
+          "text": "红帽说有研究演示过可靠利用",
+          "startMs": 2548,
+          "endMs": 4328
+        },
+        {
+          "text": "但没公开",
+          "startMs": 4328,
+          "endMs": 5344
+        }
+      ]
+    },
+    {
+      "id": "act",
+      "audioSrc": "audio/tutorials/apache-http2-rce-ai-found/06-act.mp3",
+      "audioMs": 6792,
+      "startFrame": 903,
+      "durationFrames": 215,
+      "cues": {
+        "a": 730,
+        "b": 2604
+      },
+      "captions": [
+        {
+          "text": "所以现在：httpd -v 查版本",
+          "startMs": 135,
+          "endMs": 2604
+        },
+        {
+          "text": "升到2.4.71",
+          "startMs": 2604,
+          "endMs": 4615
+        },
+        {
+          "text": "暂时升不了",
+          "startMs": 4615,
+          "endMs": 5322
+        },
+        {
+          "text": "先关掉HTTP/2",
+          "startMs": 5322,
+          "endMs": 7058
+        }
+      ]
+    }
+  ]
+}

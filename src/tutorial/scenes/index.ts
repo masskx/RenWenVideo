@@ -57,6 +57,7 @@ import {opensshMuslScenes} from './openssh-musl-auth-bypass-ai';
 import {usDatacenterPauseScenes} from './us-ai-datacenter-pause';
 import {NRTA_SCENES} from './nrta-ai-duanju-regulate';
 import {SEEDANCE_WORKFLOW_SCENES} from './seedance-claude-video-workflow';
+import {APACHE_H2_SCENES} from './apache-http2-rce-ai-found';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -120,4 +121,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...usDatacenterPauseScenes,
   ...NRTA_SCENES,
   ...SEEDANCE_WORKFLOW_SCENES,
+  ...APACHE_H2_SCENES,
 };
