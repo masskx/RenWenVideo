@@ -106,7 +106,7 @@ const Clock = make(({f, cue, dur}) => {
   return <Desk f={f} dur={dur}>
     <div style={{position: 'absolute', left: 64, top: 180}}>
       <div style={{fontFamily: plex, fontSize: 28, color: DIM}}>2026</div>
-      <div style={{fontFamily: plex, fontWeight: 600, fontSize: 190, color: TXT, lineHeight: 1}}>{DATES[k].d}</div>
+      <div style={{fontFamily: plex, fontWeight: 600, fontSize: 190, color: TXT, lineHeight: 1}}>{(() => { const d = Math.round(play); return d <= 5 ? `10-${26 + d}` : `11-${String(d - 5).padStart(2, '0')}`; })()}</div>
       <div style={{fontFamily: plex, fontSize: 44, color: RED, marginTop: 8}}>T+{Math.round(play)} 天</div>
     </div>
     <svg width={1080} height={1920} style={{position: 'absolute', left: 0, top: 0}}>
