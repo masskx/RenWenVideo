@@ -183,14 +183,14 @@
    "visual": "nvb.hook",
    "step": 0,
    "pace": "fast",
-   "narration": "据《华尔街日报》独家报道，英伟达董事会准备罢免黄仁勋，{a}消息出来后，盘后报价跌了8.61%。"
+   "narration": "据《华尔街日报》独家报道，英伟达董事会准备罢免黄仁勋，{a}消息一出，盘后报价跌了8.61%。"
   },
   {
    "id": "status",
    "visual": "nvb.status",
    "step": 0,
    "pace": "fast",
-   "narration": "这还只是报道：{a}截至发稿，公司没宣布任何决定。"
+   "narration": "这还只是报道：{a}公司还没宣布任何决定。"
   },
   {
    "id": "rule",
@@ -204,7 +204,7 @@
    "visual": "nvb.seats",
    "step": 0,
    "pace": "fast",
-   "narration": "董事会11人，10人是独立董事，{a}6票就够；{b}黄仁勋持股3.58%，在这里也只占一票。"
+   "narration": "董事会11人，10人独立，{a}6票就够；{b}黄仁勋持股3.58%，在这里也只占一票。"
   },
   {
    "id": "who",
@@ -218,7 +218,7 @@
    "visual": "nvb.risk",
    "step": 0,
    "pace": "fast",
-   "narration": "英伟达年报自己写着：{a}高度依赖长期经营团队，{b}继任规划做不好，会伤到长期发展。"
+   "narration": "年报自己写着：{a}高度依赖长期经营团队，{b}继任规划做不好，会伤到长期发展。"
   },
   {
    "id": "end",
@@ -229,6 +229,6 @@
   }
  ],
  "musicSrc": "audio/tutorials/nvidia-board-oust-huang/score.mp3",
- "musicVolume": 0.13,
+ "musicVolume": 0.129,
  "musicDuckDb": 10
 }

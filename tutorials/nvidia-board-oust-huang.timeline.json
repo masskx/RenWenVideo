@@ -4,59 +4,59 @@
   "rate": null,
   "fps": 30,
   "leadMs": 100,
-  "totalFrames": 1112,
+  "totalFrames": 1030,
   "scenes": [
     {
       "id": "hook",
       "audioSrc": "audio/tutorials/nvidia-board-oust-huang/01-hook.mp3",
-      "audioMs": 6113,
+      "audioMs": 6139,
       "startFrame": 0,
-      "durationFrames": 194,
+      "durationFrames": 195,
       "cues": {
-        "a": 3280
+        "a": 3428
       },
       "captions": [
         {
           "text": "据《华尔街日报》独家报道",
           "startMs": 135,
-          "endMs": 1499
+          "endMs": 1534
         },
         {
           "text": "英伟达董事会准备罢免黄仁勋",
-          "startMs": 1499,
-          "endMs": 3280
+          "startMs": 1534,
+          "endMs": 3428
         },
         {
-          "text": "消息出来后",
-          "startMs": 3280,
-          "endMs": 4135
+          "text": "消息一出",
+          "startMs": 3428,
+          "endMs": 4183
         },
         {
           "text": "盘后报价跌了8.61%",
-          "startMs": 4135,
-          "endMs": 6338
+          "startMs": 4183,
+          "endMs": 6384
         }
       ]
     },
     {
       "id": "status",
       "audioSrc": "audio/tutorials/nvidia-board-oust-huang/02-status.mp3",
-      "audioMs": 3187,
-      "startFrame": 194,
-      "durationFrames": 107,
+      "audioMs": 2299,
+      "startFrame": 195,
+      "durationFrames": 80,
       "cues": {
-        "a": 1009
+        "a": 939
       },
       "captions": [
         {
           "text": "这还只是报道",
           "startMs": 135,
-          "endMs": 1009
+          "endMs": 939
         },
         {
-          "text": "截至发稿，公司没宣布任何决定",
-          "startMs": 1009,
-          "endMs": 3437
+          "text": "公司还没宣布任何决定",
+          "startMs": 939,
+          "endMs": 2583
         }
       ]
     },
@@ -64,7 +64,7 @@
       "id": "rule",
       "audioSrc": "audio/tutorials/nvidia-board-oust-huang/03-rule.mp3",
       "audioMs": 4180,
-      "startFrame": 301,
+      "startFrame": 275,
       "durationFrames": 136,
       "cues": {
         "a": 939,
@@ -91,38 +91,33 @@
     {
       "id": "seats",
       "audioSrc": "audio/tutorials/nvidia-board-oust-huang/04-seats.mp3",
-      "audioMs": 6034,
-      "startFrame": 437,
-      "durationFrames": 192,
+      "audioMs": 5198,
+      "startFrame": 411,
+      "durationFrames": 167,
       "cues": {
-        "a": 2181,
-        "b": 3096
+        "a": 1618,
+        "b": 2382
       },
       "captions": [
         {
           "text": "董事会11人",
           "startMs": 135,
-          "endMs": 1009
+          "endMs": 904
         },
         {
-          "text": "10人是独立董事",
-          "startMs": 1009,
-          "endMs": 2181
-        },
-        {
-          "text": "6票就够",
-          "startMs": 2181,
-          "endMs": 3096
+          "text": "10人独立，6票就够",
+          "startMs": 904,
+          "endMs": 2382
         },
         {
           "text": "黄仁勋持股3.58%",
-          "startMs": 3096,
-          "endMs": 4682
+          "startMs": 2382,
+          "endMs": 3904
         },
         {
           "text": "在这里也只占一票",
-          "startMs": 4682,
-          "endMs": 6318
+          "startMs": 3904,
+          "endMs": 5474
         }
       ]
     },
@@ -130,7 +125,7 @@
       "id": "who",
       "audioSrc": "audio/tutorials/nvidia-board-oust-huang/05-who.mp3",
       "audioMs": 5747,
-      "startFrame": 629,
+      "startFrame": 578,
       "durationFrames": 183,
       "cues": {
         "a": 2146,
@@ -162,33 +157,33 @@
     {
       "id": "risk",
       "audioSrc": "audio/tutorials/nvidia-board-oust-huang/06-risk.mp3",
-      "audioMs": 5486,
-      "startFrame": 812,
-      "durationFrames": 176,
+      "audioMs": 4467,
+      "startFrame": 761,
+      "durationFrames": 145,
       "cues": {
-        "a": 1429,
-        "b": 3063
+        "a": 1009,
+        "b": 2400
       },
       "captions": [
         {
-          "text": "英伟达年报自己写着",
+          "text": "年报自己写着",
           "startMs": 135,
-          "endMs": 1429
+          "endMs": 1009
         },
         {
           "text": "高度依赖长期经营团队",
-          "startMs": 1429,
-          "endMs": 3063
+          "startMs": 1009,
+          "endMs": 2400
         },
         {
           "text": "继任规划做不好",
-          "startMs": 3063,
-          "endMs": 4274
+          "startMs": 2400,
+          "endMs": 3401
         },
         {
           "text": "会伤到长期发展",
-          "startMs": 4274,
-          "endMs": 5805
+          "startMs": 3401,
+          "endMs": 4811
         }
       ]
     },
@@ -196,7 +191,7 @@
       "id": "end",
       "audioSrc": "audio/tutorials/nvidia-board-oust-huang/07-end.mp3",
       "audioMs": 3762,
-      "startFrame": 988,
+      "startFrame": 906,
       "durationFrames": 124,
       "cues": {
         "a": 1114,
