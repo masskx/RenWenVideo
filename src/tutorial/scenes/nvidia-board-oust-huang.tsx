@@ -35,10 +35,10 @@ const make = (draw: NonNullable<Scene['backdrop']>, sfx?: Scene['sfx'], wipe = t
   S.sfx = sfx;
   return S;
 };
-const Frame: React.FC<{f: number; strap: StrapItem[]; src?: [string, number]; children: React.ReactNode}> = ({f, strap, src, children}) => (
+const Frame: React.FC<{f: number; dur?: number; strap: StrapItem[]; src?: [string, number]; children: React.ReactNode}> = ({f, dur = 150, strap, src, children}) => (
   <div style={{position: 'absolute', inset: 0, background: k.bg, overflow: 'hidden'}}>
-    {[0, 1, 2].map((i) => <div key={i} style={{position: 'absolute', left: -200 + i * 420, top: -200, width: 120, height: 2400, transform: 'rotate(24deg)', background: 'rgba(118,185,0,0.035)'}} />)}
-    {children}
+    {[0, 1, 2].map((i) => <div key={i} style={{position: 'absolute', left: -200 + i * 420 + ((f * 3) % 420), top: -200, width: 120, height: 2400, transform: 'rotate(24deg)', background: 'rgba(118,185,0,0.05)'}} />)}
+    <div style={{position: 'absolute', inset: 0, transformOrigin: '50% 40%', transform: `scale(${1 + 0.06 * ease.inOutCubic(clamp(f / dur))})`}}>{children}</div>
     <Veil from={1120} top={false} a={0.9} />
     <Bug k={k} tag="AI 新闻" topic="英伟达董事会" en="NVIDIA BOARD" />
     {src && <SourceTag k={k} label={src[0]} f={f} at={src[1]} />}
@@ -53,7 +53,7 @@ const Push: React.FC<{f: number; dur: number; children: React.ReactNode}> = ({f,
 
 const Hook = make(({f, cue, dur}) => {
   const a = cue('a', 98);
-  return <Frame f={f} strap={[S_REPORT]} src={['视频 NVIDIA GTC 2026 高光｜案例展示', 0]}>
+  return <Frame f={f} dur={dur} strap={[S_REPORT]} src={['视频 NVIDIA GTC 2026 高光｜案例展示', 0]}>
     <Push f={f} dur={dur}>
       <div style={{position: 'absolute', left: 0, top: 200, width: 1080, height: 960, overflow: 'hidden'}}>
         <OffthreadVideo src={staticFile('video/nvidia-board-oust-huang/keynote-99.mp4')} muted playbackRate={0.6} style={{position: 'absolute', left: -340, top: 0, height: 960, width: 1707, objectFit: 'cover', filter: `brightness(${0.75 - 0.35 * eo(f, a - 6, a + 6)}) contrast(1.05)`}} />
@@ -74,9 +74,9 @@ const Hook = make(({f, cue, dur}) => {
 /* ---------- 2 status: still only a report ---------- */
 
 const ROWS: [string, string][] = [['英伟达新闻中心', '最新相关稿：11-10 独立董事声明'], ['SEC EDGAR', '11 月没有 8-K（最近一份 09-03）'], ['官方 X / 黄仁勋 X', '未回应这篇报道']];
-const Status = make(({f, cue}) => {
+const Status = make(({f, cue, dur}) => {
   const a = cue('a', 30);
-  return <Frame f={f} strap={[S_REPORT, {...S_CHECK, at: 4}]}>
+  return <Frame f={f} dur={dur} strap={[S_REPORT, {...S_CHECK, at: 4}]}>
     <div style={{position: 'absolute', left: 64, top: 260, fontFamily: plex, fontSize: 30, color: k.dim}}>截至 2026-11-12 · 我们复查</div>
     {ROWS.map(([w, t], i) => f < a + i * 8 ? null : <div key={i} style={{position: 'absolute', left: 64, top: 330 + i * 200, width: 952, opacity: eo(f, a + i * 8, a + i * 8 + 6), background: k.panel, borderLeft: `8px solid ${k.dim}`, padding: '22px 28px'}}>
       <div style={{fontFamily: plex, fontSize: 30, color: k.dim}}>{w}</div>
@@ -89,9 +89,9 @@ const Status = make(({f, cue}) => {
 /* ---------- 3 rule: Section 32, typeset ---------- */
 
 const BYLAW = 'Any officer may be removed from office at any time, either with or without cause, by the affirmative vote of a majority of the directors in office at the time …';
-const Rule = make(({f, cue}) => {
+const Rule = make(({f, cue, dur}) => {
   const a = cue('a', 28), b = cue('b', 77);
-  return <Frame f={f} strap={[S_CHECK, {...S_RULE, at: 4}]} src={['公司细则 · SEC 备案 2024-03-12', 0]}>
+  return <Frame f={f} dur={dur} strap={[S_CHECK, {...S_RULE, at: 4}]} src={['公司细则 · SEC 备案 2024-03-12', 0]}>
     <Doc k={k} f={f} at={2} head="NVIDIA BYLAWS · SECTION 32. REMOVAL" body={BYLAW} mark="a majority of the directors in office" markAt={a} y={300} size={50} />
     {f >= b && <div style={{position: 'absolute', left: 90, top: 940, display: 'flex', gap: 20, opacity: eo(f, b, b + 6)}}>
       <div style={{background: GREEN, color: k.onAccent, fontFamily: font, fontWeight: 900, fontSize: 52, padding: '10px 26px'}}>有因或无因</div>
@@ -115,7 +115,7 @@ const Seats = make(({f, cue, dur}) => {
   const pos = Array.from({length: 11}, (_, i) => i < 6 ? {x: 70 + i * 160, y: 420} : {x: 150 + (i - 6) * 160, y: 610});
   const lit = (i: number): number => (i < 6 && f >= a + i * 4 ? 1 : 0);
   const n: number = Array.from({length: 6}, (_, i) => lit(i)).reduce((s: number, v) => s + v, 0);
-  return <Frame f={f} strap={[S_RULE, {...S_MATH, at: 4}]} src={['董事名单 · NVIDIA 投资者关系页', 0]}>
+  return <Frame f={f} dur={dur} strap={[S_RULE, {...S_MATH, at: 4}]} src={['董事名单 · NVIDIA 投资者关系页', 0]}>
     <Push f={f} dur={dur}>
       <div style={{position: 'absolute', left: 64, top: 300, fontFamily: font, fontWeight: 900, fontSize: 56, color: k.ink}}>董事会 <span style={{fontFamily: cond, fontSize: 80}}>11</span> 人 · <span style={{color: k.dim}}>10 人独立</span></div>
       {pos.map((p, i) => <Seat key={i} x={p.x} y={p.y} on={lit(i)} f={f} at={6 + i * 3} ceo={i === 10} />)}
@@ -137,9 +137,9 @@ const Seats = make(({f, cue, dur}) => {
 
 /* ---------- 5 who: the reported interim pick, attributed ---------- */
 
-const Who = make(({f, cue}) => {
+const Who = make(({f, cue, dur}) => {
   const a = cue('a', 64), b = cue('b', 133);
-  return <Frame f={f} strap={[S_MATH, {...S_WHO, at: 4}]}>
+  return <Frame f={f} dur={dur} strap={[S_MATH, {...S_WHO, at: 4}]}>
     <QuoteCard k={k} f={f} at={2} lines={['若罢免黄仁勋，', '由 CFO Colette Kress', '出任临时 CEO']} gist="——部分董事的倾向" who="SEMAFOR · 据知情人士 · 2026-11-11" mark="Colette Kress" markAt={a} y={300} size={78} />
     {f >= b && <div style={{position: 'absolute', left: 64, top: 960, border: `4px dashed ${k.dim}`, padding: '12px 26px', fontFamily: font, fontWeight: 900, fontSize: 54, color: k.ink, opacity: eo(f, b, b + 6)}}>全体董事尚未决定</div>}
   </Frame>;
@@ -149,7 +149,7 @@ const Who = make(({f, cue}) => {
 
 const Risk = make(({f, cue, dur}) => {
   const a = cue('a', 43), b = cue('b', 92);
-  return <Frame f={f} strap={[S_WHO, {...S_RISK, at: 4}]} src={['照片 Peter Dasilva · CC BY 4.0', 0]}>
+  return <Frame f={f} dur={dur} strap={[S_WHO, {...S_RISK, at: 4}]} src={['照片 Peter Dasilva · CC BY 4.0', 0]}>
     <Push f={f} dur={dur}>
       <div style={{position: 'absolute', left: 380, top: 200, width: 700, height: 960, overflow: 'hidden'}}>
         <Img src={IMG('huang.jpg')} style={{width: 700, height: 1040, objectFit: 'cover', filter: 'grayscale(0.4) brightness(0.45) contrast(1.05)'}} />
@@ -163,7 +163,7 @@ const Risk = make(({f, cue, dur}) => {
 
 /* ---------- 7 end: two things to watch ---------- */
 
-const End = make(({f, cue}) => {
+const End = make(({f, cue, dur}) => {
   const a = cue('a', 33), b = cue('b', 65);
   const card = (at: number, top: number, kicker: string, title: string, note: string, pending: boolean) => f < at ? null : (
     <div style={{position: 'absolute', left: 64, top: top + (1 - eo(f, at, at + 7)) * 60, width: 952, opacity: eo(f, at, at + 6), background: k.panel, borderLeft: `10px solid ${pending ? k.dim : GREEN}`, padding: '24px 30px'}}>
@@ -171,7 +171,7 @@ const End = make(({f, cue}) => {
       <div style={{fontFamily: font, fontWeight: 900, fontSize: 64, color: k.ink, marginTop: 6}}>{title}</div>
       <div style={{fontFamily: font, fontWeight: 700, fontSize: 32, color: k.dim, marginTop: 8}}>{note}</div>
     </div>);
-  return <Frame f={f} strap={[S_RISK, {...S_NEXT, at: 4}]}>
+  return <Frame f={f} dur={dur} strap={[S_RISK, {...S_NEXT, at: 4}]}>
     {card(a, 320, '1 · 待公布', '董事会的正式决定', '公司公告 / SEC 8-K 为准', true)}
     {card(b, 640, '2 · 11-17 美西 14:00', 'Q3 财报电话会', '10 月 28 日已预告的既定安排', false)}
   </Frame>;
