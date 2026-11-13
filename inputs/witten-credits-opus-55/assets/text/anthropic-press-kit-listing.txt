@@ -1,0 +1,61 @@
+Archive:  /tmp/anthropic-press-kit.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+        0  2026-01-12 23:33   Anthropic media resources/
+        0  2025-09-26 00:31   Anthropic media resources/Anthropic logos/
+        0  2026-01-12 23:33   Anthropic media resources/Anthropic leadership/
+        0  2025-10-07 05:36   Anthropic media resources/Anthropic logos/Anthropic logos/
+        0  2026-01-24 02:03   Anthropic media resources/Anthropic logos/Claude logos/
+        0  2026-01-12 23:30   Anthropic media resources/Anthropic leadership/Headshots/
+    95028  2026-01-12 23:29   Anthropic media resources/Anthropic leadership/Executive-bios.pdf
+        0  2025-10-07 05:38   Anthropic media resources/Anthropic logos/Anthropic logos/2 Anthropic symbol/
+        0  2025-10-07 05:38   Anthropic media resources/Anthropic logos/Anthropic logos/1 Anthropic logo/
+        0  2026-01-20 09:10   Anthropic media resources/Anthropic logos/Claude logos/1 Claude logo/
+        0  2026-01-12 23:43   Anthropic media resources/Anthropic logos/Claude logos/4 Claude icon/
+        0  2026-01-20 09:16   Anthropic media resources/Anthropic logos/Claude logos/2 Claude Code logo/
+        0  2026-01-24 02:03   Anthropic media resources/Anthropic logos/Claude logos/3 Claude Spark/
+  1351689  2025-07-24 07:53   Anthropic media resources/Anthropic leadership/Headshots/Anthropic-dario-amodei.jpg
+ 22925439  2024-04-09 04:56   Anthropic media resources/Anthropic leadership/Headshots/Anthropic-dario-daniela.jpg
+   288586  2025-07-24 07:53   Anthropic media resources/Anthropic leadership/Headshots/Anthropic-daniela-amodei.jpg
+   281024  2025-07-24 07:53   Anthropic media resources/Anthropic leadership/Headshots/Anthropic-jack-clark.jpg
+   312260  2025-07-24 07:53   Anthropic media resources/Anthropic leadership/Headshots/Anthropic-jared-kaplan.jpg
+        0  2025-10-07 05:49   Anthropic media resources/Anthropic logos/Anthropic logos/2 Anthropic symbol/SVG/
+        0  2026-01-13 00:01   Anthropic media resources/Anthropic logos/Anthropic logos/2 Anthropic symbol/PNG/
+        0  2025-10-07 05:48   Anthropic media resources/Anthropic logos/Anthropic logos/1 Anthropic logo/SVG/
+        0  2026-01-22 01:25   Anthropic media resources/Anthropic logos/Anthropic logos/1 Anthropic logo/PNG/
+        0  2026-01-20 09:10   Anthropic media resources/Anthropic logos/Claude logos/1 Claude logo/SVG/
+        0  2026-01-20 08:59   Anthropic media resources/Anthropic logos/Claude logos/1 Claude logo/PNG/
+        0  2025-12-19 23:18   Anthropic media resources/Anthropic logos/Claude logos/4 Claude icon/SVG/
+        0  2025-12-19 23:18   Anthropic media resources/Anthropic logos/Claude logos/4 Claude icon/PNG/
+        0  2026-01-20 09:16   Anthropic media resources/Anthropic logos/Claude logos/2 Claude Code logo/SVG/
+        0  2026-01-20 08:59   Anthropic media resources/Anthropic logos/Claude logos/2 Claude Code logo/PNG/
+        0  2025-10-07 05:58   Anthropic media resources/Anthropic logos/Claude logos/3 Claude Spark/SVG/
+        0  2025-10-07 05:59   Anthropic media resources/Anthropic logos/Claude logos/3 Claude Spark/PNG/
+      350  2025-10-07 05:44   Anthropic media resources/Anthropic logos/Anthropic logos/2 Anthropic symbol/SVG/Anthropic symbol - Slate.svg
+      340  2025-10-07 05:44   Anthropic media resources/Anthropic logos/Anthropic logos/2 Anthropic symbol/SVG/Anthropic symbol - Ivory.svg
+    16642  2025-12-19 23:35   Anthropic media resources/Anthropic logos/Anthropic logos/2 Anthropic symbol/PNG/Anthropic symbol - Slate.png
+    17008  2025-10-07 05:58   Anthropic media resources/Anthropic logos/Anthropic logos/2 Anthropic symbol/PNG/Anthropic symbol - Ivory.png
+     1978  2025-10-07 05:44   Anthropic media resources/Anthropic logos/Anthropic logos/1 Anthropic logo/SVG/Anthropic logo - Slate.svg
+     1976  2025-10-07 05:44   Anthropic media resources/Anthropic logos/Anthropic logos/1 Anthropic logo/SVG/Anthropic logo - Ivory.svg
+    45019  2025-10-07 05:49   Anthropic media resources/Anthropic logos/Anthropic logos/1 Anthropic logo/PNG/Anthropic logo - Slate.png
+    45827  2025-10-07 05:49   Anthropic media resources/Anthropic logos/Anthropic logos/1 Anthropic logo/PNG/Anthropic logo - Ivory.png
+     4377  2026-01-20 09:09   Anthropic media resources/Anthropic logos/Claude logos/1 Claude logo/SVG/Claude logo - Slate.svg
+     4329  2026-01-20 09:10   Anthropic media resources/Anthropic logos/Claude logos/1 Claude logo/SVG/Claude logo - One-color.svg
+     4377  2026-01-20 09:09   Anthropic media resources/Anthropic logos/Claude logos/1 Claude logo/SVG/Claude logo - Ivory.svg
+    59969  2026-01-16 03:39   Anthropic media resources/Anthropic logos/Claude logos/1 Claude logo/PNG/Claude logo - Slate.png
+    59871  2026-01-16 03:39   Anthropic media resources/Anthropic logos/Claude logos/1 Claude logo/PNG/Claude logo - Ivory.png
+    44274  2026-01-16 03:39   Anthropic media resources/Anthropic logos/Claude logos/1 Claude logo/PNG/Claude logo - One-color.png
+     3064  2025-12-19 23:04   Anthropic media resources/Anthropic logos/Claude logos/4 Claude icon/SVG/ClaudeIcon-Rounded.svg
+     3048  2025-12-19 23:04   Anthropic media resources/Anthropic logos/Claude logos/4 Claude icon/SVG/ClaudeIcon-Square.svg
+   363204  2025-12-19 23:04   Anthropic media resources/Anthropic logos/Claude logos/4 Claude icon/PNG/ClaudeIcon-Rounded.png
+   356176  2025-12-19 23:04   Anthropic media resources/Anthropic logos/Claude logos/4 Claude icon/PNG/ClaudeIcon-Square.png
+     7000  2026-01-20 09:16   Anthropic media resources/Anthropic logos/Claude logos/2 Claude Code logo/SVG/Claude Code logo - Slate.svg
+     6926  2026-01-20 09:15   Anthropic media resources/Anthropic logos/Claude logos/2 Claude Code logo/SVG/Claude Code logo - One-color.svg
+     8335  2026-01-20 09:16   Anthropic media resources/Anthropic logos/Claude logos/2 Claude Code logo/SVG/Claude Code logo - Ivory.svg
+    63192  2026-01-16 03:39   Anthropic media resources/Anthropic logos/Claude logos/2 Claude Code logo/PNG/Claude Code logo - One-color.png
+    84971  2026-01-16 03:39   Anthropic media resources/Anthropic logos/Claude logos/2 Claude Code logo/PNG/Claude Code logo - Slate.png
+    85801  2026-01-16 03:39   Anthropic media resources/Anthropic logos/Claude logos/2 Claude Code logo/PNG/Claude Code logo - Ivory.png
+     2580  2025-10-07 05:42   Anthropic media resources/Anthropic logos/Claude logos/3 Claude Spark/SVG/Claude Spark - Clay.svg
+    39563  2025-10-07 05:58   Anthropic media resources/Anthropic logos/Claude logos/3 Claude Spark/PNG/Claude Spark - Clay.png
+---------                     -------
+ 26699295                     139 files

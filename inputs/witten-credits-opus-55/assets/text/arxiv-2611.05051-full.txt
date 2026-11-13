@@ -1,0 +1,1964 @@
+arXiv:2611.05051v1 [hep-lat] 3 Nov 2026
+
+A Note On Lattice Definition of Gauge Theories With
+Chiral Fermions
+
+Edward Witten
+School of Natural Sciences, Institute for Advanced Study,
+1 Einstein Drive, Princeton, NJ 08540 USA
+
+Abstract: Because of the fermion doubling problem, it has been a longstanding challenge
+to describe a lattice algorithm for studying four-dimensional gauge theories coupled to
+chiral fermions. Recently, an algorithm to do so has been described by Craig, extending
+partial results in the previous literature. Here we describe a variant of this algorithm,
+based on interpolating a lattice gauge field over the continuum (as in Craig’s work) and
+coupling the interpolated gauge field to continuum chiral fermions. The same variant was
+also proposed recently by Hsu. In any dimension and for any anomaly-free representation,
+this approach can be implemented on a computer in principle, but not in practice by Monte
+Carlo methods because the chiral fermion path integral is not positive.
+
+Contents
+1 Introduction
+1.1 The Fermion Path Integral In A Background Field
+1.2 Interpolating A Lattice Gauge Field To The Continuum
+1.3 Organization of This Article
+
+1
+2
+5
+7
+
+2 The Path Integral of Anomaly-Free Chiral Fermions
+2.1 Anomaly Inflow and the Eta-Invariant
+2.2 Anomalies and the Chiral Partition Function
+2.3 Theta-Angles And Fermion Zero-Modes
+
+7
+8
+13
+16
+
+3 Continuum Interpolations of Admissible Lattice Gauge Fields
+
+24
+
+4 Can This Regularization Be Implemented on a Computer?
+
+31
+
+1
+
+Introduction
+
+Lattice gauge theory [1] provides a very satisfactory regularization of four-dimensional
+Yang-Mills theory, and has offered an effective starting point for nonperturbative numerical exploration of this theory, as pioneered in [2]. The same framework is applicable – with
+considerably more difficulty – for gauge theories like QCD with fermions in vector-like
+representations. However, because of the fermion doubling problem, which is well characterized by the Nielsen-Ninomiya theorem [3], it has been notoriously difficult to describe in
+this framework gauge theories with chiral fermions, such as the Standard Model of particle
+physics.
+Ginsparg and Wilson proposed a strategy to circumvent the fermion doubling problem
+[4]. Building on the domain wall fermions of Kaplan [5], Narayanan and Neuberger [6, 7]
+interpreted the chiral fermion determinant as an overlap. Neuberger [8] and Hasenfratz
+[9] then derived lattice Dirac operators that satisfy the Ginsparg-Wilson relation, and
+Lüscher [10] showed that this implies an exact chiral symmetry of the classical lattice action.
+But this framework does not provide any immediate way to define a suitable measure for
+integration over these fermions, so quantization is not obvious. However, Lüscher was
+able to define such a measure for chiral gauge theories with abelian gauge group [11],
+thus achieving a lattice regularization for such theories. One important ingredient in this
+construction was a restriction to “admissible” gauge fields – gauge fields whose plaquette
+curvatures are small.
+The extension of Lüscher’s construction to nonabelian gauge theory was not straightforward. Lüscher himself showed that a nonabelian version of his construction works to
+all orders of perturbation theory around the trivial connection [12], and there were several
+
+–1–
+
+other partial results [13–15]. Very recently, Craig overcame the difficulties and, with the
+aid of several new ideas, finally constructed a lattice regularization of chiral gauge theories
+in enough generality to encompass the Standard Model [16].
+In this article, we will revisit this subject, and explain a slightly different route to the
+objective using two key facts. The second of these facts was also used by Craig, and the
+first is closely related to facts that he used. Actually, following the appearance of Craig’s
+paper and while the present one was being written, another paper appeared by Hsu [17]
+also describing a lattice regularization of chiral fermions and using the same key facts that
+the present article is based on. We will say more about Hsu’s paper and the background
+to it in section 1.2.
+Our analysis gives several generalizations of previous results (very likely the arguments
+in [16, 17] can be modestly extended to yield these generalizations). First, we use no special
+properties of the gauge group or fermion representation, so in four dimensions our analysis
+applies for any gauge group and anomaly-free fermion representation. Second (provided
+one follows the general analysis in section 2.4 of [18] or in the appendix of [19] rather than
+the simpler explanation we give in section 2.1), our discussion generalizes to any anomalyfree fermion system in any dimension, such as chiral fermions in two dimensions or more
+exotic cases such as nonperturbative anomalies of three-dimensional fermions in theories
+with time-reversal symmetry. Finally, our discussion applies on an arbitrary compact
+Euclidean spin manifold, not necessarily a torus. One might question the importance of
+this generalization, as lattice gauge theory is usually formulated on a torus. However,
+since gravity does exist in the real world, part of the consistency of anomaly-free chiral
+gauge theories such as the Standard Model is that they can be consistently coupled to
+gravity. And part of the consistency of that coupling is that these models can be defined
+in Euclidean signature on any spin manifold.
+We now summarize the two key facts that we will use. This summary is detailed
+enough to explain the main ideas of the paper.
+1.1
+
+The Fermion Path Integral In A Background Field
+
+The first key fact is that in continuum Yang-Mills theory with any gauge group G, the path
+integral for fermions in any anomaly-free representation, chiral or not, coupled to any classical background field A (and any background spacetime metric), is always well-defined. The
+representation has to be free of both perturbative and nonperturbative (global) anomalies.
+This statement may sound like a tautology; if the fermion path integral in some representation is not well-defined, we declare that this representation is anomalous. What gives
+the statement its force is the following:
+(1) In learning how to define the fermion path integral for anomaly-free theories, one
+also learns to determine all possible nonperturbative anomalies – that is, anomalies beyond
+the standard perturbative anomalies. For example, in four-dimensional chiral gauge theories with connected and simply-connected gauge group, one learns [18, 20] that the only
+anomaly beyond the usual triangle anomalies1 is the familiar mod 2 anomaly involving
+1
+
+By the usual triangle anomalies, we intend both gauge anomalies and the mixed gauge-gravitational
+
+–2–
+
+the number of fermion zero-modes in an instanton field [21, 22]. Though the Standard
+Model gauge group is not simply-connected, the Standard Model fermion representation
+is completely anomaly-free because it extends to a representation of the simply-connected
+group SU (5), and this representation is anomaly-free by the criterion just stated.
+(2) The path integral of an anomaly-free fermion system, chiral or not, can be described
+by explicit formulas that could be evaluated numerically on a computer.
+These statements are valid in any spacetime dimension and without assuming spacetime to be orientable (as it need not be in a parity-conserving theory),2 but we will in
+this article concentrate on theories defined on oriented spacetimes W of dimension d = 4.
+W will be assumed to have a spin structure so that fermions can be defined on W . A
+generalization beyond the familiar case W = T 4 is introduced explicitly only at the end of
+section 3.
+The positive chirality fermions of a four-dimensional gauge theory, taken together,
+/+
+transform in a possibly reducible representation R of the gauge group G. Let D
+W be
+the Dirac operator acting on this representation. Formally the fermion partition function
+/+
+/+
+is3 det D
+W , the determinant of D
+W . There is no problem to define the absolute value
++
+/ W | of this determinant; it is the square root of the determinant of the positive
+| det D
+/ +†
+/+
+operator D
+W , and can be defined by any standard regularization, such as Pauli-Villars
+WD
+/+
+or zeta-function regularization. To define the phase of det D
+W is subtle. If, however, W
+is the boundary of a manifold Y of dimension five over which the gauge field A and the
+/ W be a
+orientation and spin structure of W extend, then we can proceed as follows. Let D
+/W
+non-chiral Dirac operator acting on fermions that transform in the representation R. D
+anticommutes with the usual γ5 operator γ5 = γ1 γ2 γ3 γ4 (which can be defined because
+W is assumed to be oriented). Using γ5 as a fifth gamma matrix, we can define a five/ Y that is equivalent to iD
+/ W along the boundary. Let
+dimensional Dirac operator DY = iD
+η(DY ) be the Atiyah-Patodi-Singer (APS) eta-invariant of this operator, computed with
+APS boundary conditions. Then, as we will explain, a formula for the fermion partition
+function, valid in any anomaly-free representation, is4
+/+
+| det D
+W | exp(−iπη(DY )).
+
+(1.1)
+
+Once the fermion partition function is defined (and a suitable alternative is described for
+instanton sectors, where the partition function vanishes), there is no problem to define
+anomaly that arises in U (1) gauge theory if the sum of the charges of positive chirality fermions does not
+vanish. The latter anomaly obstructs the ability to define a model on a general four-dimensional spin
+manifold. If one wishes in lattice gauge theory to study a U (1) theory that has no gauge anomaly but does
+have a mixed gauge-gravitational anomaly, then one has to choose the spacetime W (and the five-manifold
+Y introduced later) to be manifolds whose first Pontryagin form vanishes, for example products T 2 × B,
+where T 2 is a flat two-torus and B is arbitrary.
+2
+For analysis of a general case, see section 2.4 of [18] or the appendix of [19]. Once can also generalize
+from spin structures to spinc structures, etc.
+3
+/+
+For the moment, we assume that instanton numbers vanish so that det D
+W is generically nonzero. The
+generalization is discussed briefly below and in more detail in section 2.3.
+4
+The formula (1.1) may appear to have a non-smooth dependence on A at the locus in field space along
+/+
+/+
+which D
+W develops a zero-mode, causing det D
+W to vanish. This is not the case; along this locus, η(DY )
+has a non-smooth behavior such that the right hand side of eqn. (1.1) is perfectly smooth.
+
+–3–
+
+arbitrary correlation functions of operators involving fermions. The only new ingredient
+required is the fermion propagator (or Green’s function), and this is well-defined for any
+fermion representation, anomaly-free or not.
+As written, the formula (1.1) appears to depend on the choice of the five-manifold Y
+and the extension of the gauge field A over Y . However, it turns out that the fermion representation R is anomaly-free if and only if the exponentiated eta-invariant exp(−iπη(DY ))
+depends only on W and the gauge field, metric, and spin structure of W , not on Y or the
+extension of that data over Y . This statement can be motivated as follows (see section 2 for
+a technical explanation). First of all, perturbative anomalies in d dimensions are related
+to Chern-Simons forms in d + 1 dimensions [24, 25]. This relation is beautifully expressed
+in the idea of anomaly inflow from an extra dimension [26]. If and only if a representation
+R has no perturbative anomaly, the Chern-Simons form that would be related to that
+representation by anomaly inflow vanishes. The eta-invariant of a connection is locally
+equivalent to the integral of a Chern-Simons form, but globally it captures some additional
+information. It turns out that to extend the relation between anomalies and Chern-Simons
+to global or nonperturbative anomalies, one just has to use the eta-invariant instead of
+Chern-Simons. This was first shown in [27], with an important later generalization by Dai
+and Freed [28]. The analysis in [27] was based on computing the holonomy around a loop in
+field space of what is nowadays often called the Berry connection, or in this context sometimes the Bismut-Freed connection [29], of the fermion ground state. It was shown that
+this holonomy can be expressed in terms of the eta-invariant. See also [30] for a closely
+related analysis. The upshot is the following: a fermion representation R is completely
+anomaly-free if and only if, for any manifold Y without boundary, exp(−iπη(DY )) = 1.
+When this fact is combined with the gluing law for the eta-invariant that was proved in
+[28], one learns that the right hand side of eqn. (1.1) is independent of the choice of Y ,
+and of the extension of A over Y , if and only if the representation R is anomaly-free. The
+formula (1.1) was most fully justified from a physical point of view in [18]. (The Dai-Freed
+theorem – as opposed to the formula (1.1) that it suggests – was elucidated from a physical
+point of view in [31].) The formula (1.1) can be viewed as an extension of the fact that
+anomaly inflow for domain wall fermions can be described via the eta-invariant [32]. This
+formula has had a variety of applications, for example to the worldsheet path integral of
+the heterotic string [33].
+This reasoning as we have presented it does not apply in instanton sectors, where Y
+/+
+does not exist and det D
+W typically is identically zero because of fermion zero-modes.
+Two refinements are needed, as elaborated in section 2.3: instead of the formula (1.1), one
+characterizes the fermion measure via a similar formula for correlation functions that are
+generically nonzero; and instead of Y having boundary W , its boundary consists of W and
+a disjoint union of fiducial manifolds Wi equipped with chosen gauge fields that carry the
+appropriate instanton numbers. By specifying the phases of the path integral measure for
+the fiducial manifolds and gauge fields, one specifies the renormalized values of gauge and
+gravitational theta-angles, in general including discrete ones.
+An important consequence of the relation of perturbative anomalies to the ChernSimons form and thereby to the eta-invariant, together with the APS index theorem, is
+
+–4–
+
+the following. In any d-dimensional theory that is free of perturbative anomalies, the
+d + 1-dimensional invariant exp(−iπη(DY )) that controls global anomalies is a cobordism
+invariant. This typically makes it possible to identify all possible global anomalies in
+particular theories or show that they are absent [34], [35], [20], [18].
+1.2
+
+Interpolating A Lattice Gauge Field To The Continuum
+
+Now we come to the second key fact. It may not be obvious that understanding the path
+integral for anomaly-free chiral fermions in the continuum is going to help us construct a
+nonperturbative regularization of chiral gauge theories. For that purpose, we presumably
+need to consider lattice gauge fields. What good will it do to know what happens if chiral
+fermions are coupled to continuum gauge fields? The answer to this question is clear from
+the construction described by Craig [16] and the further discussion by Hsu [17].
+By way of background, long ago Lüscher [36] introduced the idea of constraining lattice
+gauge fields so that every plaquette holonomy UP is close to the identity, say |UP − 1| < ϵ
+for some fixed and sufficiently small ϵ. Lattice gauge fields with this property have been
+called “admissible.” The original goal was to define topological invariants such as instanton
+number in lattice gauge theory. In conventional lattice gauge theory, with the link variables
+being general gauge group elements as in [1], it is not possible to define a topological
+invariant such as the instanton number, because an instanton can continuously shrink to
+a point and disappear in the holes between the lattice sites. However, if one constrains
+the lattice gauge field so that all plaquette holonomies are sufficiently close to the identity,
+then the instanton number (and corresponding topological invariants in other dimensions)
+can indeed be defined.
+It was further argued [36] that restricting to admissible lattice gauge fields does not
+affect the continuum limit of the theory. The reason for this expectation is that if g is the
+gauge coupling at the lattice scale, then typically |UP −1| ∼ g, which because of asymptotic
+freedom becomes much less than ϵ near the continuum limit. The admissibility constraint
+is hence expected to become irrelevant in the continuum limit.
+Another interpretation of the fact that instanton number can be defined for admissible
+gauge fields is that admissible lattice gauge fields can be interpolated over the continuum,
+as shown in various degrees of generality in [37–40] and [16]. In other words, given an
+admissible lattice gauge field, one can interpolate it to a corresponding continuum gauge
+field that agrees with the lattice gauge field on the lattice links. To make such an interpolation involves arbitrary choices, but the choices can be made in a way that respects all
+lattice symmetries and is gauge-invariant (if two lattice gauge fields are gauge-equivalent,
+then the corresponding interpolations are also gauge-equivalent) and in such a way that
+the continuum gauge field associated to a given admissible lattice gauge field always has
+field strength (in lattice units) at most of order ϵ. Under this condition, the topology of
+the continuum gauge field does not depend on the choices. We will refer to such a procedure as continuum interpolation of admissible lattice gauge fields. Once one knows that
+an admissible lattice gauge field has a continuum interpolation, one can simply define its
+topological invariants to be those of the interpolation.
+
+–5–
+
+Continuum interpolations exist for every compact gauge group G and on any manifold
+of any dimension d. We give one explanation of this in section 3; this can also be deduced
+by a slight extension of arguments of ’t Hooft [39] and Craig [16], among others.
+Craig makes use of the existence of continuum interpolations to define a regularization
+of chiral gauge theories as follows. As explained earlier, overlap fermions and the GinspargWilson equation give a way to define chiral fermions on a lattice, but without a simple
+way to define a measure for integrating over them. To determine such a measure, Craig
+compares chiral fermions on ever finer lattices, ultimately defining the fermion measure
+via a continuum limit. The continuum interpolation of the original lattice gauge fields is
+used to define a gauge field that can be coupled to the lattice fermions on any scale. In
+short, Craig uses the behavior near a continuum limit to define a measure for lattice chiral
+fermions. In part, this construction involves new ab initio proofs of some of the facts that
+were cited in section 1.1 to explain the well-definedness of the chiral fermion path integral.
+Alternatively, and as described independently of the present work by Hsu [17], once
+one knows that lattice gauge theory can be restricted to admissible lattice gauge fields and
+that admissible lattice gauge fields have a continuum interpolation, one can construct a
+lattice regularization of chiral gauge theories by directly using the fact that the continuum
+path integral of anomaly-free chiral fermions is always well-defined. In fact, there have
+been a number of earlier proposals along roughly these lines, including [41–46] and [39].
+The main novelty of the present article is possibly to incorporate a more precise description
+of the chiral fermion path integral and its anomalies.
+The approach we discuss applies in any spacetime dimension, for any anomaly-free
+fermion representation; the only lattice specific fact that is used is the existence of continuum interpolations. One simply couples admissible lattice gauge fields, or more precisely
+their continuum interpolation, to continuum chiral fermions. There is no fermion doubling
+problem because one never introduces lattice fermions (as explained in section 4, numerical
+evaluation does not bring back the doubling problem). The chiral fermion path integral is
+then characterized by the formula (1.1) (or its generalization, explained in section 2.3, in
+instanton sectors). Thus the lattice path integral is defined by an integral over admissible
+families of link variables U⟨xy⟩ connecting neighboring lattice sites x, y, weighted by the
+exponential of the lattice action I times the output of the fermion path integral. The
+instanton number zero contribution to the partition function is
+Z Y
+/+
+Z=
+dU⟨xy⟩ e−I | det D
+(1.2)
+W | exp(−iπη(DY )).
+A ⟨xy⟩
+
+Here the integral runs over the space A of admissible lattice gauge fields, and the Dirac
+/+
+operators D
+W and DY are constructed using the interpolated continuum gauge field on W
+and an extension of it over Y . Of course, we want to calculate not just a partition function
+but correlation functions of gauge-invariant operators. These operators are constructed in
+the usual way as functions of the link variables U⟨xy⟩ along with the continuum fermion
+fields evaluated at lattice points. From any product of such operators, the fermions can
+be integrated out at fixed values of the U⟨xy⟩ , using their propagators (in the interpolated
+continuum gauge field). Then the desired expectation value is evaluated by integrating
+
+–6–
+
+over the link variables and dividing by the partition function. Contributions to the path
+integral from sectors with nonzero instanton numbers are evaluated by replacing eqn. (1.1)
+with its appropriate generalization, as detailed in section 2.3.
+1.3
+
+Organization of This Article
+
+In section 2 of this article, we will provide more detail on the well-definedness of the path
+integral for anomaly-free chiral fermions coupled to a background gauge field. In section
+3, we explain one approach to constructing continuum interpolations of admissible lattice
+gauge fields, for an arbitrary compact gauge group G and on a manifold of any dimension.
+Finally, in section 4, we address the following question: Could the regularization of chiral
+gauge theories described here be implemented on a computer in principle, even if not very
+efficiently? One may worry that when one tries to actually evaluate numerically the formula
+for the chiral fermion path integral that we describe, the fermion doubling problem would
+come back. We will see that that is not the case.
+
+2
+
+The Path Integral of Anomaly-Free Chiral Fermions
+
+The action for chiral fermions in four-dimensions (on a manifold W of Euclidean signature)
+has the general form
+Z
+√
+/ W Ψ,
+I = − d4 x gΨD
+(2.1)
+where we collect all positive chirality fermions in Ψ, and negative chirality fermions in
+Ψ. Ψ transforms in some possibly reducible representation R of the gauge group, and Ψ
+transforms in the complex conjugate representation R. Classically, such a theory has an
+evident U (1) symmetry under which Ψ and Ψ respectively have charge 1 and −1. This
+symmetry is anomalous, but it can still be used to organize an analysis of the fermion
+path integral. As in sections 2.1-2.3 of [18], exploiting such a symmetry leads to a simple
+explanation of the relation between anomaly inflow and the eta-invariant. A completely
+general explanation, applicable for example to chiral fermions in two dimensions and to
+global anomalies of fermions in three dimensions, can be found in [19] or section 2.4 of [18].
+The main difference is that in the absence of a convenient U (1) symmetry, a more involved
+notation is required.
+In section 2.1, we explain the basic anomaly inflow formula (1.1) for chiral gauge theory
+on a compact spin manifold W of Euclidean signature, assuming that W is the boundary
+of a five-manifold Y over which all relevant structures extend. This in particular is only
+true if all relevant instanton numbers vanish. In section 2.2, we explain how the anomaly
+inflow formula can be used to effectively classify the possible nonperturbative or global
+anomalies for a given gauge group and in particular to show that the Standard Model is
+free of such anomalies. In section 2.3, we explain the generalization when Y does not exist.
+The main idea of the generalization is that in defining the theory, for every generator of the
+cobordism group that obstructs the existence of Y , one has to introduce a dual topological
+theta-angle (discrete or continuous depending on whether the generator in question is a
+torsion element or not).
+
+–7–
+
+2.1
+
+Anomaly Inflow and the Eta-Invariant
+
+To study the chiral fermion theory (2.1), let Ψ be a non-chiral fermion field in the representation R. Then, on an oriented four-manifold W , we can define the chirality operator
+γ5 = γ1 γ2 γ3 γ4 , and using this as the fifth gamma matrix, we can define a five-dimensional
+Dirac equation for a fermion in the representation R. This five-dimensional fermion can
+have a bare mass, the action on an oriented five-manifold Y being
+Z
+
+√
+/ Y + m Ψ.
+d5 x gΨ D
+I=−
+(2.2)
+Y
+
+To write this action, we added a five-dimensional fermion field Ψ in the complex conjugate
+representation R. This theory is completely anomaly-free, since a bare mass is possible.
+For example, a Pauli-Villars regulator is possible. This entails including a field obeying the
+same Dirac equation as Ψ but with opposite statistics. Roughly speaking, the regularized
+fermion path integral is then
+Y −iλk + m
+ZΨ =
+,
+(2.3)
+−iλk + M
+k
+
+where M ≫ |m| is the regulator mass, and the product runs over the eigenvalues λk of
+/ Y . (If λk is an eigenvalue of DY , then the corresponding
+the self-adjoint operator DY = iD
+/ Y is −iλk , so det(D
+/ Y + m) is a product of factors −iλk + m.) Actually,
+eigenvalue of D
+in five dimensions, the infinite product in (2.3) does not converge. One can achieve convergence, for example, by including additional regulator pairs of opposite statistics, thus
+Q Q
+′
+k +Mr
+including a factor k pr=1 −iλ
+−iλk +Mr′ with suitable regulator masses Mr , Mr . (One also
+should multiply the expression for ZΨ by the exponential of a local counterterm to remove
+scheme-dependent local contributions to the effective action.) For brevity, we generally
+omit such additional regulators and describe Pauli-Villars regularization by the simplified
+formula (2.3).
+Now suppose that Y has boundary W , and that near W , the metric of Y has the form
+2
+ds = dτ 2 + ds2W , where the boundary is at τ = 0, the normal direction to the boundary
+is parametrized by τ < 0, and ds2W is some metric on W . We assume that this form of
+the metric is valid in an interval τ ∈ (−ϵ, 0]. We impose on Ψ and Ψ a local boundary
+condition along W :
+L : (1 − γ τ )Ψ|τ =0 = 0 = Ψ(1 + γ τ ) τ =0 ,
+(2.4)
+where γ τ is the gamma matrix in the τ direction.5 This boundary condition is elliptic
+but not self-adjoint. Ellipticity alone does not ensure a discrete spectrum in finite volume
+d
+(for example, every complex number is an eigenvalue of the elliptic operator eiθ dθ
+on a
+circle), but here discreteness can be shown as follows.. Integrating by parts, one finds
+R
+√
+/Y Ψ =
+that if ψ satisfies the boundary condition (1 − γ τ )ψ|W = 0, then 2 Re Y d5 x gΨD
+R
+√
+2
+4
+/
+W d x g|Ψ| ≥ 0. Hence D Y + m has no kernel for Re m > 0, and a similar argument
+/ Y is
+for the adjoint operator, whose boundary condition is (1 + γ τ )Φ|W = 0, shows that D
+5
+
+The opposite signs in the boundary conditions for Ψ and Ψ ensure that the boundary term
+4 √
+d
+x gΨγ τ δΨ in the variation of the action vanishes, so that the variational problem is well-posed
+W
+and Ψ and Ψ each obey simple Dirac equations with no boundary correction.
+
+R
+
+–8–
+
+/ Y with this boundary condition
+invertible. Its inverse is compact by elliptic regularity, so iD
+/ Y are not real. If they were real, the chiral
+has a discrete spectrum. The eigenvalues of iD
+physics along the boundary that we are about to describe could not arise. But the discrete
+spectrum makes it possible to define the fermion determinant and propagator and to do
+quantum field theory with this boundary condition. For a Lorentz signature explanation
+of why the boundary condition is physically sensible, see [18].
+The action (2.2) can be written near the boundary as
+
+
+Z
+∂
+√
+4
+τ
+τ
+d xdτ gΨγ
+I=−
++ DW + γ m Ψ
+(2.5)
+∂τ
+Y
+where
+DW =
+
+X
+
+γ τ γ µ Dµ .
+
+(2.6)
+
+µ̸=τ
+
+/ W , differing from it only by the use of a
+DW is equivalent to the usual Dirac operator iD
+different representation of the same Clifford algebra (with γ µ replaced by −iγ τ γ µ ).
+So far, m could be positive or negative, but given our choice of boundary condition,
+/ Y + m)Ψ has solutions
+the interesting case is m < 0. For m < 0, the Dirac equation (D
+localized near the boundary of the form
+Ψ = χ exp(|m|τ ),
+
+(1 − γ τ )χ = 0,
+
+DW χ = 0.
+
+(2.7)
+
+As this solution is localized near τ = 0, and χ satisfies the four-dimensional Dirac equation
+DW χ = 0 along with the four-dimensional chirality condition (1 − γ τ )χ = 0, χ propagates
+along W as a massless chiral fermion. For m > 0, there is no such boundary-localized
+mode.
+It is likewise true that for m < 0, Ψ has a boundary localized mode of the opposite
+chirality:6
+Ψ = χ exp(|m|τ ), (1 + γ τ )χ = 0, DW χ = 0.
+(2.8)
+Considering modes of both Ψ and Ψ, the boundary localized fermions are the same ones as
+in the purely four-dimensional theory (2.1): positive chirality fermions in the representation
+R and negative chirality fermions in the complex conjugate representation R.
+Depending on R, the purely four-dimensional theory may be anomalous, but the fivedimensional theory that generates the same massless fermions along the boundary is not
+anomalous. In fact, the theory (2.2) with boundary condition L is completely anomalyfree. One way to see this is to note that if m is positive, there are no light modes at all,
+and fermion theories with no light modes are always anomaly-free. On the other hand,
+anomalies never depend on fermion bare masses, so the theory must remain anomaly-free
+for m < 0. Even more explicitly, the boundary condition does not obstruct the ability to
+carry out Pauli-Villars regularization. Finally, this theory actually has a lattice regularization. Indeed, a lattice regularization of this theory is Shamir’s variant [47] of domain
+wall fermions [5]; five-dimensional fermions (which have no lattice doubling problem) on a
+6
+
+We have converted Ψ and χ to column spinors by taking their transposes and multiplying by a charge
+conjugation matrix C that satisfies Cγµ C −1 = γµtr (where tr denotes the transpose).
+
+–9–
+
+lattice with boundary, with a suitable “free” boundary condition in the lattice theory, can
+lead in a continuum limit to the boundary condition that we have called L.
+As in [18], we want to compute the partition function of the massive fermion Ψ with
+boundary condition L. For this, we think of τ as a Euclidean time coordinate, and the
+boundary W = ∂Y as a time-slice. The path integral over Y then gives a physical state
+vector that we denote as |Y ⟩. This is a state vector in the Hilbert space HW of the fermion
+theory quantized on the spatial manifold W . The boundary condition L also corresponds
+to a state vector |L⟩ ∈ HW , which we might call the boundary state. The partition function
+on Y with the boundary condition L is then given by
+Z(Y, L) = ⟨L|Y ⟩.
+
+(2.9)
+
+Now let us take the mass |m| to be very large so that the fermion Compton wavelength
+is much shorter than the typical scale of manifolds W and Y ; indeed, we can take |m| all
+the way up to the cutoff, with m = −M . Then the Hilbert space HW has a large mass
+gap from the ground state. Euclidean propagation in the cylindrical region (−ϵ, 0] × W
+can be described by the action of the operator e−ϵH , where H is the Hamiltonian. For
+ϵ|m| ≫ 1, e−ϵH converges to the projection operator |Ω⟩⟨Ω| to the ground state |Ω⟩. So
+|Y ⟩ is a multiple of |Ω⟩, and the formula (2.9) can be factored
+Z(Y, L) = ⟨L|Ω⟩⟨Ω|Y ⟩,
+
+(2.10)
+
+splitting off the boundary contribution ⟨L|Ω⟩ from the bulk contribution ⟨Ω|Y ⟩.
+In a generic quantum system, there is no natural way to define the phase of the ground
+state |Ω⟩. As one varies background fields, |Ω⟩ varies as a section of a line bundle over
+the field space, and one will potentially run into the Berry connection on this line bundle.
+Thus, by generic logic, one might expect a phase ambiguity in each of the two factors ⟨L|Ω⟩
+and ⟨Ω|Y ⟩, and one might anticipate that only their product in eqn. (2.10) is well-defined.
+Perhaps surprisingly, in the case of free fermions in a background field, this phase
+ambiguity can be eliminated by making use of the global Atiyah-Patodi-Singer (APS)
+boundary condition [48, 49]. Assuming DW has no zero-modes (for the generalization
+see section 2.3), APS boundary conditions are defined by requiring that Ψ, restricted to
+W = ∂Y , is a linear combination of eigenfunctions of DW with positive eigenvalue. The
+APS boundary condition is not local, but it is self-adjoint, so with this boundary condition,
+/ Y has a complete set of real eigenvalues. Like L, APS boundary conditions define
+DY = iD
+a boundary state |APS⟩. Because this state is annihilated by modes of Ψ corresponding to
+negative eigenvalues, it is a multiple of the state |Ωm=0 ⟩ that would be the fermion ground
+state if m = 0. This state is certainly not the fermion ground state for the case m < 0 that
+we are actually studying, but it can be viewed (after regularizing high energy modes) as a
+state in the same Hilbert space.
+Unlike the ground state of a generic quantum system, the state |APS⟩ has no phase
+ambiguity. One way to explain that is simply to observe that the inner product ⟨APS|Y ⟩
+is simply the fermion path integral on Y computed with APS boundary conditions. This
+is completely well-defined, since it can be defined as in eqn. (2.3) using Pauli-Villars
+
+– 10 –
+
+/ Y with APS boundary conditions:
+regularization, but now using the eigenvalues of iD
+ZΨ,APS =
+
+Y −iλk + m
+k
+
+(2.11)
+
+−iλk + M
+
+(as before, this is a somewhat symbolic formula in which we omit additional regulators).
+We will evaluate this expression in a moment.
+Using the fact that |Y ⟩ is a multiple of |Ω⟩, we now can write an improved version of
+the formula (2.10):
+⟨L|Ω⟩⟨Ω|APS⟩
+Z(Y, L) =
+· ⟨APS|Y ⟩.
+(2.12)
+|⟨APS|Ω⟩|2
+Clearly, this formula is equivalent to (2.10) as long as |Y ⟩ is a multiple of |Ω⟩. The first
+factor ⟨L|Ω⟩⟨Ω|APS⟩
+in (2.12) knows about the chosen boundary condition L but has no
+|⟨APS|Ω⟩|2
+knowledge of the manifold Y , and the second factor ⟨APS|Y ⟩ knows about Y but not
+about the choice of boundary condition L. Since Z(Y, L) is well-defined, and the second
+factor on the right hand side of eqn. (2.12) is also well-defined, evidently so is their ratio,
+the first factor on the right hand side.
+For free fermions in a background field, the ratio ⟨L|Ω⟩⟨Ω|APS⟩
+can be evaluated by
+|⟨APS|Ω⟩|2
+expanding the field Ψ in eigenmodes of the Dirac operator DW and evaluating the matrix
+elements on a mode by mode basis, leading to an answer that is a product over modes.
+The derivation can be found in section 2.3 of [18]. The result7 is that this quantity is a
++
+of the chiral
+regularized version of the absolute value of the naive path integral det DW
+fermions that propagate along W = ∂Y :
+⟨L|Ω⟩⟨Ω|APS⟩
++
+|.
+= | det DW
+|⟨APS|Ω⟩|2
+
+(2.13)
+
+We will not repeat here the derivation, which is reminiscent of lattice calculations with
+overlap fermions, but we note the following. Since chiral fermions in the representation R
+do propagate along W , their path integral must somehow appear in Z(Y, L). On the other
++
+hand, the naive path integral det DW
+is not well-defined for a generic representation; its
+absolute value is well-defined, as it is the square root of the determinant of the self-adjoint
++† +
++
+is anomalous. Accordingly, what appears in
+operator DW
+DW , but the phase of det DW
++
++
+.
+eqn. (2.13) is the well-defined absolute value | det DW
+|, not the ill-defined det DW
++
+| is well-defined for any metric g and
+A point worth noting is that although | det DW
+gauge field A on W , it fails to be real analytic along the locus in field space at which a
++
+zero-mode appears and | det DW
+| = 0. In the context of the formula (2.13), this behavior
+is possible because the APS boundary condition, which appears on the left hand side of
++
+the formula, fails to be self-adjoint when the operator DW
+has a zero-mode, and the real
+analyticity of the left hand side of the formula also fails along that locus. Likewise, the
+second factor in eqn. (2.12), though gauge-invariant and real analytic as a function of g and
+|λk |
+k 2|m| , where
++† +
+2
+the eigenvalues of DW DW are λk . After regularization and renormalization, the infinite product of factors
+1
+, one for each mode, disappears (its regularized version, for instance using ζ-functions, renormalizes
+2|m|
+Q
++
+the local terms in the effective action), and k |λk | becomes a regularized version of | det DW
+|.
+7
+
+To be precise, eqn. (2.31) of [18] asserts that ⟨L|Ω⟩⟨Ω|APS⟩
+is a regularized version of
+|⟨APS|Ω⟩|2
+
+– 11 –
+
+Q
+
+A as long as DW has no zero-modes, becomes ill-defined (and certainly not real analytic)
+along the same locus in field space, again because of the breakdown of APS boundary
+conditions. This does not affect the validity of the formula (2.12), because the first factor
+on the right hand side of that formula vanishes when the second factor is ill-defined. The
+product Z(Y, L) is completely gauge-invariant and real analytic, but the factorization of
+Z(Y, L) in eqn. (2.12) breaks down along the locus in field space where Z(Y, L) = 0.
+Now let us discuss the second factor ⟨APS|Y ⟩. This is the path integral of a massive
+fermion on Y , with the self-adjoint APS boundary condition. It has long been understood
+that integrating out a massive fermion on an odd-dimensional manifold without boundary
+produces a Chern-Simons function perturbatively [50] and an eta-invariant nonperturbatively [51]. In the present context, on a manifold with boundary but with the self-adjoint
+APS boundary condition, the same logic applies; we just have to define the eta-invariant
+/ Y computed with APS boundary conditions. We will sketch the
+using the eigenvalues of iD
+derivation, essentially following [51]. We return to the formula (2.11) for ZΨ,APS , where we
+understand that this formula will require some further regularization. We are interested in
+evaluating this formula for the case that m is negative and comparable to the cutoff M . It
+is convenient then to set m = −M . But first, we note that if m = +M , then ZΨ,APS = 1.
+The meaning of this is simply that if m = +M , then all modes of Ψ are near the cutoff,
+and the partition function obtained by integrating over Ψ should equal 1, after removing
+inessential scheme-dependent local terms in the effective action. For m = −M , it is evident
+from the formula (2.11) that |ZΨ,APS | = 1, so only the phase of ZΨ,APS will be of interest.
+For this phase, we can write, at general m,
+X
+−iλk + m
+Arg(ZΨ,APS ) =
+Arg
+.
+(2.14)
+−iλk + M
+k
+
+Assuming that |λk | ≪ M and λk ̸= 0, as m varies along the real axis from M to
+−iλk +m
+−M , Arg −iλ
+varies from 0 to −π sign(λk ). Naively then, Arg(ZΨ,APS ) should equal
+k +M
+P
+−π k sign(λk ). However, the formula −π sign(λk ) is only valid if λk ≪ M , and we need
+/ Y . The exact cutoff does not
+to cut off the contribution of very large eigenvalues of iD
+matter, as long as it is smooth and sufficiently close to treating positive and negative λk
+symmetrically. Though we could include additional Pauli-Villars regulator fields, it is more
+simple to define
+X
+e−ϵ|λk | sign(λk ).
+(2.15)
+η = lim
+ϵ→0
+
+k
+
+The cutoff actually used by Atiyah, Patodi, and Singer was different but equivalent. They
+defined8
+X
+η = lim
+|λk |−s sign(λk ).
+(2.16)
+s→0
+
+k
+
+8
+
+We note two points of terminology. Atiyah, Patodi, and Singer defined η by a sum as in (2.16) restricted
+to λk ̸= 0. In a moment, we will depart from this and include the zero-modes in the definition of η; what
+we call η was called 2ξ by Atiyah, Patodi, and Singer. Also, what we here call η was called ηD in [18]. In
+that paper, the name η was used for an eta-invariant that is defined by summing over modes of both Ψ and
+Ψ (this definition has a better generalization in d dimensions), and an eta-invariant defined as we do here
+summing only over modes of Ψ was called ηD = 12 η.
+
+– 12 –
+
+To be more precise, the “limit” here means the following: one first defines the sum on the
+right hand side for Re s sufficiently large that the series converges, and then (after proving
+that this analytic continuation exists) one analytically continues to s = 0.
+The derivation shows that for m = −M and in the limit of large M , Arg(ZΨ,APS ) =
+−πη, and since |ZΨ,APS | = 1, we get ⟨APS|Y ⟩ = ZΨ,APS = exp(−iπη). However, we have
+not yet defined η precisely enough to take into account the fact that one or more of the λk
+may vanish. (Even if the four-dimensional Dirac operator DW has no zero-modes, which
+is the most relevant case for our derivation so far, the five-dimensional Dirac operator DY
+−iλ+m
+may have such modes.) When we interpolate from m = M to m = −M , −iλ+M
+changes
+sign if λ = 0, so a general formula for ⟨APS|Y ⟩ should include a factor of −1 for every
+/ Y . We can achieve this result by defining the function sign(x) to include
+zero-mode of iD
+the case x = 0:
+(
+1
+if x ≥ 0
+sign(x) =
+(2.17)
+−1 if x < 0.
+/ Y contributes +1 to η and hence contributes a multiplicative
+Then every zero-mode of D
+factor −1 to exp(−iπη). We would get exactly the same result if we define sign(0) = −1;
+/ Y contributes −1 to η but still contributes a multiplicative factor
+then a zero-mode of D
+−1 to exp(−iπη).
+The conclusion then is a general formula for the partition function of the fermion field
+Ψ on Y with the boundary condition L along W = ∂Y .
++
+| exp(−iπη).
+Z(Y, L) = | det DW
+
+(2.18)
+
+We can describe this by saying that “anomaly inflow” from Y , described by the factor
+exp(−iπη), is compensating for the anomaly of the chiral fermion that propagates along
+the boundary of Y . This is a nonperturbative version of anomaly inflow; the inflow from the
+bulk compensates for all perturbative and nonperturbative anomalies along the boundary.
+The original formulation of anomaly inflow [26] involved perturbative anomalies only
+(triangle anomalies in the four-dimensional case) and used the Chern-Simons function
+instead of the eta-invariant. Indeed, the APS formula for the change of η under an infinitesimal change in the background fields shows that η and Chern-Simons are equivalent
+perturbatively [49]. However, for precise nonperturbative statements, and in particular to
+give a precise definition of the phase of the path integral of a chiral fermion, which we come
+to next, it is important to use η, not Chern-Simons.
+As we explain next, for anomaly-free representations, the right hand side of eqn. (2.18)
+actually does not depend on the choice of Y , and this expression can be viewed as a formula
+for the chiral fermion partition function on W .
+2.2
+
+Anomalies and the Chiral Partition Function
+
+Now, under a certain topological restriction, we can determine the condition for a chiral
+fermion system on W to be anomaly-free, and, when it is anomaly-free, we can give a
+formula for the partition function of this system. Specifically, we will assume that the
+four-dimensional spin manifold W and the gauge field A on W are such that W is the
+
+– 13 –
+
+boundary of a five-manifold Y and moreover the spin structure of W and the gauge field A
+both extend over Y . In section 2.3, we will extend the analysis to cover the possibility that
+Y may not exist, and we will see that this does not lead to any new anomalies. But for
+now, we assume that a suitable Y exists. If Y does exist, there are many possible choices
+of Y . For brevity, in the following by “the choice of Y ,” we will mean the choice of Y
+together with the choice of an extension over Y of the metric, spin structure and gauge
+field of W .
+We would like to interpret Z(Y, L) as a formula for the chiral partition function on W .
+A necessary condition for this is certainly that Z(Y, L) must be independent of the choice
+of Y , since in general there is not going to be any distinguished choice. Let Y and Y ′ be
+two possible choices. From eqn. (2.18), we find that
+Z(Y, L)
+= exp(−iπηY ) exp(iπηY ′ ),
+Z(Y ′ , L)
+
+(2.19)
+
+where ηY , ηY ′ are the eta-invariants of DY , DY ′ , each with APS boundary conditions.
+Now, let Y be the closed five-manifold that one can make by gluing together Y and Y ′
+along their common boundary, after reversing the orientation of Y ′ . The gluing law for the
+eta-invariant [28] says that exp(−iπηY ) exp(iπηY ′ ) = exp(−iπηY ), and therefore
+Z(Y, L)
+= exp(−iπηY ).
+Z(Y ′ , L)
+
+(2.20)
+
+In other words, a sufficient condition that Z(Y, L) really depends only on W and the
+fields on W , not on the choice of Y , is that for any closed five-manifold Y , with any spin
+structure and gauge field, we must have
+exp(−iπηY ) = 1.
+
+(2.21)
+
+This condition is also necessary; if there is a five-manifold Y that does not satisfy eqn.
+(2.21), then taking W to be a small sphere embedded in Y with Y and Y ′ the interior and exterior of the sphere, we get a case with Z(Y, L) ̸= Z(Y ′ , L). Precisely when
+exp(−iπηY ) = 1 for all closed manifolds Y , we can define the partition function of the
++
+| exp(−iπη), where this formula does not depend on
+fermion representation R as | det DW
+the five-manifold used to evaluate it.
+Let us see how the criterion (2.21) incorporates known anomalies, and makes it possible
+in many cases to show that there are no anomalies other than the known ones. First of
+all, perturbatively η is equivalent to Chern-Simons; more precisely, Atiyah, Patodi, and
+Singer [49] showed that the change in η under a small change in the metric or gauge field
+is the same as the change in a corresponding Chern-Simons form, so locally in field space
+η and Chern-Simons have the same dependence on the metric and gauge field and they
+capture the same perturbative anomalies. The perturbative anomaly of any chiral fermion
+representation R in four dimensions is related via anomaly inflow to a certain Chern-Simons
+form in five dimensions. Precisely when R has no perturbative anomaly, the Chern-Simons
+
+– 14 –
+
+form vanishes. In this case, exp(−iπηY ) is invariant under continuous variations of the
+metric and gauge field, and thus is a topological invariant.9
+Let us now see how exp(−iπηY ) detects a global or nonperturbative anomaly in a case
+in which there is one. We take the gauge group to be G = SU (2) (a symplectic group Sp(k)
+would be similar; note that SU (2) ∼
+= Sp(1)). As G does not have complex representations,
+in four dimensions all representations of G are free of perturbative anomalies. Now let
+us evaluate exp(−iπηY ) for the case that the representation R is a representation of halfinteger spin, for example the spin 1/2 representation. The one fact that we will use about
+such representations is that they are pseudoreal.10
+The dimension four spinor representation S of Spin(5) is likewise pseudoreal. The Dirac
+/ Y valued in R then acts on a wavefunction that is valued in the tensor product
+operator D
+S ⊗ R, and, as the tensor product of two pseudoreal representations, this representation
+/ Y can be defined as a real operator. So the self-adjoint Dirac
+is real. This means that D
+/
+operator iDY is imaginary and anticommutes with complex conjugation, which we will
+/ Y Ψ = λΨ, then iD
+/ Y (⋆Ψ) = −λ ⋆ Ψ. Thus the nonzero eigenvalues of iD
+/Y
+denote as ⋆. If iD
+come in pairs (λ, −λ), and since such a pair makes no net contribution to ηY , it follows
+/ Y . Let ζ be the
+that ηY can be evaluated just from the contributions of zero-modes of D
+number of such zero-modes. Each one contributes +1 to η, so in this situation
+exp(−iπηY ) = (−1)ζ .
+
+(2.22)
+
+Indeed, it was found in [21] that a representation of SU (2) is anomalous if the fivedimensional Dirac operator can have an odd number of zero-modes. The original example
+was a certain SU (2) gauge field over S 5 with ζ = 1 for the spin 1/2 representation and
+more generally for representations of spin 2n + 1/2 (but not 2n − 1/2). Another simple
+example, discussed in [22], is the following. Take Y = S 4 × S 1 with a product metric, and
+a spin structure that is periodic in the S 1 direction; assume that the gauge field A has
+instanton number 1 on S 4 and is pulled back from S 4 (thus A is invariant under rotation
+of S 1 and has no component in the S 1 direction). Then a zero-mode of the Dirac operator
+on S 4 × S 1 has no dependence on S 1 and is derived from a zero-mode of the Dirac operator
+on S 4 . So there is an anomaly if (counting both chiralities of fermion) the Dirac operator
+on S 4 , in a field of instanton number 1, has an odd number of zero-modes.
+Are these two examples equivalent? Do they detect anomalies for the same representations of SU (2)? This question, of course, can be decided by computation. What cannot
+be so easily decided by computation is the following question: are there other examples
+that are independent of these two? To show that a given representation is completely
+anomaly-free, must we consider five-manifolds other than S 5 and S 4 × S 1 ?
+To answer this type of question, it is useful to know that exp(−iπηY ) is not just a
+topological invariant, but a cobordism invariant. This means that exp(−iπηY ) = 1 if Y
+is the boundary of a six-manifold Z over which the spin structure and gauge field extend.
+9
+
+/Y
+Although exp(−iπηY ) is a topological invariant, ηY is not: it jumps by 2 when an eigenvalue of iD
+changes sign.
+10
+SU (2) representations of integer spin are real. A real representation of SU (2) – or indeed of any group
+– allows a bare mass, so it is completely anomaly-free.
+
+– 15 –
+
+That claim can be proved by considering the index theorem for the index I of the Dirac
+/ Z on Z, again with values in the representation R. In general, the Atiyah-Singer
+operator D
+index theorem for the Dirac operator on a closed manifold Z of any even dimension 2r has
+R
+the general form I = Z Φ, where Φ is a differential form that is a polynomial of degree r
+in the Riemann tensor of Z and the Yang-Mills field strength. If, however, Z has boundary
+Y , then the formula receives a boundary contribution and becomes
+Z
+I=
+Φ − 12 ηY .
+(2.23)
+Z
+
+This is known as the APS index theorem. In our application, Φ represents the sixdimensional characteristic class that is related to the anomaly Chern-Simons five-form
+in five dimensions. So if we started with an anomaly-free representation R in four dimensions, then Φ = 0 and the APS index theorem reduces to I = − 12 ηY . As I is an integer, it
+follows that ηY is an even integer and exp(−iπηY ) = 1.
+Manifolds of some given dimension with some additional structures such as a spin
+structure, a gauge field, etc., can be made into a group. The group law is disjoint union of
+manifolds, and one imposes an equivalence relation that a manifold is considered trivial if
+it is the boundary of a manifold of one dimension more over which the structures extend.
+The group defined this way is called the cobordism group. The fact that exp(−iπηY ) = 1
+if Y is the boundary of some Z (over which all structures extend) means that the map
+Y → exp(−iπηY ) can be viewed as a group homomorphism from the cobordism group
+to U (1). Since cobordism groups often have been or can be determined mathematically,
+this often gives a practical way to identify the possible anomalies in a given example.
+For instance, in [35], this approach was used to show that the low energy supergravity
+associated to the heterotic string is completely anomaly-free; the relevant cobordism group
+was shown to vanish in an appendix to the paper by R. E. Stong.
+Going back to SU (2) gauge theory, the cobordism group that classifies five-dimensional
+spin manifolds with an SU (2) bundle is Z2 , generated by either of the two examples discussed earlier. So those examples are equivalent to each other, and there are no other
+examples to check.
+For more examples of such arguments in dimensions 1, 2, 3, and 4, see section 4 of [18].
+In particular, it is shown there that in four-dimensional gauge theory with a connected and
+simply-connected gauge group, there are no anomalies except the usual triangle anomaly,
+and the mod 2 anomaly that arises when there can be an odd number of fermion zeromodes in an instanton field. Among simple Lie groups, that latter anomaly arises only for
+symplectic groups Sp(k), and in particular, as just discussed, for SU (2) ∼
+= Sp(1).
+2.3
+
+Theta-Angles And Fermion Zero-Modes
+
+There are two deficiencies in the explanation that we have given so far. First, we assumed
+that the four-manifold W on which we wish to study a given chiral gauge theory is the
+boundary of a five-manifold Y over which the spin structure and gauge field of W extend.
+In other words, we assumed that W is trivial as an element of the relevant cobordism group.
+
+– 16 –
+
+Second, we assumed that the partition function of the chiral fermions on W is generically
+nonzero.
+The importance of this second assumption is that if the partition function is generically
+nonzero, then the path integral of fermions coupled to background gauge and gravitational
+fields is adequately described by giving the formula (2.18) for that partition function. The
+only additional information that one needs to compute a path integral with insertions
+of operators containing fermions is a knowledge of the fermion propagator, and in the
+absence of zero-modes, this is always well-defined for any representation, anomaly-free or
+not. However, if the fermion partition function vanishes identically, then to characterize the
+fermion path integral, we need to replace eqn. (2.18) by a similar formula for a correlation
+function that is generically nonzero. Such a formula will be described at the end of this
+section.
+The two obstructions are closed related, since when the fermion partition function
+vanishes identically due to an index theorem (or, in some spacetime dimensions, a mod
+2 index theorem), this always represents an obstruction to null-cobordism of W , that is,
+to the existence of Y . However, the cobordism obstruction is more general since it is
+possible to have obstructions in the cobordism problem that are not reflected in fermion
+zero-modes. For example, in four dimensions, this can happen in chiral gauge theories with
+suitable gauge groups. Therefore, we will consider first the cobordism problem, ignoring the
+second question about fermion zero-modes, and then explain how to modify the definitions
+to take into account the fact that the fermion path integral vanishes identically in some
+topological sectors.
+In four dimensions, the obvious obstructions in the cobordism problem are given by
+gauge and gravitational instantons. Suppose, for example, that F is the gauge field strength
+in a simple factor of the gauge group. Then if W is the boundary of some Y over which the
+R
+R
+gauge field extends, we have W Tr F ∧F = Y dTr F ∧F = 0, where we use Stokes’s theorem
+and the Bianchi identity. So a nonzero gauge theory instanton number is an obstruction
+to existence of Y . Replacing F with the Riemann tensor R, the same reasoning applies
+R
+to show that a nonzero W Tr R ∧ R, representing the gravitational instanton number, is
+also an obstruction to existence of Y . In the group theory sense, these obstructions are
+of infinite order, since if W has a nonzero gauge or gravitational instanton number, the
+disjoint union of any (nonzero) number of copies of W has the same obstruction and is
+still not the boundary of any Y . When we say “any number of copies,” we include the
+possibility of a negative number of copies. Here we define −W to be W with orientation
+reversed (but no change in gauge field or spin structure), and by −n copies of W , we mean
+n copies of −W . Note that −W is always the inverse of W in the cobordism group, since
+the disjoint union W + (−W ) is the boundary of W × I, where I is an interval. (After
+picking an orientation of W × I and using a definite recipe like “outward normal first” to
+orient the boundary of an oriented manifold, one finds that the two boundaries of W × I
+are oppositely oriented.) Indeed, it is this fact that turns the cobordism relation into a
+group.
+In four dimensions, gauge and gravitational instantons are the only obstructions of
+infinite order in the cobordism problem. In four-dimensional gauge theories with connected
+
+– 17 –
+
+and simply-connected gauge groups, there are no obstructions of finite order, but that is
+not so for other gauge groups. For example, in SU (N )/ZN × SU (N )/ZN gauge theory in
+four dimensions, there is an obstruction of order N which can be described as follows. An
+SU (N )/ZN bundle E → W has a mod N characteristic class α ∈ H 2 (W, ZN ) (α is the
+second Stieffel-Whitney class of E if N = 2), so in SU (N )/ZN × SU (N )/ZN gauge theory,
+R
+there are two such classes α and α′ , and there is a mod N invariant W α ∪ α′ that does
+not contribute to any index formula and is not reflected in any fermion zero-modes. In four
+dimensions, other examples can be given with finite gauge groups or more general gauge
+groups that are not connected.
+In general, the cobordism group that classifies obstructions to the existence of Y is a
+finitely generated abelian group. Such a group has the general form Zk ×Zr1 ×Zr2 ×· · ·×Zrs ,
+for some k and r1 , · · · , rs . In such a case, we can pick generators W1 , W2 , · · · , Wk+s for the
+cobordism group; here W1 , · · · , Wk are of infinite order and for i > 0, Wk+i is of order ri .
+Each of these generators is a four-manifold with some spin structure and gauge field. The
+statement that they generate the cobordism group means that any four-manifold W with
+spin structure and gauge field is cobordant to a disjoint union ⊕k+s
+i=1 ni Wi , with integers ni
+that are uniquely determined if i ≤ k and uniquely determined mod rj if i = k + j, j > 0.
+None of the generators Wi are boundaries of any Y , so a first task we might consider is
+how to define the chiral fermion partition function on Wi for an anomaly-free representation.
+First let us consider Wk+i , which is of some finite order ri . Then the disjoint union
+of ri copies of Wk+i is the boundary of some Y . So we can use the formula (2.18) to
+determine the partition function of chiral fermions on the disjoint union of ri copies of
+Wk+i . Since physically, the partition function of a quantum field theory on the disjoint
+union of manifolds is the product of the individual partition functions, we interpret this
+partition function for ri copies of Wk+i as the rith power of the partition function Z(Wk+i )
+for a single copy. Given this formula for Z(Wk+i )ri , how do we determine Z(Wk+i )? Of
+course, we want to take an rith root. There are ri possible choices of rith root, and each
+choice will lead to a sensible definition of the chiral fermion partition function. In fact, if
+there is an obstruction of order ri in the cobordism problem for some gauge theory, then
+the gauge theory will have a Zri -valued discrete theta-angle. The procedure just described
+gives a precise explanation of how to incorporate this theta-angle at the quantum level.
+The subtlety in defining the phase of a chiral fermion partition function will generally
+frustrate more obvious attempts to do that.
+Now let us consider one of the Wi that is of infinite order in the cobordism group. This
+means that no multiple of Wi is a boundary. However, as previously noted, Wi + (−Wi )
+is the boundary of Wi × I. So we can use eqn. (2.18) to determine the chiral fermion
+partition function on the disjoint union Wi + (−Wi ). As before, since the path integral
+on a disjoint union is the product of path integrals, we interpret the resulting formula for
+the path integral11 Z(Wi + (−Wi )) of the disjoint union Wi + (−Wi ) as a formula for the
+11
+
+In four dimensions, the generators of the cobordism group of infinite order are related to the gauge and
+gravitational instanton numbers. This means that typically, the chiral fermion partition functions on the
+infinite order generators Wi are identically zero. We ignore this momentarily and explain presently how to
+modify the procedure to take this into account. In four dimensions, there is no zero-mode problem for the
+
+– 18 –
+
+product Z(Wi )Z(−Wi ). A general principle of Euclidean quantum field theory, related to
+reflection positivity, is that reversing the orientation of spacetime with no change in the
+other data (in the present context, the metric, spin connection, and gauge field on W ) has
+the effect of complex conjugating the partition function. So we interpret Z(Wi )Z(−Wi )
+as |Z(Wi )|2 . Thus, we get a natural definition of the absolute value |Z(Wi )|. We do
+not get any natural definition of the phase of Z(Wi ), so we just assign it an arbitrary
+phase. So we learn that to every generator of infinite order in the cobordism group, there
+is a corresponding continuous theta-angle. In the case of chiral gauge theories in four
+dimensions, the generators of the cobordism group of infinite order are associated to the
+gauge theory and gravitational instanton numbers. For each instanton type, there is an
+associated theta-angle. These theta-angles can be incorporated at the quantum level in
+the manner just described. The subtlety of defining the phase of the chiral fermion path
+integral will generally frustrate more obvious attempts to define the renormalized thetaangles, provided that one wants to be able to define the theory on a general four-manifold.
+However, if one wishes to work only on T 4 , then for connected, simply-connected gauge
+groups, one can use cluster decomposition instead, as in [16].12
+Now we are ready to explain how to define the chiral fermion path integral for any
+P
+W . By definition of the generators, W is cobordant to some disjoint union i ni Wi , which
+P
+means that a disjoint union W − i ni Wi is the boundary of some Y . (For i ≤ k, ni
+is uniquely determined, but nk+i is uniquely determined mod only ri .) So eqn. (2.18),
+or more exactly its extension described shortly to accomodate fermion zero-modes, gives
+P
+a definition of the chiral fermion path integral on W − i ni Wi , which we interpret as
+Q
+Q
+ni
+Z(W ) i Z(−Wi )ni = Z(W ) i Z(Wi ) . Since the Z(Wi ) have already been defined, this
+gives a general definition of the chiral fermion path integral for any W , in terms of the
+quantum renormalized theta-angles. As usual, this definition does not depend on the choice
+of Y , and using the fact that ri copies of Wk+i are a boundary, one can verify that the
+definition in unaffected if nk+i is shifted by a multiple of ri . A similar argument was used
+in [33] to define precisely the worldsheet path integral of the heterotic string in a general
+background.
+Part of what we have learned is that the discrete and continuous theta-angles, taken
+together, are associated to homomorphisms from the relevant four-dimensional cobordism
+group to U (1). A precise statement is that given any such homomorphism Υ, the thetaangles can be shifted by multiplying the partition function Z(W ) by an additional factor
+Υ(W ).
+Now we will consider the case that the chiral fermion partition function vanishes identically on W because of zero-modes predicted by an index theorem (or, in some dimensions,
+generators of finite order, because there is no mod 2 index theorem.
+12
+For discrete theta-angles, cluster decomposition does not appear to provide a satisfactory shortcut to
+the argument based on cobordism, even on T 4 . That is roughly because the gauge field configurations that
+R
+carry discrete topological obstructions like W α ∪ α′ cannot be localized in the same way that instantons
+can be localized. There actually is a problem even in the absence of discrete theta-angles if fractional
+instanton number on T 4 is possible, as for gauge group SU (N )/ZN , because the fractional part of the
+instanton number cannot be localized and treated by cluster decomposition.
+
+– 19 –
+
+a mod 2 index theorem). When this happens, W is not a boundary, so we have to apply the
+machinery with a bounding five-manifold to a disjoint union of W with other components,
+P
+for example W = W − i ni Wi , as just discussed. We cannot now characterize the fermion
+path integral on W by the formula (2.18) for the partition function, since the partition
+function vanishes identically. Instead we need a formula generalizing that equation but
+describes path integrals on W with operator insertions chosen to get a non-zero result. We
+will describe how to construct a relatively direct analog of the previous formula. For an
+alternative explanation in a more general context, see section 2.5 of [18].
+First of all, the definition of APS boundary conditions that we gave previously assumed
+that the operator DW has no zero-modes. Under this condition, APS boundary conditions
+are described by saying that the coefficients of eigenmodes of DW with negative eigenvalue
+are required to vanish along the boundary. To generalize APS boundary conditions without
+this restriction, we need to place a constraint on the coefficients of the zero-modes. We want
+a condition that will make DY self-adjoint, so that it will have a discrete spectrum of real
+eigenvalues, just as when DW has no zero-modes. It turns out that a self-adjoint boundary
++
+condition of this type exists if and only if the index of the chiral Dirac operator DW
+vanishes. We are now in a situation in which this is not true on the connected manifold W ,
+P
+but it is true on the disconnected manifold W = W − i ni Wi . So, if W = ∂Y , we will have
+to complete the definition of APS boundary conditions by defining a boundary condition
+along W that mixes zero-modes on different boundaries. The necessary procedure is as
++
+follows. Since the index of DW
+vanishes, the spaces V+ and V− of positive and negative
+chirality zero-modes of DW have equal dimension. So there exist unitary isomorphisms
+U : V+ ∼
+= V− . For any such choice, we complete the definition of the APS boundary
+/ Y by saying that the coefficients of positive and negative chirality zerocondition on iD
+modes of DW are related by13 U . This gives a self-adjoint boundary condition that has
+all essential properties that we used in section 2.1. In particular, the boundary condition
+determines a state |APS⟩ in the boundary Hilbert space HW , which has a well-defined
+phase, since, if W = ∂Y , the inner product ⟨APS|Y ⟩ with the state |Y ⟩ created by the
+path integral on Y is simply given by a path integral on Y with APS boundary conditions.
+In fact, with mass parameter m ∼
+= −M and cutoff M taken to infinity, ⟨APS|Y ⟩ is given
+by the same formula as before, with the same derivation:
+⟨APS|Y ⟩ = exp(−iπηY ).
+13
+
+(2.24)
+
+/ Y , restricted to the zero-modes of DW ,
+We can motivate this definition by observing that near W , iD
+!
+d
+0
+/ Y = i dτ
+can be approximated by a 1-dimensional Dirac operator iD
+⊗ IN , where IN is the identity
+d
+0 − dτ
+on an N -dimensional vector space; here upper and lower components correspond to positive and negative
++
+chirality zero-modes of DW , and we have incorporated the fact that these are equal in number as DW
+has zero index. (We group all zero-modes of DW together here, regardless of which boundary they come
+from.) It is fairly well known
+! that the general self-adjoint boundary condition on this operator restricts
+ψ+
+the wavefunction Ψ =
+so that ψ− |τ =0 = U ψ+ |τ =0 for some unitary matrix U , and this is the APS
+ψ−
+boundary condition.
+
+– 20 –
+
+The eta-invariant, of course, is now computed using the eigenvalues of DY with the generalized APS boundary conditions.
+There is no problem to define the local boundary condition L for W and for all of the
+Wi . However, in trying to repeat the derivation of eqn. (2.12), we run into the fact that
+⟨L|Ω⟩ = 0, where Ω is the fermion ground state. This is related, of course, to the fact
+that the partition function Z(Y, L) on the left hand side of eqn. (2.12) also vanishes. To
+characterize the fermion path integral, we need a formula not for the partition function but
+for the unnormalized expectation value of some operator O that has a generically nonzero
+expectation value. Such an operator will have to “absorb” the fermion zero-modes, and a
+minimal choice of O on any given manifold is the product of a minimum number of elementary fermion fields that generically suffices to absorb zero-modes on that manifold. (This
+number can be determined by applying the index theorem to irreducible components of the
+representation R.) If a manifold W is the disjoint union of components Wα (for example,
+W and some of the Wi or −Wi ), we can define a minimal observable Oα to generically
+Q
+absorb zero-modes on Wα , and then we set O = α Oα . If the fermion representation
+is anomaly-free, there is no factor-ordering issue here; each Oα is bosonic because in any
+anomaly-free representation, the number of fermion zero-modes on a manifold is always
+even (this may seem clear from the discussion of SU (2) gauge theory in section 2.2, and
+is proved at the end of this section). For such O, the path integral ⟨O⟩Y,L on some Y of
+boundary W , with boundary condition L and boundary insertion O, is generically nonzero,
+and we want a formula for it generalizing eqn. (2.18).
+We can think of the fermion fields that appear in the operators Oα as the massless
+boundary fields χ and χ that were introduced in eqns. (2.7) and (2.8); of course, for
+|m|, M < ∞, these are modes of the five-dimensional fields Ψ, Ψ. Suppose that on Wα , χ
+and χ generically have µα and να zero-modes respectively. As we prove later, nα = µα + να
+is always even in the case of an anomaly-free representation, but separately µα and να can
+P
+P
++
+is assumed to vanish, we can define N = α µα = α να .
+be odd.14 Since the index of DW
+Let ψi , i = 1, · · · , N , be an orthonormal basis of the positive chirality zero-modes
+of DW , corresponding to zero-modes of χ, and set ψi′ = U ψi , with U the unitary map
+that enters the APS boundary condition. The ψi′ are an orthonormal basis of the negative
+′
+chirality zero-modes of DW in the representation R, and their complex conjugates ψ i are
+the zero-modes of χ. (It is natural, though not necessary, to take each ψi to be supported
+on a single component Wα ; the ψi′ then generically do not have that property.) We expand
+X
+X
+′
+χ=
+χi ψi + · · · , χ =
+χ′i ψ i + · · · ,
+(2.25)
+i
+
+i
+
+14
+
+It is possible for µα and να to be both nonzero and in fact odd because the representation R may
+be reducible, and the gauge group G is not necessarily simple; there can be multiple contributions to
+the index theorem, from gravitational instantons and different types of gauge instanton. For a simple
+example, let G = SU (N ) × SU (N ) × SU (N ), and take R to be the chiral but anomaly-free representation
+(N, N , 1) ⊕ (1, N, N ) ⊕ (N , 1, N ). Let W be a disjoint union W1 + W2 + W3 , with each of the Wi a copy of
+T 4 , and take the instanton numbers to be (1, −1, 0) on W1 , (−1, 0, 0) on W2 , and (0, 1, 0) on W3 , a choice
+that is consistent with W = ∂Y . Then (µ1 , ν1 ) = (N, N ), (µ2 , ν2 ) = (0, 2N ), (µ3 , ν3 ) = (2N, 0). So µi + νi
+P
+P
+is even for all i, but µ1 and ν1 are odd if N is odd. And i µi = i νi .
+
+– 21 –
+
+with anticommuting coefficients χi , χ′i , where the omitted terms are nonzero-modes. Up
+Q
+to a sign (−1)∆ that comes from reordering the factors in O = α Oα , we can write
+O = χ(x1 ) · · · χ(xN )χ(y1 ) · · · χ(yN ), with points xj , yj ∈ W (the correct number of them
+in each Wα ). As O contains exactly as many fermion fields as there are zero-modes, only
+the zero-mode parts of these fields contribute to ⟨O⟩Y,L , and inside the path integral we
+can replace O by
+′
+
+(−1)∆ det[ψi (xj )] det[ψ i (yj )] χ1 · · · χN χ′1 · · · χ′N .
+
+(2.26)
+
+The determinants come from summing over the ways that N elementary fermion fields
+can absorb N zero-modes. So it suffices to compute the path integral with insertion of
+χ1 · · · χN χ′1 · · · χ′N .
+For this, we perturb the operator DW to lift its zero-modes. Let Π± be projection
+operators from the spaces of positive or negative chirality spinors to the zero-mode subspaces. For small ϵ > 0, define the self-adjoint operator DW ,ϵ = DW + ϵ(U Π+ + U † Π− ).
+This operator has no zero-modes, since for instance it maps a positive chirality zero-mode
+ψ to the negative chirality zero-mode ϵU ψ. By extending U slightly into Y , we can define
+!
+ψ
+a self-adjoint operator DY,ϵ on Y that restricts to DW ,ϵ on W . On W , if Ψ =
+,
+ψ′
+where ψ and ψ ′ are zero-modes of DW with positive and negative chirality, then Ψ is a
+linear combination of eigenstates of DW ,ϵ of eigenvalue ±ϵ, and the condition that Ψ has
+eigenvalue +ϵ is that ψ ′ = U ψ. So APS boundary conditions for DY,ϵ coincide with the
+APS boundary conditions that we described earlier at ϵ = 0 for the original DY , with the
+same U . As DW ,ϵ has no zero-modes, we can simply use eqn. (2.18) to compute Z(Y, L)ϵ .
++†
++† +
+Since DW
+D+ has N eigenvalues ϵ2 and otherwise has the same spectrum as DW
+DW ,
+,ϵ W ,ϵ
++
++
+| = ϵN | det′ DW
+|, where det′ is a regularized determinant computed in
+we have | det DW
+,ϵ
+the space orthogonal to the zero-modes. So to leading order in ϵ,
+Y
++
+| exp(−iπηY ),
+(2.27)
+|det′ DW
+Z(Y, L)ϵ = ϵN
+α
+α
+
+where ηY is the eta-invariant of the original operator DY at ϵ = 0, with APS boundary
+conditions defined by U . On the other hand, the perturbation has added to the action a
+P
+term −ϵ i χ′i χi , so the coefficient of ϵN in Z(Y, L)ϵ is the path integral on Y at ϵ = 0
+Q
+with insertion of i χ′i χi = (−1)N (N +1)/2 χ1 · · · χN χ′1 · · · χ′N . Combining this with (2.26),
+we get finally15
+Y
+′
++
+⟨O⟩Y,L = (−1)∆+N (N +1)/2
+|det′ DW
+| exp(−iπηY ) det[ψi (xj )] det[ψ i (yj )].
+(2.28)
+α
+α
+15
+
+A careful reader may notice that we have elided a detail. If normalized four-dimensional zero-modes
+are related to five-dimensional zero-modes via eqns. (2.7) and (2.8), then the five-dimensional modes have
+1
+norm squared 2|m|
+. As a result, in the derivation just sketched, each zero-mode should come with a factor
+ϵ
+(not
+just
+ϵ).
+As
+shown in [18] and remarked in footnote 7, each nonzero mode also comes with a factor
+2|m|
+1
+1
+. The product of 2|m|
+over all modes disappears after regularization and renormalization. If we did
+2|m|
+not take into account the factors coming from zero-modes, we would be left with an uncompensated factor
+(2|m|)N .
+
+– 22 –
+
+Two consistency checks are worth noting. First, the right hand side of (2.28) does not
+P
+depend on the choice of basis ψi . Indeed, if we transform the ψi by ψi → j ψj Vji with
+P
+unitary V , then ψi′ → j ψj′ Vji , so the first determinant is multiplied by det V and the
+second by det V = (det V )−1 . Second, the left hand side of (2.28) is defined without any
+reference to APS boundary conditions, so it does not depend on U . On the right hand
+′
+side, U enters both in the eta-invariant and through ψi′ = U ψi , and as U varies, det[ψ i (yj )]
+varies as a constant times (det U )−1 . So exp(−iπηY ) must vary as a constant times det U .
+This is part of the Dai-Freed theorem [28].
+Assuming that the representation R is anomaly-free, by the usual argument the right
+hand side of the formula (2.28) does not depend on Y . So the formula gives us information
+about the purely four-dimensional theory on W = ∂Y . As before, the only problem is that
+W is the union of disjoint components Wα , and we want to define the chiral gauge theory
+P
+on a single component. For this we specialize to the case W = W − i ni Wi , where W is
+the manifold of interest and Wi are generators of the cobordism group. For each Wi , we
+pick as before a fiducial metric and gauge field on each Wi , but now we also pick a fiducial
+observable Oi of the previously described type on each16 Wi . Then reasoning as before,
+the formula (2.28) determines ⟨Oi ⟩Wi up to a phase if i ≤ k, and determines ⟨Ok+i ⟩Wk+i
+up to an rith root of unity. Fixing the undetermined constants amounts to specifying the
+values of renormalized theta-angles – both discrete ones and continuous ones. Once all the
+theta-angles are fixed, eqn. (2.28) contains enough information to define ⟨O⟩W on each fourmanifold W . And once this is determined, arbitrary chiral fermion correlation functions on
+W are uniquely determined by using this information plus the fermion propagator defined
+in a space orthogonal to the zero-modes; that propagator is always well-defined for any
+representation, anomaly-free or not.
+Q
+To avoid a troublesome minus sign in defining α Oα , we claimed that in any anomalyfree representation, the number ζ of fermion zero-modes on any manifold W is always even.
+This may be proved as follows. First, let Y = W × S 1 with a product metric. Parametrize
+S 1 by a periodic variable τ with τ ∼
+= τ + L, and pick a spin structure in which fermions are
+periodic under τ → τ + L. Let x denote local coordinates on W . Assume the gauge field
+on Y is pulled back from W . The five-dimensional Dirac operator DY is odd under the
+reflection symmetry Ψ(x, τ ) → γτ Ψ(x, −τ ). So nonzero eigenvalues come in pairs (λ, −λ),
+and therefore η(DY ) is simply the number of zero-modes of DY . A zero-mode of DY must
+have zero momentum in the S 1 direction, so it must come from a zero mode of DW . Hence
+η(DY ) = ζ and exp(−iπη(DY )) = (−1)ζ . So ζ must be even to avoid an anomaly. This
+argument is obviously reminiscent of the discussion of SU (2) gauge theory in section 2.2,
+but in that case, the proof that nonzero modes of DY are in pairs (λ, −λ) required an
+If Wi is not a torsion generator, let Oi and Oi− be fiducial observables on Wi and on −Wi . We want to
+ensure that the product ⟨Oi− ⟩−Wi ⟨Oi ⟩Wi , computed by applying eqn. (2.28) on Y = Wi × I, is positive, so
+that we can take a square root to define |⟨Oi ⟩Wi |. Positivity will follow from reflection positivity applied to
+the reflection that exchanges the two ends of Y if the fiducial observables and the APS boundary conditions
+are chosen to respect reflection positivity. For this aim, having picked a fiducial observable Oi on Wi ,
+we pick on −Wi the fiducial observable Oi− that is obtained from Oi by the operation corresponding to
+reflection positivity (complex conjugation and reversal of orientation). We also define the APS boundary
+condition by taking U to be the identity map from zero-modes on Wi to zero-modes on −Wi .
+16
+
+– 23 –
+
+assumption that the fermion representation is pseudoreal with no restriction on Y , while
+here there is no restriction on the fermion representation but we require a specific form of
+Y.
+
+3
+
+Continuum Interpolations of Admissible Lattice Gauge Fields
+
+As noted in section 1.2, continuum interpolations of admissible nonabelian lattice gauge
+fields have been constructed in several papers, including [37–40] and recently [16], in varying
+degrees of generality. There are various routes to construct such an interpolation for
+arbitrary compact G (not necessarily connected or simply-connected). One route – an
+extension of that of ’t Hooft [39] – will be briefly described here. Though we phrase the
+following initially for the four-dimensional case, it will be evident that the arguments apply
+equally well in any dimension d. In fact, as we will explain, the procedure can be carried
+out on any d-manifold.
+For orientation, we can start with a hypercubic lattice in T 4 . The lattice divides
+4
+T into four-dimensional hypercubes. For 0 ≤ k ≤ 3, the k-dimensional faces of such a
+hypercube are themselves k-dimensional hypercubes, whose faces of any codimension are
+again hypercubes. The key property that we will use is that topologically a hypercube of
+any dimension is a ball, and its boundary is a sphere. In the following, ϵ is an arbitrary,
+sufficiently small parameter. If it is necessary to rescale ϵ by a fixed constant (which will
+happen finitely many times in the following), we do not keep track of these constants and
+just call the new parameter ϵ. When we say “A is of order ϵ,” we always mean that A and
+its field strength F are of order ϵ; this is not always stated explicitly.
+We will use some basic facts about the Dirichlet problem for Yang-Mills theory. Before
+considering Yang-Mills theory, let us recall the analogous and more elementary facts about
+Maxwell’s equations. Given any abelian gauge field A on the boundary of a ball B of
+dimension ≥ 3, A can be extended to a solution of Maxwell’s equations on B in a way
+that is unique up to a gauge transformation trivial on ∂B; moreover, there is a unique
+gauge transformation on B that is trivial on ∂B and puts A in Landau gauge ∇i Ai = 0
+(∇i is the covariant derivative defined using the metric on B, not necessarily assumed to
+be flat).17 We call the gauge field satisfying these conditions the solution of the Landau
+gauge Dirichlet problem for A. Uniqueness means that if we are given two Landau gauge
+solutions A, A′ of Maxwell’s equations on B, then any gauge transformation between the
+boundary values of A and of A′ extends uniquely to a gauge transformation from A to A′
+defined on all of B . These statements need some modification in dimension 2, where ∂B
+is not simply connected, and in dimension 1, where ∂B is not connected. In dimension 2,
+H
+the same statements hold if the holonomy U = exp(i ∂B A) is close enough to the identity,
+17
+
+Both main steps here can be viewed as the outcome of minimization problems. Solving Maxwell’s
+R
+√
+equations with given boundary values amounts to minimizing the Maxwell action B dd x gFij F ij , and
+R d √
+imposing the Landau gauge condition amounts to minimizing B d x gAi Ai under gauge transformations
+that are trivial on the boundary (and, in d = 1, are constrained to keep A small). The minima exist
+because the functionals in question are bounded below, and are unique because (after imposing smallness
+conditions in the low dimensional cases to avoid topological issues) these functionals are effectively quadratic
+functionals on connected spaces of fields.
+
+– 24 –
+
+say |U − 1| < ϵ for small ϵ, and one stipulates that one wants the solution on B to be small,
+with |A|, |F | < ϵ everywhere (in units of the radius of B). Now consider the case d = 1.
+The ball is then an interval, say the interval 0 ≤ x ≤ a, with metric dx2 . To get a good
+analog of the Landau gauge Dirichlet problem in one dimension, one has to specify the
+R
+desired value of U = exp(i B A), and this should be sufficiently close to 1, say |U − 1| < ϵ.
+One also has to stipulate that one wants |A| to be of order ϵ (in units of 1/a). Then the
+Landau gauge Dirichlet problem has a unique solution with |A| < ϵ/a. Indeed, in one
+dimension Maxwell’s equations are trivial, and the Landau gauge condition ∇i Ai = 0 says
+that A should be constant. The unique solution of the Landau gauge Dirichlet problem is
+1
+then A = ia
+log U dx.
+The Yang-Mills equations are analogous to Maxwell’s equations, but nonlinear. The
+nonlinearity, however, is small for weak fields. All statements that we made about the Landau gauge Dirichlet problem for Maxwell’s equations also hold for the Yang-Mills equations
+provided that, to make the effects of the nonlinearity sufficiently small, we stipulate that
+the assumed boundary values of |A| and |F | are small, and that we want a bulk solution
+with |A| and |F | small. In all cases, “smallness” is measured in units of the radius of the
+ball or of its boundary. The basis for the claim is the following.18 The Yang-Mills equations
+plus the Landau gauge condition (and similarly their linearization in Maxwell theory) are
+a system of elliptic partial differential equations. In general, if a linear elliptic equation has
+a unique solution for all boundary data, then after perturbing it with a sufficiently small
+nonlinearity – which we achieve here by requiring |A|, |F | < ϵ – the resulting nonlinear
+equation has a nearby solution that is unique and nondegenerate. (Nondegeneracy means
+that in expanding around this solution of the nonlinear equation, there are no zero-modes.)
+In our context, the conclusion is that given a Yang-Mills field on ∂B with |A|, |F | < ϵ, there
+is a unique Landau gauge solution of the Yang-Mills equations on B with the given boundary values and |A|, |F | < ϵ. A variant of the uniqueness statement is the following: if A,
+A′ are two Landau gauge solutions on B, both of order ϵ and with field strength of order
+ϵ, then any gauge transformation on ∂B from the boundary values of A to the boundary
+values of A′ extends uniquely to a gauge transformation from A to A′ on B. Note that
+controlling the nonlinearity in Yang-Mills theory has required the same sort of smallness
+condition on A, F that was needed in Maxwell theory for small d to deal with topological
+issues.
+Now we turn to lattice gauge theory. An admissible lattice gauge field is a G-valued
+−1
+function U⟨xy⟩ defined for nearest neighbor pairs of lattice points, satisfying U⟨yx⟩ = U⟨xy⟩
+and such that the plaquette holonomies UP satisfy |UP − 1| < ϵ, for all P , with some ϵ
+that is sufficiently small for the following argument. Given this data, we wish to construct
+a continuum gauge field A on T 4 that interpolates the lattice gauge field, in the sense
+that for each nearest neighbor pair xy, the parallel transport by A along the link from
+x to y gives precisely U⟨xy⟩ . The interpolation procedure will be gauge-invariant, in the
+sense that if two lattice gauge fields are gauge-equivalent, then their interpolations will
+also be gauge-equivalent. Moreover, the Yang-Mills field strength F = dA + A ∧ A of the
+18
+
+For a rigorous discussion of a closely related Yang-Mills Dirichlet problem in four dimensions, see [23].
+
+– 25 –
+
+interpolated gauge field will be of order ϵ in lattice units; that is, if the lattice spacing is
+a, then F ∼ ϵ/a2 .
+An elementary fact that we will use is the existence of a logarithm for a group element
+that is close to the identity. In general, for a compact Lie group, there is no continuous map
+U → log U from the group to its Lie algebra satisfying U = elog U . But in a neighborhood
+of the identity, there is a unique such map with log 1 = 0. We already used the existence
+of such a logarithm in Maxwell theory for d = 1.
+In lattice gauge theory on a hypercubic lattice, the holonomy around a single plaquette
+is a product UP = U1 U2 U3 U4 of four link variables. It is possible to set three of them, say
+U1 , U2 , U3 , to 1 by a gauge transformation, and once this is done, one has U4 = UP . In the
+case of an admissible lattice gauge field, |UP − 1| < ϵ, and therefore in the gauge stated, all
+of the link variables of the plaquette satisfy |U − 1| < ϵ. Similarly, the boundary of a cube
+contains 12 edges, and (see fig. 1) it is possible to set 7 of them to the identity by a gauge
+transformation; once this is done, each remaining link variable is the holonomy around a
+lattice path that bounds the union of at most two plaquettes. So each link variable in this
+gauge obeys |U − 1| < 2ϵ. Finally, in a four-dimensional hypercube (as explained in the
+caption to fig. 1), it is possible to gauge 15 of its edges to 1, and each remaining one is then
+the holonomy around a path that bounds at most three plaquettes. So in this gauge, each
+link variable of the hypercube satisfies |U − 1| < 3ϵ. (The generalization to a k-dimensional
+hypercube is |U − 1| < (k − 1)ϵ.)
+We will start by trying to define A on a single four-dimensional hypercube C4 . First we
+go to the gauge just described in which all link variables satisfy |U − 1| < 3ϵ. This means
+that the link variables all have logarithms. On an edge with link variable U , we define
+1
+A to be the constant19 A = ia
+log U . In one dimension, just as in the abelian case, the
+P i
+Landau gauge condition i ∇ Ai = 0 says that A should be constant, and the Yang-Mills
+1
+equations are vacuous, so we can describe the choice A = ia
+log U as the unique Landau
+gauge solution of the Yang-Mills equations that is of order ϵ and whose parallel transport
+along the edge agrees with U . Next let C2 be a two-dimensional face of C4 . We have
+already defined A on ∂C2 , in such a way that it is of order ϵ. So solving the Landau
+gauge Dirichlet problem on C2 , we get a unique extension of A over C2 that is of order
+ϵ. After doing this for every two-dimensional face of C4 , we consider in the same way a
+three-dimensional face C3 . At this point, we have defined A on ∂C3 and it is of order ϵ. So
+solving the Landau gauge Dirichlet problem again, we extend A over C3 . After doing this
+for each three-dimensional face of C4 , we have defined A on ∂C4 , and it is of order ϵ. So
+we solve the Landau gauge Dirichlet problem one more time and extend A over C4 , again
+of order ϵ.
+Now let us discuss how to combine the results of this construction on hypercubes C
+and C ′ that share a common face C ∩ C ′ . The starting point of the whole construction was,
+of course, an admissible lattice gauge field defined on the whole lattice, with link variables
+U⟨xy⟩ for every link xy. Then on C, we made a lattice gauge transformation ϕC – defined
+19
+
+R
+The factor 1/i is needed if A is defined to be hermitian and holonomy is defined by U = P exp i A,
+R
+where P represents path ordering. If A is defined to be antihermitian and U = P exp A, then A = a1 log U .
+
+– 26 –
+
+Figure 1. The boundary of a three-dimensional cube has been projected to a plane, for visibility. The
+1-skeleton of the boundary consists of 12 links. By a lattice gauge transformation, up to 7 of the link
+variables can be set to 1, for example, the ones associated to the seven links shown in black, which make
+up a “maximal tree.” In that gauge, the link variables associated to the four green links are plaquette
+holonomies and satisfy |U − 1| < ϵ, while the remaining link variable in red is the holonomy around the
+boundary of the union of two plaquettes (the outer one and one on the right), and so satisfies |U − 1| < 2ϵ.
+For a similar four-dimensional construction, start with a “bottom” cube and a “top” one and connect each
+of the 8 corners of the bottom cube to the corresponding corner of the top cube by a “vertical” link. Gauge
+to the identity 7 link variables in the bottom cube, as in the picture, and the 8 vertical ones. In this gauge,
+each remaining link variable is the holonomy around a region that encloses at most three plaquettes, so all
+satisfy |U − 1| < 3ϵ.
+
+only on the lattice sites – to ensure that all link variables on C satisfy |U − 1| < 3ϵ, and
+this was the starting point for the construction of an interpolating gauge field AC on C.
+Similarly, on C ′ , we made a lattice gauge transformation ϕC ′ to a gauge in which all link
+variables on C ′ obey |U − 1| < 3ϵ, and this led to the construction of an interpolating
+gauge field AC ′ on C ′ . In general the gauge transformations ϕC and ϕC ′ are not equal
+on C ∩ C ′ (and it is not possible through additional choices to make them equal for all
+adjacent pairs C, C ′ ). However, we can construct on C ∩ C ′ a uniquely determined gauge
+transformation from AC to AC ′ . First of all, since the lattice data that were used as input
+to the interpolation on C and on C ′ were obtained by lattice gauge transformations ϕC and
+ϕC ′ from the same initial family U⟨xy⟩ , it follows that, on C ∩ C ′ , the lattice data used on
+C ′ are related to the lattice data used on C by the gauge transformation ϕC ′ ϕ−1
+C . Second,
+the subsequent steps in which starting with lattice data on C or on C ′ , we constructed
+the interpolating gauge fields AC and AC ′ first on links, then on squares, then on cubes,
+and finally on all of C or C ′ , were made at each stage by solving a Landau gauge Dirichlet
+problem. The uniqueness of the solution of the Landau gauge Dirichlet problem means that
+any gauge equivalence between boundary values extends uniquely to a gauge equivalence
+between bulk solutions. Applying this reasoning first on links, then on squares and so
+on, we learn that there is a uniquely determined gauge transformation ΦC ′ ,C from AC to
+AC ′ that agrees with ϕC ′ ϕ−1
+C on the lattice sites. In general, ΦC ′ ,C does not factorize as
+−1
+ψC ′ ψC where ψC ′ and ψC respectively extend ϕC ′ and ϕC over all of ∂C ′ and ∂C. If that
+is the case, the bundle on T 4 constructed presently is topologically trivial. Note that this
+argument constructing ΦC ′ ,C holds equally regardless of the dimension of C ∩ C ′ (which
+may be 0,1,2, or 3, but if it is of dimension 0, there was no nontrivial statement to prove).
+Next consider three hypercubes C, C ′ , C ′′ with non-empty joint intersection. On C ∩
+
+– 27 –
+
+C ′ ∩ C ′′ , we can define the following two gauge transformations from AC to AC ′′ , namely
+Φ(C ′′ , C) and Φ(C ′′ , C ′ )Φ(C ′ , C). We want to know that these are equal,
+Φ(C ′′ , C) = Φ(C ′′ , C ′ )Φ(C ′ , C).
+
+(3.1)
+
+−1
+′′
+′
+This is true on lattice sites, since on lattice sites Φ(C ′′ , C) = ϕC ′′ ϕ−1
+C . Φ(C , C ) = ϕC ′′ ϕC ′ ,
+Φ(C ′ , C) = ϕC ′ ϕ−1
+C . The uniqueness part of the Landau gauge Dirichlet problem, applied
+just as we did to define Φ(C ′ , C), then shows that the relation (3.1) must also hold on all
+of C ∩ C ′ ∩ C ′′ . Again, this argument holds regardless of the dimension of C ∩ C ′ ∩ C ′′
+(which may be 0, 1, or 2).
+Each AC or AC ′ can be viewed as a connection on a trivial G-bundle over C or C ′ . The
+gauge transformation Φ(C ′ , C) can be used to glue together the bundles over C and C ′ ,
+and their corresponding connections AC and AC ′ , to build a G-bundle with connection over
+the union C ∪ C ′ . The relation (3.1) means that no inconsistency is encountered in further
+gluing of hypercubes, so we can glue together the data on all the hypercubes comprising
+T 4 to build a G-bundle with connection A over all of T 4 . The field strength F of this
+connection is everywhere of order ϵ in lattice units. The bundle constructed in this way
+may be topologically nontrivial (if the bundle is nontrivial, a global gauge choice does not
+exist; even if it is trivial, there may be no global gauge choice with A everywhere small,
+though there is such a choice in any one hypercube or small set of hypercubes). In fact,
+some of the steps in this argument are similar to reasoning used by Lüscher [36] to define
+the topological charge of an admissible lattice gauge field. To make it obvious that there
+is no general restriction on the topology of the bundle constructed in this way, observe
+that starting with any G-bundle over T 4 , any connection A on this bundle, if restricted to
+a sufficiently fine lattice, becomes an admissible lattice gauge field; then the interpolating
+procedure will simply reconstruct the G-bundle that we started with, up to isomorphism,
+with a connection close to the original one.
+The inductive nature of this construction hopefully makes it clear that the same construction applies for a hypercubic lattice of any dimension. The continuum gauge field
+produced by this construction has the property that its holonomy on a given link agrees
+precisely with the corresponding lattice link variable, and its restriction to any given k-cell
+depends only on the lattice link variables of that cell. It is smooth in the interior of each
+four-dimensional hypercube. Across boundaries of hypercubes, the interpolated gauge field
+is continuous but its derivative is not continuous. So the Yang-Mills field strength, while everywhere of order ϵ in lattice units, is discontinuous across boundaries of hypercubes. This
+actually should not interfere with the use of this interpolated gauge field to define a cou/+
+/ Y ))
+pling of lattice gauge theory to chiral fermions, since the formula | det D
+W | exp(−iπη(D
+makes sense with this kind of gauge field. The behavior of the interpolation that we have
+described across boundaries of hypercubes is actually similar to the typical behavior of
+lattice gauge fields at the lattice scale. However, as noted in [43], a numerical evaluation
+/+
+/ Y )) is likely to be more efficient if chiral fermions are coupled to
+of | det D
+W | exp(−iπη(D
+a smooth gauge field.
+There are several ways to achieve smoothness. A simple smoothing procedure is to act
+on the interpolated A with the Yang-Mills gradient flow for a short time. To define this
+
+– 28 –
+
+flow, let s be a new “time” coordinate, and let the four-dimensional gauge field A evolve
+by
+dAi (x) X
+=
+Dj Fji (x).
+(3.2)
+ds
+j
+
+Starting at s = 0 with the continuum interpolation A that we already constructed, this
+will produce a smooth continuum gauge field for any s > 0. Gradient flow for a time s0
+√
+will smooth out A on a length scale s0 , so picking s0 ∼ a2 will suppress modes of A
+with wavelength smaller than the lattice spacing a. This gives a smooth continuum gauge
+field in the same topological class as A; its link holonomies agree with U⟨xy⟩ up to small
+corrections (but not exactly), and it is quasilocal in the sense that dependence on links
+2 2
+that are n lattice units away is suppressed by e−n a /s0 . All this is sufficient for coupling
+to continuum fermions.20
+Anthropic’s Claude Opus 5.5 suggested a likely variant that gives a smooth interpolation with link holonomies that equal precisely the corresponding lattice link variables and
+such that the interpolated gauge field in a hypercube depend only on the link variables on
+the boundary of that hypercube. Pick coordinates on R4 so that the lattice consists of the
+points with integer coordinates. Fix a small δ > 0, and let s(t) be a smooth nondecreasing
+function, with s(t + 1) = s(t) + 1, that is equal to n for |t − n| < δ, n ∈ Z, and maps each interval [n, n+1] onto itself. The map Φ(x) = (s(x1 ), . . . , s(x4 )) maps every cell of the lattice
+onto itself; it collapses the δ-neighborhood of the boundary of the cell onto the boundary,
+and maps the rest of the cell onto its interior. After defining A on the cells of dimension k,
+and before going on to dimension k + 1 by solving a Dirichlet problem, replace A on each
+k-cell by Φ∗ A. This squeezes the gauge field on each cell into its interior and, near each
+face, replaces it by its value on the face, continued without change in the normal directions.
+Since Φ acts on each link only by reparametrization, the link holonomies are unchanged.
+Gauge fields on adjacent cells now match smoothly across their common faces. The end
+result is a smooth continuum interpolation procedure that is gauge-invariant, preserves all
+lattice symmetries, reproduces the link variables exactly, and on each cell depends only on
+the lattice data of that cell.
+There are many possible variants of this construction, some with possibly desirable
+properties. For example, Opus 5.5 also described a variant in which the inductive step is
+made by a sort of linear interpolation rather than by solving a Dirichlet problem.
+Continuum interpolation is also available, with similar arguments, if lattice gauge theory is formulated on a general smooth d-manifold W , for any d. To do lattice gauge theory
+on W , we want not just a lattice embedded in W but a sequence of increasingly fine lattices
+in W on which lattice gauge theory can be expected to converge to a continuum limit. For
+this, we want the top dimensional cells in the refined lattices to have “bounded flatness,”
+that is, as the lattice is refined, one wants these cells to remain roughly isotropic, rather than
+becoming highly flattened in some directions relative to others, which would make it difficult
+20
+
+Craig’s interpolation for SU (N ) [16] has the following properties. It is smooth; it is strictly local in
+the sense that A(x) does not depend at all on lattice links more than a fixed distance away; and its link
+holonomies do not precisely coincide with U⟨xy⟩ .
+
+– 29 –
+
+to see a continuum limit of lattice gauge theory.21 One way to proceed (in any dimension)
+is as follows, following Freudenthal [53] (the title of the paper can be translated “Simplicial
+Decompositions of Bounded Flatness”). Smooth manifolds of any dimension can always be
+triangulated [54, 55]; start with any triangulation of W . In a triangulation, the basic cells
+are simplices (a k-simplex is the k-dimensional generalization of a tetrahedron, with k + 1
+vertices), as opposed to the hypercubes in our previous discussion.22 Order the vertices in
+the triangulation. Then in particular the vertices v0 , v1 , · · · , vk of any given k-simplex are
+ordered. The simplex can be identified with a region {1 ≥ x1 ≥ x2 ≥ · · · ≥ xk ≥ 0} in
+Rk ; the vertices are points at which all but one of these inequalities are saturated and are
+ordered accordingly. Picking any integer n > 1, subdivide the simplex into nk smaller ones
+by cutting along the hyperplanes xi = m/n and xi − xj = m/n, with integers 0 < m < n.
+This divides the original simplex into nk smaller ones. (This decomposition of a k-simplex
+restricts along its boundary to the decomposition of its faces made in the same way.) As
+n → ∞, the simplices remain of bounded flatness, because regardless of n, the simplices
+that arise in this process have only k!/2 possible shapes [56]. The vertices in each simplex
+of the refined lattice inherit an ordering from the ordering of the vertices in the original
+lattice, so the process of subdivision can be repeated. Subdividing in this fashion with
+n = n1 n2 is equivalent to first subdividing with n1 and then with n2 , so for example, to
+subdivide with n = 2b can be accomplished with b steps in each of which one subdivides
+by a factor of 2. So this process of subdivision may be amenable to a renormalization
+group approach. To do lattice gauge theory in this setting, one can start with the Wilson
+P
+action defined by a sum over plaquettes I = P wP ReTr(1 − UP ), but now with different
+weights wP > 0 for different plaquettes. The weights would be adjusted so that, expanding
+around a configuration with all link variables equal to 1, the quadratic part of the action
+R 4 √ ij kl
+matches the desired 4g12
+d x gg g Tr Fik Fjl , with some desired metric gij of W and
+YM
+some Yang-Mills coupling gYM . Near the continuum limit, one takes gYM to zero in the
+usual way; some further tuning of the lattice weights will be required to avoid generating
+non-isotropic dimension four couplings by quantum corrections.
+There is no problem with continuum interpolation in this setup. For example, the
+approach based on the solution of the Dirichlet problem carries over without any essential
+change. The cells in the lattice are now simplices, rather than the hypercubes of the
+previous discussion. But as a simplex is topologically a ball, with its boundary a sphere,
+this does not require any essential change in the previous explanation based on the Dirichlet
+problem.
+21
+
+A procedure that does not work well is barycentric subdivision, in which one starts with a triangulation
+and at each stage adds a new vertex in each simplex and subdivides. The simplices become very flat.
+22
+Simplices are simpler than hypercubes in one respect. After gauging to 1 a maximal number of link
+variables in a simplex, the remaining ones are all plaquette holonomies. Thus on the 1-skeleton of a
+simplex, an admissible lattice connection can always be put in a gauge with |U − 1| < ϵ for all links, while
+for hypercubes of dimension k, ϵ must be replaced by (k − 1)ϵ.
+
+– 30 –
+
+4
+
+Can This Regularization Be Implemented on a Computer?
+
+Finally, we will address this question: can the regularization of chiral gauge theories that
+we have discussed, with lattice gauge fields interpolated over the continuum and coupled
+to continuum chiral fermions, be implemented on a computer?
+There will certainly be no straightforward lattice Monte Carlo implementation, because the chiral fermion path integral, even when anomaly-free, lacks the positivity needed
+in Monte Carlo procedures. So an implementation, at least with known methods, may
+be impracticably slow. But is such an implementation possible in principle? In lattice
+gauge theory with a finite volume and a positive lattice spacing, and therefore only finitely
+many link variables, the lattice path integral is an integral over a compact space of finite
+dimension. So if the chiral fermion integral can be effectively computed, then the whole
+lattice path integral can be effectively computed as well, in principle.
+So we have to discuss whether one can effectively interpolate an admissible lattice
+gauge field over the continuum, extend it over some Y , and then compute
++
+| det DW
+| exp(−iπη(DY ))
+
+(4.1)
+
+(and its generalization in instanton sectors, which raises similar issues). The interpolation is
+certainly not a problem; with the procedure described in section 3, this amounts to solving
+finitely many Landau gauge Dirichlet problems, which certainly can be solved numerically.
+The extension over Y is also not an issue. For example, for T 4 = T 3 × S 1 , we can take
+Y = T 3 × D, where D is a disc of boundary S 1 . With a connected, simply-connected group
+G, a topologically trivial gauge field A can be extended over Y and such an extension can
+be effectively found. Indeed, any path from A = 0 to a given A can be used to construct an
+extension of A over T 3 × D. (To do this, use the path to construct a gauge field on S 1 × I,
+where I is an interval, with A = 0 in a neighborhood of one end and the desired A at the
+other end; then collapse the end with A = 0 to build a disc with a gauge field.) Variants
+of this are possible in topologically non-trivial sectors. No particularly nice procedure is
+needed for the extension because the result will anyway be independent of Y .
++
+The question is then whether one can effectively approximate | det DW
+| and exp(−iπηY )
+on a computer. Will the fermion doubling problem come back when we try to do so? In
+fact, there is no difficulty. Although we would face a fermion doubling problem if we try to
++
++
+|.
+directly, there is no problem to compute its absolute value | det DW
+make sense of det DW
++† +
+That is the square root of the determinant of the self-adjoint operator DW
+DW . This operator is Laplace-like, and there is no difficulty to discretize it and compute its spectrum.
+Now let us discuss the problem of computing the eta-invariant of the Dirac operator DY , a
+self-adjoint operator defined with APS boundary conditions. This eta-invariant of course
+can be extracted from the spectrum of DY . If we try to compute the spectrum of DY
+directly, for example by a lattice regularization, we may indeed recover a version of the
+lattice doubling problem. However, there is no need to do that. We can compute the spectrum of the self-adjoint operator DY2 (defined with a boundary condition that is inherited
+from the APS boundary condition of DY ). This is a Laplace-like operator with no doubling
+problem. Generically, the eigenvalues of DY2 are nondegenerate. If ψ is a eigenvector of DY2
+
+– 31 –
+
+√
+with nondegenerate eigenvalue λ, then it is an eigenstate of DY with eigenvalue ± λ, and
+we can find the sign by computing the expectation value (ψ, DY ψ). If exceptionally DY2
+has an s-dimensional space of eigenvectors with the same eigenvalue λ, we evaluate DY is a
+√
+√
+matrix in this space and learn the multiplicity of states with eigenvalue + λ or − λ. The
+APS boundary condition that was part of the input here can be described just in terms
+of the nonchiral Dirac operator DW , so it too can be approximated numerically without
+running into a doubling problem. So in short, there is no fermion doubling problem in
+numerical study of the eta-invariant η(DY ).
+
+Acknowledgements Research supported in part by NSF Grant PHY-2514611. I thank T.
+Hartman for pointing out Craig’s paper, and K. Yonekura for helpful comments on the
+manuscript. Assistance on many details was provided by Claude Opus 5.5.
+
+References
+[1] K. G. Wilson, “Confinement of Quarks,” Phys. Rev. D10 (1974) 2445.
+[2] M. Creutz, “Monte Carlo Study of Quantized SU (2) Gauge Theory,” Phys. Rev. D21 (1980)
+2308.
+[3] H. B. Nielsen and M. Ninomiya, “A No-Go Theorem For Regularizing Chiral Fermions on
+the Lattice,” Phys. Lett. B105 (1981) 219.
+[4] P. H. Ginsparg and K. G. Wilson, “A Remnant of Chiral Symmetry on the Lattice,” Phys.
+Rev. D25 (1982) 2649.
+[5] D. B. Kaplan, “A Method For Simulating Chiral Fermions on the Lattice,” Phys. Lett. 288B
+(1992) 342-7.
+[6] R. Narayanan and H. Neuberger, “Chiral Determinant as an Overlap of Two Vacua,” Nucl.
+Phys. B412 (1994) 574, hep-lat/9307006.
+[7] R. Narayanan and H. Neuberger, “A Construction of Lattice Chiral Gauge Theories,” Nucl.
+Phys. B443 (1995) 305, hep-th/9411108.
+[8] H. Neuberger, “Exactly Massless Quarks on the Lattice,” Phys. Lett. B417 (1998) 141,
+hep-lat/9707022.
+[9] P. Hasenfratz, “Lattice QCD Without Tuning, Mixing, and Current Renormalization,” Nucl.
+Phys. B525 (1998) 401-9.
+[10] M. Lüscher, “Exact Chiral Symmetry on the Lattice and the Ginsparg-Wilson Relation,”
+Phys. Lett. B428 (1998) 342, hep-lat/9802011.
+[11] M. Lüscher, “Abelian Chiral Gauge Theories on the Lattice with Exact Gauge Invariance,”
+Nucl. Phys. B549 (1999) 295, hep-lat/9811032.
+[12] M. Lüscher, “Lattice Regularization of Chiral Gauge Theories to All Orders of Perturbation
+Theory,” JHEP 06 (2000) 028, hep-lat/0006014.
+[13] H. Suzuki, “Real Representation in Chiral Gauge Theories on the Lattice,” JHEP 10 (2000)
+039, hep-lat/0009036.
+
+– 32 –
+
+[14] D. Kadoh and Y. Kikukawa, “A Construction of the Glashow-Weinberg-Salam Model on The
+Lattice with Exact Gauge Invariance, JHEP 05 (2008) 095, arXiv:0709.3658.
+[15] Y. Kikukawa, “On the Gauge-Invariant Path-Integral Measure for the Overlap Weyl
+Fermions in 16 of SO(10),” Prog. Theor. Exp. Phys. 2019 (2019) 113B03, arXiv:1710.11618.
+[16] N. Craig, “A Gauge-Invariant Measure for Lattice Chiral Fermions,” arXiv:2610.09093.
+[17] S.D. H. Hsu, “The Standard Model On A Finite Bosonic Lattice With Continuum Weyl
+Fermions,” arXiv:2610.29019.
+[18] E. Witten and K. Yonekura, “Anomaly Inflow and the η-Invariant,” in Memorial Volume for
+Shoucheng Zhang, eds. B. Lian et. al. (World Scientific, 2021), pp. 283-352, arXiv:1909.08775.
+[19] D. S. Freed and M. J. Hopkins, “Consistency of M-Theory on Non-Orientable Manifolds,”
+Quart. J. Math. Oxford 72 (2021) 603-671, arXiv:1908.09916.
+[20] D. S. Freed, “Pions and Generalized Cohomology,” J. Diff. Geom. 80 (2008) 45-77,
+arXiv:hep-th/0607134.
+[21] E. Witten, “An SU(2) Anomaly,” Phys. Lett. B117 (1982) 324.
+[22] J. Wang, X.-G. Wen, and E. Witten, “A New SU (2) Anomaly,” J. Math. Phys. 60 (2019)
+052301, arXiv:1810:00844.
+[23] A. Marini, “Dirichlet and Neumann Boundary Value Problems For Yang-Mills Connections,”
+Comm. Pure. Appl. Math. 45 (1992) 1015-50.
+[24] R. Jackiw, “Topological Investigations Of Quantized Gauge Theories,” in B. S. DeWitt et.
+al., eds., Relativity, Groups, and Topology, II, Les Houches 1983, reprinted in updated form
+in S. B. Treiman et. al., eds., Current Algebra and Anomalies (World-Scientific, 1985)
+[25] B. Zumino, “Chiral Anomalies in Differential Geometry,” in B. S. DeWitt et. al., eds.,
+Relativity, Groups, and Topology, II, Les Houches 1983, reprinted in Treiman et. al., eds.,
+Current Algebra and Anomalies (World-Scientific, 1985).
+[26] C. G. Callan, Jr., and J. A. Harvey, “Anomalies And Fermion Zero-Modes On Strings And
+Domain Walls,” Nucl. Phys. B250 (1985) 427-36.
+[27] E. Witten, “Global Gravitational Anomalies,” Commun. Math. Phys. 100 (1985) 197.
+[28] X. Dai and D. S. Freed, ”η-Invariants and Determinant Lines,” J. Math. Phys. 35 (1994)
+5155.
+[29] J.-M. Bismut and D. S. Freed, “The Analysis of Elliptic Families, II. Dirac Operators, Eta
+Invariants, and the Holonomy Theorem,” Commun. Math. Phys. 107 (1986) 103-63.
+[30] S. Della Pietra, V. Della Pietra, and L. Alvarez-Gaumé, “The Chiral Determinant and the
+Eta Invariant,” Commun. Math. Phys. 109 (1987) 691-700.
+[31] K. Yonekura, “Dai-Freed Theorem and Topological Phases of Matter,” JHEP 09 (2016) 22,
+arXiv:1607.01873.
+[32] D. B. Kaplan and M. Schmaltz, “Domain Wall Fermions and the Eta Invariant,” Phys. Lett.
+B368 (1996) 44-52, hep-th/9510197.
+[33] E. Witten, “World-Sheet Corrections Via D-Instantons,” JHEP 0002 (2000) 030,
+hep-th/9907041.
+[34] E. Witten, “Global Anomalies In String Theory,” in W. A. Bardeen and A. R. White, eds.,
+Symposium on Anomalies, Geometry, Topology (World Scientific Publishing Company, 1986),
+
+– 33 –
+
+available at https://www.ias.edu/sites/default/files/sns/files/
+global-anomalies-in-stringtheory-1985.pdf.
+[35] E. Witten, “Topological Tools in Ten-Dimensional Physics,” in M. B. Green and D. J. Gross,
+eds., Workshop on Unified String Theories (World Scientific, 1986), with an appendix by R.
+E. Stong, available at https://www.ias.edu/sites/default/files/sns/files/
+TopologicalTools-10Dimensions%2BAddendum-1987-REV.pdf.
+[36] M. Lüscher, “Topology of Lattice Gauge Fields,” Commun. Math. Phys. 85 (1982) 39-48.
+[37] M. Göckeler, A. S. Kronfeld, G. Schierholz, and U.-J. Wiese, “Continuum Gauge Fields From
+Lattice Gauge Fields,” Nucl. Phys. B404 (1993) 839-852.
+[38] A. Phillips and D. Stone, “The Chern-Simons Character of a Lattice Gauge Field,” in
+Quantum Topology, L. H. Kauffman and R. A. Baadhio, eds. (World Scientific, 1993) 244-91.
+[39] G. ’t Hooft, “Lattice Regularization of Gauge Theories Without Loss of Chiral Symmetry,”
+Phys. Lett. B349 (1995) 491-498, hep-th/9411228.
+[40] P. Hernández and R. Sundrum, “Interpolation of Nonabelian Gauge Fields,” Nucl. Phys.
+B472 (1996) 334-348, hep-lat/9602017.
+[41] R. Flume and D. Wyler, “Topological Charge in the Lattice Schwinger Model,” Phys. Lett.
+108B (1982) 317-322.
+[42] M Göckeler and G. Schierholz, “A Method for Putting Chiral Fermions on the Lattice,”
+Nucl. Phys. B Proc. Suppl. 30 (1993) 609-612, hep-lat/9211030.
+[43] S. D. H. Hsu, “Regularization of Chiral Gauge Theories,” hep-th/9503058.
+[44] A. S. Kronfeld, “Chiral Fermions Coupled to Lattice Gauge Fields,” hep-lat/9504007.
+[45] I. Montvay,“Interpolated Lattice Gauge Fields and Chiral Fermions in the Schwinger
+Model,” hep-lat/9505015.
+[46] P. Hernández and R. Sundrum, “A Lattice Construction of Chiral Fermions,” Nucl. Phys.
+B455 (1995) 287-319, hep-ph/9506331.
+[47] Y. Shamir, “Chiral Fermions From Lattice Boundaries,” Nucl. Phys. B406 (1993) 90-106,
+arXiv:hep-lat/9303005.
+[48] M. F. Atiyah, V. K. Patodi, and I. M. Singer, “Spectral Asymmetry and Riemannian
+Geometry I,” Math. Proc. Cambridge Phil. Soc. 77 (1975) 43-69.
+[49] M. F. Atiyah, V. K. Patodi, and I. M. Singer, “Spectral Asymmetry and Riemannian
+Geometry II,” Math. Proc. Cambridge Phil. Soc. 78 (1975) 405-32.
+[50] N. Redlich, 11Gauge Noninvariance and Parity Violation of Three-Dimensional Fermions,”
+Phys. Rev. Lett. 52 (1984) 18.
+[51] L. Alvarez-Gaume, S. Della Pietra and G. W. Moore, “Anomalies and Odd Dimensions,”
+Ann. Phys. 163 (1985) 288.
+[52] M. F. L. Golterman, K. Jansen, and D. B. Kaplan, “Chern-Simons Currents and Chiral
+Fermions on the Lattice,” Phys. Lett. B301 (1993) 219-223.
+[53] H. Freudenthal, “Simplizialzerlegungen von beschränkter Flachheit,” Ann. of Math. 43
+(1942) , 580-583.
+[54] S. S. Cairns, “Triangulated Manifolds,” Ann. Math. 35 (1935) 579-95.
+
+– 34 –
+
+[55] J. H. C. Whitehead, “On C1 Complexes,” Ann. Math. 41 (1940) 809-24.
+[56] H. Edelsbrunner and D. R. Grayson, “Edgewise Subdivision of a Simplex,” Disc. and Comp.
+Geom. 24 (2000) 707-19
+
+– 35 –
+
+
