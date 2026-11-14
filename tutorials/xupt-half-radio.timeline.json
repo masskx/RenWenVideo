@@ -1,0 +1,342 @@
+{
+  "id": "xupt-half-radio",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 150,
+  "totalFrames": 2696,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/xupt-half-radio/01-hook.mp3",
+      "audioMs": 8620,
+      "startFrame": 0,
+      "durationFrames": 274,
+      "cues": {
+        "a": 2417,
+        "b": 5117
+      },
+      "captions": [
+        {
+          "text": "红军的第一部电台",
+          "startMs": 194,
+          "endMs": 1439
+        },
+        {
+          "text": "只有半部",
+          "startMs": 1439,
+          "endMs": 2417
+        },
+        {
+          "text": "1930年底在龙冈缴获它时",
+          "startMs": 2417,
+          "endMs": 5117
+        },
+        {
+          "text": "发报机已经坏了",
+          "startMs": 5117,
+          "endMs": 6777
+        },
+        {
+          "text": "只能收，不能发",
+          "startMs": 6777,
+          "endMs": 8808
+        }
+      ]
+    },
+    {
+      "id": "title",
+      "audioSrc": "audio/tutorials/xupt-half-radio/02-title.mp3",
+      "audioMs": 3683,
+      "startFrame": 274,
+      "durationFrames": 175,
+      "cues": {
+        "a": 1634
+      },
+      "captions": [
+        {
+          "text": "这是我心中的思政课",
+          "startMs": 196,
+          "endMs": 1634
+        },
+        {
+          "text": "就从半部电台讲起",
+          "startMs": 1634,
+          "endMs": 4042
+        }
+      ]
+    },
+    {
+      "id": "listen",
+      "audioSrc": "audio/tutorials/xupt-half-radio/03-listen.mp3",
+      "audioMs": 11494,
+      "startFrame": 449,
+      "durationFrames": 360,
+      "cues": {
+        "a": 1661,
+        "b": 5225,
+        "c": 6684,
+        "d": 8545
+      },
+      "captions": [
+        {
+          "text": "只能听，那就听",
+          "startMs": 194,
+          "endMs": 1661
+        },
+        {
+          "text": "1931年1月",
+          "startMs": 1661,
+          "endMs": 2980
+        },
+        {
+          "text": "红军第一支无线电队成立",
+          "startMs": 2980,
+          "endMs": 5225
+        },
+        {
+          "text": "王诤任队长",
+          "startMs": 5225,
+          "endMs": 6684
+        },
+        {
+          "text": "他们日夜监听敌台",
+          "startMs": 6684,
+          "endMs": 8545
+        },
+        {
+          "text": "帮红军打赢第二次反“围剿”首战",
+          "startMs": 8545,
+          "endMs": 11824
+        }
+      ]
+    },
+    {
+      "id": "yanan",
+      "audioSrc": "audio/tutorials/xupt-half-radio/04-yanan.mp3",
+      "audioMs": 8673,
+      "startFrame": 809,
+      "durationFrames": 276,
+      "cues": {
+        "a": 2098,
+        "b": 3871,
+        "c": 6010,
+        "d": 7360
+      },
+      "captions": [
+        {
+          "text": "1940年12月30日",
+          "startMs": 196,
+          "endMs": 2098
+        },
+        {
+          "text": "延安王皮湾的窑洞里",
+          "startMs": 2098,
+          "endMs": 3871
+        },
+        {
+          "text": "新华广播电台第一次播音",
+          "startMs": 3871,
+          "endMs": 6010
+        },
+        {
+          "text": "从只能听，到能说",
+          "startMs": 6010,
+          "endMs": 8955
+        }
+      ]
+    },
+    {
+      "id": "xupt",
+      "audioSrc": "audio/tutorials/xupt-half-radio/05-xupt.mp3",
+      "audioMs": 8620,
+      "startFrame": 1085,
+      "durationFrames": 274,
+      "cues": {
+        "a": 950,
+        "b": 3921,
+        "c": 6057
+      },
+      "captions": [
+        {
+          "text": "1950年",
+          "startMs": 194,
+          "endMs": 950
+        },
+        {
+          "text": "陕甘两省邮电人员训练班成立",
+          "startMs": 950,
+          "endMs": 3921
+        },
+        {
+          "text": "这是西安邮电大学的前身",
+          "startMs": 3921,
+          "endMs": 6057
+        },
+        {
+          "text": "电波，从此有人接着传",
+          "startMs": 6057,
+          "endMs": 8842
+        }
+      ]
+    },
+    {
+      "id": "era",
+      "audioSrc": "audio/tutorials/xupt-half-radio/06-era.mp3",
+      "audioMs": 11729,
+      "startFrame": 1359,
+      "durationFrames": 367,
+      "cues": {
+        "a": 994,
+        "b": 4017,
+        "c": 6980,
+        "d": 10150
+      },
+      "captions": [
+        {
+          "text": "2014年",
+          "startMs": 194,
+          "endMs": 994
+        },
+        {
+          "text": "习近平总书记提出建设网络强国",
+          "startMs": 994,
+          "endMs": 4017
+        },
+        {
+          "text": "2020年，北斗三号全球开通",
+          "startMs": 4017,
+          "endMs": 6980
+        },
+        {
+          "text": "今年9月底",
+          "startMs": 6980,
+          "endMs": 8234
+        },
+        {
+          "text": "全国5G基站达到525.4万个",
+          "startMs": 8234,
+          "endMs": 12044
+        }
+      ]
+    },
+    {
+      "id": "climax",
+      "audioSrc": "audio/tutorials/xupt-half-radio/07-climax.mp3",
+      "audioMs": 3657,
+      "startFrame": 1726,
+      "durationFrames": 181,
+      "cues": {
+        "a": 1265
+      },
+      "captions": [
+        {
+          "text": "从半部电台",
+          "startMs": 198,
+          "endMs": 1265
+        },
+        {
+          "text": "到525万座基站",
+          "startMs": 1265,
+          "endMs": 4080
+        }
+      ]
+    },
+    {
+      "id": "ai",
+      "audioSrc": "audio/tutorials/xupt-half-radio/08-ai.mp3",
+      "audioMs": 10815,
+      "startFrame": 1907,
+      "durationFrames": 340,
+      "cues": {
+        "a": 2051,
+        "b": 4917,
+        "c": 6333,
+        "d": 8040
+      },
+      "captions": [
+        {
+          "text": "今天，我们有了AI",
+          "startMs": 196,
+          "endMs": 2051
+        },
+        {
+          "text": "片里的这些物件",
+          "startMs": 2051,
+          "endMs": 3479
+        },
+        {
+          "text": "都是AI画的",
+          "startMs": 3479,
+          "endMs": 4917
+        },
+        {
+          "text": "它能复原画面",
+          "startMs": 4917,
+          "endMs": 6333
+        },
+        {
+          "text": "复原不了那股劲",
+          "startMs": 6333,
+          "endMs": 8040
+        },
+        {
+          "text": "只剩半部，也要把信号接住",
+          "startMs": 8040,
+          "endMs": 11110
+        }
+      ]
+    },
+    {
+      "id": "choose",
+      "audioSrc": "audio/tutorials/xupt-half-radio/09-choose.mp3",
+      "audioMs": 3082,
+      "startFrame": 2247,
+      "durationFrames": 108,
+      "cues": {
+        "a": 1794
+      },
+      "captions": [
+        {
+          "text": "讲什么、为什么讲",
+          "startMs": 196,
+          "endMs": 1794
+        },
+        {
+          "text": "由我们自己定",
+          "startMs": 1794,
+          "endMs": 3392
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/xupt-half-radio/10-end.mp3",
+      "audioMs": 6008,
+      "startFrame": 2355,
+      "durationFrames": 341,
+      "cues": {
+        "a": 1411,
+        "b": 3504,
+        "c": 4594
+      },
+      "captions": [
+        {
+          "text": "当年他们只能听",
+          "startMs": 198,
+          "endMs": 1411
+        },
+        {
+          "text": "今天轮到我们发报",
+          "startMs": 1411,
+          "endMs": 3504
+        },
+        {
+          "text": "请党放心，强国有我",
+          "startMs": 3504,
+          "endMs": 6466
+        }
+      ]
+    }
+  ]
+}

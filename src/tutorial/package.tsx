@@ -568,3 +568,30 @@ export const CaptionAcrylic: React.FC<{captions: TimedCaption[]; k: Pk; breaks?:
     </div>
   </div>;
 };
+
+/**
+ * The pill caption (halftone-dossier §4, in 9:16): the caption bar is a dark-ink rounded pill with an overprint-ink offset
+ * shadow (+8/+8, `k.second`), paper-coloured text and the keyword in the highlight ink (`k.accent`). It pops in with a
+ * small overshoot (0.2 s) when the line changes. Left aligned at x 64, at most two lines, 60 px, inside x 64–930.
+ */
+export const CaptionPill: React.FC<{captions: TimedCaption[]; k: Pk; keywords?: string[]; breaks?: Record<string, string>; y?: number}> = ({captions, k, keywords = [], breaks = {}, y = 1430}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  if (!c) return null;
+  const since = (ms - c.startMs) / 1000 * 30;
+  const s = 0.9 + 0.1 * ease.outBack(clamp(since / 6), 2);
+  const kw = [...keywords].sort((a, b) => b.length - a.length).find((w) => c.text.includes(w));
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 13, kw);
+  const sz = Math.max(56, Math.min(62, Math.floor(800 / Math.max(...lines.map(units)))));
+  return <div style={{position: 'absolute', left: L, top: y, transformOrigin: '0 50%', transform: `scale(${s})`, opacity: clamp(since / 3)}}>
+    <div style={{display: 'inline-block', background: k.panel, borderRadius: 34, padding: '16px 34px 18px', boxShadow: `8px 8px 0 ${k.second ?? k.accent}`, border: `2px solid ${k.ink}22`}}>
+      {lines.map((line, i) => {
+        const parts = kw && line.includes(kw) ? line.split(kw) : null;
+        return <div key={i} style={{fontFamily: font, fontWeight: 900, fontSize: sz, lineHeight: 1.22, color: k.ink, whiteSpace: 'nowrap'}}>
+          {parts ? <>{parts[0]}<span style={{color: k.accent}}>{kw}</span>{parts.slice(1).join(kw as string)}</> : line}
+        </div>;
+      })}
+    </div>
+  </div>;
+};
