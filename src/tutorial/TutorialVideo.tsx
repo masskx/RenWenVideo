@@ -4,7 +4,7 @@ import {Audio} from '@remotion/media';
 import {Layout, Palette, blueprint, cinema, color, font, layoutOf, mono, palette, paper} from './theme';
 import {sceneRegistry} from './scenes';
 import {HostLayer} from './host';
-import {CaptionBar, CaptionCard, CaptionLabel, CaptionStrip, CaptionSwiss, CaptionMap, CaptionTear, CaptionTele, CaptionNote, CaptionLog, CaptionFigure, CaptionPlate, CaptionAcrylic, CaptionToast} from './package';
+import {CaptionBar, CaptionPill, CaptionCard, CaptionLabel, CaptionStrip, CaptionSwiss, CaptionMap, CaptionTear, CaptionTele, CaptionNote, CaptionLog, CaptionFigure, CaptionPlate, CaptionAcrylic, CaptionToast} from './package';
 import {DepthField, GridFloor} from './space';
 import {Dino} from './ui';
 import {CoverRatio, SceneTiming, TimedCaption, Tutorial, TutorialProps} from './types';
@@ -338,6 +338,7 @@ export const TutorialVideo: React.FC<TutorialProps> = ({tutorial, timing}) => {
           : (look.header ?? true) && <Header theme={theme} title={tutorial.title} step={scene?.step ?? 0} steps={tutorial.steps ?? []} />}
         {tutorial.host && <HostLayer cfg={{...tutorial.host, colors: tutorial.host.colors ?? (look.pk ? {panel: look.pk.panel, accent: look.pk.accent, ink: look.pk.ink, bg: look.pk.bg} : undefined)}} sceneId={s.id} prevId={timing.scenes[i - 1]?.id} nextId={timing.scenes[i + 1]?.id} audioSrc={s.audioSrc} leadMs={timing.leadMs ?? 0} dur={s.durationFrames} />}
         {look.captions === 'card' && look.pk ? <CaptionCard captions={s.captions} k={look.pk} keywords={tutorial.keywords} breaks={look.breaks} y={look.captionTop} />
+          : look.captions === 'pill' && look.pk ? <CaptionPill captions={s.captions} k={look.pk} keywords={tutorial.keywords} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'bar' && look.pk ? <CaptionBar captions={s.captions} k={look.pk} keywords={tutorial.keywords} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'strip' && look.pk ? <CaptionStrip captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />
           : look.captions === 'toast' && look.pk ? <CaptionToast captions={s.captions} k={look.pk} breaks={look.breaks} y={look.captionTop} />

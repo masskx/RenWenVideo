@@ -1,0 +1,202 @@
+{
+ "id": "xupt-half-radio",
+ "title": "半部电台",
+ "subtitle": "一堂西邮人的思政课",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax"
+ },
+ "leadMs": 150,
+ "tailMs": 350,
+ "series": "西安邮电大学 · AI+思政",
+ "credit": "史实：新华社 / 中国网信网 / 扬子晚报 / 工信部 / 西安邮电大学官网",
+ "source": "inputs/xupt-half-radio/idea.md",
+ "maxSeconds": 150,
+ "kind": "competition",
+ "score": {
+  "mood": "warm",
+  "climax": "climax",
+  "lifts": [
+   "yanan",
+   "end"
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "pill",
+  "captionTop": 1430,
+  "pk": {
+   "bg": "#16202C",
+   "panel": "#1B2533",
+   "ink": "#EFE5CF",
+   "accent": "#F2C230",
+   "onAccent": "#1B2533",
+   "dim": "#9A9384",
+   "second": "#0B6E4F"
+  },
+  "breaks": {},
+  "grain": 2
+ },
+ "keywords": [
+  "半部",
+  "只能收，不能发",
+  "王诤",
+  "第一仗",
+  "XNCR",
+  "能说",
+  "前身",
+  "一届届",
+  "网络强国",
+  "北斗三号",
+  "525.4万",
+  "525万",
+  "AI",
+  "那股劲",
+  "接住",
+  "我们自己定",
+  "只能听",
+  "发报",
+  "强国有我"
+ ],
+ "cover": "climax",
+ "componentStyle": "Single isolated object cut-out with a fully transparent background, rendered as a vintage black-ink halftone print on white (clear newspaper halftone dots for shading, crisp ink outlines, high contrast, like an engraving clipped from an old printed page). Whole object visible and centred, no text, no letters, no numbers, no logos, no people, no shadow on the ground",
+ "components": [
+  {
+   "id": "radio",
+   "size": "1536x1024",
+   "prompt": "Front view of a 1930s military field radio station made of two matching wooden boxes standing side by side and touching: the left box is the receiver with three round dials, knobs and a valve tube on top; the right box is the transmitter with one large tuning dial, two round meters and a toggle switch; symmetrical, straight-on, both boxes the same height"
+  },
+  {
+   "id": "headphones",
+   "prompt": "1930s radio operator headphones with two round metal earpieces, a curved spring headband and a coiled cord, three-quarter view"
+  },
+  {
+   "id": "key",
+   "size": "1536x1024",
+   "prompt": "An old brass Morse telegraph key on a small wooden base, side three-quarter view"
+  },
+  {
+   "id": "pagoda",
+   "size": "1024x1536",
+   "prompt": "The nine-storey Yan'an Pagoda, an octagonal brick pagoda standing on top of a small loess hill with a few trees, distant three-quarter view"
+  },
+  {
+   "id": "cave",
+   "size": "1536x1024",
+   "prompt": "The facade of a Shaanbei loess cave dwelling (yaodong): an arched opening in a loess cliff with a wooden lattice window filling the arch and a small wooden door, front view, a little loess wall around it"
+  },
+  {
+   "id": "lamp",
+   "prompt": "An old kerosene oil lamp with a glass chimney, lit with a small flame"
+  },
+  {
+   "id": "mic",
+   "prompt": "A 1940s broadcast microphone: a round mesh capsule held by springs inside a ring, on a short desk stand, front three-quarter view"
+  },
+  {
+   "id": "tower",
+   "size": "1024x1536",
+   "prompt": "A modern cellular base station tower: a slim steel monopole with a triangular platform near the top carrying three rectangular flat panel antennas and small microwave dishes, full height"
+  },
+  {
+   "id": "satellite",
+   "size": "1536x1024",
+   "prompt": "A navigation satellite in orbit pose: a box-shaped body with gold foil and an antenna array on its face, two long rectangular solar panel wings stretched out left and right"
+  },
+  {
+   "id": "chip",
+   "prompt": "A modern AI processor chip seen from above at a slight angle: a square package with a metal heat spreader lid on a green circuit substrate with tiny contacts around the edge"
+  }
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "xh.hook",
+   "step": 0,
+   "pace": "normal",
+   "narration": "红军的第一部电台，只有半部。{a}1930年底龙冈一战缴获它时，{b}发报机已经坏了——只能收，不能发。"
+  },
+  {
+   "id": "title",
+   "visual": "xh.title",
+   "step": 0,
+   "pace": "calm",
+   "tailMs": 1600,
+   "narration": "这是我心中的思政课，{a}就从这半部电台讲起。"
+  },
+  {
+   "id": "listen",
+   "visual": "xh.listen",
+   "step": 0,
+   "pace": "normal",
+   "narration": "只能听，那就听。{a}1931年1月，红军第一支无线电队成立，{b}王诤任队长。{c}他们日夜监听敌台，{d}帮红军打赢了第二次反“围剿”的第一仗。"
+  },
+  {
+   "id": "yanan",
+   "visual": "xh.yanan",
+   "step": 0,
+   "pace": "calm",
+   "narration": "十年后，电波到了陕北。{a}1940年12月30日，延安王皮湾的窑洞里，{b}新华广播电台第一次播音。{c}从只能听，到能说，{d}人民广播事业从这里起步。"
+  },
+  {
+   "id": "xupt",
+   "visual": "xh.xupt",
+   "step": 0,
+   "pace": "normal",
+   "narration": "又过十年，{a}1950年，陕甘两省邮电人员训练班成立，{b}这就是西安邮电大学的前身。{c}从那以后，接住电波的，是一届届西邮人。"
+  },
+  {
+   "id": "era",
+   "visual": "xh.era",
+   "step": 0,
+   "pace": "normal",
+   "narration": "2014年，习近平总书记提出，{a}努力把我国建设成为网络强国。{b}2020年，北斗三号全球系统开通。{c}到今年9月底，全国5G基站达到{d}525.4万个。"
+  },
+  {
+   "id": "climax",
+   "visual": "xh.climax",
+   "step": 0,
+   "pace": "slow",
+   "tailMs": 1800,
+   "narration": "从半部电台，{a}到525万座基站。"
+  },
+  {
+   "id": "ai",
+   "visual": "xh.ai",
+   "step": 0,
+   "pace": "calm",
+   "narration": "现在，我们有了AI。{a}片里的电台、窑洞和铁塔，都是AI帮我们画的。{b}它能复原画面，{c}却复原不了那股劲：{d}只剩半部，也要把信号接住。"
+  },
+  {
+   "id": "choose",
+   "visual": "xh.choose",
+   "step": 0,
+   "pace": "calm",
+   "narration": "讲哪段历史，为什么讲，{a}得由我们自己定。"
+  },
+  {
+   "id": "end",
+   "visual": "xh.end",
+   "step": 0,
+   "pace": "slow",
+   "tailMs": 7000,
+   "narration": "当年的报务员只能听。{a}今天，轮到我们发报：{b}请党放心，{c}强国有我。"
+  }
+ ]
+}
