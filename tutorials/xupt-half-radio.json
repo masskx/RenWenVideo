@@ -6,14 +6,19 @@
  "width": 1080,
  "height": 1920,
  "tts": {
-  "provider": "minimax"
+  "provider": "minimax",
+  "pauses": {
+   "max_ms": 420,
+   "sentence_ms": 650,
+   "detect_db": -38
+  }
  },
  "leadMs": 150,
  "tailMs": 350,
  "series": "西安邮电大学 · AI+思政",
  "credit": "史实：新华社 / 中国网信网 / 扬子晚报 / 工信部 / 西安邮电大学官网",
  "source": "inputs/xupt-half-radio/idea.md",
- "maxSeconds": 150,
+ "maxSeconds": 95,
  "kind": "competition",
  "score": {
   "mood": "warm",
@@ -21,7 +26,8 @@
   "lifts": [
    "yanan",
    "end"
-  ]
+  ],
+  "climaxAt": 1.3
  },
  "steps": [],
  "look": {
@@ -57,11 +63,11 @@
   "半部",
   "只能收，不能发",
   "王诤",
-  "第一仗",
-  "XNCR",
+  "首战",
+  "播音",
   "能说",
   "前身",
-  "一届届",
+  "接着传",
   "网络强国",
   "北斗三号",
   "525.4万",
@@ -70,7 +76,6 @@
   "那股劲",
   "接住",
   "我们自己定",
-  "只能听",
   "发报",
   "强国有我"
  ],
@@ -130,50 +135,50 @@
    "visual": "xh.hook",
    "step": 0,
    "pace": "normal",
-   "narration": "红军的第一部电台，只有半部。{a}1930年底龙冈一战缴获它时，{b}发报机已经坏了——只能收，不能发。"
+   "narration": "红军的第一部电台，只有半部。{a}1930年底在龙冈缴获它时，{b}发报机已经坏了，只能收，不能发。"
   },
   {
    "id": "title",
    "visual": "xh.title",
    "step": 0,
    "pace": "calm",
-   "tailMs": 1600,
-   "narration": "这是我心中的思政课，{a}就从这半部电台讲起。"
+   "tailMs": 2000,
+   "narration": "这是我心中的思政课，{a}就从半部电台讲起。"
   },
   {
    "id": "listen",
    "visual": "xh.listen",
    "step": 0,
    "pace": "normal",
-   "narration": "只能听，那就听。{a}1931年1月，红军第一支无线电队成立，{b}王诤任队长。{c}他们日夜监听敌台，{d}帮红军打赢了第二次反“围剿”的第一仗。"
+   "narration": "只能听，那就听。{a}1931年1月，红军第一支无线电队成立，{b}王诤任队长。{c}他们日夜监听敌台，{d}帮红军打赢第二次反“围剿”首战。"
   },
   {
    "id": "yanan",
    "visual": "xh.yanan",
    "step": 0,
    "pace": "calm",
-   "narration": "十年后，电波到了陕北。{a}1940年12月30日，延安王皮湾的窑洞里，{b}新华广播电台第一次播音。{c}从只能听，到能说，{d}人民广播事业从这里起步。"
+   "narration": "1940年12月30日，{a}延安王皮湾的窑洞里，{b}新华广播电台第一次播音。{c}从只能听，{d}到能说。"
   },
   {
    "id": "xupt",
    "visual": "xh.xupt",
    "step": 0,
    "pace": "normal",
-   "narration": "又过十年，{a}1950年，陕甘两省邮电人员训练班成立，{b}这就是西安邮电大学的前身。{c}从那以后，接住电波的，是一届届西邮人。"
+   "narration": "1950年，{a}陕甘两省邮电人员训练班成立，{b}这是西安邮电大学的前身。{c}电波，从此有人接着传。"
   },
   {
    "id": "era",
    "visual": "xh.era",
    "step": 0,
    "pace": "normal",
-   "narration": "2014年，习近平总书记提出，{a}努力把我国建设成为网络强国。{b}2020年，北斗三号全球系统开通。{c}到今年9月底，全国5G基站达到{d}525.4万个。"
+   "narration": "2014年，{a}习近平总书记提出建设网络强国。{b}2020年，北斗三号全球开通。{c}今年9月底，全国5G基站达到{d}525.4万个。"
   },
   {
    "id": "climax",
    "visual": "xh.climax",
    "step": 0,
    "pace": "slow",
-   "tailMs": 1800,
+   "tailMs": 2200,
    "narration": "从半部电台，{a}到525万座基站。"
   },
   {
@@ -181,22 +186,25 @@
    "visual": "xh.ai",
    "step": 0,
    "pace": "calm",
-   "narration": "现在，我们有了AI。{a}片里的电台、窑洞和铁塔，都是AI帮我们画的。{b}它能复原画面，{c}却复原不了那股劲：{d}只剩半部，也要把信号接住。"
+   "narration": "今天，我们有了AI。{a}片里的这些物件，都是AI画的。{b}它能复原画面，{c}复原不了那股劲：{d}只剩半部，也要把信号接住。"
   },
   {
    "id": "choose",
    "visual": "xh.choose",
    "step": 0,
    "pace": "calm",
-   "narration": "讲哪段历史，为什么讲，{a}得由我们自己定。"
+   "narration": "讲什么、为什么讲，{a}由我们自己定。"
   },
   {
    "id": "end",
    "visual": "xh.end",
    "step": 0,
    "pace": "slow",
-   "tailMs": 7000,
-   "narration": "当年的报务员只能听。{a}今天，轮到我们发报：{b}请党放心，{c}强国有我。"
+   "tailMs": 5200,
+   "narration": "当年他们只能听，{a}今天轮到我们发报：{b}请党放心，{c}强国有我。"
   }
- ]
+ ],
+ "musicSrc": "audio/tutorials/xupt-half-radio/score.mp3",
+ "musicVolume": 0.139,
+ "musicDuckDb": 10
 }

@@ -77,7 +77,18 @@ const Dots: React.FC<{density: (x: number, y: number) => number; color: string; 
 };
 
 /** The sheet: paper (or night ink) with mottling, edge dots, a faint centre fold, specks. */
-const Sheet: React.FC<{night?: boolean; green?: boolean; f: number; edge?: number}> = ({night, green, f, edge = 0.55}) => {
+/** A giant numeral printed in halftone dots behind the beat (template native move "numbered exhibits"); it drifts slowly. */
+const BigNum: React.FC<{text: string; f: number; night?: boolean; green?: boolean; y?: number}> = ({text, f, night, green, y = 1180}) => {
+  const id = `bn${text.replace(/\W/g, '')}${night ? 'n' : green ? 'g' : 'p'}`;
+  const ink = green ? '#0E7C59' : night ? '#24344A' : '#D9C79F';
+  const size = text.length > 4 ? 380 : 520;
+  return <svg width={W} height={H} style={{position: 'absolute', inset: 0}}>
+    <defs><pattern id={id} width={16} height={16} patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx={8} cy={8} r={5.6} fill={ink} /></pattern></defs>
+    <text x={W / 2 - 30 + Math.sin(f / 60) * 14 - f * 0.25} y={y} textAnchor="middle" fill={`url(#${id})`} style={{fontFamily: cond, fontWeight: 800, fontSize: size, letterSpacing: -10}}>{text}</text>
+  </svg>;
+};
+
+const Sheet: React.FC<{night?: boolean; green?: boolean; f: number; edge?: number; num?: string; numY?: number}> = ({night, green, f, edge = 0.55, num, numY}) => {
   const bg = green ? C.green : night ? C.night : C.paper;
   const dot = green ? C.greenDot : night ? C.nightDot : C.paper2;
   const seed = Math.floor(f / 2) % 5;
@@ -88,6 +99,16 @@ const Sheet: React.FC<{night?: boolean; green?: boolean; f: number; edge?: numbe
     }} />
     <svg width={W} height={H} style={{position: 'absolute', inset: 0, mixBlendMode: 'multiply', opacity: night || green ? 0.35 : 0.55}}><rect width={W} height={H} filter="url(#xh-mottle)" /></svg>
     <div style={{position: 'absolute', left: 0, right: 0, top: H * 0.5 - 1, height: 2, background: night || green ? 'rgba(255,255,255,0.04)' : 'rgba(80,60,30,0.07)'}} />
+    {/* telegraph tape: faint rows of dots and dashes drifting sideways (the film's texture) */}
+    <svg width={W} height={H} style={{position: 'absolute', inset: 0, opacity: night || green ? 0.09 : 0.1}}>
+      {Array.from({length: 9}, (_, r) => {
+        const y = 140 + r * 210, dir = r % 2 ? 1 : -1, off = ((f * (0.8 + (r % 3) * 0.35) * dir) % 600 + 600) % 600 - 600;
+        let x = off; const marks: React.ReactNode[] = [];
+        for (let i = 0; x < W + 40; i++) { const long = hash(r * 97 + i) > 0.55, w = long ? 46 : 14; marks.push(<rect key={i} x={x} y={y} width={w} height={14} rx={7} />); x += w + 22 + (hash(r * 31 + i) > 0.8 ? 40 : 0); }
+        return <g key={r} fill={night || green ? '#ffffff' : C.ink}>{marks}</g>;
+      })}
+    </svg>
+    {num && <BigNum text={num} f={f} night={night} green={green} y={numY} />}
     <svg width={W} height={H} style={{position: 'absolute', inset: 0}}>
       {Array.from({length: 70}, (_, i) => {
         const x = hash(i * 7 + seed * 131) * W, y = hash(i * 13 + seed * 71 + 3) * H, r = 0.6 + hash(i + seed) * 1.6;
@@ -309,6 +330,39 @@ const Ridge: React.FC<{y: number; amp: number; seed: number; color: string; dot:
   </svg>;
 };
 
+/** 连: nodes appear and link up across the lower sheet (a network growing). */
+const NODES = Array.from({length: 22}, (_, i) => [90 + hash(i * 17 + 5) * 900, 1000 + hash(i * 29 + 11) * 380] as [number, number]);
+const Network: React.FC<{f: number; at: number; fade: number}> = ({f, at, fade}) => {
+  const edges: [number, number][] = [];
+  NODES.forEach((p, i) => NODES.forEach((q, j) => { if (j > i && Math.hypot(p[0] - q[0], p[1] - q[1]) < 260) edges.push([i, j]); }));
+  return <svg width={W} height={H} style={{position: 'absolute', inset: 0, opacity: 1 - fade}}>
+    {edges.map(([i, j], k) => {
+      const t0 = at + 4 + (i + j) * 1.3, p = eo(f, t0, t0 + 10);
+      if (p <= 0) return null;
+      const [x1, y1] = NODES[i], [x2, y2] = NODES[j];
+      return <line key={k} x1={x1} y1={y1} x2={x1 + (x2 - x1) * p} y2={y1 + (y2 - y1) * p} stroke={C.green} strokeWidth={4} strokeDasharray="10 8" />;
+    })}
+    {NODES.map(([x, y], i) => {
+      const p = back(f, at + i * 2.6, 8);
+      return p > 0 ? <g key={i}><circle cx={x} cy={y} r={15 * p} fill={i % 5 ? C.ink : C.green} /><circle cx={x} cy={y} r={26 * p} fill="none" stroke={C.ink} strokeWidth={3} /></g> : null;
+    })}
+  </svg>;
+};
+
+/** Circuit traces growing out of the AI chip. */
+const Traces: React.FC<{f: number; at: number}> = ({f, at}) => <svg width={W} height={H} style={{position: 'absolute', inset: 0}}>
+  {Array.from({length: 16}, (_, i) => {
+    const side = i % 4, k = Math.floor(i / 4), o = (k - 1.5) * 70;
+    const [sx, sy] = side === 0 ? [540 + o, 620] : side === 1 ? [800, 820 + o] : side === 2 ? [540 + o, 1020] : [280, 820 + o];
+    const len = 260 + hash(i * 7) * 240, bend = (hash(i * 13) - 0.5) * 220;
+    const d = side === 0 ? `M ${sx} ${sy} v ${-len * 0.5} h ${bend} v ${-len * 0.5}` : side === 1 ? `M ${sx} ${sy} h ${len * 0.5} v ${bend} h ${len * 0.5}`
+      : side === 2 ? `M ${sx} ${sy} v ${len * 0.5} h ${bend} v ${len * 0.5}` : `M ${sx} ${sy} h ${-len * 0.5} v ${bend} h ${-len * 0.5}`;
+    const p = eo(f, at + i * 1.5, at + i * 1.5 + 24);
+    return <g key={i}><path d={d} fill="none" stroke={C.green} strokeWidth={5} pathLength={1} strokeDasharray={`${p} 1`} />
+      {p > 0.98 && <circle cx={0} cy={0} r={0} />}</g>;
+  })}
+</svg>;
+
 /* ======================= 1 hook: the first radio was half a radio ======================= */
 
 const Hook = make(({f, cue, dur}) => {
@@ -317,7 +371,7 @@ const Hook = make(({f, cue, dur}) => {
   const sh = shakeOf(f, [a]);
   return <div style={{position: 'absolute', inset: 0, overflow: 'hidden'}}>
     <Defs />
-    <Sheet night f={f} />
+    <Sheet night f={f} num="1930" numY={1560} />
     <Lay cam={cam} depth={0.4} shake={sh}>
       <Wave a={[-40, 1040]} b={[260, 990]} f={f} at={b + 6} color={C.hi} amp={14} width={7} />
       <Wave a={[-40, 1120]} b={[260, 1040]} f={f} at={b + 12} color={C.hi} amp={10} width={5} />
@@ -345,7 +399,7 @@ const Title = make(({f, cue}) => {
   const cam = camOf(f, [[0, {z: 1.03}, 200]]);
   return <div style={{position: 'absolute', inset: 0, overflow: 'hidden'}}>
     <Defs />
-    <Sheet f={f} />
+    <Sheet f={f} num="1930" numY={1700} />
     <Lay cam={cam} depth={0.6}>
       {/* the telegram form: green rules, code boxes over the title characters */}
       <div style={{position: 'absolute', left: 60, top: 250, width: 960, height: 980, background: C.light, border: `4px solid ${C.green}`, boxShadow: '0 30px 50px rgba(40,30,10,0.22)', transform: 'rotate(-1.2deg)'}}>
@@ -391,7 +445,7 @@ const Listen = make(({f, cue, dur}) => {
   const sun = io(f, c, Math.min(dur, c + 70));
   return <div style={{position: 'absolute', inset: 0, overflow: 'hidden'}}>
     <Defs />
-    <Sheet f={f} />
+    <Sheet f={f} num="1931" numY={760} />
     {/* day / night: a disc swings over the ridge */}
     <Lay cam={cam} depth={0.2} shake={sh}>
       {f >= c && <div style={{position: 'absolute', left: 540 - 380 * Math.cos(sun * Math.PI) - 60, top: 900 - 380 * Math.sin(sun * Math.PI) - 60, width: 120, height: 120, borderRadius: 60,
@@ -424,6 +478,7 @@ const Listen = make(({f, cue, dur}) => {
     <Headline text="只能听，那就听" x={64} y={250} size={92} f={f} at={0} />
     <Flash f={f} at={d} a={0.3} />
     <Hud no="NO.1931-01" chapter="一 · 听" f={f} />
+    <DotWipe f={f} from={C.green} />
   </div>;
 }, (cue) => [{at: 2, kind: 'whoosh-short', gain: 0.05}, {at: cue('a', 40), kind: 'thud', gain: 0.07}, {at: cue('b', 90), kind: 'pop', gain: 0.05},
   ...Array.from({length: 5}, (_, i) => ({at: cue('c', 130) + 8 + i * 10, kind: 'tick', gain: 0.04})), {at: cue('d', 190), kind: 'stamp', gain: 0.1}]);
@@ -440,7 +495,7 @@ const Yanan = make(({f, cue, dur}) => {
   const glow = eo(f, a + 4, a + 20);
   return <div style={{position: 'absolute', inset: 0, overflow: 'hidden'}}>
     <Defs />
-    <Sheet night f={f} />
+    <Sheet night f={f} num="1940" numY={1640} />
     {/* stars: a light dot layer */}
     <Lay cam={cam} depth={0.1} shake={sh}>
       <Dots color={C.paper} step={46} angle={10} k={0.16} opacity={0.55 * inside} density={(x, y) => (y < 900 && hash(Math.round(x * 3 + y * 7)) > 0.72 ? 0.5 + hash(Math.round(x + y)) * 0.5 : 0)} />
@@ -499,7 +554,7 @@ const Xupt = make(({f, cue, dur}) => {
   const sh = shakeOf(f, [a]);
   return <div style={{position: 'absolute', inset: 0, overflow: 'hidden'}}>
     <Defs />
-    <Sheet f={f} />
+    <Sheet f={f} num="1950" numY={1500} />
     <Lay cam={cam} depth={0.5} shake={sh}>
       {/* rows of seats lighting up behind: one class after another */}
       {f >= c && <Dots color={C.green} step={34} angle={0} k={0.42} opacity={0.9} density={(x, y) => (y > 1080 && y < 1380 && x > 60 && x < 1020 ? ((x - 60) / 960 < (f - c) / 50 + (y - 1080) / 900 ? 1 : 0.25) : 0)} />}
@@ -541,7 +596,7 @@ const Era = make(({f, cue, dur}) => {
   const quoteOut = io(f, b - 10, b + 6);
   return <div style={{position: 'absolute', inset: 0, overflow: 'hidden'}}>
     <Defs />
-    <Sheet f={f} />
+    <Sheet f={f} num={f < cue('b', 120) ? '2014' : f < cue('c', 180) ? '2020' : '2026'} numY={1560} />
     <Lay cam={cam} depth={0.4}>
       <svg width={W} height={H} style={{position: 'absolute', inset: 0, opacity: eo(f, b - 4, b + 10)}}>
         <path d="M -100 1000 Q 540 340 1180 800" fill="none" stroke={C.ink} strokeWidth={3} strokeDasharray="14 12" />
@@ -581,7 +636,10 @@ const Era = make(({f, cue, dur}) => {
       <span style={{background: C.green, color: C.paper, fontFamily: font, fontWeight: 900, fontSize: 34, padding: '6px 16px', borderRadius: 8}}>概论 · 知识点</span>
       <span style={{fontFamily: font, fontWeight: 900, fontSize: 40, color: C.ink}}>{f < b ? '网络强国' : f < c ? '科技自立自强' : '新时代伟大成就'}</span>
     </div>
+    {/* 连: a network of nodes grows across the lower sheet while the line is quoted */}
+    {f < cue('b', 120) + 10 && <Network f={f} at={cue('a', 40)} fade={eo(f, cue('b', 120) - 8, cue('b', 120) + 8)} />}
     <Hud no="NO.2014-2026" chapter="四 · 连" f={f} />
+    <DotWipe f={f} from={C.green} />
   </div>;
 }, (cue) => [{at: 2, kind: 'paper', gain: 0.05}, {at: cue('a', 40) + 18, kind: 'marker', gain: 0.08}, {at: cue('b', 120), kind: 'whoosh-short', gain: 0.06},
   {at: cue('c', 180), kind: 'whoosh-short', gain: 0.05}, ...Array.from({length: 8}, (_, i) => ({at: cue('c', 180) + 8 + i * 4, kind: 'tick', gain: 0.035})), {at: cue('d', 240), kind: 'thud', gain: 0.08}]);
@@ -598,7 +656,7 @@ const Climax = make(({f, cue}) => {
     {/* every dot one base station (schematic): they spread out from the stamp */}
     <Dots color={C.paper} step={22} angle={0} k={0.32} opacity={0.85} density={(x, y) => {
       const r = Math.hypot(x - 230, y - 420);
-      return r < spread * 2100 ? 0.55 + 0.45 * hash(Math.round(x * 13 + y * 3)) : 0;
+      return r < spread * 2100 ? (0.5 + 0.35 * hash(Math.round(x * 13 + y * 3))) * (0.8 + 0.3 * Math.sin(r / 70 - f / 3.5)) : 0;
     }} />
     <div style={{position: 'absolute', inset: 0, background: `radial-gradient(ellipse 60% 22% at 50% 52%, ${C.green} 30%, transparent 100%)`, opacity: 0.92}} />
     <Stamp x={84} y={260} w={300} h={260} f={f} at={0} rot={-4} bg={C.light}>
@@ -643,8 +701,9 @@ const Ai = make(({f, cue}) => {
   const sheetOut = io(f, b - 8, b + 8);
   return <div style={{position: 'absolute', inset: 0, overflow: 'hidden'}}>
     <Defs />
-    <Sheet f={f} />
+    <Sheet f={f} num="AI" numY={1560} />
     {f < a + 6 && <div style={{opacity: 1 - eo(f, a, a + 6)}}>
+      <Traces f={f} at={4} />
       <Cut n="chip" x={540} y={820} w={560 * (0.6 + 0.4 * chip)} duo="greenPaper" rot={-8 + 8 * chip} />
       <div style={{position: 'absolute', left: 540 - 120, top: 1080, width: 240, textAlign: 'center', background: C.green, color: C.paper, fontFamily: jet, fontSize: 40, padding: '6px 0', transform: `scale(${back(f, 12, 8)})`}}>AIGC</div>
     </div>}
@@ -666,6 +725,7 @@ const Ai = make(({f, cue}) => {
       </div>
     </div>}
     <Hud no="NO.AI" chapter="五 · 想" f={f} />
+    <DotWipe f={f} from={C.green} />
   </div>;
 }, (cue) => [{at: 2, kind: 'thud', gain: 0.06}, ...Array.from({length: 9}, (_, i) => ({at: cue('a', 40) + i * 2, kind: 'tick', gain: 0.03})), {at: cue('b', 130), kind: 'paper', gain: 0.06}, {at: cue('c', 170), kind: 'marker', gain: 0.08}, {at: cue('d', 220), kind: 'marker', gain: 0.08}]);
 
@@ -701,7 +761,7 @@ const End = make(({f, cue, dur}) => {
   const decodeAt = (i: number) => (i < 4 ? b : c) + (i % 4) * 3;
   return <div style={{position: 'absolute', inset: 0, overflow: 'hidden'}}>
     <Defs />
-    <Sheet night f={f} />
+    <Sheet night f={f} num="2026" numY={1700} />
     <Lay cam={cam} depth={1}>
       <Radio x={540} y={540} w={760} f={f} fill={fill} duo="nightPaper" night />
       {fill >= 1 && <Rings x={735} y={540} f={f} at={last + 2} color={C.hi} n={4} max={600} every={13} width={7} />}
