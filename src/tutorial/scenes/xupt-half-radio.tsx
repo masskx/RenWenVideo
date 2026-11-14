@@ -339,7 +339,7 @@ const Hook = make(({f, cue, dur}) => {
 
 /* ======================= 2 title: the work's card (contest requirement) ======================= */
 
-const TEAM = {school: '参赛学院：××学院', members: '团队成员：×××  ×××  ×××', teacher: '指导教师：×××'};
+const TEAM = {school: '参赛学院：计算机学院', major: '专业班级：数据科学与大数据技术 · 大数据2601班', members: '参赛者：马岚妮（学号 2600421004）', teacher: '指导教师：罗肖肖'};
 const Title = make(({f, cue}) => {
   const a = cue('a', 40);
   const cam = camOf(f, [[0, {z: 1.03}, 200]]);
@@ -367,15 +367,15 @@ const Title = make(({f, cue}) => {
         <div style={{position: 'absolute', left: 60, top: 470, fontFamily: serif, fontWeight: 900, fontSize: 70, color: C.ink, opacity: eo(f, 26, 34)}}>
           <Hl f={f} at={a}>一堂西邮人的思政课</Hl>
         </div>
-        <div style={{position: 'absolute', left: 60, top: 600, display: 'flex', flexDirection: 'column', gap: 18}}>
-          {[TEAM.school, TEAM.members, TEAM.teacher].map((t, i) => <div key={i} style={{fontFamily: font, fontWeight: 700, fontSize: 44, color: C.ink, opacity: eo(f, 34 + i * 5, 42 + i * 5), borderBottom: `2px dashed ${C.green}88`, paddingBottom: 10, width: 840}}>{t}</div>)}
+        <div style={{position: 'absolute', left: 60, top: 580, display: 'flex', flexDirection: 'column', gap: 14}}>
+          {[TEAM.school, TEAM.major, TEAM.members, TEAM.teacher].map((t, i) => <div key={i} style={{fontFamily: font, fontWeight: 700, fontSize: 37, color: C.ink, opacity: eo(f, 34 + i * 5, 42 + i * 5), borderBottom: `2px dashed ${C.green}88`, paddingBottom: 8, width: 840, whiteSpace: 'nowrap'}}>{t}</div>)}
         </div>
         <div style={{position: 'absolute', left: 60, bottom: 30, fontFamily: font, fontWeight: 700, fontSize: 28, color: C.dim}}>作品含 AI 生成内容（插图、配音），见片尾说明</div>
       </div>
     </Lay>
     <Lay cam={cam} depth={1.1}>
-      <Radio x={760} y={1250} w={440} f={f} duo="inkPaper" />
-      <Postmark x={880} y={330} f={f} at={14} date="2026.11" top="西安 · 长安" bottom="思政课" r={110} rot={10} color={C.red} waves={false} />
+      <Radio x={790} y={1330} w={440} f={f} duo="inkPaper" />
+      <Postmark x={330} y={1290} f={f} at={14} date="2026.11" top="西安 · 长安" bottom="思政课" r={110} rot={10} color={C.red} waves={false} />
     </Lay>
     <DotWipe f={f} from={C.night} />
   </div>;
@@ -563,7 +563,7 @@ const Era = make(({f, cue, dur}) => {
           const t = sat, x = -200 + 1300 * t, y = 1000 - Math.sin(t * Math.PI) * 330 - t * 60;
           return <Cut n="satellite" x={x} y={y} w={640} duo="inkPaper" rot={-12 + 20 * t} />;
         })()}
-        <div style={{position: 'absolute', left: 64, top: 1180, opacity: eo(f, b + 10, b + 18), background: C.ink, color: C.paper, fontFamily: font, fontWeight: 900, fontSize: 52, padding: '10px 24px'}}>北斗三号 · 2020.7.31 全球开通</div>
+        <div style={{position: 'absolute', left: 64, top: 1180, opacity: eo(f, b + 10, b + 18), background: C.ink, color: C.paper, fontFamily: font, fontWeight: 900, fontSize: 52, padding: '10px 24px', whiteSpace: 'nowrap'}}>北斗三号 · 2020.7.31 全球开通</div>
       </div>}
       {f >= c && <>
         <Cut n="tower" x={860} y={1640 - 640 * rise} w={330} duo="inkPaper" />
@@ -613,7 +613,7 @@ const Climax = make(({f, cue}) => {
       </div>
       <div style={{fontFamily: font, fontWeight: 900, fontSize: 44, color: C.paper, marginTop: 20, opacity: eo(f, a + 20, a + 30)}}>座 5G 基站 · 截至 2026.9 末</div>
     </div>
-    <div style={{position: 'absolute', right: 70, top: 600, fontFamily: font, fontSize: 26, color: '#CFE3D8', opacity: eo(f, a + 10, a + 20)}}>一点 ≈ 一批基站（示意）</div>
+    <div style={{position: 'absolute', right: 70, top: 640, fontFamily: font, fontWeight: 700, fontSize: 28, color: C.paper, background: C.ink, padding: '4px 14px', opacity: eo(f, a + 10, a + 20)}}>网点为示意</div>
     <Flash f={f} at={a} a={0.35} />
     <Hud no="NO.1930→2026" chapter="四 · 连" night f={f} />
     <DotWipe f={f} from={C.paper} d={10} />
@@ -742,7 +742,7 @@ const End = make(({f, cue, dur}) => {
         </div>
         <div style={{marginTop: 34, fontFamily: font, fontWeight: 700, fontSize: 28, color: C.ink, lineHeight: 1.55}}>
           史实来源：中国网信网、共产党员网、新华社、扬子晚报、工信部、西安邮电大学官网；中文电码：Unicode Unihan 数据库<br />
-          {TEAM.members}　{TEAM.teacher}
+          {TEAM.school.replace('参赛学院：', '')} · {TEAM.major.replace('专业班级：', '')}<br />{TEAM.members}　{TEAM.teacher}
         </div>
       </div>
     </div>}
