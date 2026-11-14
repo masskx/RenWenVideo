@@ -267,7 +267,7 @@ const Label: React.FC<{x: number; y: number; tx: number; ty: number; f: number; 
 };
 
 /** The radio: receiver (left half) always printed; the transmitter (right half) a dashed ghost until `fill` 0 → 1. */
-const Radio: React.FC<{x: number; y: number; w: number; f: number; fill?: number; duo?: keyof typeof DUO; night?: boolean; ghostIn?: number}> = ({x, y, w, f, fill = 0, duo = 'inkPaper', night, ghostIn = 1}) => {
+const Radio: React.FC<{x: number; y: number; w: number; f: number; fill?: number; duo?: keyof typeof DUO; night?: boolean; ghostIn?: number}> = ({x, y, w, fill = 0, duo = 'inkPaper', night, ghostIn = 1}) => {
   const h = hOf('radio', w);
   const line = night ? C.paper : C.ink;
   // the transmitter prints back in dots: a dot mask whose dots grow with `fill`
@@ -373,8 +373,8 @@ const Hook = make(({f, cue, dur}) => {
     <Defs />
     <Sheet night f={f} num="1930" numY={1560} />
     <Lay cam={cam} depth={0.4} shake={sh}>
-      <Wave a={[-40, 1040]} b={[260, 990]} f={f} at={b + 6} color={C.hi} amp={14} width={7} />
-      <Wave a={[-40, 1120]} b={[260, 1040]} f={f} at={b + 12} color={C.hi} amp={10} width={5} />
+      <Wave a={[-40, 1040]} b={[260, 990]} f={f} at={8} color={C.hi} amp={14} width={7} />
+      <Wave a={[-40, 1120]} b={[260, 1040]} f={f} at={18} color={C.hi} amp={10} width={5} />
     </Lay>
     <Lay cam={cam} depth={1} shake={sh}>
       <Radio x={540} y={1010} w={1010} f={f} duo="nightPaper" night ghostIn={1} />
@@ -439,7 +439,7 @@ const Title = make(({f, cue}) => {
 
 const Listen = make(({f, cue, dur}) => {
   const a = cue('a', 40), b = cue('b', 90), c = cue('c', 130), d = cue('d', 190);
-  const cam = camOf(f, [[0, {x: 540, y: 860, z: 1.0}, 1], [4, {y: 780, z: 1.08}, 60], [c, {x: 620, z: 1.0}, 30]]);
+  const cam = camOf(f, [[0, {x: 540, y: 860, z: 1.0}, 1], [4, {y: 780, z: 1.08}, 60], [c, {x: 620, z: 1.0}, 30], [c + 30, {x: 600, y: 760, z: 1.1}, Math.max(40, dur - c - 30)], [a, {x: 560, y: 800, z: 1.12}, Math.max(20, c - a)]]);
   const sh = shakeOf(f, [a, d]);
   const drop = eo(f, 2, 18);
   const sun = io(f, c, Math.min(dur, c + 70));
@@ -457,7 +457,7 @@ const Listen = make(({f, cue, dur}) => {
       <Wave a={[1150, 380]} b={[700, 640]} f={f} at={8} color={C.red} amp={18} width={6} />
       <Wave a={[1150, 520]} b={[720, 700]} f={f} at={16} color={C.red} amp={12} width={5} />
       <div style={{position: 'absolute', left: 860, top: 330, fontFamily: jet, fontSize: 30, color: C.red, opacity: eo(f, 10, 18)}}>敌台</div>
-      <Cut n="headphones" x={470} y={300 + 440 * drop} w={600} duo="inkPaper" rot={-6 + 6 * drop} />
+      <Cut n="headphones" x={470 + Math.sin(f / 26) * 6} y={300 + 440 * drop + Math.sin(f / 19) * 5} w={600} duo="inkPaper" rot={-6 + 6 * drop + Math.sin(f / 31) * 1.5} />
       {/* telegram strips spill out: dots and dashes heard */}
       {f >= c && Array.from({length: 5}, (_, i) => {
         const t0 = c + 8 + i * 10, p = eo(f, t0, t0 + 14);
@@ -485,7 +485,7 @@ const Listen = make(({f, cue, dur}) => {
 
 /* ======================= 4 yanan: the first broadcast ======================= */
 
-const Yanan = make(({f, cue, dur}) => {
+const Yanan = make(({f, cue}) => {
   const a = cue('a', 70), b = cue('b', 150), c = cue('c', 210), d = cue('d', 260);
   // route first (schematic, not a map), then the camera pushes into the cave layers
   const route = eo(f, 4, Math.max(30, a - 10));
@@ -587,7 +587,7 @@ const Xupt = make(({f, cue, dur}) => {
 
 /* ======================= 6 era: cyber power, Beidou, 5G ======================= */
 
-const Era = make(({f, cue, dur}) => {
+const Era = make(({f, cue}) => {
   const a = cue('a', 40), b = cue('b', 120), c = cue('c', 180), d = cue('d', 240);
   const cam = camOf(f, [[0, {x: 540, y: 760, z: 1.04}, 1], [b - 8, {y: 820, z: 1.0}, 24], [c - 6, {y: 900, z: 1.04}, 30]]);
   const sat = eo(f, b, b + 50);
@@ -749,7 +749,7 @@ const Choose = make(({f, cue}) => {
 
 /* ======================= 10 end: we send — the other half prints back ======================= */
 
-const End = make(({f, cue, dur}) => {
+const End = make(({f, cue}) => {
   const a = cue('a', 50), b = cue('b', 110), c = cue('c', 150);
   const typeAt = (i: number) => a + 6 + i * Math.max(4, Math.floor((c + 20 - a) / 8));
   const typed = CODES.filter((_, i) => f >= typeAt(i)).length;
@@ -802,7 +802,7 @@ const End = make(({f, cue, dur}) => {
         </div>
         <div style={{marginTop: 34, fontFamily: font, fontWeight: 700, fontSize: 28, color: C.ink, lineHeight: 1.55}}>
           史实来源：中国网信网、共产党员网、新华社、扬子晚报、工信部、西安邮电大学官网；中文电码：Unicode Unihan 数据库<br />
-          {TEAM.school.replace('参赛学院：', '')} · {TEAM.major.replace('专业班级：', '')}<br />{TEAM.members}　{TEAM.teacher}
+          {TEAM.school.replace('参赛学院：', '')} · {TEAM.major.replace('专业班级：', '')}<br />{TEAM.members}{'\u3000'}{TEAM.teacher}
         </div>
       </div>
     </div>}
