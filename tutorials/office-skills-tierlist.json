@@ -1,0 +1,272 @@
+{
+ "id": "office-skills-tierlist",
+ "title": "39 个办公 AI skill 从夯到拉",
+ "subtitle": "0 星进顶级，848 星拉完了",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "kind": "tutorial",
+ "tts": {
+  "provider": "minimax"
+ },
+ "leadMs": 100,
+ "tailMs": 350,
+ "series": "AI 工具 · 盘点",
+ "credit": "X 平台网友长文《办公室 Skill 从夯到拉》· 纯主观排名 · 星数截至 2026-11-17",
+ "source": "inputs/office-skills-tierlist/idea.md",
+ "maxSeconds": 60,
+ "score": {
+  "mood": "playful",
+  "bpm": 120,
+  "climax": "rule",
+  "lifts": [
+   "twist",
+   "zero"
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "telop",
+  "captionTop": 1380,
+  "pk": {
+   "bg": "#26264A",
+   "panel": "#FFF6E5",
+   "ink": "#111820",
+   "accent": "#E5494D",
+   "onAccent": "#FFFFFF",
+   "dim": "#6F7F98",
+   "second": "#D7A520"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "mode": "window",
+  "x": 866,
+  "y": 150,
+  "size": 150,
+  "colors": {
+   "panel": "#FFF6E5",
+   "accent": "#E5494D",
+   "ink": "#111820",
+   "bg": "#26264A"
+  },
+  "scenes": {
+   "hook": {
+    "expr": "surprise",
+    "pose": "idle",
+    "look": [
+     -0.6,
+     0.4
+    ],
+    "beats": [
+     {
+      "at": 1.8,
+      "pose": "nod",
+      "expr": "smile"
+     }
+    ]
+   },
+   "twist": {
+    "expr": "think",
+    "pose": "think",
+    "look": [
+     -0.6,
+     0.3
+    ],
+    "beats": [
+     {
+      "at": 2.6,
+      "pose": "nod",
+      "expr": "serious"
+     }
+    ]
+   },
+   "end": {
+    "expr": "smile",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 1.0,
+      "pose": "nod",
+      "expr": "smile"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "keywords": [
+  "0星",
+  "848星",
+  "顶级",
+  "拉完了",
+  "两百多个",
+  "原生可编辑",
+  "22种",
+  "国标",
+  "活公式",
+  "0",
+  "整个仓库",
+  "不到100行",
+  "直接用",
+  "两行"
+ ],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "0星的进了顶级",
+   "848星的拉完了"
+  ],
+  "support": "39 个办公 AI skill 从夯到拉 · 纯主观排名",
+  "tag": "AI 工具 · 盘点",
+  "anchor": "ost.cover",
+  "colors": {
+   "bg": "#26264A",
+   "text": "#FFFFFF",
+   "accent": "#F76C17",
+   "dim": "#C9CCE0"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     980,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 80,
+    "anchor": [
+     540,
+     860,
+     0.78
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     300
+    ],
+    "size": 88,
+    "anchor": [
+     540,
+     1180,
+     1.05
+    ],
+    "support": 1620
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "ost.hook",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "0星的排进顶级，{a}848星的拉完了。"
+  },
+  {
+   "id": "intro",
+   "visual": "ost.intro",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "39个办公skill，{a}分十个类目，{b}从夯到拉。"
+  },
+  {
+   "id": "ppt",
+   "visual": "ost.ppt",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "PPT最卷，{a}GitHub上两百多个。"
+  },
+  {
+   "id": "pptmaster",
+   "visual": "ost.pptmaster",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "夯爆了的PPT Master，{a}丢进文档，{b}出原生可编辑的PPTX。"
+  },
+  {
+   "id": "word",
+   "visual": "ost.word",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "写公文的看这个：{a}22种文书，{b}按国标一键排版。"
+  },
+  {
+   "id": "excel",
+   "visual": "ost.excel",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "Excel只给活公式，{a}公式错误必须是0。"
+  },
+  {
+   "id": "meet",
+   "visual": "ost.meet",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "会议和待办，{a}夯爆了的都是Anthropic官方套件。"
+  },
+  {
+   "id": "twist",
+   "visual": "ost.twist",
+   "step": 0,
+   "pace": "normal",
+   "narration": "但星数会骗人：{a}官方那19万星，{b}是整个仓库的。"
+  },
+  {
+   "id": "zero",
+   "visual": "ost.zero",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "那个0星的，不到100行：{a}丢进会议记录，{b}行动项、截止日，一次出齐。"
+  },
+  {
+   "id": "lazy",
+   "visual": "ost.lazy",
+   "step": 0,
+   "pace": "brisk",
+   "narration": "848星的停更、没许可证，{a}还有付费空壳、{b}只出报告不出表的。"
+  },
+  {
+   "id": "rule",
+   "visual": "ost.rule",
+   "step": 0,
+   "pace": "normal",
+   "narration": "排位只看一件事：{a}交出来的文件，能不能直接用。"
+  },
+  {
+   "id": "end",
+   "visual": "ost.end",
+   "step": 0,
+   "pace": "normal",
+   "narration": "官方四件套，{a}Claude Code里两行装好。"
+  }
+ ]
+}

@@ -595,3 +595,34 @@ export const CaptionPill: React.FC<{captions: TimedCaption[]; k: Pk; keywords?: 
     </div>
   </div>;
 };
+
+/**
+ * The game-show telop caption (lemo/game-show §4: "with narration, subtitles are telop plates at the bottom in the same
+ * outlined type, never a thin generic caption"): a cream plate with the kit's 8 px ink outline and a hard 10 px offset
+ * shadow, black-weight type, one keyword (the first of `keywords` it contains) in the accent colour; pops in with a
+ * back-ease (things are either on or popping). Centred, inside x 64–930's width.
+ */
+export const CaptionTelop: React.FC<{captions: TimedCaption[]; k: Pk; keywords?: string[]; breaks?: Record<string, string>; y?: number}> = ({captions, k, keywords = [], breaks = {}, y = 1380}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  if (!c) return null;
+  const kw = [...keywords].sort((a, b) => b.length - a.length).find((w) => c.text.includes(w));
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 12, kw);
+  const sz = Math.max(60, Math.min(68, Math.floor(800 / Math.max(...lines.map(units)))));
+  const p = ease.outBack(clamp((ms - c.startMs) / 160), 1.6);
+  const ink = k.ink;
+  const paint = (line: string) => {
+    if (!kw || !line.includes(kw)) return line;
+    const [a, ...rest] = line.split(kw);
+    return <>{a}<span style={{color: k.accent}}>{kw}</span>{rest.join(kw)}</>;
+  };
+  return <div style={{position: 'absolute', left: 0, right: 0, top: y, display: 'flex', justifyContent: 'center'}}>
+    <div style={{position: 'relative', transform: `scale(${0.85 + 0.15 * p})`, opacity: clamp(p * 3), maxWidth: 900}}>
+      <div style={{position: 'absolute', left: 10, top: 10, right: -10, bottom: -10, background: ink, borderRadius: 26}} />
+      <div style={{position: 'relative', background: k.panel, border: `7px solid ${ink}`, borderRadius: 26, padding: '10px 34px 14px'}}>
+        {lines.map((line, j) => <div key={j} style={{fontFamily: font, fontWeight: 900, fontSize: sz, lineHeight: 1.22, color: ink, whiteSpace: 'nowrap', textAlign: 'center'}}>{paint(line)}</div>)}
+      </div>
+    </div>
+  </div>;
+};
