@@ -18,12 +18,13 @@ import CAMS from './working-hard-overrated.cam.json';
 
 const INK = '#1D1A17', PAPER = '#F4EFE4', ACCENT = '#D97757', DIM = '#7A7266';
 const START: Record<string, number> = Object.fromEntries((TL as {scenes: {id: string; startFrame: number}[]}).scenes.map((s) => [s.id, s.startFrame]));
-const CAM = CAMS as [number, number, number][];
+const CAM = CAMS as [number, number, number, number][];
 const Y = (i: number) => i * 1150;
 /** Paper → screen for global frame g (the page's own camera; the screen centre sits at 0.42 of the height). */
 const toScreen = (g: number, x: number, y: number) => {
-  const [cx, cy, k] = CAM[Math.max(0, Math.min(CAM.length - 1, g))];
-  return [540 + (x - cx) * k, 1920 * 0.42 + (y - cy) * k, k] as const;
+  const [cx, cy, k, r] = CAM[Math.max(0, Math.min(CAM.length - 1, g))];
+  const c = Math.cos(-r), sn = Math.sin(-r), px = (x - cx) * k, py = (y - cy) * k;
+  return [540 + c * px - sn * py, 1920 * 0.42 + sn * px + c * py, k, r] as const;
 };
 
 const make = (id: string, draw: (p: {f: number; g: number; cue: (n: string, fb?: number) => number}) => React.ReactNode, sfx?: Scene['sfx']): Scene => {
@@ -41,11 +42,11 @@ const make = (id: string, draw: (p: {f: number; g: number; cue: (n: string, fb?:
 /** A handwritten label pinned to paper point (x, y), written on from frame `at` (scene frames). */
 const Label: React.FC<{g: number; f: number; at: number; x: number; y: number; text: string; size?: number; color?: string; anchor?: 'left' | 'center'; until?: number}> = ({g, f, at, x, y, text, size = 60, color = INK, anchor = 'center', until}) => {
   if (f < at || (until != null && f >= until + 9)) return null;
-  const [sx, sy, k] = toScreen(g, x, y);
+  const [sx, sy, k, r] = toScreen(g, x, y);
   const u = clamp((f - at) / (6 + text.length * 0.6));
   const out = until != null ? 1 - clamp((f - until) / 9) : 1;
   const z = k / 1.6;
-  return <div style={{position: 'absolute', left: sx, top: sy, transform: `translate(${anchor === 'center' ? '-50%' : '0'}, -50%) scale(${z})`, transformOrigin: anchor === 'center' ? '50% 50%' : '0 50%',
+  return <div style={{position: 'absolute', left: sx, top: sy, transform: `translate(${anchor === 'center' ? '-50%' : '0'}, -50%) rotate(${-r}rad) scale(${z})`, transformOrigin: anchor === 'center' ? '50% 50%' : '0 50%',
     fontFamily: hand, fontWeight: 700, fontSize: size, color, opacity: out, WebkitTextStroke: `1px ${color}`, whiteSpace: 'nowrap', lineHeight: 1.1,
     textShadow: `0 0 10px ${PAPER}, 0 0 4px ${PAPER}`, clipPath: `inset(-30% ${(1 - u) * 100}% -30% -4%)`}}>{text}</div>;
 };
@@ -55,7 +56,7 @@ const Src: React.FC<{text: string}> = ({text}) => <div style={{position: 'absolu
 const Hook = make('hook', ({f, g, cue}) => {
   const a = cue('a', 42);
   return <>
-    <Label g={g} f={f} at={-1} x={-170} y={290} text="幸福感 0–10" size={52} />
+    <Label g={g} f={f} at={-1} x={-170} y={262} text="幸福感 0–10" size={52} />
     <Label g={g} f={f} at={18} x={-150} y={-120} text="+1 分" size={56} />
     <Label g={g} f={f} at={a - 4} x={60} y={-320} text="效率 +12%" size={96} />
     <Src text="据原文引用的研究" />

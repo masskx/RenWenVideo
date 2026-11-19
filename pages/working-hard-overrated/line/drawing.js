@@ -134,7 +134,7 @@ export const SEGS = [
 ];
 
 // camera: composed on each vignette (low follow), following the nib while it travels between them
-const comp = (i, t0, t1, z = 1.06, dy = 0) => [{ t: t0, x: 0, y: Y(i) + dy, z, r: 0, f: 0 }, { t: t1, x: 0, y: Y(i) + dy, z: z * 1.14, r: 0, f: 0 }];
+const comp = (i, t0, t1, z = 1.06, dy = 0) => [{ t: t0, x: 0, y: Y(i) + dy, z: z * 0.96, r: i % 2 ? 2 : -2, f: 0 }, { t: t1, x: 0, y: Y(i) + dy, z: z * 1.2, r: i % 2 ? -1.5 : 1.5, f: 0 }];
 export const CAM = [
   ...comp(0, 0, 3.0, 1.08, -20),
   { t: 3.5, x: 0, y: Y(0.6), z: 0.9, r: 0, f: 0.8 },

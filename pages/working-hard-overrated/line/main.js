@@ -50,4 +50,4 @@ window.render = render;
 window.TRACK = (step = 1 / 30) => { const out = []; for (let t = 0; t <= DUR; t += step) { const h = headAt(P, t), i = Math.floor(h), c = camFor(t), Mx = worldToScreen(c, W, H), p = Mx(...posAt(P, h)); out.push([+t.toFixed(3), Math.round(P.V[i]), Math.round(p[0]), Math.round(p[1]), P.segs[P.SEG[i]].style]); } return out; };
 window.READY = true;
 // per-frame camera (cx, cy, k) for overlays placed in paper coordinates by the Remotion layer
-window.CAMS = (fps = 30) => { const out = []; for (let i = 0; i <= Math.ceil(DUR * fps); i++) { const c = camFor(i / fps); out.push([+c.cx.toFixed(2), +c.cy.toFixed(2), +c.k.toFixed(4)]); } return out; };
+window.CAMS = (fps = 30) => { const out = []; for (let i = 0; i <= Math.ceil(DUR * fps); i++) { const c = camFor(i / fps); out.push([+c.cx.toFixed(2), +c.cy.toFixed(2), +c.k.toFixed(4), +c.r.toFixed(5)]); } return out; };
