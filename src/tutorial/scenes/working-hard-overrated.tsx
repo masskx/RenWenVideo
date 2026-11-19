@@ -46,7 +46,7 @@ const Label: React.FC<{g: number; f: number; at: number; x: number; y: number; t
   const out = until != null ? 1 - clamp((f - until) / 9) : 1;
   const z = k / 1.6;
   return <div style={{position: 'absolute', left: sx, top: sy, transform: `translate(${anchor === 'center' ? '-50%' : '0'}, -50%) scale(${z})`, transformOrigin: anchor === 'center' ? '50% 50%' : '0 50%',
-    fontFamily: hand, fontWeight: 700, fontSize: size, color, opacity: out, whiteSpace: 'nowrap', lineHeight: 1.1,
+    fontFamily: hand, fontWeight: 700, fontSize: size, color, opacity: out, WebkitTextStroke: `1px ${color}`, whiteSpace: 'nowrap', lineHeight: 1.1,
     textShadow: `0 0 10px ${PAPER}, 0 0 4px ${PAPER}`, clipPath: `inset(-30% ${(1 - u) * 100}% -30% -4%)`}}>{text}</div>;
 };
 /** A small source note, fixed on screen above the captions. */
@@ -55,9 +55,9 @@ const Src: React.FC<{text: string}> = ({text}) => <div style={{position: 'absolu
 const Hook = make('hook', ({f, g, cue}) => {
   const a = cue('a', 42);
   return <>
-    <Label g={g} f={f} at={-1} x={-240} y={290} text="幸福感 0–10" size={50} />
+    <Label g={g} f={f} at={-1} x={-170} y={290} text="幸福感 0–10" size={52} />
     <Label g={g} f={f} at={18} x={-150} y={-120} text="+1 分" size={56} />
-    <Label g={g} f={f} at={a - 4} x={130} y={-330} text="效率 +12%" size={96} />
+    <Label g={g} f={f} at={a - 4} x={60} y={-320} text="效率 +12%" size={96} />
     <Src text="据原文引用的研究" />
   </>;
 }, (cue) => [{at: 3, kind: 'tap', gain: 0.06}, {at: cue('a', 42), kind: 'marker', gain: 0.05}]);
@@ -65,7 +65,7 @@ const Hook = make('hook', ({f, g, cue}) => {
 const Title = make('title', ({f, g, cue}) => {
   const a = cue('a', 73);
   return <>
-    <Label g={g} f={f} at={6} x={0} y={Y(1) - 330} text="Working Hard Is Overrated" size={66} />
+    <Label g={g} f={f} at={14} x={0} y={Y(1) - 300} text="Working Hard Is Overrated" size={62} />
     <Label g={g} f={f} at={a} x={170} y={Y(1) + 230} text="（原文标题）" size={40} color={DIM} />
     <Src text="海外长文的中文译文 · X 平台 27 万次浏览" />
   </>;
@@ -74,7 +74,7 @@ const Title = make('title', ({f, g, cue}) => {
 const Forward = make('forward', ({f, g, cue}) => {
   const a = cue('a', 52);
   return <>
-    <Label g={g} f={f} at={4} x={0} y={Y(2) - 250} text="转发的人加了一句" size={50} color={DIM} />
+    <Label g={g} f={f} at={12} x={0} y={Y(2) - 230} text="转发的人加了一句" size={50} color={DIM} />
     <Label g={g} f={f} at={a} x={20} y={Y(2) + 40} text="agent" size={80} anchor="left" />
   </>;
 });
@@ -86,10 +86,10 @@ const Effortless = make('effortless', ({f, g, cue}) => <>
 const Tennis = make('tennis', ({f, g, cue}) => {
   const a = cue('a', 55), b = cue('b', 119);
   return <>
-    <Label g={g} f={f} at={4} x={-60} y={Y(4) - 300} text="23 岁" size={60} />
+    <Label g={g} f={f} at={6} x={-160} y={Y(4) - 280} text="23 岁" size={64} />
     <Label g={g} f={f} at={a} x={200} y={Y(4) - 290} text="7" size={140} />
     <Label g={g} f={f} at={a + 6} x={200} y={Y(4) - 200} text="大满贯 · 据原文" size={40} color={DIM} />
-    <Label g={g} f={f} at={b} x={-150} y={Y(4) + 300} text="“怕它变成义务”" size={56} />
+    <Label g={g} f={f} at={b} x={40} y={Y(4) + 300} text="“怕它变成义务”" size={56} />
   </>;
 });
 
@@ -135,7 +135,7 @@ const Handoff = make('handoff', ({f, g, cue}) => {
   </>;
 });
 
-const STEPS = ['列出这周你在硬推的事', '重复、等待、整理 → 交给 agent', '省下的时间，做想做的'];
+const STEPS = ['列出这周在硬推的事', '重复的活 → 交给 agent', '省下的时间做想做的'];
 const Todo = make('todo', ({f, g, cue}) => {
   const b = cue('b', 100);
   return <>

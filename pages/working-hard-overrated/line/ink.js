@@ -8,10 +8,10 @@ export const RED = [217, 119, 87];   // the accent: Claude Code terracotta (used
 // working-hard-overrated: the line's "voice" says how the work feels — push (heavy, trembling, drying), flow (thin, fast, light),
 // plain (a neutral drawing hand), agent (the one accent stretch: the agent's hand, Claude Code terracotta).
 const STY = {
-  plain: { w: 4.0, a: .95 },
-  push: { w: 5.2, a: .97 },
-  flow: { w: 3.0, a: .9 },
-  agent: { w: 4.6, a: 1 },
+  plain: { w: 5.2, a: .96 },
+  push: { w: 6.6, a: .98 },
+  flow: { w: 3.9, a: .92 },
+  agent: { w: 6.0, a: 1 },
 };
 
 // precompute each point's style (once on the paper it never changes)

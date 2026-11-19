@@ -647,7 +647,7 @@ export const CaptionScript: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: 
     {lines.map((line, j) => {
       const n = [...line].length, a = used / total, b = (used + n) / total; used += n;
       const u = clamp((wrote - a) / Math.max(0.001, b - a));
-      return <div key={j} style={{position: 'relative', fontFamily: hand, fontWeight: 700, fontSize: sz, lineHeight: 1.3, color: k.ink, opacity: 0.86, whiteSpace: 'nowrap',
+      return <div key={j} style={{position: 'relative', fontFamily: hand, fontWeight: 700, fontSize: sz, lineHeight: 1.3, color: k.ink, whiteSpace: 'nowrap', WebkitTextStroke: `1.4px ${k.ink}`,
         textShadow: `0 0 10px ${k.bg}, 0 0 18px ${k.bg}, 0 0 4px ${k.bg}`, clipPath: `inset(-20% ${(1 - u) * 100}% -20% -2%)`}}>{line}</div>;
     })}
   </div>;
