@@ -64,9 +64,9 @@ const Hook = make(({f, cue}) => {
     <RowLabel x={440} row={1} text="call-notes-to-actions" sub="会议纪要 · <100 行" />
     <Judge f={f} at={-10} text="顶级！" x={690} y={rowTop(1) - 34} size={100} fill={T.top} rot={-7} />
     {/* 848★ — claude-office-skills, falls through the rows */}
-    <Bean x={falling || f >= land ? 330 : 690} y={y848} scale={0.78} color="#FF8FB1" mark={{kind: 'ball', color: '#8ED1FC'}} squash={hit(f, land)} mouth={f < land + 20} arms={f < land ? 'up' : 'down'}
+    <Bean x={f >= land ? 330 : falling ? 690 - 360 * ease.outCubic(clamp((f - (land - HOOK_FALL)) / HOOK_FALL)) : 690} y={y848} scale={0.78} color="#FF8FB1" mark={{kind: 'ball', color: '#8ED1FC'}} squash={hit(f, land)} mouth={f < land + 20} arms={f < land ? 'up' : 'down'}
       score="848★" scoreSize={46} scoreColor="#fff" rot={f < land ? Math.sin(f / 3) * 6 : 0} />
-    {falling && <div style={{position: 'absolute', left: 300, top: y848 - 260, width: 60, height: 120, borderLeft: `6px solid ${INK}`, borderRight: `6px solid ${INK}`, opacity: 0.5}} />}
+    {falling && <div style={{position: 'absolute', left: 690 - 360 * ease.outCubic(clamp((f - (land - HOOK_FALL)) / HOOK_FALL)) - 30, top: y848 - 260, width: 60, height: 120, borderLeft: `6px solid ${INK}`, borderRight: `6px solid ${INK}`, opacity: 0.5}} />}
     <Burst f={f} at={land} x={330} y={rowFeet(4) - 40} r={80} color="#C3CAD9" />
     <RowLabel x={440} row={4} text="claude-office-skills" sub="Word · 848★" f={f} at={land + 3} />
     <Judge f={f} at={land + 2} text="拉完了！" x={690} y={rowTop(4) - 30} size={100} fill="#C3CAD9" rot={6} />
@@ -135,7 +135,7 @@ const Intro = make(({f, cue}) => {
 
 /* ---------- 3 ppt: a wall of contestants that doesn't end ---------- */
 
-const Ppt = make(({f, cue, dur}) => {
+const Ppt = make(({f, cue}) => {
   const a = cue('a', 30);
   const scroll = f * 7;
   return <Stage f={f} set={<Stripes f={f} a="#C8431F" b="#D45530" />} hits={[a]}>
@@ -146,13 +146,12 @@ const Ppt = make(({f, cue, dur}) => {
       return <Bean key={i} x={96 + col * 128 + (row % 2) * 30} y={y + hop(f, 5, rnd(i))} scale={0.33} color={CANDY[(i * 3) % CANDY.length]} mark={{kind: 'badge', text: 'P', color: '#C8431F'}} />;
     })}
     <Banner f={f} at={-10} tag="ROUND 1" title="PPT" color={T.top} />
-    {f >= a && <div style={{position: 'absolute', left: 0, right: 0, top: 560, display: 'flex', justifyContent: 'center', transform: `scale(${pop(f, a, 7)})`}}>
-      <Card x={-330} y={0} w={660} h={330} fill={INK} r={36} sh={14} style={{position: 'relative', left: 0}}>
-        <div style={{position: 'absolute', left: 0, right: 0, top: 10, textAlign: 'center', fontFamily: cond, fontWeight: 800, fontSize: 210, color: '#FFD23F', lineHeight: 1}}>200+</div>
-        <div style={{position: 'absolute', left: 0, right: 0, top: 236, textAlign: 'center', fontFamily: font, fontWeight: 700, fontSize: 34, color: '#fff'}}>做 PPT 的 skill · 一个榜单就收了 227 个</div>
+    {f >= a && <div>
+      <Card x={130} y={520} w={820} h={380} fill={INK} r={36} sh={14} scale={pop(f, a, 7)}>
+        <div style={{position: 'absolute', left: 0, right: 0, top: 10, textAlign: 'center', fontFamily: cond, fontWeight: 800, fontSize: 250, color: '#FFD23F', lineHeight: 1}}>200+</div>
+        <div style={{position: 'absolute', left: 0, right: 0, top: 286, textAlign: 'center', fontFamily: font, fontWeight: 700, fontSize: 34, color: '#fff'}}>做 PPT 的 skill · 一个榜单就收了 227 个</div>
       </Card>
     </div>}
-    {dur > 0 && null}
   </Stage>;
 }, (cue) => [{at: 0, kind: 'whoosh-short', gain: 0.06}, {at: cue('a', 30), kind: 'stamp', gain: 0.09}]);
 
@@ -165,6 +164,15 @@ const Word = make(({f, cue}) => {
   return <Stage f={f} set={<Stripes f={f} a="#185ABD" b="#2466C8" />} hits={[a, b, win]}>
     <Floor color="#0F3C82" />
     <Banner f={f} at={-10} tag="ROUND 2 · Word" title="公文写作" color="#4D7CFE" />
+    {/* before the fan: one big official document, the thing this skill writes */}
+    {f < a + 4 && <div style={{position: 'absolute', left: 300, top: 360 + hop(f, 10), transform: `rotate(-4deg) scale(${f < a ? 1 : 1 - (f - a) / 5})`}}>
+      <Card x={0} y={0} w={480} h={620} fill="#fff" r={16} sh={12}>
+        <div style={{position: 'absolute', left: 0, right: 0, top: 40, textAlign: 'center', fontFamily: font, fontWeight: 900, fontSize: 52, color: '#E5494D'}}>某某单位文件</div>
+        <div style={{position: 'absolute', left: 40, right: 40, top: 128, height: 6, background: '#E5494D'}} />
+        {[180, 230, 280, 330, 380, 430, 480, 530].map((y, i) => <div key={y} style={{position: 'absolute', left: 50, width: 380 - (i % 3) * 50, top: y, height: 16, background: '#C9CCD6', borderRadius: 6}} />)}
+        <div style={{position: 'absolute', right: 20, bottom: 14, fontFamily: font, fontWeight: 700, fontSize: 24, color: '#9AA0AE'}}>示意</div>
+      </Card>
+    </div>}
     {/* the fan of 22 documents */}
     {f >= a && f < b + 10 && Array.from({length: fanN}, (_, i) => {
       const ang = -50 + (i / 21) * 100;
@@ -493,7 +501,12 @@ const End = make(({f, cue}) => {
 /* ---------- cover anchor: the hook after the landing ---------- */
 
 const HookBack = Hook.backdrop!;
-const Cover = make(({f}) => <HookBack f={f + 80} dur={150} cue={(_n, fb) => fb ?? 0} />);
+/** The cover anchor: the hook's shelf after the landing (y 300–1340 of the frame), scaled into the 880 × 800 stage box. */
+const Cover: Scene = () => <div style={{position: 'absolute', left: 0, top: 0, width: 880, height: 800, overflow: 'hidden', borderRadius: 30}}>
+  <div style={{position: 'absolute', left: 8, top: -300 * 0.8, width: 1080, height: 1920, transform: 'scale(0.8)', transformOrigin: '0 0'}}>
+    <HookBack f={80} dur={150} cue={(_n, fb) => fb ?? 0} />
+  </div>
+</div>;
 
 export const OFFICE_SKILLS_SCENES: Record<string, Scene> = {
   'ost.hook': Hook, 'ost.intro': Intro, 'ost.ppt': Ppt, 'ost.pptmaster': PptMaster, 'ost.word': Word, 'ost.excel': Excel, 'ost.meet': Meet,
