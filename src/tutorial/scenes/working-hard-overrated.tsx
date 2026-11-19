@@ -1,5 +1,5 @@
 import React from 'react';
-import {OffthreadVideo, staticFile} from 'remotion';
+import {Img, OffthreadVideo, staticFile} from 'remotion';
 import {clamp} from '../../fx';
 import {hand} from '../fonts';
 import {font} from '../theme';
@@ -27,13 +27,16 @@ const toScreen = (g: number, x: number, y: number) => {
   return [540 + c * px - sn * py, 1920 * 0.42 + sn * px + c * py, k, r] as const;
 };
 
-const make = (id: string, draw: (p: {f: number; g: number; cue: (n: string, fb?: number) => number}) => React.ReactNode, sfx?: Scene['sfx']): Scene => {
+/** dx: shift the whole sheet (line + labels) right by dx px for this scene, to keep left-edge content in frame. */
+const make = (id: string, draw: (p: {f: number; g: number; cue: (n: string, fb?: number) => number}) => React.ReactNode, sfx?: Scene['sfx'], dx = 0): Scene => {
   const S: Scene = () => null;
   S.backdrop = ({f, cue}) => {
     const g = (START[id] ?? 0) + f;
     return <div style={{position: 'absolute', inset: 0, background: PAPER, overflow: 'hidden'}}>
-      <OffthreadVideo src={staticFile('video/working-hard-overrated/line.mp4')} startFrom={START[id] ?? 0} muted style={{position: 'absolute', inset: 0, width: 1080, height: 1920}} />
-      {draw({f, g, cue})}
+      <div style={{position: 'absolute', inset: 0, transform: `translateX(${dx}px)`}}>
+        <OffthreadVideo src={staticFile('video/working-hard-overrated/line.mp4')} startFrom={START[id] ?? 0} muted style={{position: 'absolute', inset: 0, width: 1080, height: 1920}} />
+        {draw({f, g, cue})}
+      </div>
     </div>;
   };
   S.sfx = sfx;
@@ -56,9 +59,9 @@ const Src: React.FC<{text: string}> = ({text}) => <div style={{position: 'absolu
 const Hook = make('hook', ({f, g, cue}) => {
   const a = cue('a', 42);
   return <>
-    <Label g={g} f={f} at={-1} x={-170} y={262} text="幸福感 0–10" size={52} />
+    <Label g={g} f={f} at={-14} x={-170} y={262} text="幸福感 0–10" size={52} />
     <Label g={g} f={f} at={18} x={-150} y={-120} text="+1 分" size={56} />
-    <Label g={g} f={f} at={a - 4} x={60} y={-320} text="效率 +12%" size={96} />
+    <Label g={g} f={f} at={a - 4} x={-30} y={-300} text="效率 +12%" size={92} />
     <Src text="据原文引用的研究" />
   </>;
 }, (cue) => [{at: 3, kind: 'tap', gain: 0.06}, {at: cue('a', 42), kind: 'marker', gain: 0.05}]);
@@ -114,8 +117,8 @@ const Discipline = make('discipline', ({f, g, cue}) => {
 const Ratio = make('ratio', ({f, g, cue}) => {
   const a = cue('a', 47), b = cue('b', 97);
   return <>
-    <Label g={g} f={f} at={a} x={-270} y={Y(7) - 130} text="10%" size={80} />
-    <Label g={g} f={f} at={a + 8} x={-270} y={Y(7) + 110} text="硬推" size={46} color={DIM} />
+    <Label g={g} f={f} at={a} x={-235} y={Y(7) - 130} text="10%" size={80} />
+    <Label g={g} f={f} at={a + 8} x={-235} y={Y(7) + 110} text="硬推" size={46} color={DIM} />
     <Label g={g} f={f} at={b} x={40} y={Y(7) - 130} text="90%" size={96} />
     <Label g={g} f={f} at={b + 8} x={40} y={Y(7) + 110} text="被拉着走" size={46} color={DIM} />
   </>;
@@ -144,11 +147,11 @@ const Todo = make('todo', ({f, g, cue}) => {
     {STEPS.map((t, i) => <Label key={t} g={g} f={f} at={6 + i * 14} x={-196} y={Y(10) + [-170, -30, 110][i]} text={t} size={48} anchor="left" />)}
     {f >= b && <Src text="三步清单 · 截图留着" />}
   </>;
-});
+}, undefined, 90);
 
 /** Cover anchor: the boulder vignette, a still of the page (stage box 880 × 800). */
 const Cover: Scene = () => <div style={{position: 'absolute', left: 0, top: 0, width: 880, height: 800, overflow: 'hidden', borderRadius: 24, background: PAPER}}>
-  <OffthreadVideo src={staticFile('video/working-hard-overrated/line.mp4')} startFrom={242} muted style={{position: 'absolute', left: -100, top: -380, width: 1080, height: 1920}} />
+  <Img src={staticFile('images/working-hard-overrated/boulder.png')} style={{position: 'absolute', left: -100, top: -380, width: 1080, height: 1920}} />
 </div>;
 
 export const WORKING_HARD_SCENES: Record<string, Scene> = {
