@@ -259,14 +259,19 @@
    "visual": "ost.rule",
    "step": 0,
    "pace": "normal",
-   "narration": "排位只看一件事：{a}交出来的文件，能不能直接用。"
+   "narration": "排位只看一件事：{a}交出来的文件，能不能直接用。",
+   "tailMs": 1500
   },
   {
    "id": "end",
    "visual": "ost.end",
    "step": 0,
    "pace": "normal",
-   "narration": "官方四件套，{a}Claude Code里两行装好。"
+   "narration": "官方四件套，{a}Claude Code里两行装好。",
+   "tailMs": 600
   }
- ]
+ ],
+ "musicSrc": "audio/tutorials/office-skills-tierlist/score.mp3",
+ "musicVolume": 0.143,
+ "musicDuckDb": 10
 }

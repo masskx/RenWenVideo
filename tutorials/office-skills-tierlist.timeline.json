@@ -1,0 +1,310 @@
+{
+  "id": "office-skills-tierlist",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1576,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/office-skills-tierlist/01-hook.mp3",
+      "audioMs": 3109,
+      "startFrame": 0,
+      "durationFrames": 107,
+      "cues": {
+        "a": 1295
+      },
+      "captions": [
+        {
+          "text": "0星的排进顶级",
+          "startMs": 143,
+          "endMs": 1295
+        },
+        {
+          "text": "848星的拉完了",
+          "startMs": 1295,
+          "endMs": 3389
+        }
+      ]
+    },
+    {
+      "id": "intro",
+      "audioSrc": "audio/tutorials/office-skills-tierlist/02-intro.mp3",
+      "audioMs": 3762,
+      "startFrame": 107,
+      "durationFrames": 127,
+      "cues": {
+        "a": 1380,
+        "b": 2413
+      },
+      "captions": [
+        {
+          "text": "39个办公skill",
+          "startMs": 143,
+          "endMs": 1380
+        },
+        {
+          "text": "分十个类目",
+          "startMs": 1380,
+          "endMs": 2413
+        },
+        {
+          "text": "从夯到拉",
+          "startMs": 2413,
+          "endMs": 4025
+        }
+      ]
+    },
+    {
+      "id": "ppt",
+      "audioSrc": "audio/tutorials/office-skills-tierlist/03-ppt.mp3",
+      "audioMs": 2482,
+      "startFrame": 234,
+      "durationFrames": 88,
+      "cues": {
+        "a": 911
+      },
+      "captions": [
+        {
+          "text": "PPT最卷，GitHub上两百多个",
+          "startMs": 143,
+          "endMs": 2768
+        }
+      ]
+    },
+    {
+      "id": "pptmaster",
+      "audioSrc": "audio/tutorials/office-skills-tierlist/04-pptmaster.mp3",
+      "audioMs": 4441,
+      "startFrame": 322,
+      "durationFrames": 147,
+      "cues": {
+        "a": 1465,
+        "b": 2345
+      },
+      "captions": [
+        {
+          "text": "夯爆了的PPT Master",
+          "startMs": 143,
+          "endMs": 1465
+        },
+        {
+          "text": "丢进文档",
+          "startMs": 1465,
+          "endMs": 2345
+        },
+        {
+          "text": "出原生可编辑的PPTX",
+          "startMs": 2345,
+          "endMs": 4748
+        }
+      ]
+    },
+    {
+      "id": "word",
+      "audioSrc": "audio/tutorials/office-skills-tierlist/05-word.mp3",
+      "audioMs": 4206,
+      "startFrame": 469,
+      "durationFrames": 140,
+      "cues": {
+        "a": 1380,
+        "b": 2531
+      },
+      "captions": [
+        {
+          "text": "写公文的看这个",
+          "startMs": 143,
+          "endMs": 1380
+        },
+        {
+          "text": "22种文书，按国标一键排版",
+          "startMs": 1380,
+          "endMs": 4561
+        }
+      ]
+    },
+    {
+      "id": "excel",
+      "audioSrc": "audio/tutorials/office-skills-tierlist/06-excel.mp3",
+      "audioMs": 3161,
+      "startFrame": 609,
+      "durationFrames": 109,
+      "cues": {
+        "a": 1465
+      },
+      "captions": [
+        {
+          "text": "Excel只给活公式",
+          "startMs": 143,
+          "endMs": 1465
+        },
+        {
+          "text": "公式错误必须是0",
+          "startMs": 1465,
+          "endMs": 3363
+        }
+      ]
+    },
+    {
+      "id": "meet",
+      "audioSrc": "audio/tutorials/office-skills-tierlist/07-meet.mp3",
+      "audioMs": 3892,
+      "startFrame": 718,
+      "durationFrames": 131,
+      "cues": {
+        "a": 953
+      },
+      "captions": [
+        {
+          "text": "会议和待办",
+          "startMs": 143,
+          "endMs": 953
+        },
+        {
+          "text": "夯爆了的都是Anthropic官方套件",
+          "startMs": 953,
+          "endMs": 4154
+        }
+      ]
+    },
+    {
+      "id": "twist",
+      "audioSrc": "audio/tutorials/office-skills-tierlist/08-twist.mp3",
+      "audioMs": 4023,
+      "startFrame": 849,
+      "durationFrames": 135,
+      "cues": {
+        "a": 1344,
+        "b": 2582
+      },
+      "captions": [
+        {
+          "text": "但星数会骗人",
+          "startMs": 144,
+          "endMs": 1344
+        },
+        {
+          "text": "官方那19万星",
+          "startMs": 1344,
+          "endMs": 2582
+        },
+        {
+          "text": "是整个仓库的",
+          "startMs": 2582,
+          "endMs": 4227
+        }
+      ]
+    },
+    {
+      "id": "zero",
+      "audioSrc": "audio/tutorials/office-skills-tierlist/09-zero.mp3",
+      "audioMs": 4885,
+      "startFrame": 984,
+      "durationFrames": 161,
+      "cues": {
+        "a": 1746,
+        "b": 2714
+      },
+      "captions": [
+        {
+          "text": "那个0星的，不到100行",
+          "startMs": 143,
+          "endMs": 1746
+        },
+        {
+          "text": "丢进会议记录",
+          "startMs": 1746,
+          "endMs": 2714
+        },
+        {
+          "text": "行动项、截止日",
+          "startMs": 2714,
+          "endMs": 3998
+        },
+        {
+          "text": "一次出齐",
+          "startMs": 3998,
+          "endMs": 5229
+        }
+      ]
+    },
+    {
+      "id": "lazy",
+      "audioSrc": "audio/tutorials/office-skills-tierlist/10-lazy.mp3",
+      "audioMs": 4937,
+      "startFrame": 1145,
+      "durationFrames": 162,
+      "cues": {
+        "a": 2234,
+        "b": 3468
+      },
+      "captions": [
+        {
+          "text": "848星的停更",
+          "startMs": 143,
+          "endMs": 1508
+        },
+        {
+          "text": "没许可证，还有付费空壳",
+          "startMs": 1508,
+          "endMs": 3468
+        },
+        {
+          "text": "只出报告不出表的",
+          "startMs": 3468,
+          "endMs": 5159
+        }
+      ]
+    },
+    {
+      "id": "rule",
+      "audioSrc": "audio/tutorials/office-skills-tierlist/11-rule.mp3",
+      "audioMs": 3709,
+      "startFrame": 1307,
+      "durationFrames": 160,
+      "cues": {
+        "a": 1522
+      },
+      "captions": [
+        {
+          "text": "排位只看一件事",
+          "startMs": 144,
+          "endMs": 1522
+        },
+        {
+          "text": "交出来的文件",
+          "startMs": 1522,
+          "endMs": 2477
+        },
+        {
+          "text": "能不能直接用",
+          "startMs": 2477,
+          "endMs": 3994
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/office-skills-tierlist/12-end.mp3",
+      "audioMs": 2926,
+      "startFrame": 1467,
+      "durationFrames": 109,
+      "cues": {
+        "a": 989
+      },
+      "captions": [
+        {
+          "text": "官方四件套",
+          "startMs": 144,
+          "endMs": 989
+        },
+        {
+          "text": "Claude Code里两行装好",
+          "startMs": 989,
+          "endMs": 3241
+        }
+      ]
+    }
+  ]
+}
