@@ -1,0 +1,303 @@
+{
+  "id": "working-hard-overrated",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 150,
+  "totalFrames": 1681,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/working-hard-overrated/01-hook.mp3",
+      "audioMs": 3396,
+      "startFrame": 0,
+      "durationFrames": 116,
+      "cues": {
+        "a": 1394
+      },
+      "captions": [
+        {
+          "text": "幸福感每高1分",
+          "startMs": 194,
+          "endMs": 1394
+        },
+        {
+          "text": "干活效率高12%",
+          "startMs": 1394,
+          "endMs": 3772
+        }
+      ]
+    },
+    {
+      "id": "title",
+      "audioSrc": "audio/tutorials/working-hard-overrated/02-title.mp3",
+      "audioMs": 4206,
+      "startFrame": 116,
+      "durationFrames": 140,
+      "cues": {
+        "a": 2417
+      },
+      "captions": [
+        {
+          "text": "一篇27万人看过的长文说",
+          "startMs": 194,
+          "endMs": 2417
+        },
+        {
+          "text": "努力工作，被高估了",
+          "startMs": 2417,
+          "endMs": 4546
+        }
+      ]
+    },
+    {
+      "id": "forward",
+      "audioSrc": "audio/tutorials/working-hard-overrated/03-forward.mp3",
+      "audioMs": 3762,
+      "startFrame": 256,
+      "durationFrames": 127,
+      "cues": {
+        "a": 1706
+      },
+      "captions": [
+        {
+          "text": "转发它的人加了一句",
+          "startMs": 194,
+          "endMs": 1706
+        },
+        {
+          "text": "所以要用agent",
+          "startMs": 1706,
+          "endMs": 2791
+        },
+        {
+          "text": "解放自己",
+          "startMs": 2791,
+          "endMs": 4170
+        }
+      ]
+    },
+    {
+      "id": "effortless",
+      "audioSrc": "audio/tutorials/working-hard-overrated/04-effortless.mp3",
+      "audioMs": 3866,
+      "startFrame": 383,
+      "durationFrames": 130,
+      "cues": {
+        "a": 1083
+      },
+      "captions": [
+        {
+          "text": "原文的例子",
+          "startMs": 194,
+          "endMs": 1083
+        },
+        {
+          "text": "各行最顶尖的人",
+          "startMs": 1083,
+          "endMs": 2180
+        },
+        {
+          "text": "往往看起来毫不费力",
+          "startMs": 2180,
+          "endMs": 4207
+        }
+      ]
+    },
+    {
+      "id": "tennis",
+      "audioSrc": "audio/tutorials/working-hard-overrated/05-tennis.mp3",
+      "audioMs": 6374,
+      "startFrame": 513,
+      "durationFrames": 205,
+      "cues": {
+        "a": 1839,
+        "b": 3974
+      },
+      "captions": [
+        {
+          "text": "一位23岁的网球冠军",
+          "startMs": 194,
+          "endMs": 1839
+        },
+        {
+          "text": "据原文已拿7个大满贯",
+          "startMs": 1839,
+          "endMs": 3974
+        },
+        {
+          "text": "他说，最怕网球变成一种义务",
+          "startMs": 3974,
+          "endMs": 6685
+        }
+      ]
+    },
+    {
+      "id": "music",
+      "audioSrc": "audio/tutorials/working-hard-overrated/06-music.mp3",
+      "audioMs": 4624,
+      "startFrame": 718,
+      "durationFrames": 153,
+      "cues": {
+        "a": 1617,
+        "b": 3034
+      },
+      "captions": [
+        {
+          "text": "一支乐队的主唱说",
+          "startMs": 194,
+          "endMs": 1617
+        },
+        {
+          "text": "他们最火的那些歌",
+          "startMs": 1617,
+          "endMs": 3034
+        },
+        {
+          "text": "都只写了10分钟",
+          "startMs": 3034,
+          "endMs": 4945
+        }
+      ]
+    },
+    {
+      "id": "discipline",
+      "audioSrc": "audio/tutorials/working-hard-overrated/07-discipline.mp3",
+      "audioMs": 5851,
+      "startFrame": 871,
+      "durationFrames": 190,
+      "cues": {
+        "a": 1483,
+        "b": 3716
+      },
+      "captions": [
+        {
+          "text": "一位高管教练说",
+          "startMs": 194,
+          "endMs": 1483
+        },
+        {
+          "text": "纪律是推，推很耗能量",
+          "startMs": 1483,
+          "endMs": 3716
+        },
+        {
+          "text": "想去做的时候",
+          "startMs": 3716,
+          "endMs": 4755
+        },
+        {
+          "text": "你是被拉着走",
+          "startMs": 4755,
+          "endMs": 6184
+        }
+      ]
+    },
+    {
+      "id": "ratio",
+      "audioSrc": "audio/tutorials/working-hard-overrated/08-ratio.mp3",
+      "audioMs": 5277,
+      "startFrame": 1061,
+      "durationFrames": 172,
+      "cues": {
+        "a": 1572,
+        "b": 3224
+      },
+      "captions": [
+        {
+          "text": "但作者没说别努力",
+          "startMs": 194,
+          "endMs": 1572
+        },
+        {
+          "text": "10%的时间必须硬推",
+          "startMs": 1572,
+          "endMs": 3224
+        },
+        {
+          "text": "剩下90%应该是拉",
+          "startMs": 3224,
+          "endMs": 5598
+        }
+      ]
+    },
+    {
+      "id": "sessions",
+      "audioSrc": "audio/tutorials/working-hard-overrated/09-sessions.mp3",
+      "audioMs": 4206,
+      "startFrame": 1233,
+      "durationFrames": 140,
+      "cues": {
+        "a": 1617,
+        "b": 3152
+      },
+      "captions": [
+        {
+          "text": "可很多人的90%",
+          "startMs": 194,
+          "endMs": 1617
+        },
+        {
+          "text": "耗在一堆sessions里",
+          "startMs": 1617,
+          "endMs": 3152
+        },
+        {
+          "text": "当苦行僧",
+          "startMs": 3152,
+          "endMs": 4419
+        }
+      ]
+    },
+    {
+      "id": "handoff",
+      "audioSrc": "audio/tutorials/working-hard-overrated/10-handoff.mp3",
+      "audioMs": 4023,
+      "startFrame": 1373,
+      "durationFrames": 135,
+      "cues": {
+        "a": 1839
+      },
+      "captions": [
+        {
+          "text": "把重复的推交给agent",
+          "startMs": 194,
+          "endMs": 1839
+        },
+        {
+          "text": "你的手，留给被拉着的那部分",
+          "startMs": 1839,
+          "endMs": 4436
+        }
+      ]
+    },
+    {
+      "id": "todo",
+      "audioSrc": "audio/tutorials/working-hard-overrated/11-todo.mp3",
+      "audioMs": 4885,
+      "startFrame": 1508,
+      "durationFrames": 173,
+      "cues": {
+        "a": 1078,
+        "b": 3331
+      },
+      "captions": [
+        {
+          "text": "今天试一件",
+          "startMs": 196,
+          "endMs": 1078
+        },
+        {
+          "text": "挑一件你天天硬推的重复活",
+          "startMs": 1078,
+          "endMs": 3331
+        },
+        {
+          "text": "交给agent跑一遍",
+          "startMs": 3331,
+          "endMs": 5239
+        }
+      ]
+    }
+  ]
+}

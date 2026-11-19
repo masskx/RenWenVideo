@@ -62,6 +62,7 @@ import {NVIDIA_BOARD_SCENES} from './nvidia-board-oust-huang';
 import {NVIDIA_RESIGNS_SCENES} from './nvidia-huang-resigns';
 import {XUPT_HALF_RADIO_SCENES} from './xupt-half-radio';
 import {OFFICE_SKILLS_SCENES} from './office-skills-tierlist';
+import {WORKING_HARD_SCENES} from './working-hard-overrated';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -130,4 +131,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...NVIDIA_RESIGNS_SCENES,
   ...XUPT_HALF_RADIO_SCENES,
   ...OFFICE_SKILLS_SCENES,
+  ...WORKING_HARD_SCENES,
 };

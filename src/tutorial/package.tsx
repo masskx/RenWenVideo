@@ -626,3 +626,29 @@ export const CaptionTelop: React.FC<{captions: TimedCaption[]; k: Pk; keywords?:
     </div>
   </div>;
 };
+
+/**
+ * The one-line caption (lemo/one-line §4): written, like the line — a handwriting face (our 霞鹜文楷), ink at ~84 %, no box,
+ * centred near the bottom, written on left to right (~0.2 s + ~17 ms a character) behind a soft paper-coloured halo so a
+ * passing line never crosses the letters; it fades out over the last 0.3 s.
+ */
+export const CaptionScript: React.FC<{captions: TimedCaption[]; k: Pk; breaks?: Record<string, string>; y?: number}> = ({captions, k, breaks = {}, y = 1440}) => {
+  const frame = useCurrentFrame();
+  const ms = (frame / 30) * 1000;
+  const c = captions.find((x) => ms >= x.startMs && ms < x.endMs);
+  if (!c) return null;
+  const lines = breaks[c.text]?.split('|') ?? captionLines(c.text, 13);
+  const sz = Math.max(62, Math.min(76, Math.floor(860 / Math.max(...lines.map(units)))));
+  const total = [...lines.join('')].length;
+  const wrote = (ms - c.startMs) / (200 + 17 * total);
+  const fade = clamp((c.endMs - ms) / 300);
+  let used = 0;
+  return <div style={{position: 'absolute', left: 0, right: 0, top: y, display: 'flex', flexDirection: 'column', alignItems: 'center', opacity: fade}}>
+    {lines.map((line, j) => {
+      const n = [...line].length, a = used / total, b = (used + n) / total; used += n;
+      const u = clamp((wrote - a) / Math.max(0.001, b - a));
+      return <div key={j} style={{position: 'relative', fontFamily: hand, fontWeight: 700, fontSize: sz, lineHeight: 1.3, color: k.ink, opacity: 0.86, whiteSpace: 'nowrap',
+        textShadow: `0 0 10px ${k.bg}, 0 0 18px ${k.bg}, 0 0 4px ${k.bg}`, clipPath: `inset(-20% ${(1 - u) * 100}% -20% -2%)`}}>{line}</div>;
+    })}
+  </div>;
+};

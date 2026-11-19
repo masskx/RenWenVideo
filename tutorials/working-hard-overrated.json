@@ -1,0 +1,245 @@
+{
+ "id": "working-hard-overrated",
+ "title": "努力工作被高估了：10% 推，90% 拉",
+ "subtitle": "把重复的推交给 agent",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "kind": "tutorial",
+ "tts": {
+  "provider": "minimax"
+ },
+ "leadMs": 150,
+ "tailMs": 300,
+ "series": "AI 工具 · 方法",
+ "credit": "海外长文《Working Hard Is Overrated》中文译文 · X 平台转发",
+ "source": "inputs/working-hard-overrated/idea.md",
+ "maxSeconds": 75,
+ "score": {
+  "mood": "warm",
+  "bpm": 84,
+  "climax": "handoff",
+  "lifts": [
+   "ratio"
+  ]
+ },
+ "steps": [],
+ "look": {
+  "theme": "cinema",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "script",
+  "captionTop": 1440,
+  "pk": {
+   "bg": "#F4EFE4",
+   "panel": "#F4EFE4",
+   "ink": "#1D1A17",
+   "accent": "#D97757",
+   "onAccent": "#FFFFFF",
+   "dim": "#7A7266"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "mode": "window",
+  "x": 866,
+  "y": 150,
+  "size": 150,
+  "colors": {
+   "panel": "#EDE6D6",
+   "accent": "#D97757",
+   "ink": "#1D1A17",
+   "bg": "#F4EFE4"
+  },
+  "scenes": {
+   "hook": {
+    "expr": "smile",
+    "pose": "idle",
+    "look": [
+     -0.6,
+     0.3
+    ]
+   },
+   "forward": {
+    "expr": "think",
+    "pose": "think",
+    "look": [
+     -0.6,
+     0.3
+    ],
+    "beats": [
+     {
+      "at": 1.6,
+      "pose": "nod",
+      "expr": "smile"
+     }
+    ]
+   },
+   "todo": {
+    "expr": "smile",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 1.2,
+      "pose": "nod",
+      "expr": "smile"
+     }
+    ]
+   }
+  }
+ },
+ "highlights": [],
+ "cover": "hook",
+ "keywords": [],
+ "coverCard": {
+  "template": "conflict",
+  "headline": [
+   "努力工作",
+   "被高估了"
+  ],
+  "support": "10% 硬推，90% 被拉着走 · 重复的推交给 agent",
+  "tag": "AI 工具 · 方法",
+  "anchor": "wh.cover",
+  "colors": {
+   "bg": "#F4EFE4",
+   "text": "#1D1A17",
+   "accent": "#D97757",
+   "dim": "#7A7266"
+  },
+  "layouts": {
+   "3:4": {
+    "headline": [
+     80,
+     110
+    ],
+    "size": 100,
+    "anchor": [
+     540,
+     900,
+     0.9
+    ],
+    "support": 1330
+   },
+   "6:7": {
+    "headline": [
+     80,
+     90
+    ],
+    "size": 90,
+    "anchor": [
+     540,
+     820,
+     0.8
+    ],
+    "support": 1160
+   },
+   "9:16": {
+    "headline": [
+     80,
+     280
+    ],
+    "size": 110,
+    "anchor": [
+     540,
+     1060,
+     1.05
+    ],
+    "support": 1640
+   }
+  }
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "wh.hook",
+   "step": 0,
+   "pace": "normal",
+   "narration": "幸福感每高1分，{a}干活效率高12%。"
+  },
+  {
+   "id": "title",
+   "visual": "wh.title",
+   "step": 0,
+   "pace": "normal",
+   "narration": "一篇27万人看过的长文说：{a}努力工作，被高估了。"
+  },
+  {
+   "id": "forward",
+   "visual": "wh.forward",
+   "step": 0,
+   "pace": "normal",
+   "narration": "转发它的人加了一句：{a}所以要用agent，解放自己。"
+  },
+  {
+   "id": "effortless",
+   "visual": "wh.effortless",
+   "step": 0,
+   "pace": "normal",
+   "narration": "原文的例子：{a}各行最顶尖的人，往往看起来毫不费力。"
+  },
+  {
+   "id": "tennis",
+   "visual": "wh.tennis",
+   "step": 0,
+   "pace": "normal",
+   "narration": "一位23岁的网球冠军，{a}据原文已拿7个大满贯；{b}他说，最怕网球变成一种义务。"
+  },
+  {
+   "id": "music",
+   "visual": "wh.music",
+   "step": 0,
+   "pace": "normal",
+   "narration": "一支乐队的主唱说：{a}他们最火的那些歌，{b}都只写了10分钟。"
+  },
+  {
+   "id": "discipline",
+   "visual": "wh.discipline",
+   "step": 0,
+   "pace": "normal",
+   "narration": "一位高管教练说：{a}纪律是推，推很耗能量；{b}想去做的时候，你是被拉着走。"
+  },
+  {
+   "id": "ratio",
+   "visual": "wh.ratio",
+   "step": 0,
+   "pace": "normal",
+   "narration": "但作者没说别努力：{a}10%的时间必须硬推，{b}剩下90%应该是拉。"
+  },
+  {
+   "id": "sessions",
+   "visual": "wh.sessions",
+   "step": 0,
+   "pace": "normal",
+   "narration": "可很多人的90%，{a}耗在一堆sessions里，{b}当苦行僧。"
+  },
+  {
+   "id": "handoff",
+   "visual": "wh.handoff",
+   "step": 0,
+   "pace": "normal",
+   "narration": "把重复的推交给agent，{a}你的手，留给被拉着的那部分。"
+  },
+  {
+   "id": "todo",
+   "visual": "wh.todo",
+   "step": 0,
+   "pace": "calm",
+   "narration": "今天试一件：{a}挑一件你天天硬推的重复活，{b}交给agent跑一遍。",
+   "tailMs": 700
+  }
+ ],
+ "musicSrc": "audio/tutorials/working-hard-overrated/score.mp3",
+ "musicVolume": 0.125,
+ "musicDuckDb": 10
+}
