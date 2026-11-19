@@ -109,7 +109,7 @@ const RUNOFF = 'M -224,-210 C -100,-120 60,120 220,180 C 420,250 600,230 800,300
 // segment table. t = [t0, t1] seconds; marks = sync points; holds = pen stops.
 const T = (i) => ({ x: 0, y: Y(i) });
 export const SEGS = [
-  { id: 'ruler', style: 'plain', t: [0.10, 0.95], parts: [{ d: RULER, tf: T(0) }], slowK: 0.6 },
+  { id: 'ruler', style: 'plain', t: [-0.6, 0.95], parts: [{ d: RULER, tf: T(0) }], slowK: 0.6 },
   { id: 'chart', style: 'plain', t: [0.95, 2.55], parts: [{ d: CHART, tf: T(0) }], slowK: 1.4, marks: [{ f: 0.62, t: 1.6 }] },
   { id: 'boulder', style: 'push', t: [3.95, 8.1], parts: [{ d: BOULDER, tf: T(1) }], slowK: 2.6, },
   { id: 'window', style: 'plain', t: [8.6, 11.9], parts: [{ d: PROMPT, tf: T(2) }, { d: WINDOW, tf: T(2) }], slowK: 1.6, marks: [{ f: 0.25, t: 10.3 }] },

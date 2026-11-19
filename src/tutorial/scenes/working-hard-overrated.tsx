@@ -45,7 +45,7 @@ const Label: React.FC<{g: number; f: number; at: number; x: number; y: number; t
   const [sx, sy, k, r] = toScreen(g, x, y);
   const u = clamp((f - at) / (6 + text.length * 0.6));
   const out = until != null ? 1 - clamp((f - until) / 9) : 1;
-  const z = k / 1.6;
+  const z = k / 1.3;
   return <div style={{position: 'absolute', left: sx, top: sy, transform: `translate(${anchor === 'center' ? '-50%' : '0'}, -50%) rotate(${-r}rad) scale(${z})`, transformOrigin: anchor === 'center' ? '50% 50%' : '0 50%',
     fontFamily: hand, fontWeight: 700, fontSize: size, color, opacity: out, WebkitTextStroke: `1px ${color}`, whiteSpace: 'nowrap', lineHeight: 1.1,
     textShadow: `0 0 10px ${PAPER}, 0 0 4px ${PAPER}`, clipPath: `inset(-30% ${(1 - u) * 100}% -30% -4%)`}}>{text}</div>;
@@ -148,7 +148,7 @@ const Todo = make('todo', ({f, g, cue}) => {
 
 /** Cover anchor: the boulder vignette, a still of the page (stage box 880 × 800). */
 const Cover: Scene = () => <div style={{position: 'absolute', left: 0, top: 0, width: 880, height: 800, overflow: 'hidden', borderRadius: 24, background: PAPER}}>
-  <OffthreadVideo src={staticFile('video/working-hard-overrated/line.mp4')} startFrom={250} muted style={{position: 'absolute', left: -100, top: -330, width: 1080, height: 1920}} />
+  <OffthreadVideo src={staticFile('video/working-hard-overrated/line.mp4')} startFrom={242} muted style={{position: 'absolute', left: -100, top: -380, width: 1080, height: 1920}} />
 </div>;
 
 export const WORKING_HARD_SCENES: Record<string, Scene> = {

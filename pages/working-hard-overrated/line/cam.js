@@ -2,7 +2,7 @@
 import { clamp, lerp } from './lib.js';
 import { headAt, posAt } from './geom.js';
 
-export const BASE = 1.6;   // pixels per unit at z=1 (whole face in frame)
+export const BASE = 1.3;   // pixels per unit at z=1 (whole face in frame)
 
 const sm = t => t * t * (3 - 2 * t);
 function keyAt(keys, t) {
