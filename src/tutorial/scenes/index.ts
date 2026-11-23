@@ -61,6 +61,7 @@ import {APACHE_H2_SCENES} from './apache-http2-rce-ai-found';
 import {NVIDIA_BOARD_SCENES} from './nvidia-board-oust-huang';
 import {NVIDIA_RESIGNS_SCENES} from './nvidia-huang-resigns';
 import {XUPT_HALF_RADIO_POSTERS, XUPT_HALF_RADIO_SCENES} from './xupt-half-radio';
+import {OFFICE_SKILLS_SCENES} from './office-skills-tierlist';
 import type {CoverRatio} from '../types';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
@@ -129,6 +130,7 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...NVIDIA_BOARD_SCENES,
   ...NVIDIA_RESIGNS_SCENES,
   ...XUPT_HALF_RADIO_SCENES,
+  ...OFFICE_SKILLS_SCENES,
 };
 
 /**
