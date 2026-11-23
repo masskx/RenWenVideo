@@ -62,6 +62,7 @@ import {NVIDIA_BOARD_SCENES} from './nvidia-board-oust-huang';
 import {NVIDIA_RESIGNS_SCENES} from './nvidia-huang-resigns';
 import {XUPT_HALF_RADIO_POSTERS, XUPT_HALF_RADIO_SCENES} from './xupt-half-radio';
 import {OFFICE_SKILLS_SCENES} from './office-skills-tierlist';
+import {PNP_POSTERS, PNP_SCENES} from './p-vs-np-agent-fleet';
 import type {CoverRatio} from '../types';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
@@ -131,6 +132,7 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...NVIDIA_RESIGNS_SCENES,
   ...XUPT_HALF_RADIO_SCENES,
   ...OFFICE_SKILLS_SCENES,
+  ...PNP_SCENES,
 };
 
 /**
@@ -139,4 +141,5 @@ export const sceneRegistry: Record<string, SceneComponent> = {
  */
 export const posterRegistry: Record<string, React.FC<{ratio: CoverRatio; w: number; h: number}>> = {
   ...XUPT_HALF_RADIO_POSTERS,
+  ...PNP_POSTERS,
 };

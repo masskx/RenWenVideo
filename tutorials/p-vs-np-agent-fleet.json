@@ -1,0 +1,200 @@
+{
+ "id": "p-vs-np-agent-fleet",
+ "title": "一群AI组队挑战P对NP",
+ "subtitle": "谁来判AI写的证明？",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax"
+ },
+ "leadMs": 100,
+ "tailMs": 300,
+ "series": "AI 新闻 · 研究",
+ "credit": "pequalnp.com 项目首页 / 方法页 / 实时看板 · Clay 数学研究所",
+ "source": "inputs/p-vs-np-agent-fleet/idea.md",
+ "maxSeconds": 55,
+ "score": {
+  "mood": "wonder",
+  "climax": "open",
+  "lifts": [
+   "judge"
+  ],
+  "silences": [
+   {
+    "scene": "judge",
+    "at": 0,
+    "dur": 0.3
+   }
+  ],
+  "climaxAt": 3.2
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "label",
+  "captionTop": 1400,
+  "pk": {
+   "bg": "#FAF8F2",
+   "panel": "#F3E9D2",
+   "ink": "#2A2F38",
+   "accent": "#2F6B4F",
+   "onAccent": "#FFFFFF",
+   "dim": "#8B8F98",
+   "second": "#F2B84B"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "mode": "window",
+  "x": 866,
+  "y": 150,
+  "size": 150,
+  "colors": {
+   "panel": "#F3E9D2",
+   "accent": "#2F6B4F",
+   "ink": "#2A2F38",
+   "bg": "#2A2F38"
+  },
+  "scenes": {
+   "hook": {
+    "expr": "surprise",
+    "pose": "idle",
+    "look": [
+     -0.6,
+     0.4
+    ],
+    "beats": [
+     {
+      "at": 2.4,
+      "pose": "nod",
+      "expr": "smile"
+     }
+    ]
+   },
+   "judge": {
+    "expr": "think",
+    "pose": "think",
+    "look": [
+     -0.6,
+     0.3
+    ],
+    "beats": [
+     {
+      "at": 2.0,
+      "pose": "nod",
+      "expr": "serious"
+     }
+    ]
+   },
+   "end": {
+    "expr": "smile",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 1.2,
+      "pose": "nod",
+      "expr": "smile"
+     }
+    ]
+   }
+  }
+ },
+ "keywords": [
+  "100万美元",
+  "通过",
+  "好找",
+  "几秒",
+  "找反例",
+  "Lean",
+  "一个",
+  "登记的那句",
+  "一小步",
+  "没有答案",
+  "每一步"
+ ],
+ "cover": "open",
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "pn.hook",
+   "step": 0,
+   "pace": "normal",
+   "narration": "悬赏100万美元的P对NP，{a}一群AI正在组队公开攻。{b}有一步，已经被判了“通过”。"
+  },
+  {
+   "id": "ask",
+   "visual": "pn.ask",
+   "step": 0,
+   "pace": "normal",
+   "narration": "这道题问的是：{a}答案好验的问题，{b}是不是也一定好找？"
+  },
+  {
+   "id": "route",
+   "visual": "pn.route",
+   "step": 0,
+   "pace": "normal",
+   "narration": "打个比方。{a}给你一条路线，顺着一站站查，很快就知道对不对；{b}可让你在空地图上找一条，{c}就得一条条试。"
+  },
+  {
+   "id": "judge",
+   "visual": "pn.judge",
+   "step": 0,
+   "pace": "normal",
+   "narration": "那AI写的证明，谁来判？{a}这个项目里，有的AI想思路，{b}有的专门找反例，{c}走得通的一步，再写成Lean证明。"
+  },
+  {
+   "id": "check",
+   "visual": "pn.check",
+   "step": 0,
+   "pace": "normal",
+   "narration": "裁判只有一个：Lean检查器。{a}它只认一件事：{b}证明里证的，正好是登记的那句话。"
+  },
+  {
+   "id": "open",
+   "visual": "pn.open",
+   "step": 0,
+   "pace": "calm",
+   "narration": "所以看板上的“通过”，{a}只是一小步；{b}P对NP本身，今天还没有答案。"
+  },
+  {
+   "id": "end",
+   "visual": "pn.end",
+   "step": 0,
+   "pace": "normal",
+   "narration": "这场实验最值得看的，{a}不是AI多聪明，{b}是它的每一步，都得过裁判这关。"
+  }
+ ],
+ "coverCard": {
+  "poster": "pn.poster",
+  "template": "conflict",
+  "headline": [
+   "一群AI组队",
+   "挑战 P vs NP"
+  ],
+  "support": "小命题过了，主问题呢？",
+  "tag": "AI 新闻 · 研究",
+  "colors": {
+   "bg": "#FAF9F5",
+   "text": "#2A2F38",
+   "accent": "#2F6B4F",
+   "dim": "#8B8F98"
+  }
+ },
+ "musicSrc": "audio/tutorials/p-vs-np-agent-fleet/score.mp3",
+ "musicVolume": 0.157,
+ "musicDuckDb": 10
+}
