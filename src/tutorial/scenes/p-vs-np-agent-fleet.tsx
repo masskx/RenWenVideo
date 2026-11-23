@@ -112,8 +112,8 @@ const CAM: CK[] = [
   [h.route - 10, 1820, 1420, 1.03], [h.route - 1, 560, 2660, 1.0], [h.rB, 560, 2640, 1.02], [h.rC + 40, 560, 2660, 1.0],
   [h.judge - 6, 560, 2660, 1.0], [h.judge + 3, 1800, 3200, 1.0], [h.jC - 10, 1800, 3330, 1.0], [h.jC + 20, 1800, 3400, 1.03],
   [h.check - 8, 1800, 3400, 1.03], [h.check + 2, 560, 4320, 1.0], [h.cB + 40, 560, 4380, 1.02],
-  [h.open - 4, 560, 4380, 1.02], [h.open + 16, 1200, 2500, 0.34], [h.oA + 2, 520, 1210, 1.25], [h.oB, 540, 900, 0.92], [h.end - 4, 540, 860, 0.95],
-  [h.eA + 6, 1200, 2500, 0.34], [h.eB + 2, 540, 3880, 1.1], [h.end + 400, 540, 3880, 1.14],
+  [h.open - 4, 560, 4420, 1.09], [h.open + 16, 1200, 2500, 0.34], [h.oA + 2, 520, 1210, 1.25], [h.oB, 540, 900, 0.92], [h.end - 4, 540, 860, 0.95],
+  [h.eA + 6, 1200, 2500, 0.34], [h.eB + 2, 540, 3880, 1.1], [h.end + 200, 560, 3820, 1.28],
 ];
 const camOf = (F: number): Cam => camAt(F, CAM);
 
@@ -176,9 +176,9 @@ const SC_IDS = {hook: 'ask', ask: 'route', route: 'judge', judge: 'check', check
 
 /* ---------- cover poster (封面.md §〇·五): the board's own world — the claim circled, the small step ticked ---------- */
 const POSTER: Record<CoverRatio, {cam: Cam; head: [number, number, number]; sup: number}> = {
-  '3:4': {cam: {x: 560, y: 1080, z: 0.9}, head: [70, 96, 108], sup: 330},
-  '6:7': {cam: {x: 560, y: 1110, z: 0.8}, head: [70, 84, 96], sup: 290},
-  '9:16': {cam: {x: 560, y: 940, z: 0.94}, head: [70, 230, 118], sup: 500},
+  '3:4': {cam: {x: 560, y: 759, z: 0.95}, head: [70, 96, 108], sup: 330},
+  '6:7': {cam: {x: 560, y: 803, z: 0.78}, head: [70, 84, 96], sup: 290},
+  '9:16': {cam: {x: 560, y: 544, z: 1.1}, head: [70, 230, 118], sup: 500},
 };
 export const PnpPoster: React.FC<{ratio: CoverRatio; w: number; h: number}> = ({ratio, h: hh}) => {
   const L = POSTER[ratio];
@@ -195,6 +195,7 @@ export const PnpPoster: React.FC<{ratio: CoverRatio; w: number; h: number}> = ({
       <span style={{width: 50, height: 8, background: '#F2B84B', borderRadius: 4}} />
       <span style={{fontFamily: hand, fontSize: 52, color: C.ink}}>小命题过了，主问题呢？</span>
     </div>
+    <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: Math.max(0, hh - (ratio === '9:16' ? 1660 : ratio === '3:4' ? 1360 : 1180)), background: 'linear-gradient(180deg, rgba(244,242,236,0), #F4F2EC 60%)'}} />
     <div style={{position: 'absolute', right: 70, top: L.head[1] + 8, fontFamily: plex, fontSize: 24, color: DIM, textAlign: 'right', lineHeight: 1.5}}>AI 新闻 · 研究<br />pequalnp.com</div>
   </div>;
 };
