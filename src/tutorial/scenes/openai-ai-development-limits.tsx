@@ -83,9 +83,9 @@ strokes('mint', [[[840, 772], [872, yOf(0.819) - 22]]], 3, h.sA + 4, h.sA + 10);
 
 /* ---------- camera ---------- */
 const CAM: CK[] = [
-  [-30, 780, 1060, 1.45], [h.hA - 4, 780, 1060, 1.4], [h.hA + 14, 590, 960, 1.0], [h.met - 8, 600, 980, 1.0],
+  [-30, 800, 1070, 1.5], [h.hA - 4, 760, 1050, 1.36], [h.hA + 14, 590, 960, 1.0], [h.met - 8, 600, 980, 1.0],
   [h.met + 2, 1650, 960, 1.0], [h.mB, 1650, 970, 1.03], [h.data - 8, 1650, 980, 1.03],
-  [h.data + 2, 580, 1000, 1.0], [h.dB + 40, 580, 1010, 1.03],
+  [h.data + 2, 500, 900, 1.08], [h.dA + 4, 560, 960, 1.1], [h.dB + 4, 640, 1030, 1.12], [h.dB + 40, 590, 1010, 1.02],
   [h.line + 6, 580, 1040, 1.0], [h.lC + 30, 580, 1060, 1.04],
   [h.tw - 2, 580, 1060, 1.04], [h.tw + 10, 410, 1350, 2.1], [h.ms - 6, 420, 1355, 2.2],
   [h.ms + 6, 600, 1000, 1.0], [h.sB + 40, 610, 1010, 1.04],
@@ -146,6 +146,8 @@ const Sheet: React.FC<{F: number; s0?: number; camera?: Cam; noPen?: boolean}> =
       <Ink kit={kit} F={F} w={SW} h={SH} />
       {/* data dots: ink ring, mint fill; Microsoft's is a hollow diamond */}
       <svg width={SW} height={SH} style={{position: 'absolute', left: 0, top: 0}}>
+        {[[0, h.data + 2], [1, h.dA - 2], [2, h.dB - 2], [3, h.hA - 6]].map(([i, t]) => { if (F < t || F > t + 22) return null; const k = (F - t) / 22, m = MARKS[i]; return <circle key={`r${i}`} cx={m.x} cy={yOf(m.v)} r={16 + 70 * ease.outCubic(k)} fill="none" stroke={C.mint} strokeWidth={4} opacity={1 - k} />; })}
+        {F >= h.sA && F < h.sA + 22 && <circle cx={880} cy={yOf(0.819)} r={16 + 70 * ease.outCubic((F - h.sA) / 22)} fill="none" stroke={C.mint} strokeWidth={4} opacity={1 - (F - h.sA) / 22} />}
         {MARKS.map((m, i) => { if (F < m.at) return null; const k = ease.outBack(clamp((F - m.at) / 6), 2); return <circle key={i} cx={m.x} cy={yOf(m.v)} r={16 * k} fill={C.mint} stroke={BG} strokeWidth={5} />; })}
         {F >= h.sA && (() => { const k = ease.outBack(clamp((F - h.sA) / 6), 2), x = 880, y = yOf(0.819); return <rect x={x - 15 * k} y={y - 15 * k} width={30 * k} height={30 * k} transform={`rotate(45 ${x} ${y})`} fill={BG} stroke={C.mint} strokeWidth={5} />; })()}
       </svg>
@@ -181,7 +183,7 @@ const sceneOf = (id: string, next?: string): Scene => {
 /* ---------- cover poster (封面.md §〇·五): the chart, the falling series, the undecided brake line ---------- */
 const POSTER: Record<CoverRatio, {cam: Cam; head: number; sup: number; dy: number}> = {
   '3:4': {cam: {x: 570, y: 692, z: 0.9}, head: 120, sup: 380, dy: 0},
-  '6:7': {cam: {x: 570, y: 675, z: 0.78}, head: 100, sup: 330, dy: 0},
+  '6:7': {cam: {x: 570, y: 640, z: 0.74}, head: 100, sup: 384, dy: 0},
   '9:16': {cam: {x: 570, y: 790, z: 1.0}, head: 250, sup: 520, dy: 0},
 };
 export const OlPoster: React.FC<{ratio: CoverRatio; w: number; h: number}> = ({ratio, h: hh}) => {
@@ -189,6 +191,7 @@ export const OlPoster: React.FC<{ratio: CoverRatio; w: number; h: number}> = ({r
   return <div style={{position: 'absolute', inset: 0, width: 1080, height: hh, overflow: 'hidden', background: BG}}>
     <div style={{position: 'absolute', left: 0, top: L.dy + (hh - 1920) / 2, width: 1080, height: 1920}}><Sheet F={h.lC + 20} camera={L.cam} noPen /></div>
     <div style={{position: 'absolute', left: 0, right: 0, top: 0, height: L.sup + 120, background: `linear-gradient(180deg, ${BG} 72%, ${BG}00)`}} />
+    {ratio === '6:7' && <div style={{position: 'absolute', right: 0, top: 0, bottom: 0, width: 110, background: `linear-gradient(90deg, ${BG}00, ${BG} 55%)`}} />}
     <div style={{position: 'absolute', left: 64, top: L.head, fontFamily: font, fontWeight: 900, fontSize: 124, lineHeight: 1.08, color: C.ink}}>
       <div>AI 该不该</div><div>踩<span style={{color: C.amber}}>刹车</span>？</div>
     </div>
