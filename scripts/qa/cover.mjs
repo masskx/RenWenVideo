@@ -64,6 +64,22 @@ else {
   console.log('看图，按 封面.md §五 的十条打分（< 8 分就改），写进分镜的“静帧判断”。');
 }
 
+// Blank / thin covers (2026-11-23: xupt-half-radio shipped a near-empty cover — the frozen-frame cover drew the empty
+// stage of a template film; user: "not visually appealing, lacks sophistication"). Measure each cover's detail: the share
+// of pixels that differ clearly from the median background, and the spread of luminance. A poster has a hero object and
+// type that cover a real part of the frame. Calibrated 2026-11-23: the blank cover 1.5 %, dark posters ≈ 24 %, light
+// whiteboard posters (p-vs-np-agent-fleet) 11–17 % — fail < 6 %, warn < 15 %.
+for (const f of covers) {
+  const py = `import sys\nfrom PIL import Image, ImageStat, ImageFilter\nim=Image.open(sys.argv[1]).convert('L').resize((216,int(216*Image.open(sys.argv[1]).height/Image.open(sys.argv[1]).width)))\npx=list(im.tobytes());m=sorted(px)[len(px)//2]\nink=sum(1 for v in px if abs(v-m)>40)/len(px)\nedge=ImageStat.Stat(im.filter(ImageFilter.FIND_EDGES)).mean[0]\nprint(f'{ink:.3f} {ImageStat.Stat(im).stddev[0]:.1f} {edge:.1f}')`;
+  try {
+    const [ink, sd, edge] = execFileSync('python3', ['-c', py, f], {encoding: 'utf8'}).trim().split(' ').map(Number);
+    console.log(`封面细节 ${path.basename(f)}：着墨 ${(ink * 100).toFixed(0)}%，亮度离散 ${sd}，边缘 ${edge}`);
+    if (ink < 0.06 || sd < 22) fail.push(`${path.basename(f)} 几乎是空的（着墨 ${(ink * 100).toFixed(0)}% < 6% 或离散 ${sd} < 22）：用海报式封面（coverCard.poster，封面.md §〇），别冻结空舞台`);
+    else if (ink < 0.15) warn.push(`${path.basename(f)} 着墨只有 ${(ink * 100).toFixed(0)}%：主体再大一点（锚点占画面高 30%–45%）`);
+  } catch { warn.push(`没量到 ${path.basename(f)} 的细节（缺 python3 / Pillow）`); }
+}
+if (fs.existsSync(`tutorials/${id}.json`) && !JSON.parse(fs.readFileSync(`tutorials/${id}.json`, 'utf8')).coverCard) warn.push('配置里没有 coverCard：封面会冻结一帧；给它一张按片子自己的世界画的海报（coverCard.poster，封面.md §〇）');
+
 for (const w of warn) console.log(`提醒：${w}`);
 for (const f of fail) console.log(`不合格：${f}`);
 console.log(fail.length ? '判定：不过' : '判定：过（缩略图仍要人眼看）');

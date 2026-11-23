@@ -2,7 +2,7 @@ import React, {useMemo} from 'react';
 import {AbsoluteFill, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Audio} from '@remotion/media';
 import {Layout, Palette, blueprint, cinema, color, font, layoutOf, mono, palette, paper} from './theme';
-import {sceneRegistry} from './scenes';
+import {posterRegistry, sceneRegistry} from './scenes';
 import {HostLayer} from './host';
 import {CaptionBar, CaptionPill, CaptionCard, CaptionLabel, CaptionStrip, CaptionSwiss, CaptionMap, CaptionTear, CaptionTele, CaptionNote, CaptionLog, CaptionFigure, CaptionPlate, CaptionAcrylic, CaptionToast, CaptionTelop} from './package';
 import {DepthField, GridFloor} from './space';
@@ -395,6 +395,9 @@ export const TutorialCover: React.FC<TutorialProps> = ({tutorial, timing}) => {
   const mascot = tutorial.look?.mascot ?? theme === 'dark';
   const L = layoutOf(tutorial.look?.frame);
   const {stage, captionY} = L;
+  // Template films draw the whole frame in their scene's backdrop (the stage is empty): freeze that frame as it is.
+  const Back = Visual?.backdrop;
+  if (Back) return <AbsoluteFill style={{background: pal.bg, overflow: 'hidden'}}><Back f={t.durationFrames - 10} dur={t.durationFrames} cue={cueOf(t, fps)} /></AbsoluteFill>;
   return <LayoutCtx.Provider value={L}><AbsoluteFill style={{background: pal.bg}}>
     <Background theme={theme} />
     <Header theme={theme} title={tutorial.title} step={0} steps={tutorial.steps ?? []} />
@@ -419,10 +422,13 @@ export const TutorialCoverCard: React.FC<TutorialProps & {ratio: CoverRatio}> = 
   const base = palette(themeOf(tutorial));
   const pal = card?.colors ? {...base, bg: card.colors.bg, text: card.colors.text, keyA: card.colors.accent, dim: card.colors.dim ?? base.dim} : base;
   if (!card) return <AbsoluteFill style={{background: pal.bg}} />;
+  const Poster = card.poster ? posterRegistry[card.poster] : undefined;
+  if (Poster) return <AbsoluteFill style={{overflow: 'hidden'}}><Poster ratio={ratio} w={width} h={height} /></AbsoluteFill>;
+  if (!card.layouts) return <AbsoluteFill style={{background: pal.bg}} />;
   const lay = card.layouts[ratio];
   // a ratio may carry its own copy and anchor (different platforms, different headlines)
   const headline = lay.text ?? card.headline, support = lay.supportText ?? card.support, tag = lay.tagText ?? card.tag;
-  const Anchor = sceneRegistry[lay.anchorId ?? card.anchor];
+  const Anchor = sceneRegistry[lay.anchorId ?? card.anchor ?? ''];
   const [ax, ay, as] = lay.anchor;
   const grid = themeOf(tutorial) === 'blueprint' ? blueprint.grid : pal.bg;
   return <AbsoluteFill style={{background: pal.bg, overflow: 'hidden'}}>

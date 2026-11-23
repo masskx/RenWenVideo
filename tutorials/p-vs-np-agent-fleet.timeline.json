@@ -1,0 +1,258 @@
+{
+  "id": "p-vs-np-agent-fleet",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1430,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/p-vs-np-agent-fleet/01-hook.mp3",
+      "audioMs": 6296,
+      "startFrame": 0,
+      "durationFrames": 201,
+      "cues": {
+        "a": 2056,
+        "b": 4223
+      },
+      "captions": [
+        {
+          "text": "悬赏100万美元的P对NP",
+          "startMs": 144,
+          "endMs": 2056
+        },
+        {
+          "text": "一群AI正在组队公开攻",
+          "startMs": 2056,
+          "endMs": 4223
+        },
+        {
+          "text": "有一步，已经被判了“通过”",
+          "startMs": 4223,
+          "endMs": 6600
+        }
+      ]
+    },
+    {
+      "id": "ask",
+      "audioSrc": "audio/tutorials/p-vs-np-agent-fleet/02-ask.mp3",
+      "audioMs": 3918,
+      "startFrame": 201,
+      "durationFrames": 130,
+      "cues": {
+        "a": 1167,
+        "b": 2425
+      },
+      "captions": [
+        {
+          "text": "这道题问的是",
+          "startMs": 144,
+          "endMs": 1167
+        },
+        {
+          "text": "答案好验的问题",
+          "startMs": 1167,
+          "endMs": 2425
+        },
+        {
+          "text": "是不是也一定好找？",
+          "startMs": 2425,
+          "endMs": 4090
+        }
+      ]
+    },
+    {
+      "id": "route",
+      "audioSrc": "audio/tutorials/p-vs-np-agent-fleet/03-route.mp3",
+      "audioMs": 8072,
+      "startFrame": 331,
+      "durationFrames": 255,
+      "cues": {
+        "a": 944,
+        "b": 4977,
+        "c": 6700
+      },
+      "captions": [
+        {
+          "text": "打个比方",
+          "startMs": 144,
+          "endMs": 944
+        },
+        {
+          "text": "给你一条路线",
+          "startMs": 944,
+          "endMs": 2057
+        },
+        {
+          "text": "顺着一站站查",
+          "startMs": 2057,
+          "endMs": 3308
+        },
+        {
+          "text": "很快就知道对不对",
+          "startMs": 3308,
+          "endMs": 4977
+        },
+        {
+          "text": "可让你在空地图上找一条",
+          "startMs": 4977,
+          "endMs": 6700
+        },
+        {
+          "text": "就得一条条试",
+          "startMs": 6700,
+          "endMs": 8395
+        }
+      ]
+    },
+    {
+      "id": "judge",
+      "audioSrc": "audio/tutorials/p-vs-np-agent-fleet/04-judge.mp3",
+      "audioMs": 8594,
+      "startFrame": 586,
+      "durationFrames": 270,
+      "cues": {
+        "a": 2159,
+        "b": 4584,
+        "c": 5960
+      },
+      "captions": [
+        {
+          "text": "那AI写的证明",
+          "startMs": 144,
+          "endMs": 1344
+        },
+        {
+          "text": "谁来判？",
+          "startMs": 1344,
+          "endMs": 2159
+        },
+        {
+          "text": "这个项目里",
+          "startMs": 2159,
+          "endMs": 3106
+        },
+        {
+          "text": "有的AI想思路",
+          "startMs": 3106,
+          "endMs": 4584
+        },
+        {
+          "text": "有的专门找反例",
+          "startMs": 4584,
+          "endMs": 5960
+        },
+        {
+          "text": "走得通的一步",
+          "startMs": 5960,
+          "endMs": 7052
+        },
+        {
+          "text": "再写成Lean证明",
+          "startMs": 7052,
+          "endMs": 8825
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "audioSrc": "audio/tutorials/p-vs-np-agent-fleet/05-check.mp3",
+      "audioMs": 6531,
+      "startFrame": 856,
+      "durationFrames": 208,
+      "cues": {
+        "a": 2392,
+        "b": 3641
+      },
+      "captions": [
+        {
+          "text": "裁判只有一个",
+          "startMs": 144,
+          "endMs": 1256
+        },
+        {
+          "text": "Lean检查器",
+          "startMs": 1256,
+          "endMs": 2392
+        },
+        {
+          "text": "它只认一件事",
+          "startMs": 2392,
+          "endMs": 3641
+        },
+        {
+          "text": "证明里证的",
+          "startMs": 3641,
+          "endMs": 4696
+        },
+        {
+          "text": "正好是登记的那句话",
+          "startMs": 4696,
+          "endMs": 6782
+        }
+      ]
+    },
+    {
+      "id": "open",
+      "audioSrc": "audio/tutorials/p-vs-np-agent-fleet/06-open.mp3",
+      "audioMs": 5982,
+      "startFrame": 1064,
+      "durationFrames": 192,
+      "cues": {
+        "a": 2005,
+        "b": 3203
+      },
+      "captions": [
+        {
+          "text": "所以看板上的“通过”",
+          "startMs": 146,
+          "endMs": 2005
+        },
+        {
+          "text": "只是一小步",
+          "startMs": 2005,
+          "endMs": 3203
+        },
+        {
+          "text": "P对NP本身，今天还没有答案",
+          "startMs": 3203,
+          "endMs": 6252
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/p-vs-np-agent-fleet/07-end.mp3",
+      "audioMs": 5381,
+      "startFrame": 1256,
+      "durationFrames": 174,
+      "cues": {
+        "a": 1344,
+        "b": 2834
+      },
+      "captions": [
+        {
+          "text": "这场实验最值得看的",
+          "startMs": 144,
+          "endMs": 1344
+        },
+        {
+          "text": "不是AI多聪明",
+          "startMs": 1344,
+          "endMs": 2834
+        },
+        {
+          "text": "是它的每一步",
+          "startMs": 2834,
+          "endMs": 3833
+        },
+        {
+          "text": "都得过裁判这关",
+          "startMs": 3833,
+          "endMs": 5621
+        }
+      ]
+    }
+  ]
+}

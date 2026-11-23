@@ -1,0 +1,208 @@
+{
+ "id": "openai-ai-development-limits",
+ "title": "AI该不该踩刹车？",
+ "subtitle": "谁来定这条线？",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "tts": {
+  "provider": "minimax"
+ },
+ "leadMs": 100,
+ "tailMs": 300,
+ "series": "AI 新闻 · 安全",
+ "credit": "OpenAI《Perplexity and Intelligence》· 微软 AI 负责人 Suleyman 公开帖",
+ "source": "inputs/openai-ai-development-limits/idea.md",
+ "maxSeconds": 55,
+ "score": {
+  "mood": "tension",
+  "climax": "line",
+  "lifts": [
+   "twist"
+  ],
+  "silences": [
+   {
+    "scene": "twist",
+    "at": 0,
+    "dur": 0.3
+   }
+  ],
+  "climaxAt": 3.7
+ },
+ "steps": [],
+ "look": {
+  "theme": "paper",
+  "frame": "full",
+  "header": false,
+  "tour": false,
+  "particles": false,
+  "mascot": false,
+  "cuts": {
+   "big": [
+    "cut"
+   ],
+   "small": [
+    "cut"
+   ]
+  },
+  "captions": "figure",
+  "captionTop": 1400,
+  "pk": {
+   "bg": "#121D26",
+   "panel": "#1D2E38",
+   "ink": "#DCEBE6",
+   "accent": "#80F0D8",
+   "onAccent": "#121D26",
+   "dim": "#7F948F",
+   "second": "#F8D890"
+  },
+  "breaks": {}
+ },
+ "host": {
+  "mode": "window",
+  "x": 866,
+  "y": 150,
+  "size": 150,
+  "colors": {
+   "panel": "#1D2E38",
+   "accent": "#80F0D8",
+   "ink": "#DCEBE6",
+   "bg": "#121D26"
+  },
+  "scenes": {
+   "hook": {
+    "expr": "surprise",
+    "pose": "idle",
+    "look": [
+     -0.6,
+     0.4
+    ],
+    "beats": [
+     {
+      "at": 2.4,
+      "pose": "nod",
+      "expr": "serious"
+     }
+    ]
+   },
+   "twist": {
+    "expr": "think",
+    "pose": "think",
+    "look": [
+     -0.6,
+     0.3
+    ],
+    "beats": [
+     {
+      "at": 1.8,
+      "pose": "nod",
+      "expr": "serious"
+     }
+    ]
+   },
+   "end": {
+    "expr": "calm",
+    "pose": "idle",
+    "beats": [
+     {
+      "at": 1.0,
+      "pose": "nod",
+      "expr": "smile"
+     }
+    ]
+   }
+  }
+ },
+ "keywords": [
+  "0.76",
+  "数学",
+  "越低越准",
+  "0.8",
+  "一条线",
+  "谁都不越过",
+  "内部的代码",
+  "0.819",
+  "特例",
+  "谁来出",
+  "谁来验",
+  "谁有资格"
+ ],
+ "cover": "line",
+ "scenes": [
+  {
+   "id": "hook",
+   "visual": "ol.hook",
+   "step": 0,
+   "pace": "normal",
+   "narration": "OpenAI首席科学家公开了一个分数：{a}降到0.76左右，{b}AI开始在数学难题上出突破。"
+  },
+  {
+   "id": "metric",
+   "visual": "ol.metric",
+   "step": 0,
+   "pace": "normal",
+   "narration": "这个分数叫对数困惑度，{a}量的是模型猜下一个词有多准，{b}越低越准。"
+  },
+  {
+   "id": "data",
+   "visual": "ol.data",
+   "step": 0,
+   "pace": "normal",
+   "narration": "GPT-3.5约0.99，{a}GPT-4约0.91，{b}后来的模型，已经低于0.8。"
+  },
+  {
+   "id": "line",
+   "visual": "ol.line",
+   "step": 0,
+   "pace": "normal",
+   "narration": "他提议：{a}各家约定一条线，{b}在安全监测跟上之前，{c}谁都不越过。"
+  },
+  {
+   "id": "twist",
+   "visual": "ol.twist",
+   "step": 0,
+   "pace": "normal",
+   "narration": "可这几个分数，{a}是用OpenAI自己内部的代码测的。"
+  },
+  {
+   "id": "ms",
+   "visual": "ol.ms",
+   "step": 0,
+   "pace": "normal",
+   "narration": "微软用同一套题测了自家模型：{a}0.819。{b}但它也说，拿到这套题是特例。"
+  },
+  {
+   "id": "debate",
+   "visual": "ol.debate",
+   "step": 0,
+   "pace": "normal",
+   "narration": "线画早了，能给监测留出时间；{a}可题谁来出，{b}结果谁来验？"
+  },
+  {
+   "id": "end",
+   "visual": "ol.end",
+   "step": 0,
+   "pace": "normal",
+   "narration": "这条线要是真画，{a}你觉得谁有资格画？"
+  }
+ ],
+ "coverCard": {
+  "poster": "ol.poster",
+  "template": "conflict",
+  "headline": [
+   "AI 该不该",
+   "踩刹车？"
+  ],
+  "support": "谁来定这条线？",
+  "tag": "AI 新闻 · 安全",
+  "colors": {
+   "bg": "#121D26",
+   "text": "#DCEBE6",
+   "accent": "#F8D890",
+   "dim": "#7F948F"
+  }
+ },
+ "musicSrc": "audio/tutorials/openai-ai-development-limits/score.mp3",
+ "musicVolume": 0.131,
+ "musicDuckDb": 10
+}
