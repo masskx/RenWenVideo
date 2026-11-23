@@ -66,7 +66,7 @@
 ```bash
 node scripts/qa/brief.mjs <id>            # 简报五项 + 导演十项、时长和口播字数预算
 node scripts/qa/echo.mjs <id>             # 上屏字复述口播超过三分之一就不过
-node scripts/qa/cover.mjs <id>            # 封面
+node scripts/qa/cover.mjs <id>            # 封面（2026-11-23 起是片子自己画的海报 coverCard.poster，封面.md §〇·五；空封面判不过）
 node scripts/qa/richness.mjs douyin/<id>/video.mp4
 node scripts/qa/marks.mjs douyin/<id>/video.mp4
 node scripts/qa/clutter.mjs douyin/<id>/video.mp4 [--frame channels]   # 主体大小、字幕上方空带、同屏颜色个数（只提醒）

@@ -60,7 +60,8 @@ import {SEEDANCE_WORKFLOW_SCENES} from './seedance-claude-video-workflow';
 import {APACHE_H2_SCENES} from './apache-http2-rce-ai-found';
 import {NVIDIA_BOARD_SCENES} from './nvidia-board-oust-huang';
 import {NVIDIA_RESIGNS_SCENES} from './nvidia-huang-resigns';
-import {XUPT_HALF_RADIO_SCENES} from './xupt-half-radio';
+import {XUPT_HALF_RADIO_POSTERS, XUPT_HALF_RADIO_SCENES} from './xupt-half-radio';
+import type {CoverRatio} from '../types';
 
 export type SceneComponent = React.FC<SceneProps & {credit: string}> & {sfx?: (cue: SceneProps['cue'], dur: number) => SfxEvent[];
   camera?: (cue: SceneProps['cue'], dur: number) => CamKey[]; hud?: boolean; backdrop?: React.FC<SceneProps>};
@@ -128,4 +129,12 @@ export const sceneRegistry: Record<string, SceneComponent> = {
   ...NVIDIA_BOARD_SCENES,
   ...NVIDIA_RESIGNS_SCENES,
   ...XUPT_HALF_RADIO_SCENES,
+};
+
+/**
+ * Cover posters (coverCard.poster, docs/video-craft/封面.md §〇): a film draws its own cover per ratio, in its own world —
+ * full bleed, its own type, palette and hero object — instead of the generic card or a frozen frame.
+ */
+export const posterRegistry: Record<string, React.FC<{ratio: CoverRatio; w: number; h: number}>> = {
+  ...XUPT_HALF_RADIO_POSTERS,
 };

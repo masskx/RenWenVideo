@@ -4,6 +4,7 @@ import {clamp, ease, hash} from '../../fx';
 import {font} from '../theme';
 import {cond, hand, jet, serif} from '../fonts';
 import {Scene} from '../paper';
+import type {CoverRatio} from '../types';
 
 // xupt-half-radio (半部电台): a competition film for 西安邮电大学's first "AI+思政" short-video contest (inputs/xupt-half-radio/).
 // Template lemo/halftone-dossier (docs/video-craft/prompt-library/vendor/lemomo-ai__lemo-opuscar/3961ddb/styles/
@@ -88,13 +89,13 @@ const BigNum: React.FC<{text: string; f: number; night?: boolean; green?: boolea
   </svg>;
 };
 
-const Sheet: React.FC<{night?: boolean; green?: boolean; f: number; edge?: number; num?: string; numY?: number}> = ({night, green, f, edge = 0.55, num, numY}) => {
+const Sheet: React.FC<{night?: boolean; green?: boolean; f: number; edge?: number; num?: string; numY?: number; h?: number}> = ({night, green, f, edge = 0.55, num, numY, h: SH = H}) => {
   const bg = green ? C.green : night ? C.night : C.paper;
   const dot = green ? C.greenDot : night ? C.nightDot : C.paper2;
   const seed = Math.floor(f / 2) % 5;
   return <div style={{position: 'absolute', inset: 0, background: bg, overflow: 'hidden'}}>
-    <Dots color={dot} step={26} angle={22} density={(x, y) => {
-      const ex = Math.min(x, W - x) / W, ey = Math.min(y, H - y) / H;
+    <Dots color={dot} step={26} angle={22} h={SH} density={(x, y) => {
+      const ex = Math.min(x, W - x) / W, ey = Math.min(y, SH - y) / SH;
       return edge * (1 - Math.min(1, Math.min(ex * 5.2, ey * 7.5)));
     }} />
     <svg width={W} height={H} style={{position: 'absolute', inset: 0, mixBlendMode: 'multiply', opacity: night || green ? 0.35 : 0.55}}><rect width={W} height={H} filter="url(#xh-mottle)" /></svg>
@@ -813,6 +814,63 @@ const End = make(({f, cue}) => {
   const step = Math.max(4, Math.floor((c + 20 - a) / 8));
   return [...Array.from({length: 8}, (_, i) => ({at: a + 6 + i * step, kind: 'tick', gain: 0.07})), {at: cue('b', 110), kind: 'pop', gain: 0.06}, {at: c, kind: 'pop', gain: 0.06}, {at: c + 24, kind: 'stamp', gain: 0.1}].filter((e) => e.at < dur);
 });
+
+
+/* ======================= cover poster (coverCard.poster, docs/video-craft/封面.md §〇) ======================= */
+
+// The cover is a poster drawn in the film's own world, not a frozen frame: the night ink sheet of the hook, one hero (the
+// half radio, the receiver printed, the transmitter a dashed ghost already filling with yellow dots — the ending, hinted),
+// the title as the poster's architecture (stacked black serif, misregistered in post-office green, each row carrying its
+// real telegraph codes), one red postmark, and one quiet line of credits. Three text layers: title, support, credit line.
+type PosterLay = {title: [number, number, number]; codes: number; radio: [number, number, number]; mark: [number, number, number]; support: number; foot: number; num: number};
+const POSTER: Record<CoverRatio, PosterLay> = {
+  '3:4': {title: [70, 120, 330], codes: 770, radio: [540, 1058, 980], mark: [880, 1195, 118], support: 1316, foot: 1368, num: 1250},
+  '6:7': {title: [70, 96, 280], codes: 660, radio: [540, 905, 900], mark: [870, 1030, 106], support: 1150, foot: 1205, num: 1080},
+  '9:16': {title: [70, 300, 360], codes: 830, radio: [540, 1420, 1010], mark: [880, 1580, 128], support: 1080, foot: 1790, num: 1640},
+};
+export const XuptPoster: React.FC<{ratio: CoverRatio; w: number; h: number}> = ({ratio, h}) => {
+  const L = POSTER[ratio];
+  const [tx, ty, ts] = L.title, [rx, ry, rw] = L.radio;
+  const rh = hOf('radio', rw);
+  const rows: [string, [string, string]][] = [['半部', ['0584', '6752']], ['电台', ['7193', '0669']]];
+  return <div style={{position: 'absolute', inset: 0, width: W, height: h, overflow: 'hidden', background: C.night}}>
+    <Defs />
+    <Sheet night f={0} h={h} edge={0.7} num="1930" numY={L.num} />
+    {/* the transmitter's ghost already filling with signal dots: the other half is ours to send */}
+    <div style={{position: 'absolute', left: rx, top: ry - rh * 0.36, width: rw / 2 - 22, height: rh * 0.82, overflow: 'hidden', borderRadius: 10}}>
+      <Dots w={rw / 2} h={rh} color={C.hi} step={14} angle={0} k={0.5} density={(x, y) => { const v = 0.95 - (x / (rw / 2)) * 1.55 + (y / rh - 0.5) * 0.3 + (hash(Math.round(x * 7 + y * 3)) - 0.5) * 0.18; return v > 0.06 ? clamp(v) : 0; }} />
+    </div>
+    <Wave a={[-60, ry + 40]} b={[rx - rw * 0.32, ry + 10]} f={30} at={0} color={C.hi} amp={14} width={7} />
+    <Wave a={[-60, ry + 120]} b={[rx - rw * 0.32, ry + 60]} f={22} at={0} color={C.hi} amp={10} width={5} />
+    <Radio x={rx} y={ry} w={rw} f={0} duo="nightPaper" night />
+    <Postmark x={L.mark[0]} y={L.mark[1]} f={20} at={0} date="1930.12.30" top="江西 · 龙冈" bottom="缴获" r={L.mark[2]} rot={-12} />
+    {/* a fine frame: hairline inset with corner ticks, the poster's margin */}
+    <svg width={W} height={h} style={{position: 'absolute', inset: 0}}>
+      <rect x={34} y={34} width={W - 68} height={h - 68} fill="none" stroke={C.paper} strokeOpacity={0.22} strokeWidth={1.5} />
+      {[[34, 34, 1, 1], [W - 34, 34, -1, 1], [34, h - 34, 1, -1], [W - 34, h - 34, -1, -1]].map(([x, y, sx, sy], i) =>
+        <path key={i} d={`M ${x} ${y + sy * 40} V ${y} H ${x + sx * 40}`} fill="none" stroke={C.paper} strokeOpacity={0.7} strokeWidth={3} />)}
+      <line x1={L.codes - 26} y1={ty + ts * 0.12} x2={L.codes - 26} y2={ty + ts * 1.95} stroke={C.paper} strokeOpacity={0.25} strokeWidth={1.5} />
+    </svg>
+    {/* the title: two stacked rows, each with its telegraph codes beside it */}
+    {rows.map(([txt, codes], i) => <React.Fragment key={txt}>
+      <div style={{position: 'absolute', left: tx, top: ty + i * ts * 1.02, fontFamily: serif, fontWeight: 900, fontSize: ts, lineHeight: 1, color: C.paper, letterSpacing: -4,
+        textShadow: `${ts * 0.04}px ${ts * 0.04}px 0 ${C.green}`, whiteSpace: 'nowrap'}}>{txt}</div>
+      <div style={{position: 'absolute', left: L.codes, top: ty + i * ts * 1.02 + ts * 0.14, fontFamily: jet, fontSize: ts * 0.13, lineHeight: 1.5, color: C.nightDim, letterSpacing: 3}}>
+        {codes.map((c) => <div key={c}>{c}</div>)}
+      </div>
+    </React.Fragment>)}
+    <div style={{position: 'absolute', left: tx + 6, top: ty - 58, display: 'flex', gap: 12, alignItems: 'center'}}>
+      <span style={{fontFamily: jet, fontSize: 26, color: C.ink, background: C.paper, padding: '5px 12px', borderRadius: 6}}>NO.1930-12</span>
+      <span style={{fontFamily: font, fontWeight: 700, fontSize: 28, color: C.paper, opacity: 0.8}}>西安邮电大学 · AI+思政</span>
+    </div>
+    <div style={{position: 'absolute', left: tx + 6, top: L.support, display: 'flex', alignItems: 'center', gap: 18}}>
+      <span style={{width: 56, height: 6, background: C.hi}} />
+      <span style={{fontFamily: font, fontWeight: 900, fontSize: 50, color: C.paper, letterSpacing: 4}}>一堂西邮人的思政课</span>
+    </div>
+    {ratio !== '6:7' && <div style={{position: 'absolute', left: tx + 6, top: L.foot, fontFamily: font, fontWeight: 700, fontSize: 26, color: C.nightDim, letterSpacing: 1}}>计算机学院 · 马岚妮 ｜ 指导教师 罗肖肖</div>}
+  </div>;
+};
+export const XUPT_HALF_RADIO_POSTERS: Record<string, React.FC<{ratio: CoverRatio; w: number; h: number}>> = {'xh.poster': XuptPoster};
 
 export const XUPT_HALF_RADIO_SCENES: Record<string, Scene> = {
   'xh.hook': Hook, 'xh.title': Title, 'xh.listen': Listen, 'xh.yanan': Yanan, 'xh.xupt': Xupt, 'xh.era': Era, 'xh.climax': Climax, 'xh.ai': Ai, 'xh.choose': Choose, 'xh.end': End,

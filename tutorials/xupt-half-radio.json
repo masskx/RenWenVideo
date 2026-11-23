@@ -206,5 +206,21 @@
  ],
  "musicSrc": "audio/tutorials/xupt-half-radio/score.mp3",
  "musicVolume": 0.139,
- "musicDuckDb": 10
+ "musicDuckDb": 10,
+ "coverCard": {
+  "poster": "xh.poster",
+  "template": "emotion",
+  "headline": [
+   "半部",
+   "电台"
+  ],
+  "support": "一堂西邮人的思政课",
+  "tag": "NO.1930-12 · 西安邮电大学 · AI+思政",
+  "colors": {
+   "bg": "#16202C",
+   "text": "#EFE5CF",
+   "accent": "#F2C230",
+   "dim": "#8C8A80"
+  }
+ }
 }

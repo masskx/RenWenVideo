@@ -98,16 +98,21 @@ export type TutorialProps = {tutorial: Tutorial; timing: TutorialTiming};
 
 export type CoverRatio = '3:4' | '6:7' | '9:16';
 export type CoverCard = {
+  /**
+   * A poster drawn by the film itself (scenes/index.ts posterRegistry id): full bleed, per ratio, in the film's own world.
+   * When set, it is the whole cover; the fields below only document the card (封面.md §〇, 2026-11-23).
+   */
+  poster?: string;
   template: 'number' | 'conflict' | 'comparison' | 'emotion';
   /** One or two lines; the last line is set in the A colour. */
   headline: string[];
   support?: string;
   tag?: string;
-  anchor: string;
+  anchor?: string;
   /** The film's own colours (found in its material), replacing the theme's background and text colours on the card. */
   colors?: {bg: string; text: string; accent: string; dim?: string};
   /** Per ratio: positions, plus optional copy / anchor that override the card's own for that ratio. */
-  layouts: Record<CoverRatio, {headline: [number, number]; size: number; anchor: [number, number, number]; support: number;
+  layouts?: Record<CoverRatio, {headline: [number, number]; size: number; anchor: [number, number, number]; support: number;
     text?: string[]; supportText?: string; tagText?: string; anchorId?: string}>;
 };
 export const COVER_SIZE: Record<CoverRatio, [number, number]> = {'3:4': [1080, 1440], '6:7': [1080, 1260], '9:16': [1080, 1920]};
