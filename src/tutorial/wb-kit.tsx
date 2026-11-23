@@ -84,7 +84,7 @@ const units = (s: string) => [...s].reduce((w, ch) => w + ((ch.codePointAt(0) ??
 export const widthOf = (t: Text) => units(t.text) * t.size * (t.face === 'serif' ? 1.02 : 1);
 export const leftOf = (t: Text) => (t.anchor === 'middle' ? t.x - widthOf(t) / 2 : t.x);
 
-export const createBoard = (colors: Record<string, string>) => {
+export const createBoard = (colors: Record<string, string>, opts: {blend?: React.CSSProperties['mixBlendMode']} = {}) => {
   const items: Item[] = [];
   let seed = 1;
   const stroke = (pen: string, raw: P[], w: number, t0: number, t1: number, extra: Partial<Stroke> = {}) => {
@@ -100,14 +100,14 @@ export const createBoard = (colors: Record<string, string>) => {
   /** Several strokes (a box, an arrow) shared out over one window. */
   const strokes = (pen: string, list: P[][], w: number, t0: number, t1: number, extra: Partial<Stroke> = {}) =>
     list.map((pts, i) => stroke(pen, pts, w, t0 + ((t1 - t0) * i) / list.length, t0 + ((t1 - t0) * (i + 1)) / list.length, extra));
-  return {items, stroke, write, strokes, colors};
+  return {items, stroke, write, strokes, colors, blend: opts.blend ?? 'multiply'};
 };
 export type BoardKit = ReturnType<typeof createBoard>;
 
 /* ---------- drawing ---------- */
 
 const ghostOp = 0.13;
-export const StrokeView: React.FC<{s: Stroke; F: number; color: string}> = ({s, F, color}) => {
+export const StrokeView: React.FC<{s: Stroke; F: number; color: string; blend?: React.CSSProperties['mixBlendMode']}> = ({s, F, color, blend = 'multiply'}) => {
   if (F < s.t0) return null;
   const L = lenOf(s.pts);
   let u = handU(clamp((F - s.t0) / Math.max(1, s.t1 - s.t0)));
@@ -115,18 +115,18 @@ export const StrokeView: React.FC<{s: Stroke; F: number; color: string}> = ({s, 
   if (s.erase && F >= s.erase[0]) { u = 1 - clamp((F - s.erase[0]) / (s.erase[1] - s.erase[0])); ghost = true; }
   const gone = s.ghostAfter !== undefined && F >= s.ghostAfter;
   const op = gone ? ghostOp + (1 - ghostOp) * (1 - clamp((F - s.ghostAfter!) / 4)) : 0.94;
-  return <g style={{mixBlendMode: 'multiply'}}>
+  return <g style={{mixBlendMode: blend}}>
     {ghost && <path d={dOf(s.pts)} fill="none" stroke={color} strokeWidth={s.w} strokeLinecap="round" strokeLinejoin="round" opacity={ghostOp} />}
     <path d={dOf(s.pts)} fill="none" stroke={color} strokeWidth={s.w} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={`${L * u} ${L + 10}`} opacity={op} />
     {u > 0.02 && !gone && <circle cx={s.pts[0][0] + 0.5} cy={s.pts[0][1]} r={s.w * 0.42} fill={color} opacity={0.5} />}
   </g>;
 };
-export const TextView: React.FC<{t: Text; F: number; color: string}> = ({t, F, color}) => {
+export const TextView: React.FC<{t: Text; F: number; color: string; blend?: React.CSSProperties['mixBlendMode']}> = ({t, F, color, blend = 'multiply'}) => {
   if (F < t.t0) return null;
   const chars = [...t.text];
   const u = handU(clamp((F - t.t0) / Math.max(1, t.t1 - t.t0))) * chars.length;
   const g = t.ghostAt !== undefined && F >= t.ghostAt ? ghostOp + (1 - ghostOp) * (1 - clamp((F - t.ghostAt) / 6)) : 0.94;
-  return <div style={{position: 'absolute', left: t.x, top: t.y - t.size * 0.92, transform: t.anchor === 'middle' ? 'translateX(-50%)' : undefined, whiteSpace: 'pre', mixBlendMode: 'multiply',
+  return <div style={{position: 'absolute', left: t.x, top: t.y - t.size * 0.92, transform: t.anchor === 'middle' ? 'translateX(-50%)' : undefined, whiteSpace: 'pre', mixBlendMode: blend,
     fontFamily: t.face === 'serif' ? serif : hand, fontWeight: t.face === 'serif' ? 700 : 500, fontSize: t.size, lineHeight: 1.2, color, opacity: g}}>
     {chars.map((ch, i) => {
       const p = clamp(u - i);
@@ -141,9 +141,9 @@ export const Ink: React.FC<{kit: BoardKit; F: number; w: number; h: number}> = (
   const vis = kit.items.filter((it) => it.t0 <= F);
   return <>
     <svg width={w} height={h} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
-      {vis.filter((it): it is Stroke => it.kind === 'stroke').map((s, i) => <StrokeView key={i} s={s} F={F} color={kit.colors[s.pen]} />)}
+      {vis.filter((it): it is Stroke => it.kind === 'stroke').map((s, i) => <StrokeView key={i} s={s} F={F} color={kit.colors[s.pen]} blend={kit.blend} />)}
     </svg>
-    {vis.filter((it): it is Text => it.kind === 'text').map((t, i) => <TextView key={i} t={t} F={F} color={kit.colors[t.pen]} />)}
+    {vis.filter((it): it is Text => it.kind === 'text').map((t, i) => <TextView key={i} t={t} F={F} color={kit.colors[t.pen]} blend={kit.blend} />)}
   </>;
 };
 
@@ -159,7 +159,7 @@ const endOf = (it: Item): P => (it.kind === 'stroke' ? it.pts[it.pts.length - 1]
 
 export type Cam = {x: number; y: number; z: number};
 /** A floating dry-erase marker (no hand): on the active stroke's nib, else flying to the next one or parked off-frame. */
-export const PenView: React.FC<{kit: BoardKit; pen: string; slot: number; F: number; cam: Cam}> = ({kit, pen, slot, F, cam}) => {
+export const PenView: React.FC<{kit: BoardKit; pen: string; slot: number; F: number; cam: Cam; look?: 'marker' | 'pencil'}> = ({kit, pen, slot, F, cam, look = 'marker'}) => {
   const mine = kit.items.filter((it) => it.pen === pen);
   const active = mine.find((it) => F >= it.t0 && F <= it.t1);
   const park: P = [cam.x + (560 + slot * 60) / cam.z, cam.y + (180 + slot * 90) / cam.z];
@@ -184,6 +184,15 @@ export const PenView: React.FC<{kit: BoardKit; pen: string; slot: number; F: num
   }
   const col = kit.colors[pen];
   const s = 1 + lift * 0.08;
+  // lemo/dataviz's pencil: a hexagonal body, a sharpened wood cone, the lead in the pen's colour; only the tip end shows
+  if (look === 'pencil') return <div style={{position: 'absolute', left: p[0], top: p[1], width: 0, height: 0}}>
+    <div style={{position: 'absolute', left: 14 + lift * 36, top: 8 + lift * 44, width: 30, height: 360, borderRadius: 12, background: 'rgba(0,0,0,0.35)', filter: `blur(${4 + lift * 10}px)`, transformOrigin: '50% 0', transform: 'rotate(-34deg)'}} />
+    <div style={{position: 'absolute', left: -11, top: -lift * 24, width: 22, height: 380, transformOrigin: '50% 0', transform: `rotate(-34deg) scale(${s})`}}>
+      <div style={{position: 'absolute', left: 7, top: 0, width: 8, height: 14, background: col, clipPath: 'polygon(50% 0, 100% 100%, 0 100%)'}} />
+      <div style={{position: 'absolute', left: 0, top: 12, width: 22, height: 40, background: '#D9B98C', clipPath: 'polygon(32% 0, 68% 0, 100% 100%, 0 100%)'}} />
+      <div style={{position: 'absolute', left: 0, top: 50, width: 22, height: 330, background: `linear-gradient(90deg, ${col} 0 30%, #FFFFFF55 30% 34%, ${col} 34% 66%, #00000033 66% 70%, ${col} 70%)`, opacity: 0.92}} />
+    </div>
+  </div>;
   return <div style={{position: 'absolute', left: p[0], top: p[1], width: 0, height: 0}}>
     <div style={{position: 'absolute', left: 18 + lift * 40, top: 10 + lift * 50, width: 46, height: 290, borderRadius: 20, background: 'rgba(40,38,30,0.18)', filter: `blur(${4 + lift * 10}px)`,
       transformOrigin: '50% 0', transform: 'rotate(-28deg)'}} />

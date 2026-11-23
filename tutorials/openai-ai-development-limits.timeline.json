@@ -1,0 +1,228 @@
+{
+  "id": "openai-ai-development-limits",
+  "voice": "minimax",
+  "rate": null,
+  "fps": 30,
+  "leadMs": 100,
+  "totalFrames": 1323,
+  "scenes": [
+    {
+      "id": "hook",
+      "audioSrc": "audio/tutorials/openai-ai-development-limits/01-hook.mp3",
+      "audioMs": 6583,
+      "startFrame": 0,
+      "durationFrames": 210,
+      "cues": {
+        "a": 2633,
+        "b": 4087
+      },
+      "captions": [
+        {
+          "text": "OpenAI首席科学家公开了一个分数",
+          "startMs": 144,
+          "endMs": 2633
+        },
+        {
+          "text": "降到0.76左右",
+          "startMs": 2633,
+          "endMs": 4087
+        },
+        {
+          "text": "AI开始在数学难题上出突破",
+          "startMs": 4087,
+          "endMs": 6873
+        }
+      ]
+    },
+    {
+      "id": "metric",
+      "audioSrc": "audio/tutorials/openai-ai-development-limits/02-metric.mp3",
+      "audioMs": 4963,
+      "startFrame": 210,
+      "durationFrames": 161,
+      "cues": {
+        "a": 1700,
+        "b": 3994
+      },
+      "captions": [
+        {
+          "text": "这个分数叫对数困惑度",
+          "startMs": 144,
+          "endMs": 1700
+        },
+        {
+          "text": "量的是模型猜下一个词有多准",
+          "startMs": 1700,
+          "endMs": 3994
+        },
+        {
+          "text": "越低越准",
+          "startMs": 3994,
+          "endMs": 5249
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "audioSrc": "audio/tutorials/openai-ai-development-limits/03-data.mp3",
+      "audioMs": 6478,
+      "startFrame": 371,
+      "durationFrames": 207,
+      "cues": {
+        "a": 2233,
+        "b": 3977
+      },
+      "captions": [
+        {
+          "text": "GPT-3.5约0.99",
+          "startMs": 144,
+          "endMs": 2233
+        },
+        {
+          "text": "GPT-4约0.91",
+          "startMs": 2233,
+          "endMs": 3977
+        },
+        {
+          "text": "后来的模型",
+          "startMs": 3977,
+          "endMs": 4903
+        },
+        {
+          "text": "已经低于0.8",
+          "startMs": 4903,
+          "endMs": 6736
+        }
+      ]
+    },
+    {
+      "id": "line",
+      "audioSrc": "audio/tutorials/openai-ai-development-limits/04-line.mp3",
+      "audioMs": 4937,
+      "startFrame": 578,
+      "durationFrames": 161,
+      "cues": {
+        "a": 856,
+        "b": 1899,
+        "c": 3704
+      },
+      "captions": [
+        {
+          "text": "他提议：各家约定一条线",
+          "startMs": 144,
+          "endMs": 1899
+        },
+        {
+          "text": "在安全监测跟上之前",
+          "startMs": 1899,
+          "endMs": 3704
+        },
+        {
+          "text": "谁都不越过",
+          "startMs": 3704,
+          "endMs": 5297
+        }
+      ]
+    },
+    {
+      "id": "twist",
+      "audioSrc": "audio/tutorials/openai-ai-development-limits/05-twist.mp3",
+      "audioMs": 3736,
+      "startFrame": 739,
+      "durationFrames": 125,
+      "cues": {
+        "a": 1078
+      },
+      "captions": [
+        {
+          "text": "可这几个分数",
+          "startMs": 144,
+          "endMs": 1078
+        },
+        {
+          "text": "是用OpenAI自己内部的代码测的",
+          "startMs": 1078,
+          "endMs": 4020
+        }
+      ]
+    },
+    {
+      "id": "ms",
+      "audioSrc": "audio/tutorials/openai-ai-development-limits/06-ms.mp3",
+      "audioMs": 5825,
+      "startFrame": 864,
+      "durationFrames": 187,
+      "cues": {
+        "a": 2500,
+        "b": 3375
+      },
+      "captions": [
+        {
+          "text": "微软用同一套题测了自家模型",
+          "startMs": 144,
+          "endMs": 2500
+        },
+        {
+          "text": "0.819",
+          "startMs": 2500,
+          "endMs": 3375
+        },
+        {
+          "text": "但它也说，拿到这套题是特例",
+          "startMs": 3375,
+          "endMs": 6077
+        }
+      ]
+    },
+    {
+      "id": "debate",
+      "audioSrc": "audio/tutorials/openai-ai-development-limits/07-debate.mp3",
+      "audioMs": 5433,
+      "startFrame": 1051,
+      "durationFrames": 176,
+      "cues": {
+        "a": 2711,
+        "b": 3961
+      },
+      "captions": [
+        {
+          "text": "线画早了，能给监测留出时间",
+          "startMs": 144,
+          "endMs": 2711
+        },
+        {
+          "text": "可题谁来出",
+          "startMs": 2711,
+          "endMs": 3961
+        },
+        {
+          "text": "结果谁来验？",
+          "startMs": 3961,
+          "endMs": 5512
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "audioSrc": "audio/tutorials/openai-ai-development-limits/08-end.mp3",
+      "audioMs": 2795,
+      "startFrame": 1227,
+      "durationFrames": 96,
+      "cues": {
+        "a": 1256
+      },
+      "captions": [
+        {
+          "text": "这条线要是真画",
+          "startMs": 144,
+          "endMs": 1256
+        },
+        {
+          "text": "你觉得谁有资格画？",
+          "startMs": 1256,
+          "endMs": 2862
+        }
+      ]
+    }
+  ]
+}
